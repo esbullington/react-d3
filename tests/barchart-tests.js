@@ -1,0 +1,23 @@
+/** @jsx React.DOM */
+
+var expect = require('chai').expect;  
+
+describe('BarChart', function() {
+  it('renders barchart', function() {
+    var React = require('react/addons');
+    var BarChart = require('../src/barchart.js').BarChart;
+    var Bar = require('../src/barchart.js').Bar;
+    var TestUtils = React.addons.TestUtils;
+
+    // Render a barchart using array data
+    var data = [ 10, 20, 30, 20, 15, 5 ];
+    var barchart = TestUtils.renderIntoDocument(
+      <BarChart data={data} width={400} height={200} />
+    );
+
+    // Verify that it has the same number of bars as the array's length
+    var bars = TestUtils.scryRenderedDOMComponentsWithTag(
+      barchart, 'rect');
+    expect(bars.length).to.equal(data.length);
+  });
+});
