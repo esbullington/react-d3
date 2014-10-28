@@ -7,10 +7,11 @@ describe('BarChart', function() {
     var React = require('react/addons');
     var BarChart = require('../src/barchart.js').BarChart;
     var Bar = require('../src/barchart.js').Bar;
+    var generate = require('../utils/datagen').generateArrayOfNumbers;
     var TestUtils = React.addons.TestUtils;
 
     // Render a barchart using array data
-    var data = [ 10, 20, 30, 20, 15, 5 ];
+    var data = generate(5);
     var barchart = TestUtils.renderIntoDocument(
       <BarChart data={data} width={400} height={200} />
     );
