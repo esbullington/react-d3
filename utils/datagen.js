@@ -17,6 +17,5 @@ exports.generateArrayOfNumbers = function(n) {
     var j = Math.floor(Math.random() * 100);
     data.push(j);
   } 
-  console.log(data);
   return data;
 };
