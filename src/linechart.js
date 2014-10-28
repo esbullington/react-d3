@@ -35,6 +35,34 @@ var Line = React.createClass({
 
 });
 
+var Circle = React.createClass({
+  
+  propTypes: {
+    cx: React.PropTypes.number,
+    cy: React.PropTypes.number,
+    r: React.PropTypes.number,
+    fill: React.PropTypes.string
+  },
+
+  getDefaultProps: function() {
+    return {
+      fill: '#1f77b4'
+    }
+  },
+
+  render: function() {
+    return (
+      <circle 
+        cx={this.props.cx}
+        cy={this.props.cy}
+        r={this.props.r}
+        fill={this.props.fill}
+      />
+    );
+  }
+
+});
+
 var DataSeries = React.createClass({
 
   propTypes: {
@@ -66,19 +94,23 @@ var DataSeries = React.createClass({
 var LineChart = React.createClass({
 
   propTypes: {
+    pointRadius: React.PropTypes.number,
     width: React.PropTypes.number,
     height: React.PropTypes.number
   },
 
   getDefaultProps: function() {
     return {
+      pointRadius: 2,
       width: 400,
       height: 200
     }
   },
 
   render: function() {
+
     var data = this.props.data;
+
     var size = { width: this.props.width, height: this.props.height };
 
 
@@ -98,6 +130,11 @@ var LineChart = React.createClass({
       .domain([0, maxY])
       .range([this.props.height, 0]);
 
+    var circles = [];
+    this.props.data.forEach(function(point) {
+      circles.push(<Circle cx={xScale(point.x)} cy={yScale(point.y)} r={this.props.pointRadius}  />);
+    }.bind(this));
+
     return (
       <Chart width={this.props.width} height={this.props.height}>
         <DataSeries 
@@ -107,6 +144,7 @@ var LineChart = React.createClass({
           width={this.props.width}
           height={this.props.height}
         />
+        {circles}
       </Chart>
     );
   }
