@@ -27,7 +27,7 @@
     "jsdom": "1.0.0"
   },
   "scripts": {
-    "start": "watchify -o public/js/main.js src/main.js & nodemon server.js",
+    "start": "watchify -o public/js/main.js examples/main.js & nodemon server.js",
     "build": "NODE_ENV=production browserify --standalone react-d3 -o react-d3.js ./src/index.js",
     "browserbuild": "NODE_ENV=production browserify --standalone react-d3 ./src/index.js | uglifyjs -c > react-d3.min.js",
     "test": "./node_modules/karma/bin/karma start karma.conf.js"
