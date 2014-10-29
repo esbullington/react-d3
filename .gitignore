@@ -8,3 +8,5 @@ npm-debug.log
 *.swp
 # Generate js file(s)
 public/js/*.js
+# npm package
+*.tgz
