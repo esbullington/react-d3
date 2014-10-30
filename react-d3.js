@@ -27725,9 +27725,9 @@ module.exports={
     "jsdom": "1.0.0"
   },
   "scripts": {
-    "start": "watchify -o public/js/main.js src/main.js & nodemon server.js",
+    "start": "watchify -o public/js/main.js examples/main.js & nodemon server.js",
     "build": "NODE_ENV=production browserify --standalone react-d3 -o react-d3.js ./src/index.js",
-    "browserbuild": "NODE_ENV=production browserify --standalone react-d3 -o react-d3.js ./src/index.js | uglifyjs -c > react-d3.min.js",
+    "browserbuild": "NODE_ENV=production browserify --standalone react-d3 ./src/index.js | uglifyjs -c > react-d3.min.js",
     "test": "./node_modules/karma/bin/karma start karma.conf.js"
   },
   "author": "Eric S. Bullington",
@@ -27853,8 +27853,9 @@ var d3 = require('d3');
 
 exports.BarChart = require('./barchart').BarChart;
 exports.LineChart = require('./linechart').LineChart;
+exports.PieChart = require('./piechart').PieChart;
 
-},{"./barchart":147,"./linechart":150,"d3":1}],150:[function(require,module,exports){
+},{"./barchart":147,"./linechart":150,"./piechart":151,"d3":1}],150:[function(require,module,exports){
 /** @jsx React.DOM */
 var React = require('react');
 window.React = React;
@@ -27988,8 +27989,8 @@ var LineChart = React.createClass({displayName: 'LineChart',
       .range([this.props.height, 0]);
 
     var circles = [];
-    this.props.data.forEach(function(point) {
-      circles.push(Circle({cx: xScale(point.x), cy: yScale(point.y), r: this.props.pointRadius}));
+    this.props.data.forEach(function(point, i) {
+      circles.push(Circle({cx: xScale(point.x), cy: yScale(point.y), r: this.props.pointRadius, key: i}));
     }.bind(this));
 
     return (
@@ -28009,6 +28010,113 @@ var LineChart = React.createClass({displayName: 'LineChart',
 });
 
 exports.LineChart = LineChart;
+
+},{"../package.json":146,"./common":148,"d3":1,"react":145}],151:[function(require,module,exports){
+/** @jsx React.DOM */
+var React = require('react');
+var pkg = require('../package.json');
+var d3 = require('d3');
+var Chart = require('./common').Chart;
+
+
+var Arc = React.createClass({displayName: 'Arc',
+
+  propTypes: {
+    fill: React.PropTypes.string,
+    d: React.PropTypes.string,
+    startAngle: React.PropTypes.number,
+    endAngle: React.PropTypes.number,
+    innerRadius: React.PropTypes.number,
+    outerRadius: React.PropTypes.number
+  },
+
+  render: function() {
+    var arc = d3.svg.arc()
+      .innerRadius(this.props.innerRadius)
+      .outerRadius(this.props.outerRadius)
+      .startAngle(this.props.startAngle)
+      .endAngle(this.props.endAngle);
+    return (
+      React.DOM.path({
+        d: arc(), 
+        fill: this.props.fill}
+      )
+    );
+  }
+});
+
+var DataSeries = React.createClass({displayName: 'DataSeries',
+
+  propTypes: {
+    transform: React.PropTypes.string,
+    data: React.PropTypes.array,
+    innerRadius: React.PropTypes.number,
+    radius: React.PropTypes.number
+  },
+
+  getDefaultProps: function() {
+    return {
+      innerRadius: 0,
+      data: []
+    }
+  },
+
+  render: function() {
+    var props = this.props;
+
+    var pie = d3.layout
+      .pie()
+      .sort(null);
+    
+    var arcData = pie(props.data);
+
+    var color = d3.scale.category20c();
+
+    var arcs = [];
+    arcData.forEach(function(arc, i) {
+      console.log('arc data', arc);
+      arcs.push(
+        Arc({
+          startAngle: arc.startAngle, 
+          endAngle: arc.endAngle, 
+          outerRadius: props.radius, 
+          innerRadius: props.innerRadius, 
+          fill: color(i), 
+          key: i}
+        )
+      )
+    });
+    console.log('arcs: ', arcs);
+    console.log('pie dataseries: ', this);
+    return (
+      React.DOM.g({transform: this.props.transform}, arcs)
+    );
+  }
+});
+
+var PieChart = React.createClass({displayName: 'PieChart',
+
+  propTypes: {
+    radius: React.PropTypes.number,
+    cx: React.PropTypes.number,
+    cy: React.PropTypes.number
+
+  },
+
+  render: function() {
+    var transform = "translate(" 
+      + (this.props.cx || this.props.width/2) + "," 
+      + (this.props.cy || this.props.height/2) + ")";
+    return (
+      Chart({width: this.props.width, height: this.props.height}, 
+        DataSeries({transform: transform, data: this.props.data, width: this.props.width, height: this.props.height, radius: this.props.radius, innerRadius: this.props.innerRadius})
+      )
+    );
+  }
+
+});
+
+exports.PieChart = PieChart;
 
 },{"../package.json":146,"./common":148,"d3":1,"react":145}]},{},[149])(149)
 });
