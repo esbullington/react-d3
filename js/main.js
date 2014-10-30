@@ -6,21 +6,46 @@ var d3 = require('d3');
 var BarChart = require('../src/barchart').BarChart;
 var LineChart = require('../src/linechart').LineChart;
 var PieChart = require('../src/piechart').PieChart;
+var AreaChart = require('../src/areachart').AreaChart;
 var datagen = require('../utils/datagen');
 
 
 var Demos = React.createClass({displayName: 'Demos',
+
+  getInitialState: function() {
+    return {
+      areaData: []
+    }
+  },
+  
+  componentDidMount: function() {
+    // Apple stock data from Mike Bostock's chart at
+    // http://bl.ocks.org/mbostock/3883195
+    var parseDate = d3.time.format("%d-%b-%y").parse;
+    d3.tsv("data/applestock.tsv", function(error, data) {
+      data.forEach(function(d) {
+        d.date = parseDate(d.date);
+        d.value = +d.value;
+      });
+      this.setState({areaData: data});
+    }.bind(this))
+  },
+
   render: function() {
+
     var lineData = datagen.generateArrayOfPoints(10);
     var barData = datagen.generateArrayOfNumbers(5);
     var pieData = datagen.generateArrayOfNumbers(5);
+ 
     return (
       React.DOM.div(null, 
         LineChart({data: lineData, width: 400, height: 200}), 
         React.DOM.hr(null), 
         BarChart({data: barData, width: 400, height: 200}), 
         React.DOM.hr(null), 
-        PieChart({data: pieData, width: 400, height: 400, radius: 200, innerRadius: 60})
+        PieChart({data: pieData, width: 400, height: 400, radius: 200, innerRadius: 60}), 
+        React.DOM.hr(null), 
+        AreaChart({data: this.state.areaData, width: 600, height: 400})
       )
     );
   }
@@ -32,7 +57,7 @@ React.renderComponent(
   document.body
 );
 
-},{"../package.json":"/home/eric/repos/react-d3/package.json","../src/barchart":"/home/eric/repos/react-d3/src/barchart.js","../src/linechart":"/home/eric/repos/react-d3/src/linechart.js","../src/piechart":"/home/eric/repos/react-d3/src/piechart.js","../utils/datagen":"/home/eric/repos/react-d3/utils/datagen.js","d3":"/home/eric/repos/react-d3/node_modules/d3/d3.js","react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/node_modules/d3/d3.js":[function(require,module,exports){
+},{"../package.json":"/home/eric/repos/react-d3/package.json","../src/areachart":"/home/eric/repos/react-d3/src/areachart.js","../src/barchart":"/home/eric/repos/react-d3/src/barchart.js","../src/linechart":"/home/eric/repos/react-d3/src/linechart.js","../src/piechart":"/home/eric/repos/react-d3/src/piechart.js","../utils/datagen":"/home/eric/repos/react-d3/utils/datagen.js","d3":"/home/eric/repos/react-d3/node_modules/d3/d3.js","react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/node_modules/d3/d3.js":[function(require,module,exports){
 !function() {
   var d3 = {
     version: "3.4.13"
@@ -27730,7 +27755,7 @@ module.exports = warning;
 module.exports = require('./lib/React');
 
 },{"./lib/React":"/home/eric/repos/react-d3/node_modules/react/lib/React.js"}],"/home/eric/repos/react-d3/package.json":[function(require,module,exports){
-module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
   "name": "react-d3",
   "version": "0.0.1",
   "description": "ReactJS charts using d3",
@@ -27759,7 +27784,8 @@ module.exports={
     "jsdom": "1.0.0"
   },
   "scripts": {
-    "start": "watchify -o public/js/main.js examples/main.js & nodemon server.js",
+    "webpublish": "git subtree push --prefix dist origin gh-pages",
+    "start": "watchify -o dist/js/main.js examples/main.js & nodemon server.js",
     "build": "NODE_ENV=production browserify --standalone react-d3 -o react-d3.js ./src/index.js",
     "browserbuild": "NODE_ENV=production browserify --standalone react-d3 ./src/index.js | uglifyjs -c > react-d3.min.js",
     "test": "./node_modules/karma/bin/karma start karma.conf.js"
@@ -27778,7 +27804,183 @@ module.exports={
   }
 }
 
-},{}],"/home/eric/repos/react-d3/src/barchart.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/src/areachart.js":[function(require,module,exports){
+/** @jsx React.DOM */
+var React = require('react');
+window.React = React;
+var pkg = require('../package.json');
+var d3 = require('d3');
+var Chart = require('./common').Chart;
+
+// Working on axes, not yet functional
+var XAxis = React.createClass({displayName: 'XAxis',
+
+  componentDidMount: function() {
+    var xAxis = d3.svg.axis()
+      .scale(this.props.xScale)
+      .orient("bottom"); 
+    var node = this.refs.xaxis.getDOMNode();
+    d3.select(node).call(xAxis);
+  },
+
+  render: function() {
+    console.log('xaxis', this);
+    var t = "translate(0," + this.props.height + ")";
+    return (
+      React.DOM.g({
+        ref: "xaxis", 
+        className: "x axis", 
+        transform: t
+      }
+      )
+    );
+  }
+
+});
+
+
+var YAxis = React.createClass({displayName: 'YAxis',
+
+  componentDidMount: function() {
+
+    var yAxis = d3.svg.axis()
+      .scale(this.props.yScale)
+      .orient("left"); 
+    var node = this.refs.yaxis.getDOMNode();
+    d3.select(node).append('g').call(yAxis);
+
+  },
+
+  render: function() {
+    return (
+      React.DOM.g({
+        ref: "yaxis", 
+        className: "y axis"
+      }
+      )
+    );
+  }
+
+});
+
+
+var Area = React.createClass({displayName: 'Area',
+  
+  propTypes: {
+    path: React.PropTypes.string,
+    fill: React.PropTypes.string,
+    height: React.PropTypes.number,
+    width: React.PropTypes.number
+  },
+
+  getDefaultProps: function() {
+    return {
+      fill: 'steelblue'
+    }
+  },
+
+  render: function() {
+
+    return (
+      React.DOM.path({
+        className: "area", 
+        d: this.props.path, 
+        fill: this.props.fill}
+      )
+    );
+  }
+
+});
+
+
+var DataSeries = React.createClass({displayName: 'DataSeries',
+
+  propTypes: {
+    data: React.PropTypes.array,
+    interpolate: React.PropTypes.string
+  },
+
+  getDefaultProps: function() {
+    return {
+      data: [],
+      interpolate: 'linear'
+    }
+  },
+
+  render: function() {
+
+    var props = this.props;
+
+    var area = d3.svg.area()
+      .x(function(d) { return props.xScale(d.date); })
+      .y0(this.props.height)
+      .y1(function(d) { return props.yScale(d.value); });
+
+    var path = area(this.props.data);
+
+    return (
+      Area({path: path})
+    )
+  }
+
+});
+
+var AreaChart = React.createClass({displayName: 'AreaChart',
+
+  propTypes: {
+    pointRadius: React.PropTypes.number,
+    width: React.PropTypes.number,
+    height: React.PropTypes.number
+  },
+
+  getDefaultProps: function() {
+    return {
+      pointRadius: 2,
+      width: 400,
+      height: 200
+    }
+  },
+
+  render: function() {
+
+    var props = this.props;
+
+    var xScale = d3.time.scale()
+      .domain(d3.extent(props.data, function(d) { return d.date; }))
+      .range([0, props.width]);
+
+    var yScale = d3.scale.linear()
+      .domain([0, d3.max(props.data, function(d) { return d.value; })])
+      .range([props.height, 0]);
+
+    var margin = {top: 20, right: 20, bottom: 30, left: 50};
+
+    var trans = "translate(" + margin.left + "," + margin.top + ")";
+
+    return (
+      Chart({
+        ref: "chart", 
+        width: this.props.width + margin.left + margin.right, 
+        height: this.props.height + margin.top + margin.bottom
+      }, 
+        React.DOM.g({transform: trans}, 
+          DataSeries({
+            xScale: xScale, 
+            yScale: yScale, 
+            data: this.props.data, 
+            width: this.props.width, 
+            height: this.props.height}
+          )
+        )
+      )
+    );
+  }
+
+});
+
+exports.AreaChart = AreaChart;
+
+},{"../package.json":"/home/eric/repos/react-d3/package.json","./common":"/home/eric/repos/react-d3/src/common.js","d3":"/home/eric/repos/react-d3/node_modules/d3/d3.js","react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/src/barchart.js":[function(require,module,exports){
 /** @jsx React.DOM */
 var React = require('react');
 var pkg = require('../package.json');
@@ -28166,6 +28368,24 @@ exports.generateArrayOfNumbers = function(n) {
     data.push(j);
   } 
   return data;
+};
+
+exports.generateArrayOfTimeObjects = function(n) {
+  function randomDate(start, end) {
+      return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+  }
+
+  randomDate(new Date(2000, 0, 1), new Date())
+  var data = [];
+  for (var i = 0; i < n; i++) {
+    var date = randomDate(new Date(2012, 0, 1), new Date());
+    var value = Math.random() * 1000;
+    var point = {date:date.valueOf(), value:value};
+    data.push(point);
+  } 
+  return data.sort(function(a, b) {
+    return a.date - b.date;
+  });
 };
 
 },{}]},{},["/home/eric/repos/react-d3/examples/main.js"]);
