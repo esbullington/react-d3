@@ -27,6 +27,7 @@
     "jsdom": "1.0.0"
   },
   "scripts": {
+    "webpublish": "git subtree push --prefix dist origin gh-pages",
     "start": "watchify -o dist/js/main.js examples/main.js & nodemon server.js",
     "build": "NODE_ENV=production browserify --standalone react-d3 -o react-d3.js ./src/index.js",
     "browserbuild": "NODE_ENV=production browserify --standalone react-d3 ./src/index.js | uglifyjs -c > react-d3.min.js",
