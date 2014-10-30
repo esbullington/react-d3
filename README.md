@@ -1,15 +1,16 @@
 ## react-d3
 Modular ReactJS charts calculated with the help of d3.
 
-**Caution:**  alpha quality software.
+**Caution:**  alpha state software.
 
 ### Chart types
 Current charts:
 * bar chart
 * line chart
 * pie chart
+* area chart (*very* basic!)
 
-The basic charts generated from the examples/main.js ReactJS app can be [viewed here](http://esbullington.github.io/react-d3).  I'm hard at work expanding on these basic examples.
+The basic charts generated from the examples/main.js ReactJS app can be [viewed here](http://esbullington.github.io/react-d3).  I'm hard at work expanding these basic examples.
 
 ### Background
 Although there have been [several](http://nicolashery.com/integrating-d3js-visualizations-in-a-react-app/) [different](http://bl.ocks.org/milroc/d22bbf92231876505e5d) approaches proposed for combining the power of d3 with the flexibility and modularity of ReactJS, the approach I'm using here was inspired by [this blog post](http://10consulting.com/2014/02/19/d3-plus-reactjs-for-charting/) by Ben Smith of [Binary Consulting](http://10consulting.com/).
