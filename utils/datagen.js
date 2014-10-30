@@ -19,3 +19,19 @@ exports.generateArrayOfNumbers = function(n) {
   } 
   return data;
 };
+
+exports.generateArrayOfTimeObjects = function(n) {
+  function randomDate(start, end) {
+      return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+  }
+
+  randomDate(new Date(2000, 0, 1), new Date())
+  var data = [];
+  for (var i = 0; i < n; i++) {
+    var date = randomDate(new Date(2012, 0, 1), new Date());
+    var value = Math.random() * 1000;
+    var point = {data:date, value:value};
+    data.push(point);
+  } 
+  return data;
+};

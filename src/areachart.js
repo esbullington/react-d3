@@ -15,11 +15,14 @@ var XAxis = React.createClass({
   },
 
   render: function() {
+    var t = "translate(0," + this.props.height + ")";
     return (
       <g
         className="x axis"
-        transform="translate(0," + this.props.height + ")"
-      /g>
+        transform={t}
+      >
+      </g>
+    );
   }
 
 });
@@ -38,11 +41,14 @@ var YAxis = React.createClass({
   },
 
   render: function() {
+    var t = "translate(0," + this.props.height + ")";
     return (
       <g
         className="y axis"
-        transform="translate(0," + this.props.height + ")"
-      /g>
+        transform={t}
+      >
+      </g>
+    );
   }
 
 });
@@ -126,7 +132,7 @@ var AreaChart = React.createClass({
     var props = this.props;
 
     var xScale = d3.time.scale()
-      .domain(d3.extent(data, function(d) { return d.date; })
+      .domain(d3.extent(data, function(d) { return d.date; }))
       .range([0, props.width]);
 
     var yScale = d3.scale.linear()
