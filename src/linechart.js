@@ -131,8 +131,8 @@ var LineChart = React.createClass({
       .range([this.props.height, 0]);
 
     var circles = [];
-    this.props.data.forEach(function(point) {
-      circles.push(<Circle cx={xScale(point.x)} cy={yScale(point.y)} r={this.props.pointRadius}  />);
+    this.props.data.forEach(function(point, i) {
+      circles.push(<Circle cx={xScale(point.x)} cy={yScale(point.y)} r={this.props.pointRadius} key={i} />);
     }.bind(this));
 
     return (
