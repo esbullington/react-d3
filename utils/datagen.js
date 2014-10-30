@@ -30,8 +30,10 @@ exports.generateArrayOfTimeObjects = function(n) {
   for (var i = 0; i < n; i++) {
     var date = randomDate(new Date(2012, 0, 1), new Date());
     var value = Math.random() * 1000;
-    var point = {data:date, value:value};
+    var point = {date:date.valueOf(), value:value};
     data.push(point);
   } 
-  return data;
+  return data.sort(function(a, b) {
+    return a.date - b.date;
+  });
 };

@@ -10,11 +10,32 @@ var datagen = require('../utils/datagen');
 
 
 var Demos = React.createClass({
+
+  getInitialState: function() {
+    return {
+      areaData: []
+    }
+  },
+  
+  componentDidMount: function() {
+    // Apple stock data from Mike Bostock's chart at
+    // http://bl.ocks.org/mbostock/3883195
+    var parseDate = d3.time.format("%d-%b-%y").parse;
+    d3.tsv("data/applestock.tsv", function(error, data) {
+      data.forEach(function(d) {
+        d.date = parseDate(d.date);
+        d.value = +d.value;
+      });
+      this.setState({areaData: data});
+    }.bind(this))
+  },
+
   render: function() {
+
     var lineData = datagen.generateArrayOfPoints(10);
     var barData = datagen.generateArrayOfNumbers(5);
     var pieData = datagen.generateArrayOfNumbers(5);
-    var areaData = datagen.generateArrayOfTimeObjects(10);
+ 
     return (
       <div>
         <LineChart data={lineData} width={400} height={200} />
@@ -23,7 +44,7 @@ var Demos = React.createClass({
         <hr/>
         <PieChart data={pieData} width={400} height={400} radius={200} innerRadius={60}  />
         <hr/>
-        <AreaChart data={areaData} width={400} height={400} />
+        <AreaChart data={this.state.areaData} width={600} height={400} />
       </div>
     );
   }
