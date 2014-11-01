@@ -17,7 +17,6 @@ var XAxis = React.createClass({
   },
 
   render: function() {
-    console.log('xaxis', this);
     var t = "translate(0," + this.props.height + ")";
     return (
       <g

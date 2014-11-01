@@ -60,7 +60,6 @@ var DataSeries = React.createClass({
 
     var arcs = [];
     arcData.forEach(function(arc, i) {
-      console.log('arc data', arc);
       arcs.push(
         <Arc
           startAngle={arc.startAngle}
@@ -72,8 +71,6 @@ var DataSeries = React.createClass({
         />
       )
     });
-    console.log('arcs: ', arcs);
-    console.log('pie dataseries: ', this);
     return (
       <g transform={this.props.transform} >{arcs}</g>
     );
