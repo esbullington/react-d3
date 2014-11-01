@@ -24,6 +24,7 @@ var Arc = React.createClass({
       .endAngle(this.props.endAngle);
     return (
       <path 
+        className='arc'
         d={arc()}
         fill={this.props.fill}
       />
@@ -91,7 +92,7 @@ var PieChart = React.createClass({
       + (this.props.cx || this.props.width/2) + "," 
       + (this.props.cy || this.props.height/2) + ")";
     return (
-      <Chart width={this.props.width} height={this.props.height}>
+      <Chart className='pie-chart' width={this.props.width} height={this.props.height}>
         <DataSeries transform={transform} data={this.props.data} width={this.props.width} height={this.props.height} radius={this.props.radius} innerRadius={this.props.innerRadius} />
       </Chart>
     );
