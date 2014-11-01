@@ -3,6 +3,8 @@ Modular ReactJS charts calculated with the help of d3.
 
 **Caution:**  alpha state software.
 
+[![Build Status](https://travis-ci.org/esbullington/react-d3.svg?branch=master)](https://travis-ci.org/esbullington/react-d3)
+
 ### Chart types
 Current charts:
 * bar chart
