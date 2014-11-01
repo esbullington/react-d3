@@ -3,20 +3,17 @@ module.exports = function(config) {
   config.set({
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
-    basePath: '/home/eric/repos/react-d3-charts',
+    basePath: '',
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
     frameworks: ['mocha', 'browserify', 'chai', 'chai-as-promised'],
 
     // list of files / patterns to load in the browser
+    // 'utils/phantomjs-shims.js',
     files: [
-      'utils/phantomjs-shims.js',
       'tests/index.js'
     ],
-
-    // list of files to exclude
-    exclude: [],
 
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
@@ -48,11 +45,13 @@ module.exports = function(config) {
     autoWatch: false,
 
     plugins: [
-      'karma-*',
       // 'karma-chrome-launcher',
-      // 'karma-jasmine',
-      // 'karma-phantomjs',
-      // 'karma-browserify'
+      'karma-phantomjs-launcher',
+      'karma-jasmine',
+      'karma-mocha',
+      'karma-chai',
+      'karma-chai-plugins',
+      'karma-bro'
     ],
 
     // start these browsers
