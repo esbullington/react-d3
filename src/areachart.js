@@ -11,7 +11,11 @@ var XAxis = React.createClass({
 
   componentWillReceiveProps: function(props) {
 
+    var unit = props.xAxisTickInterval.unit;
+    var interval = props.xAxisTickInterval.interval;
+
     var xAxis = d3.svg.axis()
+      .ticks(d3.time[unit], interval)
       .scale(props.xScale)
       .orient("bottom"); 
 
@@ -56,6 +60,7 @@ var YAxis = React.createClass({
   componentWillReceiveProps: function(props) {
 
     var yAxis = d3.svg.axis()
+      .ticks(props.yAxisTickCount)
       .scale(props.yScale)
       .orient("left"); 
 
@@ -157,14 +162,16 @@ var DataSeries = React.createClass({
 var AreaChart = React.createClass({
 
   propTypes: {
-    pointRadius: React.PropTypes.number,
+    yAxisTickCount: React.PropTypes.number,
+    xAxisTickInterval: React.PropTypes.object,
     width: React.PropTypes.number,
     height: React.PropTypes.number
   },
 
   getDefaultProps: function() {
     return {
-      pointRadius: 2,
+      yAxisTickCount: 4,
+      xAxisTickInterval: {unit: 'years', interval: 1},
       width: 400,
       height: 200
     }
@@ -204,6 +211,7 @@ var AreaChart = React.createClass({
           />
           <XAxis 
             xScale={xScale}
+            xAxisTickInterval={this.props.xAxisTickInterval}
             margin={margin}
             width={this.props.width}
             height={this.props.height}
@@ -211,6 +219,7 @@ var AreaChart = React.createClass({
           <YAxis 
             yScale={yScale}
             margin={margin}
+            yAxisTickCount={this.props.yAxisTickCount}
             width={this.props.width}
             height={this.props.height}
           />
