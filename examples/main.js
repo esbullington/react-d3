@@ -26,7 +26,6 @@ var Demos = React.createClass({
     d3.tsv("data/applestock.tsv", function(error, data) {
       data.forEach(function(d) {
         d.date = parseDate(d.date);
-        console.log(d.date.valueOf());
         d.value = +d.value;
       });
       this.setState({areaData: data});
