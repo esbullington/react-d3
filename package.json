@@ -7,6 +7,7 @@
     "browserify": "~6.2.0",
     "chai": "^1.9.1",
     "envify": "~3.0.0",
+    "highlight.js": "^8.3.0",
     "karma": "^0.12.21",
     "karma-bro": "^0.6.2",
     "karma-chai": "^0.1.0",
