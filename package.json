@@ -25,6 +25,7 @@
   },
   "dependencies": {
     "d3": "^3.4.13",
+    "express": "^4.10.1",
     "jsdom": "1.0.0"
   },
   "scripts": {
