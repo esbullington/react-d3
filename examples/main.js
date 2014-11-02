@@ -109,8 +109,8 @@ var Demos = React.createClass({
           <div className="col-md-6">
             <AreaChart
               data={this.state.areaData}
-              width={300}
-              height={200}
+              width={400}
+              height={300}
               yAxisTickCount={4}
               xAxisTickInterval={{unit: 'year', interval: 1}}
             />
@@ -123,7 +123,7 @@ var Demos = React.createClass({
             </pre>
             <pre ref='block'>
               <code className='html'>
-                {'<AreaChart\n  data={areaData}\n  width={300}\n  height={200}\n  yAxisTickCount={4}\n  xAxisTickInterval={{unit: "year", interval: 1}}\n/>'}
+                {'<AreaChart\n  data={areaData}\n  width={400}\n  height={300}\n  yAxisTickCount={4}\n  xAxisTickInterval={{unit: "year", interval: 1}}\n/>'}
               </code>
             </pre>
           </div>
