@@ -27,7 +27,6 @@ var Demos = React.createClass({displayName: 'Demos',
     d3.tsv("data/applestock.tsv", function(error, data) {
       data.forEach(function(d) {
         d.date = parseDate(d.date);
-        console.log(d.date.valueOf());
         d.value = +d.value;
       });
       this.setState({areaData: data});
@@ -36566,7 +36565,7 @@ module.exports = warning;
 module.exports = require('./lib/React');
 
 },{"./lib/React":"/home/eric/repos/react-d3/node_modules/react/lib/React.js"}],"/home/eric/repos/react-d3/package.json":[function(require,module,exports){
-module.exports=module.exports=module.exports={
+module.exports={
   "name": "react-d3",
   "version": "0.0.5",
   "description": "ReactJS charts using d3",
@@ -36601,7 +36600,7 @@ module.exports=module.exports=module.exports={
     "webpublish": "git subtree push --prefix dist origin gh-pages",
     "start": "watchify -o dist/js/main.js examples/main.js & nodemon server.js",
     "npmbuild": "NODE_ENV=production browserify --standalone react-d3 -o react-d3.js ./src/index.js",
-    "browserbuild": "NODE_ENV=production browserify --standalone react-d3 ./src/index.js | uglifyjs -c > react-d3.min.js",
+    "browserbuild": "NODE_ENV=production browserify --standalone react-d3 ./src/index.js | uglifyjs -c > dist/js/react-d3.min.js",
     "test": "./node_modules/karma/bin/karma start karma.conf.js"
   },
   "author": "Eric S. Bullington",
