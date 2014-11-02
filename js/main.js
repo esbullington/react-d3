@@ -36566,11 +36566,11 @@ module.exports = warning;
 module.exports = require('./lib/React');
 
 },{"./lib/React":"/home/eric/repos/react-d3/node_modules/react/lib/React.js"}],"/home/eric/repos/react-d3/package.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports={
   "name": "react-d3",
-  "version": "0.0.1",
+  "version": "0.0.5",
   "description": "ReactJS charts using d3",
-  "main": "index.js",
+  "main": "src/index.js",
   "devDependencies": {
     "browserify": "~6.2.0",
     "chai": "^1.9.1",
@@ -36586,7 +36586,6 @@ module.exports=module.exports=module.exports=module.exports=module.exports=modul
     "karma-mocha": "^0.1.9",
     "karma-phantomjs-launcher": "^0.1.4",
     "mocha": "^1.21.4",
-    "react": "^0.12.0",
     "react-tools": "^0.12.0",
     "reactify": "^0.15.2",
     "uglifyjs": "^2.3.6",
@@ -36595,6 +36594,7 @@ module.exports=module.exports=module.exports=module.exports=module.exports=modul
   "dependencies": {
     "d3": "^3.4.13",
     "express": "^4.10.1",
+    "react": "^0.12.0",
     "jsdom": "1.0.0"
   },
   "scripts": {
@@ -36750,18 +36750,6 @@ var Area = React.createClass({displayName: 'Area',
 
 var DataSeries = React.createClass({displayName: 'DataSeries',
 
-  propTypes: {
-    data: React.PropTypes.array,
-    interpolate: React.PropTypes.string
-  },
-
-  getDefaultProps: function() {
-    return {
-      data: [],
-      interpolate: 'linear'
-    }
-  },
-
   render: function() {
 
     var props = this.props;
@@ -36783,6 +36771,7 @@ var DataSeries = React.createClass({displayName: 'DataSeries',
 var AreaChart = React.createClass({displayName: 'AreaChart',
 
   propTypes: {
+    data: React.PropTypes.array,
     yAxisTickCount: React.PropTypes.number,
     xAxisTickInterval: React.PropTypes.object,
     width: React.PropTypes.number,
@@ -36791,6 +36780,7 @@ var AreaChart = React.createClass({displayName: 'AreaChart',
 
   getDefaultProps: function() {
     return {
+      data: [],
       yAxisTickCount: 4,
       xAxisTickInterval: {unit: 'years', interval: 1},
       width: 400,
