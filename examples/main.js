@@ -38,6 +38,7 @@ var Demos = React.createClass({
  
     return (
       <div>
+        <hr/>
         <LineChart data={lineData} width={400} height={200} />
         <hr/>
         <BarChart data={barData} width={400} height={200} />
@@ -51,7 +52,7 @@ var Demos = React.createClass({
 
 });
 
-React.renderComponent(
+React.render(
   <Demos />,
   document.body
 );
