@@ -129,18 +129,6 @@ var Area = React.createClass({
 
 var DataSeries = React.createClass({
 
-  propTypes: {
-    data: React.PropTypes.array,
-    interpolate: React.PropTypes.string
-  },
-
-  getDefaultProps: function() {
-    return {
-      data: [],
-      interpolate: 'linear'
-    }
-  },
-
   render: function() {
 
     var props = this.props;
@@ -162,6 +150,7 @@ var DataSeries = React.createClass({
 var AreaChart = React.createClass({
 
   propTypes: {
+    data: React.PropTypes.array,
     yAxisTickCount: React.PropTypes.number,
     xAxisTickInterval: React.PropTypes.object,
     width: React.PropTypes.number,
@@ -170,6 +159,7 @@ var AreaChart = React.createClass({
 
   getDefaultProps: function() {
     return {
+      data: [],
       yAxisTickCount: 4,
       xAxisTickInterval: {unit: 'years', interval: 1},
       width: 400,
