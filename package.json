@@ -1,8 +1,8 @@
 {
   "name": "react-d3",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "description": "ReactJS charts using d3",
-  "main": "index.js",
+  "main": "src/index.js",
   "devDependencies": {
     "browserify": "~6.2.0",
     "chai": "^1.9.1",
