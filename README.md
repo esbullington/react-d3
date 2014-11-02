@@ -10,7 +10,7 @@ Current charts:
 * bar chart
 * line chart
 * pie chart
-* area chart (*very* basic -- no axis!)
+* area chart (now with axes!)
 
 The basic charts generated from the examples/main.js ReactJS app can be [viewed here](http://esbullington.github.io/react-d3).  I'm hard at work expanding these basic examples.
 
