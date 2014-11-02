@@ -8,12 +8,32 @@ var Chart = require('./common').Chart;
 // Working on axes, not yet functional
 var XAxis = React.createClass({
 
-  componentDidMount: function() {
+
+  componentWillReceiveProps: function(props) {
+
     var xAxis = d3.svg.axis()
-      .scale(this.props.xScale)
+      .scale(props.xScale)
       .orient("bottom"); 
+
     var node = this.refs.xaxis.getDOMNode();
-    d3.select(node).call(xAxis);
+
+    d3.select(node)
+      .attr("class", "x axis")
+      .call(xAxis);
+
+    // Style each of the tick lines
+    d3.select('.x.axis')
+      .selectAll('line')
+      .attr("shape-rendering", "crispEdges")
+      .attr("stroke", "#000");
+
+    // Style the main axis line
+    d3.select('.x.axis')
+      .select('path')
+      .attr("shape-rendering", "crispEdges")
+      .attr("fill", "none")
+      .attr("stroke", "#000")
+
   },
 
   render: function() {
@@ -33,13 +53,30 @@ var XAxis = React.createClass({
 
 var YAxis = React.createClass({
 
-  componentDidMount: function() {
+  componentWillReceiveProps: function(props) {
 
     var yAxis = d3.svg.axis()
-      .scale(this.props.yScale)
+      .scale(props.yScale)
       .orient("left"); 
+
     var node = this.refs.yaxis.getDOMNode();
-    d3.select(node).append('g').call(yAxis);
+
+    d3.select(node)
+      .attr("class", "y axis")
+      .call(yAxis);
+
+    // Style each of the tick lines
+    d3.select('.y.axis')
+      .selectAll('line')
+      .attr("shape-rendering", "crispEdges")
+      .attr("stroke", "#000");
+
+    // Style the main axis line
+    d3.select('.y.axis')
+      .select('path')
+      .attr("shape-rendering", "crispEdges")
+      .attr("fill", "none")
+      .attr("stroke", "#000")
 
   },
 
@@ -138,12 +175,14 @@ var AreaChart = React.createClass({
     var props = this.props;
 
     var xScale = d3.time.scale()
-      .domain(d3.extent(props.data, function(d) { return d.date; }))
       .range([0, props.width]);
 
+    xScale.domain(d3.extent(props.data, function(d) { return d.date; }))
+
     var yScale = d3.scale.linear()
-      .domain([0, d3.max(props.data, function(d) { return d.value; })])
       .range([props.height, 0]);
+
+    yScale.domain([0, d3.max(props.data, function(d) { return d.value; })])
 
     var margin = {top: 20, right: 20, bottom: 30, left: 50};
 
@@ -160,6 +199,18 @@ var AreaChart = React.createClass({
             xScale={xScale}
             yScale={yScale}
             data={this.props.data}
+            width={this.props.width}
+            height={this.props.height}
+          />
+          <XAxis 
+            xScale={xScale}
+            margin={margin}
+            width={this.props.width}
+            height={this.props.height}
+          />
+          <YAxis 
+            yScale={yScale}
+            margin={margin}
             width={this.props.width}
             height={this.props.height}
           />
