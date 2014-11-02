@@ -1,6 +1,6 @@
 {
   "name": "react-d3",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "ReactJS charts using d3",
   "main": "index.js",
   "devDependencies": {
@@ -18,7 +18,6 @@
     "karma-mocha": "^0.1.9",
     "karma-phantomjs-launcher": "^0.1.4",
     "mocha": "^1.21.4",
-    "react": "^0.12.0",
     "react-tools": "^0.12.0",
     "reactify": "^0.15.2",
     "uglifyjs": "^2.3.6",
@@ -27,6 +26,7 @@
   "dependencies": {
     "d3": "^3.4.13",
     "express": "^4.10.1",
+    "react": "^0.12.0",
     "jsdom": "1.0.0"
   },
   "scripts": {
