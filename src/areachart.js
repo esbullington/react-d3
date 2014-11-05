@@ -71,13 +71,13 @@ var YAxis = React.createClass({
       .call(yAxis);
 
     // Style each of the tick lines
-    d3.select('.y.axis')
+    d3.selectAll('.y.axis')
       .selectAll('line')
       .attr("shape-rendering", "crispEdges")
       .attr("stroke", "#000");
 
     // Style the main axis line
-    d3.select('.y.axis')
+    d3.selectAll('.y.axis')
       .select('path')
       .attr("shape-rendering", "crispEdges")
       .attr("fill", "none")
