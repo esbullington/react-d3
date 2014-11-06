@@ -40,7 +40,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/esbullington/react-d3-charts.git"
+    "url": "https://github.com/esbullington/react-d3.git"
   },
   "browserify": {
     "transform": [
