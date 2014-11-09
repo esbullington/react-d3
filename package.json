@@ -1,13 +1,15 @@
 {
   "name": "react-d3",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "ReactJS charts using d3",
   "author": "Eric S. Bullington",
   "homepage": "http://esbullington.github.io/react-d3/",
-  "keywords": ["d3",
+  "keywords": [
+    "d3",
+    "react",
     "charts",
     "ReactJS",
-    "react-components"
+    "react-component"
   ],
   "license": "MIT",
   "main": "src/index.js",
