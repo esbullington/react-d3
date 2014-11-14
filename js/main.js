@@ -48,6 +48,26 @@ var Demos = React.createClass({displayName: 'Demos',
         ), 
         React.createElement("div", {className: "row"}, 
           React.createElement("div", {className: "col-md-6"}, 
+            React.createElement(BarChart, {data: barData, width: 500, height: 200})
+          ), 
+          React.createElement("div", {className: "col-md-6"}, 
+            React.createElement("pre", {ref: "block"}, 
+              React.createElement("code", {className: "js"}, 
+              "var barData = {'A': 5, 'B': 6, 'C': 2, 'D': 11, 'E': 2, 'F': 7};"
+              )
+            ), 
+            React.createElement("pre", {ref: "block"}, 
+              React.createElement("code", {className: "html"}, 
+                "<BarChart data={barData} width={500} height={200} fill={'cornflowerblue'} />"
+              )
+            )
+          )
+        ), 
+        React.createElement("div", {className: "row"}, 
+          React.createElement("hr", null)
+        ), 
+        React.createElement("div", {className: "row"}, 
+          React.createElement("div", {className: "col-md-6"}, 
             React.createElement(LineChart, {data: lineData, width: 400, height: 200})
           ), 
           React.createElement("div", {className: "col-md-6"}, 
@@ -59,26 +79,6 @@ var Demos = React.createClass({displayName: 'Demos',
             React.createElement("pre", {ref: "block"}, 
               React.createElement("code", {className: "html"}, 
               '<LineChart data={lineData} width={400} height={200} />'
-              )
-            )
-          )
-        ), 
-        React.createElement("div", {className: "row"}, 
-          React.createElement("hr", null)
-        ), 
-        React.createElement("div", {className: "row"}, 
-          React.createElement("div", {className: "col-md-6"}, 
-            React.createElement(BarChart, {data: barData, width: 400, height: 200})
-          ), 
-          React.createElement("div", {className: "col-md-6"}, 
-            React.createElement("pre", {ref: "block"}, 
-              React.createElement("code", {className: "js"}, 
-              '//Sample data format (not actually rendered)\nvar barData = [2, 3, 6, 3, 2]'
-              )
-            ), 
-            React.createElement("pre", {ref: "block"}, 
-              React.createElement("code", {className: "html"}, 
-                '<BarChart data={barData} width={400} height={200} />'
               )
             )
           )
@@ -43355,7 +43355,7 @@ module.exports = warning;
 module.exports = require('./lib/React');
 
 },{"./lib/React":"/home/eric/repos/react-d3/node_modules/react/lib/React.js"}],"/home/eric/repos/react-d3/package.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports={
   "name": "react-d3",
   "version": "0.0.8",
   "description": "ReactJS charts using d3",
@@ -43374,6 +43374,7 @@ module.exports=module.exports=module.exports=module.exports=module.exports=modul
     "browserify": "~6.2.0",
     "chai": "^1.9.1",
     "envify": "~3.0.0",
+    "express": "^4.10.1",
     "highlight.js": "^8.3.0",
     "karma": "^0.12.21",
     "karma-bro": "^0.6.2",
@@ -43392,9 +43393,9 @@ module.exports=module.exports=module.exports=module.exports=module.exports=modul
   },
   "dependencies": {
     "d3": "^3.4.13",
-    "express": "^4.10.1",
-    "react": "^0.12.0",
-    "jsdom": "1.0.0"
+    "jsdom": "1.0.0",
+    "lodash": "^2.4.1",
+    "react": "^0.12.0"
   },
   "scripts": {
     "webpublish": "git subtree push --prefix dist origin gh-pages",
@@ -43815,6 +43816,7 @@ var BarChart = React.createClass({displayName: 'BarChart',
       yAxisTickCount: 4,
       width: 500,
       height: 200,
+      margins: {top: 20, right: 30, bottom: 30, left: 30},
       fill: "cornflowerblue"
     }
   },
@@ -43825,7 +43827,7 @@ var BarChart = React.createClass({displayName: 'BarChart',
 
     var keys = _.keys(this.props.data);
 
-    var margins = {top: 20, right: 30, bottom: 30, left: 50};
+    var margins = this.props.margins;
 
     var sideMargins = margins.left + margins.right;
     var topBottomMargins = margins.top + margins.bottom;
