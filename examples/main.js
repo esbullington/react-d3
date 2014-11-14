@@ -47,6 +47,26 @@ var Demos = React.createClass({
         </h2>
         <div className="row">
           <div className="col-md-6">
+            <BarChart data={barData} width={500} height={200} />
+          </div>
+          <div className="col-md-6">
+            <pre ref='block'>
+              <code className='js'>
+              {"var barData = {'A': 5, 'B': 6, 'C': 2, 'D': 11, 'E': 2, 'F': 7};"}
+              </code>
+            </pre>
+            <pre ref='block'>
+              <code className='html'>
+                {"<BarChart data={barData} width={500} height={200} fill={'cornflowerblue'} />"}
+              </code>
+            </pre>
+          </div>
+        </div>
+        <div className="row">
+          <hr/>
+        </div>
+        <div className="row">
+          <div className="col-md-6">
             <LineChart data={lineData} width={400} height={200} />
           </div>
           <div className="col-md-6">
@@ -58,26 +78,6 @@ var Demos = React.createClass({
             <pre ref='block'>
               <code className='html'>
               {'<LineChart data={lineData} width={400} height={200} />'}
-              </code>
-            </pre>
-          </div>
-        </div>
-        <div className="row">
-          <hr/>
-        </div>
-        <div className="row">
-          <div className="col-md-6">
-            <BarChart data={barData} width={400} height={200} />
-          </div>
-          <div className="col-md-6">
-            <pre ref='block'>
-              <code className='js'>
-              {'//Sample data format (not actually rendered)\nvar barData = [2, 3, 6, 3, 2]'}
-              </code>
-            </pre>
-            <pre ref='block'>
-              <code className='html'>
-                {'<BarChart data={barData} width={400} height={200} />'}
               </code>
             </pre>
           </div>
