@@ -17,6 +17,7 @@
     "browserify": "~6.2.0",
     "chai": "^1.9.1",
     "envify": "~3.0.0",
+    "express": "^4.10.1",
     "highlight.js": "^8.3.0",
     "karma": "^0.12.21",
     "karma-bro": "^0.6.2",
@@ -35,9 +36,9 @@
   },
   "dependencies": {
     "d3": "^3.4.13",
-    "express": "^4.10.1",
-    "react": "^0.12.0",
-    "jsdom": "1.0.0"
+    "jsdom": "1.0.0",
+    "lodash": "^2.4.1",
+    "react": "^0.12.0"
   },
   "scripts": {
     "webpublish": "git subtree push --prefix dist origin gh-pages",
