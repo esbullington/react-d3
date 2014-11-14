@@ -36,7 +36,7 @@ var Demos = React.createClass({
   render: function() {
 
     var lineData = datagen.generateArrayOfPoints(10);
-    var barData = datagen.generateArrayOfNumbers(5);
+    var barData = {'A': 5, 'B': 6, 'C': 2, 'D': 11, 'E': 2, 'F': 7};
     var pieData = datagen.generateArrayOfNumbers(5);
  
     return (

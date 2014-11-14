@@ -3,6 +3,7 @@ var React = require('react');
 var pkg = require('../package.json');
 var d3 = require('d3');
 var Chart = require('./common').Chart;
+var _ = require('lodash');
 
 
 var Bar = React.createClass({
@@ -27,7 +28,7 @@ var Bar = React.createClass({
         width={this.props.width}
         height={this.props.height} 
         x={this.props.offset}
-        y={this.props.availableHeight - this.props.height} 
+        y={this.props.availableHeight  - this.props.height} 
       />
     );
   }
@@ -38,42 +39,37 @@ var XAxis = React.createClass({
 
   componentWillReceiveProps: function(props) {
 
-    var unit = props.xAxisTickInterval.unit;
-    var interval = props.xAxisTickInterval.interval;
-
     var xAxis = d3.svg.axis()
-      .ticks(props.xAxisTickCount)
-      .ticks(d3.time[unit], interval)
       .scale(props.xScale)
-      .orient("bottom"); 
+      .orient("bottom");
 
-    var node = this.refs.xaxis.getDOMNode();
+    var node = this.refs.barxaxis.getDOMNode();
 
     d3.select(node)
-      .attr("class", "x axis")
+      .attr("class", "barx axis")
       .call(xAxis);
 
     // Style each of the tick lines
-    d3.select('.x.axis')
+    d3.select('.barx.axis')
       .selectAll('line')
       .attr("shape-rendering", "crispEdges")
       .attr("stroke", "#000");
 
     // Style the main axis line
-    d3.select('.x.axis')
+    d3.select('.barx.axis')
       .select('path')
       .attr("shape-rendering", "crispEdges")
       .attr("fill", "none")
-      .attr("stroke", "#000")
+      .attr("stroke", "none")
 
   },
 
   render: function() {
-    var t = "translate(0," + this.props.height + ")";
+    var t = "translate(0," + this.props.height + ")"
     return (
       <g
-        ref='xaxis'
-        className="x axis"
+        ref='barxaxis'
+        className="barx axis"
         transform={t}
       >
       </g>
@@ -101,11 +97,13 @@ var YAxis = React.createClass({
     // Style each of the tick lines
     d3.selectAll('.bary.axis')
       .selectAll('line')
+      .attr("shape-rendering", "crispEdges")
       .attr("stroke", "#000");
 
     // Style the main axis line
     d3.selectAll('.bary.axis')
       .select('path')
+      .attr("shape-rendering", "crispEdges")
       .attr("fill", "none")
       .attr("stroke", "#000")
 
@@ -144,17 +142,19 @@ var DataSeries = React.createClass({
   render: function() {
     var props = this.props;
 
-    var yScale = d3.scale.linear()
-      .domain([0, d3.max(this.props.data)])
-      .range([0, this.props.height]);
+    var values = _.values(props.data);
+
+    // var yScale = d3.scale.linear()
+    //   .domain([0, d3.max(values)])
+    //   .range([0, this.props.height]);
 
     var xScale = d3.scale.ordinal()
-      .domain(d3.range(this.props.data.length))
+      .domain(d3.range(values.length))
       .rangeRoundBands([0, this.props.width], this.props.padding);
 
-    var bars = this.props.data.map(function(point, i) {
+    var bars = values.map(function(point, i) {
       return (
-        <Bar height={yScale(point)} width={xScale.rangeBand()} offset={xScale(i)} availableHeight={props.height} fill={props.fill} key={i} />
+        <Bar height={props.yScale(0) - props.yScale(point)} width={xScale.rangeBand()} offset={xScale(i)} availableHeight={props.height} fill={props.fill} key={i} />
       )
     });
 
@@ -170,35 +170,58 @@ var BarChart = React.createClass({
     return {
       data: [],
       yAxisTickCount: 4,
-      width: 400,
-      height: 200
+      width: 500,
+      height: 200,
+      fill: "cornflowerblue"
     }
   },
 
   render: function() {
 
+    var values = _.values(this.props.data);
+
+    var keys = _.keys(this.props.data);
+
+    var margins = {top: 20, right: 30, bottom: 30, left: 50};
+
+    var sideMargins = margins.left + margins.right;
+    var topBottomMargins = margins.top + margins.bottom;
+
     var yScale = d3.scale.linear()
-      .domain([d3.max(this.props.data), 0])
-      .range([0, this.props.height]);
+      .domain([0, d3.max(values)])
+      .range([this.props.height - topBottomMargins, 0]);
 
     var xScale = d3.scale.ordinal()
-      .domain(d3.range(this.props.data.length))
-      .rangeRoundBands([0, this.props.width], this.props.padding);
+        .domain(keys)
+        .rangeRoundBands([0, this.props.width - sideMargins], 0.1);
 
-    var margin = {top: 20, right: 20, bottom: 30, left: 50};
-
-    var trans = "translate(" + margin.left + "," + margin.top + ")";
+    var trans = "translate(" + margins.left + "," + margins.top + ")";
 
     return (
-      <Chart width={this.props.width} height={this.props.height}>
+      <Chart width={this.props.width } height={this.props.height }>
         <g transform={trans} >
-          <DataSeries data={this.props.data} width={this.props.width} height={this.props.height} fill="cornflowerblue" />
+          <DataSeries 
+            yScale={yScale}
+            xScale={yScale}
+            margins={margins}
+            data={this.props.data}
+            width={this.props.width - sideMargins}
+            height={this.props.height - topBottomMargins}
+            fill={this.props.fill}
+          />
           <YAxis 
             yScale={yScale}
-            margin={margin}
+            margins={margins}
             yAxisTickCount={this.props.yAxisTickCount}
-            width={this.props.width}
-            height={this.props.height}
+            width={this.props.width - sideMargins}
+            height={this.props.height - topBottomMargins}
+          />
+          <XAxis 
+            xScale={xScale}
+            data={this.props.data}
+            margins={margins}
+            width={this.props.width - sideMargins}
+            height={this.props.height - topBottomMargins}
           />
         </g>
       </Chart>
@@ -208,16 +231,3 @@ var BarChart = React.createClass({
 });
 
 exports.BarChart = BarChart;
-/** @jsx React.DOM */
-var React = require('react');
-var d3 = require('d3');
-
-
-exports.Chart = React.createClass({
-  render: function() {
-    return (
-      <svg width={this.props.width} height={this.props.height}>{this.props.children}</svg>
-    );
-  }
-});
-
