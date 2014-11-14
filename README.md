@@ -10,7 +10,7 @@ Current charts:
 * bar chart
 * line chart
 * pie chart
-* area chart (now with axes!)
+* area chart
 
 The basic charts generated from the examples/main.js ReactJS app can be [viewed here](http://esbullington.github.io/react-d3).  I'm hard at work expanding these basic examples.
 
@@ -27,12 +27,12 @@ Then, import into your ReactJS project:
 The charts are then available under the `rd3` namespace, which you can then use as shown on the [demonstration page](http://esbullington.github.io/react-d3).
 
 ### Background
-Although there have been [several](http://nicolashery.com/integrating-d3js-visualizations-in-a-react-app/) [different](http://bl.ocks.org/milroc/d22bbf92231876505e5d) approaches proposed for combining the power of d3 with the flexibility and modularity of ReactJS, the approach I'm using here was inspired by [this blog post](http://10consulting.com/2014/02/19/d3-plus-reactjs-for-charting/) by Ben Smith of [Binary Consulting](http://10consulting.com/).
+Although there have been [several](http://nicolashery.com/integrating-d3js-visualizations-in-a-react-app/) [different](http://bl.ocks.org/milroc/d22bbf92231876505e5d) approaches proposed for combining the power of d3 with the flexibility and modularity of ReactJS, the approach I'm using here was inspired by [this blog post](http://10consulting.com/2014/02/19/d3-plus-reactjs-for-charting/) by Ben Smith of [Binary Consulting](http://10consulting.com/).  Basically, it uses React to generate a chart's svg components using stateless React components.  However, I've diverged a bit from this original vision and am storing a bit of state in top-level chart components in order to leverage d3's axis generators, at least until I develop native React chart axes.
 
 With this approach, ReactJS itself is responsible for the SVG markup.  d3 is used for its tremendous collection of utility functions, such as those that calculate the `path` value for various chart types.
 
 ### Todo
-* Many more charts types!
+* Many more charts types (scatter chart, candlestick, radial gauge)
 * Add optional animation to charts using ReactJS transitions
 * Demos galore
 * Documentation
