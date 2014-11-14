@@ -172,6 +172,7 @@ var BarChart = React.createClass({
       yAxisTickCount: 4,
       width: 500,
       height: 200,
+      margins: {top: 20, right: 30, bottom: 30, left: 30},
       fill: "cornflowerblue"
     }
   },
@@ -182,7 +183,7 @@ var BarChart = React.createClass({
 
     var keys = _.keys(this.props.data);
 
-    var margins = {top: 20, right: 30, bottom: 30, left: 50};
+    var margins = this.props.margins;
 
     var sideMargins = margins.left + margins.right;
     var topBottomMargins = margins.top + margins.bottom;
