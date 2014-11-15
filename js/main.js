@@ -38,7 +38,7 @@ var Demos = React.createClass({displayName: 'Demos',
 
     var lineData = datagen.generateArrayOfPoints(10);
     var barData = {'A': 5, 'B': 6, 'C': 2, 'D': 11, 'E': 2, 'F': 7};
-    var pieData = datagen.generatePartsOfWhole();
+    var pieData = [{label: "Margarita", value: 20.0}, {label: "John", value: 55.0}, {label: "Tim", value: 25.0 }];
  
     return (
       React.createElement("div", {className: "container"}, 
@@ -73,7 +73,7 @@ var Demos = React.createClass({displayName: 'Demos',
           React.createElement("div", {className: "col-md-6"}, 
             React.createElement("pre", {ref: "block"}, 
               React.createElement("code", {className: "js"}, 
-              '//Sample data format (not actually rendered)\nvar pieData = {"margarita": 20.0, "john": 55.0, "tim": 25.0 }'
+              ' var pieData = [{label: "Margarita", value: 20.0}, {label: "John", value: 55.0}, {label: "Tim", value: 25.0 }]'
               )
             ), 
             React.createElement("pre", {ref: "block"}, 
@@ -43355,7 +43355,7 @@ module.exports = warning;
 module.exports = require('./lib/React');
 
 },{"./lib/React":"/home/eric/repos/react-d3/node_modules/react/lib/React.js"}],"/home/eric/repos/react-d3/package.json":[function(require,module,exports){
-module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
   "name": "react-d3",
   "version": "0.0.10",
   "description": "ReactJS charts using d3",
