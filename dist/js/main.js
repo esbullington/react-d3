@@ -43355,9 +43355,9 @@ module.exports = warning;
 module.exports = require('./lib/React');
 
 },{"./lib/React":"/home/eric/repos/react-d3/node_modules/react/lib/React.js"}],"/home/eric/repos/react-d3/package.json":[function(require,module,exports){
-module.exports=module.exports={
+module.exports={
   "name": "react-d3",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "ReactJS charts using d3",
   "author": "Eric S. Bullington",
   "homepage": "http://esbullington.github.io/react-d3/",
@@ -44173,7 +44173,8 @@ var DataSeries = React.createClass({displayName: 'DataSeries',
   getDefaultProps: function() {
     return {
       innerRadius: 0,
-      data: []
+      data: [],
+      color: d3.scale.category20c()
     }
   },
 
@@ -44186,7 +44187,7 @@ var DataSeries = React.createClass({displayName: 'DataSeries',
     
     var arcData = pie(props.data);
 
-    var color = d3.scale.category20c();
+    var color = this.props.color;
 
     var arcs = [];
     arcData.forEach(function(arc, i) {
@@ -44212,8 +44213,8 @@ var PieChart = React.createClass({displayName: 'PieChart',
   propTypes: {
     radius: React.PropTypes.number,
     cx: React.PropTypes.number,
-    cy: React.PropTypes.number
-
+    cy: React.PropTypes.number,
+    color: React.PropTypes.func
   },
 
   render: function() {
@@ -44222,7 +44223,7 @@ var PieChart = React.createClass({displayName: 'PieChart',
       + (this.props.cy || this.props.height/2) + ")";
     return (
       React.createElement(Chart, {className: "pie-chart", width: this.props.width, height: this.props.height}, 
-        React.createElement(DataSeries, {transform: transform, data: this.props.data, width: this.props.width, height: this.props.height, radius: this.props.radius, innerRadius: this.props.innerRadius})
+        React.createElement(DataSeries, {color: this.props.color, transform: transform, data: this.props.data, width: this.props.width, height: this.props.height, radius: this.props.radius, innerRadius: this.props.innerRadius})
       )
     );
   }
