@@ -34,13 +34,14 @@ var Arc = React.createClass({
     var y      = -dist * Math.cos(angle);
     var t = "translate(" + x + "," + y + ")";
     return (
-      <g>
+      <g className="arc-group" >
         <path 
           className='arc'
           d={arc()}
           fill={this.props.fill}
         />
         <line
+          className='arc-line'
           x1="0"
           x2="0"
           y1={-radius - 2}
@@ -50,12 +51,14 @@ var Arc = React.createClass({
         >
         </line>
         <text 
+          className='arc-label-text'
           transform={t}
           dy=".35em"
           style={{"textAnchor": "middle", "fill": "black"}}>
           {this.props.label}
         </text>
         <text 
+          className='arc-value-text'
           transform={"translate(" + arc.centroid() + ")"}
           dy=".35em"
           style={{"textAnchor": "middle", "fill": "white"}}>
@@ -111,7 +114,7 @@ var DataSeries = React.createClass({
       )
     });
     return (
-      <g transform={this.props.transform} >{arcs}</g>
+      <g className="pie-group" transform={this.props.transform} >{arcs}</g>
     );
   }
 });
