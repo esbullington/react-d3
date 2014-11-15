@@ -37,7 +37,7 @@ var Demos = React.createClass({
 
     var lineData = datagen.generateArrayOfPoints(10);
     var barData = {'A': 5, 'B': 6, 'C': 2, 'D': 11, 'E': 2, 'F': 7};
-    var pieData = datagen.generatePartsOfWhole();
+    var pieData = [{label: "Margarita", value: 20.0}, {label: "John", value: 55.0}, {label: "Tim", value: 25.0 }];
  
     return (
       <div className="container">
@@ -72,7 +72,7 @@ var Demos = React.createClass({
           <div className="col-md-6">
             <pre ref='block'>
               <code className='js'>
-              {'//Sample data format (not actually rendered)\nvar pieData = {"margarita": 20.0, "john": 55.0, "tim": 25.0 }'}
+              {' var pieData = [{label: "Margarita", value: 20.0}, {label: "John", value: 55.0}, {label: "Tim", value: 25.0 }]'}
               </code>
             </pre>
             <pre ref='block'>
