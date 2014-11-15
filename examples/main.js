@@ -37,7 +37,7 @@ var Demos = React.createClass({
 
     var lineData = datagen.generateArrayOfPoints(10);
     var barData = {'A': 5, 'B': 6, 'C': 2, 'D': 11, 'E': 2, 'F': 7};
-    var pieData = datagen.generateArrayOfNumbers(5);
+    var pieData = datagen.generatePartsOfWhole();
  
     return (
       <div className="container">
@@ -67,6 +67,26 @@ var Demos = React.createClass({
         </div>
         <div className="row">
           <div className="col-md-6">
+            <PieChart data={pieData} width={400} height={400} radius={110} innerRadius={20}  />
+          </div>
+          <div className="col-md-6">
+            <pre ref='block'>
+              <code className='js'>
+              {'//Sample data format (not actually rendered)\nvar pieData = {"margarita": 20.0, "john": 55.0, "tim": 25.0 }'}
+              </code>
+            </pre>
+            <pre ref='block'>
+              <code className='html'>
+                {'<PieChart\n  data={pieData}\n  width={400}\n  height={400}\n  radius={100}\n  innerRadius={20}\n/>'}
+              </code>
+            </pre>
+          </div>
+        </div>
+        <div className="row">
+          <hr/>
+        </div>
+        <div className="row">
+          <div className="col-md-6">
             <LineChart data={lineData} width={400} height={200} />
           </div>
           <div className="col-md-6">
@@ -78,26 +98,6 @@ var Demos = React.createClass({
             <pre ref='block'>
               <code className='html'>
               {'<LineChart data={lineData} width={400} height={200} />'}
-              </code>
-            </pre>
-          </div>
-        </div>
-        <div className="row">
-          <hr/>
-        </div>
-        <div className="row">
-          <div className="col-md-6">
-            <PieChart data={pieData} width={400} height={400} radius={200} innerRadius={60}  />
-          </div>
-          <div className="col-md-6">
-            <pre ref='block'>
-              <code className='js'>
-              {'//Sample data format (not actually rendered)\nvar pieData = [2, 3, 6, 3, 2]'}
-              </code>
-            </pre>
-            <pre ref='block'>
-              <code className='html'>
-                {'<PieChart\n  data={pieData}\n  width={400}\n  height={400}\n  radius={200}\n  innerRadius={60}\n/>'}
               </code>
             </pre>
           </div>
