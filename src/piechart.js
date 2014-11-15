@@ -44,7 +44,8 @@ var DataSeries = React.createClass({
   getDefaultProps: function() {
     return {
       innerRadius: 0,
-      data: []
+      data: [],
+      color: d3.scale.category20c()
     }
   },
 
@@ -57,7 +58,7 @@ var DataSeries = React.createClass({
     
     var arcData = pie(props.data);
 
-    var color = d3.scale.category20c();
+    var color = this.props.color;
 
     var arcs = [];
     arcData.forEach(function(arc, i) {
@@ -83,8 +84,8 @@ var PieChart = React.createClass({
   propTypes: {
     radius: React.PropTypes.number,
     cx: React.PropTypes.number,
-    cy: React.PropTypes.number
-
+    cy: React.PropTypes.number,
+    color: React.PropTypes.func
   },
 
   render: function() {
@@ -93,7 +94,7 @@ var PieChart = React.createClass({
       + (this.props.cy || this.props.height/2) + ")";
     return (
       <Chart className='pie-chart' width={this.props.width} height={this.props.height}>
-        <DataSeries transform={transform} data={this.props.data} width={this.props.width} height={this.props.height} radius={this.props.radius} innerRadius={this.props.innerRadius} />
+        <DataSeries color={this.props.color} transform={transform} data={this.props.data} width={this.props.width} height={this.props.height} radius={this.props.radius} innerRadius={this.props.innerRadius} />
       </Chart>
     );
   }
