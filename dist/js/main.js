@@ -38,7 +38,7 @@ var Demos = React.createClass({displayName: 'Demos',
 
     var lineData = datagen.generateArrayOfPoints(10);
     var barData = {'A': 5, 'B': 6, 'C': 2, 'D': 11, 'E': 2, 'F': 7};
-    var pieData = datagen.generateArrayOfNumbers(5);
+    var pieData = datagen.generatePartsOfWhole();
  
     return (
       React.createElement("div", {className: "container"}, 
@@ -68,6 +68,26 @@ var Demos = React.createClass({displayName: 'Demos',
         ), 
         React.createElement("div", {className: "row"}, 
           React.createElement("div", {className: "col-md-6"}, 
+            React.createElement(PieChart, {data: pieData, width: 450, height: 400, radius: 110, innerRadius: 20})
+          ), 
+          React.createElement("div", {className: "col-md-6"}, 
+            React.createElement("pre", {ref: "block"}, 
+              React.createElement("code", {className: "js"}, 
+              '//Sample data format (not actually rendered)\nvar pieData = {"margarita": 20.0, "john": 55.0, "tim": 25.0 }'
+              )
+            ), 
+            React.createElement("pre", {ref: "block"}, 
+              React.createElement("code", {className: "html"}, 
+                '<PieChart\n  data={pieData}\n  width={400}\n  height={400}\n  radius={100}\n  innerRadius={20}\n/>'
+              )
+            )
+          )
+        ), 
+        React.createElement("div", {className: "row"}, 
+          React.createElement("hr", null)
+        ), 
+        React.createElement("div", {className: "row"}, 
+          React.createElement("div", {className: "col-md-6"}, 
             React.createElement(LineChart, {data: lineData, width: 400, height: 200})
           ), 
           React.createElement("div", {className: "col-md-6"}, 
@@ -79,26 +99,6 @@ var Demos = React.createClass({displayName: 'Demos',
             React.createElement("pre", {ref: "block"}, 
               React.createElement("code", {className: "html"}, 
               '<LineChart data={lineData} width={400} height={200} />'
-              )
-            )
-          )
-        ), 
-        React.createElement("div", {className: "row"}, 
-          React.createElement("hr", null)
-        ), 
-        React.createElement("div", {className: "row"}, 
-          React.createElement("div", {className: "col-md-6"}, 
-            React.createElement(PieChart, {data: pieData, width: 400, height: 400, radius: 200, innerRadius: 60})
-          ), 
-          React.createElement("div", {className: "col-md-6"}, 
-            React.createElement("pre", {ref: "block"}, 
-              React.createElement("code", {className: "js"}, 
-              '//Sample data format (not actually rendered)\nvar pieData = [2, 3, 6, 3, 2]'
-              )
-            ), 
-            React.createElement("pre", {ref: "block"}, 
-              React.createElement("code", {className: "html"}, 
-                '<PieChart\n  data={pieData}\n  width={400}\n  height={400}\n  radius={200}\n  innerRadius={60}\n/>'
               )
             )
           )
@@ -43357,7 +43357,7 @@ module.exports = require('./lib/React');
 },{"./lib/React":"/home/eric/repos/react-d3/node_modules/react/lib/React.js"}],"/home/eric/repos/react-d3/package.json":[function(require,module,exports){
 module.exports={
   "name": "react-d3",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "ReactJS charts using d3",
   "author": "Eric S. Bullington",
   "homepage": "http://esbullington.github.io/react-d3/",
@@ -44131,10 +44131,18 @@ exports.LineChart = LineChart;
 var React = require('react');
 var pkg = require('../package.json');
 var d3 = require('d3');
+var _ = require('lodash');
 var Chart = require('./common').Chart;
 
 
 var Arc = React.createClass({displayName: 'Arc',
+
+  getDefaultProps: function() {
+    return {
+      labelTextFill: "black",
+      valueTextFill: "white"
+    }
+  },
 
   propTypes: {
     fill: React.PropTypes.string,
@@ -44146,16 +44154,64 @@ var Arc = React.createClass({displayName: 'Arc',
   },
 
   render: function() {
+    // transform={"translate(" + arc.centroid() + ")"}
+    props = this.props;
     var arc = d3.svg.arc()
-      .innerRadius(this.props.innerRadius)
-      .outerRadius(this.props.outerRadius)
-      .startAngle(this.props.startAngle)
-      .endAngle(this.props.endAngle);
+      .innerRadius(props.innerRadius)
+      .outerRadius(props.outerRadius)
+      .startAngle(props.startAngle)
+      .endAngle(props.endAngle);
+    var rotate = "rotate(" + (props.startAngle+props.endAngle)/2 * (180/Math.PI) + ")";
+    var positions = arc.centroid();
+    var radius = props.outerRadius;
+    var dist   = radius + 35;
+    var angle  = (props.startAngle + props.endAngle) / 2;
+    var x      = dist * (1.2 * Math.sin(angle));
+    var y      = -dist * Math.cos(angle);
+    var t = "translate(" + x + "," + y + ")";
     return (
-      React.createElement("path", {
-        className: "arc", 
-        d: arc(), 
-        fill: this.props.fill}
+      React.createElement("g", {className: "arc-group"}, 
+        React.createElement("path", {
+          className: "arc", 
+          d: arc(), 
+          fill: props.fill}
+        ), 
+        React.createElement("line", {
+          className: "arc-line", 
+          x1: "0", 
+          x2: "0", 
+          y1: -radius - 2, 
+          y2: -radius - 26, 
+          stroke: "black", 
+          transform: rotate, 
+          style: {
+            "fill": props.labelTextFill,
+            "strokeWidth": 2,
+          }}, 
+        ">"
+        ), 
+        React.createElement("text", {
+          className: "arc-label-text", 
+          transform: t, 
+          dy: ".35em", 
+          style: {
+            "textAnchor": "middle",
+            "fill": props.labelTextFill,
+            "shapeRendering": "crispEdges"
+          }}, 
+          this.props.label
+        ), 
+        React.createElement("text", {
+          className: "arc-value-text", 
+          transform: "translate(" + arc.centroid() + ")", 
+          dy: ".35em", 
+          style: {
+            "shapeRendering": "crispEdges",
+            "textAnchor": "middle",
+            "fill": props.valueTextFill
+          }}, 
+          this.props.value + "%"
+        )
       )
     );
   }
@@ -44197,33 +44253,63 @@ var DataSeries = React.createClass({displayName: 'DataSeries',
           endAngle: arc.endAngle, 
           outerRadius: props.radius, 
           innerRadius: props.innerRadius, 
+          labelTextFill: props.labelTextFill, 
+          valueTextFill: props.valueTextFill, 
           fill: color(i), 
-          key: i}
+          label: props.labels[i], 
+          value: props.data[i], 
+          key: i, 
+          width: props.width}
         )
       )
     });
     return (
-      React.createElement("g", {transform: this.props.transform}, arcs)
+      React.createElement("g", {className: "pie-group", transform: this.props.transform}, arcs)
     );
   }
 });
 
 var PieChart = React.createClass({displayName: 'PieChart',
 
+  getDefaultProps: function() {
+    return {
+    }
+  },
+
   propTypes: {
     radius: React.PropTypes.number,
     cx: React.PropTypes.number,
     cy: React.PropTypes.number,
+    labelTextFill: React.PropTypes.string,
+    valueTextFill: React.PropTypes.string,
     color: React.PropTypes.func
   },
 
   render: function() {
+    var props = this.props;
     var transform = "translate(" 
       + (this.props.cx || this.props.width/2) + "," 
       + (this.props.cy || this.props.height/2) + ")";
+    var data = _.pluck(this.props.data, 'value');
+    var labels = _.pluck(this.props.data, 'label');
     return (
-      React.createElement(Chart, {className: "pie-chart", width: this.props.width, height: this.props.height}, 
-        React.createElement(DataSeries, {color: this.props.color, transform: transform, data: this.props.data, width: this.props.width, height: this.props.height, radius: this.props.radius, innerRadius: this.props.innerRadius})
+      React.createElement(Chart, {
+        className: "pie-chart", 
+        width: this.props.width, 
+        height: this.props.height
+      }, 
+        React.createElement(DataSeries, {
+          labelTextFill: this.props.labelTextFill, 
+          valueTextFill: this.props.valueTextFill, 
+          labels: labels, 
+          color: this.props.color, 
+          transform: transform, 
+          data: data, 
+          width: this.props.width, 
+          height: this.props.height, 
+          radius: this.props.radius, 
+          innerRadius: this.props.innerRadius}
+        )
       )
     );
   }
@@ -44232,8 +44318,8 @@ var PieChart = React.createClass({displayName: 'PieChart',
 
 exports.PieChart = PieChart;
 
-},{"../package.json":"/home/eric/repos/react-d3/package.json","./common":"/home/eric/repos/react-d3/src/common.js","d3":"/home/eric/repos/react-d3/node_modules/d3/d3.js","react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/utils/datagen.js":[function(require,module,exports){
-
+},{"../package.json":"/home/eric/repos/react-d3/package.json","./common":"/home/eric/repos/react-d3/src/common.js","d3":"/home/eric/repos/react-d3/node_modules/d3/d3.js","lodash":"/home/eric/repos/react-d3/node_modules/lodash/dist/lodash.js","react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/utils/datagen.js":[function(require,module,exports){
+var _ = require('lodash');
 
 exports.generateArrayOfPoints = function(n) {
   var data = [];
@@ -44246,7 +44332,87 @@ exports.generateArrayOfPoints = function(n) {
   return data;
 };
 
-exports.generateArrayOfNumbers = function(n) {
+var generateArrayOfNameObjects = function(n) {
+  var names = [
+    "Henrietta",
+    "Meaghan",
+    "Miguelina",
+    "Hoyt",
+    "Felecia",
+    "Karisa",
+    "Gaynell",
+    "Meda",
+    "Natisha",
+    "Annika"
+  ];
+  var numbers = [];
+  for (var i = 0; i < n; i++) {
+    var j = Math.floor(Math.random() * 100);
+    numbers.push(j);
+  } 
+  var data = new Array(n);
+  numbers.forEach( function(value, idx) {
+    var i = idx % 10;
+    var name = names[i];
+    var o = {
+      label: name,
+      value: value
+    };
+    data.push(o);
+  });
+  return data;
+};
+
+exports.generateArrayOfNameObjects = generateArrayOfNameObjects;
+
+var generatePartsOfWhole = function() {
+  var data = [];
+  var names = [
+    "Henrietta",
+    "Meaghan",
+    "Miguelina",
+    "Hoyt",
+    "Felecia",
+    "Karisa",
+    "Gaynell",
+    "Meda",
+    "Natisha",
+    "Annika"
+  ];
+  var numbers = [];
+  var total = 0;
+  while (total < 100) {
+    var j = Math.floor(Math.random() * 100);
+    var j1 = j/2.0;
+    if (j1 < 10.0) {
+      continue;
+    }
+    total += j1;
+    numbers.push(j1);
+  }
+  numbers.pop();
+  numbers.pop();
+  var sum = _.reduce(numbers, function(sum, num) {
+    return sum + num;
+  });
+  var remainder = 100 - sum;
+  numbers.push(remainder);
+  var numbers = _.sortBy(numbers, function(v) { return v; });
+  numbers.forEach( function(value, idx) {
+    var i = idx % 10;
+    var name = names[i];
+    var o = {
+      label: name,
+      value: value
+    };
+    data.push(o);
+  });
+  return data;
+}
+
+exports.generatePartsOfWhole = generatePartsOfWhole;
+
+var generateArrayOfNumbers = function(n) {
   var data = [];
   for (var i = 0; i < n; i++) {
     var j = Math.floor(Math.random() * 100);
@@ -44255,7 +44421,9 @@ exports.generateArrayOfNumbers = function(n) {
   return data;
 };
 
-exports.generateArrayOfTimeObjects = function(n) {
+exports.generateArrayOfNumbers = generateArrayOfNumbers;
+
+var generateArrayOfTimeObjects = function(n) {
   function randomDate(start, end) {
       return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
   }
@@ -44273,4 +44441,6 @@ exports.generateArrayOfTimeObjects = function(n) {
   });
 };
 
-},{}]},{},["/home/eric/repos/react-d3/examples/main.js"]);
+exports.generateArrayOfTimeObjects = generateArrayOfTimeObjects;
+
+},{"lodash":"/home/eric/repos/react-d3/node_modules/lodash/dist/lodash.js"}]},{},["/home/eric/repos/react-d3/examples/main.js"]);
