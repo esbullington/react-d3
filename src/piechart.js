@@ -33,7 +33,6 @@ var Arc = React.createClass({
     var x      = dist * Math.sin(angle);
     var y      = -dist * Math.cos(angle);
     var t = "translate(" + x + "," + y + ")";
-    console.log(rotate);
     return (
       <g>
         <path 
