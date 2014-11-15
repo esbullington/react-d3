@@ -8,6 +8,13 @@ var Chart = require('./common').Chart;
 
 var Arc = React.createClass({
 
+  getDefaultProps: function() {
+    return {
+      labelTextFill: "black",
+      valueTextFill: "white"
+    }
+  },
+
   propTypes: {
     fill: React.PropTypes.string,
     d: React.PropTypes.string,
@@ -28,9 +35,9 @@ var Arc = React.createClass({
     var rotate = "rotate(" + (props.startAngle+props.endAngle)/2 * (180/Math.PI) + ")";
     var positions = arc.centroid();
     var radius = props.outerRadius;
-    var dist   = radius + 55;
-    var angle  = (props.startAngle + props.endAngle) / 2; // Middle of wedge
-    var x      = dist * Math.sin(angle);
+    var dist   = radius + 35;
+    var angle  = (props.startAngle + props.endAngle) / 2;
+    var x      = dist * (1.2 * Math.sin(angle));
     var y      = -dist * Math.cos(angle);
     var t = "translate(" + x + "," + y + ")";
     return (
@@ -38,30 +45,42 @@ var Arc = React.createClass({
         <path 
           className='arc'
           d={arc()}
-          fill={this.props.fill}
+          fill={props.fill}
         />
         <line
           className='arc-line'
           x1="0"
           x2="0"
           y1={-radius - 2}
-          y2={-radius - 20}
+          y2={-radius - 26}
           stroke={"black"}
           transform={rotate}
+          style={{
+            "fill": props.labelTextFill,
+            "strokeWidth": 2,
+          }}>
         >
         </line>
         <text 
           className='arc-label-text'
           transform={t}
           dy=".35em"
-          style={{"textAnchor": "middle", "fill": "black"}}>
+          style={{
+            "textAnchor": "middle",
+            "fill": props.labelTextFill,
+            "shapeRendering": "crispEdges"
+          }}>
           {this.props.label}
         </text>
         <text 
           className='arc-value-text'
           transform={"translate(" + arc.centroid() + ")"}
           dy=".35em"
-          style={{"textAnchor": "middle", "fill": "white"}}>
+          style={{
+            "shapeRendering": "crispEdges",
+            "textAnchor": "middle",
+            "fill": props.valueTextFill
+          }}>
           {this.props.value + "%"}
         </text>
       </g>
@@ -105,6 +124,8 @@ var DataSeries = React.createClass({
           endAngle={arc.endAngle}
           outerRadius={props.radius}
           innerRadius={props.innerRadius}
+          labelTextFill={props.labelTextFill}
+          valueTextFill={props.valueTextFill}
           fill={color(i)}
           label={props.labels[i]}
           value={props.data[i]}
@@ -130,6 +151,8 @@ var PieChart = React.createClass({
     radius: React.PropTypes.number,
     cx: React.PropTypes.number,
     cy: React.PropTypes.number,
+    labelTextFill: React.PropTypes.string,
+    valueTextFill: React.PropTypes.string,
     color: React.PropTypes.func
   },
 
@@ -141,8 +164,23 @@ var PieChart = React.createClass({
     var data = _.pluck(this.props.data, 'value');
     var labels = _.pluck(this.props.data, 'label');
     return (
-      <Chart className='pie-chart' width={this.props.width} height={this.props.height}>
-            <DataSeries  labels={labels} color={this.props.color} transform={transform} data={data} width={this.props.width} height={this.props.height} radius={this.props.radius} innerRadius={this.props.innerRadius} />
+      <Chart
+        className='pie-chart'
+        width={this.props.width}
+        height={this.props.height}
+      >
+        <DataSeries
+          labelTextFill={this.props.labelTextFill}
+          valueTextFill={this.props.valueTextFill}
+          labels={labels}
+          color={this.props.color}
+          transform={transform}
+          data={data}
+          width={this.props.width}
+          height={this.props.height}
+          radius={this.props.radius}
+          innerRadius={this.props.innerRadius}
+        />
       </Chart>
     );
   }
