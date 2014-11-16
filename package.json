@@ -1,6 +1,6 @@
 {
   "name": "react-d3",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "description": "ReactJS charts using d3",
   "author": "Eric S. Bullington",
   "homepage": "http://esbullington.github.io/react-d3/",
