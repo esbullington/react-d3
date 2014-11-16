@@ -37,7 +37,7 @@ var Demos = React.createClass({displayName: 'Demos',
   render: function() {
 
     var lineData = datagen.generateArrayOfPoints(10);
-    var barData = {'A': 5, 'B': 6, 'C': 2, 'D': 11, 'E': 2, 'F': 7};
+    var barData = [{label: 'A', value: 5}, {label: 'B', value: 6}, {label: 'C', value: 2}, {label: 'D', value: 11}, {label: 'E', value: 2}, {label: 'F', value: 7}];
     var pieData = [{label: "Margarita", value: 20.0}, {label: "John", value: 55.0}, {label: "Tim", value: 25.0 }];
  
     return (
@@ -53,7 +53,7 @@ var Demos = React.createClass({displayName: 'Demos',
           React.createElement("div", {className: "col-md-6"}, 
             React.createElement("pre", {ref: "block"}, 
               React.createElement("code", {className: "js"}, 
-              "var barData = {'A': 5, 'B': 6, 'C': 2, 'D': 11, 'E': 2, 'F': 7};"
+              "var barData = [\n  {label: 'A', value: 5},\n  {label: 'B', value: 6},\n  ...\n  {label: 'F', value: 7}];"
               )
             ), 
             React.createElement("pre", {ref: "block"}, 
@@ -73,7 +73,7 @@ var Demos = React.createClass({displayName: 'Demos',
           React.createElement("div", {className: "col-md-6"}, 
             React.createElement("pre", {ref: "block"}, 
               React.createElement("code", {className: "js"}, 
-              ' var pieData = [{label: "Margarita", value: 20.0}, {label: "John", value: 55.0}, {label: "Tim", value: 25.0 }]'
+              "var pieData = [\n  {label: 'Margarita', value: 20.0},\n  {label: 'John', value: 55.0},\n  {label: 'Tim', value: 25.0 }]"
               )
             ), 
             React.createElement("pre", {ref: "block"}, 
@@ -43355,7 +43355,7 @@ module.exports = warning;
 module.exports = require('./lib/React');
 
 },{"./lib/React":"/home/eric/repos/react-d3/node_modules/react/lib/React.js"}],"/home/eric/repos/react-d3/package.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
   "name": "react-d3",
   "version": "0.0.10",
   "description": "ReactJS charts using d3",
@@ -43786,17 +43786,11 @@ var DataSeries = React.createClass({displayName: 'DataSeries',
   render: function() {
     var props = this.props;
 
-    var values = _.values(props.data);
-
-    // var yScale = d3.scale.linear()
-    //   .domain([0, d3.max(values)])
-    //   .range([0, this.props.height]);
-
     var xScale = d3.scale.ordinal()
-      .domain(d3.range(values.length))
+      .domain(d3.range(props.values.length))
       .rangeRoundBands([0, this.props.width], this.props.padding);
 
-    var bars = values.map(function(point, i) {
+    var bars = props.values.map(function(point, i) {
       return (
         React.createElement(Bar, {height: props.yScale(0) - props.yScale(point), width: xScale.rangeBand(), offset: xScale(i), availableHeight: props.height, fill: props.fill, key: i})
       )
@@ -43823,9 +43817,9 @@ var BarChart = React.createClass({displayName: 'BarChart',
 
   render: function() {
 
-    var values = _.values(this.props.data);
+    var values = _.pluck(this.props.data, 'value');
 
-    var keys = _.keys(this.props.data);
+    var labels = _.pluck(this.props.data, 'label');
 
     var margins = this.props.margins;
 
@@ -43837,7 +43831,7 @@ var BarChart = React.createClass({displayName: 'BarChart',
       .range([this.props.height - topBottomMargins, 0]);
 
     var xScale = d3.scale.ordinal()
-        .domain(keys)
+        .domain(labels)
         .rangeRoundBands([0, this.props.width - sideMargins], 0.1);
 
     var trans = "translate(" + margins.left + "," + margins.top + ")";
@@ -43846,6 +43840,7 @@ var BarChart = React.createClass({displayName: 'BarChart',
       React.createElement(Chart, {width: this.props.width, height: this.props.height}, 
         React.createElement("g", {transform: trans}, 
           React.createElement(DataSeries, {
+            values: values, 
             yScale: yScale, 
             xScale: yScale, 
             margins: margins, 
