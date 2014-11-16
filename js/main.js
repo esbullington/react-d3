@@ -43355,9 +43355,9 @@ module.exports = warning;
 module.exports = require('./lib/React');
 
 },{"./lib/React":"/home/eric/repos/react-d3/node_modules/react/lib/React.js"}],"/home/eric/repos/react-d3/package.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
   "name": "react-d3",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "ReactJS charts using d3",
   "author": "Eric S. Bullington",
   "homepage": "http://esbullington.github.io/react-d3/",
@@ -44031,6 +44031,97 @@ var Circle = React.createClass({displayName: 'Circle',
 
 });
 
+var XAxis = React.createClass({displayName: 'XAxis',
+
+
+  componentWillReceiveProps: function(props) {
+
+    var xAxis = d3.svg.axis()
+      .scale(props.xScale)
+      .orient("bottom");
+
+    var node = this.refs.linexaxis.getDOMNode();
+
+    d3.select(node)
+      .attr("class", "linex axis")
+      .call(xAxis);
+
+    // Style each of the tick lines
+    var lineXAxis = d3.select('.linex.axis')
+      .selectAll('line')
+      .attr("shape-rendering", "crispEdges")
+      .attr("stroke", "#000");
+
+    // Style the main axis line
+    d3.select('.linex.axis')
+      .select('path')
+      .attr("shape-rendering", "crispEdges")
+      .attr("fill", "none")
+      .attr("stroke", "#000")
+      .attr("stroke-width", "1")
+
+    // Hides the x axis origin
+    d3.selectAll(".linex.axis g:first-child").style("opacity","0");
+
+  },
+
+  render: function() {
+    var t = "translate(0," + this.props.height + ")"
+    return (
+      React.createElement("g", {
+        ref: "linexaxis", 
+        className: "linex axis", 
+        transform: t
+      }
+      )
+    );
+  }
+
+});
+
+
+var YAxis = React.createClass({displayName: 'YAxis',
+
+  componentWillReceiveProps: function(props) {
+
+    var yAxis = d3.svg.axis()
+      .ticks(props.yAxisTickCount)
+      .scale(props.yScale)
+      .orient("left"); 
+
+    var node = this.refs.lineyaxis.getDOMNode();
+
+    d3.select(node)
+      .attr("class", "liney axis")
+      .call(yAxis);
+
+    // Style each of the tick lines
+    d3.selectAll('.liney.axis')
+      .selectAll('line')
+      .attr("shape-rendering", "crispEdges")
+      .attr("stroke", "#000");
+
+    // Style the main axis line
+    d3.selectAll('.liney.axis')
+      .select('path')
+      .attr("shape-rendering", "crispEdges")
+      .attr("fill", "none")
+      .attr("stroke", "#000")
+
+  },
+
+  render: function() {
+    return (
+      React.createElement("g", {
+        ref: "lineyaxis", 
+        className: "liney axis"
+      }
+      )
+    );
+  }
+
+});
+
 var DataSeries = React.createClass({displayName: 'DataSeries',
 
   propTypes: {
@@ -44062,6 +44153,7 @@ var DataSeries = React.createClass({displayName: 'DataSeries',
 var LineChart = React.createClass({displayName: 'LineChart',
 
   propTypes: {
+    margins: React.PropTypes.object,
     pointRadius: React.PropTypes.number,
     width: React.PropTypes.number,
     height: React.PropTypes.number
@@ -44069,7 +44161,8 @@ var LineChart = React.createClass({displayName: 'LineChart',
 
   getDefaultProps: function() {
     return {
-      pointRadius: 2,
+      margins: {top: 20, right: 30, bottom: 30, left: 30},
+      pointRadius: 3,
       width: 400,
       height: 200
     }
@@ -44079,8 +44172,11 @@ var LineChart = React.createClass({displayName: 'LineChart',
 
     var data = this.props.data;
 
-    var size = { width: this.props.width, height: this.props.height };
+    var margins = this.props.margins;
 
+    var sideMargins = margins.left + margins.right;
+
+    var topBottomMargins = margins.top + margins.bottom;
 
     var maxY = d3.max(data, function(d) {
       return d.y;
@@ -44092,27 +44188,46 @@ var LineChart = React.createClass({displayName: 'LineChart',
 
     var xScale = d3.scale.linear()
       .domain([0, maxX])
-      .range([0, this.props.width]);
+      .range([0, this.props.width - sideMargins]);
 
     var yScale = d3.scale.linear()
       .domain([0, maxY])
-      .range([this.props.height, 0]);
+      .range([this.props.height - topBottomMargins, 0]);
 
     var circles = [];
+
     this.props.data.forEach(function(point, i) {
       circles.push(React.createElement(Circle, {cx: xScale(point.x), cy: yScale(point.y), r: this.props.pointRadius, key: i}));
     }.bind(this));
 
+    var trans = "translate(" + margins.left + "," + margins.top + ")"
+
     return (
       React.createElement(Chart, {width: this.props.width, height: this.props.height}, 
-        React.createElement(DataSeries, {
-          xScale: xScale, 
-          yScale: yScale, 
-          data: this.props.data, 
-          width: this.props.width, 
-          height: this.props.height}
-        ), 
-        circles
+        React.createElement("g", {transform: trans}, 
+          React.createElement(DataSeries, {
+            xScale: xScale, 
+            yScale: yScale, 
+            data: this.props.data, 
+            width: this.props.width - sideMargins, 
+            height: this.props.height - topBottomMargins}
+          ), 
+          circles, 
+          React.createElement(YAxis, {
+            yScale: yScale, 
+            margins: margins, 
+            yAxisTickCount: this.props.yAxisTickCount, 
+            width: this.props.width - sideMargins, 
+            height: this.props.height - topBottomMargins}
+          ), 
+          React.createElement(XAxis, {
+            xScale: xScale, 
+            data: this.props.data, 
+            margins: margins, 
+            width: this.props.width - sideMargins, 
+            height: this.props.height - topBottomMargins}
+          )
+        )
       )
     );
   }
