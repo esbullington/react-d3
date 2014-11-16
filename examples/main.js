@@ -36,7 +36,7 @@ var Demos = React.createClass({
   render: function() {
 
     var lineData = datagen.generateArrayOfPoints(10);
-    var barData = {'A': 5, 'B': 6, 'C': 2, 'D': 11, 'E': 2, 'F': 7};
+    var barData = [{label: 'A', value: 5}, {label: 'B', value: 6}, {label: 'C', value: 2}, {label: 'D', value: 11}, {label: 'E', value: 2}, {label: 'F', value: 7}];
     var pieData = [{label: "Margarita", value: 20.0}, {label: "John", value: 55.0}, {label: "Tim", value: 25.0 }];
  
     return (
@@ -52,7 +52,7 @@ var Demos = React.createClass({
           <div className="col-md-6">
             <pre ref='block'>
               <code className='js'>
-              {"var barData = {'A': 5, 'B': 6, 'C': 2, 'D': 11, 'E': 2, 'F': 7};"}
+              {"var barData = [\n  {label: 'A', value: 5},\n  {label: 'B', value: 6},\n  ...\n  {label: 'F', value: 7}];"}
               </code>
             </pre>
             <pre ref='block'>
@@ -72,7 +72,7 @@ var Demos = React.createClass({
           <div className="col-md-6">
             <pre ref='block'>
               <code className='js'>
-              {' var pieData = [{label: "Margarita", value: 20.0}, {label: "John", value: 55.0}, {label: "Tim", value: 25.0 }]'}
+              {"var pieData = [\n  {label: 'Margarita', value: 20.0},\n  {label: 'John', value: 55.0},\n  {label: 'Tim', value: 25.0 }]"}
               </code>
             </pre>
             <pre ref='block'>

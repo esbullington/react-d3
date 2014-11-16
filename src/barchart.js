@@ -142,17 +142,11 @@ var DataSeries = React.createClass({
   render: function() {
     var props = this.props;
 
-    var values = _.values(props.data);
-
-    // var yScale = d3.scale.linear()
-    //   .domain([0, d3.max(values)])
-    //   .range([0, this.props.height]);
-
     var xScale = d3.scale.ordinal()
-      .domain(d3.range(values.length))
+      .domain(d3.range(props.values.length))
       .rangeRoundBands([0, this.props.width], this.props.padding);
 
-    var bars = values.map(function(point, i) {
+    var bars = props.values.map(function(point, i) {
       return (
         <Bar height={props.yScale(0) - props.yScale(point)} width={xScale.rangeBand()} offset={xScale(i)} availableHeight={props.height} fill={props.fill} key={i} />
       )
@@ -179,9 +173,9 @@ var BarChart = React.createClass({
 
   render: function() {
 
-    var values = _.values(this.props.data);
+    var values = _.pluck(this.props.data, 'value');
 
-    var keys = _.keys(this.props.data);
+    var labels = _.pluck(this.props.data, 'label');
 
     var margins = this.props.margins;
 
@@ -193,7 +187,7 @@ var BarChart = React.createClass({
       .range([this.props.height - topBottomMargins, 0]);
 
     var xScale = d3.scale.ordinal()
-        .domain(keys)
+        .domain(labels)
         .rangeRoundBands([0, this.props.width - sideMargins], 0.1);
 
     var trans = "translate(" + margins.left + "," + margins.top + ")";
@@ -202,6 +196,7 @@ var BarChart = React.createClass({
       <Chart width={this.props.width } height={this.props.height }>
         <g transform={trans} >
           <DataSeries 
+            values={values}
             yScale={yScale}
             xScale={yScale}
             margins={margins}
