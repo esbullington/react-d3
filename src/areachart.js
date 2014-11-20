@@ -1,13 +1,10 @@
 /** @jsx React.DOM */
 var React = require('react');
-window.React = React;
 var pkg = require('../package.json');
 var d3 = require('d3');
 var Chart = require('./common').Chart;
 
-// Working on axes, not yet functional
 var XAxis = React.createClass({
-
 
   componentWillReceiveProps: function(props) {
 
