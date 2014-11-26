@@ -43355,9 +43355,9 @@ module.exports = warning;
 module.exports = require('./lib/React');
 
 },{"./lib/React":"/home/eric/repos/react-d3/node_modules/react/lib/React.js"}],"/home/eric/repos/react-d3/package.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports={
   "name": "react-d3",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "description": "ReactJS charts using d3",
   "author": "Eric S. Bullington",
   "homepage": "http://esbullington.github.io/react-d3/",
@@ -43419,14 +43419,10 @@ module.exports=module.exports=module.exports=module.exports=module.exports=modul
 },{}],"/home/eric/repos/react-d3/src/areachart.js":[function(require,module,exports){
 /** @jsx React.DOM */
 var React = require('react');
-window.React = React;
-var pkg = require('../package.json');
 var d3 = require('d3');
 var Chart = require('./common').Chart;
 
-// Working on axes, not yet functional
 var XAxis = React.createClass({displayName: 'XAxis',
-
 
   componentWillReceiveProps: function(props) {
 
@@ -43641,10 +43637,9 @@ var AreaChart = React.createClass({displayName: 'AreaChart',
 
 exports.AreaChart = AreaChart;
 
-},{"../package.json":"/home/eric/repos/react-d3/package.json","./common":"/home/eric/repos/react-d3/src/common.js","d3":"/home/eric/repos/react-d3/node_modules/d3/d3.js","react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/src/barchart.js":[function(require,module,exports){
+},{"./common":"/home/eric/repos/react-d3/src/common.js","d3":"/home/eric/repos/react-d3/node_modules/d3/d3.js","react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/src/barchart.js":[function(require,module,exports){
 /** @jsx React.DOM */
 var React = require('react');
-var pkg = require('../package.json');
 var d3 = require('d3');
 var Chart = require('./common').Chart;
 var _ = require('lodash');
@@ -43872,7 +43867,7 @@ var BarChart = React.createClass({displayName: 'BarChart',
 
 exports.BarChart = BarChart;
 
-},{"../package.json":"/home/eric/repos/react-d3/package.json","./common":"/home/eric/repos/react-d3/src/common.js","d3":"/home/eric/repos/react-d3/node_modules/d3/d3.js","lodash":"/home/eric/repos/react-d3/node_modules/lodash/dist/lodash.js","react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/src/common.js":[function(require,module,exports){
+},{"./common":"/home/eric/repos/react-d3/src/common.js","d3":"/home/eric/repos/react-d3/node_modules/d3/d3.js","lodash":"/home/eric/repos/react-d3/node_modules/lodash/dist/lodash.js","react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/src/common.js":[function(require,module,exports){
 /** @jsx React.DOM */
 var React = require('react');
 var d3 = require('d3');
@@ -43968,8 +43963,6 @@ exports.YAxis = React.createClass({displayName: 'YAxis',
 },{"d3":"/home/eric/repos/react-d3/node_modules/d3/d3.js","react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/src/linechart.js":[function(require,module,exports){
 /** @jsx React.DOM */
 var React = require('react');
-window.React = React;
-var pkg = require('../package.json');
 var d3 = require('d3');
 var Chart = require('./common').Chart;
 
@@ -44236,10 +44229,9 @@ var LineChart = React.createClass({displayName: 'LineChart',
 
 exports.LineChart = LineChart;
 
-},{"../package.json":"/home/eric/repos/react-d3/package.json","./common":"/home/eric/repos/react-d3/src/common.js","d3":"/home/eric/repos/react-d3/node_modules/d3/d3.js","react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/src/piechart.js":[function(require,module,exports){
+},{"./common":"/home/eric/repos/react-d3/src/common.js","d3":"/home/eric/repos/react-d3/node_modules/d3/d3.js","react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/src/piechart.js":[function(require,module,exports){
 /** @jsx React.DOM */
 var React = require('react');
-var pkg = require('../package.json');
 var d3 = require('d3');
 var _ = require('lodash');
 var Chart = require('./common').Chart;
@@ -44428,7 +44420,7 @@ var PieChart = React.createClass({displayName: 'PieChart',
 
 exports.PieChart = PieChart;
 
-},{"../package.json":"/home/eric/repos/react-d3/package.json","./common":"/home/eric/repos/react-d3/src/common.js","d3":"/home/eric/repos/react-d3/node_modules/d3/d3.js","lodash":"/home/eric/repos/react-d3/node_modules/lodash/dist/lodash.js","react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/utils/datagen.js":[function(require,module,exports){
+},{"./common":"/home/eric/repos/react-d3/src/common.js","d3":"/home/eric/repos/react-d3/node_modules/d3/d3.js","lodash":"/home/eric/repos/react-d3/node_modules/lodash/dist/lodash.js","react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/utils/datagen.js":[function(require,module,exports){
 var _ = require('lodash');
 
 exports.generateArrayOfPoints = function(n) {
