@@ -1,6 +1,5 @@
 /** @jsx React.DOM */
 var React = require('react');
-var pkg = require('../package.json');
 var d3 = require('d3');
 var _ = require('lodash');
 var Chart = require('./common').Chart;
