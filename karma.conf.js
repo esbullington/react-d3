@@ -47,11 +47,10 @@ module.exports = function(config) {
     plugins: [
       // 'karma-chrome-launcher',
       'karma-phantomjs-launcher',
-      'karma-jasmine',
       'karma-mocha',
       'karma-chai',
       'karma-chai-plugins',
-      'karma-bro'
+      'karma-browserify'
     ],
 
     // start these browsers
