@@ -17,7 +17,7 @@ var Line = React.createClass({
     return {
       stroke: '#1f77b4',
       fill: 'none'
-    }
+    };
   },
 
   render: function() {
@@ -107,7 +107,7 @@ var XAxis = React.createClass({
       .attr("shape-rendering", "crispEdges")
       .attr("fill", "none")
       .attr("stroke", props.color)
-      .attr("stroke-width", "1")
+      .attr("stroke-width", "1");
 
     // Hides the x axis origin
     d3.selectAll(".linex.axis g:first-child").style("opacity","0");
@@ -200,7 +200,8 @@ var LineChart = React.createClass({
     pointRadius: React.PropTypes.number,
     width: React.PropTypes.number,
     height: React.PropTypes.number,
-    axesColor: React.PropTypes.string
+    axesColor: React.PropTypes.string,
+    title: React.PropTypes.string
   },
 
   getDefaultProps: function() {
@@ -209,7 +210,8 @@ var LineChart = React.createClass({
       pointRadius: 3,
       width: 400,
       height: 200,
-      axesColor: '#000'
+      axesColor: '#000',
+      title: ''
     }
   },
 
@@ -248,7 +250,7 @@ var LineChart = React.createClass({
     var trans = "translate(" + margins.left + "," + margins.top + ")"
 
     return (
-      <Chart width={this.props.width} height={this.props.height}>
+      <Chart width={this.props.width} height={this.props.height} title={this.props.title}>
         <g transform={trans}>
           <DataSeries
             xScale={xScale}

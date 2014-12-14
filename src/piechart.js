@@ -41,7 +41,7 @@ var Arc = React.createClass({
     var t = "translate(" + x + "," + y + ")";
     return (
       <g className="arc-group" >
-        <path 
+        <path
           className='arc'
           d={arc()}
           fill={props.fill}
@@ -60,7 +60,7 @@ var Arc = React.createClass({
           }}>
         >
         </line>
-        <text 
+        <text
           className='arc-label-text'
           transform={t}
           dy=".35em"
@@ -71,7 +71,7 @@ var Arc = React.createClass({
           }}>
           {this.props.label}
         </text>
-        <text 
+        <text
           className='arc-value-text'
           transform={"translate(" + arc.centroid() + ")"}
           dy=".35em"
@@ -110,7 +110,7 @@ var DataSeries = React.createClass({
     var pie = d3.layout
       .pie()
       .sort(null);
-    
+
     var arcData = pie(props.data);
 
     var color = this.props.color;
@@ -143,6 +143,7 @@ var PieChart = React.createClass({
 
   getDefaultProps: function() {
     return {
+      title: ''
     }
   },
 
@@ -152,13 +153,14 @@ var PieChart = React.createClass({
     cy: React.PropTypes.number,
     labelTextFill: React.PropTypes.string,
     valueTextFill: React.PropTypes.string,
-    color: React.PropTypes.func
+    color: React.PropTypes.func,
+    title: React.PropTypes.string
   },
 
   render: function() {
     var props = this.props;
-    var transform = "translate(" 
-      + (this.props.cx || this.props.width/2) + "," 
+    var transform = "translate("
+      + (this.props.cx || this.props.width/2) + ","
       + (this.props.cy || this.props.height/2) + ")";
     var data = _.pluck(this.props.data, 'value');
     var labels = _.pluck(this.props.data, 'label');
@@ -167,6 +169,7 @@ var PieChart = React.createClass({
         className='pie-chart'
         width={this.props.width}
         height={this.props.height}
+        title={this.props.title}
       >
         <DataSeries
           labelTextFill={this.props.labelTextFill}

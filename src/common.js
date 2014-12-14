@@ -6,7 +6,10 @@ var d3 = require('d3');
 exports.Chart = React.createClass({
   render: function() {
     return (
-      <svg width={this.props.width} height={this.props.height}>{this.props.children}</svg>
+      <div>
+        <h3>{this.props.title}</h3>
+        <svg width={this.props.width} height={this.props.height}>{this.props.children}</svg>
+      </div>
     );
   }
 });
@@ -23,7 +26,7 @@ exports.XAxis = React.createClass({
       .ticks(props.xAxisTickCount)
       .ticks(d3.time[unit], interval)
       .scale(props.xScale)
-      .orient("bottom"); 
+      .orient("bottom");
 
     var node = this.refs.xaxis.getDOMNode();
 
@@ -68,7 +71,7 @@ exports.YAxis = React.createClass({
     var yAxis = d3.svg.axis()
       .ticks(props.yAxisTickCount)
       .scale(props.yScale)
-      .orient("left"); 
+      .orient("left");
 
     var node = this.refs.yaxis.getDOMNode();
 
