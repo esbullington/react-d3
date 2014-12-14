@@ -10,3 +10,4 @@ npm-debug.log
 public/js/*.js
 # npm package
 *.tgz
+dist

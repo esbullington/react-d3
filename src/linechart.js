@@ -5,7 +5,7 @@ var Chart = require('./common').Chart;
 
 
 var Line = React.createClass({
-  
+
   propTypes: {
     strokeWidth: React.PropTypes.number,
     path: React.PropTypes.string,
@@ -22,11 +22,11 @@ var Line = React.createClass({
 
   render: function() {
     return (
-      <path 
-        d={this.props.path} 
+      <path
+        d={this.props.path}
         stroke={this.props.stroke}
         fill={this.props.fill}
-        strokeWidth={this.props.strokeWidth} 
+        strokeWidth={this.props.strokeWidth}
       />
     );
   }
@@ -34,7 +34,7 @@ var Line = React.createClass({
 });
 
 var Circle = React.createClass({
-  
+
   propTypes: {
     cx: React.PropTypes.number,
     cy: React.PropTypes.number,
@@ -50,7 +50,7 @@ var Circle = React.createClass({
 
   render: function() {
     return (
-      <circle 
+      <circle
         cx={this.props.cx}
         cy={this.props.cy}
         r={this.props.r}
@@ -63,9 +63,27 @@ var Circle = React.createClass({
 
 var XAxis = React.createClass({
 
-
   componentWillReceiveProps: function(props) {
+    this._renderAxis(props);
+  },
 
+  render: function() {
+    var t = "translate(0," + this.props.height + ")"
+    return (
+      <g
+        ref='linexaxis'
+        className="linex axis"
+        transform={t}
+      >
+      </g>
+    );
+  },
+
+  componentDidMount: function() {
+    this._renderAxis(this.props);
+  },
+
+  _renderAxis: function(props) {
     var xAxis = d3.svg.axis()
       .scale(props.xScale)
       .orient("bottom");
@@ -92,19 +110,6 @@ var XAxis = React.createClass({
 
     // Hides the x axis origin
     d3.selectAll(".linex.axis g:first-child").style("opacity","0");
-
-  },
-
-  render: function() {
-    var t = "translate(0," + this.props.height + ")"
-    return (
-      <g
-        ref='linexaxis'
-        className="linex axis"
-        transform={t}
-      >
-      </g>
-    );
   }
 
 });
@@ -113,11 +118,28 @@ var XAxis = React.createClass({
 var YAxis = React.createClass({
 
   componentWillReceiveProps: function(props) {
+    this._renderAxis(props);
+  },
 
+  render: function() {
+    return (
+      <g
+        ref='lineyaxis'
+        className="liney axis"
+      >
+      </g>
+    );
+  },
+
+  componentDidMount: function() {
+    this._renderAxis(this.props);
+  },
+
+  _renderAxis: function(props) {
     var yAxis = d3.svg.axis()
       .ticks(props.yAxisTickCount)
       .scale(props.yScale)
-      .orient("left"); 
+      .orient("left");
 
     var node = this.refs.lineyaxis.getDOMNode();
 
@@ -137,17 +159,6 @@ var YAxis = React.createClass({
       .attr("shape-rendering", "crispEdges")
       .attr("fill", "none")
       .attr("stroke", "#000")
-
-  },
-
-  render: function() {
-    return (
-      <g
-        ref='lineyaxis'
-        className="liney axis"
-      >
-      </g>
-    );
   }
 
 });
@@ -211,7 +222,7 @@ var LineChart = React.createClass({
     var maxY = d3.max(data, function(d) {
       return d.y;
     });
-      
+
     var maxX = d3.max(data, function(d) {
       return d.x;
     });
@@ -235,7 +246,7 @@ var LineChart = React.createClass({
     return (
       <Chart width={this.props.width} height={this.props.height}>
         <g transform={trans}>
-          <DataSeries 
+          <DataSeries
             xScale={xScale}
             yScale={yScale}
             data={this.props.data}
@@ -243,14 +254,14 @@ var LineChart = React.createClass({
             height={this.props.height - topBottomMargins}
           />
           {circles}
-          <YAxis 
+          <YAxis
             yScale={yScale}
             margins={margins}
             yAxisTickCount={this.props.yAxisTickCount}
             width={this.props.width - sideMargins}
             height={this.props.height - topBottomMargins}
           />
-          <XAxis 
+          <XAxis
             xScale={xScale}
             data={this.props.data}
             margins={margins}
