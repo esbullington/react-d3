@@ -92,20 +92,21 @@ var XAxis = React.createClass({
 
     d3.select(node)
       .attr("class", "linex axis")
+      .style("fill", props.color)
       .call(xAxis);
 
     // Style each of the tick lines
     var lineXAxis = d3.select('.linex.axis')
       .selectAll('line')
       .attr("shape-rendering", "crispEdges")
-      .attr("stroke", "#000");
+      .attr("stroke", props.color);
 
     // Style the main axis line
     d3.select('.linex.axis')
       .select('path')
       .attr("shape-rendering", "crispEdges")
       .attr("fill", "none")
-      .attr("stroke", "#000")
+      .attr("stroke", props.color)
       .attr("stroke-width", "1")
 
     // Hides the x axis origin
@@ -145,20 +146,21 @@ var YAxis = React.createClass({
 
     d3.select(node)
       .attr("class", "liney axis")
+      .style("fill", props.color)
       .call(yAxis);
 
     // Style each of the tick lines
     d3.selectAll('.liney.axis')
       .selectAll('line')
       .attr("shape-rendering", "crispEdges")
-      .attr("stroke", "#000");
+      .attr("stroke", props.color);
 
     // Style the main axis line
     d3.selectAll('.liney.axis')
       .select('path')
       .attr("shape-rendering", "crispEdges")
       .attr("fill", "none")
-      .attr("stroke", "#000")
+      .attr("stroke", props.color)
   }
 
 });
@@ -197,7 +199,8 @@ var LineChart = React.createClass({
     margins: React.PropTypes.object,
     pointRadius: React.PropTypes.number,
     width: React.PropTypes.number,
-    height: React.PropTypes.number
+    height: React.PropTypes.number,
+    axesColor: React.PropTypes.string
   },
 
   getDefaultProps: function() {
@@ -205,7 +208,8 @@ var LineChart = React.createClass({
       margins: {top: 20, right: 30, bottom: 30, left: 30},
       pointRadius: 3,
       width: 400,
-      height: 200
+      height: 200,
+      axesColor: '#000'
     }
   },
 
@@ -260,6 +264,7 @@ var LineChart = React.createClass({
             yAxisTickCount={this.props.yAxisTickCount}
             width={this.props.width - sideMargins}
             height={this.props.height - topBottomMargins}
+            color={this.props.axesColor}
           />
           <XAxis
             xScale={xScale}
@@ -267,6 +272,7 @@ var LineChart = React.createClass({
             margins={margins}
             width={this.props.width - sideMargins}
             height={this.props.height - topBottomMargins}
+            color={this.props.axesColor}
           />
         </g>
       </Chart>
