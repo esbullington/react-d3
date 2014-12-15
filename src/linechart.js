@@ -21,6 +21,7 @@ var Line = React.createClass({
   },
 
   render: function() {
+    debugger;
     return (
       <path
         d={this.props.path}
@@ -85,7 +86,7 @@ var XAxis = React.createClass({
 
   _renderAxis: function(props) {
     var xAxis = d3.svg.axis()
-      .scale(props.xScale)
+      .scale(props.scaleX)
       .orient("bottom");
 
     var node = this.refs.linexaxis.getDOMNode();
@@ -139,7 +140,7 @@ var YAxis = React.createClass({
   _renderAxis: function(props) {
     var yAxis = d3.svg.axis()
       .ticks(props.yAxisTickCount)
-      .scale(props.yScale)
+      .scale(props.scaleY)
       .orient("left");
 
     var node = this.refs.lineyaxis.getDOMNode();
@@ -169,25 +170,40 @@ var DataSeries = React.createClass({
 
   propTypes: {
     data: React.PropTypes.array,
-    interpolate: React.PropTypes.string
+    interpolate: React.PropTypes.string,
+    color: React.PropTypes.string
   },
 
   getDefaultProps: function() {
     return {
       data: [],
-      interpolate: 'linear'
+      interpolate: 'linear',
+      color: '#fff'
     }
   },
 
   render: function() {
     var self = this;
     var interpolatePath = d3.svg.line()
-        .x(function(d) { return self.props.xScale(d.x); })
-        .y(function(d) { return self.props.yScale(d.y); })
+        .x(function(d) {
+          return self.props.scaleX(d.x);
+        })
+        .y(function(d) {
+          return self.props.scaleY(d.y);
+        })
         .interpolate(this.props.interpolate);
 
+    var circles = [];
+
+    this.props.data.forEach(function(point, i) {
+      circles.push(<Circle cx={this.props.scaleX(point.x)} cy={this.props.scaleY(point.y)} r={this.props.pointRadius} fill={this.props.color} key={this.props.seriesName + i} />);
+    }.bind(this));
+
     return (
-      <Line path={interpolatePath(this.props.data)} />
+      <g>
+        <Line path={interpolatePath(this.props.data)} stroke={this.props.color} />
+        {circles}
+      </g>
     )
   }
 
@@ -201,7 +217,8 @@ var LineChart = React.createClass({
     width: React.PropTypes.number,
     height: React.PropTypes.number,
     axesColor: React.PropTypes.string,
-    title: React.PropTypes.string
+    title: React.PropTypes.string,
+    colors: React.PropTypes.func
   },
 
   getDefaultProps: function() {
@@ -211,74 +228,112 @@ var LineChart = React.createClass({
       width: 400,
       height: 200,
       axesColor: '#000',
-      title: ''
+      title: '',
+      colors: d3.scale.category20c()
     }
+  },
+
+  getInitialState: function() {
+    return {
+      maxX: 0,
+      maxY: 0,
+      chartWidth: 0,
+      chartHeight: 0
+    }
+  },
+
+  componentWillMount: function() {
+    this._calculateState();
   },
 
   render: function() {
 
-    var data = this.props.data;
+    var dataSeriesArray = [];
+    var index = 0;
 
-    var margins = this.props.margins;
+    for(var seriesName in this.props.data) {
+      if (this.props.data.hasOwnProperty(seriesName)) {
+        dataSeriesArray.push(
+            <DataSeries
+              scaleX={this.state.scaleX}
+              scaleY={this.state.scaleY}
+              seriesName={seriesName}
+              data={this.props.data[seriesName]}
+              width={this.state.chartWidth}
+              height={this.state.chartHeight}
+              color={this.props.colors(index)}
+              pointRadius={this.props.pointRadius}
+              key={seriesName}
+            />
+        )
+        index++;
+      }
+    }
 
-    var sideMargins = margins.left + margins.right;
-
-    var topBottomMargins = margins.top + margins.bottom;
-
-    var maxY = d3.max(data, function(d) {
-      return d.y;
-    });
-
-    var maxX = d3.max(data, function(d) {
-      return d.x;
-    });
-
-    var xScale = d3.scale.linear()
-      .domain([0, maxX])
-      .range([0, this.props.width - sideMargins]);
-
-    var yScale = d3.scale.linear()
-      .domain([0, maxY])
-      .range([this.props.height - topBottomMargins, 0]);
-
-    var circles = [];
-
-    this.props.data.forEach(function(point, i) {
-      circles.push(<Circle cx={xScale(point.x)} cy={yScale(point.y)} r={this.props.pointRadius} key={i} />);
-    }.bind(this));
-
-    var trans = "translate(" + margins.left + "," + margins.top + ")"
+    var trans = "translate(" + this.props.margins.left + "," + this.props.margins.top + ")"
 
     return (
       <Chart width={this.props.width} height={this.props.height} title={this.props.title}>
         <g transform={trans}>
-          <DataSeries
-            xScale={xScale}
-            yScale={yScale}
-            data={this.props.data}
-            width={this.props.width - sideMargins}
-            height={this.props.height - topBottomMargins}
-          />
-          {circles}
+          {dataSeriesArray}
           <YAxis
-            yScale={yScale}
-            margins={margins}
+            scaleY={this.state.scaleY}
+            margins={this.props.margins}
             yAxisTickCount={this.props.yAxisTickCount}
-            width={this.props.width - sideMargins}
-            height={this.props.height - topBottomMargins}
+            width={this.state.chartWidth}
+            height={this.state.chartHeight}
             color={this.props.axesColor}
           />
           <XAxis
-            xScale={xScale}
+            scaleX={this.state.scaleX}
             data={this.props.data}
-            margins={margins}
-            width={this.props.width - sideMargins}
-            height={this.props.height - topBottomMargins}
+            margins={this.props.margins}
+            width={this.state.chartWidth}
+            height={this.state.chartHeight}
             color={this.props.axesColor}
           />
         </g>
       </Chart>
     );
+  },
+
+  _calculateState: function() {
+
+    var maxY = 0,
+        maxX = 0;
+
+    for(var series in this.props.data) {
+      var seriesMaxY = d3.max(this.props.data[series], function(d) {
+        return d.y;
+      });
+
+      var seriesMaxX = d3.max(this.props.data[series], function(d) {
+        return d.x;
+      });
+
+      maxX = (seriesMaxX > maxX) ? seriesMaxX : maxX;
+      maxY = (seriesMaxY > maxY) ? seriesMaxY : maxY;
+    }
+
+    var chartWidth = this.props.width - this.props.margins.left - this.props.margins.right;
+    var chartHeight = this.props.height - this.props.margins.top - this.props.margins.bottom;
+
+    var scaleX = d3.scale.linear()
+      .domain([0, maxX])
+      .range([0, chartWidth]);
+
+    var scaleY = d3.scale.linear()
+      .domain([0, maxY])
+      .range([chartHeight, 0]);
+
+    this.setState({
+      maxX: maxX,
+      maxY: maxY,
+      scaleX: scaleX,
+      scaleY: scaleY,
+      chartWidth: chartWidth,
+      chartHeight: chartHeight
+    })
   }
 
 });

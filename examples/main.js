@@ -35,7 +35,11 @@ var Demos = React.createClass({
 
   render: function() {
 
-    var lineData = datagen.generateArrayOfPoints(10);
+    var lineData = {
+        series1: [ { x: 0, y: 20 }, { x: 1, y: 30 }, { x: 2, y: 10 }, { x: 3, y: 5 }, { x: 4, y: 8 }, { x: 5, y: 15 }, { x: 6, y: 10 } ],
+        series2: [ { x: 0, y: 8 }, { x: 1, y: 5 }, { x: 2, y: 20 }, { x: 3, y: 12 }, { x: 4, y: 4 }, { x: 5, y: 6 }, { x: 6, y: 2 } ],
+        series3: [ { x: 0, y: 0 }, { x: 1, y: 5 }, { x: 2, y: 8 }, { x: 3, y: 2 }, { x: 4, y: 6 }, { x: 5, y: 4 }, { x: 6, y: 2 } ]
+    };
     var barData = [{label: 'A', value: 5}, {label: 'B', value: 6}, {label: 'C', value: 2}, {label: 'D', value: 11}, {label: 'E', value: 2}, {label: 'F', value: 7}];
     var pieData = [{label: "Margarita", value: 20.0}, {label: "John", value: 55.0}, {label: "Tim", value: 25.0 }];
 
@@ -92,7 +96,7 @@ var Demos = React.createClass({
           <div className="col-md-6">
             <pre ref='block'>
               <code className='js'>
-              {'//Sample data format (not actually rendered)\nvar lineData = [\n  { x: 0, y: 95.2687838114798 },\n  { x: 1, y: 77.65943023841828 }\n  ...\n  { x: 4, y: 87.52988900523633 }\n]'}
+              {'var lineData = [\n  series1: [ { x: 0, y: 20 }, ... , { x: 6, y: 10 } ],\n  series2: [ { x: 0, y: 8 }, ..., { x: 6, y: 2 } ],\n  series3: [ { x: 0, y: 0 }, ..., { x: 6, y: 2 } ]\n]'}
               </code>
             </pre>
             <pre ref='block'>
