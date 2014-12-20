@@ -8,9 +8,9 @@ var _ = require('lodash');
 var Bar = React.createClass({
 
   propTypes: {
-    fill: React.PropTypes.string,  
-    width: React.PropTypes.number,  
-    height: React.PropTypes.number,  
+    fill: React.PropTypes.string,
+    width: React.PropTypes.number,
+    height: React.PropTypes.number,
     offset: React.PropTypes.number
   },
 
@@ -22,12 +22,12 @@ var Bar = React.createClass({
 
   render: function() {
     return (
-      <rect 
+      <rect
         fill={this.props.fill}
         width={this.props.width}
-        height={this.props.height} 
+        height={this.props.height}
         x={this.props.offset}
-        y={this.props.availableHeight  - this.props.height} 
+        y={this.props.availableHeight  - this.props.height}
       />
     );
   }
@@ -85,7 +85,7 @@ var YAxis = React.createClass({
     var yAxis = d3.svg.axis()
       .ticks(props.yAxisTickCount)
       .scale(props.yScale)
-      .orient("left"); 
+      .orient("left");
 
     var node = this.refs.baryaxis.getDOMNode();
 
@@ -123,11 +123,11 @@ var YAxis = React.createClass({
 var DataSeries = React.createClass({
 
   propTypes: {
-    fill: React.PropTypes.string,  
-    title: React.PropTypes.string,  
-    padding: React.PropTypes.number,  
-    width: React.PropTypes.number,  
-    height: React.PropTypes.number,  
+    fill: React.PropTypes.string,
+    title: React.PropTypes.string,
+    padding: React.PropTypes.number,
+    width: React.PropTypes.number,
+    height: React.PropTypes.number,
     offset: React.PropTypes.number
   },
 
@@ -159,6 +159,16 @@ var DataSeries = React.createClass({
 
 var BarChart = React.createClass({
 
+  propTypes: {
+    data: React.PropTypes.array,
+    yAxisTickCount: React.PropTypes.number,
+    width: React.PropTypes.number,
+    margins: React.PropTypes.object,
+    height: React.PropTypes.number,
+    fill: React.PropTypes.string,
+    title: React.PropTypes.string
+  },
+
   getDefaultProps: function() {
     return {
       data: [],
@@ -166,7 +176,8 @@ var BarChart = React.createClass({
       width: 500,
       height: 200,
       margins: {top: 20, right: 30, bottom: 30, left: 30},
-      fill: "cornflowerblue"
+      fill: "cornflowerblue",
+      title: ''
     }
   },
 
@@ -192,9 +203,9 @@ var BarChart = React.createClass({
     var trans = "translate(" + margins.left + "," + margins.top + ")";
 
     return (
-      <Chart width={this.props.width } height={this.props.height }>
+      <Chart width={this.props.width} height={this.props.height} title={this.props.title}>
         <g transform={trans} >
-          <DataSeries 
+          <DataSeries
             values={values}
             yScale={yScale}
             xScale={yScale}
@@ -204,14 +215,14 @@ var BarChart = React.createClass({
             height={this.props.height - topBottomMargins}
             fill={this.props.fill}
           />
-          <YAxis 
+          <YAxis
             yScale={yScale}
             margins={margins}
             yAxisTickCount={this.props.yAxisTickCount}
             width={this.props.width - sideMargins}
             height={this.props.height - topBottomMargins}
           />
-          <XAxis 
+          <XAxis
             xScale={xScale}
             data={this.props.data}
             margins={margins}

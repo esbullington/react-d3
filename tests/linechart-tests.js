@@ -1,6 +1,6 @@
 /** @jsx React.DOM */
 
-var expect = require('chai').expect;  
+var expect = require('chai').expect;
 
 describe('LineChart', function() {
   it('renders linechart', function() {
@@ -11,14 +11,17 @@ describe('LineChart', function() {
     var TestUtils = React.addons.TestUtils;
 
     // Render a linechart using array data
-    var data = generate(5);
+    var data = {
+      series1: generate(5),
+      series2: generate(5)
+    };
     var linechart = TestUtils.renderIntoDocument(
       <LineChart data={data} width={400} height={200} />
     );
 
     // Verify that it has the same number of bars as the array's length
-    var path = TestUtils.findRenderedDOMComponentWithTag(
+    var paths = TestUtils.scryRenderedDOMComponentsWithTag(
       linechart, 'path');
-    expect(path).to.exist;
+    expect(paths).to.have.length(2);
   });
 });

@@ -5,7 +5,7 @@ var Chart = require('./common').Chart;
 
 
 var Line = React.createClass({
-  
+
   propTypes: {
     strokeWidth: React.PropTypes.number,
     path: React.PropTypes.string,
@@ -17,16 +17,17 @@ var Line = React.createClass({
     return {
       stroke: '#1f77b4',
       fill: 'none'
-    }
+    };
   },
 
   render: function() {
+    debugger;
     return (
-      <path 
-        d={this.props.path} 
+      <path
+        d={this.props.path}
         stroke={this.props.stroke}
         fill={this.props.fill}
-        strokeWidth={this.props.strokeWidth} 
+        strokeWidth={this.props.strokeWidth}
       />
     );
   }
@@ -34,7 +35,7 @@ var Line = React.createClass({
 });
 
 var Circle = React.createClass({
-  
+
   propTypes: {
     cx: React.PropTypes.number,
     cy: React.PropTypes.number,
@@ -50,7 +51,7 @@ var Circle = React.createClass({
 
   render: function() {
     return (
-      <circle 
+      <circle
         cx={this.props.cx}
         cy={this.props.cy}
         r={this.props.r}
@@ -63,36 +64,8 @@ var Circle = React.createClass({
 
 var XAxis = React.createClass({
 
-
   componentWillReceiveProps: function(props) {
-
-    var xAxis = d3.svg.axis()
-      .scale(props.xScale)
-      .orient("bottom");
-
-    var node = this.refs.linexaxis.getDOMNode();
-
-    d3.select(node)
-      .attr("class", "linex axis")
-      .call(xAxis);
-
-    // Style each of the tick lines
-    var lineXAxis = d3.select('.linex.axis')
-      .selectAll('line')
-      .attr("shape-rendering", "crispEdges")
-      .attr("stroke", "#000");
-
-    // Style the main axis line
-    d3.select('.linex.axis')
-      .select('path')
-      .attr("shape-rendering", "crispEdges")
-      .attr("fill", "none")
-      .attr("stroke", "#000")
-      .attr("stroke-width", "1")
-
-    // Hides the x axis origin
-    d3.selectAll(".linex.axis g:first-child").style("opacity","0");
-
+    this._renderAxis(props);
   },
 
   render: function() {
@@ -105,6 +78,40 @@ var XAxis = React.createClass({
       >
       </g>
     );
+  },
+
+  componentDidMount: function() {
+    this._renderAxis(this.props);
+  },
+
+  _renderAxis: function(props) {
+    var xAxis = d3.svg.axis()
+      .scale(props.scaleX)
+      .orient("bottom");
+
+    var node = this.refs.linexaxis.getDOMNode();
+
+    d3.select(node)
+      .attr("class", "linex axis")
+      .style("fill", props.color)
+      .call(xAxis);
+
+    // Style each of the tick lines
+    var lineXAxis = d3.select('.linex.axis')
+      .selectAll('line')
+      .attr("shape-rendering", "crispEdges")
+      .attr("stroke", props.color);
+
+    // Style the main axis line
+    d3.select('.linex.axis')
+      .select('path')
+      .attr("shape-rendering", "crispEdges")
+      .attr("fill", "none")
+      .attr("stroke", props.color)
+      .attr("stroke-width", "1");
+
+    // Hides the x axis origin
+    d3.selectAll(".linex.axis g:first-child").style("opacity","0");
   }
 
 });
@@ -113,31 +120,7 @@ var XAxis = React.createClass({
 var YAxis = React.createClass({
 
   componentWillReceiveProps: function(props) {
-
-    var yAxis = d3.svg.axis()
-      .ticks(props.yAxisTickCount)
-      .scale(props.yScale)
-      .orient("left"); 
-
-    var node = this.refs.lineyaxis.getDOMNode();
-
-    d3.select(node)
-      .attr("class", "liney axis")
-      .call(yAxis);
-
-    // Style each of the tick lines
-    d3.selectAll('.liney.axis')
-      .selectAll('line')
-      .attr("shape-rendering", "crispEdges")
-      .attr("stroke", "#000");
-
-    // Style the main axis line
-    d3.selectAll('.liney.axis')
-      .select('path')
-      .attr("shape-rendering", "crispEdges")
-      .attr("fill", "none")
-      .attr("stroke", "#000")
-
+    this._renderAxis(props);
   },
 
   render: function() {
@@ -148,6 +131,37 @@ var YAxis = React.createClass({
       >
       </g>
     );
+  },
+
+  componentDidMount: function() {
+    this._renderAxis(this.props);
+  },
+
+  _renderAxis: function(props) {
+    var yAxis = d3.svg.axis()
+      .ticks(props.yAxisTickCount)
+      .scale(props.scaleY)
+      .orient("left");
+
+    var node = this.refs.lineyaxis.getDOMNode();
+
+    d3.select(node)
+      .attr("class", "liney axis")
+      .style("fill", props.color)
+      .call(yAxis);
+
+    // Style each of the tick lines
+    d3.selectAll('.liney.axis')
+      .selectAll('line')
+      .attr("shape-rendering", "crispEdges")
+      .attr("stroke", props.color);
+
+    // Style the main axis line
+    d3.selectAll('.liney.axis')
+      .select('path')
+      .attr("shape-rendering", "crispEdges")
+      .attr("fill", "none")
+      .attr("stroke", props.color)
   }
 
 });
@@ -156,25 +170,40 @@ var DataSeries = React.createClass({
 
   propTypes: {
     data: React.PropTypes.array,
-    interpolate: React.PropTypes.string
+    interpolate: React.PropTypes.string,
+    color: React.PropTypes.string
   },
 
   getDefaultProps: function() {
     return {
       data: [],
-      interpolate: 'linear'
+      interpolate: 'linear',
+      color: '#fff'
     }
   },
 
   render: function() {
     var self = this;
     var interpolatePath = d3.svg.line()
-        .x(function(d) { return self.props.xScale(d.x); })
-        .y(function(d) { return self.props.yScale(d.y); })
+        .x(function(d) {
+          return self.props.scaleX(d.x);
+        })
+        .y(function(d) {
+          return self.props.scaleY(d.y);
+        })
         .interpolate(this.props.interpolate);
 
+    var circles = [];
+
+    this.props.data.forEach(function(point, i) {
+      circles.push(<Circle cx={this.props.scaleX(point.x)} cy={this.props.scaleY(point.y)} r={this.props.pointRadius} fill={this.props.color} key={this.props.seriesName + i} />);
+    }.bind(this));
+
     return (
-      <Line path={interpolatePath(this.props.data)} />
+      <g>
+        <Line path={interpolatePath(this.props.data)} stroke={this.props.color} />
+        {circles}
+      </g>
     )
   }
 
@@ -186,7 +215,10 @@ var LineChart = React.createClass({
     margins: React.PropTypes.object,
     pointRadius: React.PropTypes.number,
     width: React.PropTypes.number,
-    height: React.PropTypes.number
+    height: React.PropTypes.number,
+    axesColor: React.PropTypes.string,
+    title: React.PropTypes.string,
+    colors: React.PropTypes.func
   },
 
   getDefaultProps: function() {
@@ -194,72 +226,114 @@ var LineChart = React.createClass({
       margins: {top: 20, right: 30, bottom: 30, left: 30},
       pointRadius: 3,
       width: 400,
-      height: 200
+      height: 200,
+      axesColor: '#000',
+      title: '',
+      colors: d3.scale.category20c()
     }
+  },
+
+  getInitialState: function() {
+    return {
+      maxX: 0,
+      maxY: 0,
+      chartWidth: 0,
+      chartHeight: 0
+    }
+  },
+
+  componentWillMount: function() {
+    this._calculateState();
   },
 
   render: function() {
 
-    var data = this.props.data;
+    var dataSeriesArray = [];
+    var index = 0;
 
-    var margins = this.props.margins;
+    for(var seriesName in this.props.data) {
+      if (this.props.data.hasOwnProperty(seriesName)) {
+        dataSeriesArray.push(
+            <DataSeries
+              scaleX={this.state.scaleX}
+              scaleY={this.state.scaleY}
+              seriesName={seriesName}
+              data={this.props.data[seriesName]}
+              width={this.state.chartWidth}
+              height={this.state.chartHeight}
+              color={this.props.colors(index)}
+              pointRadius={this.props.pointRadius}
+              key={seriesName}
+            />
+        )
+        index++;
+      }
+    }
 
-    var sideMargins = margins.left + margins.right;
-
-    var topBottomMargins = margins.top + margins.bottom;
-
-    var maxY = d3.max(data, function(d) {
-      return d.y;
-    });
-      
-    var maxX = d3.max(data, function(d) {
-      return d.x;
-    });
-
-    var xScale = d3.scale.linear()
-      .domain([0, maxX])
-      .range([0, this.props.width - sideMargins]);
-
-    var yScale = d3.scale.linear()
-      .domain([0, maxY])
-      .range([this.props.height - topBottomMargins, 0]);
-
-    var circles = [];
-
-    this.props.data.forEach(function(point, i) {
-      circles.push(<Circle cx={xScale(point.x)} cy={yScale(point.y)} r={this.props.pointRadius} key={i} />);
-    }.bind(this));
-
-    var trans = "translate(" + margins.left + "," + margins.top + ")"
+    var trans = "translate(" + this.props.margins.left + "," + this.props.margins.top + ")"
 
     return (
-      <Chart width={this.props.width} height={this.props.height}>
+      <Chart width={this.props.width} height={this.props.height} title={this.props.title}>
         <g transform={trans}>
-          <DataSeries 
-            xScale={xScale}
-            yScale={yScale}
-            data={this.props.data}
-            width={this.props.width - sideMargins}
-            height={this.props.height - topBottomMargins}
-          />
-          {circles}
-          <YAxis 
-            yScale={yScale}
-            margins={margins}
+          {dataSeriesArray}
+          <YAxis
+            scaleY={this.state.scaleY}
+            margins={this.props.margins}
             yAxisTickCount={this.props.yAxisTickCount}
-            width={this.props.width - sideMargins}
-            height={this.props.height - topBottomMargins}
+            width={this.state.chartWidth}
+            height={this.state.chartHeight}
+            color={this.props.axesColor}
           />
-          <XAxis 
-            xScale={xScale}
+          <XAxis
+            scaleX={this.state.scaleX}
             data={this.props.data}
-            margins={margins}
-            width={this.props.width - sideMargins}
-            height={this.props.height - topBottomMargins}
+            margins={this.props.margins}
+            width={this.state.chartWidth}
+            height={this.state.chartHeight}
+            color={this.props.axesColor}
           />
         </g>
       </Chart>
     );
+  },
+
+  _calculateState: function() {
+
+    var maxY = 0,
+        maxX = 0;
+
+    for(var series in this.props.data) {
+      var seriesMaxY = d3.max(this.props.data[series], function(d) {
+        return d.y;
+      });
+
+      var seriesMaxX = d3.max(this.props.data[series], function(d) {
+        return d.x;
+      });
+
+      maxX = (seriesMaxX > maxX) ? seriesMaxX : maxX;
+      maxY = (seriesMaxY > maxY) ? seriesMaxY : maxY;
+    }
+
+    var chartWidth = this.props.width - this.props.margins.left - this.props.margins.right;
+    var chartHeight = this.props.height - this.props.margins.top - this.props.margins.bottom;
+
+    var scaleX = d3.scale.linear()
+      .domain([0, maxX])
+      .range([0, chartWidth]);
+
+    var scaleY = d3.scale.linear()
+      .domain([0, maxY])
+      .range([chartHeight, 0]);
+
+    this.setState({
+      maxX: maxX,
+      maxY: maxY,
+      scaleX: scaleX,
+      scaleY: scaleY,
+      chartWidth: chartWidth,
+      chartHeight: chartHeight
+    })
   }
 
 });

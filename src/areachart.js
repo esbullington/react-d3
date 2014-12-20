@@ -13,7 +13,7 @@ var XAxis = React.createClass({
     var xAxis = d3.svg.axis()
       .ticks(d3.time[unit], interval)
       .scale(props.xScale)
-      .orient("bottom"); 
+      .orient("bottom");
 
     var node = this.refs.xaxis.getDOMNode();
 
@@ -58,7 +58,7 @@ var YAxis = React.createClass({
     var yAxis = d3.svg.axis()
       .ticks(props.yAxisTickCount)
       .scale(props.yScale)
-      .orient("left"); 
+      .orient("left");
 
     var node = this.refs.yaxis.getDOMNode();
 
@@ -95,7 +95,7 @@ var YAxis = React.createClass({
 
 
 var Area = React.createClass({
-  
+
   propTypes: {
     path: React.PropTypes.string,
     fill: React.PropTypes.string,
@@ -112,9 +112,9 @@ var Area = React.createClass({
   render: function() {
 
     return (
-      <path 
+      <path
         className="area"
-        d={this.props.path} 
+        d={this.props.path}
         fill={this.props.fill}
       />
     );
@@ -150,7 +150,8 @@ var AreaChart = React.createClass({
     yAxisTickCount: React.PropTypes.number,
     xAxisTickInterval: React.PropTypes.object,
     width: React.PropTypes.number,
-    height: React.PropTypes.number
+    height: React.PropTypes.number,
+    title: React.PropTypes.string
   },
 
   getDefaultProps: function() {
@@ -159,7 +160,8 @@ var AreaChart = React.createClass({
       yAxisTickCount: 4,
       xAxisTickInterval: {unit: 'years', interval: 1},
       width: 400,
-      height: 200
+      height: 200,
+      title: ''
     }
   },
 
@@ -182,27 +184,28 @@ var AreaChart = React.createClass({
     var trans = "translate(" + margin.left + "," + margin.top + ")";
 
     return (
-      <Chart 
+      <Chart
         ref='chart'
-        width={this.props.width + margin.left + margin.right} 
+        width={this.props.width + margin.left + margin.right}
         height={this.props.height + margin.top + margin.bottom}
+        title={this.props.title}
       >
         <g transform={trans} >
-          <DataSeries 
+          <DataSeries
             xScale={xScale}
             yScale={yScale}
             data={this.props.data}
             width={this.props.width}
             height={this.props.height}
           />
-          <XAxis 
+          <XAxis
             xScale={xScale}
             xAxisTickInterval={this.props.xAxisTickInterval}
             margin={margin}
             width={this.props.width}
             height={this.props.height}
           />
-          <YAxis 
+          <YAxis
             yScale={yScale}
             margin={margin}
             yAxisTickCount={this.props.yAxisTickCount}
