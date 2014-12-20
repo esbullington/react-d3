@@ -7,8 +7,5 @@ npm-debug.log
 #Vim swap file
 *.swp
 
-# Generate js file(s)
-dist/js/*.js
-
 # npm package
 *.tgz
