@@ -7,6 +7,7 @@ var Chart = require('./common').Chart;
 var Line = React.createClass({
 
   propTypes: {
+    data: React.PropTypes.object,
     strokeWidth: React.PropTypes.number,
     path: React.PropTypes.string,
     fill: React.PropTypes.string,
@@ -21,7 +22,6 @@ var Line = React.createClass({
   },
 
   render: function() {
-    debugger;
     return (
       <path
         d={this.props.path}
@@ -247,7 +247,6 @@ var LineChart = React.createClass({
   },
 
   render: function() {
-
     var dataSeriesArray = [];
     var index = 0;
 
