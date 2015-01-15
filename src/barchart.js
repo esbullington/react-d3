@@ -176,7 +176,7 @@ var BarChart = React.createClass({
       width: 500,
       height: 200,
       margins: {top: 20, right: 30, bottom: 30, left: 30},
-      fill: "cornflowerblue",
+      fill: "#3182bd",
       title: ''
     }
   },

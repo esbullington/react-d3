@@ -65,7 +65,7 @@ var Demos = React.createClass({
             </pre>
             <pre ref='block'>
               <code className='html'>
-                {"<BarChart\n  data={barData}\n  width={500}\n  height={200}\n  fill={'cornflowerblue'}\n  title='Bar Chart'\n/>"}
+                {"<BarChart\n  data={barData}\n  width={500}\n  height={200}\n  fill={'#3182bd'}\n  title='Bar Chart'\n/>"}
               </code>
             </pre>
           </div>
