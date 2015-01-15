@@ -147,18 +147,20 @@ var Demos = React.createClass({displayName: "Demos",
               width: 450, 
               height: 250, 
               title: "Treemap", 
-              data: treemapData}
+              data: treemapData, 
+              textColor: "#484848", 
+              fontColor: "10px"}
             )
           ), 
           React.createElement("div", {className: "col-md-6"}, 
             React.createElement("pre", {ref: "block"}, 
               React.createElement("code", {className: "js"}, 
-              '//2014 World Most Populous Countries (millions)\n//http://www.prb.org/pdf14/2014-world-population-data-sheet_eng.pdf\n var treemapData = [\n  {label: "China", value: 1364},\n  {label: "India", value: 1296},\n  {label: "United States", value: 318},\n  {label: "Indonesia", value: 251},\n  {label: "Brazil", value: 203}\n ];'
+              '//2014 World Most Populous Countries (millions)\n//http://www.prb.org/pdf14/2014-world-population-data-sheet_eng.pdf\n var treemapData = [\n  {label: "China", value: 1364},\n  {label: "India", value: 1296},\n...\n  {label: "Brazil", value: 203}\n ];'
               )
             ), 
             React.createElement("pre", {ref: "block"}, 
               React.createElement("code", {className: "html"}, 
-                "<Treemap\n  data={treemapData}\n  width={450}\n  height={250}\n  title='Treemap'\n/>"
+                '<Treemap\n  data={treemapData}\n  width={450}\n  height={250}\n  textColor="#484848"\n  fontSize="10px"\n  title="Treemap"\n/>'
               )
             )
           )
@@ -44598,7 +44600,7 @@ process.chdir = function (dir) {
 };
 
 },{}],"/Users/yangwei/code/react-d3/package.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
   "name": "react-d3",
   "version": "0.0.13",
   "description": "ReactJS charts using d3",
@@ -45685,22 +45687,10 @@ var Chart = require('./common').Chart;
 var Cell = React.createClass({displayName: "Cell",
 
   propTypes: {
-    textColor: React.PropTypes.string,
-    fontSize: React.PropTypes.oneOfType([ 
-      React.PropTypes.string,
-      React.PropTypes.number
-    ]),
     cellColor: React.PropTypes.string,
     width: React.PropTypes.number,
     height: React.PropTypes.number,
     label: React.PropTypes.string
-  },
-
-  getDefaultProps: function() {
-    return {
-      textColor: '#f7f7f7',
-      fontSize: '.65em'
-    } 
   },
 
   render: function() {
@@ -45754,7 +45744,7 @@ var DataSeries = React.createClass({displayName: "DataSeries",
     var value = this.props.value;
     var label = this.props.label;
 
-    var color = d3.scale.category20b();
+    var color = d3.scale.category20c();
 
     var treemap = d3.layout.treemap()
                     // make sure calculation loop through all objects inside array 
@@ -45793,16 +45783,23 @@ var Treemap = React.createClass({displayName: "Treemap",
     data: React.PropTypes.array, 
     width: React.PropTypes.number,
     height: React.PropTypes.number,
-    title: React.PropTypes.string
+    title: React.PropTypes.string,
+    textColor: React.PropTypes.string,
+    fontSize: React.PropTypes.oneOfType([ 
+      React.PropTypes.string,
+      React.PropTypes.number
+    ])
+
   },
 
   getDefaultProps: function() {
     return {
-      margins: {top: 20, right: 30, bottom: 30, left: 30},
       data: [], 
       width: 400,
       heigth: 200,
-      title: ''
+      title: '',
+      textColor: '#f7f7f7',
+      fontSize: '0.65em'
     } 
   },
 
@@ -45817,7 +45814,9 @@ var Treemap = React.createClass({displayName: "Treemap",
         React.createElement(DataSeries, {
           width: this.props.width, 
           height: this.props.height, 
-          data: this.props.data}
+          data: this.props.data, 
+          textColor: this.props.textColor, 
+          fontSize: this.props.fontSize}
         )
       )
     );
