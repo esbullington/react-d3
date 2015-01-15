@@ -6,6 +6,7 @@ var BarChart = require('../src/barchart').BarChart;
 var LineChart = require('../src/linechart').LineChart;
 var PieChart = require('../src/piechart').PieChart;
 var AreaChart = require('../src/areachart').AreaChart;
+var Treemap = require('../src/treemap').Treemap;
 var datagen = require('../utils/datagen');
 var hljs = require("highlight.js");
 
@@ -42,6 +43,9 @@ var Demos = React.createClass({
     };
     var barData = [{label: 'A', value: 5}, {label: 'B', value: 6}, {label: 'C', value: 2}, {label: 'D', value: 11}, {label: 'E', value: 2}, {label: 'F', value: 7}];
     var pieData = [{label: "Margarita", value: 20.0}, {label: "John", value: 55.0}, {label: "Tim", value: 25.0 }];
+    // 2014 Most Populous Countries
+    // http://www.prb.org/pdf14/2014-world-population-data-sheet_eng.pdf
+    var treemapData = [{label: 'China', value: 1364}, {label: 'India', value: 1296}, {label: 'United States', value: 318}, {label: 'Indonesia', value: 251}, {label: 'Brazil', value: 203}];
 
     return (
       <div className="container">
@@ -133,6 +137,34 @@ var Demos = React.createClass({
             </pre>
           </div>
         </div>
+        <div className="row">
+          <hr/>
+        </div>
+        <div className="row">
+          <div className="col-md-6">
+            <Treemap
+              width={450}
+              height={250}
+              title="Treemap"
+              data={treemapData}
+              textColor="#484848"
+              fontColor="10px"
+            />
+          </div>
+          <div className="col-md-6">
+            <pre ref='block'>
+              <code className='js'>
+              {'//2014 World Most Populous Countries (millions)\n//http://www.prb.org/pdf14/2014-world-population-data-sheet_eng.pdf\n var treemapData = [\n  {label: "China", value: 1364},\n  {label: "India", value: 1296},\n...\n  {label: "Brazil", value: 203}\n ];'}
+              </code>
+            </pre>
+            <pre ref='block'>
+              <code className='html'>
+                {'<Treemap\n  data={treemapData}\n  width={450}\n  height={250}\n  textColor="#484848"\n  fontSize="10px"\n  title="Treemap"\n/>'}
+              </code>
+            </pre>
+          </div>
+        </div>
+
       </div>
     );
   }
