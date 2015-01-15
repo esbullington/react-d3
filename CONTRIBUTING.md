@@ -7,7 +7,7 @@ _By contributing code to React-d3, you are agreeing to release it under the MIT 
 * Each chart should be given its own file, or if complex enough, its own directory.  If you create a chart directory, please include an `index.js` file in its root, in which the root chart component is exported.  This way, we can `require` the chart using Browserify, just like with a single file chart.
 * All new charts and bug fixes must be tested by one or more specs (we use Karma with Chai for assertions, please see [here](https://github.com/esbullington/react-d3/blob/master/tests/piechart-tests.js) for an example test).  Tests are not required for minor new features, but would be appreciated.
 * Please try to include an example if you submit a new chart.
-* Please set the default use style on charts that use a multicolor palette to use d3's `d3.scale.category20c()` [color palette](https://github.com/mbostock/d3/wiki/Ordinal-Scales#category20c).  For single color charts, please set the default fill color to `#6495ED` (CornflowerBlue).
+* Please set the default use style on charts that use a multicolor palette to use d3's `d3.scale.category20c()` [color palette](https://github.com/mbostock/d3/wiki/Ordinal-Scales#category20c).  For single color charts, please set the default fill color to `#3182bd`.
 * We try follow the rules contained in [Google's JavaScript Style Guide](http://google-styleguide.googlecode.com/svn/trunk/javascriptguide.xml).  No tabs, 2-space indents, etc.
 
 ## React-specific guidelines
