@@ -147,17 +147,19 @@ var Demos = React.createClass({
               height={250}
               title="Treemap"
               data={treemapData}
+              textColor="#484848"
+              fontColor="10px"
             />
           </div>
           <div className="col-md-6">
             <pre ref='block'>
               <code className='js'>
-              {'//2014 World Most Populous Countries (millions)\n//http://www.prb.org/pdf14/2014-world-population-data-sheet_eng.pdf\n var treemapData = [\n  {label: "China", value: 1364},\n  {label: "India", value: 1296},\n  {label: "United States", value: 318},\n  {label: "Indonesia", value: 251},\n  {label: "Brazil", value: 203}\n ];'}
+              {'//2014 World Most Populous Countries (millions)\n//http://www.prb.org/pdf14/2014-world-population-data-sheet_eng.pdf\n var treemapData = [\n  {label: "China", value: 1364},\n  {label: "India", value: 1296},\n...\n  {label: "Brazil", value: 203}\n ];'}
               </code>
             </pre>
             <pre ref='block'>
               <code className='html'>
-                {"<Treemap\n  data={treemapData}\n  width={450}\n  height={250}\n  title='Treemap'\n/>"}
+                {'<Treemap\n  data={treemapData}\n  width={450}\n  height={250}\n  textColor="#484848"\n  fontSize="10px"\n  title="Treemap"\n/>'}
               </code>
             </pre>
           </div>
