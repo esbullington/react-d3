@@ -6,6 +6,14 @@ var Chart = require('./common').Chart;
 var XAxis = React.createClass({
 
   componentWillReceiveProps: function(props) {
+    this._renderAxes(props);
+  },
+
+  componentDidMount: function() {
+    this._renderAxes(this.props);
+  },
+
+  _renderAxes: function(props) {
 
     var unit = props.xAxisTickInterval.unit;
     var interval = props.xAxisTickInterval.interval;
@@ -54,6 +62,14 @@ var XAxis = React.createClass({
 var YAxis = React.createClass({
 
   componentWillReceiveProps: function(props) {
+    this._renderAxes(props);
+  },
+
+  componentDidMount: function() {
+    this._renderAxes(this.props);
+  },
+
+  _renderAxes: function(props) {
 
     var yAxis = d3.svg.axis()
       .ticks(props.yAxisTickCount)
