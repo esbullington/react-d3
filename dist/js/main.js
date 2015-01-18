@@ -44398,7 +44398,7 @@ module.exports = warning;
 module.exports = require('./lib/React');
 
 },{"./lib/React":"/home/eric/repos/react-d3/node_modules/react/lib/React.js"}],"/home/eric/repos/react-d3/package.json":[function(require,module,exports){
-module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
   "name": "react-d3",
   "version": "0.0.13",
   "description": "ReactJS charts using d3",
@@ -44465,6 +44465,14 @@ var Chart = require('./common').Chart;
 var XAxis = React.createClass({displayName: "XAxis",
 
   componentWillReceiveProps: function(props) {
+    this._renderAxes(props);
+  },
+
+  componentDidMount: function() {
+    this._renderAxes(this.props);
+  },
+
+  _renderAxes: function(props) {
 
     var unit = props.xAxisTickInterval.unit;
     var interval = props.xAxisTickInterval.interval;
@@ -44513,6 +44521,14 @@ var XAxis = React.createClass({displayName: "XAxis",
 var YAxis = React.createClass({displayName: "YAxis",
 
   componentWillReceiveProps: function(props) {
+    this._renderAxes(props);
+  },
+
+  componentDidMount: function() {
+    this._renderAxes(this.props);
+  },
+
+  _renderAxes: function(props) {
 
     var yAxis = d3.svg.axis()
       .ticks(props.yAxisTickCount)
@@ -44718,9 +44734,15 @@ var Bar = React.createClass({displayName: "Bar",
 
 var XAxis = React.createClass({displayName: "XAxis",
 
+  componentDidMount: function() {
+    this._renderAxis(this.props);
+  },
 
   componentWillReceiveProps: function(props) {
+    this._renderAxis(props);
+  },
 
+  _renderAxis: function(props) {
     var xAxis = d3.svg.axis()
       .scale(props.xScale)
       .orient("bottom");
@@ -44763,8 +44785,15 @@ var XAxis = React.createClass({displayName: "XAxis",
 
 var YAxis = React.createClass({displayName: "YAxis",
 
-  componentWillReceiveProps: function(props) {
+  componentDidMount: function() {
+    this._renderAxis(this.props);
+  },
 
+  componentWillReceiveProps: function(props) {
+    this._renderAxis(props);
+  },
+
+  _renderAxis: function(props) {
     var yAxis = d3.svg.axis()
       .ticks(props.yAxisTickCount)
       .scale(props.yScale)
