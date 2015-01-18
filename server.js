@@ -4,14 +4,14 @@ var express = require('express');
 
 var app = express();
 
-app.use(express.static(__dirname + '/dist'));
+app.use(express.static(__dirname + '/dist/public'));
 
 app.get('/static', function(req, res) {
-  res.sendFile(__dirname + '/dist/barchart.html');
+  res.sendFile(__dirname + '/dist/public/barchart.html');
 });
 
 app.get('/', function(req, res) {
-  res.sendFile(__dirname + '/dist/index.html');
+  res.sendFile(__dirname + '/dist/public/index.html');
 });
 
 console.log('Listening on port ' + port);
