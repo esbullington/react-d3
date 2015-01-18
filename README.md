@@ -6,7 +6,7 @@ Modular ReactJS charts calculated with the help of d3.
 [![Build Status](https://travis-ci.org/esbullington/react-d3.svg?branch=master)](https://travis-ci.org/esbullington/react-d3)
 
 ### Version
-0.0.13
+0.1.0
 
 ### Chart types
 Current charts:
@@ -46,6 +46,19 @@ However, I've diverged a bit from this original vision and am storing a bit of s
 * Add optional animation to charts using ReactJS transitions
 * Demos galore
 * Documentation
+
+### Changelog
+
+####0.1.0:
+- Added treemap (Thanks @yang-wei!)
+- Restructured project for improved npm compatibility
+- Harmonized chart palettes
+- Fixed non-initial-render for charts with axes (contributions from @tarrencev and @unbracketed)
+- Improved documentation (contribution from @jeffriesen)
+- Improved chart APIs (contribution from @wookiehangover)
+
+####0.0.1:
+- Initial release with linechart, barchart and areachart follow in subsequent patch updates
 
 ### License
 MIT
