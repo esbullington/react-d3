@@ -1,0 +1,28 @@
+{
+  "name": "react-d3",
+  "version": "0.0.13",
+  "description": "ReactJS charts using d3",
+  "author": "Eric S. Bullington",
+  "homepage": "http://esbullington.github.io/react-d3/",
+  "keywords": [
+    "d3",
+    "react",
+    "charts",
+    "ReactJS",
+    "react-component"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "devDependencies": {
+    "browserify": "~6.3.3"
+  },
+  "dependencies": {
+    "d3": "^3.4.13",
+    "lodash": "^2.4.1",
+    "react": "^0.12.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/esbullington/react-d3.git"
+  }
+}
