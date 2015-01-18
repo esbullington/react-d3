@@ -7,7 +7,7 @@ var LineChart = require('../../src/linechart').LineChart;
 var PieChart = require('../../src/piechart').PieChart;
 var AreaChart = require('../../src/areachart').AreaChart;
 var Treemap = require('../../src/treemap').Treemap;
-var datagen = require('./datagen');
+var datagen = require('../../utils/datagen');
 var hljs = require("highlight.js");
 
 hljs.initHighlightingOnLoad();
