@@ -1,15 +1,15 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({"/home/eric/repos/react-d3/docs/examples/main.js":[function(require,module,exports){
 /** @jsx React.DOM */
 var React = require('react');
-var pkg = require('../../package.json');
 var d3 = require('d3');
-var BarChart = require('../../src/barchart').BarChart;
-var LineChart = require('../../src/linechart').LineChart;
-var PieChart = require('../../src/piechart').PieChart;
-var AreaChart = require('../../src/areachart').AreaChart;
-var Treemap = require('../../src/treemap').Treemap;
-var datagen = require('../../utils/datagen');
 var hljs = require("highlight.js");
+var datagen = require('../../utils/datagen');
+var rd3 = require('../../src');
+var BarChart = rd3.BarChart;
+var LineChart = rd3.LineChart;
+var PieChart = rd3.PieChart;
+var AreaChart = rd3.AreaChart;
+var Treemap = rd3.Treemap;
 
 hljs.initHighlightingOnLoad();
 
@@ -177,7 +177,7 @@ React.render(
   document.body
 );
 
-},{"../../package.json":"/home/eric/repos/react-d3/package.json","../../src/areachart":"/home/eric/repos/react-d3/src/areachart.js","../../src/barchart":"/home/eric/repos/react-d3/src/barchart.js","../../src/linechart":"/home/eric/repos/react-d3/src/linechart.js","../../src/piechart":"/home/eric/repos/react-d3/src/piechart.js","../../src/treemap":"/home/eric/repos/react-d3/src/treemap.js","../../utils/datagen":"/home/eric/repos/react-d3/utils/datagen.js","d3":"/home/eric/repos/react-d3/node_modules/d3/d3.js","highlight.js":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/index.js","react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/node_modules/d3/d3.js":[function(require,module,exports){
+},{"../../src":"/home/eric/repos/react-d3/src/index.js","../../utils/datagen":"/home/eric/repos/react-d3/utils/datagen.js","d3":"/home/eric/repos/react-d3/node_modules/d3/d3.js","highlight.js":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/index.js","react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/node_modules/d3/d3.js":[function(require,module,exports){
 !function() {
   var d3 = {
     version: "3.5.3"
@@ -44397,69 +44397,7 @@ module.exports = warning;
 },{"./emptyFunction":"/home/eric/repos/react-d3/node_modules/react/lib/emptyFunction.js"}],"/home/eric/repos/react-d3/node_modules/react/react.js":[function(require,module,exports){
 module.exports = require('./lib/React');
 
-},{"./lib/React":"/home/eric/repos/react-d3/node_modules/react/lib/React.js"}],"/home/eric/repos/react-d3/package.json":[function(require,module,exports){
-module.exports={
-  "name": "react-d3",
-  "version": "0.1.1",
-  "description": "ReactJS charts using d3",
-  "author": "Eric S. Bullington",
-  "homepage": "http://esbullington.github.io/react-d3/",
-  "keywords": [
-    "d3",
-    "react",
-    "charts",
-    "ReactJS",
-    "react-component"
-  ],
-  "license": "MIT",
-  "main": "src/index.js",
-  "devDependencies": {
-    "browserify": "~6.3.3",
-    "chai": "^1.10.0",
-    "express": "^4.10.4",
-    "glob": "^4.3.5",
-    "highlight.js": "^8.4.0",
-    "karma": "^0.12.28",
-    "karma-browserify": "^1.0.0",
-    "karma-chai": "^0.1.0",
-    "karma-chai-plugins": "^0.2.3",
-    "karma-chrome-launcher": "^0.1.5",
-    "karma-firefox-launcher": "^0.1.3",
-    "karma-mocha": "^0.1.9",
-    "karma-phantomjs-launcher": "^0.1.4",
-    "mocha": "^2.0.1",
-    "nodemon": "^1.2.1",
-    "reactify": "^0.17.1",
-    "uglifyjs": "^2.3.6",
-    "watchify": "^2.1.1"
-  },
-  "dependencies": {
-    "d3": "^3.4.13",
-    "lodash": "^2.4.1",
-    "react": "^0.12.1"
-  },
-  "scripts": {
-    "webpublish": "git subtree push --prefix dist/public origin gh-pages",
-    "watch": "watchify -o dist/public/js/main.js docs/examples/main.js & nodemon server.js",
-    "docs": "browserify -o dist/public/js/main.js docs/examples/main.js",
-    "minified": "NODE_ENV=production browserify --standalone react-d3 ./src/index.js | uglifyjs -c > dist/browser/react-d3.min.js",
-    "build": "mkdir -p ./build/cjs & cp *.md ./build/cjs & cp ./dist/cjs/* ./build/cjs & jsx ./src ./build/cjs",
-    "clean": "rm -f ./build/cjs/*.js",
-    "lint": "npm run build & jshint ./build/js",
-    "test": "./node_modules/karma/bin/karma start karma.conf.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/esbullington/react-d3.git"
-  },
-  "browserify": {
-    "transform": [
-      "reactify"
-    ]
-  }
-}
-
-},{}],"/home/eric/repos/react-d3/src/areachart.js":[function(require,module,exports){
+},{"./lib/React":"/home/eric/repos/react-d3/node_modules/react/lib/React.js"}],"/home/eric/repos/react-d3/src/areachart.js":[function(require,module,exports){
 /** @jsx React.DOM */
 var React = require('react');
 var d3 = require('d3');
@@ -44970,7 +44908,17 @@ exports.Chart = React.createClass({displayName: "Chart",
   }
 });
 
-},{"d3":"/home/eric/repos/react-d3/node_modules/d3/d3.js","react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/src/linechart.js":[function(require,module,exports){
+},{"d3":"/home/eric/repos/react-d3/node_modules/d3/d3.js","react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/src/index.js":[function(require,module,exports){
+var d3 = require('d3');
+var React = require('react');
+
+exports.BarChart = require('./barchart').BarChart;
+exports.LineChart = require('./linechart').LineChart;
+exports.PieChart = require('./piechart').PieChart;
+exports.AreaChart = require('./areachart').AreaChart;
+exports.Treemap = require('./treemap').Treemap;
+
+},{"./areachart":"/home/eric/repos/react-d3/src/areachart.js","./barchart":"/home/eric/repos/react-d3/src/barchart.js","./linechart":"/home/eric/repos/react-d3/src/linechart.js","./piechart":"/home/eric/repos/react-d3/src/piechart.js","./treemap":"/home/eric/repos/react-d3/src/treemap.js","d3":"/home/eric/repos/react-d3/node_modules/d3/d3.js","react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/src/linechart.js":[function(require,module,exports){
 /** @jsx React.DOM */
 var React = require('react');
 var d3 = require('d3');
