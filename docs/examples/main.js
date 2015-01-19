@@ -1,14 +1,14 @@
 /** @jsx React.DOM */
 var React = require('react');
-var pkg = require('../../package.json');
 var d3 = require('d3');
-var BarChart = require('../../src/barchart').BarChart;
-var LineChart = require('../../src/linechart').LineChart;
-var PieChart = require('../../src/piechart').PieChart;
-var AreaChart = require('../../src/areachart').AreaChart;
-var Treemap = require('../../src/treemap').Treemap;
-var datagen = require('../../utils/datagen');
 var hljs = require("highlight.js");
+var datagen = require('../../utils/datagen');
+var rd3 = require('../../src');
+var BarChart = rd3.BarChart;
+var LineChart = rd3.LineChart;
+var PieChart = rd3.PieChart;
+var AreaChart = rd3.AreaChart;
+var Treemap = rd3.Treemap;
 
 hljs.initHighlightingOnLoad();
 
