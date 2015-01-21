@@ -6,7 +6,7 @@ Modular ReactJS charts calculated with the help of d3.
 [![Build Status](https://travis-ci.org/esbullington/react-d3.svg?branch=master)](https://travis-ci.org/esbullington/react-d3)
 
 ### Version
-0.1.1
+0.1.2
 
 ### Chart types
 Current charts:
