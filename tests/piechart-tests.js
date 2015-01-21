@@ -7,7 +7,6 @@ describe('PieChart', function() {
   it('renders piechart', function() {
     var React = require('react/addons');
     var PieChart = require('../src/piechart.js').PieChart;
-    var Arc = require('../src/piechart.js').Arc;
     var generatePartsOfWhole = require('../utils/datagen').generatePartsOfWhole;;
     var TestUtils = React.addons.TestUtils;
 

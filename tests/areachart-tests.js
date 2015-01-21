@@ -6,7 +6,6 @@ describe('AreaChart', function() {
   it('renders areachart', function() {
     var React = require('react/addons');
     var AreaChart = require('../src/areachart.js').AreaChart;
-    var Area = require('../src/areachart.js').Area;
     var generate = require('../utils/datagen').generateArrayOfNumbers;
     var TestUtils = React.addons.TestUtils;
 
