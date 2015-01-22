@@ -1,8 +1,10 @@
 /** @jsx React.DOM */
 var React = require('react');
 var d3 = require('d3');
-var Chart = require('./common').Chart;
-
+var common = require('./common');
+var Chart = common.Chart;
+var XAxis = common.XAxis;
+var YAxis = common.YAxis;
 
 var Line = React.createClass({
 
@@ -62,110 +64,6 @@ var Circle = React.createClass({
 
 });
 
-var XAxis = React.createClass({
-
-  componentWillReceiveProps: function(props) {
-    this._renderAxis(props);
-  },
-
-  render: function() {
-    var t = "translate(0," + this.props.height + ")"
-    return (
-      <g
-        ref='linexaxis'
-        className="linex axis"
-        transform={t}
-      >
-      </g>
-    );
-  },
-
-  componentDidMount: function() {
-    this._renderAxis(this.props);
-  },
-
-  _renderAxis: function(props) {
-    var xAxis = d3.svg.axis()
-      .scale(props.scaleX)
-      .orient("bottom");
-
-    var node = this.refs.linexaxis.getDOMNode();
-
-    d3.select(node)
-      .attr("class", "linex axis")
-      .style("fill", props.color)
-      .call(xAxis);
-
-    // Style each of the tick lines
-    var lineXAxis = d3.select('.linex.axis')
-      .selectAll('line')
-      .attr("shape-rendering", "crispEdges")
-      .attr("stroke", props.color);
-
-    // Style the main axis line
-    d3.select('.linex.axis')
-      .select('path')
-      .attr("shape-rendering", "crispEdges")
-      .attr("fill", "none")
-      .attr("stroke", props.color)
-      .attr("stroke-width", "1");
-
-    // Hides the x axis origin
-    d3.selectAll(".linex.axis g:first-child").style("opacity","0");
-  }
-
-});
-
-
-var YAxis = React.createClass({
-
-  componentWillReceiveProps: function(props) {
-    this._renderAxis(props);
-  },
-
-  render: function() {
-    return (
-      <g
-        ref='lineyaxis'
-        className="liney axis"
-      >
-      </g>
-    );
-  },
-
-  componentDidMount: function() {
-    this._renderAxis(this.props);
-  },
-
-  _renderAxis: function(props) {
-    var yAxis = d3.svg.axis()
-      .ticks(props.yAxisTickCount)
-      .scale(props.scaleY)
-      .orient("left");
-
-    var node = this.refs.lineyaxis.getDOMNode();
-
-    d3.select(node)
-      .attr("class", "liney axis")
-      .style("fill", props.color)
-      .call(yAxis);
-
-    // Style each of the tick lines
-    d3.selectAll('.liney.axis')
-      .selectAll('line')
-      .attr("shape-rendering", "crispEdges")
-      .attr("stroke", props.color);
-
-    // Style the main axis line
-    d3.selectAll('.liney.axis')
-      .select('path')
-      .attr("shape-rendering", "crispEdges")
-      .attr("fill", "none")
-      .attr("stroke", props.color)
-  }
-
-});
-
 var DataSeries = React.createClass({
 
   propTypes: {
@@ -186,17 +84,17 @@ var DataSeries = React.createClass({
     var self = this;
     var interpolatePath = d3.svg.line()
         .x(function(d) {
-          return self.props.scaleX(d.x);
+          return self.props.xScale(d.x);
         })
         .y(function(d) {
-          return self.props.scaleY(d.y);
+          return self.props.yScale(d.y);
         })
         .interpolate(this.props.interpolate);
 
     var circles = [];
 
     this.props.data.forEach(function(point, i) {
-      circles.push(<Circle cx={this.props.scaleX(point.x)} cy={this.props.scaleY(point.y)} r={this.props.pointRadius} fill={this.props.color} key={this.props.seriesName + i} />);
+      circles.push(<Circle cx={this.props.xScale(point.x)} cy={this.props.yScale(point.y)} r={this.props.pointRadius} fill={this.props.color} key={this.props.seriesName + i} />);
     }.bind(this));
 
     return (
@@ -254,8 +152,8 @@ var LineChart = React.createClass({
       if (this.props.data.hasOwnProperty(seriesName)) {
         dataSeriesArray.push(
             <DataSeries
-              scaleX={this.state.scaleX}
-              scaleY={this.state.scaleY}
+              xScale={this.state.xScale}
+              yScale={this.state.yScale}
               seriesName={seriesName}
               data={this.props.data[seriesName]}
               width={this.state.chartWidth}
@@ -276,20 +174,24 @@ var LineChart = React.createClass({
         <g transform={trans}>
           {dataSeriesArray}
           <YAxis
-            scaleY={this.state.scaleY}
+            yAxisClassName="line y axis"
+            yScale={this.state.yScale}
             margins={this.props.margins}
             yAxisTickCount={this.props.yAxisTickCount}
             width={this.state.chartWidth}
             height={this.state.chartHeight}
-            color={this.props.axesColor}
+            stroke={this.props.axesColor}
           />
           <XAxis
-            scaleX={this.state.scaleX}
+            xAxisClassName="line x axis"
+            strokeWidth="1"
+            hideOrigin={true}
+            xScale={this.state.xScale}
             data={this.props.data}
             margins={this.props.margins}
             width={this.state.chartWidth}
             height={this.state.chartHeight}
-            color={this.props.axesColor}
+            stroke={this.props.axesColor}
           />
         </g>
       </Chart>
@@ -317,19 +219,19 @@ var LineChart = React.createClass({
     var chartWidth = this.props.width - this.props.margins.left - this.props.margins.right;
     var chartHeight = this.props.height - this.props.margins.top - this.props.margins.bottom;
 
-    var scaleX = d3.scale.linear()
+    var xScale = d3.scale.linear()
       .domain([0, maxX])
       .range([0, chartWidth]);
 
-    var scaleY = d3.scale.linear()
+    var yScale = d3.scale.linear()
       .domain([0, maxY])
       .range([chartHeight, 0]);
 
     this.setState({
       maxX: maxX,
       maxY: maxY,
-      scaleX: scaleX,
-      scaleY: scaleY,
+      xScale: xScale,
+      yScale: yScale,
       chartWidth: chartWidth,
       chartHeight: chartHeight
     })
