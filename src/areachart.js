@@ -1,114 +1,10 @@
 /** @jsx React.DOM */
 var React = require('react');
 var d3 = require('d3');
-var Chart = require('./common').Chart;
-
-var XAxis = React.createClass({
-
-  componentWillReceiveProps: function(props) {
-    this._renderAxes(props);
-  },
-
-  componentDidMount: function() {
-    this._renderAxes(this.props);
-  },
-
-  _renderAxes: function(props) {
-
-    var unit = props.xAxisTickInterval.unit;
-    var interval = props.xAxisTickInterval.interval;
-
-    var xAxis = d3.svg.axis()
-      .ticks(d3.time[unit], interval)
-      .scale(props.xScale)
-      .orient("bottom");
-
-    var node = this.refs.xaxis.getDOMNode();
-
-    d3.select(node)
-      .attr("class", "x axis")
-      .call(xAxis);
-
-    // Style each of the tick lines
-    d3.select('.x.axis')
-      .selectAll('line')
-      .attr("shape-rendering", "crispEdges")
-      .attr("stroke", "#000");
-
-    // Style the main axis line
-    d3.select('.x.axis')
-      .select('path')
-      .attr("shape-rendering", "crispEdges")
-      .attr("fill", "none")
-      .attr("stroke", "#000")
-
-  },
-
-  render: function() {
-    var t = "translate(0," + this.props.height + ")";
-    return (
-      <g
-        ref='xaxis'
-        className="x axis"
-        transform={t}
-      >
-      </g>
-    );
-  }
-
-});
-
-
-var YAxis = React.createClass({
-
-  componentWillReceiveProps: function(props) {
-    this._renderAxes(props);
-  },
-
-  componentDidMount: function() {
-    this._renderAxes(this.props);
-  },
-
-  _renderAxes: function(props) {
-
-    var yAxis = d3.svg.axis()
-      .ticks(props.yAxisTickCount)
-      .scale(props.yScale)
-      .orient("left");
-
-    var node = this.refs.yaxis.getDOMNode();
-
-    d3.select(node)
-      .attr("class", "y axis")
-      .call(yAxis);
-
-    // Style each of the tick lines
-    d3.selectAll('.y.axis')
-      .selectAll('line')
-      .attr("shape-rendering", "crispEdges")
-      .attr("stroke", "#000");
-
-    // Style the main axis line
-    d3.selectAll('.y.axis')
-      .select('path')
-      .attr("shape-rendering", "crispEdges")
-      .attr("fill", "none")
-      .attr("stroke", "#000")
-
-  },
-
-  render: function() {
-    return (
-      <g
-        ref='yaxis'
-        className="y axis"
-      >
-      </g>
-    );
-  }
-
-});
-
+var common = require('./common');
+var Chart = common.Chart;
+var XAxis = common.XAxis;
+var YAxis = common.YAxis;
 
 var Area = React.createClass({
 
@@ -129,7 +25,7 @@ var Area = React.createClass({
 
     return (
       <path
-        className="area"
+        className="area-path"
         d={this.props.path}
         fill={this.props.fill}
       />
@@ -215,6 +111,7 @@ var AreaChart = React.createClass({
             height={this.props.height}
           />
           <XAxis
+            xAxisClassName="area x axis"
             xScale={xScale}
             xAxisTickInterval={this.props.xAxisTickInterval}
             margin={margin}
@@ -222,6 +119,7 @@ var AreaChart = React.createClass({
             height={this.props.height}
           />
           <YAxis
+            yAxisClassName="area y axis"
             yScale={yScale}
             margin={margin}
             yAxisTickCount={this.props.yAxisTickCount}

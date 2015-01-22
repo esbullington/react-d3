@@ -1,7 +1,10 @@
 /** @jsx React.DOM */
 var React = require('react');
 var d3 = require('d3');
-var Chart = require('./common').Chart;
+var common = require('./common');
+var Chart = common.Chart;
+var XAxis = common.XAxis;
+var YAxis = common.YAxis;
 var _ = require('lodash');
 
 
@@ -31,106 +34,6 @@ var Bar = React.createClass({
       />
     );
   }
-});
-
-var XAxis = React.createClass({
-
-  componentDidMount: function() {
-    this._renderAxis(this.props);
-  },
-
-  componentWillReceiveProps: function(props) {
-    this._renderAxis(props);
-  },
-
-  _renderAxis: function(props) {
-    var xAxis = d3.svg.axis()
-      .scale(props.xScale)
-      .orient("bottom");
-
-    var node = this.refs.barxaxis.getDOMNode();
-
-    d3.select(node)
-      .attr("class", "barx axis")
-      .call(xAxis);
-
-    // Style each of the tick lines
-    d3.select('.barx.axis')
-      .selectAll('line')
-      .attr("shape-rendering", "crispEdges")
-      .attr("stroke", "#000");
-
-    // Style the main axis line
-    d3.select('.barx.axis')
-      .select('path')
-      .attr("shape-rendering", "crispEdges")
-      .attr("fill", "none")
-      .attr("stroke", "none")
-
-  },
-
-  render: function() {
-    var t = "translate(0," + this.props.height + ")"
-    return (
-      <g
-        ref='barxaxis'
-        className="barx axis"
-        transform={t}
-      >
-      </g>
-    );
-  }
-
-});
-
-
-var YAxis = React.createClass({
-
-  componentDidMount: function() {
-    this._renderAxis(this.props);
-  },
-
-  componentWillReceiveProps: function(props) {
-    this._renderAxis(props);
-  },
-
-  _renderAxis: function(props) {
-    var yAxis = d3.svg.axis()
-      .ticks(props.yAxisTickCount)
-      .scale(props.yScale)
-      .orient("left");
-
-    var node = this.refs.baryaxis.getDOMNode();
-
-    d3.select(node)
-      .attr("class", "bary axis")
-      .call(yAxis);
-
-    // Style each of the tick lines
-    d3.selectAll('.bary.axis')
-      .selectAll('line')
-      .attr("shape-rendering", "crispEdges")
-      .attr("stroke", "#000");
-
-    // Style the main axis line
-    d3.selectAll('.bary.axis')
-      .select('path')
-      .attr("shape-rendering", "crispEdges")
-      .attr("fill", "none")
-      .attr("stroke", "#000")
-
-  },
-
-  render: function() {
-    return (
-      <g
-        ref='baryaxis'
-        className="bary axis"
-      >
-      </g>
-    );
-  }
-
 });
 
 var DataSeries = React.createClass({
@@ -229,6 +132,7 @@ var BarChart = React.createClass({
             fill={this.props.fill}
           />
           <YAxis
+            yAxisClassName="bar y axis"
             yScale={yScale}
             margins={margins}
             yAxisTickCount={this.props.yAxisTickCount}
@@ -236,6 +140,7 @@ var BarChart = React.createClass({
             height={this.props.height - topBottomMargins}
           />
           <XAxis
+            xAxisClassName="bar x axis"
             xScale={xScale}
             data={this.props.data}
             margins={margins}

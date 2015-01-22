@@ -17,7 +17,7 @@ describe('AreaChart', function() {
 
     // Verify that it has the same number of areas as the array's length
     var area = TestUtils.findRenderedDOMComponentWithClass(
-      areachart, 'area');
+      areachart, 'area-path');
     expect(area.props.d).to.exist;
   });
 });
