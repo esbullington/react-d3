@@ -39,7 +39,7 @@ var Cell = React.createClass({
           {this.props.label}
         </text>
       </g>
-    )
+    );
   }
 });
 
@@ -55,7 +55,7 @@ var DataSeries = React.createClass({
       data: [],
       value: 'value',
       label: 'label'
-    } 
+    };
   },
 
   render: function() {
@@ -68,10 +68,10 @@ var DataSeries = React.createClass({
 
     var treemap = d3.layout.treemap()
                     // make sure calculation loop through all objects inside array 
-                    .children(function(d) { return d })
+                    .children(function(d) { return d; })
                     .size([this.props.width, this.props.height])
                     .sticky(true)
-                    .value(function(d) { return d[value] });
+                    .value(function(d) { return d[value]; });
     
     var cells = treemap(data).map(function(node, i) {
       return (
@@ -91,7 +91,7 @@ var DataSeries = React.createClass({
       <g transform={this.props.transform} className='treemap'>
         {cells}
       </g>
-    )
+    );
   }
 
 });
@@ -120,7 +120,7 @@ var Treemap = React.createClass({
       title: '',
       textColor: '#f7f7f7',
       fontSize: '0.65em'
-    } 
+    };
   },
 
   render: function() {

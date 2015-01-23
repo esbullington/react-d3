@@ -21,7 +21,7 @@ var Bar = React.createClass({
   getDefaultProps: function() {
     return {
       offset: 0
-    }
+    };
   },
 
   render: function() {
@@ -52,7 +52,7 @@ var DataSeries = React.createClass({
     return {
       padding: 0.1,
       data: []
-    }
+    };
   },
 
   render: function() {
@@ -65,7 +65,7 @@ var DataSeries = React.createClass({
     var bars = props.values.map(function(point, i) {
       return (
         <Bar height={props.yScale(0) - props.yScale(point)} width={xScale.rangeBand()} offset={xScale(i)} availableHeight={props.height} fill={props.fill} key={i} />
-      )
+      );
     });
 
     return (
@@ -95,7 +95,7 @@ var BarChart = React.createClass({
       margins: {top: 20, right: 30, bottom: 30, left: 30},
       fill: "#3182bd",
       title: ''
-    }
+    };
   },
 
   render: function() {

@@ -19,7 +19,7 @@ var Area = React.createClass({
   getDefaultProps: function() {
     return {
       fill: 'steelblue'
-    }
+    };
   },
 
   render: function() {
@@ -51,7 +51,7 @@ var DataSeries = React.createClass({
 
     return (
       <Area path={path} />
-    )
+    );
   }
 
 });
@@ -75,7 +75,7 @@ var AreaChart = React.createClass({
       width: 400,
       height: 200,
       title: ''
-    }
+    };
   },
 
   render: function() {
@@ -85,12 +85,12 @@ var AreaChart = React.createClass({
     var xScale = d3.time.scale()
       .range([0, props.width]);
 
-    xScale.domain(d3.extent(props.data, function(d) { return d.date; }))
+    xScale.domain(d3.extent(props.data, function(d) { return d.date; }));
 
     var yScale = d3.scale.linear()
       .range([props.height, 0]);
 
-    yScale.domain([0, d3.max(props.data, function(d) { return d.value; })])
+    yScale.domain([0, d3.max(props.data, function(d) { return d.value; })]);
 
     var margin = {top: 20, right: 20, bottom: 30, left: 50};
 

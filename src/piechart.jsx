@@ -12,7 +12,7 @@ var Arc = React.createClass({
     return {
       labelTextFill: "black",
       valueTextFill: "white"
-    }
+    };
   },
 
   propTypes: {
@@ -102,7 +102,7 @@ var DataSeries = React.createClass({
       innerRadius: 0,
       data: [],
       color: d3.scale.category20c()
-    }
+    };
   },
 
   render: function() {
@@ -132,7 +132,7 @@ var DataSeries = React.createClass({
           key={i}
           width={props.width}
         />
-      )
+      );
     });
     return (
       <g className="pie-group" transform={this.props.transform} >{arcs}</g>
@@ -145,7 +145,7 @@ var PieChart = React.createClass({
   getDefaultProps: function() {
     return {
       title: ''
-    }
+    };
   },
 
   propTypes: {
@@ -160,9 +160,9 @@ var PieChart = React.createClass({
 
   render: function() {
     var props = this.props;
-    var transform = "translate("
-      + (this.props.cx || this.props.width/2) + ","
-      + (this.props.cy || this.props.height/2) + ")";
+    var transform = "translate(" +
+      (this.props.cx || this.props.width/2) + "," +
+      (this.props.cy || this.props.height/2) + ")";
     var data = _.pluck(this.props.data, 'value');
     var labels = _.pluck(this.props.data, 'label');
     return (
