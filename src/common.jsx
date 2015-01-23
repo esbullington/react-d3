@@ -61,7 +61,7 @@ exports.XAxis = React.createClass({
       xAxis.ticks(props.xAxisTickCount);
     }
 
-    xAxisClassSelect = props.xAxisClassName.replace(/ /g, '.');
+    var xAxisClassSelect = props.xAxisClassName.replace(/ /g, '.');
 
     if (xAxisClassSelect[0] != '.') {
       xAxisClassSelect = '.' + xAxisClassSelect;
@@ -155,7 +155,7 @@ exports.YAxis = React.createClass({
       yAxis.ticks(d3.time[props.yAxisTickInterval.unit], props.yAxisTickInterval.interval);
     }
 
-    yAxisClassSelect = props.yAxisClassName.replace(/ /g, '.');
+    var yAxisClassSelect = props.yAxisClassName.replace(/ /g, '.');
 
     if (yAxisClassSelect[0] != '.') {
       yAxisClassSelect = '.' + yAxisClassSelect;

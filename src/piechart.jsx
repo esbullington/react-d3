@@ -26,7 +26,7 @@ var Arc = React.createClass({
 
   render: function() {
     // transform={"translate(" + arc.centroid() + ")"}
-    props = this.props;
+    var props = this.props;
     var arc = d3.svg.arc()
       .innerRadius(props.innerRadius)
       .outerRadius(props.outerRadius)
