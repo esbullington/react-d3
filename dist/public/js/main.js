@@ -44397,118 +44397,15 @@ module.exports = warning;
 },{"./emptyFunction":"/home/eric/repos/react-d3/node_modules/react/lib/emptyFunction.js"}],"/home/eric/repos/react-d3/node_modules/react/react.js":[function(require,module,exports){
 module.exports = require('./lib/React');
 
-},{"./lib/React":"/home/eric/repos/react-d3/node_modules/react/lib/React.js"}],"/home/eric/repos/react-d3/src/areachart.js":[function(require,module,exports){
-/** @jsx React.DOM */
+},{"./lib/React":"/home/eric/repos/react-d3/node_modules/react/lib/React.js"}],"/home/eric/repos/react-d3/src/areachart.jsx":[function(require,module,exports){
+'use strict';
+
 var React = require('react');
 var d3 = require('d3');
-var Chart = require('./common').Chart;
-
-var XAxis = React.createClass({displayName: "XAxis",
-
-  componentWillReceiveProps: function(props) {
-    this._renderAxes(props);
-  },
-
-  componentDidMount: function() {
-    this._renderAxes(this.props);
-  },
-
-  _renderAxes: function(props) {
-
-    var unit = props.xAxisTickInterval.unit;
-    var interval = props.xAxisTickInterval.interval;
-
-    var xAxis = d3.svg.axis()
-      .ticks(d3.time[unit], interval)
-      .scale(props.xScale)
-      .orient("bottom");
-
-    var node = this.refs.xaxis.getDOMNode();
-
-    d3.select(node)
-      .attr("class", "x axis")
-      .call(xAxis);
-
-    // Style each of the tick lines
-    d3.select('.x.axis')
-      .selectAll('line')
-      .attr("shape-rendering", "crispEdges")
-      .attr("stroke", "#000");
-
-    // Style the main axis line
-    d3.select('.x.axis')
-      .select('path')
-      .attr("shape-rendering", "crispEdges")
-      .attr("fill", "none")
-      .attr("stroke", "#000")
-
-  },
-
-  render: function() {
-    var t = "translate(0," + this.props.height + ")";
-    return (
-      React.createElement("g", {
-        ref: "xaxis", 
-        className: "x axis", 
-        transform: t
-      }
-      )
-    );
-  }
-
-});
-
-
-var YAxis = React.createClass({displayName: "YAxis",
-
-  componentWillReceiveProps: function(props) {
-    this._renderAxes(props);
-  },
-
-  componentDidMount: function() {
-    this._renderAxes(this.props);
-  },
-
-  _renderAxes: function(props) {
-
-    var yAxis = d3.svg.axis()
-      .ticks(props.yAxisTickCount)
-      .scale(props.yScale)
-      .orient("left");
-
-    var node = this.refs.yaxis.getDOMNode();
-
-    d3.select(node)
-      .attr("class", "y axis")
-      .call(yAxis);
-
-    // Style each of the tick lines
-    d3.selectAll('.y.axis')
-      .selectAll('line')
-      .attr("shape-rendering", "crispEdges")
-      .attr("stroke", "#000");
-
-    // Style the main axis line
-    d3.selectAll('.y.axis')
-      .select('path')
-      .attr("shape-rendering", "crispEdges")
-      .attr("fill", "none")
-      .attr("stroke", "#000")
-
-  },
-
-  render: function() {
-    return (
-      React.createElement("g", {
-        ref: "yaxis", 
-        className: "y axis"
-      }
-      )
-    );
-  }
-
-});
-
+var common = require('./common');
+var Chart = common.Chart;
+var XAxis = common.XAxis;
+var YAxis = common.YAxis;
 
 var Area = React.createClass({displayName: "Area",
 
@@ -44521,15 +44418,15 @@ var Area = React.createClass({displayName: "Area",
 
   getDefaultProps: function() {
     return {
-      fill: 'steelblue'
-    }
+      fill: '#3182bd'
+    };
   },
 
   render: function() {
 
     return (
       React.createElement("path", {
-        className: "area", 
+        className: "area-path", 
         d: this.props.path, 
         fill: this.props.fill}
       )
@@ -44554,7 +44451,7 @@ var DataSeries = React.createClass({displayName: "DataSeries",
 
     return (
       React.createElement(Area, {path: path})
-    )
+    );
   }
 
 });
@@ -44578,7 +44475,7 @@ var AreaChart = React.createClass({displayName: "AreaChart",
       width: 400,
       height: 200,
       title: ''
-    }
+    };
   },
 
   render: function() {
@@ -44588,12 +44485,12 @@ var AreaChart = React.createClass({displayName: "AreaChart",
     var xScale = d3.time.scale()
       .range([0, props.width]);
 
-    xScale.domain(d3.extent(props.data, function(d) { return d.date; }))
+    xScale.domain(d3.extent(props.data, function(d) { return d.date; }));
 
     var yScale = d3.scale.linear()
       .range([props.height, 0]);
 
-    yScale.domain([0, d3.max(props.data, function(d) { return d.value; })])
+    yScale.domain([0, d3.max(props.data, function(d) { return d.value; })]);
 
     var margin = {top: 20, right: 20, bottom: 30, left: 50};
 
@@ -44615,6 +44512,7 @@ var AreaChart = React.createClass({displayName: "AreaChart",
             height: this.props.height}
           ), 
           React.createElement(XAxis, {
+            xAxisClassName: "area x axis", 
             xScale: xScale, 
             xAxisTickInterval: this.props.xAxisTickInterval, 
             margin: margin, 
@@ -44622,6 +44520,7 @@ var AreaChart = React.createClass({displayName: "AreaChart",
             height: this.props.height}
           ), 
           React.createElement(YAxis, {
+            yAxisClassName: "area y axis", 
             yScale: yScale, 
             margin: margin, 
             yAxisTickCount: this.props.yAxisTickCount, 
@@ -44637,11 +44536,15 @@ var AreaChart = React.createClass({displayName: "AreaChart",
 
 exports.AreaChart = AreaChart;
 
-},{"./common":"/home/eric/repos/react-d3/src/common.js","d3":"/home/eric/repos/react-d3/node_modules/d3/d3.js","react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/src/barchart.js":[function(require,module,exports){
-/** @jsx React.DOM */
+},{"./common":"/home/eric/repos/react-d3/src/common.jsx","d3":"/home/eric/repos/react-d3/node_modules/d3/d3.js","react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/src/barchart.jsx":[function(require,module,exports){
+'use strict';
+
 var React = require('react');
 var d3 = require('d3');
-var Chart = require('./common').Chart;
+var common = require('./common');
+var Chart = common.Chart;
+var XAxis = common.XAxis;
+var YAxis = common.YAxis;
 var _ = require('lodash');
 
 
@@ -44657,7 +44560,7 @@ var Bar = React.createClass({displayName: "Bar",
   getDefaultProps: function() {
     return {
       offset: 0
-    }
+    };
   },
 
   render: function() {
@@ -44671,106 +44574,6 @@ var Bar = React.createClass({displayName: "Bar",
       )
     );
   }
-});
-
-var XAxis = React.createClass({displayName: "XAxis",
-
-  componentDidMount: function() {
-    this._renderAxis(this.props);
-  },
-
-  componentWillReceiveProps: function(props) {
-    this._renderAxis(props);
-  },
-
-  _renderAxis: function(props) {
-    var xAxis = d3.svg.axis()
-      .scale(props.xScale)
-      .orient("bottom");
-
-    var node = this.refs.barxaxis.getDOMNode();
-
-    d3.select(node)
-      .attr("class", "barx axis")
-      .call(xAxis);
-
-    // Style each of the tick lines
-    d3.select('.barx.axis')
-      .selectAll('line')
-      .attr("shape-rendering", "crispEdges")
-      .attr("stroke", "#000");
-
-    // Style the main axis line
-    d3.select('.barx.axis')
-      .select('path')
-      .attr("shape-rendering", "crispEdges")
-      .attr("fill", "none")
-      .attr("stroke", "none")
-
-  },
-
-  render: function() {
-    var t = "translate(0," + this.props.height + ")"
-    return (
-      React.createElement("g", {
-        ref: "barxaxis", 
-        className: "barx axis", 
-        transform: t
-      }
-      )
-    );
-  }
-
-});
-
-
-var YAxis = React.createClass({displayName: "YAxis",
-
-  componentDidMount: function() {
-    this._renderAxis(this.props);
-  },
-
-  componentWillReceiveProps: function(props) {
-    this._renderAxis(props);
-  },
-
-  _renderAxis: function(props) {
-    var yAxis = d3.svg.axis()
-      .ticks(props.yAxisTickCount)
-      .scale(props.yScale)
-      .orient("left");
-
-    var node = this.refs.baryaxis.getDOMNode();
-
-    d3.select(node)
-      .attr("class", "bary axis")
-      .call(yAxis);
-
-    // Style each of the tick lines
-    d3.selectAll('.bary.axis')
-      .selectAll('line')
-      .attr("shape-rendering", "crispEdges")
-      .attr("stroke", "#000");
-
-    // Style the main axis line
-    d3.selectAll('.bary.axis')
-      .select('path')
-      .attr("shape-rendering", "crispEdges")
-      .attr("fill", "none")
-      .attr("stroke", "#000")
-
-  },
-
-  render: function() {
-    return (
-      React.createElement("g", {
-        ref: "baryaxis", 
-        className: "bary axis"
-      }
-      )
-    );
-  }
-
 });
 
 var DataSeries = React.createClass({displayName: "DataSeries",
@@ -44788,7 +44591,7 @@ var DataSeries = React.createClass({displayName: "DataSeries",
     return {
       padding: 0.1,
       data: []
-    }
+    };
   },
 
   render: function() {
@@ -44801,7 +44604,7 @@ var DataSeries = React.createClass({displayName: "DataSeries",
     var bars = props.values.map(function(point, i) {
       return (
         React.createElement(Bar, {height: props.yScale(0) - props.yScale(point), width: xScale.rangeBand(), offset: xScale(i), availableHeight: props.height, fill: props.fill, key: i})
-      )
+      );
     });
 
     return (
@@ -44831,7 +44634,7 @@ var BarChart = React.createClass({displayName: "BarChart",
       margins: {top: 20, right: 30, bottom: 30, left: 30},
       fill: "#3182bd",
       title: ''
-    }
+    };
   },
 
   render: function() {
@@ -44869,6 +44672,7 @@ var BarChart = React.createClass({displayName: "BarChart",
             fill: this.props.fill}
           ), 
           React.createElement(YAxis, {
+            yAxisClassName: "bar y axis", 
             yScale: yScale, 
             margins: margins, 
             yAxisTickCount: this.props.yAxisTickCount, 
@@ -44876,6 +44680,7 @@ var BarChart = React.createClass({displayName: "BarChart",
             height: this.props.height - topBottomMargins}
           ), 
           React.createElement(XAxis, {
+            xAxisClassName: "bar x axis", 
             xScale: xScale, 
             data: this.props.data, 
             margins: margins, 
@@ -44891,8 +44696,9 @@ var BarChart = React.createClass({displayName: "BarChart",
 
 exports.BarChart = BarChart;
 
-},{"./common":"/home/eric/repos/react-d3/src/common.js","d3":"/home/eric/repos/react-d3/node_modules/d3/d3.js","lodash":"/home/eric/repos/react-d3/node_modules/lodash/dist/lodash.js","react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/src/common.js":[function(require,module,exports){
-/** @jsx React.DOM */
+},{"./common":"/home/eric/repos/react-d3/src/common.jsx","d3":"/home/eric/repos/react-d3/node_modules/d3/d3.js","lodash":"/home/eric/repos/react-d3/node_modules/lodash/dist/lodash.js","react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/src/common.jsx":[function(require,module,exports){
+'use strict';
+
 var React = require('react');
 var d3 = require('d3');
 
@@ -44908,6 +44714,186 @@ exports.Chart = React.createClass({displayName: "Chart",
   }
 });
 
+exports.XAxis = React.createClass({displayName: "XAxis",
+
+  propTypes: {
+    xAxisClassName: React.PropTypes.string.isRequired,
+    orient: React.PropTypes.oneOf(['top', 'bottom']),
+    xScale: React.PropTypes.func.isRequired,
+    height: React.PropTypes.number.isRequired,
+    fill: React.PropTypes.string,
+    stroke: React.PropTypes.string,
+    tickStroke: React.PropTypes.string,
+    strokeWidth: React.PropTypes.string,
+    hideOrigin: React.PropTypes.bool
+  },
+
+  getDefaultProps: function() {
+    return {
+      xAxisClassName: 'x axis',
+      orient: 'bottom',
+      fill: "none",
+      stroke: "none",
+      tickStroke: "#000",
+      strokeWidth: "none",
+      hideOrigin: false
+    };
+  },
+
+
+  componentDidMount: function() {
+    this._renderAxis(this.props);
+  },
+
+  componentWillReceiveProps: function(props) {
+    this._renderAxis(props);
+  },
+
+  _renderAxis: function(props) {
+    var xAxis = d3.svg.axis()
+      .scale(props.xScale)
+      .orient("bottom");
+
+    if (props.xAxisTickInterval) {
+      xAxis.ticks(d3.time[props.xAxisTickInterval.unit], props.xAxisTickInterval.interval);
+    } else if (props.xAxisTickCount) {
+      xAxis.ticks(props.xAxisTickCount);
+    }
+
+    var xAxisClassSelect = props.xAxisClassName.replace(/ /g, '.');
+
+    if (xAxisClassSelect[0] != '.') {
+      xAxisClassSelect = '.' + xAxisClassSelect;
+    }
+
+    var node = this.refs.xaxis.getDOMNode();
+
+    d3.select(node)
+      .attr("class", props.xAxisClassName)
+      .call(xAxis);
+
+    // Style each of the tick lines
+    d3.select(xAxisClassSelect)
+      .selectAll('line')
+      .attr("shape-rendering", "crispEdges")
+      .attr("stroke", props.tickStroke);
+
+    // Style the main axis line
+    d3.select(xAxisClassSelect)
+      .select('path')
+      .attr("shape-rendering", "crispEdges")
+      .attr("fill", props.fill)
+      .attr("stroke", props.stroke)
+      .attr("stroke-width", props.strokeWidth);
+
+    if (props.hideOrigin) {
+      // Hack to hide the x axis origin
+      var originSelect = xAxisClassSelect + ' g:first-child';
+      d3.selectAll(originSelect).style("opacity","0");
+    }
+
+  },
+
+  render: function() {
+    var props = this.props;
+    var t = "translate(0," + props.height + ")";
+    return (
+      React.createElement("g", {
+        ref: "xaxis", 
+        className: props.xAxisClassName, 
+        transform: t
+      }
+      )
+    );
+  }
+
+});
+
+
+exports.YAxis = React.createClass({displayName: "YAxis",
+
+  propTypes: {
+    yAxisClassName: React.PropTypes.string,
+    orient: React.PropTypes.oneOf(['left', 'right']),
+    yScale: React.PropTypes.func.isRequired,
+    fill: React.PropTypes.string,
+    stroke: React.PropTypes.string,
+    tickStroke: React.PropTypes.string,
+    strokeWidth: React.PropTypes.string
+  },
+
+  getDefaultProps: function() {
+    return {
+      yAxisClassName: 'y axis',
+      orient: 'left',
+      fill: "none",
+      stroke: "#000",
+      tickStroke: "#000",
+      strokeWidth: "none"
+    };
+  },
+
+  componentDidMount: function() {
+    this._renderAxis(this.props);
+  },
+
+  componentWillReceiveProps: function(props) {
+    this._renderAxis(props);
+  },
+
+  _renderAxis: function(props) {
+
+    var yAxis = d3.svg.axis()
+      .ticks(props.yAxisTickCount)
+      .scale(props.yScale)
+      .orient(this.props.orient);
+
+    if (props.yAxisTickCount) {
+      yAxis.ticks(props.yAxisTickCount);
+    } else if (props.yAxisTickInterval) {
+      yAxis.ticks(d3.time[props.yAxisTickInterval.unit], props.yAxisTickInterval.interval);
+    }
+
+    var yAxisClassSelect = props.yAxisClassName.replace(/ /g, '.');
+
+    if (yAxisClassSelect[0] != '.') {
+      yAxisClassSelect = '.' + yAxisClassSelect;
+    }
+
+    var node = this.refs.yaxis.getDOMNode();
+
+    d3.select(node)
+      .attr("class", props.yAxisClassName)
+      .call(yAxis);
+
+    // Style each of the tick lines
+    d3.selectAll(yAxisClassSelect)
+      .selectAll('line')
+      .attr("shape-rendering", "crispEdges")
+      .attr("stroke", props.tickStroke);
+
+    // Style the main axis line
+    d3.selectAll(yAxisClassSelect)
+      .select('path')
+      .attr("shape-rendering", "crispEdges")
+      .attr("fill", props.fill)
+      .attr("stroke", props.stroke);
+
+  },
+
+  render: function() {
+    var props = this.props;
+    return (
+      React.createElement("g", {
+        ref: "yaxis", 
+        className: props.yAxisClassName
+      }
+      )
+    );
+  }
+
+});
+
 },{"d3":"/home/eric/repos/react-d3/node_modules/d3/d3.js","react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/src/index.js":[function(require,module,exports){
 var d3 = require('d3');
 var React = require('react');
@@ -44918,12 +44904,15 @@ exports.PieChart = require('./piechart').PieChart;
 exports.AreaChart = require('./areachart').AreaChart;
 exports.Treemap = require('./treemap').Treemap;
 
-},{"./areachart":"/home/eric/repos/react-d3/src/areachart.js","./barchart":"/home/eric/repos/react-d3/src/barchart.js","./linechart":"/home/eric/repos/react-d3/src/linechart.js","./piechart":"/home/eric/repos/react-d3/src/piechart.js","./treemap":"/home/eric/repos/react-d3/src/treemap.js","d3":"/home/eric/repos/react-d3/node_modules/d3/d3.js","react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/src/linechart.js":[function(require,module,exports){
-/** @jsx React.DOM */
+},{"./areachart":"/home/eric/repos/react-d3/src/areachart.jsx","./barchart":"/home/eric/repos/react-d3/src/barchart.jsx","./linechart":"/home/eric/repos/react-d3/src/linechart.jsx","./piechart":"/home/eric/repos/react-d3/src/piechart.jsx","./treemap":"/home/eric/repos/react-d3/src/treemap.jsx","d3":"/home/eric/repos/react-d3/node_modules/d3/d3.js","react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/src/linechart.jsx":[function(require,module,exports){
+'use strict';
+
 var React = require('react');
 var d3 = require('d3');
-var Chart = require('./common').Chart;
-
+var common = require('./common');
+var Chart = common.Chart;
+var XAxis = common.XAxis;
+var YAxis = common.YAxis;
 
 var Line = React.createClass({displayName: "Line",
 
@@ -44967,7 +44956,7 @@ var Circle = React.createClass({displayName: "Circle",
   getDefaultProps: function() {
     return {
       fill: '#1f77b4'
-    }
+    };
   },
 
   render: function() {
@@ -44979,110 +44968,6 @@ var Circle = React.createClass({displayName: "Circle",
         fill: this.props.fill}
       )
     );
-  }
-
-});
-
-var XAxis = React.createClass({displayName: "XAxis",
-
-  componentWillReceiveProps: function(props) {
-    this._renderAxis(props);
-  },
-
-  render: function() {
-    var t = "translate(0," + this.props.height + ")"
-    return (
-      React.createElement("g", {
-        ref: "linexaxis", 
-        className: "linex axis", 
-        transform: t
-      }
-      )
-    );
-  },
-
-  componentDidMount: function() {
-    this._renderAxis(this.props);
-  },
-
-  _renderAxis: function(props) {
-    var xAxis = d3.svg.axis()
-      .scale(props.scaleX)
-      .orient("bottom");
-
-    var node = this.refs.linexaxis.getDOMNode();
-
-    d3.select(node)
-      .attr("class", "linex axis")
-      .style("fill", props.color)
-      .call(xAxis);
-
-    // Style each of the tick lines
-    var lineXAxis = d3.select('.linex.axis')
-      .selectAll('line')
-      .attr("shape-rendering", "crispEdges")
-      .attr("stroke", props.color);
-
-    // Style the main axis line
-    d3.select('.linex.axis')
-      .select('path')
-      .attr("shape-rendering", "crispEdges")
-      .attr("fill", "none")
-      .attr("stroke", props.color)
-      .attr("stroke-width", "1");
-
-    // Hides the x axis origin
-    d3.selectAll(".linex.axis g:first-child").style("opacity","0");
-  }
-
-});
-
-
-var YAxis = React.createClass({displayName: "YAxis",
-
-  componentWillReceiveProps: function(props) {
-    this._renderAxis(props);
-  },
-
-  render: function() {
-    return (
-      React.createElement("g", {
-        ref: "lineyaxis", 
-        className: "liney axis"
-      }
-      )
-    );
-  },
-
-  componentDidMount: function() {
-    this._renderAxis(this.props);
-  },
-
-  _renderAxis: function(props) {
-    var yAxis = d3.svg.axis()
-      .ticks(props.yAxisTickCount)
-      .scale(props.scaleY)
-      .orient("left");
-
-    var node = this.refs.lineyaxis.getDOMNode();
-
-    d3.select(node)
-      .attr("class", "liney axis")
-      .style("fill", props.color)
-      .call(yAxis);
-
-    // Style each of the tick lines
-    d3.selectAll('.liney.axis')
-      .selectAll('line')
-      .attr("shape-rendering", "crispEdges")
-      .attr("stroke", props.color);
-
-    // Style the main axis line
-    d3.selectAll('.liney.axis')
-      .select('path')
-      .attr("shape-rendering", "crispEdges")
-      .attr("fill", "none")
-      .attr("stroke", props.color)
   }
 
 });
@@ -45100,24 +44985,24 @@ var DataSeries = React.createClass({displayName: "DataSeries",
       data: [],
       interpolate: 'linear',
       color: '#fff'
-    }
+    };
   },
 
   render: function() {
     var self = this;
     var interpolatePath = d3.svg.line()
         .x(function(d) {
-          return self.props.scaleX(d.x);
+          return self.props.xScale(d.x);
         })
         .y(function(d) {
-          return self.props.scaleY(d.y);
+          return self.props.yScale(d.y);
         })
         .interpolate(this.props.interpolate);
 
     var circles = [];
 
     this.props.data.forEach(function(point, i) {
-      circles.push(React.createElement(Circle, {cx: this.props.scaleX(point.x), cy: this.props.scaleY(point.y), r: this.props.pointRadius, fill: this.props.color, key: this.props.seriesName + i}));
+      circles.push(React.createElement(Circle, {cx: this.props.xScale(point.x), cy: this.props.yScale(point.y), r: this.props.pointRadius, fill: this.props.color, key: this.props.seriesName + i}));
     }.bind(this));
 
     return (
@@ -45125,7 +45010,7 @@ var DataSeries = React.createClass({displayName: "DataSeries",
         React.createElement(Line, {path: interpolatePath(this.props.data), stroke: this.props.color}), 
         circles
       )
-    )
+    );
   }
 
 });
@@ -45151,83 +45036,20 @@ var LineChart = React.createClass({displayName: "LineChart",
       axesColor: '#000',
       title: '',
       colors: d3.scale.category20c()
-    }
+    };
   },
 
-  getInitialState: function() {
-    return {
-      maxX: 0,
-      maxY: 0,
-      chartWidth: 0,
-      chartHeight: 0
-    }
-  },
-
-  componentWillMount: function() {
-    this._calculateState();
-  },
-
-  render: function() {
-    var dataSeriesArray = [];
-    var index = 0;
-
-    for(var seriesName in this.props.data) {
-      if (this.props.data.hasOwnProperty(seriesName)) {
-        dataSeriesArray.push(
-            React.createElement(DataSeries, {
-              scaleX: this.state.scaleX, 
-              scaleY: this.state.scaleY, 
-              seriesName: seriesName, 
-              data: this.props.data[seriesName], 
-              width: this.state.chartWidth, 
-              height: this.state.chartHeight, 
-              color: this.props.colors(index), 
-              pointRadius: this.props.pointRadius, 
-              key: seriesName}
-            )
-        )
-        index++;
-      }
-    }
-
-    var trans = "translate(" + this.props.margins.left + "," + this.props.margins.top + ")"
-
-    return (
-      React.createElement(Chart, {width: this.props.width, height: this.props.height, title: this.props.title}, 
-        React.createElement("g", {transform: trans}, 
-          dataSeriesArray, 
-          React.createElement(YAxis, {
-            scaleY: this.state.scaleY, 
-            margins: this.props.margins, 
-            yAxisTickCount: this.props.yAxisTickCount, 
-            width: this.state.chartWidth, 
-            height: this.state.chartHeight, 
-            color: this.props.axesColor}
-          ), 
-          React.createElement(XAxis, {
-            scaleX: this.state.scaleX, 
-            data: this.props.data, 
-            margins: this.props.margins, 
-            width: this.state.chartWidth, 
-            height: this.state.chartHeight, 
-            color: this.props.axesColor}
-          )
-        )
-      )
-    );
-  },
-
-  _calculateState: function() {
+  _calculateScales: function(props, chartWidth, chartHeight) {
 
     var maxY = 0,
         maxX = 0;
 
-    for(var series in this.props.data) {
-      var seriesMaxY = d3.max(this.props.data[series], function(d) {
+    for(var series in props.data) {
+      var seriesMaxY = d3.max(props.data[series], function(d) {
         return d.y;
       });
 
-      var seriesMaxX = d3.max(this.props.data[series], function(d) {
+      var seriesMaxX = d3.max(props.data[series], function(d) {
         return d.x;
       });
 
@@ -45235,33 +45057,86 @@ var LineChart = React.createClass({displayName: "LineChart",
       maxY = (seriesMaxY > maxY) ? seriesMaxY : maxY;
     }
 
-    var chartWidth = this.props.width - this.props.margins.left - this.props.margins.right;
-    var chartHeight = this.props.height - this.props.margins.top - this.props.margins.bottom;
-
-    var scaleX = d3.scale.linear()
+    var xScale = d3.scale.linear()
       .domain([0, maxX])
       .range([0, chartWidth]);
 
-    var scaleY = d3.scale.linear()
+    var yScale = d3.scale.linear()
       .domain([0, maxY])
       .range([chartHeight, 0]);
 
-    this.setState({
-      maxX: maxX,
-      maxY: maxY,
-      scaleX: scaleX,
-      scaleY: scaleY,
-      chartWidth: chartWidth,
-      chartHeight: chartHeight
-    })
-  }
+    return {xScale: xScale, yScale: yScale};
+
+  },
+
+  render: function() {
+
+    // Calculate inner chart dimensions
+    var chartWidth = this.props.width - this.props.margins.left - this.props.margins.right;
+    var chartHeight = this.props.height - this.props.margins.top - this.props.margins.bottom;
+
+    var scales = this._calculateScales(this.props, chartWidth, chartHeight);
+
+    var trans = "translate(" + this.props.margins.left + "," + this.props.margins.top + ")";
+
+    var index = 0;
+    var dataSeriesArray = [];
+    for(var seriesName in this.props.data) {
+      if (this.props.data.hasOwnProperty(seriesName)) {
+        dataSeriesArray.push(
+            React.createElement(DataSeries, {
+              xScale: scales.xScale, 
+              yScale: scales.yScale, 
+              seriesName: seriesName, 
+              data: this.props.data[seriesName], 
+              width: chartWidth, 
+              height: chartHeight, 
+              color: this.props.colors(index), 
+              pointRadius: this.props.pointRadius, 
+              key: seriesName}
+            )
+        );
+        index++;
+      }
+    }
+
+    return (
+      React.createElement(Chart, {width: this.props.width, height: this.props.height, title: this.props.title}, 
+        React.createElement("g", {transform: trans}, 
+          dataSeriesArray, 
+          React.createElement(YAxis, {
+            yAxisClassName: "line y axis", 
+            yScale: scales.yScale, 
+            margins: this.props.margins, 
+            yAxisTickCount: this.props.yAxisTickCount, 
+            width: chartWidth, 
+            height: chartHeight, 
+            stroke: this.props.axesColor}
+          ), 
+          React.createElement(XAxis, {
+            xAxisClassName: "line x axis", 
+            strokeWidth: "1", 
+            hideOrigin: true, 
+            xScale: scales.xScale, 
+            data: this.props.data, 
+            margins: this.props.margins, 
+            width: chartWidth, 
+            height: chartHeight, 
+            stroke: this.props.axesColor}
+          )
+        )
+      )
+    );
+  },
+
 
 });
 
 exports.LineChart = LineChart;
 
-},{"./common":"/home/eric/repos/react-d3/src/common.js","d3":"/home/eric/repos/react-d3/node_modules/d3/d3.js","react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/src/piechart.js":[function(require,module,exports){
-/** @jsx React.DOM */
+},{"./common":"/home/eric/repos/react-d3/src/common.jsx","d3":"/home/eric/repos/react-d3/node_modules/d3/d3.js","react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/src/piechart.jsx":[function(require,module,exports){
+'use strict';
+
 var React = require('react');
 var d3 = require('d3');
 var _ = require('lodash');
@@ -45274,7 +45149,7 @@ var Arc = React.createClass({displayName: "Arc",
     return {
       labelTextFill: "black",
       valueTextFill: "white"
-    }
+    };
   },
 
   propTypes: {
@@ -45288,7 +45163,7 @@ var Arc = React.createClass({displayName: "Arc",
 
   render: function() {
     // transform={"translate(" + arc.centroid() + ")"}
-    props = this.props;
+    var props = this.props;
     var arc = d3.svg.arc()
       .innerRadius(props.innerRadius)
       .outerRadius(props.outerRadius)
@@ -45364,7 +45239,7 @@ var DataSeries = React.createClass({displayName: "DataSeries",
       innerRadius: 0,
       data: [],
       color: d3.scale.category20c()
-    }
+    };
   },
 
   render: function() {
@@ -45394,7 +45269,7 @@ var DataSeries = React.createClass({displayName: "DataSeries",
           key: i, 
           width: props.width}
         )
-      )
+      );
     });
     return (
       React.createElement("g", {className: "pie-group", transform: this.props.transform}, arcs)
@@ -45407,7 +45282,7 @@ var PieChart = React.createClass({displayName: "PieChart",
   getDefaultProps: function() {
     return {
       title: ''
-    }
+    };
   },
 
   propTypes: {
@@ -45422,9 +45297,9 @@ var PieChart = React.createClass({displayName: "PieChart",
 
   render: function() {
     var props = this.props;
-    var transform = "translate("
-      + (this.props.cx || this.props.width/2) + ","
-      + (this.props.cy || this.props.height/2) + ")";
+    var transform = "translate(" +
+      (this.props.cx || this.props.width/2) + "," +
+      (this.props.cy || this.props.height/2) + ")";
     var data = _.pluck(this.props.data, 'value');
     var labels = _.pluck(this.props.data, 'label');
     return (
@@ -45454,8 +45329,9 @@ var PieChart = React.createClass({displayName: "PieChart",
 
 exports.PieChart = PieChart;
 
-},{"./common":"/home/eric/repos/react-d3/src/common.js","d3":"/home/eric/repos/react-d3/node_modules/d3/d3.js","lodash":"/home/eric/repos/react-d3/node_modules/lodash/dist/lodash.js","react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/src/treemap.js":[function(require,module,exports){
-/** @jsx React.DOM */
+},{"./common":"/home/eric/repos/react-d3/src/common.jsx","d3":"/home/eric/repos/react-d3/node_modules/d3/d3.js","lodash":"/home/eric/repos/react-d3/node_modules/lodash/dist/lodash.js","react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/src/treemap.jsx":[function(require,module,exports){
+'use strict';
+
 var React = require('react');
 var d3 = require('d3');
 var Chart = require('./common').Chart;
@@ -45495,7 +45371,7 @@ var Cell = React.createClass({displayName: "Cell",
           this.props.label
         )
       )
-    )
+    );
   }
 });
 
@@ -45511,7 +45387,7 @@ var DataSeries = React.createClass({displayName: "DataSeries",
       data: [],
       value: 'value',
       label: 'label'
-    } 
+    };
   },
 
   render: function() {
@@ -45524,10 +45400,10 @@ var DataSeries = React.createClass({displayName: "DataSeries",
 
     var treemap = d3.layout.treemap()
                     // make sure calculation loop through all objects inside array 
-                    .children(function(d) { return d })
+                    .children(function(d) { return d; })
                     .size([this.props.width, this.props.height])
                     .sticky(true)
-                    .value(function(d) { return d[value] });
+                    .value(function(d) { return d[value]; });
     
     var cells = treemap(data).map(function(node, i) {
       return (
@@ -45547,7 +45423,7 @@ var DataSeries = React.createClass({displayName: "DataSeries",
       React.createElement("g", {transform: this.props.transform, className: "treemap"}, 
         cells
       )
-    )
+    );
   }
 
 });
@@ -45576,7 +45452,7 @@ var Treemap = React.createClass({displayName: "Treemap",
       title: '',
       textColor: '#f7f7f7',
       fontSize: '0.65em'
-    } 
+    };
   },
 
   render: function() {
@@ -45602,7 +45478,7 @@ var Treemap = React.createClass({displayName: "Treemap",
 
 exports.Treemap = Treemap;
 
-},{"./common":"/home/eric/repos/react-d3/src/common.js","d3":"/home/eric/repos/react-d3/node_modules/d3/d3.js","react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/utils/datagen.js":[function(require,module,exports){
+},{"./common":"/home/eric/repos/react-d3/src/common.jsx","d3":"/home/eric/repos/react-d3/node_modules/d3/d3.js","react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/utils/datagen.js":[function(require,module,exports){
 var _ = require('lodash');
 
 exports.generateArrayOfPoints = function(n) {
