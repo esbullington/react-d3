@@ -18,7 +18,7 @@ var Area = React.createClass({
 
   getDefaultProps: function() {
     return {
-      fill: 'steelblue'
+      fill: '#3182bd'
     };
   },
 
