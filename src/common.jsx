@@ -178,7 +178,7 @@ exports.YAxis = React.createClass({
       .select('path')
       .attr("shape-rendering", "crispEdges")
       .attr("fill", props.fill)
-      .attr("stroke", props.stroke)
+      .attr("stroke", props.stroke);
 
   },
 

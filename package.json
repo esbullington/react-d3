@@ -42,15 +42,27 @@
     "webpublish": "git subtree push --prefix dist/public origin gh-pages",
     "watch": "watchify -o dist/public/js/main.js docs/examples/main.js --extension='.jsx' & nodemon server.js",
     "docs": "browserify -o dist/public/js/main.js docs/examples/main.js",
-    "minified": "NODE_ENV=production browserify --standalone react-d3 ./src/index.js | uglifyjs -c > dist/browser/react-d3.min.js",
+    "minified": "NODE_ENV=production browserify --standalone --extension='.jsx' react-d3 ./src/index.js | uglifyjs -c > dist/browser/react-d3.min.js",
     "build": "mkdir -p ./build/cjs & cp *.md ./build/cjs & cp ./dist/cjs/* ./build/cjs & jsx ./src ./build/cjs",
     "clean": "rm -f ./build/cjs/*.js",
-    "lint": "npm run build & jshint ./build/js",
+    "lint": "jsxhint src/* tests/* || true",
     "test": "./node_modules/karma/bin/karma start karma.conf.js"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/esbullington/react-d3.git"
+  },
+  "jshintConfig": {
+    "browserify": true,
+    "expr": true,
+    "globals"   : {
+      "describe"   : false,
+      "it"         : false,
+      "before"     : false,
+      "beforeEach" : false,
+      "after"      : false,
+      "afterEach"  : false
+    }
   },
   "browserify": {
     "transform": [

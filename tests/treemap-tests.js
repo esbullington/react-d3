@@ -33,8 +33,8 @@ describe('Treemap', function() {
     var labels = TestUtils.scryRenderedDOMComponentsWithTag(
       treemap, 'text');
 
-    expect(labels[0].getDOMNode().textContent).to.be.empty;
+    expect(labels[0].getDOMNode().textContent).to.be.empty();
     expect(labels.length).to.equal(data.length + 1);
 
   });
-})
+});
