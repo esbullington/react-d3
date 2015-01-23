@@ -6,6 +6,7 @@ var common = require('./common');
 var Chart = common.Chart;
 var XAxis = common.XAxis;
 var YAxis = common.YAxis;
+var _ = require('lodash');
 
 var Area = React.createClass({
 
