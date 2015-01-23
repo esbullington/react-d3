@@ -6,6 +6,8 @@ var common = require('./common');
 var Chart = common.Chart;
 var XAxis = common.XAxis;
 var YAxis = common.YAxis;
+var _ = require('lodash');
+
 
 var Line = React.createClass({
 
@@ -134,28 +136,16 @@ var LineChart = React.createClass({
 
   _calculateScales: function(props, chartWidth, chartHeight) {
 
-    var maxY = 0,
-        maxX = 0;
-
-    for(var series in props.data) {
-      var seriesMaxY = d3.max(props.data[series], function(d) {
-        return d.y;
-      });
-
-      var seriesMaxX = d3.max(props.data[series], function(d) {
-        return d.x;
-      });
-
-      maxX = (seriesMaxX > maxX) ? seriesMaxX : maxX;
-      maxY = (seriesMaxY > maxY) ? seriesMaxY : maxY;
-    }
+    var allValues = _.flatten(_.values(this.props.data), true);
+    var xValues = _.pluck(allValues, 'x');
+    var yValues = _.pluck(allValues, 'y');
 
     var xScale = d3.scale.linear()
-      .domain([0, maxX])
+      .domain([d3.min([d3.min(xValues), 0]), d3.max(xValues)])
       .range([0, chartWidth]);
 
     var yScale = d3.scale.linear()
-      .domain([0, maxY])
+      .domain([d3.min([d3.min(yValues), 0]), d3.max(yValues)])
       .range([chartHeight, 0]);
 
     return {xScale: xScale, yScale: yScale};

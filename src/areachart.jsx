@@ -6,6 +6,7 @@ var common = require('./common');
 var Chart = common.Chart;
 var XAxis = common.XAxis;
 var YAxis = common.YAxis;
+var _ = require('lodash');
 
 var Area = React.createClass({
 
@@ -90,7 +91,8 @@ var AreaChart = React.createClass({
     var yScale = d3.scale.linear()
       .range([props.height, 0]);
 
-    yScale.domain([0, d3.max(props.data, function(d) { return d.value; })]);
+    var values = _.pluck(props.data, 'value');
+    yScale.domain([d3.min([d3.min(values), 0]), d3.max(values)]);
 
     var margin = {top: 20, right: 20, bottom: 30, left: 50};
 
