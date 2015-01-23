@@ -19,7 +19,7 @@ describe('Treemap', function() {
 
     // Verify that it has rendered the main chart svg
     var svg = TestUtils.findRenderedDOMComponentWithTag(treemap, 'svg');
-    expect(svg).to.exist();
+    expect(svg).to.exist;
     
     // Verify that it has the same number of nodes as the array's length
     var cells = TestUtils.scryRenderedDOMComponentsWithTag(treemap, 'rect');
