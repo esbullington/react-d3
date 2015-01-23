@@ -25,9 +25,7 @@
     "karma-chai-plugins": "^0.2.3",
     "karma-chrome-launcher": "^0.1.5",
     "karma-firefox-launcher": "^0.1.3",
-    "karma-mocha": "^0.1.9",
     "karma-phantomjs-launcher": "^0.1.4",
-    "mocha": "^2.0.1",
     "nodemon": "^1.2.1",
     "reactify": "^0.17.1",
     "uglifyjs": "^2.3.6",
@@ -45,7 +43,7 @@
     "minified": "NODE_ENV=production browserify --standalone --extension='.jsx' react-d3 ./src/index.js | uglifyjs -c > dist/browser/react-d3.min.js",
     "build": "mkdir -p ./build/cjs & cp *.md ./build/cjs & cp ./dist/cjs/* ./build/cjs & jsx ./src ./build/cjs",
     "clean": "rm -f ./build/cjs/*.js",
-    "lint": "jsxhint src/*",
+    "lint": "jsxhint src/* tests/* || true",
     "test": "./node_modules/karma/bin/karma start karma.conf.js"
   },
   "repository": {
@@ -54,7 +52,7 @@
   },
   "jshintConfig": {
     "browserify": true,
-    "mocha": true,
+    "expr": true,
     "globals"   : {
       "describe"   : false,
       "it"         : false,
