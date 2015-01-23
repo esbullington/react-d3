@@ -110,7 +110,7 @@ var BarChart = React.createClass({
     var topBottomMargins = margins.top + margins.bottom;
 
     var yScale = d3.scale.linear()
-      .domain([0, d3.max(values)])
+      .domain([d3.min([d3.min(values), 0]), d3.max(values)])
       .range([this.props.height - topBottomMargins, 0]);
 
     var xScale = d3.scale.ordinal()
