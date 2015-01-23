@@ -1,4 +1,4 @@
-/** @jsx React.DOM */
+'use strict';
 
 var expect = require('chai').expect;  
 var _ = require('lodash');
@@ -6,7 +6,7 @@ var _ = require('lodash');
 describe('PieChart', function() {
   it('renders piechart', function() {
     var React = require('react/addons');
-    var PieChart = require('../src/piechart.js').PieChart;
+    var PieChart = require('../src/piechart').PieChart;
     var generatePartsOfWhole = require('../utils/datagen').generatePartsOfWhole;;
     var TestUtils = React.addons.TestUtils;
 

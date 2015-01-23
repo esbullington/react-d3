@@ -1,11 +1,11 @@
-/** @jsx React.DOM */
+'use strict';
 
 var expect = require('chai').expect;  
 
 describe('BarChart', function() {
   it('renders barchart', function() {
     var React = require('react/addons');
-    var BarChart = require('../src/barchart.js').BarChart;
+    var BarChart = require('../src/barchart').BarChart;
     var generate = require('../utils/datagen').generateArrayOfNumbers;
     var TestUtils = React.addons.TestUtils;
 

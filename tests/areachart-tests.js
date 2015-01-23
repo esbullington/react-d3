@@ -1,11 +1,11 @@
-/** @jsx React.DOM */
+'use strict';
 
 var expect = require('chai').expect;  
 
 describe('AreaChart', function() {
   it('renders areachart', function() {
     var React = require('react/addons');
-    var AreaChart = require('../src/areachart.js').AreaChart;
+    var AreaChart = require('../src/areachart').AreaChart;
     var generate = require('../utils/datagen').generateArrayOfNumbers;
     var TestUtils = React.addons.TestUtils;
 
