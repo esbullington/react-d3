@@ -7,7 +7,7 @@ describe('PieChart', function() {
   it('renders piechart', function() {
     var React = require('react/addons');
     var PieChart = require('../src/piechart').PieChart;
-    var generatePartsOfWhole = require('../utils/datagen').generatePartsOfWhole;;
+    var generatePartsOfWhole = require('../utils/datagen').generatePartsOfWhole;
     var TestUtils = React.addons.TestUtils;
 
     // Render a piechart using array data
@@ -22,10 +22,10 @@ describe('PieChart', function() {
     // Verify that it has the same number of pies as the array's length
     var pie = TestUtils.findRenderedDOMComponentWithTag(
       piechart, 'svg');
-    expect(pie).to.exist;
+    expect(pie).to.exist();
 
     var pieGroup = TestUtils.findRenderedDOMComponentWithClass(pie, 'pie-group');
-    expect(pieGroup).to.exist;
+    expect(pieGroup).to.exist();
 
     var chartSeries = TestUtils.scryRenderedDOMComponentsWithClass(pieGroup, 'arc-group');
     expect(chartSeries.length).to.equal(values.length);

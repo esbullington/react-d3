@@ -18,7 +18,7 @@ describe('BarChart', function() {
     // Verify that it has rendered the main chart svg
     var svg = TestUtils.findRenderedDOMComponentWithTag(
       barchart, 'svg');
-    expect(svg).to.exist;
+    expect(svg).to.exist();
 
     // Verify that it has the same number of bars as the array's length
     var bars = TestUtils.scryRenderedDOMComponentsWithTag(
