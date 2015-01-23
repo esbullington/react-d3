@@ -1,4 +1,6 @@
 /** @jsx React.DOM */
+'use strict';
+
 var React = require('react');
 var d3 = require('d3');
 var common = require('./common');
@@ -48,7 +50,7 @@ var Circle = React.createClass({
   getDefaultProps: function() {
     return {
       fill: '#1f77b4'
-    }
+    };
   },
 
   render: function() {
@@ -77,7 +79,7 @@ var DataSeries = React.createClass({
       data: [],
       interpolate: 'linear',
       color: '#fff'
-    }
+    };
   },
 
   render: function() {
@@ -102,7 +104,7 @@ var DataSeries = React.createClass({
         <Line path={interpolatePath(this.props.data)} stroke={this.props.color} />
         {circles}
       </g>
-    )
+    );
   }
 
 });
@@ -128,96 +130,26 @@ var LineChart = React.createClass({
       axesColor: '#000',
       title: '',
       colors: d3.scale.category20c()
-    }
+    };
   },
 
-  getInitialState: function() {
-    return {
-      maxX: 0,
-      maxY: 0,
-      chartWidth: 0,
-      chartHeight: 0
-    }
-  },
-
-  componentWillMount: function() {
-    this._calculateState();
-  },
-
-  render: function() {
-    var dataSeriesArray = [];
-    var index = 0;
-
-    for(var seriesName in this.props.data) {
-      if (this.props.data.hasOwnProperty(seriesName)) {
-        dataSeriesArray.push(
-            <DataSeries
-              xScale={this.state.xScale}
-              yScale={this.state.yScale}
-              seriesName={seriesName}
-              data={this.props.data[seriesName]}
-              width={this.state.chartWidth}
-              height={this.state.chartHeight}
-              color={this.props.colors(index)}
-              pointRadius={this.props.pointRadius}
-              key={seriesName}
-            />
-        )
-        index++;
-      }
-    }
-
-    var trans = "translate(" + this.props.margins.left + "," + this.props.margins.top + ")"
-
-    return (
-      <Chart width={this.props.width} height={this.props.height} title={this.props.title}>
-        <g transform={trans}>
-          {dataSeriesArray}
-          <YAxis
-            yAxisClassName="line y axis"
-            yScale={this.state.yScale}
-            margins={this.props.margins}
-            yAxisTickCount={this.props.yAxisTickCount}
-            width={this.state.chartWidth}
-            height={this.state.chartHeight}
-            stroke={this.props.axesColor}
-          />
-          <XAxis
-            xAxisClassName="line x axis"
-            strokeWidth="1"
-            hideOrigin={true}
-            xScale={this.state.xScale}
-            data={this.props.data}
-            margins={this.props.margins}
-            width={this.state.chartWidth}
-            height={this.state.chartHeight}
-            stroke={this.props.axesColor}
-          />
-        </g>
-      </Chart>
-    );
-  },
-
-  _calculateState: function() {
+  _calculateScales: function(props, chartWidth, chartHeight) {
 
     var maxY = 0,
         maxX = 0;
 
-    for(var series in this.props.data) {
-      var seriesMaxY = d3.max(this.props.data[series], function(d) {
+    for(var series in props.data) {
+      var seriesMaxY = d3.max(props.data[series], function(d) {
         return d.y;
       });
 
-      var seriesMaxX = d3.max(this.props.data[series], function(d) {
+      var seriesMaxX = d3.max(props.data[series], function(d) {
         return d.x;
       });
 
       maxX = (seriesMaxX > maxX) ? seriesMaxX : maxX;
       maxY = (seriesMaxY > maxY) ? seriesMaxY : maxY;
     }
-
-    var chartWidth = this.props.width - this.props.margins.left - this.props.margins.right;
-    var chartHeight = this.props.height - this.props.margins.top - this.props.margins.bottom;
 
     var xScale = d3.scale.linear()
       .domain([0, maxX])
@@ -227,15 +159,70 @@ var LineChart = React.createClass({
       .domain([0, maxY])
       .range([chartHeight, 0]);
 
-    this.setState({
-      maxX: maxX,
-      maxY: maxY,
-      xScale: xScale,
-      yScale: yScale,
-      chartWidth: chartWidth,
-      chartHeight: chartHeight
-    })
-  }
+    return {xScale: xScale, yScale: yScale};
+
+  },
+
+  render: function() {
+
+    // Calculate inner chart dimensions
+    var chartWidth = this.props.width - this.props.margins.left - this.props.margins.right;
+    var chartHeight = this.props.height - this.props.margins.top - this.props.margins.bottom;
+
+    var scales = this._calculateScales(this.props, chartWidth, chartHeight);
+
+    var trans = "translate(" + this.props.margins.left + "," + this.props.margins.top + ")";
+
+    var index = 0;
+    var dataSeriesArray = [];
+    for(var seriesName in this.props.data) {
+      if (this.props.data.hasOwnProperty(seriesName)) {
+        dataSeriesArray.push(
+            <DataSeries
+              xScale={scales.xScale}
+              yScale={scales.yScale}
+              seriesName={seriesName}
+              data={this.props.data[seriesName]}
+              width={chartWidth}
+              height={chartHeight}
+              color={this.props.colors(index)}
+              pointRadius={this.props.pointRadius}
+              key={seriesName}
+            />
+        );
+        index++;
+      }
+    }
+
+    return (
+      <Chart width={this.props.width} height={this.props.height} title={this.props.title}>
+        <g transform={trans}>
+          {dataSeriesArray}
+          <YAxis
+            yAxisClassName="line y axis"
+            yScale={scales.yScale}
+            margins={this.props.margins}
+            yAxisTickCount={this.props.yAxisTickCount}
+            width={chartWidth}
+            height={chartHeight}
+            stroke={this.props.axesColor}
+          />
+          <XAxis
+            xAxisClassName="line x axis"
+            strokeWidth="1"
+            hideOrigin={true}
+            xScale={scales.xScale}
+            data={this.props.data}
+            margins={this.props.margins}
+            width={chartWidth}
+            height={chartHeight}
+            stroke={this.props.axesColor}
+          />
+        </g>
+      </Chart>
+    );
+  },
+
 
 });
 
