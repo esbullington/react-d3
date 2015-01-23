@@ -40,7 +40,7 @@
   },
   "scripts": {
     "webpublish": "git subtree push --prefix dist/public origin gh-pages",
-    "watch": "watchify -o dist/public/js/main.js docs/examples/main.js & nodemon server.js",
+    "watch": "watchify -o dist/public/js/main.js docs/examples/main.js --extension='.jsx' & nodemon server.js",
     "docs": "browserify -o dist/public/js/main.js docs/examples/main.js",
     "minified": "NODE_ENV=production browserify --standalone react-d3 ./src/index.js | uglifyjs -c > dist/browser/react-d3.min.js",
     "build": "mkdir -p ./build/cjs & cp *.md ./build/cjs & cp ./dist/cjs/* ./build/cjs & jsx ./src ./build/cjs",

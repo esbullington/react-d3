@@ -22,6 +22,7 @@ module.exports = function(config) {
     },
 
     browserify: {
+      extensions: ['.jsx'],
       debug: true,
       transform: [ 'reactify' ]
     },
