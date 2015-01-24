@@ -1,5 +1,5 @@
 ## react-d3
-Modular ReactJS charts calculated with the help of d3.
+Modular ReactJS charts made using d3 chart utilities.
 
 **Caution:**  alpha state software. Chart APIs will change.
 
@@ -16,7 +16,7 @@ Current charts:
 * area chart
 * treemap
 
-The basic charts generated from the examples/main.js ReactJS app can be [viewed here](http://esbullington.github.io/react-d3).  I'm hard at work expanding these basic examples.
+The basic charts generated from the examples/main.js ReactJS app can be [viewed here](http://esbullington.github.io/react-d3). Additional chart types are soon to come.
 
 ### Basic usage
 
