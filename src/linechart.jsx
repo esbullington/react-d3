@@ -2,11 +2,12 @@
 
 var React = require('react');
 var d3 = require('d3');
+var _ = require('lodash');
 var common = require('./common');
 var Chart = common.Chart;
 var XAxis = common.XAxis;
 var YAxis = common.YAxis;
-var _ = require('lodash');
+var Legend = common.Legend;
 
 
 var Line = React.createClass({
@@ -208,6 +209,13 @@ var LineChart = React.createClass({
             stroke={this.props.axesColor}
           />
         </g>
+        <Legend 
+          margins={this.props.margins}
+          colors={this.props.colors}
+          data={this.props.data}
+          width={this.props.width}
+          height={this.props.height}
+        /> 
       </Chart>
     );
   },
