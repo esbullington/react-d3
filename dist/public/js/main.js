@@ -44406,6 +44406,7 @@ var common = require('./common');
 var Chart = common.Chart;
 var XAxis = common.XAxis;
 var YAxis = common.YAxis;
+var _ = require('lodash');
 
 var Area = React.createClass({displayName: "Area",
 
@@ -44490,7 +44491,8 @@ var AreaChart = React.createClass({displayName: "AreaChart",
     var yScale = d3.scale.linear()
       .range([props.height, 0]);
 
-    yScale.domain([0, d3.max(props.data, function(d) { return d.value; })]);
+    var values = _.pluck(props.data, 'value');
+    yScale.domain([d3.min([d3.min(values), 0]), d3.max(values)]);
 
     var margin = {top: 20, right: 20, bottom: 30, left: 50};
 
@@ -44536,7 +44538,7 @@ var AreaChart = React.createClass({displayName: "AreaChart",
 
 exports.AreaChart = AreaChart;
 
-},{"./common":"/home/eric/repos/react-d3/src/common.jsx","d3":"/home/eric/repos/react-d3/node_modules/d3/d3.js","react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/src/barchart.jsx":[function(require,module,exports){
+},{"./common":"/home/eric/repos/react-d3/src/common/index.js","d3":"/home/eric/repos/react-d3/node_modules/d3/d3.js","lodash":"/home/eric/repos/react-d3/node_modules/lodash/dist/lodash.js","react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/src/barchart.jsx":[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -44649,7 +44651,7 @@ var BarChart = React.createClass({displayName: "BarChart",
     var topBottomMargins = margins.top + margins.bottom;
 
     var yScale = d3.scale.linear()
-      .domain([0, d3.max(values)])
+      .domain([d3.min([d3.min(values), 0]), d3.max(values)])
       .range([this.props.height - topBottomMargins, 0]);
 
     var xScale = d3.scale.ordinal()
@@ -44696,23 +44698,11 @@ var BarChart = React.createClass({displayName: "BarChart",
 
 exports.BarChart = BarChart;
 
-},{"./common":"/home/eric/repos/react-d3/src/common.jsx","d3":"/home/eric/repos/react-d3/node_modules/d3/d3.js","lodash":"/home/eric/repos/react-d3/node_modules/lodash/dist/lodash.js","react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/src/common.jsx":[function(require,module,exports){
+},{"./common":"/home/eric/repos/react-d3/src/common/index.js","d3":"/home/eric/repos/react-d3/node_modules/d3/d3.js","lodash":"/home/eric/repos/react-d3/node_modules/lodash/dist/lodash.js","react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/src/common/axes.jsx":[function(require,module,exports){
 'use strict';
 
 var React = require('react');
 var d3 = require('d3');
-
-
-exports.Chart = React.createClass({displayName: "Chart",
-  render: function() {
-    return (
-      React.createElement("div", null, 
-        React.createElement("h3", null, this.props.title), 
-        React.createElement("svg", {width: this.props.width, height: this.props.height}, this.props.children)
-      )
-    );
-  }
-});
 
 exports.XAxis = React.createClass({displayName: "XAxis",
 
@@ -44894,7 +44884,29 @@ exports.YAxis = React.createClass({displayName: "YAxis",
 
 });
 
-},{"d3":"/home/eric/repos/react-d3/node_modules/d3/d3.js","react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/src/index.js":[function(require,module,exports){
+},{"d3":"/home/eric/repos/react-d3/node_modules/d3/d3.js","react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/src/common/chart.jsx":[function(require,module,exports){
+'use strict';
+
+var React = require('react');
+
+exports.Chart = React.createClass({displayName: "Chart",
+  render: function() {
+    return (
+      React.createElement("div", null, 
+        React.createElement("h3", null, this.props.title), 
+        React.createElement("svg", {width: this.props.width, height: this.props.height}, this.props.children)
+      )
+    );
+  }
+});
+
+},{"react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/src/common/index.js":[function(require,module,exports){
+
+exports.XAxis = require('./axes').XAxis;
+exports.YAxis = require('./axes').YAxis;
+exports.Chart = require('./chart').Chart;
+
+},{"./axes":"/home/eric/repos/react-d3/src/common/axes.jsx","./chart":"/home/eric/repos/react-d3/src/common/chart.jsx"}],"/home/eric/repos/react-d3/src/index.js":[function(require,module,exports){
 var d3 = require('d3');
 var React = require('react');
 
@@ -44913,6 +44925,8 @@ var common = require('./common');
 var Chart = common.Chart;
 var XAxis = common.XAxis;
 var YAxis = common.YAxis;
+var _ = require('lodash');
+
 
 var Line = React.createClass({displayName: "Line",
 
@@ -45041,28 +45055,16 @@ var LineChart = React.createClass({displayName: "LineChart",
 
   _calculateScales: function(props, chartWidth, chartHeight) {
 
-    var maxY = 0,
-        maxX = 0;
-
-    for(var series in props.data) {
-      var seriesMaxY = d3.max(props.data[series], function(d) {
-        return d.y;
-      });
-
-      var seriesMaxX = d3.max(props.data[series], function(d) {
-        return d.x;
-      });
-
-      maxX = (seriesMaxX > maxX) ? seriesMaxX : maxX;
-      maxY = (seriesMaxY > maxY) ? seriesMaxY : maxY;
-    }
+    var allValues = _.flatten(_.values(this.props.data), true);
+    var xValues = _.pluck(allValues, 'x');
+    var yValues = _.pluck(allValues, 'y');
 
     var xScale = d3.scale.linear()
-      .domain([0, maxX])
+      .domain([d3.min([d3.min(xValues), 0]), d3.max(xValues)])
       .range([0, chartWidth]);
 
     var yScale = d3.scale.linear()
-      .domain([0, maxY])
+      .domain([d3.min([d3.min(yValues), 0]), d3.max(yValues)])
       .range([chartHeight, 0]);
 
     return {xScale: xScale, yScale: yScale};
@@ -45134,7 +45136,7 @@ var LineChart = React.createClass({displayName: "LineChart",
 
 exports.LineChart = LineChart;
 
-},{"./common":"/home/eric/repos/react-d3/src/common.jsx","d3":"/home/eric/repos/react-d3/node_modules/d3/d3.js","react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/src/piechart.jsx":[function(require,module,exports){
+},{"./common":"/home/eric/repos/react-d3/src/common/index.js","d3":"/home/eric/repos/react-d3/node_modules/d3/d3.js","lodash":"/home/eric/repos/react-d3/node_modules/lodash/dist/lodash.js","react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/src/piechart.jsx":[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -45329,7 +45331,7 @@ var PieChart = React.createClass({displayName: "PieChart",
 
 exports.PieChart = PieChart;
 
-},{"./common":"/home/eric/repos/react-d3/src/common.jsx","d3":"/home/eric/repos/react-d3/node_modules/d3/d3.js","lodash":"/home/eric/repos/react-d3/node_modules/lodash/dist/lodash.js","react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/src/treemap.jsx":[function(require,module,exports){
+},{"./common":"/home/eric/repos/react-d3/src/common/index.js","d3":"/home/eric/repos/react-d3/node_modules/d3/d3.js","lodash":"/home/eric/repos/react-d3/node_modules/lodash/dist/lodash.js","react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/src/treemap.jsx":[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -45478,7 +45480,7 @@ var Treemap = React.createClass({displayName: "Treemap",
 
 exports.Treemap = Treemap;
 
-},{"./common":"/home/eric/repos/react-d3/src/common.jsx","d3":"/home/eric/repos/react-d3/node_modules/d3/d3.js","react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/utils/datagen.js":[function(require,module,exports){
+},{"./common":"/home/eric/repos/react-d3/src/common/index.js","d3":"/home/eric/repos/react-d3/node_modules/d3/d3.js","react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/utils/datagen.js":[function(require,module,exports){
 var _ = require('lodash');
 
 exports.generateArrayOfPoints = function(n) {
