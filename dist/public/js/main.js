@@ -128,7 +128,7 @@ var Demos = React.createClass({displayName: "Demos",
           React.createElement("div", {className: "col-md-6"}, 
             React.createElement("pre", {ref: "block"}, 
               React.createElement("code", {className: "js"}, 
-              'var scatterChart = {\n  series1: [ { x: 0, y: 20 }, ..., { x: 24, y: 10 } ],\n  series2: [ { x: 40, y: 40 }, ..., { x: 69, y: 50 } ],\n  series3: [ { x: 70, y: 82 }, ..., { x: 76, y: 82 } ]\n};'
+              'var scatterData = {\n  series1: [ { x: 0, y: 20 }, ..., { x: 24, y: 10 } ],\n  series2: [ { x: 40, y: 40 }, ..., { x: 69, y: 50 } ],\n  series3: [ { x: 70, y: 82 }, ..., { x: 76, y: 82 } ]\n};'
               )
             ), 
             React.createElement("pre", {ref: "block"}, 
