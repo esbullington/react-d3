@@ -1,4 +1,4 @@
-/** @jsx React.DOM */
+ /** @jsx React.DOM */
 var React = require('react');
 var d3 = require('d3');
 var hljs = require("highlight.js");
@@ -9,6 +9,7 @@ var LineChart = rd3.LineChart;
 var PieChart = rd3.PieChart;
 var AreaChart = rd3.AreaChart;
 var Treemap = rd3.Treemap;
+var ScatterChart= rd3.ScatterChart;
 
 hljs.initHighlightingOnLoad();
 
@@ -46,6 +47,11 @@ var Demos = React.createClass({
     // 2014 Most Populous Countries
     // http://www.prb.org/pdf14/2014-world-population-data-sheet_eng.pdf
     var treemapData = [{label: 'China', value: 1364}, {label: 'India', value: 1296}, {label: 'United States', value: 318}, {label: 'Indonesia', value: 251}, {label: 'Brazil', value: 203}];
+    var scatterData = {
+        series1: [ { x: 0, y: 20 }, { x: 5, y: 7 }, { x: 8, y: 3 }, { x: 13, y: 33 }, { x: 12, y: 10 }, { x: 13, y: 15 }, { x: 24, y: 8 }, { x: 25, y: 15 }, { x: 16, y: 10 }, { x: 16, y: 10 }, { x: 19, y: 30 }, { x: 14, y: 30 }],
+        series2: [ { x: 40, y: 30 }, { x: 35, y: 37 }, { x: 48, y: 37 }, { x: 38, y: 33 }, { x: 52, y: 60 }, { x: 51, y: 55 }, { x: 54, y: 48 }, { x: 45, y: 45 }, { x: 46, y: 50 }, { x: 66, y: 50 }, { x: 39, y: 36 }, { x: 54, y: 30 }],
+        series3: [ { x: 80, y: 78 }, { x: 71, y: 58 }, { x: 78, y: 68 }, { x: 81, y: 47 },{ x: 72, y: 70 }, { x: 70, y: 88 }, { x: 81, y: 90 }, { x: 92, y: 80 }, { x: 81, y: 72 }, { x: 99, y: 95 }, { x: 67, y: 81 }, { x: 96, y: 78 }]
+    };
 
     return (
       <div className="container">
@@ -110,6 +116,27 @@ var Demos = React.createClass({
             </pre>
           </div>
         </div>
+        <div className="row">
+          <hr/>
+        </div>
+        <div className="row">
+          <div className="col-md-6">
+            <ScatterChart data={scatterData} width={400} height={200} title="Scatter Chart" />
+          </div>
+          <div className="col-md-6">
+            <pre ref='block'>
+              <code className='js'>
+              {'var scatterChart = {\n  series1: [ { x: 0, y: 20 }, ..., { x: 24, y: 10 } ],\n  series2: [ { x: 40, y: 40 }, ..., { x: 69, y: 50 } ],\n  series3: [ { x: 70, y: 82 }, ..., { x: 76, y: 82 } ]\n};'}
+              </code>
+            </pre>
+            <pre ref='block'>
+              <code className='html'>
+              {'<ScatterChart\n  data={scatterData}\n  width={400}\n  height={200}\n  title="Scatter Chart"\n/>'}
+              </code>
+            </pre>
+          </div>
+        </div>
+
         <div className="row">
           <hr/>
         </div>
