@@ -1,0 +1,4 @@
+- [ ] increment version numbers in README.md, package.json, and dist/package.json
+- [ ] run `npm build`
+- [ ] `cd` to build/cjs directory and check that all needed files are present
+- [ ]  
