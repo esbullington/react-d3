@@ -5,14 +5,15 @@ var React = require('react');
 exports.Legend = React.createClass({
 
   propTypes: {
+    width: React.PropTypes.number,
+    height: React.PropTypes.number,
     margins: React.PropTypes.object,
     text: React.PropTypes.string
   },
 
   getDefaultProps: function() {
     return {
-      text: "#000",
-      strokeWidth: 1
+      text: "#000"
     };
   },
 
@@ -48,11 +49,20 @@ exports.Legend = React.createClass({
       }
     }
 
+    var legendFloat = 'right';
+
+    console.log('h', props.height);
+
+    var topMargin = props.margins.top;
+
     var legendBlockStyle = {
-      'marginBottom': '0'
+      'paddingLeft': '0',
+      'marginBottom': '0',
+      'marginTop': topMargin,
+      'float': legendFloat
     };
 
-    return <ul style={{'marginBottom': '0', 'float': 'left'}}>{legendItems}</ul>;
+    return <ul style={legendBlockStyle}>{legendItems}</ul>;
   }
 
 });

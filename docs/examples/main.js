@@ -102,7 +102,7 @@ var Demos = React.createClass({
         </div>
         <div className="row">
           <div className="col-md-6">
-            <LineChart data={lineData} width={400} height={200} title="Line Chart" />
+            <LineChart legend={true} data={lineData} width={500} height={200} title="Line Chart" />
           </div>
           <div className="col-md-6">
             <pre ref='block'>

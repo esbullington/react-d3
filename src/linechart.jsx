@@ -5,9 +5,9 @@ var d3 = require('d3');
 var _ = require('lodash');
 var common = require('./common');
 var Chart = common.Chart;
+var LegendChart = common.LegendChart;
 var XAxis = common.XAxis;
 var YAxis = common.YAxis;
-var Legend = common.Legend;
 
 
 var Line = React.createClass({
@@ -125,7 +125,7 @@ var LineChart = React.createClass({
 
   getDefaultProps: function() {
     return {
-      margins: {top: 20, right: 30, bottom: 30, left: 30},
+      margins: {top: 20, right: 120, bottom: 30, left: 30},
       pointRadius: 3,
       width: 400,
       height: 200,
@@ -184,8 +184,38 @@ var LineChart = React.createClass({
       }
     }
 
+    if (this.props.legend) {
+      return (
+        <LegendChart legend={this.props.legend} data={this.props.data} margins={this.props.margins} colors={this.props.colors} width={this.props.width} height={this.props.height} title={this.props.title}>
+          <g transform={trans}>
+            {dataSeriesArray}
+            <YAxis
+              yAxisClassName="line y axis"
+              yScale={scales.yScale}
+              margins={this.props.margins}
+              yAxisTickCount={this.props.yAxisTickCount}
+              width={chartWidth}
+              height={chartHeight}
+              stroke={this.props.axesColor}
+            />
+            <XAxis
+              xAxisClassName="line x axis"
+              strokeWidth="1"
+              hideOrigin={true}
+              xScale={scales.xScale}
+              data={this.props.data}
+              margins={this.props.margins}
+              width={chartWidth}
+              height={chartHeight}
+              stroke={this.props.axesColor}
+            />
+          </g>
+        </LegendChart>
+      );
+    }
+
     return (
-      <Chart width={this.props.width} height={this.props.height} title={this.props.title}>
+      <Chart legend={this.props.legend} data={this.props.data} margins={this.props.margins} colors={this.props.colors} width={this.props.width} height={this.props.height} title={this.props.title}>
         <g transform={trans}>
           {dataSeriesArray}
           <YAxis
@@ -209,13 +239,6 @@ var LineChart = React.createClass({
             stroke={this.props.axesColor}
           />
         </g>
-        <Legend 
-          margins={this.props.margins}
-          colors={this.props.colors}
-          data={this.props.data}
-          width={this.props.width}
-          height={this.props.height}
-        /> 
       </Chart>
     );
   },
