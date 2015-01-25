@@ -39,11 +39,12 @@
     "react": "^0.12.1"
   },
   "scripts": {
+    "env": "env",
     "webpublish": "git subtree push --prefix dist/public origin gh-pages",
     "watch": "watchify -o dist/public/js/main.js docs/examples/main.js --extension='.jsx' & nodemon server.js",
     "docs": "browserify -o dist/public/js/main.js docs/examples/main.js",
     "minified": "NODE_ENV=production browserify --standalone --extension='.jsx' react-d3 ./src/index.js | uglifyjs -c > dist/browser/react-d3.min.js",
-    "build": "mkdir -p ./build/cjs & cp *.md ./build/cjs & cp ./dist/cjs/* ./build/cjs & jsx -x jsx ./src ./build/cjs",
+    "build": "mkdir -p ./build/cjs & cp *.md ./build/cjs & node scripts/build.js & jsx -x jsx ./src ./build/cjs",
     "clean": "rm -f ./build/cjs/*.js",
     "lint": "jsxhint src/* tests/* || true",
     "test": "./node_modules/karma/bin/karma start karma.conf.js"
