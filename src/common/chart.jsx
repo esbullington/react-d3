@@ -7,7 +7,7 @@ exports.Chart = React.createClass({
   render: function() {
     return (
       <div>
-        <h3>{this.props.title}</h3>
+        <h4>{this.props.title}</h4>
         <svg width={this.props.width} height={this.props.height}>{this.props.children}</svg>
       </div>
     );
@@ -22,17 +22,14 @@ exports.LegendChart = React.createClass({
     sideOffset: React.PropTypes.number,
     margins: React.PropTypes.object,
     data: React.PropTypes.object,
-    colors: React.PropTypes.func
   },
 
   getDefaultProps: function() {
     return {
-      margins: {top: 20, right: 30, bottom: 30, left: 30},
       data: {},
-      colors: d3.scale.category20c(),
       legend: false,
       legendPosition: 'right',
-      sideOffset: 100
+      sideOffset: 90
     };
   },
 
@@ -46,6 +43,7 @@ exports.LegendChart = React.createClass({
           data={this.props.data}
           width={this.props.width}
           height={this.props.height}
+          sideOffset={this.props.sideOffset}
         /> 
       );
     }
@@ -54,7 +52,7 @@ exports.LegendChart = React.createClass({
   render: function() {
     return (
       <div style={{'width': this.props.width, 'height': this.props.height}} >
-        <h3>{this.props.title}</h3>
+        <h4>{this.props.title}</h4>
         {this._renderLegend()}
         <svg width={this.props.width - this.props.sideOffset} height={this.props.height}>{this.props.children}</svg>
       </div>

@@ -1,6 +1,7 @@
 'use strict';
 
 var React = require('react');
+var d3 = require('d3');
 
 exports.Legend = React.createClass({
 
@@ -8,12 +9,14 @@ exports.Legend = React.createClass({
     width: React.PropTypes.number,
     height: React.PropTypes.number,
     margins: React.PropTypes.object,
-    text: React.PropTypes.string
+    text: React.PropTypes.string,
+    colors: React.PropTypes.func
   },
 
   getDefaultProps: function() {
     return {
-      text: "#000"
+      text: "#000",
+      colors: d3.scale.category20c()
     };
   },
 
@@ -49,13 +52,14 @@ exports.Legend = React.createClass({
       }
     }
 
+    // In preparation for legend positioning
     var legendFloat = 'right';
-
-    console.log('h', props.height);
 
     var topMargin = props.margins.top;
 
     var legendBlockStyle = {
+      'wordWrap': 'break-word',
+      'width': props.sideOffset,
       'paddingLeft': '0',
       'marginBottom': '0',
       'marginTop': topMargin,

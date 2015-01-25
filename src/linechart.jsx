@@ -125,7 +125,9 @@ var LineChart = React.createClass({
 
   getDefaultProps: function() {
     return {
-      margins: {top: 20, right: 120, bottom: 30, left: 30},
+      margins: {top: 10, right: 20, bottom: 30, left: 30},
+      legendOffset: 120,
+      titleOffset: 56,
       pointRadius: 3,
       width: 400,
       height: 200,
@@ -156,8 +158,18 @@ var LineChart = React.createClass({
   render: function() {
 
     // Calculate inner chart dimensions
-    var chartWidth = this.props.width - this.props.margins.left - this.props.margins.right;
-    var chartHeight = this.props.height - this.props.margins.top - this.props.margins.bottom;
+    var chartWidth, chartHeight;
+
+    chartWidth = this.props.width - this.props.margins.left - this.props.margins.right;
+    chartHeight = this.props.height - this.props.margins.top - this.props.margins.bottom;
+
+    if (this.props.legend) {
+      chartWidth = chartWidth - this.props.legendOffset;
+    }
+
+    if (this.props.title) {
+      chartHeight = chartHeight - this.props.titleOffset;
+    }
 
     var scales = this._calculateScales(this.props, chartWidth, chartHeight);
 
@@ -186,7 +198,15 @@ var LineChart = React.createClass({
 
     if (this.props.legend) {
       return (
-        <LegendChart legend={this.props.legend} data={this.props.data} margins={this.props.margins} colors={this.props.colors} width={this.props.width} height={this.props.height} title={this.props.title}>
+        <LegendChart
+          legend={this.props.legend}
+          data={this.props.data}
+          margins={this.props.margins}
+          colors={this.props.colors}
+          width={this.props.width}
+          height={this.props.height}
+          title={this.props.title}
+        >
           <g transform={trans}>
             {dataSeriesArray}
             <YAxis
@@ -215,7 +235,15 @@ var LineChart = React.createClass({
     }
 
     return (
-      <Chart legend={this.props.legend} data={this.props.data} margins={this.props.margins} colors={this.props.colors} width={this.props.width} height={this.props.height} title={this.props.title}>
+      <Chart
+        legend={this.props.legend}
+        data={this.props.data}
+        margins={this.props.margins}
+        colors={this.props.colors}
+        width={this.props.width}
+        height={this.props.height}
+        title={this.props.title}
+      >
         <g transform={trans}>
           {dataSeriesArray}
           <YAxis
