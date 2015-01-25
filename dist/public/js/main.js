@@ -1,4 +1,4 @@
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({"/Users/yangwei/code/react-d3/docs/examples/main.js":[function(require,module,exports){
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({"/home/eric/repos/react-d3/docs/examples/main.js":[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -205,7 +205,7 @@ React.render(
   document.body
 );
 
-},{"../../src":"/Users/yangwei/code/react-d3/src/index.js","../../utils/datagen":"/Users/yangwei/code/react-d3/utils/datagen.js","d3":"/Users/yangwei/code/react-d3/node_modules/d3/d3.js","highlight.js":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/index.js","react":"/Users/yangwei/code/react-d3/node_modules/react/react.js"}],"/Users/yangwei/code/react-d3/node_modules/d3/d3.js":[function(require,module,exports){
+},{"../../src":"/home/eric/repos/react-d3/src/index.js","../../utils/datagen":"/home/eric/repos/react-d3/utils/datagen.js","d3":"/home/eric/repos/react-d3/node_modules/d3/d3.js","highlight.js":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/index.js","react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/node_modules/d3/d3.js":[function(require,module,exports){
 !function() {
   var d3 = {
     version: "3.5.3"
@@ -9672,7 +9672,7 @@ React.render(
   if (typeof define === "function" && define.amd) define(d3); else if (typeof module === "object" && module.exports) module.exports = d3;
   this.d3 = d3;
 }();
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/highlight.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/highlight.js":[function(require,module,exports){
 /*
 Syntax highlighting with language autodetection.
 https://highlightjs.org/
@@ -10413,7 +10413,7 @@ https://highlightjs.org/
   return hljs;
 }));
 
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/index.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/index.js":[function(require,module,exports){
 var hljs = require('./highlight');
 
 hljs.registerLanguage('1c', require('./languages/1c'));
@@ -10530,7 +10530,7 @@ hljs.registerLanguage('x86asm', require('./languages/x86asm'));
 hljs.registerLanguage('xl', require('./languages/xl'));
 
 module.exports = hljs;
-},{"./highlight":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/highlight.js","./languages/1c":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/1c.js","./languages/actionscript":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/actionscript.js","./languages/apache":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/apache.js","./languages/applescript":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/applescript.js","./languages/asciidoc":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/asciidoc.js","./languages/aspectj":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/aspectj.js","./languages/autohotkey":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/autohotkey.js","./languages/avrasm":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/avrasm.js","./languages/axapta":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/axapta.js","./languages/bash":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/bash.js","./languages/brainfuck":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/brainfuck.js","./languages/capnproto":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/capnproto.js","./languages/clojure":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/clojure.js","./languages/clojure-repl":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/clojure-repl.js","./languages/cmake":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/cmake.js","./languages/coffeescript":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/coffeescript.js","./languages/cpp":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/cpp.js","./languages/cs":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/cs.js","./languages/css":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/css.js","./languages/d":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/d.js","./languages/dart":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/dart.js","./languages/delphi":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/delphi.js","./languages/diff":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/diff.js","./languages/django":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/django.js","./languages/dos":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/dos.js","./languages/dust":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/dust.js","./languages/elixir":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/elixir.js","./languages/erb":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/erb.js","./languages/erlang":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/erlang.js","./languages/erlang-repl":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/erlang-repl.js","./languages/fix":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/fix.js","./languages/fsharp":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/fsharp.js","./languages/gcode":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/gcode.js","./languages/gherkin":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/gherkin.js","./languages/glsl":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/glsl.js","./languages/go":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/go.js","./languages/gradle":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/gradle.js","./languages/groovy":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/groovy.js","./languages/haml":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/haml.js","./languages/handlebars":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/handlebars.js","./languages/haskell":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/haskell.js","./languages/haxe":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/haxe.js","./languages/http":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/http.js","./languages/ini":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/ini.js","./languages/java":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/java.js","./languages/javascript":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/javascript.js","./languages/json":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/json.js","./languages/lasso":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/lasso.js","./languages/less":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/less.js","./languages/lisp":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/lisp.js","./languages/livecodeserver":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/livecodeserver.js","./languages/livescript":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/livescript.js","./languages/lua":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/lua.js","./languages/makefile":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/makefile.js","./languages/markdown":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/markdown.js","./languages/mathematica":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/mathematica.js","./languages/matlab":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/matlab.js","./languages/mel":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/mel.js","./languages/mercury":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/mercury.js","./languages/mizar":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/mizar.js","./languages/monkey":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/monkey.js","./languages/nginx":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/nginx.js","./languages/nimrod":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/nimrod.js","./languages/nix":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/nix.js","./languages/nsis":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/nsis.js","./languages/objectivec":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/objectivec.js","./languages/ocaml":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/ocaml.js","./languages/oxygene":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/oxygene.js","./languages/parser3":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/parser3.js","./languages/perl":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/perl.js","./languages/php":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/php.js","./languages/powershell":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/powershell.js","./languages/processing":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/processing.js","./languages/profile":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/profile.js","./languages/protobuf":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/protobuf.js","./languages/puppet":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/puppet.js","./languages/python":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/python.js","./languages/q":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/q.js","./languages/r":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/r.js","./languages/rib":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/rib.js","./languages/roboconf":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/roboconf.js","./languages/rsl":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/rsl.js","./languages/ruby":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/ruby.js","./languages/ruleslanguage":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/ruleslanguage.js","./languages/rust":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/rust.js","./languages/scala":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/scala.js","./languages/scheme":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/scheme.js","./languages/scilab":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/scilab.js","./languages/scss":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/scss.js","./languages/smali":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/smali.js","./languages/smalltalk":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/smalltalk.js","./languages/sml":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/sml.js","./languages/sql":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/sql.js","./languages/stata":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/stata.js","./languages/step21":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/step21.js","./languages/stylus":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/stylus.js","./languages/swift":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/swift.js","./languages/tcl":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/tcl.js","./languages/tex":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/tex.js","./languages/thrift":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/thrift.js","./languages/twig":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/twig.js","./languages/typescript":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/typescript.js","./languages/vala":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/vala.js","./languages/vbnet":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/vbnet.js","./languages/vbscript":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/vbscript.js","./languages/vbscript-html":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/vbscript-html.js","./languages/verilog":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/verilog.js","./languages/vhdl":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/vhdl.js","./languages/vim":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/vim.js","./languages/x86asm":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/x86asm.js","./languages/xl":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/xl.js","./languages/xml":"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/xml.js"}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/1c.js":[function(require,module,exports){
+},{"./highlight":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/highlight.js","./languages/1c":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/1c.js","./languages/actionscript":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/actionscript.js","./languages/apache":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/apache.js","./languages/applescript":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/applescript.js","./languages/asciidoc":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/asciidoc.js","./languages/aspectj":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/aspectj.js","./languages/autohotkey":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/autohotkey.js","./languages/avrasm":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/avrasm.js","./languages/axapta":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/axapta.js","./languages/bash":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/bash.js","./languages/brainfuck":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/brainfuck.js","./languages/capnproto":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/capnproto.js","./languages/clojure":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/clojure.js","./languages/clojure-repl":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/clojure-repl.js","./languages/cmake":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/cmake.js","./languages/coffeescript":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/coffeescript.js","./languages/cpp":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/cpp.js","./languages/cs":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/cs.js","./languages/css":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/css.js","./languages/d":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/d.js","./languages/dart":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/dart.js","./languages/delphi":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/delphi.js","./languages/diff":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/diff.js","./languages/django":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/django.js","./languages/dos":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/dos.js","./languages/dust":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/dust.js","./languages/elixir":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/elixir.js","./languages/erb":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/erb.js","./languages/erlang":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/erlang.js","./languages/erlang-repl":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/erlang-repl.js","./languages/fix":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/fix.js","./languages/fsharp":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/fsharp.js","./languages/gcode":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/gcode.js","./languages/gherkin":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/gherkin.js","./languages/glsl":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/glsl.js","./languages/go":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/go.js","./languages/gradle":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/gradle.js","./languages/groovy":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/groovy.js","./languages/haml":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/haml.js","./languages/handlebars":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/handlebars.js","./languages/haskell":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/haskell.js","./languages/haxe":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/haxe.js","./languages/http":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/http.js","./languages/ini":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/ini.js","./languages/java":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/java.js","./languages/javascript":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/javascript.js","./languages/json":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/json.js","./languages/lasso":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/lasso.js","./languages/less":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/less.js","./languages/lisp":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/lisp.js","./languages/livecodeserver":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/livecodeserver.js","./languages/livescript":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/livescript.js","./languages/lua":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/lua.js","./languages/makefile":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/makefile.js","./languages/markdown":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/markdown.js","./languages/mathematica":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/mathematica.js","./languages/matlab":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/matlab.js","./languages/mel":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/mel.js","./languages/mercury":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/mercury.js","./languages/mizar":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/mizar.js","./languages/monkey":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/monkey.js","./languages/nginx":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/nginx.js","./languages/nimrod":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/nimrod.js","./languages/nix":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/nix.js","./languages/nsis":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/nsis.js","./languages/objectivec":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/objectivec.js","./languages/ocaml":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/ocaml.js","./languages/oxygene":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/oxygene.js","./languages/parser3":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/parser3.js","./languages/perl":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/perl.js","./languages/php":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/php.js","./languages/powershell":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/powershell.js","./languages/processing":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/processing.js","./languages/profile":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/profile.js","./languages/protobuf":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/protobuf.js","./languages/puppet":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/puppet.js","./languages/python":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/python.js","./languages/q":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/q.js","./languages/r":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/r.js","./languages/rib":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/rib.js","./languages/roboconf":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/roboconf.js","./languages/rsl":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/rsl.js","./languages/ruby":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/ruby.js","./languages/ruleslanguage":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/ruleslanguage.js","./languages/rust":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/rust.js","./languages/scala":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/scala.js","./languages/scheme":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/scheme.js","./languages/scilab":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/scilab.js","./languages/scss":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/scss.js","./languages/smali":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/smali.js","./languages/smalltalk":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/smalltalk.js","./languages/sml":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/sml.js","./languages/sql":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/sql.js","./languages/stata":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/stata.js","./languages/step21":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/step21.js","./languages/stylus":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/stylus.js","./languages/swift":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/swift.js","./languages/tcl":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/tcl.js","./languages/tex":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/tex.js","./languages/thrift":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/thrift.js","./languages/twig":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/twig.js","./languages/typescript":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/typescript.js","./languages/vala":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/vala.js","./languages/vbnet":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/vbnet.js","./languages/vbscript":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/vbscript.js","./languages/vbscript-html":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/vbscript-html.js","./languages/verilog":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/verilog.js","./languages/vhdl":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/vhdl.js","./languages/vim":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/vim.js","./languages/x86asm":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/x86asm.js","./languages/xl":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/xl.js","./languages/xml":"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/xml.js"}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/1c.js":[function(require,module,exports){
 module.exports = function(hljs){
   var IDENT_RE_RU = '[a-zA-Zа-яА-Я][a-zA-Z0-9_а-яА-Я]*';
   var OneS_KEYWORDS = 'возврат дата для если и или иначе иначеесли исключение конецесли ' +
@@ -10616,7 +10616,7 @@ module.exports = function(hljs){
     ]
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/actionscript.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/actionscript.js":[function(require,module,exports){
 module.exports = function(hljs) {
   var IDENT_RE = '[a-zA-Z_$][a-zA-Z0-9_$]*';
   var IDENT_FUNC_RETURN_TYPE_RE = '([*]|[a-zA-Z_$][a-zA-Z0-9_$]*)';
@@ -10690,7 +10690,7 @@ module.exports = function(hljs) {
     ]
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/apache.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/apache.js":[function(require,module,exports){
 module.exports = function(hljs) {
   var NUMBER = {className: 'number', begin: '[\\$%]\\d+'};
   return {
@@ -10736,7 +10736,7 @@ module.exports = function(hljs) {
     illegal: /\S/
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/applescript.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/applescript.js":[function(require,module,exports){
 module.exports = function(hljs) {
   var STRING = hljs.inherit(hljs.QUOTE_STRING_MODE, {illegal: ''});
   var PARAMS = {
@@ -10832,7 +10832,7 @@ module.exports = function(hljs) {
     illegal: '//|->|=>'
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/asciidoc.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/asciidoc.js":[function(require,module,exports){
 module.exports = function(hljs) {
   return {
     contains: [
@@ -11021,7 +11021,7 @@ module.exports = function(hljs) {
     ]
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/aspectj.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/aspectj.js":[function(require,module,exports){
 module.exports = function (hljs) {
   var KEYWORDS =
     'false synchronized int abstract float private char boolean static null if const ' +
@@ -11157,7 +11157,7 @@ module.exports = function (hljs) {
     ]
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/autohotkey.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/autohotkey.js":[function(require,module,exports){
 module.exports = function(hljs) {
   var BACKTICK_ESCAPE = {
     className: 'escape',
@@ -11217,7 +11217,7 @@ module.exports = function(hljs) {
     ])
   }
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/avrasm.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/avrasm.js":[function(require,module,exports){
 module.exports = function(hljs) {
   return {
     case_insensitive: true,
@@ -11273,7 +11273,7 @@ module.exports = function(hljs) {
     ]
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/axapta.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/axapta.js":[function(require,module,exports){
 module.exports = function(hljs) {
   return {
     keywords: 'false int abstract private char boolean static null if for true ' +
@@ -11304,7 +11304,7 @@ module.exports = function(hljs) {
     ]
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/bash.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/bash.js":[function(require,module,exports){
 module.exports = function(hljs) {
   var VAR = {
     className: 'variable',
@@ -11380,7 +11380,7 @@ module.exports = function(hljs) {
     ]
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/brainfuck.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/brainfuck.js":[function(require,module,exports){
 module.exports = function(hljs){
   var LITERAL = {
     className: 'literal',
@@ -11416,7 +11416,7 @@ module.exports = function(hljs){
     ]
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/capnproto.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/capnproto.js":[function(require,module,exports){
 module.exports = function(hljs) {
   return {
     aliases: ['capnp'],
@@ -11465,7 +11465,7 @@ module.exports = function(hljs) {
     ]
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/clojure-repl.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/clojure-repl.js":[function(require,module,exports){
 module.exports = function(hljs) {
   return {
     contains: [
@@ -11480,7 +11480,7 @@ module.exports = function(hljs) {
     ]
   }
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/clojure.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/clojure.js":[function(require,module,exports){
 module.exports = function(hljs) {
   var keywords = {
     built_in:
@@ -11579,7 +11579,7 @@ module.exports = function(hljs) {
     contains: [LIST, STRING, HINT, HINT_COL, COMMENT, KEY, COLLECTION, NUMBER, LITERAL]
   }
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/cmake.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/cmake.js":[function(require,module,exports){
 module.exports = function(hljs) {
   return {
     aliases: ['cmake.in'],
@@ -11618,7 +11618,7 @@ module.exports = function(hljs) {
     ]
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/coffeescript.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/coffeescript.js":[function(require,module,exports){
 module.exports = function(hljs) {
   var KEYWORDS = {
     keyword:
@@ -11766,7 +11766,7 @@ module.exports = function(hljs) {
     ])
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/cpp.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/cpp.js":[function(require,module,exports){
 module.exports = function(hljs) {
   var CPP_KEYWORDS = {
     keyword: 'false int float while private char catch export virtual operator sizeof ' +
@@ -11869,7 +11869,7 @@ module.exports = function(hljs) {
     ]
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/cs.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/cs.js":[function(require,module,exports){
 module.exports = function(hljs) {
   var KEYWORDS =
     // Normal keywords.
@@ -11969,7 +11969,7 @@ module.exports = function(hljs) {
     ]
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/css.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/css.js":[function(require,module,exports){
 module.exports = function(hljs) {
   var IDENT_RE = '[a-zA-Z-][a-zA-Z0-9_-]*';
   var FUNCTION = {
@@ -12073,7 +12073,7 @@ module.exports = function(hljs) {
     ]
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/d.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/d.js":[function(require,module,exports){
 module.exports = /**
  * Known issues:
  *
@@ -12330,7 +12330,7 @@ function(hljs) {
     ]
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/dart.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/dart.js":[function(require,module,exports){
 module.exports = function (hljs) {
   var SUBST = {
     className: 'subst',
@@ -12429,7 +12429,7 @@ module.exports = function (hljs) {
     ]
   }
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/delphi.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/delphi.js":[function(require,module,exports){
 module.exports = function(hljs) {
   var KEYWORDS =
     'exports register file shl array record property for mod while set ally label uses raise not ' +
@@ -12488,7 +12488,7 @@ module.exports = function(hljs) {
     ]
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/diff.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/diff.js":[function(require,module,exports){
 module.exports = function(hljs) {
   return {
     aliases: ['patch'],
@@ -12528,7 +12528,7 @@ module.exports = function(hljs) {
     ]
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/django.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/django.js":[function(require,module,exports){
 module.exports = function(hljs) {
   var FILTER = {
     className: 'filter',
@@ -12584,7 +12584,7 @@ module.exports = function(hljs) {
     ]
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/dos.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/dos.js":[function(require,module,exports){
 module.exports = function(hljs) {
   var COMMENT = {
     className: 'comment',
@@ -12631,7 +12631,7 @@ module.exports = function(hljs) {
     ]
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/dust.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/dust.js":[function(require,module,exports){
 module.exports = function(hljs) {
   var EXPRESSION_KEYWORDS = 'if eq ne lt lte gt gte select default math sep';
   return {
@@ -12666,7 +12666,7 @@ module.exports = function(hljs) {
     ]
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/elixir.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/elixir.js":[function(require,module,exports){
 module.exports = function(hljs) {
   var ELIXIR_IDENT_RE = '[a-zA-Z_][a-zA-Z0-9_]*(\\!|\\?)?';
   var ELIXIR_METHOD_RE = '[a-zA-Z_]\\w*[!?=]?|[-+~]\\@|<<|>>|=~|===?|<=>|[<>]=?|\\*\\*|[-/+%^&*~`|]|\\[\\]=?';
@@ -12775,7 +12775,7 @@ module.exports = function(hljs) {
     contains: ELIXIR_DEFAULT_CONTAINS
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/erb.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/erb.js":[function(require,module,exports){
 module.exports = function(hljs) {
   return {
     subLanguage: 'xml', subLanguageMode: 'continuous',
@@ -12793,7 +12793,7 @@ module.exports = function(hljs) {
     ]
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/erlang-repl.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/erlang-repl.js":[function(require,module,exports){
 module.exports = function(hljs) {
   return {
     keywords: {
@@ -12844,7 +12844,7 @@ module.exports = function(hljs) {
     ]
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/erlang.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/erlang.js":[function(require,module,exports){
 module.exports = function(hljs) {
   var BASIC_ATOM_RE = '[a-z\'][a-zA-Z0-9_\']*';
   var FUNCTION_NAME_RE = '(' + BASIC_ATOM_RE + ':' + BASIC_ATOM_RE + '|' + BASIC_ATOM_RE + ')';
@@ -12999,7 +12999,7 @@ module.exports = function(hljs) {
     ]
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/fix.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/fix.js":[function(require,module,exports){
 module.exports = function(hljs) {
   return {
     contains: [
@@ -13028,7 +13028,7 @@ module.exports = function(hljs) {
     case_insensitive: true
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/fsharp.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/fsharp.js":[function(require,module,exports){
 module.exports = function(hljs) {
   var TYPEPARAM = {
     begin: '<', end: '>',
@@ -13087,7 +13087,7 @@ module.exports = function(hljs) {
     ]
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/gcode.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/gcode.js":[function(require,module,exports){
 module.exports = function(hljs) {
     var GCODE_IDENT_RE = '[A-Z_][A-Z0-9_.]*';
     var GCODE_CLOSE_RE = '\\%';
@@ -13164,7 +13164,7 @@ module.exports = function(hljs) {
         ].concat(GCODE_CODE)
     };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/gherkin.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/gherkin.js":[function(require,module,exports){
 module.exports = function (hljs) {
   return {
     aliases: ['feature'],
@@ -13195,7 +13195,7 @@ module.exports = function (hljs) {
     ]
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/glsl.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/glsl.js":[function(require,module,exports){
 module.exports = function(hljs) {
   return {
     keywords: {
@@ -13289,7 +13289,7 @@ module.exports = function(hljs) {
     ]
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/go.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/go.js":[function(require,module,exports){
 module.exports = function(hljs) {
   var GO_KEYWORDS = {
     keyword:
@@ -13328,7 +13328,7 @@ module.exports = function(hljs) {
     ]
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/gradle.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/gradle.js":[function(require,module,exports){
 module.exports = function(hljs) {
   return {
     case_insensitive: true,
@@ -13363,7 +13363,7 @@ module.exports = function(hljs) {
     ]
   }
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/groovy.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/groovy.js":[function(require,module,exports){
 module.exports = function(hljs) {
     return {
         keywords: {
@@ -13449,7 +13449,7 @@ module.exports = function(hljs) {
         ]
     }
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/haml.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/haml.js":[function(require,module,exports){
 module.exports = // TODO support filter tags like :javascript, support inline HTML
 function(hljs) {
   return {
@@ -13571,7 +13571,7 @@ function(hljs) {
     ]
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/handlebars.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/handlebars.js":[function(require,module,exports){
 module.exports = function(hljs) {
   var EXPRESSION_KEYWORDS = 'each in with if else unless bindattr action collection debugger log outlet template unbound view yield';
   return {
@@ -13604,7 +13604,7 @@ module.exports = function(hljs) {
     ]
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/haskell.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/haskell.js":[function(require,module,exports){
 module.exports = function(hljs) {
 
   var COMMENT = {
@@ -13730,7 +13730,7 @@ module.exports = function(hljs) {
     ]
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/haxe.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/haxe.js":[function(require,module,exports){
 module.exports = function(hljs) {
   var IDENT_RE = '[a-zA-Z_$][a-zA-Z0-9_$]*';
   var IDENT_FUNC_RETURN_TYPE_RE = '([*]|[a-zA-Z_$][a-zA-Z0-9_$]*)';
@@ -13791,7 +13791,7 @@ module.exports = function(hljs) {
     ]
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/http.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/http.js":[function(require,module,exports){
 module.exports = function(hljs) {
   return {
     illegal: '\\S',
@@ -13825,7 +13825,7 @@ module.exports = function(hljs) {
     ]
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/ini.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/ini.js":[function(require,module,exports){
 module.exports = function(hljs) {
   return {
     case_insensitive: true,
@@ -13855,7 +13855,7 @@ module.exports = function(hljs) {
     ]
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/java.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/java.js":[function(require,module,exports){
 module.exports = function(hljs) {
   var GENERIC_IDENT_RE = hljs.UNDERSCORE_IDENT_RE + '(<' + hljs.UNDERSCORE_IDENT_RE + '>)?';
   var KEYWORDS =
@@ -13939,7 +13939,7 @@ module.exports = function(hljs) {
     ]
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/javascript.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/javascript.js":[function(require,module,exports){
 module.exports = function(hljs) {
   return {
     aliases: ['js'],
@@ -14014,7 +14014,7 @@ module.exports = function(hljs) {
     ]
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/json.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/json.js":[function(require,module,exports){
 module.exports = function(hljs) {
   var LITERALS = {literal: 'true false null'};
   var TYPES = [
@@ -14052,7 +14052,7 @@ module.exports = function(hljs) {
     illegal: '\\S'
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/lasso.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/lasso.js":[function(require,module,exports){
 module.exports = function(hljs) {
   var LASSO_IDENT_RE = '[a-zA-Z_][a-zA-Z0-9_.]*';
   var LASSO_ANGLE_RE = '<\\?(lasso(script)?|=)';
@@ -14237,7 +14237,7 @@ module.exports = function(hljs) {
     ].concat(LASSO_CODE)
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/less.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/less.js":[function(require,module,exports){
 module.exports = function(hljs) {
   var IDENT_RE        = '[\\w-]+'; // yes, Less identifiers may begin with a digit
   var INTERP_IDENT_RE = '(' + IDENT_RE + '|@{' + IDENT_RE + '})+';
@@ -14374,7 +14374,7 @@ module.exports = function(hljs) {
     contains: RULES
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/lisp.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/lisp.js":[function(require,module,exports){
 module.exports = function(hljs) {
   var LISP_IDENT_RE = '[a-zA-Z_\\-\\+\\*\\/\\<\\=\\>\\&\\#][a-zA-Z0-9_\\-\\+\\*\\/\\<\\=\\>\\&\\#!]*';
   var MEC_RE = '\\|[^]*?\\|';
@@ -14471,7 +14471,7 @@ module.exports = function(hljs) {
     ]
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/livecodeserver.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/livecodeserver.js":[function(require,module,exports){
 module.exports = function(hljs) {
   var VARIABLE = {
     className: 'variable', begin: '\\b[gtps][A-Z]+[A-Za-z0-9_\\-]*\\b|\\$_[A-Z]+',
@@ -14640,7 +14640,7 @@ module.exports = function(hljs) {
     illegal: ';$|^\\[|^='
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/livescript.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/livescript.js":[function(require,module,exports){
 module.exports = function(hljs) {
   var KEYWORDS = {
     keyword:
@@ -14794,7 +14794,7 @@ module.exports = function(hljs) {
     ])
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/lua.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/lua.js":[function(require,module,exports){
 module.exports = function(hljs) {
   var OPENING_LONG_BRACKET = '\\[=*\\[';
   var CLOSING_LONG_BRACKET = '\\]=*\\]';
@@ -14851,7 +14851,7 @@ module.exports = function(hljs) {
     ])
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/makefile.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/makefile.js":[function(require,module,exports){
 module.exports = function(hljs) {
   var VARIABLE = {
     className: 'variable',
@@ -14897,7 +14897,7 @@ module.exports = function(hljs) {
     ]
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/markdown.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/markdown.js":[function(require,module,exports){
 module.exports = function(hljs) {
   return {
     aliases: ['md', 'mkdown', 'mkd'],
@@ -14999,7 +14999,7 @@ module.exports = function(hljs) {
     ]
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/mathematica.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/mathematica.js":[function(require,module,exports){
 module.exports = function(hljs) {
   return {
     aliases: ['mma'],
@@ -15058,7 +15058,7 @@ module.exports = function(hljs) {
     ]
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/matlab.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/matlab.js":[function(require,module,exports){
 module.exports = function(hljs) {
   var COMMON_CONTAINS = [
     hljs.C_NUMBER_MODE,
@@ -15152,7 +15152,7 @@ module.exports = function(hljs) {
     ].concat(COMMON_CONTAINS)
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/mel.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/mel.js":[function(require,module,exports){
 module.exports = function(hljs) {
   return {
     keywords:
@@ -15382,7 +15382,7 @@ module.exports = function(hljs) {
     ]
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/mercury.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/mercury.js":[function(require,module,exports){
 module.exports = function(hljs) {
   var KEYWORDS = {
     keyword:
@@ -15471,7 +15471,7 @@ module.exports = function(hljs) {
     ]
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/mizar.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/mizar.js":[function(require,module,exports){
 module.exports = function(hljs) {
   return {
     keywords:
@@ -15493,7 +15493,7 @@ module.exports = function(hljs) {
     ]
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/monkey.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/monkey.js":[function(require,module,exports){
 module.exports = function(hljs) {
   var NUMBER = {
     className: 'number', relevance: 0,
@@ -15572,7 +15572,7 @@ module.exports = function(hljs) {
     ]
   }
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/nginx.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/nginx.js":[function(require,module,exports){
 module.exports = function(hljs) {
   var VAR = {
     className: 'variable',
@@ -15654,7 +15654,7 @@ module.exports = function(hljs) {
     illegal: '[^\\s\\}]'
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/nimrod.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/nimrod.js":[function(require,module,exports){
 module.exports = function(hljs) {
   return {
     keywords: {
@@ -15709,7 +15709,7 @@ module.exports = function(hljs) {
     ]
   }
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/nix.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/nix.js":[function(require,module,exports){
 module.exports = function(hljs) {
   var NIX_KEYWORDS = {
     keyword: 'rec with let in inherit assert if else then',
@@ -15759,7 +15759,7 @@ module.exports = function(hljs) {
     contains: EXPRESSIONS
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/nsis.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/nsis.js":[function(require,module,exports){
 module.exports = function(hljs) {
   var CONSTANTS = {
     className: 'symbol',
@@ -15845,7 +15845,7 @@ module.exports = function(hljs) {
     ]
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/objectivec.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/objectivec.js":[function(require,module,exports){
 module.exports = function(hljs) {
   var OBJC_KEYWORDS = {
     keyword:
@@ -15932,7 +15932,7 @@ module.exports = function(hljs) {
     ]
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/ocaml.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/ocaml.js":[function(require,module,exports){
 module.exports = function(hljs) {
   /* missing support for heredoc-like string (OCaml 4.0.2+) */
   return {
@@ -16000,7 +16000,7 @@ module.exports = function(hljs) {
     ]
   }
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/oxygene.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/oxygene.js":[function(require,module,exports){
 module.exports = function(hljs) {
   var OXYGENE_KEYWORDS = 'abstract add and array as asc aspect assembly async begin break block by case class concat const copy constructor continue '+
     'create default delegate desc distinct div do downto dynamic each else empty end ensure enum equals event except exit extension external false '+
@@ -16065,7 +16065,7 @@ module.exports = function(hljs) {
     ]
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/parser3.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/parser3.js":[function(require,module,exports){
 module.exports = function(hljs) {
   return {
     subLanguage: 'xml', relevance: 0,
@@ -16110,7 +16110,7 @@ module.exports = function(hljs) {
     ]
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/perl.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/perl.js":[function(require,module,exports){
 module.exports = function(hljs) {
   var PERL_KEYWORDS = 'getpwent getservent quotemeta msgrcv scalar kill dbmclose undef lc ' +
     'ma syswrite tr send umask sysopen shmwrite vec qx utime local oct semctl localtime ' +
@@ -16259,7 +16259,7 @@ module.exports = function(hljs) {
     contains: PERL_DEFAULT_CONTAINS
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/php.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/php.js":[function(require,module,exports){
 module.exports = function(hljs) {
   var VARIABLE = {
     className: 'variable', begin: '\\$+[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*'
@@ -16369,7 +16369,7 @@ module.exports = function(hljs) {
     ]
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/powershell.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/powershell.js":[function(require,module,exports){
 module.exports = function(hljs) {
   var backtickEscape = {
     begin: '`[\\s\\S]',
@@ -16421,7 +16421,7 @@ module.exports = function(hljs) {
     ]
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/processing.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/processing.js":[function(require,module,exports){
 module.exports = function(hljs) {
   return {
     keywords: {
@@ -16469,7 +16469,7 @@ module.exports = function(hljs) {
     ]
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/profile.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/profile.js":[function(require,module,exports){
 module.exports = function(hljs) {
   return {
     contains: [
@@ -16511,7 +16511,7 @@ module.exports = function(hljs) {
     ]
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/protobuf.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/protobuf.js":[function(require,module,exports){
 module.exports = function(hljs) {
   return {
     keywords: {
@@ -16548,7 +16548,7 @@ module.exports = function(hljs) {
     ]
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/puppet.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/puppet.js":[function(require,module,exports){
 module.exports = function(hljs) {
   var PUPPET_TYPE_REFERENCE =
       'augeas computer cron exec file filebucket host interface k5login macauthorization mailalias maillist mcx mount nagios_command ' +
@@ -16658,7 +16658,7 @@ module.exports = function(hljs) {
     contains: PUPPET_DEFAULT_CONTAINS
   }
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/python.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/python.js":[function(require,module,exports){
 module.exports = function(hljs) {
   var PROMPT = {
     className: 'prompt',  begin: /^(>>>|\.\.\.) /
@@ -16743,7 +16743,7 @@ module.exports = function(hljs) {
     ]
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/q.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/q.js":[function(require,module,exports){
 module.exports = function(hljs) {
   var Q_KEYWORDS = {
   keyword:
@@ -16766,7 +16766,7 @@ module.exports = function(hljs) {
      ]
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/r.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/r.js":[function(require,module,exports){
 module.exports = function(hljs) {
   var IDENT_RE = '([a-zA-Z]|\\.[a-zA-Z.])[a-zA-Z0-9._]*';
 
@@ -16836,7 +16836,7 @@ module.exports = function(hljs) {
     ]
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/rib.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/rib.js":[function(require,module,exports){
 module.exports = function(hljs) {
   return {
     keywords:
@@ -16863,7 +16863,7 @@ module.exports = function(hljs) {
     ]
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/roboconf.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/roboconf.js":[function(require,module,exports){
 module.exports = function(hljs) {
   var IDENTIFIER = '[a-zA-Z-_][^\n{\r\n]+\\{';
 
@@ -16923,7 +16923,7 @@ module.exports = function(hljs) {
     ]
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/rsl.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/rsl.js":[function(require,module,exports){
 module.exports = function(hljs) {
   return {
     keywords: {
@@ -16960,7 +16960,7 @@ module.exports = function(hljs) {
     ]
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/ruby.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/ruby.js":[function(require,module,exports){
 module.exports = function(hljs) {
   var RUBY_METHOD_RE = '[a-zA-Z_]\\w*[!?=]?|[-+~]\\@|<<|>>|=~|===?|<=>|[<>]=?|\\*\\*|[-/+%^&*~`|]|\\[\\]=?';
   var RUBY_KEYWORDS =
@@ -17132,7 +17132,7 @@ module.exports = function(hljs) {
     contains: [COMMENT].concat(IRB_DEFAULT).concat(RUBY_DEFAULT_CONTAINS)
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/ruleslanguage.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/ruleslanguage.js":[function(require,module,exports){
 module.exports = function(hljs) {
   return {
     keywords: {
@@ -17189,7 +17189,7 @@ module.exports = function(hljs) {
     ]
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/rust.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/rust.js":[function(require,module,exports){
 module.exports = function(hljs) {
   var BLOCK_COMMENT = hljs.inherit(hljs.C_BLOCK_COMMENT_MODE);
   BLOCK_COMMENT.contains.push('self');
@@ -17262,7 +17262,7 @@ module.exports = function(hljs) {
     ]
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/scala.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/scala.js":[function(require,module,exports){
 module.exports = function(hljs) {
 
   var ANNOTATION = {
@@ -17335,7 +17335,7 @@ module.exports = function(hljs) {
     ]
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/scheme.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/scheme.js":[function(require,module,exports){
 module.exports = function(hljs) {
   var SCHEME_IDENT_RE = '[^\\(\\)\\[\\]\\{\\}",\'`;#|\\\\\\s]+';
   var SCHEME_SIMPLE_NUMBER_RE = '(\\-|\\+)?\\d+([./]\\d+)?';
@@ -17454,7 +17454,7 @@ module.exports = function(hljs) {
     contains: [SHEBANG, NUMBER, STRING, COMMENT, QUOTED_IDENT, LIST]
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/scilab.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/scilab.js":[function(require,module,exports){
 module.exports = function(hljs) {
 
   var COMMON_CONTAINS = [
@@ -17512,7 +17512,7 @@ module.exports = function(hljs) {
     ].concat(COMMON_CONTAINS)
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/scss.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/scss.js":[function(require,module,exports){
 module.exports = function(hljs) {
   var IDENT_RE = '[a-zA-Z-][a-zA-Z0-9_-]*';
   var VARIABLE = {
@@ -17629,7 +17629,7 @@ module.exports = function(hljs) {
     ]
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/smali.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/smali.js":[function(require,module,exports){
 module.exports = function(hljs) {
   var smali_instr_low_prio = ['add', 'and', 'cmp', 'cmpg', 'cmpl', 'const', 'div', 'double', 'float', 'goto', 'if', 'int', 'long', 'move', 'mul', 'neg', 'new', 'nop', 'not', 'or', 'rem', 'return', 'shl', 'shr', 'sput', 'sub', 'throw', 'ushr', 'xor'];
   var smali_instr_high_prio = ['aget', 'aput', 'array', 'check', 'execute', 'fill', 'filled', 'goto/16', 'goto/32', 'iget', 'instance', 'invoke', 'iput', 'monitor', 'packed', 'sget', 'sparse'];
@@ -17710,7 +17710,7 @@ module.exports = function(hljs) {
     ]
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/smalltalk.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/smalltalk.js":[function(require,module,exports){
 module.exports = function(hljs) {
   var VAR_IDENT_RE = '[a-z][a-zA-Z0-9_]*';
   var CHAR = {
@@ -17766,7 +17766,7 @@ module.exports = function(hljs) {
     ]
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/sml.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/sml.js":[function(require,module,exports){
 module.exports = function(hljs) {
   return {
     aliases: ['ml'],
@@ -17829,7 +17829,7 @@ module.exports = function(hljs) {
     ]
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/sql.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/sql.js":[function(require,module,exports){
 module.exports = function(hljs) {
   var COMMENT_MODE = {
     className: 'comment',
@@ -17932,7 +17932,7 @@ module.exports = function(hljs) {
     ]
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/stata.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/stata.js":[function(require,module,exports){
 module.exports = function(hljs) {
   return {
     aliases: ['do', 'ado'],
@@ -17973,7 +17973,7 @@ module.exports = function(hljs) {
     ]
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/step21.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/step21.js":[function(require,module,exports){
 module.exports = function(hljs) {
   var STEP21_IDENT_RE = '[A-Z_][A-Z0-9_.]*';
   var STEP21_CLOSE_RE = 'END-ISO-10303-21;';
@@ -18029,7 +18029,7 @@ module.exports = function(hljs) {
     ].concat(STEP21_CODE)
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/stylus.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/stylus.js":[function(require,module,exports){
 module.exports = function(hljs) {
 
   var VARIABLE = {
@@ -18471,7 +18471,7 @@ module.exports = function(hljs) {
     ]
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/swift.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/swift.js":[function(require,module,exports){
 module.exports = function(hljs) {
   var SWIFT_KEYWORDS = {
       keyword: 'class deinit enum extension func import init let protocol static ' +
@@ -18580,7 +18580,7 @@ module.exports = function(hljs) {
     ]
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/tcl.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/tcl.js":[function(require,module,exports){
 module.exports = function(hljs) {
   return {
     aliases: ['tk'],
@@ -18647,7 +18647,7 @@ module.exports = function(hljs) {
     ]
   }
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/tex.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/tex.js":[function(require,module,exports){
 module.exports = function(hljs) {
   var COMMAND1 = {
     className: 'command',
@@ -18700,7 +18700,7 @@ module.exports = function(hljs) {
     ]
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/thrift.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/thrift.js":[function(require,module,exports){
 module.exports = function(hljs) {
   var BUILT_IN_TYPES = 'bool byte i16 i32 i64 double string binary';
   return {
@@ -18736,7 +18736,7 @@ module.exports = function(hljs) {
     ]
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/twig.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/twig.js":[function(require,module,exports){
 module.exports = function(hljs) {
   var PARAMS = {
     className: 'params',
@@ -18796,7 +18796,7 @@ module.exports = function(hljs) {
     ]
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/typescript.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/typescript.js":[function(require,module,exports){
 module.exports = function(hljs) {
   return {
     aliases: ['ts'],
@@ -18883,7 +18883,7 @@ module.exports = function(hljs) {
     ]
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/vala.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/vala.js":[function(require,module,exports){
 module.exports = function(hljs) {
   return {
     keywords: {
@@ -18938,7 +18938,7 @@ module.exports = function(hljs) {
     ]
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/vbnet.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/vbnet.js":[function(require,module,exports){
 module.exports = function(hljs) {
   return {
     aliases: ['vb'],
@@ -18989,7 +18989,7 @@ module.exports = function(hljs) {
     ]
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/vbscript-html.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/vbscript-html.js":[function(require,module,exports){
 module.exports = function(hljs) {
   return {
     subLanguage: 'xml', subLanguageMode: 'continuous',
@@ -19001,7 +19001,7 @@ module.exports = function(hljs) {
     ]
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/vbscript.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/vbscript.js":[function(require,module,exports){
 module.exports = function(hljs) {
   return {
     aliases: ['vbs'],
@@ -19038,7 +19038,7 @@ module.exports = function(hljs) {
     ]
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/verilog.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/verilog.js":[function(require,module,exports){
 module.exports = function(hljs) {
   return {
     aliases: ['v'],
@@ -19088,7 +19088,7 @@ module.exports = function(hljs) {
     ]
   }; // return
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/vhdl.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/vhdl.js":[function(require,module,exports){
 module.exports = function(hljs) {
   return {
     case_insensitive: true,
@@ -19131,7 +19131,7 @@ module.exports = function(hljs) {
     ]
   }; // return
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/vim.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/vim.js":[function(require,module,exports){
 module.exports = function(hljs) {
   return {
     lexemes: /[!#@\w]+/,
@@ -19194,7 +19194,7 @@ module.exports = function(hljs) {
     ]
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/x86asm.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/x86asm.js":[function(require,module,exports){
 module.exports = function(hljs) {
   return {
     case_insensitive: true,
@@ -19341,7 +19341,7 @@ module.exports = function(hljs) {
     ]
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/xl.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/xl.js":[function(require,module,exports){
 module.exports = function(hljs) {
   var BUILTIN_MODULES = 'ObjectLoader Animate MovieCredits Slides Filters Shading Materials LensFlare Mapping VLCAudioVideo StereoDecoder PointCloud NetworkAccess RemoteControl RegExp ChromaKey Snowfall NodeJS Speech Charts';
 
@@ -19421,7 +19421,7 @@ module.exports = function(hljs) {
     ]
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/highlight.js/lib/languages/xml.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/highlight.js/lib/languages/xml.js":[function(require,module,exports){
 module.exports = function(hljs) {
   var XML_IDENT_RE = '[A-Za-z0-9\\._:-]+';
   var PHP = {
@@ -19522,7 +19522,7 @@ module.exports = function(hljs) {
     ]
   };
 };
-},{}],"/Users/yangwei/code/react-d3/node_modules/lodash/dist/lodash.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/lodash/dist/lodash.js":[function(require,module,exports){
 (function (global){
 /**
  * @license
@@ -26311,7 +26311,7 @@ module.exports = function(hljs) {
 }.call(this));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],"/Users/yangwei/code/react-d3/node_modules/react/lib/AutoFocusMixin.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/react/lib/AutoFocusMixin.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -26338,7 +26338,7 @@ var AutoFocusMixin = {
 
 module.exports = AutoFocusMixin;
 
-},{"./focusNode":"/Users/yangwei/code/react-d3/node_modules/react/lib/focusNode.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/BeforeInputEventPlugin.js":[function(require,module,exports){
+},{"./focusNode":"/home/eric/repos/react-d3/node_modules/react/lib/focusNode.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/BeforeInputEventPlugin.js":[function(require,module,exports){
 /**
  * Copyright 2013 Facebook, Inc.
  * All rights reserved.
@@ -26560,7 +26560,7 @@ var BeforeInputEventPlugin = {
 
 module.exports = BeforeInputEventPlugin;
 
-},{"./EventConstants":"/Users/yangwei/code/react-d3/node_modules/react/lib/EventConstants.js","./EventPropagators":"/Users/yangwei/code/react-d3/node_modules/react/lib/EventPropagators.js","./ExecutionEnvironment":"/Users/yangwei/code/react-d3/node_modules/react/lib/ExecutionEnvironment.js","./SyntheticInputEvent":"/Users/yangwei/code/react-d3/node_modules/react/lib/SyntheticInputEvent.js","./keyOf":"/Users/yangwei/code/react-d3/node_modules/react/lib/keyOf.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/CSSProperty.js":[function(require,module,exports){
+},{"./EventConstants":"/home/eric/repos/react-d3/node_modules/react/lib/EventConstants.js","./EventPropagators":"/home/eric/repos/react-d3/node_modules/react/lib/EventPropagators.js","./ExecutionEnvironment":"/home/eric/repos/react-d3/node_modules/react/lib/ExecutionEnvironment.js","./SyntheticInputEvent":"/home/eric/repos/react-d3/node_modules/react/lib/SyntheticInputEvent.js","./keyOf":"/home/eric/repos/react-d3/node_modules/react/lib/keyOf.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/CSSProperty.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -26679,8 +26679,7 @@ var CSSProperty = {
 
 module.exports = CSSProperty;
 
-},{}],"/Users/yangwei/code/react-d3/node_modules/react/lib/CSSPropertyOperations.js":[function(require,module,exports){
-(function (process){
+},{}],"/home/eric/repos/react-d3/node_modules/react/lib/CSSPropertyOperations.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -26716,7 +26715,7 @@ if (ExecutionEnvironment.canUseDOM) {
   }
 }
 
-if ("production" !== process.env.NODE_ENV) {
+if ("production" !== "development") {
   var warnedStyleNames = {};
 
   var warnHyphenatedStyleName = function(name) {
@@ -26725,7 +26724,7 @@ if ("production" !== process.env.NODE_ENV) {
     }
 
     warnedStyleNames[name] = true;
-    ("production" !== process.env.NODE_ENV ? warning(
+    ("production" !== "development" ? warning(
       false,
       'Unsupported style property ' + name + '. Did you mean ' +
       camelizeStyleName(name) + '?'
@@ -26756,7 +26755,7 @@ var CSSPropertyOperations = {
       if (!styles.hasOwnProperty(styleName)) {
         continue;
       }
-      if ("production" !== process.env.NODE_ENV) {
+      if ("production" !== "development") {
         if (styleName.indexOf('-') > -1) {
           warnHyphenatedStyleName(styleName);
         }
@@ -26783,7 +26782,7 @@ var CSSPropertyOperations = {
       if (!styles.hasOwnProperty(styleName)) {
         continue;
       }
-      if ("production" !== process.env.NODE_ENV) {
+      if ("production" !== "development") {
         if (styleName.indexOf('-') > -1) {
           warnHyphenatedStyleName(styleName);
         }
@@ -26813,9 +26812,7 @@ var CSSPropertyOperations = {
 
 module.exports = CSSPropertyOperations;
 
-}).call(this,require('_process'))
-},{"./CSSProperty":"/Users/yangwei/code/react-d3/node_modules/react/lib/CSSProperty.js","./ExecutionEnvironment":"/Users/yangwei/code/react-d3/node_modules/react/lib/ExecutionEnvironment.js","./camelizeStyleName":"/Users/yangwei/code/react-d3/node_modules/react/lib/camelizeStyleName.js","./dangerousStyleValue":"/Users/yangwei/code/react-d3/node_modules/react/lib/dangerousStyleValue.js","./hyphenateStyleName":"/Users/yangwei/code/react-d3/node_modules/react/lib/hyphenateStyleName.js","./memoizeStringOnly":"/Users/yangwei/code/react-d3/node_modules/react/lib/memoizeStringOnly.js","./warning":"/Users/yangwei/code/react-d3/node_modules/react/lib/warning.js","_process":"/Users/yangwei/code/react-d3/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/CallbackQueue.js":[function(require,module,exports){
-(function (process){
+},{"./CSSProperty":"/home/eric/repos/react-d3/node_modules/react/lib/CSSProperty.js","./ExecutionEnvironment":"/home/eric/repos/react-d3/node_modules/react/lib/ExecutionEnvironment.js","./camelizeStyleName":"/home/eric/repos/react-d3/node_modules/react/lib/camelizeStyleName.js","./dangerousStyleValue":"/home/eric/repos/react-d3/node_modules/react/lib/dangerousStyleValue.js","./hyphenateStyleName":"/home/eric/repos/react-d3/node_modules/react/lib/hyphenateStyleName.js","./memoizeStringOnly":"/home/eric/repos/react-d3/node_modules/react/lib/memoizeStringOnly.js","./warning":"/home/eric/repos/react-d3/node_modules/react/lib/warning.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/CallbackQueue.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -26876,7 +26873,7 @@ assign(CallbackQueue.prototype, {
     var callbacks = this._callbacks;
     var contexts = this._contexts;
     if (callbacks) {
-      ("production" !== process.env.NODE_ENV ? invariant(
+      ("production" !== "development" ? invariant(
         callbacks.length === contexts.length,
         "Mismatched list of contexts in callback queue"
       ) : invariant(callbacks.length === contexts.length));
@@ -26913,8 +26910,7 @@ PooledClass.addPoolingTo(CallbackQueue);
 
 module.exports = CallbackQueue;
 
-}).call(this,require('_process'))
-},{"./Object.assign":"/Users/yangwei/code/react-d3/node_modules/react/lib/Object.assign.js","./PooledClass":"/Users/yangwei/code/react-d3/node_modules/react/lib/PooledClass.js","./invariant":"/Users/yangwei/code/react-d3/node_modules/react/lib/invariant.js","_process":"/Users/yangwei/code/react-d3/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/ChangeEventPlugin.js":[function(require,module,exports){
+},{"./Object.assign":"/home/eric/repos/react-d3/node_modules/react/lib/Object.assign.js","./PooledClass":"/home/eric/repos/react-d3/node_modules/react/lib/PooledClass.js","./invariant":"/home/eric/repos/react-d3/node_modules/react/lib/invariant.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/ChangeEventPlugin.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -27296,7 +27292,7 @@ var ChangeEventPlugin = {
 
 module.exports = ChangeEventPlugin;
 
-},{"./EventConstants":"/Users/yangwei/code/react-d3/node_modules/react/lib/EventConstants.js","./EventPluginHub":"/Users/yangwei/code/react-d3/node_modules/react/lib/EventPluginHub.js","./EventPropagators":"/Users/yangwei/code/react-d3/node_modules/react/lib/EventPropagators.js","./ExecutionEnvironment":"/Users/yangwei/code/react-d3/node_modules/react/lib/ExecutionEnvironment.js","./ReactUpdates":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactUpdates.js","./SyntheticEvent":"/Users/yangwei/code/react-d3/node_modules/react/lib/SyntheticEvent.js","./isEventSupported":"/Users/yangwei/code/react-d3/node_modules/react/lib/isEventSupported.js","./isTextInputElement":"/Users/yangwei/code/react-d3/node_modules/react/lib/isTextInputElement.js","./keyOf":"/Users/yangwei/code/react-d3/node_modules/react/lib/keyOf.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/ClientReactRootIndex.js":[function(require,module,exports){
+},{"./EventConstants":"/home/eric/repos/react-d3/node_modules/react/lib/EventConstants.js","./EventPluginHub":"/home/eric/repos/react-d3/node_modules/react/lib/EventPluginHub.js","./EventPropagators":"/home/eric/repos/react-d3/node_modules/react/lib/EventPropagators.js","./ExecutionEnvironment":"/home/eric/repos/react-d3/node_modules/react/lib/ExecutionEnvironment.js","./ReactUpdates":"/home/eric/repos/react-d3/node_modules/react/lib/ReactUpdates.js","./SyntheticEvent":"/home/eric/repos/react-d3/node_modules/react/lib/SyntheticEvent.js","./isEventSupported":"/home/eric/repos/react-d3/node_modules/react/lib/isEventSupported.js","./isTextInputElement":"/home/eric/repos/react-d3/node_modules/react/lib/isTextInputElement.js","./keyOf":"/home/eric/repos/react-d3/node_modules/react/lib/keyOf.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/ClientReactRootIndex.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -27321,7 +27317,7 @@ var ClientReactRootIndex = {
 
 module.exports = ClientReactRootIndex;
 
-},{}],"/Users/yangwei/code/react-d3/node_modules/react/lib/CompositionEventPlugin.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/react/lib/CompositionEventPlugin.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -27580,8 +27576,7 @@ var CompositionEventPlugin = {
 
 module.exports = CompositionEventPlugin;
 
-},{"./EventConstants":"/Users/yangwei/code/react-d3/node_modules/react/lib/EventConstants.js","./EventPropagators":"/Users/yangwei/code/react-d3/node_modules/react/lib/EventPropagators.js","./ExecutionEnvironment":"/Users/yangwei/code/react-d3/node_modules/react/lib/ExecutionEnvironment.js","./ReactInputSelection":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactInputSelection.js","./SyntheticCompositionEvent":"/Users/yangwei/code/react-d3/node_modules/react/lib/SyntheticCompositionEvent.js","./getTextContentAccessor":"/Users/yangwei/code/react-d3/node_modules/react/lib/getTextContentAccessor.js","./keyOf":"/Users/yangwei/code/react-d3/node_modules/react/lib/keyOf.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/DOMChildrenOperations.js":[function(require,module,exports){
-(function (process){
+},{"./EventConstants":"/home/eric/repos/react-d3/node_modules/react/lib/EventConstants.js","./EventPropagators":"/home/eric/repos/react-d3/node_modules/react/lib/EventPropagators.js","./ExecutionEnvironment":"/home/eric/repos/react-d3/node_modules/react/lib/ExecutionEnvironment.js","./ReactInputSelection":"/home/eric/repos/react-d3/node_modules/react/lib/ReactInputSelection.js","./SyntheticCompositionEvent":"/home/eric/repos/react-d3/node_modules/react/lib/SyntheticCompositionEvent.js","./getTextContentAccessor":"/home/eric/repos/react-d3/node_modules/react/lib/getTextContentAccessor.js","./keyOf":"/home/eric/repos/react-d3/node_modules/react/lib/keyOf.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/DOMChildrenOperations.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -27691,7 +27686,7 @@ var DOMChildrenOperations = {
         var updatedChild = update.parentNode.childNodes[updatedIndex];
         var parentID = update.parentID;
 
-        ("production" !== process.env.NODE_ENV ? invariant(
+        ("production" !== "development" ? invariant(
           updatedChild,
           'processUpdates(): Unable to find child %s of element. This ' +
           'probably means the DOM was unexpectedly mutated (e.g., by the ' +
@@ -27754,9 +27749,7 @@ var DOMChildrenOperations = {
 
 module.exports = DOMChildrenOperations;
 
-}).call(this,require('_process'))
-},{"./Danger":"/Users/yangwei/code/react-d3/node_modules/react/lib/Danger.js","./ReactMultiChildUpdateTypes":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactMultiChildUpdateTypes.js","./getTextContentAccessor":"/Users/yangwei/code/react-d3/node_modules/react/lib/getTextContentAccessor.js","./invariant":"/Users/yangwei/code/react-d3/node_modules/react/lib/invariant.js","_process":"/Users/yangwei/code/react-d3/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/DOMProperty.js":[function(require,module,exports){
-(function (process){
+},{"./Danger":"/home/eric/repos/react-d3/node_modules/react/lib/Danger.js","./ReactMultiChildUpdateTypes":"/home/eric/repos/react-d3/node_modules/react/lib/ReactMultiChildUpdateTypes.js","./getTextContentAccessor":"/home/eric/repos/react-d3/node_modules/react/lib/getTextContentAccessor.js","./invariant":"/home/eric/repos/react-d3/node_modules/react/lib/invariant.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/DOMProperty.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -27830,7 +27823,7 @@ var DOMPropertyInjection = {
     }
 
     for (var propName in Properties) {
-      ("production" !== process.env.NODE_ENV ? invariant(
+      ("production" !== "development" ? invariant(
         !DOMProperty.isStandardName.hasOwnProperty(propName),
         'injectDOMPropertyConfig(...): You\'re trying to inject DOM property ' +
         '\'%s\' which has already been injected. You may be accidentally ' +
@@ -27879,21 +27872,21 @@ var DOMPropertyInjection = {
       DOMProperty.hasOverloadedBooleanValue[propName] =
         checkMask(propConfig, DOMPropertyInjection.HAS_OVERLOADED_BOOLEAN_VALUE);
 
-      ("production" !== process.env.NODE_ENV ? invariant(
+      ("production" !== "development" ? invariant(
         !DOMProperty.mustUseAttribute[propName] ||
           !DOMProperty.mustUseProperty[propName],
         'DOMProperty: Cannot require using both attribute and property: %s',
         propName
       ) : invariant(!DOMProperty.mustUseAttribute[propName] ||
         !DOMProperty.mustUseProperty[propName]));
-      ("production" !== process.env.NODE_ENV ? invariant(
+      ("production" !== "development" ? invariant(
         DOMProperty.mustUseProperty[propName] ||
           !DOMProperty.hasSideEffects[propName],
         'DOMProperty: Properties that have side effects must use property: %s',
         propName
       ) : invariant(DOMProperty.mustUseProperty[propName] ||
         !DOMProperty.hasSideEffects[propName]));
-      ("production" !== process.env.NODE_ENV ? invariant(
+      ("production" !== "development" ? invariant(
         !!DOMProperty.hasBooleanValue[propName] +
           !!DOMProperty.hasNumericValue[propName] +
           !!DOMProperty.hasOverloadedBooleanValue[propName] <= 1,
@@ -28053,9 +28046,7 @@ var DOMProperty = {
 
 module.exports = DOMProperty;
 
-}).call(this,require('_process'))
-},{"./invariant":"/Users/yangwei/code/react-d3/node_modules/react/lib/invariant.js","_process":"/Users/yangwei/code/react-d3/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/DOMPropertyOperations.js":[function(require,module,exports){
-(function (process){
+},{"./invariant":"/home/eric/repos/react-d3/node_modules/react/lib/invariant.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/DOMPropertyOperations.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -28088,7 +28079,7 @@ var processAttributeNameAndPrefix = memoizeStringOnly(function(name) {
   return escapeTextForBrowser(name) + '="';
 });
 
-if ("production" !== process.env.NODE_ENV) {
+if ("production" !== "development") {
   var reactProps = {
     children: true,
     dangerouslySetInnerHTML: true,
@@ -28117,7 +28108,7 @@ if ("production" !== process.env.NODE_ENV) {
 
     // For now, only warn when we have a suggested correction. This prevents
     // logging too much when using transferPropsTo.
-    ("production" !== process.env.NODE_ENV ? warning(
+    ("production" !== "development" ? warning(
       standardName == null,
       'Unknown DOM property ' + name + '. Did you mean ' + standardName + '?'
     ) : null);
@@ -28167,7 +28158,7 @@ var DOMPropertyOperations = {
       }
       return processAttributeNameAndPrefix(name) +
         escapeTextForBrowser(value) + '"';
-    } else if ("production" !== process.env.NODE_ENV) {
+    } else if ("production" !== "development") {
       warnUnknownProperty(name);
     }
     return null;
@@ -28209,7 +28200,7 @@ var DOMPropertyOperations = {
       } else {
         node.setAttribute(name, '' + value);
       }
-    } else if ("production" !== process.env.NODE_ENV) {
+    } else if ("production" !== "development") {
       warnUnknownProperty(name);
     }
   },
@@ -28241,7 +28232,7 @@ var DOMPropertyOperations = {
       }
     } else if (DOMProperty.isCustomAttribute(name)) {
       node.removeAttribute(name);
-    } else if ("production" !== process.env.NODE_ENV) {
+    } else if ("production" !== "development") {
       warnUnknownProperty(name);
     }
   }
@@ -28250,9 +28241,7 @@ var DOMPropertyOperations = {
 
 module.exports = DOMPropertyOperations;
 
-}).call(this,require('_process'))
-},{"./DOMProperty":"/Users/yangwei/code/react-d3/node_modules/react/lib/DOMProperty.js","./escapeTextForBrowser":"/Users/yangwei/code/react-d3/node_modules/react/lib/escapeTextForBrowser.js","./memoizeStringOnly":"/Users/yangwei/code/react-d3/node_modules/react/lib/memoizeStringOnly.js","./warning":"/Users/yangwei/code/react-d3/node_modules/react/lib/warning.js","_process":"/Users/yangwei/code/react-d3/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/Danger.js":[function(require,module,exports){
-(function (process){
+},{"./DOMProperty":"/home/eric/repos/react-d3/node_modules/react/lib/DOMProperty.js","./escapeTextForBrowser":"/home/eric/repos/react-d3/node_modules/react/lib/escapeTextForBrowser.js","./memoizeStringOnly":"/home/eric/repos/react-d3/node_modules/react/lib/memoizeStringOnly.js","./warning":"/home/eric/repos/react-d3/node_modules/react/lib/warning.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/Danger.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -28306,7 +28295,7 @@ var Danger = {
    * @internal
    */
   dangerouslyRenderMarkup: function(markupList) {
-    ("production" !== process.env.NODE_ENV ? invariant(
+    ("production" !== "development" ? invariant(
       ExecutionEnvironment.canUseDOM,
       'dangerouslyRenderMarkup(...): Cannot render markup in a worker ' +
       'thread. Make sure `window` and `document` are available globally ' +
@@ -28317,7 +28306,7 @@ var Danger = {
     var markupByNodeName = {};
     // Group markup by `nodeName` if a wrap is necessary, else by '*'.
     for (var i = 0; i < markupList.length; i++) {
-      ("production" !== process.env.NODE_ENV ? invariant(
+      ("production" !== "development" ? invariant(
         markupList[i],
         'dangerouslyRenderMarkup(...): Missing markup.'
       ) : invariant(markupList[i]));
@@ -28366,7 +28355,7 @@ var Danger = {
           resultIndex = +renderNode.getAttribute(RESULT_INDEX_ATTR);
           renderNode.removeAttribute(RESULT_INDEX_ATTR);
 
-          ("production" !== process.env.NODE_ENV ? invariant(
+          ("production" !== "development" ? invariant(
             !resultList.hasOwnProperty(resultIndex),
             'Danger: Assigning to an already-occupied result index.'
           ) : invariant(!resultList.hasOwnProperty(resultIndex)));
@@ -28377,7 +28366,7 @@ var Danger = {
           // we're done.
           resultListAssignmentCount += 1;
 
-        } else if ("production" !== process.env.NODE_ENV) {
+        } else if ("production" !== "development") {
           console.error(
             "Danger: Discarding unexpected node:",
             renderNode
@@ -28388,12 +28377,12 @@ var Danger = {
 
     // Although resultList was populated out of order, it should now be a dense
     // array.
-    ("production" !== process.env.NODE_ENV ? invariant(
+    ("production" !== "development" ? invariant(
       resultListAssignmentCount === resultList.length,
       'Danger: Did not assign to every index of resultList.'
     ) : invariant(resultListAssignmentCount === resultList.length));
 
-    ("production" !== process.env.NODE_ENV ? invariant(
+    ("production" !== "development" ? invariant(
       resultList.length === markupList.length,
       'Danger: Expected markup to render %s nodes, but rendered %s.',
       markupList.length,
@@ -28412,15 +28401,15 @@ var Danger = {
    * @internal
    */
   dangerouslyReplaceNodeWithMarkup: function(oldChild, markup) {
-    ("production" !== process.env.NODE_ENV ? invariant(
+    ("production" !== "development" ? invariant(
       ExecutionEnvironment.canUseDOM,
       'dangerouslyReplaceNodeWithMarkup(...): Cannot render markup in a ' +
       'worker thread. Make sure `window` and `document` are available ' +
       'globally before requiring React when unit testing or use ' +
       'React.renderToString for server rendering.'
     ) : invariant(ExecutionEnvironment.canUseDOM));
-    ("production" !== process.env.NODE_ENV ? invariant(markup, 'dangerouslyReplaceNodeWithMarkup(...): Missing markup.') : invariant(markup));
-    ("production" !== process.env.NODE_ENV ? invariant(
+    ("production" !== "development" ? invariant(markup, 'dangerouslyReplaceNodeWithMarkup(...): Missing markup.') : invariant(markup));
+    ("production" !== "development" ? invariant(
       oldChild.tagName.toLowerCase() !== 'html',
       'dangerouslyReplaceNodeWithMarkup(...): Cannot replace markup of the ' +
       '<html> node. This is because browser quirks make this unreliable ' +
@@ -28436,8 +28425,7 @@ var Danger = {
 
 module.exports = Danger;
 
-}).call(this,require('_process'))
-},{"./ExecutionEnvironment":"/Users/yangwei/code/react-d3/node_modules/react/lib/ExecutionEnvironment.js","./createNodesFromMarkup":"/Users/yangwei/code/react-d3/node_modules/react/lib/createNodesFromMarkup.js","./emptyFunction":"/Users/yangwei/code/react-d3/node_modules/react/lib/emptyFunction.js","./getMarkupWrap":"/Users/yangwei/code/react-d3/node_modules/react/lib/getMarkupWrap.js","./invariant":"/Users/yangwei/code/react-d3/node_modules/react/lib/invariant.js","_process":"/Users/yangwei/code/react-d3/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/DefaultEventPluginOrder.js":[function(require,module,exports){
+},{"./ExecutionEnvironment":"/home/eric/repos/react-d3/node_modules/react/lib/ExecutionEnvironment.js","./createNodesFromMarkup":"/home/eric/repos/react-d3/node_modules/react/lib/createNodesFromMarkup.js","./emptyFunction":"/home/eric/repos/react-d3/node_modules/react/lib/emptyFunction.js","./getMarkupWrap":"/home/eric/repos/react-d3/node_modules/react/lib/getMarkupWrap.js","./invariant":"/home/eric/repos/react-d3/node_modules/react/lib/invariant.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/DefaultEventPluginOrder.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -28477,7 +28465,7 @@ var DefaultEventPluginOrder = [
 
 module.exports = DefaultEventPluginOrder;
 
-},{"./keyOf":"/Users/yangwei/code/react-d3/node_modules/react/lib/keyOf.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/EnterLeaveEventPlugin.js":[function(require,module,exports){
+},{"./keyOf":"/home/eric/repos/react-d3/node_modules/react/lib/keyOf.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/EnterLeaveEventPlugin.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -28617,7 +28605,7 @@ var EnterLeaveEventPlugin = {
 
 module.exports = EnterLeaveEventPlugin;
 
-},{"./EventConstants":"/Users/yangwei/code/react-d3/node_modules/react/lib/EventConstants.js","./EventPropagators":"/Users/yangwei/code/react-d3/node_modules/react/lib/EventPropagators.js","./ReactMount":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactMount.js","./SyntheticMouseEvent":"/Users/yangwei/code/react-d3/node_modules/react/lib/SyntheticMouseEvent.js","./keyOf":"/Users/yangwei/code/react-d3/node_modules/react/lib/keyOf.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/EventConstants.js":[function(require,module,exports){
+},{"./EventConstants":"/home/eric/repos/react-d3/node_modules/react/lib/EventConstants.js","./EventPropagators":"/home/eric/repos/react-d3/node_modules/react/lib/EventPropagators.js","./ReactMount":"/home/eric/repos/react-d3/node_modules/react/lib/ReactMount.js","./SyntheticMouseEvent":"/home/eric/repos/react-d3/node_modules/react/lib/SyntheticMouseEvent.js","./keyOf":"/home/eric/repos/react-d3/node_modules/react/lib/keyOf.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/EventConstants.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -28689,8 +28677,7 @@ var EventConstants = {
 
 module.exports = EventConstants;
 
-},{"./keyMirror":"/Users/yangwei/code/react-d3/node_modules/react/lib/keyMirror.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/EventListener.js":[function(require,module,exports){
-(function (process){
+},{"./keyMirror":"/home/eric/repos/react-d3/node_modules/react/lib/keyMirror.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/EventListener.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014 Facebook, Inc.
  *
@@ -28753,7 +28740,7 @@ var EventListener = {
    */
   capture: function(target, eventType, callback) {
     if (!target.addEventListener) {
-      if ("production" !== process.env.NODE_ENV) {
+      if ("production" !== "development") {
         console.error(
           'Attempted to listen to events during the capture phase on a ' +
           'browser that does not support the capture phase. Your application ' +
@@ -28778,9 +28765,7 @@ var EventListener = {
 
 module.exports = EventListener;
 
-}).call(this,require('_process'))
-},{"./emptyFunction":"/Users/yangwei/code/react-d3/node_modules/react/lib/emptyFunction.js","_process":"/Users/yangwei/code/react-d3/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/EventPluginHub.js":[function(require,module,exports){
-(function (process){
+},{"./emptyFunction":"/home/eric/repos/react-d3/node_modules/react/lib/emptyFunction.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/EventPluginHub.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -28890,13 +28875,13 @@ var EventPluginHub = {
      */
     injectInstanceHandle: function(InjectedInstanceHandle) {
       InstanceHandle = InjectedInstanceHandle;
-      if ("production" !== process.env.NODE_ENV) {
+      if ("production" !== "development") {
         validateInstanceHandle();
       }
     },
 
     getInstanceHandle: function() {
-      if ("production" !== process.env.NODE_ENV) {
+      if ("production" !== "development") {
         validateInstanceHandle();
       }
       return InstanceHandle;
@@ -28927,7 +28912,7 @@ var EventPluginHub = {
    * @param {?function} listener The callback to store.
    */
   putListener: function(id, registrationName, listener) {
-    ("production" !== process.env.NODE_ENV ? invariant(
+    ("production" !== "development" ? invariant(
       !listener || typeof listener === 'function',
       'Expected %s listener to be a function, instead got type %s',
       registrationName, typeof listener
@@ -29032,7 +29017,7 @@ var EventPluginHub = {
     var processingEventQueue = eventQueue;
     eventQueue = null;
     forEachAccumulated(processingEventQueue, executeDispatchesAndRelease);
-    ("production" !== process.env.NODE_ENV ? invariant(
+    ("production" !== "development" ? invariant(
       !eventQueue,
       'processEventQueue(): Additional events were enqueued while processing ' +
       'an event queue. Support for this has not yet been implemented.'
@@ -29054,9 +29039,7 @@ var EventPluginHub = {
 
 module.exports = EventPluginHub;
 
-}).call(this,require('_process'))
-},{"./EventPluginRegistry":"/Users/yangwei/code/react-d3/node_modules/react/lib/EventPluginRegistry.js","./EventPluginUtils":"/Users/yangwei/code/react-d3/node_modules/react/lib/EventPluginUtils.js","./accumulateInto":"/Users/yangwei/code/react-d3/node_modules/react/lib/accumulateInto.js","./forEachAccumulated":"/Users/yangwei/code/react-d3/node_modules/react/lib/forEachAccumulated.js","./invariant":"/Users/yangwei/code/react-d3/node_modules/react/lib/invariant.js","_process":"/Users/yangwei/code/react-d3/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/EventPluginRegistry.js":[function(require,module,exports){
-(function (process){
+},{"./EventPluginRegistry":"/home/eric/repos/react-d3/node_modules/react/lib/EventPluginRegistry.js","./EventPluginUtils":"/home/eric/repos/react-d3/node_modules/react/lib/EventPluginUtils.js","./accumulateInto":"/home/eric/repos/react-d3/node_modules/react/lib/accumulateInto.js","./forEachAccumulated":"/home/eric/repos/react-d3/node_modules/react/lib/forEachAccumulated.js","./invariant":"/home/eric/repos/react-d3/node_modules/react/lib/invariant.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/EventPluginRegistry.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -29096,7 +29079,7 @@ function recomputePluginOrdering() {
   for (var pluginName in namesToPlugins) {
     var PluginModule = namesToPlugins[pluginName];
     var pluginIndex = EventPluginOrder.indexOf(pluginName);
-    ("production" !== process.env.NODE_ENV ? invariant(
+    ("production" !== "development" ? invariant(
       pluginIndex > -1,
       'EventPluginRegistry: Cannot inject event plugins that do not exist in ' +
       'the plugin ordering, `%s`.',
@@ -29105,7 +29088,7 @@ function recomputePluginOrdering() {
     if (EventPluginRegistry.plugins[pluginIndex]) {
       continue;
     }
-    ("production" !== process.env.NODE_ENV ? invariant(
+    ("production" !== "development" ? invariant(
       PluginModule.extractEvents,
       'EventPluginRegistry: Event plugins must implement an `extractEvents` ' +
       'method, but `%s` does not.',
@@ -29114,7 +29097,7 @@ function recomputePluginOrdering() {
     EventPluginRegistry.plugins[pluginIndex] = PluginModule;
     var publishedEvents = PluginModule.eventTypes;
     for (var eventName in publishedEvents) {
-      ("production" !== process.env.NODE_ENV ? invariant(
+      ("production" !== "development" ? invariant(
         publishEventForPlugin(
           publishedEvents[eventName],
           PluginModule,
@@ -29141,7 +29124,7 @@ function recomputePluginOrdering() {
  * @private
  */
 function publishEventForPlugin(dispatchConfig, PluginModule, eventName) {
-  ("production" !== process.env.NODE_ENV ? invariant(
+  ("production" !== "development" ? invariant(
     !EventPluginRegistry.eventNameDispatchConfigs.hasOwnProperty(eventName),
     'EventPluginHub: More than one plugin attempted to publish the same ' +
     'event name, `%s`.',
@@ -29182,7 +29165,7 @@ function publishEventForPlugin(dispatchConfig, PluginModule, eventName) {
  * @private
  */
 function publishRegistrationName(registrationName, PluginModule, eventName) {
-  ("production" !== process.env.NODE_ENV ? invariant(
+  ("production" !== "development" ? invariant(
     !EventPluginRegistry.registrationNameModules[registrationName],
     'EventPluginHub: More than one plugin attempted to publish the same ' +
     'registration name, `%s`.',
@@ -29230,7 +29213,7 @@ var EventPluginRegistry = {
    * @see {EventPluginHub.injection.injectEventPluginOrder}
    */
   injectEventPluginOrder: function(InjectedEventPluginOrder) {
-    ("production" !== process.env.NODE_ENV ? invariant(
+    ("production" !== "development" ? invariant(
       !EventPluginOrder,
       'EventPluginRegistry: Cannot inject event plugin ordering more than ' +
       'once. You are likely trying to load more than one copy of React.'
@@ -29259,7 +29242,7 @@ var EventPluginRegistry = {
       var PluginModule = injectedNamesToPlugins[pluginName];
       if (!namesToPlugins.hasOwnProperty(pluginName) ||
           namesToPlugins[pluginName] !== PluginModule) {
-        ("production" !== process.env.NODE_ENV ? invariant(
+        ("production" !== "development" ? invariant(
           !namesToPlugins[pluginName],
           'EventPluginRegistry: Cannot inject two different event plugins ' +
           'using the same name, `%s`.',
@@ -29334,9 +29317,7 @@ var EventPluginRegistry = {
 
 module.exports = EventPluginRegistry;
 
-}).call(this,require('_process'))
-},{"./invariant":"/Users/yangwei/code/react-d3/node_modules/react/lib/invariant.js","_process":"/Users/yangwei/code/react-d3/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/EventPluginUtils.js":[function(require,module,exports){
-(function (process){
+},{"./invariant":"/home/eric/repos/react-d3/node_modules/react/lib/invariant.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/EventPluginUtils.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -29366,8 +29347,8 @@ var injection = {
   Mount: null,
   injectMount: function(InjectedMount) {
     injection.Mount = InjectedMount;
-    if ("production" !== process.env.NODE_ENV) {
-      ("production" !== process.env.NODE_ENV ? invariant(
+    if ("production" !== "development") {
+      ("production" !== "development" ? invariant(
         InjectedMount && InjectedMount.getNode,
         'EventPluginUtils.injection.injectMount(...): Injected Mount module ' +
         'is missing getNode.'
@@ -29395,7 +29376,7 @@ function isStartish(topLevelType) {
 
 
 var validateEventDispatches;
-if ("production" !== process.env.NODE_ENV) {
+if ("production" !== "development") {
   validateEventDispatches = function(event) {
     var dispatchListeners = event._dispatchListeners;
     var dispatchIDs = event._dispatchIDs;
@@ -29407,7 +29388,7 @@ if ("production" !== process.env.NODE_ENV) {
       dispatchListeners.length :
       dispatchListeners ? 1 : 0;
 
-    ("production" !== process.env.NODE_ENV ? invariant(
+    ("production" !== "development" ? invariant(
       idsIsArr === listenersIsArr && IDsLen === listenersLen,
       'EventPluginUtils: Invalid `event`.'
     ) : invariant(idsIsArr === listenersIsArr && IDsLen === listenersLen));
@@ -29422,7 +29403,7 @@ if ("production" !== process.env.NODE_ENV) {
 function forEachEventDispatch(event, cb) {
   var dispatchListeners = event._dispatchListeners;
   var dispatchIDs = event._dispatchIDs;
-  if ("production" !== process.env.NODE_ENV) {
+  if ("production" !== "development") {
     validateEventDispatches(event);
   }
   if (Array.isArray(dispatchListeners)) {
@@ -29470,7 +29451,7 @@ function executeDispatchesInOrder(event, executeDispatch) {
 function executeDispatchesInOrderStopAtTrueImpl(event) {
   var dispatchListeners = event._dispatchListeners;
   var dispatchIDs = event._dispatchIDs;
-  if ("production" !== process.env.NODE_ENV) {
+  if ("production" !== "development") {
     validateEventDispatches(event);
   }
   if (Array.isArray(dispatchListeners)) {
@@ -29511,12 +29492,12 @@ function executeDispatchesInOrderStopAtTrue(event) {
  * @return The return value of executing the single dispatch.
  */
 function executeDirectDispatch(event) {
-  if ("production" !== process.env.NODE_ENV) {
+  if ("production" !== "development") {
     validateEventDispatches(event);
   }
   var dispatchListener = event._dispatchListeners;
   var dispatchID = event._dispatchIDs;
-  ("production" !== process.env.NODE_ENV ? invariant(
+  ("production" !== "development" ? invariant(
     !Array.isArray(dispatchListener),
     'executeDirectDispatch(...): Invalid `event`.'
   ) : invariant(!Array.isArray(dispatchListener)));
@@ -29555,9 +29536,7 @@ var EventPluginUtils = {
 
 module.exports = EventPluginUtils;
 
-}).call(this,require('_process'))
-},{"./EventConstants":"/Users/yangwei/code/react-d3/node_modules/react/lib/EventConstants.js","./invariant":"/Users/yangwei/code/react-d3/node_modules/react/lib/invariant.js","_process":"/Users/yangwei/code/react-d3/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/EventPropagators.js":[function(require,module,exports){
-(function (process){
+},{"./EventConstants":"/home/eric/repos/react-d3/node_modules/react/lib/EventConstants.js","./invariant":"/home/eric/repos/react-d3/node_modules/react/lib/invariant.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/EventPropagators.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -29597,7 +29576,7 @@ function listenerAtPhase(id, event, propagationPhase) {
  * "dispatch" object that pairs the event with the listener.
  */
 function accumulateDirectionalDispatches(domID, upwards, event) {
-  if ("production" !== process.env.NODE_ENV) {
+  if ("production" !== "development") {
     if (!domID) {
       throw new Error('Dispatching id must not be null');
     }
@@ -29697,8 +29676,7 @@ var EventPropagators = {
 
 module.exports = EventPropagators;
 
-}).call(this,require('_process'))
-},{"./EventConstants":"/Users/yangwei/code/react-d3/node_modules/react/lib/EventConstants.js","./EventPluginHub":"/Users/yangwei/code/react-d3/node_modules/react/lib/EventPluginHub.js","./accumulateInto":"/Users/yangwei/code/react-d3/node_modules/react/lib/accumulateInto.js","./forEachAccumulated":"/Users/yangwei/code/react-d3/node_modules/react/lib/forEachAccumulated.js","_process":"/Users/yangwei/code/react-d3/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/ExecutionEnvironment.js":[function(require,module,exports){
+},{"./EventConstants":"/home/eric/repos/react-d3/node_modules/react/lib/EventConstants.js","./EventPluginHub":"/home/eric/repos/react-d3/node_modules/react/lib/EventPluginHub.js","./accumulateInto":"/home/eric/repos/react-d3/node_modules/react/lib/accumulateInto.js","./forEachAccumulated":"/home/eric/repos/react-d3/node_modules/react/lib/forEachAccumulated.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/ExecutionEnvironment.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -29743,7 +29721,7 @@ var ExecutionEnvironment = {
 
 module.exports = ExecutionEnvironment;
 
-},{}],"/Users/yangwei/code/react-d3/node_modules/react/lib/HTMLDOMPropertyConfig.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/react/lib/HTMLDOMPropertyConfig.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -29935,8 +29913,7 @@ var HTMLDOMPropertyConfig = {
 
 module.exports = HTMLDOMPropertyConfig;
 
-},{"./DOMProperty":"/Users/yangwei/code/react-d3/node_modules/react/lib/DOMProperty.js","./ExecutionEnvironment":"/Users/yangwei/code/react-d3/node_modules/react/lib/ExecutionEnvironment.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/LinkedValueUtils.js":[function(require,module,exports){
-(function (process){
+},{"./DOMProperty":"/home/eric/repos/react-d3/node_modules/react/lib/DOMProperty.js","./ExecutionEnvironment":"/home/eric/repos/react-d3/node_modules/react/lib/ExecutionEnvironment.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/LinkedValueUtils.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -29966,7 +29943,7 @@ var hasReadOnlyValue = {
 };
 
 function _assertSingleLink(input) {
-  ("production" !== process.env.NODE_ENV ? invariant(
+  ("production" !== "development" ? invariant(
     input.props.checkedLink == null || input.props.valueLink == null,
     'Cannot provide a checkedLink and a valueLink. If you want to use ' +
     'checkedLink, you probably don\'t want to use valueLink and vice versa.'
@@ -29974,7 +29951,7 @@ function _assertSingleLink(input) {
 }
 function _assertValueLink(input) {
   _assertSingleLink(input);
-  ("production" !== process.env.NODE_ENV ? invariant(
+  ("production" !== "development" ? invariant(
     input.props.value == null && input.props.onChange == null,
     'Cannot provide a valueLink and a value or onChange event. If you want ' +
     'to use value or onChange, you probably don\'t want to use valueLink.'
@@ -29983,7 +29960,7 @@ function _assertValueLink(input) {
 
 function _assertCheckedLink(input) {
   _assertSingleLink(input);
-  ("production" !== process.env.NODE_ENV ? invariant(
+  ("production" !== "development" ? invariant(
     input.props.checked == null && input.props.onChange == null,
     'Cannot provide a checkedLink and a checked property or onChange event. ' +
     'If you want to use checked or onChange, you probably don\'t want to ' +
@@ -30090,9 +30067,7 @@ var LinkedValueUtils = {
 
 module.exports = LinkedValueUtils;
 
-}).call(this,require('_process'))
-},{"./ReactPropTypes":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactPropTypes.js","./invariant":"/Users/yangwei/code/react-d3/node_modules/react/lib/invariant.js","_process":"/Users/yangwei/code/react-d3/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/LocalEventTrapMixin.js":[function(require,module,exports){
-(function (process){
+},{"./ReactPropTypes":"/home/eric/repos/react-d3/node_modules/react/lib/ReactPropTypes.js","./invariant":"/home/eric/repos/react-d3/node_modules/react/lib/invariant.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/LocalEventTrapMixin.js":[function(require,module,exports){
 /**
  * Copyright 2014, Facebook, Inc.
  * All rights reserved.
@@ -30118,7 +30093,7 @@ function remove(event) {
 
 var LocalEventTrapMixin = {
   trapBubbledEvent:function(topLevelType, handlerBaseName) {
-    ("production" !== process.env.NODE_ENV ? invariant(this.isMounted(), 'Must be mounted to trap events') : invariant(this.isMounted()));
+    ("production" !== "development" ? invariant(this.isMounted(), 'Must be mounted to trap events') : invariant(this.isMounted()));
     var listener = ReactBrowserEventEmitter.trapBubbledEvent(
       topLevelType,
       handlerBaseName,
@@ -30140,8 +30115,7 @@ var LocalEventTrapMixin = {
 
 module.exports = LocalEventTrapMixin;
 
-}).call(this,require('_process'))
-},{"./ReactBrowserEventEmitter":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactBrowserEventEmitter.js","./accumulateInto":"/Users/yangwei/code/react-d3/node_modules/react/lib/accumulateInto.js","./forEachAccumulated":"/Users/yangwei/code/react-d3/node_modules/react/lib/forEachAccumulated.js","./invariant":"/Users/yangwei/code/react-d3/node_modules/react/lib/invariant.js","_process":"/Users/yangwei/code/react-d3/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/MobileSafariClickEventPlugin.js":[function(require,module,exports){
+},{"./ReactBrowserEventEmitter":"/home/eric/repos/react-d3/node_modules/react/lib/ReactBrowserEventEmitter.js","./accumulateInto":"/home/eric/repos/react-d3/node_modules/react/lib/accumulateInto.js","./forEachAccumulated":"/home/eric/repos/react-d3/node_modules/react/lib/forEachAccumulated.js","./invariant":"/home/eric/repos/react-d3/node_modules/react/lib/invariant.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/MobileSafariClickEventPlugin.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -30199,7 +30173,7 @@ var MobileSafariClickEventPlugin = {
 
 module.exports = MobileSafariClickEventPlugin;
 
-},{"./EventConstants":"/Users/yangwei/code/react-d3/node_modules/react/lib/EventConstants.js","./emptyFunction":"/Users/yangwei/code/react-d3/node_modules/react/lib/emptyFunction.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/Object.assign.js":[function(require,module,exports){
+},{"./EventConstants":"/home/eric/repos/react-d3/node_modules/react/lib/EventConstants.js","./emptyFunction":"/home/eric/repos/react-d3/node_modules/react/lib/emptyFunction.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/Object.assign.js":[function(require,module,exports){
 /**
  * Copyright 2014, Facebook, Inc.
  * All rights reserved.
@@ -30246,8 +30220,7 @@ function assign(target, sources) {
 
 module.exports = assign;
 
-},{}],"/Users/yangwei/code/react-d3/node_modules/react/lib/PooledClass.js":[function(require,module,exports){
-(function (process){
+},{}],"/home/eric/repos/react-d3/node_modules/react/lib/PooledClass.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -30316,7 +30289,7 @@ var fiveArgumentPooler = function(a1, a2, a3, a4, a5) {
 
 var standardReleaser = function(instance) {
   var Klass = this;
-  ("production" !== process.env.NODE_ENV ? invariant(
+  ("production" !== "development" ? invariant(
     instance instanceof Klass,
     'Trying to release an instance into a pool of a different type.'
   ) : invariant(instance instanceof Klass));
@@ -30361,9 +30334,7 @@ var PooledClass = {
 
 module.exports = PooledClass;
 
-}).call(this,require('_process'))
-},{"./invariant":"/Users/yangwei/code/react-d3/node_modules/react/lib/invariant.js","_process":"/Users/yangwei/code/react-d3/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/React.js":[function(require,module,exports){
-(function (process){
+},{"./invariant":"/home/eric/repos/react-d3/node_modules/react/lib/invariant.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/React.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -30407,7 +30378,7 @@ ReactDefaultInjection.inject();
 var createElement = ReactElement.createElement;
 var createFactory = ReactElement.createFactory;
 
-if ("production" !== process.env.NODE_ENV) {
+if ("production" !== "development") {
   createElement = ReactElementValidator.createElement;
   createFactory = ReactElementValidator.createFactory;
 }
@@ -30498,7 +30469,7 @@ if (
   });
 }
 
-if ("production" !== process.env.NODE_ENV) {
+if ("production" !== "development") {
   var ExecutionEnvironment = require("./ExecutionEnvironment");
   if (ExecutionEnvironment.canUseDOM && window.top === window.self) {
 
@@ -30549,9 +30520,7 @@ React.version = '0.12.2';
 
 module.exports = React;
 
-}).call(this,require('_process'))
-},{"./DOMPropertyOperations":"/Users/yangwei/code/react-d3/node_modules/react/lib/DOMPropertyOperations.js","./EventPluginUtils":"/Users/yangwei/code/react-d3/node_modules/react/lib/EventPluginUtils.js","./ExecutionEnvironment":"/Users/yangwei/code/react-d3/node_modules/react/lib/ExecutionEnvironment.js","./Object.assign":"/Users/yangwei/code/react-d3/node_modules/react/lib/Object.assign.js","./ReactChildren":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactChildren.js","./ReactComponent":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactComponent.js","./ReactCompositeComponent":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactCompositeComponent.js","./ReactContext":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactContext.js","./ReactCurrentOwner":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactCurrentOwner.js","./ReactDOM":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactDOM.js","./ReactDOMComponent":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactDOMComponent.js","./ReactDefaultInjection":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactDefaultInjection.js","./ReactElement":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactElement.js","./ReactElementValidator":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactElementValidator.js","./ReactInstanceHandles":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactInstanceHandles.js","./ReactLegacyElement":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactLegacyElement.js","./ReactMount":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactMount.js","./ReactMultiChild":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactMultiChild.js","./ReactPerf":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactPerf.js","./ReactPropTypes":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactPropTypes.js","./ReactServerRendering":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactServerRendering.js","./ReactTextComponent":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactTextComponent.js","./deprecated":"/Users/yangwei/code/react-d3/node_modules/react/lib/deprecated.js","./onlyChild":"/Users/yangwei/code/react-d3/node_modules/react/lib/onlyChild.js","_process":"/Users/yangwei/code/react-d3/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactBrowserComponentMixin.js":[function(require,module,exports){
-(function (process){
+},{"./DOMPropertyOperations":"/home/eric/repos/react-d3/node_modules/react/lib/DOMPropertyOperations.js","./EventPluginUtils":"/home/eric/repos/react-d3/node_modules/react/lib/EventPluginUtils.js","./ExecutionEnvironment":"/home/eric/repos/react-d3/node_modules/react/lib/ExecutionEnvironment.js","./Object.assign":"/home/eric/repos/react-d3/node_modules/react/lib/Object.assign.js","./ReactChildren":"/home/eric/repos/react-d3/node_modules/react/lib/ReactChildren.js","./ReactComponent":"/home/eric/repos/react-d3/node_modules/react/lib/ReactComponent.js","./ReactCompositeComponent":"/home/eric/repos/react-d3/node_modules/react/lib/ReactCompositeComponent.js","./ReactContext":"/home/eric/repos/react-d3/node_modules/react/lib/ReactContext.js","./ReactCurrentOwner":"/home/eric/repos/react-d3/node_modules/react/lib/ReactCurrentOwner.js","./ReactDOM":"/home/eric/repos/react-d3/node_modules/react/lib/ReactDOM.js","./ReactDOMComponent":"/home/eric/repos/react-d3/node_modules/react/lib/ReactDOMComponent.js","./ReactDefaultInjection":"/home/eric/repos/react-d3/node_modules/react/lib/ReactDefaultInjection.js","./ReactElement":"/home/eric/repos/react-d3/node_modules/react/lib/ReactElement.js","./ReactElementValidator":"/home/eric/repos/react-d3/node_modules/react/lib/ReactElementValidator.js","./ReactInstanceHandles":"/home/eric/repos/react-d3/node_modules/react/lib/ReactInstanceHandles.js","./ReactLegacyElement":"/home/eric/repos/react-d3/node_modules/react/lib/ReactLegacyElement.js","./ReactMount":"/home/eric/repos/react-d3/node_modules/react/lib/ReactMount.js","./ReactMultiChild":"/home/eric/repos/react-d3/node_modules/react/lib/ReactMultiChild.js","./ReactPerf":"/home/eric/repos/react-d3/node_modules/react/lib/ReactPerf.js","./ReactPropTypes":"/home/eric/repos/react-d3/node_modules/react/lib/ReactPropTypes.js","./ReactServerRendering":"/home/eric/repos/react-d3/node_modules/react/lib/ReactServerRendering.js","./ReactTextComponent":"/home/eric/repos/react-d3/node_modules/react/lib/ReactTextComponent.js","./deprecated":"/home/eric/repos/react-d3/node_modules/react/lib/deprecated.js","./onlyChild":"/home/eric/repos/react-d3/node_modules/react/lib/onlyChild.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/ReactBrowserComponentMixin.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -30579,7 +30548,7 @@ var ReactBrowserComponentMixin = {
    * @protected
    */
   getDOMNode: function() {
-    ("production" !== process.env.NODE_ENV ? invariant(
+    ("production" !== "development" ? invariant(
       this.isMounted(),
       'getDOMNode(): A component must be mounted to have a DOM node.'
     ) : invariant(this.isMounted()));
@@ -30592,8 +30561,7 @@ var ReactBrowserComponentMixin = {
 
 module.exports = ReactBrowserComponentMixin;
 
-}).call(this,require('_process'))
-},{"./ReactEmptyComponent":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactEmptyComponent.js","./ReactMount":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactMount.js","./invariant":"/Users/yangwei/code/react-d3/node_modules/react/lib/invariant.js","_process":"/Users/yangwei/code/react-d3/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactBrowserEventEmitter.js":[function(require,module,exports){
+},{"./ReactEmptyComponent":"/home/eric/repos/react-d3/node_modules/react/lib/ReactEmptyComponent.js","./ReactMount":"/home/eric/repos/react-d3/node_modules/react/lib/ReactMount.js","./invariant":"/home/eric/repos/react-d3/node_modules/react/lib/invariant.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/ReactBrowserEventEmitter.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -30948,8 +30916,7 @@ var ReactBrowserEventEmitter = assign({}, ReactEventEmitterMixin, {
 
 module.exports = ReactBrowserEventEmitter;
 
-},{"./EventConstants":"/Users/yangwei/code/react-d3/node_modules/react/lib/EventConstants.js","./EventPluginHub":"/Users/yangwei/code/react-d3/node_modules/react/lib/EventPluginHub.js","./EventPluginRegistry":"/Users/yangwei/code/react-d3/node_modules/react/lib/EventPluginRegistry.js","./Object.assign":"/Users/yangwei/code/react-d3/node_modules/react/lib/Object.assign.js","./ReactEventEmitterMixin":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactEventEmitterMixin.js","./ViewportMetrics":"/Users/yangwei/code/react-d3/node_modules/react/lib/ViewportMetrics.js","./isEventSupported":"/Users/yangwei/code/react-d3/node_modules/react/lib/isEventSupported.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactChildren.js":[function(require,module,exports){
-(function (process){
+},{"./EventConstants":"/home/eric/repos/react-d3/node_modules/react/lib/EventConstants.js","./EventPluginHub":"/home/eric/repos/react-d3/node_modules/react/lib/EventPluginHub.js","./EventPluginRegistry":"/home/eric/repos/react-d3/node_modules/react/lib/EventPluginRegistry.js","./Object.assign":"/home/eric/repos/react-d3/node_modules/react/lib/Object.assign.js","./ReactEventEmitterMixin":"/home/eric/repos/react-d3/node_modules/react/lib/ReactEventEmitterMixin.js","./ViewportMetrics":"/home/eric/repos/react-d3/node_modules/react/lib/ViewportMetrics.js","./isEventSupported":"/home/eric/repos/react-d3/node_modules/react/lib/isEventSupported.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/ReactChildren.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -31033,7 +31000,7 @@ function mapSingleChildIntoContext(traverseContext, child, name, i) {
   var mapResult = mapBookKeeping.mapResult;
 
   var keyUnique = !mapResult.hasOwnProperty(name);
-  ("production" !== process.env.NODE_ENV ? warning(
+  ("production" !== "development" ? warning(
     keyUnique,
     'ReactChildren.map(...): Encountered two children with the same key, ' +
     '`%s`. Child keys must be unique; when two children share a key, only ' +
@@ -31097,9 +31064,7 @@ var ReactChildren = {
 
 module.exports = ReactChildren;
 
-}).call(this,require('_process'))
-},{"./PooledClass":"/Users/yangwei/code/react-d3/node_modules/react/lib/PooledClass.js","./traverseAllChildren":"/Users/yangwei/code/react-d3/node_modules/react/lib/traverseAllChildren.js","./warning":"/Users/yangwei/code/react-d3/node_modules/react/lib/warning.js","_process":"/Users/yangwei/code/react-d3/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactComponent.js":[function(require,module,exports){
-(function (process){
+},{"./PooledClass":"/home/eric/repos/react-d3/node_modules/react/lib/PooledClass.js","./traverseAllChildren":"/home/eric/repos/react-d3/node_modules/react/lib/traverseAllChildren.js","./warning":"/home/eric/repos/react-d3/node_modules/react/lib/warning.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/ReactComponent.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -31187,7 +31152,7 @@ var ReactComponent = {
 
   injection: {
     injectEnvironment: function(ReactComponentEnvironment) {
-      ("production" !== process.env.NODE_ENV ? invariant(
+      ("production" !== "development" ? invariant(
         !injected,
         'ReactComponent: injectEnvironment() can only be called once.'
       ) : invariant(!injected));
@@ -31260,11 +31225,11 @@ var ReactComponent = {
      * @public
      */
     replaceProps: function(props, callback) {
-      ("production" !== process.env.NODE_ENV ? invariant(
+      ("production" !== "development" ? invariant(
         this.isMounted(),
         'replaceProps(...): Can only update a mounted component.'
       ) : invariant(this.isMounted()));
-      ("production" !== process.env.NODE_ENV ? invariant(
+      ("production" !== "development" ? invariant(
         this._mountDepth === 0,
         'replaceProps(...): You called `setProps` or `replaceProps` on a ' +
         'component with a parent. This is an anti-pattern since props will ' +
@@ -31347,7 +31312,7 @@ var ReactComponent = {
      * @internal
      */
     mountComponent: function(rootID, transaction, mountDepth) {
-      ("production" !== process.env.NODE_ENV ? invariant(
+      ("production" !== "development" ? invariant(
         !this.isMounted(),
         'mountComponent(%s, ...): Can only mount an unmounted component. ' +
         'Make sure to avoid storing components between renders or reusing a ' +
@@ -31376,7 +31341,7 @@ var ReactComponent = {
      * @internal
      */
     unmountComponent: function() {
-      ("production" !== process.env.NODE_ENV ? invariant(
+      ("production" !== "development" ? invariant(
         this.isMounted(),
         'unmountComponent(): Can only unmount a mounted component.'
       ) : invariant(this.isMounted()));
@@ -31401,7 +31366,7 @@ var ReactComponent = {
      * @internal
      */
     receiveComponent: function(nextElement, transaction) {
-      ("production" !== process.env.NODE_ENV ? invariant(
+      ("production" !== "development" ? invariant(
         this.isMounted(),
         'receiveComponent(...): Can only update a mounted component.'
       ) : invariant(this.isMounted()));
@@ -31540,9 +31505,7 @@ var ReactComponent = {
 
 module.exports = ReactComponent;
 
-}).call(this,require('_process'))
-},{"./Object.assign":"/Users/yangwei/code/react-d3/node_modules/react/lib/Object.assign.js","./ReactElement":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactElement.js","./ReactOwner":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactOwner.js","./ReactUpdates":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactUpdates.js","./invariant":"/Users/yangwei/code/react-d3/node_modules/react/lib/invariant.js","./keyMirror":"/Users/yangwei/code/react-d3/node_modules/react/lib/keyMirror.js","_process":"/Users/yangwei/code/react-d3/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactComponentBrowserEnvironment.js":[function(require,module,exports){
-(function (process){
+},{"./Object.assign":"/home/eric/repos/react-d3/node_modules/react/lib/Object.assign.js","./ReactElement":"/home/eric/repos/react-d3/node_modules/react/lib/ReactElement.js","./ReactOwner":"/home/eric/repos/react-d3/node_modules/react/lib/ReactOwner.js","./ReactUpdates":"/home/eric/repos/react-d3/node_modules/react/lib/ReactUpdates.js","./invariant":"/home/eric/repos/react-d3/node_modules/react/lib/invariant.js","./keyMirror":"/home/eric/repos/react-d3/node_modules/react/lib/keyMirror.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/ReactComponentBrowserEnvironment.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -31603,7 +31566,7 @@ var ReactComponentBrowserEnvironment = {
     'ReactComponentBrowserEnvironment',
     'mountImageIntoNode',
     function(markup, container, shouldReuseMarkup) {
-      ("production" !== process.env.NODE_ENV ? invariant(
+      ("production" !== "development" ? invariant(
         container && (
           container.nodeType === ELEMENT_NODE_TYPE ||
             container.nodeType === DOC_NODE_TYPE
@@ -31620,7 +31583,7 @@ var ReactComponentBrowserEnvironment = {
           getReactRootElementInContainer(container))) {
           return;
         } else {
-          ("production" !== process.env.NODE_ENV ? invariant(
+          ("production" !== "development" ? invariant(
             container.nodeType !== DOC_NODE_TYPE,
             'You\'re trying to render a component to the document using ' +
             'server rendering but the checksum was invalid. This usually ' +
@@ -31632,7 +31595,7 @@ var ReactComponentBrowserEnvironment = {
             'and ensure the props are the same client and server side.'
           ) : invariant(container.nodeType !== DOC_NODE_TYPE));
 
-          if ("production" !== process.env.NODE_ENV) {
+          if ("production" !== "development") {
             console.warn(
               'React attempted to use reuse markup in a container but the ' +
               'checksum was invalid. This generally means that you are ' +
@@ -31647,7 +31610,7 @@ var ReactComponentBrowserEnvironment = {
         }
       }
 
-      ("production" !== process.env.NODE_ENV ? invariant(
+      ("production" !== "development" ? invariant(
         container.nodeType !== DOC_NODE_TYPE,
         'You\'re trying to render a component to the document but ' +
           'you didn\'t use server rendering. We can\'t do this ' +
@@ -31662,9 +31625,7 @@ var ReactComponentBrowserEnvironment = {
 
 module.exports = ReactComponentBrowserEnvironment;
 
-}).call(this,require('_process'))
-},{"./ReactDOMIDOperations":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactDOMIDOperations.js","./ReactMarkupChecksum":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactMarkupChecksum.js","./ReactMount":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactMount.js","./ReactPerf":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactPerf.js","./ReactReconcileTransaction":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactReconcileTransaction.js","./getReactRootElementInContainer":"/Users/yangwei/code/react-d3/node_modules/react/lib/getReactRootElementInContainer.js","./invariant":"/Users/yangwei/code/react-d3/node_modules/react/lib/invariant.js","./setInnerHTML":"/Users/yangwei/code/react-d3/node_modules/react/lib/setInnerHTML.js","_process":"/Users/yangwei/code/react-d3/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactCompositeComponent.js":[function(require,module,exports){
-(function (process){
+},{"./ReactDOMIDOperations":"/home/eric/repos/react-d3/node_modules/react/lib/ReactDOMIDOperations.js","./ReactMarkupChecksum":"/home/eric/repos/react-d3/node_modules/react/lib/ReactMarkupChecksum.js","./ReactMount":"/home/eric/repos/react-d3/node_modules/react/lib/ReactMount.js","./ReactPerf":"/home/eric/repos/react-d3/node_modules/react/lib/ReactPerf.js","./ReactReconcileTransaction":"/home/eric/repos/react-d3/node_modules/react/lib/ReactReconcileTransaction.js","./getReactRootElementInContainer":"/home/eric/repos/react-d3/node_modules/react/lib/getReactRootElementInContainer.js","./invariant":"/home/eric/repos/react-d3/node_modules/react/lib/invariant.js","./setInnerHTML":"/home/eric/repos/react-d3/node_modules/react/lib/setInnerHTML.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/ReactCompositeComponent.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -32069,7 +32030,7 @@ function getDeclarationErrorAddendum(component) {
 function validateTypeDef(Constructor, typeDef, location) {
   for (var propName in typeDef) {
     if (typeDef.hasOwnProperty(propName)) {
-      ("production" !== process.env.NODE_ENV ? invariant(
+      ("production" !== "development" ? invariant(
         typeof typeDef[propName] == 'function',
         '%s: %s type `%s` is invalid; it must be a function, usually from ' +
         'React.PropTypes.',
@@ -32088,7 +32049,7 @@ function validateMethodOverride(proto, name) {
 
   // Disallow overriding of base class methods unless explicitly allowed.
   if (ReactCompositeComponentMixin.hasOwnProperty(name)) {
-    ("production" !== process.env.NODE_ENV ? invariant(
+    ("production" !== "development" ? invariant(
       specPolicy === SpecPolicy.OVERRIDE_BASE,
       'ReactCompositeComponentInterface: You are attempting to override ' +
       '`%s` from your class specification. Ensure that your method names ' +
@@ -32099,7 +32060,7 @@ function validateMethodOverride(proto, name) {
 
   // Disallow defining methods more than once unless explicitly allowed.
   if (proto.hasOwnProperty(name)) {
-    ("production" !== process.env.NODE_ENV ? invariant(
+    ("production" !== "development" ? invariant(
       specPolicy === SpecPolicy.DEFINE_MANY ||
       specPolicy === SpecPolicy.DEFINE_MANY_MERGED,
       'ReactCompositeComponentInterface: You are attempting to define ' +
@@ -32113,19 +32074,19 @@ function validateMethodOverride(proto, name) {
 
 function validateLifeCycleOnReplaceState(instance) {
   var compositeLifeCycleState = instance._compositeLifeCycleState;
-  ("production" !== process.env.NODE_ENV ? invariant(
+  ("production" !== "development" ? invariant(
     instance.isMounted() ||
       compositeLifeCycleState === CompositeLifeCycle.MOUNTING,
     'replaceState(...): Can only update a mounted or mounting component.'
   ) : invariant(instance.isMounted() ||
     compositeLifeCycleState === CompositeLifeCycle.MOUNTING));
-  ("production" !== process.env.NODE_ENV ? invariant(
+  ("production" !== "development" ? invariant(
     ReactCurrentOwner.current == null,
     'replaceState(...): Cannot update during an existing state transition ' +
     '(such as within `render`). Render methods should be a pure function ' +
     'of props and state.'
   ) : invariant(ReactCurrentOwner.current == null));
-  ("production" !== process.env.NODE_ENV ? invariant(compositeLifeCycleState !== CompositeLifeCycle.UNMOUNTING,
+  ("production" !== "development" ? invariant(compositeLifeCycleState !== CompositeLifeCycle.UNMOUNTING,
     'replaceState(...): Cannot update while unmounting component. This ' +
     'usually means you called setState() on an unmounted component.'
   ) : invariant(compositeLifeCycleState !== CompositeLifeCycle.UNMOUNTING));
@@ -32140,12 +32101,12 @@ function mixSpecIntoComponent(Constructor, spec) {
     return;
   }
 
-  ("production" !== process.env.NODE_ENV ? invariant(
+  ("production" !== "development" ? invariant(
     !ReactLegacyElement.isValidFactory(spec),
     'ReactCompositeComponent: You\'re attempting to ' +
     'use a component class as a mixin. Instead, just use a regular object.'
   ) : invariant(!ReactLegacyElement.isValidFactory(spec)));
-  ("production" !== process.env.NODE_ENV ? invariant(
+  ("production" !== "development" ? invariant(
     !ReactElement.isValidElement(spec),
     'ReactCompositeComponent: You\'re attempting to ' +
     'use a component as a mixin. Instead, just use a regular object.'
@@ -32202,7 +32163,7 @@ function mixSpecIntoComponent(Constructor, spec) {
           var specPolicy = ReactCompositeComponentInterface[name];
 
           // These cases should already be caught by validateMethodOverride
-          ("production" !== process.env.NODE_ENV ? invariant(
+          ("production" !== "development" ? invariant(
             isCompositeComponentMethod && (
               specPolicy === SpecPolicy.DEFINE_MANY_MERGED ||
               specPolicy === SpecPolicy.DEFINE_MANY
@@ -32225,7 +32186,7 @@ function mixSpecIntoComponent(Constructor, spec) {
           }
         } else {
           proto[name] = property;
-          if ("production" !== process.env.NODE_ENV) {
+          if ("production" !== "development") {
             // Add verbose displayName to the function, which helps when looking
             // at profiling tools.
             if (typeof property === 'function' && spec.displayName) {
@@ -32249,7 +32210,7 @@ function mixStaticSpecIntoComponent(Constructor, statics) {
     }
 
     var isReserved = name in RESERVED_SPEC_KEYS;
-    ("production" !== process.env.NODE_ENV ? invariant(
+    ("production" !== "development" ? invariant(
       !isReserved,
       'ReactCompositeComponent: You are attempting to define a reserved ' +
       'property, `%s`, that shouldn\'t be on the "statics" key. Define it ' +
@@ -32259,7 +32220,7 @@ function mixStaticSpecIntoComponent(Constructor, statics) {
     ) : invariant(!isReserved));
 
     var isInherited = name in Constructor;
-    ("production" !== process.env.NODE_ENV ? invariant(
+    ("production" !== "development" ? invariant(
       !isInherited,
       'ReactCompositeComponent: You are attempting to define ' +
       '`%s` on your component more than once. This conflict may be ' +
@@ -32278,13 +32239,13 @@ function mixStaticSpecIntoComponent(Constructor, statics) {
  * @return {object} one after it has been mutated to contain everything in two.
  */
 function mergeObjectsWithNoDuplicateKeys(one, two) {
-  ("production" !== process.env.NODE_ENV ? invariant(
+  ("production" !== "development" ? invariant(
     one && two && typeof one === 'object' && typeof two === 'object',
     'mergeObjectsWithNoDuplicateKeys(): Cannot merge non-objects'
   ) : invariant(one && two && typeof one === 'object' && typeof two === 'object'));
 
   mapObject(two, function(value, key) {
-    ("production" !== process.env.NODE_ENV ? invariant(
+    ("production" !== "development" ? invariant(
       one[key] === undefined,
       'mergeObjectsWithNoDuplicateKeys(): ' +
       'Tried to merge two objects with the same key: `%s`. This conflict ' +
@@ -32446,7 +32407,7 @@ var ReactCompositeComponentMixin = {
       this.props = this._processProps(this.props);
 
       this.state = this.getInitialState ? this.getInitialState() : null;
-      ("production" !== process.env.NODE_ENV ? invariant(
+      ("production" !== "development" ? invariant(
         typeof this.state === 'object' && !Array.isArray(this.state),
         '%s.getInitialState(): must return an object or null',
         this.constructor.displayName || 'ReactCompositeComponent'
@@ -32526,12 +32487,12 @@ var ReactCompositeComponentMixin = {
    * @protected
    */
   setState: function(partialState, callback) {
-    ("production" !== process.env.NODE_ENV ? invariant(
+    ("production" !== "development" ? invariant(
       typeof partialState === 'object' || partialState == null,
       'setState(...): takes an object of state variables to update.'
     ) : invariant(typeof partialState === 'object' || partialState == null));
-    if ("production" !== process.env.NODE_ENV){
-      ("production" !== process.env.NODE_ENV ? warning(
+    if ("production" !== "development"){
+      ("production" !== "development" ? warning(
         partialState != null,
         'setState(...): You passed an undefined or null state object; ' +
         'instead, use forceUpdate().'
@@ -32586,7 +32547,7 @@ var ReactCompositeComponentMixin = {
       for (var contextName in contextTypes) {
         maskedContext[contextName] = context[contextName];
       }
-      if ("production" !== process.env.NODE_ENV) {
+      if ("production" !== "development") {
         this._checkPropTypes(
           contextTypes,
           maskedContext,
@@ -32606,13 +32567,13 @@ var ReactCompositeComponentMixin = {
     var childContext = this.getChildContext && this.getChildContext();
     var displayName = this.constructor.displayName || 'ReactCompositeComponent';
     if (childContext) {
-      ("production" !== process.env.NODE_ENV ? invariant(
+      ("production" !== "development" ? invariant(
         typeof this.constructor.childContextTypes === 'object',
         '%s.getChildContext(): childContextTypes must be defined in order to ' +
         'use getChildContext().',
         displayName
       ) : invariant(typeof this.constructor.childContextTypes === 'object'));
-      if ("production" !== process.env.NODE_ENV) {
+      if ("production" !== "development") {
         this._checkPropTypes(
           this.constructor.childContextTypes,
           childContext,
@@ -32620,7 +32581,7 @@ var ReactCompositeComponentMixin = {
         );
       }
       for (var name in childContext) {
-        ("production" !== process.env.NODE_ENV ? invariant(
+        ("production" !== "development" ? invariant(
           name in this.constructor.childContextTypes,
           '%s.getChildContext(): key "%s" is not defined in childContextTypes.',
           displayName,
@@ -32642,7 +32603,7 @@ var ReactCompositeComponentMixin = {
    * @private
    */
   _processProps: function(newProps) {
-    if ("production" !== process.env.NODE_ENV) {
+    if ("production" !== "development") {
       var propTypes = this.constructor.propTypes;
       if (propTypes) {
         this._checkPropTypes(propTypes, newProps, ReactPropTypeLocations.prop);
@@ -32672,7 +32633,7 @@ var ReactCompositeComponentMixin = {
           // renderComponent calls, so I'm abstracting it away into
           // a function to minimize refactoring in the future
           var addendum = getDeclarationErrorAddendum(this);
-          ("production" !== process.env.NODE_ENV ? warning(false, error.message + addendum) : null);
+          ("production" !== "development" ? warning(false, error.message + addendum) : null);
         }
       }
     }
@@ -32725,7 +32686,7 @@ var ReactCompositeComponentMixin = {
       !this.shouldComponentUpdate ||
       this.shouldComponentUpdate(nextProps, nextState, nextContext);
 
-    if ("production" !== process.env.NODE_ENV) {
+    if ("production" !== "development") {
       if (typeof shouldUpdate === "undefined") {
         console.warn(
           (this.constructor.displayName || 'ReactCompositeComponent') +
@@ -32892,14 +32853,14 @@ var ReactCompositeComponentMixin = {
    */
   forceUpdate: function(callback) {
     var compositeLifeCycleState = this._compositeLifeCycleState;
-    ("production" !== process.env.NODE_ENV ? invariant(
+    ("production" !== "development" ? invariant(
       this.isMounted() ||
         compositeLifeCycleState === CompositeLifeCycle.MOUNTING,
       'forceUpdate(...): Can only force an update on mounted or mounting ' +
         'components.'
     ) : invariant(this.isMounted() ||
       compositeLifeCycleState === CompositeLifeCycle.MOUNTING));
-    ("production" !== process.env.NODE_ENV ? invariant(
+    ("production" !== "development" ? invariant(
       compositeLifeCycleState !== CompositeLifeCycle.UNMOUNTING &&
       ReactCurrentOwner.current == null,
       'forceUpdate(...): Cannot force an update while unmounting component ' +
@@ -32935,7 +32896,7 @@ var ReactCompositeComponentMixin = {
         ReactContext.current = previousContext;
         ReactCurrentOwner.current = null;
       }
-      ("production" !== process.env.NODE_ENV ? invariant(
+      ("production" !== "development" ? invariant(
         ReactElement.isValidElement(renderedComponent),
         '%s.render(): A valid ReactComponent must be returned. You may have ' +
           'returned undefined, an array or some other invalid object.',
@@ -32970,7 +32931,7 @@ var ReactCompositeComponentMixin = {
   _bindAutoBindMethod: function(method) {
     var component = this;
     var boundMethod = method.bind(component);
-    if ("production" !== process.env.NODE_ENV) {
+    if ("production" !== "development") {
       boundMethod.__reactBoundContext = component;
       boundMethod.__reactBoundMethod = method;
       boundMethod.__reactBoundArguments = null;
@@ -33056,12 +33017,12 @@ var ReactCompositeComponent = {
       Constructor.defaultProps = Constructor.getDefaultProps();
     }
 
-    ("production" !== process.env.NODE_ENV ? invariant(
+    ("production" !== "development" ? invariant(
       Constructor.prototype.render,
       'createClass(...): Class specification must implement a `render` method.'
     ) : invariant(Constructor.prototype.render));
 
-    if ("production" !== process.env.NODE_ENV) {
+    if ("production" !== "development") {
       if (Constructor.prototype.componentShouldUpdate) {
         monitorCodeUse(
           'react_component_should_update_warning',
@@ -33083,7 +33044,7 @@ var ReactCompositeComponent = {
       }
     }
 
-    if ("production" !== process.env.NODE_ENV) {
+    if ("production" !== "development") {
       return ReactLegacyElement.wrapFactory(
         ReactElementValidator.createFactory(Constructor)
       );
@@ -33102,8 +33063,7 @@ var ReactCompositeComponent = {
 
 module.exports = ReactCompositeComponent;
 
-}).call(this,require('_process'))
-},{"./Object.assign":"/Users/yangwei/code/react-d3/node_modules/react/lib/Object.assign.js","./ReactComponent":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactComponent.js","./ReactContext":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactContext.js","./ReactCurrentOwner":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactCurrentOwner.js","./ReactElement":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactElement.js","./ReactElementValidator":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactElementValidator.js","./ReactEmptyComponent":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactEmptyComponent.js","./ReactErrorUtils":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactErrorUtils.js","./ReactLegacyElement":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactLegacyElement.js","./ReactOwner":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactOwner.js","./ReactPerf":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactPerf.js","./ReactPropTransferer":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactPropTransferer.js","./ReactPropTypeLocationNames":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactPropTypeLocationNames.js","./ReactPropTypeLocations":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactPropTypeLocations.js","./ReactUpdates":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactUpdates.js","./instantiateReactComponent":"/Users/yangwei/code/react-d3/node_modules/react/lib/instantiateReactComponent.js","./invariant":"/Users/yangwei/code/react-d3/node_modules/react/lib/invariant.js","./keyMirror":"/Users/yangwei/code/react-d3/node_modules/react/lib/keyMirror.js","./keyOf":"/Users/yangwei/code/react-d3/node_modules/react/lib/keyOf.js","./mapObject":"/Users/yangwei/code/react-d3/node_modules/react/lib/mapObject.js","./monitorCodeUse":"/Users/yangwei/code/react-d3/node_modules/react/lib/monitorCodeUse.js","./shouldUpdateReactComponent":"/Users/yangwei/code/react-d3/node_modules/react/lib/shouldUpdateReactComponent.js","./warning":"/Users/yangwei/code/react-d3/node_modules/react/lib/warning.js","_process":"/Users/yangwei/code/react-d3/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactContext.js":[function(require,module,exports){
+},{"./Object.assign":"/home/eric/repos/react-d3/node_modules/react/lib/Object.assign.js","./ReactComponent":"/home/eric/repos/react-d3/node_modules/react/lib/ReactComponent.js","./ReactContext":"/home/eric/repos/react-d3/node_modules/react/lib/ReactContext.js","./ReactCurrentOwner":"/home/eric/repos/react-d3/node_modules/react/lib/ReactCurrentOwner.js","./ReactElement":"/home/eric/repos/react-d3/node_modules/react/lib/ReactElement.js","./ReactElementValidator":"/home/eric/repos/react-d3/node_modules/react/lib/ReactElementValidator.js","./ReactEmptyComponent":"/home/eric/repos/react-d3/node_modules/react/lib/ReactEmptyComponent.js","./ReactErrorUtils":"/home/eric/repos/react-d3/node_modules/react/lib/ReactErrorUtils.js","./ReactLegacyElement":"/home/eric/repos/react-d3/node_modules/react/lib/ReactLegacyElement.js","./ReactOwner":"/home/eric/repos/react-d3/node_modules/react/lib/ReactOwner.js","./ReactPerf":"/home/eric/repos/react-d3/node_modules/react/lib/ReactPerf.js","./ReactPropTransferer":"/home/eric/repos/react-d3/node_modules/react/lib/ReactPropTransferer.js","./ReactPropTypeLocationNames":"/home/eric/repos/react-d3/node_modules/react/lib/ReactPropTypeLocationNames.js","./ReactPropTypeLocations":"/home/eric/repos/react-d3/node_modules/react/lib/ReactPropTypeLocations.js","./ReactUpdates":"/home/eric/repos/react-d3/node_modules/react/lib/ReactUpdates.js","./instantiateReactComponent":"/home/eric/repos/react-d3/node_modules/react/lib/instantiateReactComponent.js","./invariant":"/home/eric/repos/react-d3/node_modules/react/lib/invariant.js","./keyMirror":"/home/eric/repos/react-d3/node_modules/react/lib/keyMirror.js","./keyOf":"/home/eric/repos/react-d3/node_modules/react/lib/keyOf.js","./mapObject":"/home/eric/repos/react-d3/node_modules/react/lib/mapObject.js","./monitorCodeUse":"/home/eric/repos/react-d3/node_modules/react/lib/monitorCodeUse.js","./shouldUpdateReactComponent":"/home/eric/repos/react-d3/node_modules/react/lib/shouldUpdateReactComponent.js","./warning":"/home/eric/repos/react-d3/node_modules/react/lib/warning.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/ReactContext.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -33165,7 +33125,7 @@ var ReactContext = {
 
 module.exports = ReactContext;
 
-},{"./Object.assign":"/Users/yangwei/code/react-d3/node_modules/react/lib/Object.assign.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactCurrentOwner.js":[function(require,module,exports){
+},{"./Object.assign":"/home/eric/repos/react-d3/node_modules/react/lib/Object.assign.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/ReactCurrentOwner.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -33199,8 +33159,7 @@ var ReactCurrentOwner = {
 
 module.exports = ReactCurrentOwner;
 
-},{}],"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactDOM.js":[function(require,module,exports){
-(function (process){
+},{}],"/home/eric/repos/react-d3/node_modules/react/lib/ReactDOM.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -33228,7 +33187,7 @@ var mapObject = require("./mapObject");
  * @private
  */
 function createDOMFactory(tag) {
-  if ("production" !== process.env.NODE_ENV) {
+  if ("production" !== "development") {
     return ReactLegacyElement.markNonLegacyFactory(
       ReactElementValidator.createFactory(tag)
     );
@@ -33381,8 +33340,7 @@ var ReactDOM = mapObject({
 
 module.exports = ReactDOM;
 
-}).call(this,require('_process'))
-},{"./ReactElement":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactElement.js","./ReactElementValidator":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactElementValidator.js","./ReactLegacyElement":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactLegacyElement.js","./mapObject":"/Users/yangwei/code/react-d3/node_modules/react/lib/mapObject.js","_process":"/Users/yangwei/code/react-d3/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactDOMButton.js":[function(require,module,exports){
+},{"./ReactElement":"/home/eric/repos/react-d3/node_modules/react/lib/ReactElement.js","./ReactElementValidator":"/home/eric/repos/react-d3/node_modules/react/lib/ReactElementValidator.js","./ReactLegacyElement":"/home/eric/repos/react-d3/node_modules/react/lib/ReactLegacyElement.js","./mapObject":"/home/eric/repos/react-d3/node_modules/react/lib/mapObject.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/ReactDOMButton.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -33447,8 +33405,7 @@ var ReactDOMButton = ReactCompositeComponent.createClass({
 
 module.exports = ReactDOMButton;
 
-},{"./AutoFocusMixin":"/Users/yangwei/code/react-d3/node_modules/react/lib/AutoFocusMixin.js","./ReactBrowserComponentMixin":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactBrowserComponentMixin.js","./ReactCompositeComponent":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactCompositeComponent.js","./ReactDOM":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactDOM.js","./ReactElement":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactElement.js","./keyMirror":"/Users/yangwei/code/react-d3/node_modules/react/lib/keyMirror.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactDOMComponent.js":[function(require,module,exports){
-(function (process){
+},{"./AutoFocusMixin":"/home/eric/repos/react-d3/node_modules/react/lib/AutoFocusMixin.js","./ReactBrowserComponentMixin":"/home/eric/repos/react-d3/node_modules/react/lib/ReactBrowserComponentMixin.js","./ReactCompositeComponent":"/home/eric/repos/react-d3/node_modules/react/lib/ReactCompositeComponent.js","./ReactDOM":"/home/eric/repos/react-d3/node_modules/react/lib/ReactDOM.js","./ReactElement":"/home/eric/repos/react-d3/node_modules/react/lib/ReactElement.js","./keyMirror":"/home/eric/repos/react-d3/node_modules/react/lib/keyMirror.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/ReactDOMComponent.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -33499,11 +33456,11 @@ function assertValidProps(props) {
     return;
   }
   // Note the use of `==` which checks for null or undefined.
-  ("production" !== process.env.NODE_ENV ? invariant(
+  ("production" !== "development" ? invariant(
     props.children == null || props.dangerouslySetInnerHTML == null,
     'Can only set one of `children` or `props.dangerouslySetInnerHTML`.'
   ) : invariant(props.children == null || props.dangerouslySetInnerHTML == null));
-  if ("production" !== process.env.NODE_ENV) {
+  if ("production" !== "development") {
     if (props.contentEditable && props.children != null) {
       console.warn(
         'A component is `contentEditable` and contains `children` managed by ' +
@@ -33513,7 +33470,7 @@ function assertValidProps(props) {
       );
     }
   }
-  ("production" !== process.env.NODE_ENV ? invariant(
+  ("production" !== "development" ? invariant(
     props.style == null || typeof props.style === 'object',
     'The `style` prop expects a mapping from style properties to values, ' +
     'not a string.'
@@ -33521,7 +33478,7 @@ function assertValidProps(props) {
 }
 
 function putListener(id, registrationName, listener, transaction) {
-  if ("production" !== process.env.NODE_ENV) {
+  if ("production" !== "development") {
     // IE8 has no API for event capturing and the `onScroll` event doesn't
     // bubble.
     if (registrationName === 'onScroll' &&
@@ -33576,7 +33533,7 @@ var hasOwnProperty = {}.hasOwnProperty;
 
 function validateDangerousTag(tag) {
   if (!hasOwnProperty.call(validatedTagCache, tag)) {
-    ("production" !== process.env.NODE_ENV ? invariant(VALID_TAG_REGEX.test(tag), 'Invalid tag: %s', tag) : invariant(VALID_TAG_REGEX.test(tag)));
+    ("production" !== "development" ? invariant(VALID_TAG_REGEX.test(tag), 'Invalid tag: %s', tag) : invariant(VALID_TAG_REGEX.test(tag)));
     validatedTagCache[tag] = true;
   }
 }
@@ -33933,8 +33890,7 @@ assign(
 
 module.exports = ReactDOMComponent;
 
-}).call(this,require('_process'))
-},{"./CSSPropertyOperations":"/Users/yangwei/code/react-d3/node_modules/react/lib/CSSPropertyOperations.js","./DOMProperty":"/Users/yangwei/code/react-d3/node_modules/react/lib/DOMProperty.js","./DOMPropertyOperations":"/Users/yangwei/code/react-d3/node_modules/react/lib/DOMPropertyOperations.js","./Object.assign":"/Users/yangwei/code/react-d3/node_modules/react/lib/Object.assign.js","./ReactBrowserComponentMixin":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactBrowserComponentMixin.js","./ReactBrowserEventEmitter":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactBrowserEventEmitter.js","./ReactComponent":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactComponent.js","./ReactMount":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactMount.js","./ReactMultiChild":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactMultiChild.js","./ReactPerf":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactPerf.js","./escapeTextForBrowser":"/Users/yangwei/code/react-d3/node_modules/react/lib/escapeTextForBrowser.js","./invariant":"/Users/yangwei/code/react-d3/node_modules/react/lib/invariant.js","./isEventSupported":"/Users/yangwei/code/react-d3/node_modules/react/lib/isEventSupported.js","./keyOf":"/Users/yangwei/code/react-d3/node_modules/react/lib/keyOf.js","./monitorCodeUse":"/Users/yangwei/code/react-d3/node_modules/react/lib/monitorCodeUse.js","_process":"/Users/yangwei/code/react-d3/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactDOMForm.js":[function(require,module,exports){
+},{"./CSSPropertyOperations":"/home/eric/repos/react-d3/node_modules/react/lib/CSSPropertyOperations.js","./DOMProperty":"/home/eric/repos/react-d3/node_modules/react/lib/DOMProperty.js","./DOMPropertyOperations":"/home/eric/repos/react-d3/node_modules/react/lib/DOMPropertyOperations.js","./Object.assign":"/home/eric/repos/react-d3/node_modules/react/lib/Object.assign.js","./ReactBrowserComponentMixin":"/home/eric/repos/react-d3/node_modules/react/lib/ReactBrowserComponentMixin.js","./ReactBrowserEventEmitter":"/home/eric/repos/react-d3/node_modules/react/lib/ReactBrowserEventEmitter.js","./ReactComponent":"/home/eric/repos/react-d3/node_modules/react/lib/ReactComponent.js","./ReactMount":"/home/eric/repos/react-d3/node_modules/react/lib/ReactMount.js","./ReactMultiChild":"/home/eric/repos/react-d3/node_modules/react/lib/ReactMultiChild.js","./ReactPerf":"/home/eric/repos/react-d3/node_modules/react/lib/ReactPerf.js","./escapeTextForBrowser":"/home/eric/repos/react-d3/node_modules/react/lib/escapeTextForBrowser.js","./invariant":"/home/eric/repos/react-d3/node_modules/react/lib/invariant.js","./isEventSupported":"/home/eric/repos/react-d3/node_modules/react/lib/isEventSupported.js","./keyOf":"/home/eric/repos/react-d3/node_modules/react/lib/keyOf.js","./monitorCodeUse":"/home/eric/repos/react-d3/node_modules/react/lib/monitorCodeUse.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/ReactDOMForm.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -33984,8 +33940,7 @@ var ReactDOMForm = ReactCompositeComponent.createClass({
 
 module.exports = ReactDOMForm;
 
-},{"./EventConstants":"/Users/yangwei/code/react-d3/node_modules/react/lib/EventConstants.js","./LocalEventTrapMixin":"/Users/yangwei/code/react-d3/node_modules/react/lib/LocalEventTrapMixin.js","./ReactBrowserComponentMixin":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactBrowserComponentMixin.js","./ReactCompositeComponent":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactCompositeComponent.js","./ReactDOM":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactDOM.js","./ReactElement":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactElement.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactDOMIDOperations.js":[function(require,module,exports){
-(function (process){
+},{"./EventConstants":"/home/eric/repos/react-d3/node_modules/react/lib/EventConstants.js","./LocalEventTrapMixin":"/home/eric/repos/react-d3/node_modules/react/lib/LocalEventTrapMixin.js","./ReactBrowserComponentMixin":"/home/eric/repos/react-d3/node_modules/react/lib/ReactBrowserComponentMixin.js","./ReactCompositeComponent":"/home/eric/repos/react-d3/node_modules/react/lib/ReactCompositeComponent.js","./ReactDOM":"/home/eric/repos/react-d3/node_modules/react/lib/ReactDOM.js","./ReactElement":"/home/eric/repos/react-d3/node_modules/react/lib/ReactElement.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/ReactDOMIDOperations.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -34043,7 +33998,7 @@ var ReactDOMIDOperations = {
     'updatePropertyByID',
     function(id, name, value) {
       var node = ReactMount.getNode(id);
-      ("production" !== process.env.NODE_ENV ? invariant(
+      ("production" !== "development" ? invariant(
         !INVALID_PROPERTY_ERRORS.hasOwnProperty(name),
         'updatePropertyByID(...): %s',
         INVALID_PROPERTY_ERRORS[name]
@@ -34073,7 +34028,7 @@ var ReactDOMIDOperations = {
     'deletePropertyByID',
     function(id, name, value) {
       var node = ReactMount.getNode(id);
-      ("production" !== process.env.NODE_ENV ? invariant(
+      ("production" !== "development" ? invariant(
         !INVALID_PROPERTY_ERRORS.hasOwnProperty(name),
         'updatePropertyByID(...): %s',
         INVALID_PROPERTY_ERRORS[name]
@@ -34169,8 +34124,7 @@ var ReactDOMIDOperations = {
 
 module.exports = ReactDOMIDOperations;
 
-}).call(this,require('_process'))
-},{"./CSSPropertyOperations":"/Users/yangwei/code/react-d3/node_modules/react/lib/CSSPropertyOperations.js","./DOMChildrenOperations":"/Users/yangwei/code/react-d3/node_modules/react/lib/DOMChildrenOperations.js","./DOMPropertyOperations":"/Users/yangwei/code/react-d3/node_modules/react/lib/DOMPropertyOperations.js","./ReactMount":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactMount.js","./ReactPerf":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactPerf.js","./invariant":"/Users/yangwei/code/react-d3/node_modules/react/lib/invariant.js","./setInnerHTML":"/Users/yangwei/code/react-d3/node_modules/react/lib/setInnerHTML.js","_process":"/Users/yangwei/code/react-d3/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactDOMImg.js":[function(require,module,exports){
+},{"./CSSPropertyOperations":"/home/eric/repos/react-d3/node_modules/react/lib/CSSPropertyOperations.js","./DOMChildrenOperations":"/home/eric/repos/react-d3/node_modules/react/lib/DOMChildrenOperations.js","./DOMPropertyOperations":"/home/eric/repos/react-d3/node_modules/react/lib/DOMPropertyOperations.js","./ReactMount":"/home/eric/repos/react-d3/node_modules/react/lib/ReactMount.js","./ReactPerf":"/home/eric/repos/react-d3/node_modules/react/lib/ReactPerf.js","./invariant":"/home/eric/repos/react-d3/node_modules/react/lib/invariant.js","./setInnerHTML":"/home/eric/repos/react-d3/node_modules/react/lib/setInnerHTML.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/ReactDOMImg.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -34218,8 +34172,7 @@ var ReactDOMImg = ReactCompositeComponent.createClass({
 
 module.exports = ReactDOMImg;
 
-},{"./EventConstants":"/Users/yangwei/code/react-d3/node_modules/react/lib/EventConstants.js","./LocalEventTrapMixin":"/Users/yangwei/code/react-d3/node_modules/react/lib/LocalEventTrapMixin.js","./ReactBrowserComponentMixin":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactBrowserComponentMixin.js","./ReactCompositeComponent":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactCompositeComponent.js","./ReactDOM":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactDOM.js","./ReactElement":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactElement.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactDOMInput.js":[function(require,module,exports){
-(function (process){
+},{"./EventConstants":"/home/eric/repos/react-d3/node_modules/react/lib/EventConstants.js","./LocalEventTrapMixin":"/home/eric/repos/react-d3/node_modules/react/lib/LocalEventTrapMixin.js","./ReactBrowserComponentMixin":"/home/eric/repos/react-d3/node_modules/react/lib/ReactBrowserComponentMixin.js","./ReactCompositeComponent":"/home/eric/repos/react-d3/node_modules/react/lib/ReactCompositeComponent.js","./ReactDOM":"/home/eric/repos/react-d3/node_modules/react/lib/ReactDOM.js","./ReactElement":"/home/eric/repos/react-d3/node_modules/react/lib/ReactElement.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/ReactDOMInput.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -34370,13 +34323,13 @@ var ReactDOMInput = ReactCompositeComponent.createClass({
           continue;
         }
         var otherID = ReactMount.getID(otherNode);
-        ("production" !== process.env.NODE_ENV ? invariant(
+        ("production" !== "development" ? invariant(
           otherID,
           'ReactDOMInput: Mixing React and non-React radio inputs with the ' +
           'same `name` is not supported.'
         ) : invariant(otherID));
         var otherInstance = instancesByReactID[otherID];
-        ("production" !== process.env.NODE_ENV ? invariant(
+        ("production" !== "development" ? invariant(
           otherInstance,
           'ReactDOMInput: Unknown radio button ID %s.',
           otherID
@@ -34395,9 +34348,7 @@ var ReactDOMInput = ReactCompositeComponent.createClass({
 
 module.exports = ReactDOMInput;
 
-}).call(this,require('_process'))
-},{"./AutoFocusMixin":"/Users/yangwei/code/react-d3/node_modules/react/lib/AutoFocusMixin.js","./DOMPropertyOperations":"/Users/yangwei/code/react-d3/node_modules/react/lib/DOMPropertyOperations.js","./LinkedValueUtils":"/Users/yangwei/code/react-d3/node_modules/react/lib/LinkedValueUtils.js","./Object.assign":"/Users/yangwei/code/react-d3/node_modules/react/lib/Object.assign.js","./ReactBrowserComponentMixin":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactBrowserComponentMixin.js","./ReactCompositeComponent":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactCompositeComponent.js","./ReactDOM":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactDOM.js","./ReactElement":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactElement.js","./ReactMount":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactMount.js","./ReactUpdates":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactUpdates.js","./invariant":"/Users/yangwei/code/react-d3/node_modules/react/lib/invariant.js","_process":"/Users/yangwei/code/react-d3/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactDOMOption.js":[function(require,module,exports){
-(function (process){
+},{"./AutoFocusMixin":"/home/eric/repos/react-d3/node_modules/react/lib/AutoFocusMixin.js","./DOMPropertyOperations":"/home/eric/repos/react-d3/node_modules/react/lib/DOMPropertyOperations.js","./LinkedValueUtils":"/home/eric/repos/react-d3/node_modules/react/lib/LinkedValueUtils.js","./Object.assign":"/home/eric/repos/react-d3/node_modules/react/lib/Object.assign.js","./ReactBrowserComponentMixin":"/home/eric/repos/react-d3/node_modules/react/lib/ReactBrowserComponentMixin.js","./ReactCompositeComponent":"/home/eric/repos/react-d3/node_modules/react/lib/ReactCompositeComponent.js","./ReactDOM":"/home/eric/repos/react-d3/node_modules/react/lib/ReactDOM.js","./ReactElement":"/home/eric/repos/react-d3/node_modules/react/lib/ReactElement.js","./ReactMount":"/home/eric/repos/react-d3/node_modules/react/lib/ReactMount.js","./ReactUpdates":"/home/eric/repos/react-d3/node_modules/react/lib/ReactUpdates.js","./invariant":"/home/eric/repos/react-d3/node_modules/react/lib/invariant.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/ReactDOMOption.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -34431,8 +34382,8 @@ var ReactDOMOption = ReactCompositeComponent.createClass({
 
   componentWillMount: function() {
     // TODO (yungsters): Remove support for `selected` in <option>.
-    if ("production" !== process.env.NODE_ENV) {
-      ("production" !== process.env.NODE_ENV ? warning(
+    if ("production" !== "development") {
+      ("production" !== "development" ? warning(
         this.props.selected == null,
         'Use the `defaultValue` or `value` props on <select> instead of ' +
         'setting `selected` on <option>.'
@@ -34448,8 +34399,7 @@ var ReactDOMOption = ReactCompositeComponent.createClass({
 
 module.exports = ReactDOMOption;
 
-}).call(this,require('_process'))
-},{"./ReactBrowserComponentMixin":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactBrowserComponentMixin.js","./ReactCompositeComponent":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactCompositeComponent.js","./ReactDOM":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactDOM.js","./ReactElement":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactElement.js","./warning":"/Users/yangwei/code/react-d3/node_modules/react/lib/warning.js","_process":"/Users/yangwei/code/react-d3/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactDOMSelect.js":[function(require,module,exports){
+},{"./ReactBrowserComponentMixin":"/home/eric/repos/react-d3/node_modules/react/lib/ReactBrowserComponentMixin.js","./ReactCompositeComponent":"/home/eric/repos/react-d3/node_modules/react/lib/ReactCompositeComponent.js","./ReactDOM":"/home/eric/repos/react-d3/node_modules/react/lib/ReactDOM.js","./ReactElement":"/home/eric/repos/react-d3/node_modules/react/lib/ReactElement.js","./warning":"/home/eric/repos/react-d3/node_modules/react/lib/warning.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/ReactDOMSelect.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -34633,7 +34583,7 @@ var ReactDOMSelect = ReactCompositeComponent.createClass({
 
 module.exports = ReactDOMSelect;
 
-},{"./AutoFocusMixin":"/Users/yangwei/code/react-d3/node_modules/react/lib/AutoFocusMixin.js","./LinkedValueUtils":"/Users/yangwei/code/react-d3/node_modules/react/lib/LinkedValueUtils.js","./Object.assign":"/Users/yangwei/code/react-d3/node_modules/react/lib/Object.assign.js","./ReactBrowserComponentMixin":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactBrowserComponentMixin.js","./ReactCompositeComponent":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactCompositeComponent.js","./ReactDOM":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactDOM.js","./ReactElement":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactElement.js","./ReactUpdates":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactUpdates.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactDOMSelection.js":[function(require,module,exports){
+},{"./AutoFocusMixin":"/home/eric/repos/react-d3/node_modules/react/lib/AutoFocusMixin.js","./LinkedValueUtils":"/home/eric/repos/react-d3/node_modules/react/lib/LinkedValueUtils.js","./Object.assign":"/home/eric/repos/react-d3/node_modules/react/lib/Object.assign.js","./ReactBrowserComponentMixin":"/home/eric/repos/react-d3/node_modules/react/lib/ReactBrowserComponentMixin.js","./ReactCompositeComponent":"/home/eric/repos/react-d3/node_modules/react/lib/ReactCompositeComponent.js","./ReactDOM":"/home/eric/repos/react-d3/node_modules/react/lib/ReactDOM.js","./ReactElement":"/home/eric/repos/react-d3/node_modules/react/lib/ReactElement.js","./ReactUpdates":"/home/eric/repos/react-d3/node_modules/react/lib/ReactUpdates.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/ReactDOMSelection.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -34842,8 +34792,7 @@ var ReactDOMSelection = {
 
 module.exports = ReactDOMSelection;
 
-},{"./ExecutionEnvironment":"/Users/yangwei/code/react-d3/node_modules/react/lib/ExecutionEnvironment.js","./getNodeForCharacterOffset":"/Users/yangwei/code/react-d3/node_modules/react/lib/getNodeForCharacterOffset.js","./getTextContentAccessor":"/Users/yangwei/code/react-d3/node_modules/react/lib/getTextContentAccessor.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactDOMTextarea.js":[function(require,module,exports){
-(function (process){
+},{"./ExecutionEnvironment":"/home/eric/repos/react-d3/node_modules/react/lib/ExecutionEnvironment.js","./getNodeForCharacterOffset":"/home/eric/repos/react-d3/node_modules/react/lib/getNodeForCharacterOffset.js","./getTextContentAccessor":"/home/eric/repos/react-d3/node_modules/react/lib/getTextContentAccessor.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/ReactDOMTextarea.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -34906,19 +34855,19 @@ var ReactDOMTextarea = ReactCompositeComponent.createClass({
     // TODO (yungsters): Remove support for children content in <textarea>.
     var children = this.props.children;
     if (children != null) {
-      if ("production" !== process.env.NODE_ENV) {
-        ("production" !== process.env.NODE_ENV ? warning(
+      if ("production" !== "development") {
+        ("production" !== "development" ? warning(
           false,
           'Use the `defaultValue` or `value` props instead of setting ' +
           'children on <textarea>.'
         ) : null);
       }
-      ("production" !== process.env.NODE_ENV ? invariant(
+      ("production" !== "development" ? invariant(
         defaultValue == null,
         'If you supply `defaultValue` on a <textarea>, do not pass children.'
       ) : invariant(defaultValue == null));
       if (Array.isArray(children)) {
-        ("production" !== process.env.NODE_ENV ? invariant(
+        ("production" !== "development" ? invariant(
           children.length <= 1,
           '<textarea> can only have at most one child.'
         ) : invariant(children.length <= 1));
@@ -34944,7 +34893,7 @@ var ReactDOMTextarea = ReactCompositeComponent.createClass({
     // Clone `this.props` so we don't mutate the input.
     var props = assign({}, this.props);
 
-    ("production" !== process.env.NODE_ENV ? invariant(
+    ("production" !== "development" ? invariant(
       props.dangerouslySetInnerHTML == null,
       '`dangerouslySetInnerHTML` does not make sense on <textarea>.'
     ) : invariant(props.dangerouslySetInnerHTML == null));
@@ -34982,8 +34931,7 @@ var ReactDOMTextarea = ReactCompositeComponent.createClass({
 
 module.exports = ReactDOMTextarea;
 
-}).call(this,require('_process'))
-},{"./AutoFocusMixin":"/Users/yangwei/code/react-d3/node_modules/react/lib/AutoFocusMixin.js","./DOMPropertyOperations":"/Users/yangwei/code/react-d3/node_modules/react/lib/DOMPropertyOperations.js","./LinkedValueUtils":"/Users/yangwei/code/react-d3/node_modules/react/lib/LinkedValueUtils.js","./Object.assign":"/Users/yangwei/code/react-d3/node_modules/react/lib/Object.assign.js","./ReactBrowserComponentMixin":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactBrowserComponentMixin.js","./ReactCompositeComponent":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactCompositeComponent.js","./ReactDOM":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactDOM.js","./ReactElement":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactElement.js","./ReactUpdates":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactUpdates.js","./invariant":"/Users/yangwei/code/react-d3/node_modules/react/lib/invariant.js","./warning":"/Users/yangwei/code/react-d3/node_modules/react/lib/warning.js","_process":"/Users/yangwei/code/react-d3/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactDefaultBatchingStrategy.js":[function(require,module,exports){
+},{"./AutoFocusMixin":"/home/eric/repos/react-d3/node_modules/react/lib/AutoFocusMixin.js","./DOMPropertyOperations":"/home/eric/repos/react-d3/node_modules/react/lib/DOMPropertyOperations.js","./LinkedValueUtils":"/home/eric/repos/react-d3/node_modules/react/lib/LinkedValueUtils.js","./Object.assign":"/home/eric/repos/react-d3/node_modules/react/lib/Object.assign.js","./ReactBrowserComponentMixin":"/home/eric/repos/react-d3/node_modules/react/lib/ReactBrowserComponentMixin.js","./ReactCompositeComponent":"/home/eric/repos/react-d3/node_modules/react/lib/ReactCompositeComponent.js","./ReactDOM":"/home/eric/repos/react-d3/node_modules/react/lib/ReactDOM.js","./ReactElement":"/home/eric/repos/react-d3/node_modules/react/lib/ReactElement.js","./ReactUpdates":"/home/eric/repos/react-d3/node_modules/react/lib/ReactUpdates.js","./invariant":"/home/eric/repos/react-d3/node_modules/react/lib/invariant.js","./warning":"/home/eric/repos/react-d3/node_modules/react/lib/warning.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/ReactDefaultBatchingStrategy.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -35056,8 +35004,7 @@ var ReactDefaultBatchingStrategy = {
 
 module.exports = ReactDefaultBatchingStrategy;
 
-},{"./Object.assign":"/Users/yangwei/code/react-d3/node_modules/react/lib/Object.assign.js","./ReactUpdates":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactUpdates.js","./Transaction":"/Users/yangwei/code/react-d3/node_modules/react/lib/Transaction.js","./emptyFunction":"/Users/yangwei/code/react-d3/node_modules/react/lib/emptyFunction.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactDefaultInjection.js":[function(require,module,exports){
-(function (process){
+},{"./Object.assign":"/home/eric/repos/react-d3/node_modules/react/lib/Object.assign.js","./ReactUpdates":"/home/eric/repos/react-d3/node_modules/react/lib/ReactUpdates.js","./Transaction":"/home/eric/repos/react-d3/node_modules/react/lib/Transaction.js","./emptyFunction":"/home/eric/repos/react-d3/node_modules/react/lib/emptyFunction.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/ReactDefaultInjection.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -35171,7 +35118,7 @@ function inject() {
 
   ReactInjection.Component.injectEnvironment(ReactComponentBrowserEnvironment);
 
-  if ("production" !== process.env.NODE_ENV) {
+  if ("production" !== "development") {
     var url = (ExecutionEnvironment.canUseDOM && window.location.href) || '';
     if ((/[?&]react_perf\b/).test(url)) {
       var ReactDefaultPerf = require("./ReactDefaultPerf");
@@ -35184,8 +35131,7 @@ module.exports = {
   inject: inject
 };
 
-}).call(this,require('_process'))
-},{"./BeforeInputEventPlugin":"/Users/yangwei/code/react-d3/node_modules/react/lib/BeforeInputEventPlugin.js","./ChangeEventPlugin":"/Users/yangwei/code/react-d3/node_modules/react/lib/ChangeEventPlugin.js","./ClientReactRootIndex":"/Users/yangwei/code/react-d3/node_modules/react/lib/ClientReactRootIndex.js","./CompositionEventPlugin":"/Users/yangwei/code/react-d3/node_modules/react/lib/CompositionEventPlugin.js","./DefaultEventPluginOrder":"/Users/yangwei/code/react-d3/node_modules/react/lib/DefaultEventPluginOrder.js","./EnterLeaveEventPlugin":"/Users/yangwei/code/react-d3/node_modules/react/lib/EnterLeaveEventPlugin.js","./ExecutionEnvironment":"/Users/yangwei/code/react-d3/node_modules/react/lib/ExecutionEnvironment.js","./HTMLDOMPropertyConfig":"/Users/yangwei/code/react-d3/node_modules/react/lib/HTMLDOMPropertyConfig.js","./MobileSafariClickEventPlugin":"/Users/yangwei/code/react-d3/node_modules/react/lib/MobileSafariClickEventPlugin.js","./ReactBrowserComponentMixin":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactBrowserComponentMixin.js","./ReactComponentBrowserEnvironment":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactComponentBrowserEnvironment.js","./ReactDOMButton":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactDOMButton.js","./ReactDOMComponent":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactDOMComponent.js","./ReactDOMForm":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactDOMForm.js","./ReactDOMImg":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactDOMImg.js","./ReactDOMInput":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactDOMInput.js","./ReactDOMOption":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactDOMOption.js","./ReactDOMSelect":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactDOMSelect.js","./ReactDOMTextarea":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactDOMTextarea.js","./ReactDefaultBatchingStrategy":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactDefaultBatchingStrategy.js","./ReactDefaultPerf":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactDefaultPerf.js","./ReactEventListener":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactEventListener.js","./ReactInjection":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactInjection.js","./ReactInstanceHandles":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactInstanceHandles.js","./ReactMount":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactMount.js","./SVGDOMPropertyConfig":"/Users/yangwei/code/react-d3/node_modules/react/lib/SVGDOMPropertyConfig.js","./SelectEventPlugin":"/Users/yangwei/code/react-d3/node_modules/react/lib/SelectEventPlugin.js","./ServerReactRootIndex":"/Users/yangwei/code/react-d3/node_modules/react/lib/ServerReactRootIndex.js","./SimpleEventPlugin":"/Users/yangwei/code/react-d3/node_modules/react/lib/SimpleEventPlugin.js","./createFullPageComponent":"/Users/yangwei/code/react-d3/node_modules/react/lib/createFullPageComponent.js","_process":"/Users/yangwei/code/react-d3/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactDefaultPerf.js":[function(require,module,exports){
+},{"./BeforeInputEventPlugin":"/home/eric/repos/react-d3/node_modules/react/lib/BeforeInputEventPlugin.js","./ChangeEventPlugin":"/home/eric/repos/react-d3/node_modules/react/lib/ChangeEventPlugin.js","./ClientReactRootIndex":"/home/eric/repos/react-d3/node_modules/react/lib/ClientReactRootIndex.js","./CompositionEventPlugin":"/home/eric/repos/react-d3/node_modules/react/lib/CompositionEventPlugin.js","./DefaultEventPluginOrder":"/home/eric/repos/react-d3/node_modules/react/lib/DefaultEventPluginOrder.js","./EnterLeaveEventPlugin":"/home/eric/repos/react-d3/node_modules/react/lib/EnterLeaveEventPlugin.js","./ExecutionEnvironment":"/home/eric/repos/react-d3/node_modules/react/lib/ExecutionEnvironment.js","./HTMLDOMPropertyConfig":"/home/eric/repos/react-d3/node_modules/react/lib/HTMLDOMPropertyConfig.js","./MobileSafariClickEventPlugin":"/home/eric/repos/react-d3/node_modules/react/lib/MobileSafariClickEventPlugin.js","./ReactBrowserComponentMixin":"/home/eric/repos/react-d3/node_modules/react/lib/ReactBrowserComponentMixin.js","./ReactComponentBrowserEnvironment":"/home/eric/repos/react-d3/node_modules/react/lib/ReactComponentBrowserEnvironment.js","./ReactDOMButton":"/home/eric/repos/react-d3/node_modules/react/lib/ReactDOMButton.js","./ReactDOMComponent":"/home/eric/repos/react-d3/node_modules/react/lib/ReactDOMComponent.js","./ReactDOMForm":"/home/eric/repos/react-d3/node_modules/react/lib/ReactDOMForm.js","./ReactDOMImg":"/home/eric/repos/react-d3/node_modules/react/lib/ReactDOMImg.js","./ReactDOMInput":"/home/eric/repos/react-d3/node_modules/react/lib/ReactDOMInput.js","./ReactDOMOption":"/home/eric/repos/react-d3/node_modules/react/lib/ReactDOMOption.js","./ReactDOMSelect":"/home/eric/repos/react-d3/node_modules/react/lib/ReactDOMSelect.js","./ReactDOMTextarea":"/home/eric/repos/react-d3/node_modules/react/lib/ReactDOMTextarea.js","./ReactDefaultBatchingStrategy":"/home/eric/repos/react-d3/node_modules/react/lib/ReactDefaultBatchingStrategy.js","./ReactDefaultPerf":"/home/eric/repos/react-d3/node_modules/react/lib/ReactDefaultPerf.js","./ReactEventListener":"/home/eric/repos/react-d3/node_modules/react/lib/ReactEventListener.js","./ReactInjection":"/home/eric/repos/react-d3/node_modules/react/lib/ReactInjection.js","./ReactInstanceHandles":"/home/eric/repos/react-d3/node_modules/react/lib/ReactInstanceHandles.js","./ReactMount":"/home/eric/repos/react-d3/node_modules/react/lib/ReactMount.js","./SVGDOMPropertyConfig":"/home/eric/repos/react-d3/node_modules/react/lib/SVGDOMPropertyConfig.js","./SelectEventPlugin":"/home/eric/repos/react-d3/node_modules/react/lib/SelectEventPlugin.js","./ServerReactRootIndex":"/home/eric/repos/react-d3/node_modules/react/lib/ServerReactRootIndex.js","./SimpleEventPlugin":"/home/eric/repos/react-d3/node_modules/react/lib/SimpleEventPlugin.js","./createFullPageComponent":"/home/eric/repos/react-d3/node_modules/react/lib/createFullPageComponent.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/ReactDefaultPerf.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -35445,7 +35391,7 @@ var ReactDefaultPerf = {
 
 module.exports = ReactDefaultPerf;
 
-},{"./DOMProperty":"/Users/yangwei/code/react-d3/node_modules/react/lib/DOMProperty.js","./ReactDefaultPerfAnalysis":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactDefaultPerfAnalysis.js","./ReactMount":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactMount.js","./ReactPerf":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactPerf.js","./performanceNow":"/Users/yangwei/code/react-d3/node_modules/react/lib/performanceNow.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactDefaultPerfAnalysis.js":[function(require,module,exports){
+},{"./DOMProperty":"/home/eric/repos/react-d3/node_modules/react/lib/DOMProperty.js","./ReactDefaultPerfAnalysis":"/home/eric/repos/react-d3/node_modules/react/lib/ReactDefaultPerfAnalysis.js","./ReactMount":"/home/eric/repos/react-d3/node_modules/react/lib/ReactMount.js","./ReactPerf":"/home/eric/repos/react-d3/node_modules/react/lib/ReactPerf.js","./performanceNow":"/home/eric/repos/react-d3/node_modules/react/lib/performanceNow.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/ReactDefaultPerfAnalysis.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -35651,8 +35597,7 @@ var ReactDefaultPerfAnalysis = {
 
 module.exports = ReactDefaultPerfAnalysis;
 
-},{"./Object.assign":"/Users/yangwei/code/react-d3/node_modules/react/lib/Object.assign.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactElement.js":[function(require,module,exports){
-(function (process){
+},{"./Object.assign":"/home/eric/repos/react-d3/node_modules/react/lib/Object.assign.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/ReactElement.js":[function(require,module,exports){
 /**
  * Copyright 2014, Facebook, Inc.
  * All rights reserved.
@@ -35697,7 +35642,7 @@ function defineWarningProperty(object, key) {
     },
 
     set: function(value) {
-      ("production" !== process.env.NODE_ENV ? warning(
+      ("production" !== "development" ? warning(
         false,
         'Don\'t set the ' + key + ' property of the component. ' +
         'Mutate the existing props object instead.'
@@ -35756,7 +35701,7 @@ var ReactElement = function(type, key, ref, owner, context, props) {
   // through the owner.
   this._context = context;
 
-  if ("production" !== process.env.NODE_ENV) {
+  if ("production" !== "development") {
     // The validation flag and props are currently mutative. We put them on
     // an external backing store so that we can freeze the whole object.
     // This can be replaced with a WeakMap once they are implemented in
@@ -35781,7 +35726,7 @@ ReactElement.prototype = {
   _isReactElement: true
 };
 
-if ("production" !== process.env.NODE_ENV) {
+if ("production" !== "development") {
   defineMutationMembrane(ReactElement.prototype);
 }
 
@@ -35796,8 +35741,8 @@ ReactElement.createElement = function(type, config, children) {
 
   if (config != null) {
     ref = config.ref === undefined ? null : config.ref;
-    if ("production" !== process.env.NODE_ENV) {
-      ("production" !== process.env.NODE_ENV ? warning(
+    if ("production" !== "development") {
+      ("production" !== "development" ? warning(
         config.key !== null,
         'createElement(...): Encountered component with a `key` of null. In ' +
         'a future version, this will be treated as equivalent to the string ' +
@@ -35868,7 +35813,7 @@ ReactElement.cloneAndReplaceProps = function(oldElement, newProps) {
     newProps
   );
 
-  if ("production" !== process.env.NODE_ENV) {
+  if ("production" !== "development") {
     // If the key on the original is valid, then the clone is valid
     newElement._store.validated = oldElement._store.validated;
   }
@@ -35896,9 +35841,7 @@ ReactElement.isValidElement = function(object) {
 
 module.exports = ReactElement;
 
-}).call(this,require('_process'))
-},{"./ReactContext":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactContext.js","./ReactCurrentOwner":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactCurrentOwner.js","./warning":"/Users/yangwei/code/react-d3/node_modules/react/lib/warning.js","_process":"/Users/yangwei/code/react-d3/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactElementValidator.js":[function(require,module,exports){
-(function (process){
+},{"./ReactContext":"/home/eric/repos/react-d3/node_modules/react/lib/ReactContext.js","./ReactCurrentOwner":"/home/eric/repos/react-d3/node_modules/react/lib/ReactCurrentOwner.js","./warning":"/home/eric/repos/react-d3/node_modules/react/lib/warning.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/ReactElementValidator.js":[function(require,module,exports){
 /**
  * Copyright 2014, Facebook, Inc.
  * All rights reserved.
@@ -36124,7 +36067,7 @@ var ReactElementValidator = {
   createElement: function(type, props, children) {
     // We warn in this case but don't throw. We expect the element creation to
     // succeed and there will likely be errors in render.
-    ("production" !== process.env.NODE_ENV ? warning(
+    ("production" !== "development" ? warning(
       type != null,
       'React.createElement: type should not be null or undefined. It should ' +
         'be a string (for DOM elements) or a ReactClass (for composite ' +
@@ -36178,9 +36121,7 @@ var ReactElementValidator = {
 
 module.exports = ReactElementValidator;
 
-}).call(this,require('_process'))
-},{"./ReactCurrentOwner":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactCurrentOwner.js","./ReactElement":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactElement.js","./ReactPropTypeLocations":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactPropTypeLocations.js","./monitorCodeUse":"/Users/yangwei/code/react-d3/node_modules/react/lib/monitorCodeUse.js","./warning":"/Users/yangwei/code/react-d3/node_modules/react/lib/warning.js","_process":"/Users/yangwei/code/react-d3/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactEmptyComponent.js":[function(require,module,exports){
-(function (process){
+},{"./ReactCurrentOwner":"/home/eric/repos/react-d3/node_modules/react/lib/ReactCurrentOwner.js","./ReactElement":"/home/eric/repos/react-d3/node_modules/react/lib/ReactElement.js","./ReactPropTypeLocations":"/home/eric/repos/react-d3/node_modules/react/lib/ReactPropTypeLocations.js","./monitorCodeUse":"/home/eric/repos/react-d3/node_modules/react/lib/monitorCodeUse.js","./warning":"/home/eric/repos/react-d3/node_modules/react/lib/warning.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/ReactEmptyComponent.js":[function(require,module,exports){
 /**
  * Copyright 2014, Facebook, Inc.
  * All rights reserved.
@@ -36213,7 +36154,7 @@ var ReactEmptyComponentInjection = {
  * @return {ReactComponent} component The injected empty component.
  */
 function getEmptyComponent() {
-  ("production" !== process.env.NODE_ENV ? invariant(
+  ("production" !== "development" ? invariant(
     component,
     'Trying to return null from a render, but no null placeholder component ' +
     'was injected.'
@@ -36255,8 +36196,7 @@ var ReactEmptyComponent = {
 
 module.exports = ReactEmptyComponent;
 
-}).call(this,require('_process'))
-},{"./ReactElement":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactElement.js","./invariant":"/Users/yangwei/code/react-d3/node_modules/react/lib/invariant.js","_process":"/Users/yangwei/code/react-d3/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactErrorUtils.js":[function(require,module,exports){
+},{"./ReactElement":"/home/eric/repos/react-d3/node_modules/react/lib/ReactElement.js","./invariant":"/home/eric/repos/react-d3/node_modules/react/lib/invariant.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/ReactErrorUtils.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -36288,7 +36228,7 @@ var ReactErrorUtils = {
 
 module.exports = ReactErrorUtils;
 
-},{}],"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactEventEmitterMixin.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/react/lib/ReactEventEmitterMixin.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -36338,7 +36278,7 @@ var ReactEventEmitterMixin = {
 
 module.exports = ReactEventEmitterMixin;
 
-},{"./EventPluginHub":"/Users/yangwei/code/react-d3/node_modules/react/lib/EventPluginHub.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactEventListener.js":[function(require,module,exports){
+},{"./EventPluginHub":"/home/eric/repos/react-d3/node_modules/react/lib/EventPluginHub.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/ReactEventListener.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -36522,7 +36462,7 @@ var ReactEventListener = {
 
 module.exports = ReactEventListener;
 
-},{"./EventListener":"/Users/yangwei/code/react-d3/node_modules/react/lib/EventListener.js","./ExecutionEnvironment":"/Users/yangwei/code/react-d3/node_modules/react/lib/ExecutionEnvironment.js","./Object.assign":"/Users/yangwei/code/react-d3/node_modules/react/lib/Object.assign.js","./PooledClass":"/Users/yangwei/code/react-d3/node_modules/react/lib/PooledClass.js","./ReactInstanceHandles":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactInstanceHandles.js","./ReactMount":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactMount.js","./ReactUpdates":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactUpdates.js","./getEventTarget":"/Users/yangwei/code/react-d3/node_modules/react/lib/getEventTarget.js","./getUnboundedScrollPosition":"/Users/yangwei/code/react-d3/node_modules/react/lib/getUnboundedScrollPosition.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactInjection.js":[function(require,module,exports){
+},{"./EventListener":"/home/eric/repos/react-d3/node_modules/react/lib/EventListener.js","./ExecutionEnvironment":"/home/eric/repos/react-d3/node_modules/react/lib/ExecutionEnvironment.js","./Object.assign":"/home/eric/repos/react-d3/node_modules/react/lib/Object.assign.js","./PooledClass":"/home/eric/repos/react-d3/node_modules/react/lib/PooledClass.js","./ReactInstanceHandles":"/home/eric/repos/react-d3/node_modules/react/lib/ReactInstanceHandles.js","./ReactMount":"/home/eric/repos/react-d3/node_modules/react/lib/ReactMount.js","./ReactUpdates":"/home/eric/repos/react-d3/node_modules/react/lib/ReactUpdates.js","./getEventTarget":"/home/eric/repos/react-d3/node_modules/react/lib/getEventTarget.js","./getUnboundedScrollPosition":"/home/eric/repos/react-d3/node_modules/react/lib/getUnboundedScrollPosition.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/ReactInjection.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -36562,7 +36502,7 @@ var ReactInjection = {
 
 module.exports = ReactInjection;
 
-},{"./DOMProperty":"/Users/yangwei/code/react-d3/node_modules/react/lib/DOMProperty.js","./EventPluginHub":"/Users/yangwei/code/react-d3/node_modules/react/lib/EventPluginHub.js","./ReactBrowserEventEmitter":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactBrowserEventEmitter.js","./ReactComponent":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactComponent.js","./ReactCompositeComponent":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactCompositeComponent.js","./ReactEmptyComponent":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactEmptyComponent.js","./ReactNativeComponent":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactNativeComponent.js","./ReactPerf":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactPerf.js","./ReactRootIndex":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactRootIndex.js","./ReactUpdates":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactUpdates.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactInputSelection.js":[function(require,module,exports){
+},{"./DOMProperty":"/home/eric/repos/react-d3/node_modules/react/lib/DOMProperty.js","./EventPluginHub":"/home/eric/repos/react-d3/node_modules/react/lib/EventPluginHub.js","./ReactBrowserEventEmitter":"/home/eric/repos/react-d3/node_modules/react/lib/ReactBrowserEventEmitter.js","./ReactComponent":"/home/eric/repos/react-d3/node_modules/react/lib/ReactComponent.js","./ReactCompositeComponent":"/home/eric/repos/react-d3/node_modules/react/lib/ReactCompositeComponent.js","./ReactEmptyComponent":"/home/eric/repos/react-d3/node_modules/react/lib/ReactEmptyComponent.js","./ReactNativeComponent":"/home/eric/repos/react-d3/node_modules/react/lib/ReactNativeComponent.js","./ReactPerf":"/home/eric/repos/react-d3/node_modules/react/lib/ReactPerf.js","./ReactRootIndex":"/home/eric/repos/react-d3/node_modules/react/lib/ReactRootIndex.js","./ReactUpdates":"/home/eric/repos/react-d3/node_modules/react/lib/ReactUpdates.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/ReactInputSelection.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -36698,8 +36638,7 @@ var ReactInputSelection = {
 
 module.exports = ReactInputSelection;
 
-},{"./ReactDOMSelection":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactDOMSelection.js","./containsNode":"/Users/yangwei/code/react-d3/node_modules/react/lib/containsNode.js","./focusNode":"/Users/yangwei/code/react-d3/node_modules/react/lib/focusNode.js","./getActiveElement":"/Users/yangwei/code/react-d3/node_modules/react/lib/getActiveElement.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactInstanceHandles.js":[function(require,module,exports){
-(function (process){
+},{"./ReactDOMSelection":"/home/eric/repos/react-d3/node_modules/react/lib/ReactDOMSelection.js","./containsNode":"/home/eric/repos/react-d3/node_modules/react/lib/containsNode.js","./focusNode":"/home/eric/repos/react-d3/node_modules/react/lib/focusNode.js","./getActiveElement":"/home/eric/repos/react-d3/node_modules/react/lib/getActiveElement.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/ReactInstanceHandles.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -36798,13 +36737,13 @@ function getParentID(id) {
  * @private
  */
 function getNextDescendantID(ancestorID, destinationID) {
-  ("production" !== process.env.NODE_ENV ? invariant(
+  ("production" !== "development" ? invariant(
     isValidID(ancestorID) && isValidID(destinationID),
     'getNextDescendantID(%s, %s): Received an invalid React DOM ID.',
     ancestorID,
     destinationID
   ) : invariant(isValidID(ancestorID) && isValidID(destinationID)));
-  ("production" !== process.env.NODE_ENV ? invariant(
+  ("production" !== "development" ? invariant(
     isAncestorIDOf(ancestorID, destinationID),
     'getNextDescendantID(...): React has made an invalid assumption about ' +
     'the DOM hierarchy. Expected `%s` to be an ancestor of `%s`.',
@@ -36851,7 +36790,7 @@ function getFirstCommonAncestorID(oneID, twoID) {
     }
   }
   var longestCommonID = oneID.substr(0, lastCommonMarkerIndex);
-  ("production" !== process.env.NODE_ENV ? invariant(
+  ("production" !== "development" ? invariant(
     isValidID(longestCommonID),
     'getFirstCommonAncestorID(%s, %s): Expected a valid React DOM ID: %s',
     oneID,
@@ -36876,13 +36815,13 @@ function getFirstCommonAncestorID(oneID, twoID) {
 function traverseParentPath(start, stop, cb, arg, skipFirst, skipLast) {
   start = start || '';
   stop = stop || '';
-  ("production" !== process.env.NODE_ENV ? invariant(
+  ("production" !== "development" ? invariant(
     start !== stop,
     'traverseParentPath(...): Cannot traverse from and to the same ID, `%s`.',
     start
   ) : invariant(start !== stop));
   var traverseUp = isAncestorIDOf(stop, start);
-  ("production" !== process.env.NODE_ENV ? invariant(
+  ("production" !== "development" ? invariant(
     traverseUp || isAncestorIDOf(start, stop),
     'traverseParentPath(%s, %s, ...): Cannot traverse from two IDs that do ' +
     'not have a parent path.',
@@ -36901,7 +36840,7 @@ function traverseParentPath(start, stop, cb, arg, skipFirst, skipLast) {
       // Only break //after// visiting `stop`.
       break;
     }
-    ("production" !== process.env.NODE_ENV ? invariant(
+    ("production" !== "development" ? invariant(
       depth++ < MAX_TREE_DEPTH,
       'traverseParentPath(%s, %s, ...): Detected an infinite loop while ' +
       'traversing the React DOM ID tree. This may be due to malformed IDs: %s',
@@ -37032,9 +36971,7 @@ var ReactInstanceHandles = {
 
 module.exports = ReactInstanceHandles;
 
-}).call(this,require('_process'))
-},{"./ReactRootIndex":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactRootIndex.js","./invariant":"/Users/yangwei/code/react-d3/node_modules/react/lib/invariant.js","_process":"/Users/yangwei/code/react-d3/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactLegacyElement.js":[function(require,module,exports){
-(function (process){
+},{"./ReactRootIndex":"/home/eric/repos/react-d3/node_modules/react/lib/ReactRootIndex.js","./invariant":"/home/eric/repos/react-d3/node_modules/react/lib/invariant.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/ReactLegacyElement.js":[function(require,module,exports){
 /**
  * Copyright 2014, Facebook, Inc.
  * All rights reserved.
@@ -37068,7 +37005,7 @@ function warnForLegacyFactoryCall() {
     return;
   }
   legacyFactoryLogs[name] = true;
-  ("production" !== process.env.NODE_ENV ? warning(
+  ("production" !== "development" ? warning(
     false,
     name + ' is calling a React component directly. ' +
     'Use a factory or JSX instead. See: http://fb.me/react-legacyfactory'
@@ -37082,7 +37019,7 @@ function warnForPlainFunctionType(type) {
     typeof type.prototype.mountComponent === 'function' &&
     typeof type.prototype.receiveComponent === 'function';
   if (isReactClass) {
-    ("production" !== process.env.NODE_ENV ? warning(
+    ("production" !== "development" ? warning(
       false,
       'Did not expect to get a React class here. Use `Component` instead ' +
       'of `Component.type` or `this.constructor`.'
@@ -37099,7 +37036,7 @@ function warnForPlainFunctionType(type) {
         { version: 3, name: type.name }
       );
     }
-    ("production" !== process.env.NODE_ENV ? warning(
+    ("production" !== "development" ? warning(
       false,
       'This JSX uses a plain function. Only React components are ' +
       'valid in React\'s JSX transform.'
@@ -37108,7 +37045,7 @@ function warnForPlainFunctionType(type) {
 }
 
 function warnForNonLegacyFactory(type) {
-  ("production" !== process.env.NODE_ENV ? warning(
+  ("production" !== "development" ? warning(
     false,
     'Do not pass React.DOM.' + type.type + ' to JSX or createFactory. ' +
     'Use the string "' + type.type + '" instead.'
@@ -37161,7 +37098,7 @@ ReactLegacyElementFactory.wrapCreateFactory = function(createFactory) {
       // This is probably a factory created by ReactDOM we unwrap it to get to
       // the underlying string type. It shouldn't have been passed here so we
       // warn.
-      if ("production" !== process.env.NODE_ENV) {
+      if ("production" !== "development") {
         warnForNonLegacyFactory(type);
       }
       return createFactory(type.type);
@@ -37173,7 +37110,7 @@ ReactLegacyElementFactory.wrapCreateFactory = function(createFactory) {
       return createFactory(type.type);
     }
 
-    if ("production" !== process.env.NODE_ENV) {
+    if ("production" !== "development") {
       warnForPlainFunctionType(type);
     }
 
@@ -37197,7 +37134,7 @@ ReactLegacyElementFactory.wrapCreateElement = function(createElement) {
       // This is probably a factory created by ReactDOM we unwrap it to get to
       // the underlying string type. It shouldn't have been passed here so we
       // warn.
-      if ("production" !== process.env.NODE_ENV) {
+      if ("production" !== "development") {
         warnForNonLegacyFactory(type);
       }
       args = Array.prototype.slice.call(arguments, 0);
@@ -37219,7 +37156,7 @@ ReactLegacyElementFactory.wrapCreateElement = function(createElement) {
       return createElement.apply(this, args);
     }
 
-    if ("production" !== process.env.NODE_ENV) {
+    if ("production" !== "development") {
       warnForPlainFunctionType(type);
     }
 
@@ -37231,13 +37168,13 @@ ReactLegacyElementFactory.wrapCreateElement = function(createElement) {
 };
 
 ReactLegacyElementFactory.wrapFactory = function(factory) {
-  ("production" !== process.env.NODE_ENV ? invariant(
+  ("production" !== "development" ? invariant(
     typeof factory === 'function',
     'This is suppose to accept a element factory'
   ) : invariant(typeof factory === 'function'));
   var legacyElementFactory = function(config, children) {
     // This factory should not be called when JSX is used. Use JSX instead.
-    if ("production" !== process.env.NODE_ENV) {
+    if ("production" !== "development") {
       warnForLegacyFactoryCall();
     }
     return factory.apply(this, arguments);
@@ -37265,8 +37202,8 @@ ReactLegacyElementFactory.isValidFactory = function(factory) {
 };
 
 ReactLegacyElementFactory.isValidClass = function(factory) {
-  if ("production" !== process.env.NODE_ENV) {
-    ("production" !== process.env.NODE_ENV ? warning(
+  if ("production" !== "development") {
+    ("production" !== "development" ? warning(
       false,
       'isValidClass is deprecated and will be removed in a future release. ' +
       'Use a more specific validator instead.'
@@ -37279,8 +37216,7 @@ ReactLegacyElementFactory._isLegacyCallWarningEnabled = true;
 
 module.exports = ReactLegacyElementFactory;
 
-}).call(this,require('_process'))
-},{"./ReactCurrentOwner":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactCurrentOwner.js","./invariant":"/Users/yangwei/code/react-d3/node_modules/react/lib/invariant.js","./monitorCodeUse":"/Users/yangwei/code/react-d3/node_modules/react/lib/monitorCodeUse.js","./warning":"/Users/yangwei/code/react-d3/node_modules/react/lib/warning.js","_process":"/Users/yangwei/code/react-d3/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactMarkupChecksum.js":[function(require,module,exports){
+},{"./ReactCurrentOwner":"/home/eric/repos/react-d3/node_modules/react/lib/ReactCurrentOwner.js","./invariant":"/home/eric/repos/react-d3/node_modules/react/lib/invariant.js","./monitorCodeUse":"/home/eric/repos/react-d3/node_modules/react/lib/monitorCodeUse.js","./warning":"/home/eric/repos/react-d3/node_modules/react/lib/warning.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/ReactMarkupChecksum.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -37328,8 +37264,7 @@ var ReactMarkupChecksum = {
 
 module.exports = ReactMarkupChecksum;
 
-},{"./adler32":"/Users/yangwei/code/react-d3/node_modules/react/lib/adler32.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactMount.js":[function(require,module,exports){
-(function (process){
+},{"./adler32":"/home/eric/repos/react-d3/node_modules/react/lib/adler32.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/ReactMount.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -37377,7 +37312,7 @@ var instancesByReactRootID = {};
 /** Mapping from reactRootID to `container` nodes. */
 var containersByReactRootID = {};
 
-if ("production" !== process.env.NODE_ENV) {
+if ("production" !== "development") {
   /** __DEV__-only mapping from reactRootID to root elements. */
   var rootElementsByReactRootID = {};
 }
@@ -37410,7 +37345,7 @@ function getID(node) {
     if (nodeCache.hasOwnProperty(id)) {
       var cached = nodeCache[id];
       if (cached !== node) {
-        ("production" !== process.env.NODE_ENV ? invariant(
+        ("production" !== "development" ? invariant(
           !isValid(cached, id),
           'ReactMount: Two valid but unequal nodes with the same `%s`: %s',
           ATTR_NAME, id
@@ -37474,7 +37409,7 @@ function getNode(id) {
  */
 function isValid(node, id) {
   if (node) {
-    ("production" !== process.env.NODE_ENV ? invariant(
+    ("production" !== "development" ? invariant(
       internalGetID(node) === id,
       'ReactMount: Unexpected modification of `%s`',
       ATTR_NAME
@@ -37576,7 +37511,7 @@ var ReactMount = {
       prevComponent.replaceProps(nextProps, callback);
     });
 
-    if ("production" !== process.env.NODE_ENV) {
+    if ("production" !== "development") {
       // Record the root element in case it later gets transplanted.
       rootElementsByReactRootID[getReactRootID(container)] =
         getReactRootElementInContainer(container);
@@ -37593,7 +37528,7 @@ var ReactMount = {
    * @return {string} reactRoot ID prefix
    */
   _registerComponent: function(nextComponent, container) {
-    ("production" !== process.env.NODE_ENV ? invariant(
+    ("production" !== "development" ? invariant(
       container && (
         container.nodeType === ELEMENT_NODE_TYPE ||
         container.nodeType === DOC_NODE_TYPE
@@ -37628,7 +37563,7 @@ var ReactMount = {
       // Various parts of our code (such as ReactCompositeComponent's
       // _renderValidatedComponent) assume that calls to render aren't nested;
       // verify that that's the case.
-      ("production" !== process.env.NODE_ENV ? warning(
+      ("production" !== "development" ? warning(
         ReactCurrentOwner.current == null,
         '_renderNewRootComponent(): Render methods should be a pure function ' +
         'of props and state; triggering nested component updates from ' +
@@ -37647,7 +37582,7 @@ var ReactMount = {
         shouldReuseMarkup
       );
 
-      if ("production" !== process.env.NODE_ENV) {
+      if ("production" !== "development") {
         // Record the root element in case it later gets transplanted.
         rootElementsByReactRootID[reactRootID] =
           getReactRootElementInContainer(container);
@@ -37670,7 +37605,7 @@ var ReactMount = {
    * @return {ReactComponent} Component instance rendered in `container`.
    */
   render: function(nextElement, container, callback) {
-    ("production" !== process.env.NODE_ENV ? invariant(
+    ("production" !== "development" ? invariant(
       ReactElement.isValidElement(nextElement),
       'renderComponent(): Invalid component element.%s',
       (
@@ -37744,7 +37679,7 @@ var ReactMount = {
    */
   constructAndRenderComponentByID: function(constructor, props, id) {
     var domNode = document.getElementById(id);
-    ("production" !== process.env.NODE_ENV ? invariant(
+    ("production" !== "development" ? invariant(
       domNode,
       'Tried to get element with id of "%s" but it is not present on the page.',
       id
@@ -37786,7 +37721,7 @@ var ReactMount = {
     // _renderValidatedComponent) assume that calls to render aren't nested;
     // verify that that's the case. (Strictly speaking, unmounting won't cause a
     // render but we still don't expect to be in a render call here.)
-    ("production" !== process.env.NODE_ENV ? warning(
+    ("production" !== "development" ? warning(
       ReactCurrentOwner.current == null,
       'unmountComponentAtNode(): Render methods should be a pure function of ' +
       'props and state; triggering nested component updates from render is ' +
@@ -37802,7 +37737,7 @@ var ReactMount = {
     ReactMount.unmountComponentFromNode(component, container);
     delete instancesByReactRootID[reactRootID];
     delete containersByReactRootID[reactRootID];
-    if ("production" !== process.env.NODE_ENV) {
+    if ("production" !== "development") {
       delete rootElementsByReactRootID[reactRootID];
     }
     return true;
@@ -37841,10 +37776,10 @@ var ReactMount = {
     var reactRootID = ReactInstanceHandles.getReactRootIDFromNodeID(id);
     var container = containersByReactRootID[reactRootID];
 
-    if ("production" !== process.env.NODE_ENV) {
+    if ("production" !== "development") {
       var rootElement = rootElementsByReactRootID[reactRootID];
       if (rootElement && rootElement.parentNode !== container) {
-        ("production" !== process.env.NODE_ENV ? invariant(
+        ("production" !== "development" ? invariant(
           // Call internalGetID here because getID calls isValid which calls
           // findReactContainerForID (this function).
           internalGetID(rootElement) === reactRootID,
@@ -37985,7 +37920,7 @@ var ReactMount = {
 
     firstChildren.length = 0;
 
-    ("production" !== process.env.NODE_ENV ? invariant(
+    ("production" !== "development" ? invariant(
       false,
       'findComponentRoot(..., %s): Unable to find element. This probably ' +
       'means the DOM was unexpectedly mutated (e.g., by the browser), ' +
@@ -38025,8 +37960,7 @@ ReactMount.renderComponent = deprecated(
 
 module.exports = ReactMount;
 
-}).call(this,require('_process'))
-},{"./DOMProperty":"/Users/yangwei/code/react-d3/node_modules/react/lib/DOMProperty.js","./ReactBrowserEventEmitter":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactBrowserEventEmitter.js","./ReactCurrentOwner":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactCurrentOwner.js","./ReactElement":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactElement.js","./ReactInstanceHandles":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactInstanceHandles.js","./ReactLegacyElement":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactLegacyElement.js","./ReactPerf":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactPerf.js","./containsNode":"/Users/yangwei/code/react-d3/node_modules/react/lib/containsNode.js","./deprecated":"/Users/yangwei/code/react-d3/node_modules/react/lib/deprecated.js","./getReactRootElementInContainer":"/Users/yangwei/code/react-d3/node_modules/react/lib/getReactRootElementInContainer.js","./instantiateReactComponent":"/Users/yangwei/code/react-d3/node_modules/react/lib/instantiateReactComponent.js","./invariant":"/Users/yangwei/code/react-d3/node_modules/react/lib/invariant.js","./shouldUpdateReactComponent":"/Users/yangwei/code/react-d3/node_modules/react/lib/shouldUpdateReactComponent.js","./warning":"/Users/yangwei/code/react-d3/node_modules/react/lib/warning.js","_process":"/Users/yangwei/code/react-d3/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactMultiChild.js":[function(require,module,exports){
+},{"./DOMProperty":"/home/eric/repos/react-d3/node_modules/react/lib/DOMProperty.js","./ReactBrowserEventEmitter":"/home/eric/repos/react-d3/node_modules/react/lib/ReactBrowserEventEmitter.js","./ReactCurrentOwner":"/home/eric/repos/react-d3/node_modules/react/lib/ReactCurrentOwner.js","./ReactElement":"/home/eric/repos/react-d3/node_modules/react/lib/ReactElement.js","./ReactInstanceHandles":"/home/eric/repos/react-d3/node_modules/react/lib/ReactInstanceHandles.js","./ReactLegacyElement":"/home/eric/repos/react-d3/node_modules/react/lib/ReactLegacyElement.js","./ReactPerf":"/home/eric/repos/react-d3/node_modules/react/lib/ReactPerf.js","./containsNode":"/home/eric/repos/react-d3/node_modules/react/lib/containsNode.js","./deprecated":"/home/eric/repos/react-d3/node_modules/react/lib/deprecated.js","./getReactRootElementInContainer":"/home/eric/repos/react-d3/node_modules/react/lib/getReactRootElementInContainer.js","./instantiateReactComponent":"/home/eric/repos/react-d3/node_modules/react/lib/instantiateReactComponent.js","./invariant":"/home/eric/repos/react-d3/node_modules/react/lib/invariant.js","./shouldUpdateReactComponent":"/home/eric/repos/react-d3/node_modules/react/lib/shouldUpdateReactComponent.js","./warning":"/home/eric/repos/react-d3/node_modules/react/lib/warning.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/ReactMultiChild.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -38454,7 +38388,7 @@ var ReactMultiChild = {
 
 module.exports = ReactMultiChild;
 
-},{"./ReactComponent":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactComponent.js","./ReactMultiChildUpdateTypes":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactMultiChildUpdateTypes.js","./flattenChildren":"/Users/yangwei/code/react-d3/node_modules/react/lib/flattenChildren.js","./instantiateReactComponent":"/Users/yangwei/code/react-d3/node_modules/react/lib/instantiateReactComponent.js","./shouldUpdateReactComponent":"/Users/yangwei/code/react-d3/node_modules/react/lib/shouldUpdateReactComponent.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactMultiChildUpdateTypes.js":[function(require,module,exports){
+},{"./ReactComponent":"/home/eric/repos/react-d3/node_modules/react/lib/ReactComponent.js","./ReactMultiChildUpdateTypes":"/home/eric/repos/react-d3/node_modules/react/lib/ReactMultiChildUpdateTypes.js","./flattenChildren":"/home/eric/repos/react-d3/node_modules/react/lib/flattenChildren.js","./instantiateReactComponent":"/home/eric/repos/react-d3/node_modules/react/lib/instantiateReactComponent.js","./shouldUpdateReactComponent":"/home/eric/repos/react-d3/node_modules/react/lib/shouldUpdateReactComponent.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/ReactMultiChildUpdateTypes.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -38487,8 +38421,7 @@ var ReactMultiChildUpdateTypes = keyMirror({
 
 module.exports = ReactMultiChildUpdateTypes;
 
-},{"./keyMirror":"/Users/yangwei/code/react-d3/node_modules/react/lib/keyMirror.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactNativeComponent.js":[function(require,module,exports){
-(function (process){
+},{"./keyMirror":"/home/eric/repos/react-d3/node_modules/react/lib/keyMirror.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/ReactNativeComponent.js":[function(require,module,exports){
 /**
  * Copyright 2014, Facebook, Inc.
  * All rights reserved.
@@ -38532,7 +38465,7 @@ var ReactNativeComponentInjection = {
 function createInstanceForTag(tag, props, parentType) {
   var componentClass = tagToComponentClass[tag];
   if (componentClass == null) {
-    ("production" !== process.env.NODE_ENV ? invariant(
+    ("production" !== "development" ? invariant(
       genericComponentClass,
       'There is no registered component for the tag %s',
       tag
@@ -38541,7 +38474,7 @@ function createInstanceForTag(tag, props, parentType) {
   }
   if (parentType === tag) {
     // Avoid recursion
-    ("production" !== process.env.NODE_ENV ? invariant(
+    ("production" !== "development" ? invariant(
       genericComponentClass,
       'There is no registered component for the tag %s',
       tag
@@ -38559,9 +38492,7 @@ var ReactNativeComponent = {
 
 module.exports = ReactNativeComponent;
 
-}).call(this,require('_process'))
-},{"./Object.assign":"/Users/yangwei/code/react-d3/node_modules/react/lib/Object.assign.js","./invariant":"/Users/yangwei/code/react-d3/node_modules/react/lib/invariant.js","_process":"/Users/yangwei/code/react-d3/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactOwner.js":[function(require,module,exports){
-(function (process){
+},{"./Object.assign":"/home/eric/repos/react-d3/node_modules/react/lib/Object.assign.js","./invariant":"/home/eric/repos/react-d3/node_modules/react/lib/invariant.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/ReactOwner.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -38633,7 +38564,7 @@ var ReactOwner = {
    * @internal
    */
   addComponentAsRefTo: function(component, ref, owner) {
-    ("production" !== process.env.NODE_ENV ? invariant(
+    ("production" !== "development" ? invariant(
       ReactOwner.isValidOwner(owner),
       'addComponentAsRefTo(...): Only a ReactOwner can have refs. This ' +
       'usually means that you\'re trying to add a ref to a component that ' +
@@ -38654,7 +38585,7 @@ var ReactOwner = {
    * @internal
    */
   removeComponentAsRefFrom: function(component, ref, owner) {
-    ("production" !== process.env.NODE_ENV ? invariant(
+    ("production" !== "development" ? invariant(
       ReactOwner.isValidOwner(owner),
       'removeComponentAsRefFrom(...): Only a ReactOwner can have refs. This ' +
       'usually means that you\'re trying to remove a ref to a component that ' +
@@ -38689,7 +38620,7 @@ var ReactOwner = {
      * @private
      */
     attachRef: function(ref, component) {
-      ("production" !== process.env.NODE_ENV ? invariant(
+      ("production" !== "development" ? invariant(
         component.isOwnedBy(this),
         'attachRef(%s, ...): Only a component\'s owner can store a ref to it.',
         ref
@@ -38715,9 +38646,7 @@ var ReactOwner = {
 
 module.exports = ReactOwner;
 
-}).call(this,require('_process'))
-},{"./emptyObject":"/Users/yangwei/code/react-d3/node_modules/react/lib/emptyObject.js","./invariant":"/Users/yangwei/code/react-d3/node_modules/react/lib/invariant.js","_process":"/Users/yangwei/code/react-d3/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactPerf.js":[function(require,module,exports){
-(function (process){
+},{"./emptyObject":"/home/eric/repos/react-d3/node_modules/react/lib/emptyObject.js","./invariant":"/home/eric/repos/react-d3/node_modules/react/lib/invariant.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/ReactPerf.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -38758,7 +38687,7 @@ var ReactPerf = {
    * @return {function}
    */
   measure: function(objName, fnName, func) {
-    if ("production" !== process.env.NODE_ENV) {
+    if ("production" !== "development") {
       var measuredFunc = null;
       var wrapper = function() {
         if (ReactPerf.enableMeasure) {
@@ -38799,9 +38728,7 @@ function _noMeasure(objName, fnName, func) {
 
 module.exports = ReactPerf;
 
-}).call(this,require('_process'))
-},{"_process":"/Users/yangwei/code/react-d3/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactPropTransferer.js":[function(require,module,exports){
-(function (process){
+},{}],"/home/eric/repos/react-d3/node_modules/react/lib/ReactPropTransferer.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -38932,7 +38859,7 @@ var ReactPropTransferer = {
      * @protected
      */
     transferPropsTo: function(element) {
-      ("production" !== process.env.NODE_ENV ? invariant(
+      ("production" !== "development" ? invariant(
         element._owner === this,
         '%s: You can\'t call transferPropsTo() on a component that you ' +
         'don\'t own, %s. This usually means you are calling ' +
@@ -38943,10 +38870,10 @@ var ReactPropTransferer = {
         element.type.displayName
       ) : invariant(element._owner === this));
 
-      if ("production" !== process.env.NODE_ENV) {
+      if ("production" !== "development") {
         if (!didWarn) {
           didWarn = true;
-          ("production" !== process.env.NODE_ENV ? warning(
+          ("production" !== "development" ? warning(
             false,
             'transferPropsTo is deprecated. ' +
             'See http://fb.me/react-transferpropsto for more information.'
@@ -38966,9 +38893,7 @@ var ReactPropTransferer = {
 
 module.exports = ReactPropTransferer;
 
-}).call(this,require('_process'))
-},{"./Object.assign":"/Users/yangwei/code/react-d3/node_modules/react/lib/Object.assign.js","./emptyFunction":"/Users/yangwei/code/react-d3/node_modules/react/lib/emptyFunction.js","./invariant":"/Users/yangwei/code/react-d3/node_modules/react/lib/invariant.js","./joinClasses":"/Users/yangwei/code/react-d3/node_modules/react/lib/joinClasses.js","./warning":"/Users/yangwei/code/react-d3/node_modules/react/lib/warning.js","_process":"/Users/yangwei/code/react-d3/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactPropTypeLocationNames.js":[function(require,module,exports){
-(function (process){
+},{"./Object.assign":"/home/eric/repos/react-d3/node_modules/react/lib/Object.assign.js","./emptyFunction":"/home/eric/repos/react-d3/node_modules/react/lib/emptyFunction.js","./invariant":"/home/eric/repos/react-d3/node_modules/react/lib/invariant.js","./joinClasses":"/home/eric/repos/react-d3/node_modules/react/lib/joinClasses.js","./warning":"/home/eric/repos/react-d3/node_modules/react/lib/warning.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/ReactPropTypeLocationNames.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -38984,7 +38909,7 @@ module.exports = ReactPropTransferer;
 
 var ReactPropTypeLocationNames = {};
 
-if ("production" !== process.env.NODE_ENV) {
+if ("production" !== "development") {
   ReactPropTypeLocationNames = {
     prop: 'prop',
     context: 'context',
@@ -38994,8 +38919,7 @@ if ("production" !== process.env.NODE_ENV) {
 
 module.exports = ReactPropTypeLocationNames;
 
-}).call(this,require('_process'))
-},{"_process":"/Users/yangwei/code/react-d3/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactPropTypeLocations.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/react/lib/ReactPropTypeLocations.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -39019,7 +38943,7 @@ var ReactPropTypeLocations = keyMirror({
 
 module.exports = ReactPropTypeLocations;
 
-},{"./keyMirror":"/Users/yangwei/code/react-d3/node_modules/react/lib/keyMirror.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactPropTypes.js":[function(require,module,exports){
+},{"./keyMirror":"/home/eric/repos/react-d3/node_modules/react/lib/keyMirror.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/ReactPropTypes.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -39373,7 +39297,7 @@ function getPreciseType(propValue) {
 
 module.exports = ReactPropTypes;
 
-},{"./ReactElement":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactElement.js","./ReactPropTypeLocationNames":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactPropTypeLocationNames.js","./deprecated":"/Users/yangwei/code/react-d3/node_modules/react/lib/deprecated.js","./emptyFunction":"/Users/yangwei/code/react-d3/node_modules/react/lib/emptyFunction.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactPutListenerQueue.js":[function(require,module,exports){
+},{"./ReactElement":"/home/eric/repos/react-d3/node_modules/react/lib/ReactElement.js","./ReactPropTypeLocationNames":"/home/eric/repos/react-d3/node_modules/react/lib/ReactPropTypeLocationNames.js","./deprecated":"/home/eric/repos/react-d3/node_modules/react/lib/deprecated.js","./emptyFunction":"/home/eric/repos/react-d3/node_modules/react/lib/emptyFunction.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/ReactPutListenerQueue.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -39429,7 +39353,7 @@ PooledClass.addPoolingTo(ReactPutListenerQueue);
 
 module.exports = ReactPutListenerQueue;
 
-},{"./Object.assign":"/Users/yangwei/code/react-d3/node_modules/react/lib/Object.assign.js","./PooledClass":"/Users/yangwei/code/react-d3/node_modules/react/lib/PooledClass.js","./ReactBrowserEventEmitter":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactBrowserEventEmitter.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactReconcileTransaction.js":[function(require,module,exports){
+},{"./Object.assign":"/home/eric/repos/react-d3/node_modules/react/lib/Object.assign.js","./PooledClass":"/home/eric/repos/react-d3/node_modules/react/lib/PooledClass.js","./ReactBrowserEventEmitter":"/home/eric/repos/react-d3/node_modules/react/lib/ReactBrowserEventEmitter.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/ReactReconcileTransaction.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -39605,7 +39529,7 @@ PooledClass.addPoolingTo(ReactReconcileTransaction);
 
 module.exports = ReactReconcileTransaction;
 
-},{"./CallbackQueue":"/Users/yangwei/code/react-d3/node_modules/react/lib/CallbackQueue.js","./Object.assign":"/Users/yangwei/code/react-d3/node_modules/react/lib/Object.assign.js","./PooledClass":"/Users/yangwei/code/react-d3/node_modules/react/lib/PooledClass.js","./ReactBrowserEventEmitter":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactBrowserEventEmitter.js","./ReactInputSelection":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactInputSelection.js","./ReactPutListenerQueue":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactPutListenerQueue.js","./Transaction":"/Users/yangwei/code/react-d3/node_modules/react/lib/Transaction.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactRootIndex.js":[function(require,module,exports){
+},{"./CallbackQueue":"/home/eric/repos/react-d3/node_modules/react/lib/CallbackQueue.js","./Object.assign":"/home/eric/repos/react-d3/node_modules/react/lib/Object.assign.js","./PooledClass":"/home/eric/repos/react-d3/node_modules/react/lib/PooledClass.js","./ReactBrowserEventEmitter":"/home/eric/repos/react-d3/node_modules/react/lib/ReactBrowserEventEmitter.js","./ReactInputSelection":"/home/eric/repos/react-d3/node_modules/react/lib/ReactInputSelection.js","./ReactPutListenerQueue":"/home/eric/repos/react-d3/node_modules/react/lib/ReactPutListenerQueue.js","./Transaction":"/home/eric/repos/react-d3/node_modules/react/lib/Transaction.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/ReactRootIndex.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -39636,8 +39560,7 @@ var ReactRootIndex = {
 
 module.exports = ReactRootIndex;
 
-},{}],"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactServerRendering.js":[function(require,module,exports){
-(function (process){
+},{}],"/home/eric/repos/react-d3/node_modules/react/lib/ReactServerRendering.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -39665,7 +39588,7 @@ var invariant = require("./invariant");
  * @return {string} the HTML markup
  */
 function renderToString(element) {
-  ("production" !== process.env.NODE_ENV ? invariant(
+  ("production" !== "development" ? invariant(
     ReactElement.isValidElement(element),
     'renderToString(): You must pass a valid ReactElement.'
   ) : invariant(ReactElement.isValidElement(element)));
@@ -39691,7 +39614,7 @@ function renderToString(element) {
  * (for generating static pages)
  */
 function renderToStaticMarkup(element) {
-  ("production" !== process.env.NODE_ENV ? invariant(
+  ("production" !== "development" ? invariant(
     ReactElement.isValidElement(element),
     'renderToStaticMarkup(): You must pass a valid ReactElement.'
   ) : invariant(ReactElement.isValidElement(element)));
@@ -39715,8 +39638,7 @@ module.exports = {
   renderToStaticMarkup: renderToStaticMarkup
 };
 
-}).call(this,require('_process'))
-},{"./ReactElement":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactElement.js","./ReactInstanceHandles":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactInstanceHandles.js","./ReactMarkupChecksum":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactMarkupChecksum.js","./ReactServerRenderingTransaction":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactServerRenderingTransaction.js","./instantiateReactComponent":"/Users/yangwei/code/react-d3/node_modules/react/lib/instantiateReactComponent.js","./invariant":"/Users/yangwei/code/react-d3/node_modules/react/lib/invariant.js","_process":"/Users/yangwei/code/react-d3/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactServerRenderingTransaction.js":[function(require,module,exports){
+},{"./ReactElement":"/home/eric/repos/react-d3/node_modules/react/lib/ReactElement.js","./ReactInstanceHandles":"/home/eric/repos/react-d3/node_modules/react/lib/ReactInstanceHandles.js","./ReactMarkupChecksum":"/home/eric/repos/react-d3/node_modules/react/lib/ReactMarkupChecksum.js","./ReactServerRenderingTransaction":"/home/eric/repos/react-d3/node_modules/react/lib/ReactServerRenderingTransaction.js","./instantiateReactComponent":"/home/eric/repos/react-d3/node_modules/react/lib/instantiateReactComponent.js","./invariant":"/home/eric/repos/react-d3/node_modules/react/lib/invariant.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/ReactServerRenderingTransaction.js":[function(require,module,exports){
 /**
  * Copyright 2014, Facebook, Inc.
  * All rights reserved.
@@ -39829,7 +39751,7 @@ PooledClass.addPoolingTo(ReactServerRenderingTransaction);
 
 module.exports = ReactServerRenderingTransaction;
 
-},{"./CallbackQueue":"/Users/yangwei/code/react-d3/node_modules/react/lib/CallbackQueue.js","./Object.assign":"/Users/yangwei/code/react-d3/node_modules/react/lib/Object.assign.js","./PooledClass":"/Users/yangwei/code/react-d3/node_modules/react/lib/PooledClass.js","./ReactPutListenerQueue":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactPutListenerQueue.js","./Transaction":"/Users/yangwei/code/react-d3/node_modules/react/lib/Transaction.js","./emptyFunction":"/Users/yangwei/code/react-d3/node_modules/react/lib/emptyFunction.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactTextComponent.js":[function(require,module,exports){
+},{"./CallbackQueue":"/home/eric/repos/react-d3/node_modules/react/lib/CallbackQueue.js","./Object.assign":"/home/eric/repos/react-d3/node_modules/react/lib/Object.assign.js","./PooledClass":"/home/eric/repos/react-d3/node_modules/react/lib/PooledClass.js","./ReactPutListenerQueue":"/home/eric/repos/react-d3/node_modules/react/lib/ReactPutListenerQueue.js","./Transaction":"/home/eric/repos/react-d3/node_modules/react/lib/Transaction.js","./emptyFunction":"/home/eric/repos/react-d3/node_modules/react/lib/emptyFunction.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/ReactTextComponent.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -39935,8 +39857,7 @@ ReactTextComponentFactory.type = ReactTextComponent;
 
 module.exports = ReactTextComponentFactory;
 
-},{"./DOMPropertyOperations":"/Users/yangwei/code/react-d3/node_modules/react/lib/DOMPropertyOperations.js","./Object.assign":"/Users/yangwei/code/react-d3/node_modules/react/lib/Object.assign.js","./ReactComponent":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactComponent.js","./ReactElement":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactElement.js","./escapeTextForBrowser":"/Users/yangwei/code/react-d3/node_modules/react/lib/escapeTextForBrowser.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactUpdates.js":[function(require,module,exports){
-(function (process){
+},{"./DOMPropertyOperations":"/home/eric/repos/react-d3/node_modules/react/lib/DOMPropertyOperations.js","./Object.assign":"/home/eric/repos/react-d3/node_modules/react/lib/Object.assign.js","./ReactComponent":"/home/eric/repos/react-d3/node_modules/react/lib/ReactComponent.js","./ReactElement":"/home/eric/repos/react-d3/node_modules/react/lib/ReactElement.js","./escapeTextForBrowser":"/home/eric/repos/react-d3/node_modules/react/lib/escapeTextForBrowser.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/ReactUpdates.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -39967,7 +39888,7 @@ var asapEnqueued = false;
 var batchingStrategy = null;
 
 function ensureInjected() {
-  ("production" !== process.env.NODE_ENV ? invariant(
+  ("production" !== "development" ? invariant(
     ReactUpdates.ReactReconcileTransaction && batchingStrategy,
     'ReactUpdates: must inject a reconcile transaction class and batching ' +
     'strategy'
@@ -40061,7 +39982,7 @@ function mountDepthComparator(c1, c2) {
 
 function runBatchedUpdates(transaction) {
   var len = transaction.dirtyComponentsLength;
-  ("production" !== process.env.NODE_ENV ? invariant(
+  ("production" !== "development" ? invariant(
     len === dirtyComponents.length,
     'Expected flush transaction\'s stored dirty-components length (%s) to ' +
     'match dirty-components array length (%s).',
@@ -40129,7 +40050,7 @@ var flushBatchedUpdates = ReactPerf.measure(
  * list of functions which will be executed once the rerender occurs.
  */
 function enqueueUpdate(component, callback) {
-  ("production" !== process.env.NODE_ENV ? invariant(
+  ("production" !== "development" ? invariant(
     !callback || typeof callback === "function",
     'enqueueUpdate(...): You called `setProps`, `replaceProps`, ' +
     '`setState`, `replaceState`, or `forceUpdate` with a callback that ' +
@@ -40142,7 +40063,7 @@ function enqueueUpdate(component, callback) {
   // verify that that's the case. (This is called by each top-level update
   // function, like setProps, setState, forceUpdate, etc.; creation and
   // destruction of top-level components is guarded in ReactMount.)
-  ("production" !== process.env.NODE_ENV ? warning(
+  ("production" !== "development" ? warning(
     ReactCurrentOwner.current == null,
     'enqueueUpdate(): Render methods should be a pure function of props ' +
     'and state; triggering nested component updates from render is not ' +
@@ -40171,7 +40092,7 @@ function enqueueUpdate(component, callback) {
  * if no updates are currently being performed.
  */
 function asap(callback, context) {
-  ("production" !== process.env.NODE_ENV ? invariant(
+  ("production" !== "development" ? invariant(
     batchingStrategy.isBatchingUpdates,
     'ReactUpdates.asap: Can\'t enqueue an asap callback in a context where' +
     'updates are not being batched.'
@@ -40182,7 +40103,7 @@ function asap(callback, context) {
 
 var ReactUpdatesInjection = {
   injectReconcileTransaction: function(ReconcileTransaction) {
-    ("production" !== process.env.NODE_ENV ? invariant(
+    ("production" !== "development" ? invariant(
       ReconcileTransaction,
       'ReactUpdates: must provide a reconcile transaction class'
     ) : invariant(ReconcileTransaction));
@@ -40190,15 +40111,15 @@ var ReactUpdatesInjection = {
   },
 
   injectBatchingStrategy: function(_batchingStrategy) {
-    ("production" !== process.env.NODE_ENV ? invariant(
+    ("production" !== "development" ? invariant(
       _batchingStrategy,
       'ReactUpdates: must provide a batching strategy'
     ) : invariant(_batchingStrategy));
-    ("production" !== process.env.NODE_ENV ? invariant(
+    ("production" !== "development" ? invariant(
       typeof _batchingStrategy.batchedUpdates === 'function',
       'ReactUpdates: must provide a batchedUpdates() function'
     ) : invariant(typeof _batchingStrategy.batchedUpdates === 'function'));
-    ("production" !== process.env.NODE_ENV ? invariant(
+    ("production" !== "development" ? invariant(
       typeof _batchingStrategy.isBatchingUpdates === 'boolean',
       'ReactUpdates: must provide an isBatchingUpdates boolean attribute'
     ) : invariant(typeof _batchingStrategy.isBatchingUpdates === 'boolean'));
@@ -40224,8 +40145,7 @@ var ReactUpdates = {
 
 module.exports = ReactUpdates;
 
-}).call(this,require('_process'))
-},{"./CallbackQueue":"/Users/yangwei/code/react-d3/node_modules/react/lib/CallbackQueue.js","./Object.assign":"/Users/yangwei/code/react-d3/node_modules/react/lib/Object.assign.js","./PooledClass":"/Users/yangwei/code/react-d3/node_modules/react/lib/PooledClass.js","./ReactCurrentOwner":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactCurrentOwner.js","./ReactPerf":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactPerf.js","./Transaction":"/Users/yangwei/code/react-d3/node_modules/react/lib/Transaction.js","./invariant":"/Users/yangwei/code/react-d3/node_modules/react/lib/invariant.js","./warning":"/Users/yangwei/code/react-d3/node_modules/react/lib/warning.js","_process":"/Users/yangwei/code/react-d3/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/SVGDOMPropertyConfig.js":[function(require,module,exports){
+},{"./CallbackQueue":"/home/eric/repos/react-d3/node_modules/react/lib/CallbackQueue.js","./Object.assign":"/home/eric/repos/react-d3/node_modules/react/lib/Object.assign.js","./PooledClass":"/home/eric/repos/react-d3/node_modules/react/lib/PooledClass.js","./ReactCurrentOwner":"/home/eric/repos/react-d3/node_modules/react/lib/ReactCurrentOwner.js","./ReactPerf":"/home/eric/repos/react-d3/node_modules/react/lib/ReactPerf.js","./Transaction":"/home/eric/repos/react-d3/node_modules/react/lib/Transaction.js","./invariant":"/home/eric/repos/react-d3/node_modules/react/lib/invariant.js","./warning":"/home/eric/repos/react-d3/node_modules/react/lib/warning.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/SVGDOMPropertyConfig.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -40317,7 +40237,7 @@ var SVGDOMPropertyConfig = {
 
 module.exports = SVGDOMPropertyConfig;
 
-},{"./DOMProperty":"/Users/yangwei/code/react-d3/node_modules/react/lib/DOMProperty.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/SelectEventPlugin.js":[function(require,module,exports){
+},{"./DOMProperty":"/home/eric/repos/react-d3/node_modules/react/lib/DOMProperty.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/SelectEventPlugin.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -40512,7 +40432,7 @@ var SelectEventPlugin = {
 
 module.exports = SelectEventPlugin;
 
-},{"./EventConstants":"/Users/yangwei/code/react-d3/node_modules/react/lib/EventConstants.js","./EventPropagators":"/Users/yangwei/code/react-d3/node_modules/react/lib/EventPropagators.js","./ReactInputSelection":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactInputSelection.js","./SyntheticEvent":"/Users/yangwei/code/react-d3/node_modules/react/lib/SyntheticEvent.js","./getActiveElement":"/Users/yangwei/code/react-d3/node_modules/react/lib/getActiveElement.js","./isTextInputElement":"/Users/yangwei/code/react-d3/node_modules/react/lib/isTextInputElement.js","./keyOf":"/Users/yangwei/code/react-d3/node_modules/react/lib/keyOf.js","./shallowEqual":"/Users/yangwei/code/react-d3/node_modules/react/lib/shallowEqual.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/ServerReactRootIndex.js":[function(require,module,exports){
+},{"./EventConstants":"/home/eric/repos/react-d3/node_modules/react/lib/EventConstants.js","./EventPropagators":"/home/eric/repos/react-d3/node_modules/react/lib/EventPropagators.js","./ReactInputSelection":"/home/eric/repos/react-d3/node_modules/react/lib/ReactInputSelection.js","./SyntheticEvent":"/home/eric/repos/react-d3/node_modules/react/lib/SyntheticEvent.js","./getActiveElement":"/home/eric/repos/react-d3/node_modules/react/lib/getActiveElement.js","./isTextInputElement":"/home/eric/repos/react-d3/node_modules/react/lib/isTextInputElement.js","./keyOf":"/home/eric/repos/react-d3/node_modules/react/lib/keyOf.js","./shallowEqual":"/home/eric/repos/react-d3/node_modules/react/lib/shallowEqual.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/ServerReactRootIndex.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -40543,8 +40463,7 @@ var ServerReactRootIndex = {
 
 module.exports = ServerReactRootIndex;
 
-},{}],"/Users/yangwei/code/react-d3/node_modules/react/lib/SimpleEventPlugin.js":[function(require,module,exports){
-(function (process){
+},{}],"/home/eric/repos/react-d3/node_modules/react/lib/SimpleEventPlugin.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -40851,7 +40770,7 @@ var SimpleEventPlugin = {
   executeDispatch: function(event, listener, domID) {
     var returnValue = EventPluginUtils.executeDispatch(event, listener, domID);
 
-    ("production" !== process.env.NODE_ENV ? warning(
+    ("production" !== "development" ? warning(
       typeof returnValue !== 'boolean',
       'Returning `false` from an event handler is deprecated and will be ' +
       'ignored in a future release. Instead, manually call ' +
@@ -40952,7 +40871,7 @@ var SimpleEventPlugin = {
         EventConstructor = SyntheticClipboardEvent;
         break;
     }
-    ("production" !== process.env.NODE_ENV ? invariant(
+    ("production" !== "development" ? invariant(
       EventConstructor,
       'SimpleEventPlugin: Unhandled event type, `%s`.',
       topLevelType
@@ -40970,8 +40889,7 @@ var SimpleEventPlugin = {
 
 module.exports = SimpleEventPlugin;
 
-}).call(this,require('_process'))
-},{"./EventConstants":"/Users/yangwei/code/react-d3/node_modules/react/lib/EventConstants.js","./EventPluginUtils":"/Users/yangwei/code/react-d3/node_modules/react/lib/EventPluginUtils.js","./EventPropagators":"/Users/yangwei/code/react-d3/node_modules/react/lib/EventPropagators.js","./SyntheticClipboardEvent":"/Users/yangwei/code/react-d3/node_modules/react/lib/SyntheticClipboardEvent.js","./SyntheticDragEvent":"/Users/yangwei/code/react-d3/node_modules/react/lib/SyntheticDragEvent.js","./SyntheticEvent":"/Users/yangwei/code/react-d3/node_modules/react/lib/SyntheticEvent.js","./SyntheticFocusEvent":"/Users/yangwei/code/react-d3/node_modules/react/lib/SyntheticFocusEvent.js","./SyntheticKeyboardEvent":"/Users/yangwei/code/react-d3/node_modules/react/lib/SyntheticKeyboardEvent.js","./SyntheticMouseEvent":"/Users/yangwei/code/react-d3/node_modules/react/lib/SyntheticMouseEvent.js","./SyntheticTouchEvent":"/Users/yangwei/code/react-d3/node_modules/react/lib/SyntheticTouchEvent.js","./SyntheticUIEvent":"/Users/yangwei/code/react-d3/node_modules/react/lib/SyntheticUIEvent.js","./SyntheticWheelEvent":"/Users/yangwei/code/react-d3/node_modules/react/lib/SyntheticWheelEvent.js","./getEventCharCode":"/Users/yangwei/code/react-d3/node_modules/react/lib/getEventCharCode.js","./invariant":"/Users/yangwei/code/react-d3/node_modules/react/lib/invariant.js","./keyOf":"/Users/yangwei/code/react-d3/node_modules/react/lib/keyOf.js","./warning":"/Users/yangwei/code/react-d3/node_modules/react/lib/warning.js","_process":"/Users/yangwei/code/react-d3/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/SyntheticClipboardEvent.js":[function(require,module,exports){
+},{"./EventConstants":"/home/eric/repos/react-d3/node_modules/react/lib/EventConstants.js","./EventPluginUtils":"/home/eric/repos/react-d3/node_modules/react/lib/EventPluginUtils.js","./EventPropagators":"/home/eric/repos/react-d3/node_modules/react/lib/EventPropagators.js","./SyntheticClipboardEvent":"/home/eric/repos/react-d3/node_modules/react/lib/SyntheticClipboardEvent.js","./SyntheticDragEvent":"/home/eric/repos/react-d3/node_modules/react/lib/SyntheticDragEvent.js","./SyntheticEvent":"/home/eric/repos/react-d3/node_modules/react/lib/SyntheticEvent.js","./SyntheticFocusEvent":"/home/eric/repos/react-d3/node_modules/react/lib/SyntheticFocusEvent.js","./SyntheticKeyboardEvent":"/home/eric/repos/react-d3/node_modules/react/lib/SyntheticKeyboardEvent.js","./SyntheticMouseEvent":"/home/eric/repos/react-d3/node_modules/react/lib/SyntheticMouseEvent.js","./SyntheticTouchEvent":"/home/eric/repos/react-d3/node_modules/react/lib/SyntheticTouchEvent.js","./SyntheticUIEvent":"/home/eric/repos/react-d3/node_modules/react/lib/SyntheticUIEvent.js","./SyntheticWheelEvent":"/home/eric/repos/react-d3/node_modules/react/lib/SyntheticWheelEvent.js","./getEventCharCode":"/home/eric/repos/react-d3/node_modules/react/lib/getEventCharCode.js","./invariant":"/home/eric/repos/react-d3/node_modules/react/lib/invariant.js","./keyOf":"/home/eric/repos/react-d3/node_modules/react/lib/keyOf.js","./warning":"/home/eric/repos/react-d3/node_modules/react/lib/warning.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/SyntheticClipboardEvent.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -41017,7 +40935,7 @@ SyntheticEvent.augmentClass(SyntheticClipboardEvent, ClipboardEventInterface);
 module.exports = SyntheticClipboardEvent;
 
 
-},{"./SyntheticEvent":"/Users/yangwei/code/react-d3/node_modules/react/lib/SyntheticEvent.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/SyntheticCompositionEvent.js":[function(require,module,exports){
+},{"./SyntheticEvent":"/home/eric/repos/react-d3/node_modules/react/lib/SyntheticEvent.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/SyntheticCompositionEvent.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -41063,7 +40981,7 @@ SyntheticEvent.augmentClass(
 module.exports = SyntheticCompositionEvent;
 
 
-},{"./SyntheticEvent":"/Users/yangwei/code/react-d3/node_modules/react/lib/SyntheticEvent.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/SyntheticDragEvent.js":[function(require,module,exports){
+},{"./SyntheticEvent":"/home/eric/repos/react-d3/node_modules/react/lib/SyntheticEvent.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/SyntheticDragEvent.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -41102,7 +41020,7 @@ SyntheticMouseEvent.augmentClass(SyntheticDragEvent, DragEventInterface);
 
 module.exports = SyntheticDragEvent;
 
-},{"./SyntheticMouseEvent":"/Users/yangwei/code/react-d3/node_modules/react/lib/SyntheticMouseEvent.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/SyntheticEvent.js":[function(require,module,exports){
+},{"./SyntheticMouseEvent":"/home/eric/repos/react-d3/node_modules/react/lib/SyntheticMouseEvent.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/SyntheticEvent.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -41260,7 +41178,7 @@ PooledClass.addPoolingTo(SyntheticEvent, PooledClass.threeArgumentPooler);
 
 module.exports = SyntheticEvent;
 
-},{"./Object.assign":"/Users/yangwei/code/react-d3/node_modules/react/lib/Object.assign.js","./PooledClass":"/Users/yangwei/code/react-d3/node_modules/react/lib/PooledClass.js","./emptyFunction":"/Users/yangwei/code/react-d3/node_modules/react/lib/emptyFunction.js","./getEventTarget":"/Users/yangwei/code/react-d3/node_modules/react/lib/getEventTarget.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/SyntheticFocusEvent.js":[function(require,module,exports){
+},{"./Object.assign":"/home/eric/repos/react-d3/node_modules/react/lib/Object.assign.js","./PooledClass":"/home/eric/repos/react-d3/node_modules/react/lib/PooledClass.js","./emptyFunction":"/home/eric/repos/react-d3/node_modules/react/lib/emptyFunction.js","./getEventTarget":"/home/eric/repos/react-d3/node_modules/react/lib/getEventTarget.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/SyntheticFocusEvent.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -41299,7 +41217,7 @@ SyntheticUIEvent.augmentClass(SyntheticFocusEvent, FocusEventInterface);
 
 module.exports = SyntheticFocusEvent;
 
-},{"./SyntheticUIEvent":"/Users/yangwei/code/react-d3/node_modules/react/lib/SyntheticUIEvent.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/SyntheticInputEvent.js":[function(require,module,exports){
+},{"./SyntheticUIEvent":"/home/eric/repos/react-d3/node_modules/react/lib/SyntheticUIEvent.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/SyntheticInputEvent.js":[function(require,module,exports){
 /**
  * Copyright 2013 Facebook, Inc.
  * All rights reserved.
@@ -41346,7 +41264,7 @@ SyntheticEvent.augmentClass(
 module.exports = SyntheticInputEvent;
 
 
-},{"./SyntheticEvent":"/Users/yangwei/code/react-d3/node_modules/react/lib/SyntheticEvent.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/SyntheticKeyboardEvent.js":[function(require,module,exports){
+},{"./SyntheticEvent":"/home/eric/repos/react-d3/node_modules/react/lib/SyntheticEvent.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/SyntheticKeyboardEvent.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -41433,7 +41351,7 @@ SyntheticUIEvent.augmentClass(SyntheticKeyboardEvent, KeyboardEventInterface);
 
 module.exports = SyntheticKeyboardEvent;
 
-},{"./SyntheticUIEvent":"/Users/yangwei/code/react-d3/node_modules/react/lib/SyntheticUIEvent.js","./getEventCharCode":"/Users/yangwei/code/react-d3/node_modules/react/lib/getEventCharCode.js","./getEventKey":"/Users/yangwei/code/react-d3/node_modules/react/lib/getEventKey.js","./getEventModifierState":"/Users/yangwei/code/react-d3/node_modules/react/lib/getEventModifierState.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/SyntheticMouseEvent.js":[function(require,module,exports){
+},{"./SyntheticUIEvent":"/home/eric/repos/react-d3/node_modules/react/lib/SyntheticUIEvent.js","./getEventCharCode":"/home/eric/repos/react-d3/node_modules/react/lib/getEventCharCode.js","./getEventKey":"/home/eric/repos/react-d3/node_modules/react/lib/getEventKey.js","./getEventModifierState":"/home/eric/repos/react-d3/node_modules/react/lib/getEventModifierState.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/SyntheticMouseEvent.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -41516,7 +41434,7 @@ SyntheticUIEvent.augmentClass(SyntheticMouseEvent, MouseEventInterface);
 
 module.exports = SyntheticMouseEvent;
 
-},{"./SyntheticUIEvent":"/Users/yangwei/code/react-d3/node_modules/react/lib/SyntheticUIEvent.js","./ViewportMetrics":"/Users/yangwei/code/react-d3/node_modules/react/lib/ViewportMetrics.js","./getEventModifierState":"/Users/yangwei/code/react-d3/node_modules/react/lib/getEventModifierState.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/SyntheticTouchEvent.js":[function(require,module,exports){
+},{"./SyntheticUIEvent":"/home/eric/repos/react-d3/node_modules/react/lib/SyntheticUIEvent.js","./ViewportMetrics":"/home/eric/repos/react-d3/node_modules/react/lib/ViewportMetrics.js","./getEventModifierState":"/home/eric/repos/react-d3/node_modules/react/lib/getEventModifierState.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/SyntheticTouchEvent.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -41564,7 +41482,7 @@ SyntheticUIEvent.augmentClass(SyntheticTouchEvent, TouchEventInterface);
 
 module.exports = SyntheticTouchEvent;
 
-},{"./SyntheticUIEvent":"/Users/yangwei/code/react-d3/node_modules/react/lib/SyntheticUIEvent.js","./getEventModifierState":"/Users/yangwei/code/react-d3/node_modules/react/lib/getEventModifierState.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/SyntheticUIEvent.js":[function(require,module,exports){
+},{"./SyntheticUIEvent":"/home/eric/repos/react-d3/node_modules/react/lib/SyntheticUIEvent.js","./getEventModifierState":"/home/eric/repos/react-d3/node_modules/react/lib/getEventModifierState.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/SyntheticUIEvent.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -41626,7 +41544,7 @@ SyntheticEvent.augmentClass(SyntheticUIEvent, UIEventInterface);
 
 module.exports = SyntheticUIEvent;
 
-},{"./SyntheticEvent":"/Users/yangwei/code/react-d3/node_modules/react/lib/SyntheticEvent.js","./getEventTarget":"/Users/yangwei/code/react-d3/node_modules/react/lib/getEventTarget.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/SyntheticWheelEvent.js":[function(require,module,exports){
+},{"./SyntheticEvent":"/home/eric/repos/react-d3/node_modules/react/lib/SyntheticEvent.js","./getEventTarget":"/home/eric/repos/react-d3/node_modules/react/lib/getEventTarget.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/SyntheticWheelEvent.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -41687,8 +41605,7 @@ SyntheticMouseEvent.augmentClass(SyntheticWheelEvent, WheelEventInterface);
 
 module.exports = SyntheticWheelEvent;
 
-},{"./SyntheticMouseEvent":"/Users/yangwei/code/react-d3/node_modules/react/lib/SyntheticMouseEvent.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/Transaction.js":[function(require,module,exports){
-(function (process){
+},{"./SyntheticMouseEvent":"/home/eric/repos/react-d3/node_modules/react/lib/SyntheticMouseEvent.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/Transaction.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -41807,7 +41724,7 @@ var Mixin = {
    * @return Return value from `method`.
    */
   perform: function(method, scope, a, b, c, d, e, f) {
-    ("production" !== process.env.NODE_ENV ? invariant(
+    ("production" !== "development" ? invariant(
       !this.isInTransaction(),
       'Transaction.perform(...): Cannot initialize a transaction when there ' +
       'is already an outstanding transaction.'
@@ -41879,7 +41796,7 @@ var Mixin = {
    * invoked).
    */
   closeAll: function(startIndex) {
-    ("production" !== process.env.NODE_ENV ? invariant(
+    ("production" !== "development" ? invariant(
       this.isInTransaction(),
       'Transaction.closeAll(): Cannot close transaction when none are open.'
     ) : invariant(this.isInTransaction()));
@@ -41927,8 +41844,7 @@ var Transaction = {
 
 module.exports = Transaction;
 
-}).call(this,require('_process'))
-},{"./invariant":"/Users/yangwei/code/react-d3/node_modules/react/lib/invariant.js","_process":"/Users/yangwei/code/react-d3/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/ViewportMetrics.js":[function(require,module,exports){
+},{"./invariant":"/home/eric/repos/react-d3/node_modules/react/lib/invariant.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/ViewportMetrics.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -41960,8 +41876,7 @@ var ViewportMetrics = {
 
 module.exports = ViewportMetrics;
 
-},{"./getUnboundedScrollPosition":"/Users/yangwei/code/react-d3/node_modules/react/lib/getUnboundedScrollPosition.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/accumulateInto.js":[function(require,module,exports){
-(function (process){
+},{"./getUnboundedScrollPosition":"/home/eric/repos/react-d3/node_modules/react/lib/getUnboundedScrollPosition.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/accumulateInto.js":[function(require,module,exports){
 /**
  * Copyright 2014, Facebook, Inc.
  * All rights reserved.
@@ -41992,7 +41907,7 @@ var invariant = require("./invariant");
  */
 
 function accumulateInto(current, next) {
-  ("production" !== process.env.NODE_ENV ? invariant(
+  ("production" !== "development" ? invariant(
     next != null,
     'accumulateInto(...): Accumulated items must not be null or undefined.'
   ) : invariant(next != null));
@@ -42025,8 +41940,7 @@ function accumulateInto(current, next) {
 
 module.exports = accumulateInto;
 
-}).call(this,require('_process'))
-},{"./invariant":"/Users/yangwei/code/react-d3/node_modules/react/lib/invariant.js","_process":"/Users/yangwei/code/react-d3/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/adler32.js":[function(require,module,exports){
+},{"./invariant":"/home/eric/repos/react-d3/node_modules/react/lib/invariant.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/adler32.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -42060,7 +41974,7 @@ function adler32(data) {
 
 module.exports = adler32;
 
-},{}],"/Users/yangwei/code/react-d3/node_modules/react/lib/camelize.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/react/lib/camelize.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -42092,7 +42006,7 @@ function camelize(string) {
 
 module.exports = camelize;
 
-},{}],"/Users/yangwei/code/react-d3/node_modules/react/lib/camelizeStyleName.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/react/lib/camelizeStyleName.js":[function(require,module,exports){
 /**
  * Copyright 2014, Facebook, Inc.
  * All rights reserved.
@@ -42134,7 +42048,7 @@ function camelizeStyleName(string) {
 
 module.exports = camelizeStyleName;
 
-},{"./camelize":"/Users/yangwei/code/react-d3/node_modules/react/lib/camelize.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/containsNode.js":[function(require,module,exports){
+},{"./camelize":"/home/eric/repos/react-d3/node_modules/react/lib/camelize.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/containsNode.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -42178,7 +42092,7 @@ function containsNode(outerNode, innerNode) {
 
 module.exports = containsNode;
 
-},{"./isTextNode":"/Users/yangwei/code/react-d3/node_modules/react/lib/isTextNode.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/createArrayFrom.js":[function(require,module,exports){
+},{"./isTextNode":"/home/eric/repos/react-d3/node_modules/react/lib/isTextNode.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/createArrayFrom.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -42264,8 +42178,7 @@ function createArrayFrom(obj) {
 
 module.exports = createArrayFrom;
 
-},{"./toArray":"/Users/yangwei/code/react-d3/node_modules/react/lib/toArray.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/createFullPageComponent.js":[function(require,module,exports){
-(function (process){
+},{"./toArray":"/home/eric/repos/react-d3/node_modules/react/lib/toArray.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/createFullPageComponent.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -42304,7 +42217,7 @@ function createFullPageComponent(tag) {
     displayName: 'ReactFullPageComponent' + tag,
 
     componentWillUnmount: function() {
-      ("production" !== process.env.NODE_ENV ? invariant(
+      ("production" !== "development" ? invariant(
         false,
         '%s tried to unmount. Because of cross-browser quirks it is ' +
         'impossible to unmount some top-level components (eg <html>, <head>, ' +
@@ -42324,9 +42237,7 @@ function createFullPageComponent(tag) {
 
 module.exports = createFullPageComponent;
 
-}).call(this,require('_process'))
-},{"./ReactCompositeComponent":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactCompositeComponent.js","./ReactElement":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactElement.js","./invariant":"/Users/yangwei/code/react-d3/node_modules/react/lib/invariant.js","_process":"/Users/yangwei/code/react-d3/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/createNodesFromMarkup.js":[function(require,module,exports){
-(function (process){
+},{"./ReactCompositeComponent":"/home/eric/repos/react-d3/node_modules/react/lib/ReactCompositeComponent.js","./ReactElement":"/home/eric/repos/react-d3/node_modules/react/lib/ReactElement.js","./invariant":"/home/eric/repos/react-d3/node_modules/react/lib/invariant.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/createNodesFromMarkup.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -42381,7 +42292,7 @@ function getNodeName(markup) {
  */
 function createNodesFromMarkup(markup, handleScript) {
   var node = dummyNode;
-  ("production" !== process.env.NODE_ENV ? invariant(!!dummyNode, 'createNodesFromMarkup dummy not initialized') : invariant(!!dummyNode));
+  ("production" !== "development" ? invariant(!!dummyNode, 'createNodesFromMarkup dummy not initialized') : invariant(!!dummyNode));
   var nodeName = getNodeName(markup);
 
   var wrap = nodeName && getMarkupWrap(nodeName);
@@ -42398,7 +42309,7 @@ function createNodesFromMarkup(markup, handleScript) {
 
   var scripts = node.getElementsByTagName('script');
   if (scripts.length) {
-    ("production" !== process.env.NODE_ENV ? invariant(
+    ("production" !== "development" ? invariant(
       handleScript,
       'createNodesFromMarkup(...): Unexpected <script> element rendered.'
     ) : invariant(handleScript));
@@ -42414,8 +42325,7 @@ function createNodesFromMarkup(markup, handleScript) {
 
 module.exports = createNodesFromMarkup;
 
-}).call(this,require('_process'))
-},{"./ExecutionEnvironment":"/Users/yangwei/code/react-d3/node_modules/react/lib/ExecutionEnvironment.js","./createArrayFrom":"/Users/yangwei/code/react-d3/node_modules/react/lib/createArrayFrom.js","./getMarkupWrap":"/Users/yangwei/code/react-d3/node_modules/react/lib/getMarkupWrap.js","./invariant":"/Users/yangwei/code/react-d3/node_modules/react/lib/invariant.js","_process":"/Users/yangwei/code/react-d3/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/dangerousStyleValue.js":[function(require,module,exports){
+},{"./ExecutionEnvironment":"/home/eric/repos/react-d3/node_modules/react/lib/ExecutionEnvironment.js","./createArrayFrom":"/home/eric/repos/react-d3/node_modules/react/lib/createArrayFrom.js","./getMarkupWrap":"/home/eric/repos/react-d3/node_modules/react/lib/getMarkupWrap.js","./invariant":"/home/eric/repos/react-d3/node_modules/react/lib/invariant.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/dangerousStyleValue.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -42473,8 +42383,7 @@ function dangerousStyleValue(name, value) {
 
 module.exports = dangerousStyleValue;
 
-},{"./CSSProperty":"/Users/yangwei/code/react-d3/node_modules/react/lib/CSSProperty.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/deprecated.js":[function(require,module,exports){
-(function (process){
+},{"./CSSProperty":"/home/eric/repos/react-d3/node_modules/react/lib/CSSProperty.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/deprecated.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -42502,9 +42411,9 @@ var warning = require("./warning");
  */
 function deprecated(namespace, oldName, newName, ctx, fn) {
   var warned = false;
-  if ("production" !== process.env.NODE_ENV) {
+  if ("production" !== "development") {
     var newFn = function() {
-      ("production" !== process.env.NODE_ENV ? warning(
+      ("production" !== "development" ? warning(
         warned,
         (namespace + "." + oldName + " will be deprecated in a future version. ") +
         ("Use " + namespace + "." + newName + " instead.")
@@ -42523,8 +42432,7 @@ function deprecated(namespace, oldName, newName, ctx, fn) {
 
 module.exports = deprecated;
 
-}).call(this,require('_process'))
-},{"./Object.assign":"/Users/yangwei/code/react-d3/node_modules/react/lib/Object.assign.js","./warning":"/Users/yangwei/code/react-d3/node_modules/react/lib/warning.js","_process":"/Users/yangwei/code/react-d3/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/emptyFunction.js":[function(require,module,exports){
+},{"./Object.assign":"/home/eric/repos/react-d3/node_modules/react/lib/Object.assign.js","./warning":"/home/eric/repos/react-d3/node_modules/react/lib/warning.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/emptyFunction.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -42558,8 +42466,7 @@ emptyFunction.thatReturnsArgument = function(arg) { return arg; };
 
 module.exports = emptyFunction;
 
-},{}],"/Users/yangwei/code/react-d3/node_modules/react/lib/emptyObject.js":[function(require,module,exports){
-(function (process){
+},{}],"/home/eric/repos/react-d3/node_modules/react/lib/emptyObject.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -42575,14 +42482,13 @@ module.exports = emptyFunction;
 
 var emptyObject = {};
 
-if ("production" !== process.env.NODE_ENV) {
+if ("production" !== "development") {
   Object.freeze(emptyObject);
 }
 
 module.exports = emptyObject;
 
-}).call(this,require('_process'))
-},{"_process":"/Users/yangwei/code/react-d3/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/escapeTextForBrowser.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/react/lib/escapeTextForBrowser.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -42623,8 +42529,7 @@ function escapeTextForBrowser(text) {
 
 module.exports = escapeTextForBrowser;
 
-},{}],"/Users/yangwei/code/react-d3/node_modules/react/lib/flattenChildren.js":[function(require,module,exports){
-(function (process){
+},{}],"/home/eric/repos/react-d3/node_modules/react/lib/flattenChildren.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -42652,7 +42557,7 @@ function flattenSingleChildIntoContext(traverseContext, child, name) {
   // We found a component instance.
   var result = traverseContext;
   var keyUnique = !result.hasOwnProperty(name);
-  ("production" !== process.env.NODE_ENV ? warning(
+  ("production" !== "development" ? warning(
     keyUnique,
     'flattenChildren(...): Encountered two children with the same key, ' +
     '`%s`. Child keys must be unique; when two children share a key, only ' +
@@ -42691,8 +42596,7 @@ function flattenChildren(children) {
 
 module.exports = flattenChildren;
 
-}).call(this,require('_process'))
-},{"./ReactTextComponent":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactTextComponent.js","./traverseAllChildren":"/Users/yangwei/code/react-d3/node_modules/react/lib/traverseAllChildren.js","./warning":"/Users/yangwei/code/react-d3/node_modules/react/lib/warning.js","_process":"/Users/yangwei/code/react-d3/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/focusNode.js":[function(require,module,exports){
+},{"./ReactTextComponent":"/home/eric/repos/react-d3/node_modules/react/lib/ReactTextComponent.js","./traverseAllChildren":"/home/eric/repos/react-d3/node_modules/react/lib/traverseAllChildren.js","./warning":"/home/eric/repos/react-d3/node_modules/react/lib/warning.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/focusNode.js":[function(require,module,exports){
 /**
  * Copyright 2014, Facebook, Inc.
  * All rights reserved.
@@ -42721,7 +42625,7 @@ function focusNode(node) {
 
 module.exports = focusNode;
 
-},{}],"/Users/yangwei/code/react-d3/node_modules/react/lib/forEachAccumulated.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/react/lib/forEachAccumulated.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -42752,7 +42656,7 @@ var forEachAccumulated = function(arr, cb, scope) {
 
 module.exports = forEachAccumulated;
 
-},{}],"/Users/yangwei/code/react-d3/node_modules/react/lib/getActiveElement.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/react/lib/getActiveElement.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -42781,7 +42685,7 @@ function getActiveElement() /*?DOMElement*/ {
 
 module.exports = getActiveElement;
 
-},{}],"/Users/yangwei/code/react-d3/node_modules/react/lib/getEventCharCode.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/react/lib/getEventCharCode.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -42833,7 +42737,7 @@ function getEventCharCode(nativeEvent) {
 
 module.exports = getEventCharCode;
 
-},{}],"/Users/yangwei/code/react-d3/node_modules/react/lib/getEventKey.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/react/lib/getEventKey.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -42938,7 +42842,7 @@ function getEventKey(nativeEvent) {
 
 module.exports = getEventKey;
 
-},{"./getEventCharCode":"/Users/yangwei/code/react-d3/node_modules/react/lib/getEventCharCode.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/getEventModifierState.js":[function(require,module,exports){
+},{"./getEventCharCode":"/home/eric/repos/react-d3/node_modules/react/lib/getEventCharCode.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/getEventModifierState.js":[function(require,module,exports){
 /**
  * Copyright 2013 Facebook, Inc.
  * All rights reserved.
@@ -42985,7 +42889,7 @@ function getEventModifierState(nativeEvent) {
 
 module.exports = getEventModifierState;
 
-},{}],"/Users/yangwei/code/react-d3/node_modules/react/lib/getEventTarget.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/react/lib/getEventTarget.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -43016,8 +42920,7 @@ function getEventTarget(nativeEvent) {
 
 module.exports = getEventTarget;
 
-},{}],"/Users/yangwei/code/react-d3/node_modules/react/lib/getMarkupWrap.js":[function(require,module,exports){
-(function (process){
+},{}],"/home/eric/repos/react-d3/node_modules/react/lib/getMarkupWrap.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -43114,7 +43017,7 @@ var markupWrap = {
  * @return {?array} Markup wrap configuration, if applicable.
  */
 function getMarkupWrap(nodeName) {
-  ("production" !== process.env.NODE_ENV ? invariant(!!dummyNode, 'Markup wrapping node not initialized') : invariant(!!dummyNode));
+  ("production" !== "development" ? invariant(!!dummyNode, 'Markup wrapping node not initialized') : invariant(!!dummyNode));
   if (!markupWrap.hasOwnProperty(nodeName)) {
     nodeName = '*';
   }
@@ -43132,8 +43035,7 @@ function getMarkupWrap(nodeName) {
 
 module.exports = getMarkupWrap;
 
-}).call(this,require('_process'))
-},{"./ExecutionEnvironment":"/Users/yangwei/code/react-d3/node_modules/react/lib/ExecutionEnvironment.js","./invariant":"/Users/yangwei/code/react-d3/node_modules/react/lib/invariant.js","_process":"/Users/yangwei/code/react-d3/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/getNodeForCharacterOffset.js":[function(require,module,exports){
+},{"./ExecutionEnvironment":"/home/eric/repos/react-d3/node_modules/react/lib/ExecutionEnvironment.js","./invariant":"/home/eric/repos/react-d3/node_modules/react/lib/invariant.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/getNodeForCharacterOffset.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -43208,7 +43110,7 @@ function getNodeForCharacterOffset(root, offset) {
 
 module.exports = getNodeForCharacterOffset;
 
-},{}],"/Users/yangwei/code/react-d3/node_modules/react/lib/getReactRootElementInContainer.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/react/lib/getReactRootElementInContainer.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -43243,7 +43145,7 @@ function getReactRootElementInContainer(container) {
 
 module.exports = getReactRootElementInContainer;
 
-},{}],"/Users/yangwei/code/react-d3/node_modules/react/lib/getTextContentAccessor.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/react/lib/getTextContentAccessor.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -43280,7 +43182,7 @@ function getTextContentAccessor() {
 
 module.exports = getTextContentAccessor;
 
-},{"./ExecutionEnvironment":"/Users/yangwei/code/react-d3/node_modules/react/lib/ExecutionEnvironment.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/getUnboundedScrollPosition.js":[function(require,module,exports){
+},{"./ExecutionEnvironment":"/home/eric/repos/react-d3/node_modules/react/lib/ExecutionEnvironment.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/getUnboundedScrollPosition.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -43320,7 +43222,7 @@ function getUnboundedScrollPosition(scrollable) {
 
 module.exports = getUnboundedScrollPosition;
 
-},{}],"/Users/yangwei/code/react-d3/node_modules/react/lib/hyphenate.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/react/lib/hyphenate.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -43353,7 +43255,7 @@ function hyphenate(string) {
 
 module.exports = hyphenate;
 
-},{}],"/Users/yangwei/code/react-d3/node_modules/react/lib/hyphenateStyleName.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/react/lib/hyphenateStyleName.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -43394,8 +43296,7 @@ function hyphenateStyleName(string) {
 
 module.exports = hyphenateStyleName;
 
-},{"./hyphenate":"/Users/yangwei/code/react-d3/node_modules/react/lib/hyphenate.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/instantiateReactComponent.js":[function(require,module,exports){
-(function (process){
+},{"./hyphenate":"/home/eric/repos/react-d3/node_modules/react/lib/hyphenate.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/instantiateReactComponent.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -43428,8 +43329,8 @@ var ReactEmptyComponent = require("./ReactEmptyComponent");
 function instantiateReactComponent(element, parentCompositeType) {
   var instance;
 
-  if ("production" !== process.env.NODE_ENV) {
-    ("production" !== process.env.NODE_ENV ? warning(
+  if ("production" !== "development") {
+    ("production" !== "development" ? warning(
       element && (typeof element.type === 'function' ||
                      typeof element.type === 'string'),
       'Only functions or strings can be mounted as React components.'
@@ -43489,8 +43390,8 @@ function instantiateReactComponent(element, parentCompositeType) {
     instance = new element.type(element.props);
   }
 
-  if ("production" !== process.env.NODE_ENV) {
-    ("production" !== process.env.NODE_ENV ? warning(
+  if ("production" !== "development") {
+    ("production" !== "development" ? warning(
       typeof instance.construct === 'function' &&
       typeof instance.mountComponent === 'function' &&
       typeof instance.receiveComponent === 'function',
@@ -43507,9 +43408,7 @@ function instantiateReactComponent(element, parentCompositeType) {
 
 module.exports = instantiateReactComponent;
 
-}).call(this,require('_process'))
-},{"./ReactElement":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactElement.js","./ReactEmptyComponent":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactEmptyComponent.js","./ReactLegacyElement":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactLegacyElement.js","./ReactNativeComponent":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactNativeComponent.js","./warning":"/Users/yangwei/code/react-d3/node_modules/react/lib/warning.js","_process":"/Users/yangwei/code/react-d3/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/invariant.js":[function(require,module,exports){
-(function (process){
+},{"./ReactElement":"/home/eric/repos/react-d3/node_modules/react/lib/ReactElement.js","./ReactEmptyComponent":"/home/eric/repos/react-d3/node_modules/react/lib/ReactEmptyComponent.js","./ReactLegacyElement":"/home/eric/repos/react-d3/node_modules/react/lib/ReactLegacyElement.js","./ReactNativeComponent":"/home/eric/repos/react-d3/node_modules/react/lib/ReactNativeComponent.js","./warning":"/home/eric/repos/react-d3/node_modules/react/lib/warning.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/invariant.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -43535,7 +43434,7 @@ module.exports = instantiateReactComponent;
  */
 
 var invariant = function(condition, format, a, b, c, d, e, f) {
-  if ("production" !== process.env.NODE_ENV) {
+  if ("production" !== "development") {
     if (format === undefined) {
       throw new Error('invariant requires an error message argument');
     }
@@ -43564,8 +43463,7 @@ var invariant = function(condition, format, a, b, c, d, e, f) {
 
 module.exports = invariant;
 
-}).call(this,require('_process'))
-},{"_process":"/Users/yangwei/code/react-d3/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/isEventSupported.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/react/lib/isEventSupported.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -43630,7 +43528,7 @@ function isEventSupported(eventNameSuffix, capture) {
 
 module.exports = isEventSupported;
 
-},{"./ExecutionEnvironment":"/Users/yangwei/code/react-d3/node_modules/react/lib/ExecutionEnvironment.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/isNode.js":[function(require,module,exports){
+},{"./ExecutionEnvironment":"/home/eric/repos/react-d3/node_modules/react/lib/ExecutionEnvironment.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/isNode.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -43658,7 +43556,7 @@ function isNode(object) {
 
 module.exports = isNode;
 
-},{}],"/Users/yangwei/code/react-d3/node_modules/react/lib/isTextInputElement.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/react/lib/isTextInputElement.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -43702,7 +43600,7 @@ function isTextInputElement(elem) {
 
 module.exports = isTextInputElement;
 
-},{}],"/Users/yangwei/code/react-d3/node_modules/react/lib/isTextNode.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/react/lib/isTextNode.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -43727,7 +43625,7 @@ function isTextNode(object) {
 
 module.exports = isTextNode;
 
-},{"./isNode":"/Users/yangwei/code/react-d3/node_modules/react/lib/isNode.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/joinClasses.js":[function(require,module,exports){
+},{"./isNode":"/home/eric/repos/react-d3/node_modules/react/lib/isNode.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/joinClasses.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -43768,8 +43666,7 @@ function joinClasses(className/*, ... */) {
 
 module.exports = joinClasses;
 
-},{}],"/Users/yangwei/code/react-d3/node_modules/react/lib/keyMirror.js":[function(require,module,exports){
-(function (process){
+},{}],"/home/eric/repos/react-d3/node_modules/react/lib/keyMirror.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -43807,7 +43704,7 @@ var invariant = require("./invariant");
 var keyMirror = function(obj) {
   var ret = {};
   var key;
-  ("production" !== process.env.NODE_ENV ? invariant(
+  ("production" !== "development" ? invariant(
     obj instanceof Object && !Array.isArray(obj),
     'keyMirror(...): Argument must be an object.'
   ) : invariant(obj instanceof Object && !Array.isArray(obj)));
@@ -43822,8 +43719,7 @@ var keyMirror = function(obj) {
 
 module.exports = keyMirror;
 
-}).call(this,require('_process'))
-},{"./invariant":"/Users/yangwei/code/react-d3/node_modules/react/lib/invariant.js","_process":"/Users/yangwei/code/react-d3/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/keyOf.js":[function(require,module,exports){
+},{"./invariant":"/home/eric/repos/react-d3/node_modules/react/lib/invariant.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/keyOf.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -43859,7 +43755,7 @@ var keyOf = function(oneKeyObj) {
 
 module.exports = keyOf;
 
-},{}],"/Users/yangwei/code/react-d3/node_modules/react/lib/mapObject.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/react/lib/mapObject.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -43912,7 +43808,7 @@ function mapObject(object, callback, context) {
 
 module.exports = mapObject;
 
-},{}],"/Users/yangwei/code/react-d3/node_modules/react/lib/memoizeStringOnly.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/react/lib/memoizeStringOnly.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -43946,8 +43842,7 @@ function memoizeStringOnly(callback) {
 
 module.exports = memoizeStringOnly;
 
-},{}],"/Users/yangwei/code/react-d3/node_modules/react/lib/monitorCodeUse.js":[function(require,module,exports){
-(function (process){
+},{}],"/home/eric/repos/react-d3/node_modules/react/lib/monitorCodeUse.js":[function(require,module,exports){
 /**
  * Copyright 2014, Facebook, Inc.
  * All rights reserved.
@@ -43971,7 +43866,7 @@ var invariant = require("./invariant");
  */
 
 function monitorCodeUse(eventName, data) {
-  ("production" !== process.env.NODE_ENV ? invariant(
+  ("production" !== "development" ? invariant(
     eventName && !/[^a-z0-9_]/.test(eventName),
     'You must provide an eventName using only the characters [a-z0-9_]'
   ) : invariant(eventName && !/[^a-z0-9_]/.test(eventName)));
@@ -43979,9 +43874,7 @@ function monitorCodeUse(eventName, data) {
 
 module.exports = monitorCodeUse;
 
-}).call(this,require('_process'))
-},{"./invariant":"/Users/yangwei/code/react-d3/node_modules/react/lib/invariant.js","_process":"/Users/yangwei/code/react-d3/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/onlyChild.js":[function(require,module,exports){
-(function (process){
+},{"./invariant":"/home/eric/repos/react-d3/node_modules/react/lib/invariant.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/onlyChild.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -44010,7 +43903,7 @@ var invariant = require("./invariant");
  * structure.
  */
 function onlyChild(children) {
-  ("production" !== process.env.NODE_ENV ? invariant(
+  ("production" !== "development" ? invariant(
     ReactElement.isValidElement(children),
     'onlyChild must be passed a children with exactly one child.'
   ) : invariant(ReactElement.isValidElement(children)));
@@ -44019,8 +43912,7 @@ function onlyChild(children) {
 
 module.exports = onlyChild;
 
-}).call(this,require('_process'))
-},{"./ReactElement":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactElement.js","./invariant":"/Users/yangwei/code/react-d3/node_modules/react/lib/invariant.js","_process":"/Users/yangwei/code/react-d3/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/performance.js":[function(require,module,exports){
+},{"./ReactElement":"/home/eric/repos/react-d3/node_modules/react/lib/ReactElement.js","./invariant":"/home/eric/repos/react-d3/node_modules/react/lib/invariant.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/performance.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -44048,7 +43940,7 @@ if (ExecutionEnvironment.canUseDOM) {
 
 module.exports = performance || {};
 
-},{"./ExecutionEnvironment":"/Users/yangwei/code/react-d3/node_modules/react/lib/ExecutionEnvironment.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/performanceNow.js":[function(require,module,exports){
+},{"./ExecutionEnvironment":"/home/eric/repos/react-d3/node_modules/react/lib/ExecutionEnvironment.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/performanceNow.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -44076,7 +43968,7 @@ var performanceNow = performance.now.bind(performance);
 
 module.exports = performanceNow;
 
-},{"./performance":"/Users/yangwei/code/react-d3/node_modules/react/lib/performance.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/setInnerHTML.js":[function(require,module,exports){
+},{"./performance":"/home/eric/repos/react-d3/node_modules/react/lib/performance.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/setInnerHTML.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -44154,7 +44046,7 @@ if (ExecutionEnvironment.canUseDOM) {
 
 module.exports = setInnerHTML;
 
-},{"./ExecutionEnvironment":"/Users/yangwei/code/react-d3/node_modules/react/lib/ExecutionEnvironment.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/shallowEqual.js":[function(require,module,exports){
+},{"./ExecutionEnvironment":"/home/eric/repos/react-d3/node_modules/react/lib/ExecutionEnvironment.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/shallowEqual.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -44198,7 +44090,7 @@ function shallowEqual(objA, objB) {
 
 module.exports = shallowEqual;
 
-},{}],"/Users/yangwei/code/react-d3/node_modules/react/lib/shouldUpdateReactComponent.js":[function(require,module,exports){
+},{}],"/home/eric/repos/react-d3/node_modules/react/lib/shouldUpdateReactComponent.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -44236,8 +44128,7 @@ function shouldUpdateReactComponent(prevElement, nextElement) {
 
 module.exports = shouldUpdateReactComponent;
 
-},{}],"/Users/yangwei/code/react-d3/node_modules/react/lib/toArray.js":[function(require,module,exports){
-(function (process){
+},{}],"/home/eric/repos/react-d3/node_modules/react/lib/toArray.js":[function(require,module,exports){
 /**
  * Copyright 2014, Facebook, Inc.
  * All rights reserved.
@@ -44266,19 +44157,19 @@ function toArray(obj) {
 
   // Some browse builtin objects can report typeof 'function' (e.g. NodeList in
   // old versions of Safari).
-  ("production" !== process.env.NODE_ENV ? invariant(
+  ("production" !== "development" ? invariant(
     !Array.isArray(obj) &&
     (typeof obj === 'object' || typeof obj === 'function'),
     'toArray: Array-like object expected'
   ) : invariant(!Array.isArray(obj) &&
   (typeof obj === 'object' || typeof obj === 'function')));
 
-  ("production" !== process.env.NODE_ENV ? invariant(
+  ("production" !== "development" ? invariant(
     typeof length === 'number',
     'toArray: Object needs a length property'
   ) : invariant(typeof length === 'number'));
 
-  ("production" !== process.env.NODE_ENV ? invariant(
+  ("production" !== "development" ? invariant(
     length === 0 ||
     (length - 1) in obj,
     'toArray: Object should have keys for indices'
@@ -44307,9 +44198,7 @@ function toArray(obj) {
 
 module.exports = toArray;
 
-}).call(this,require('_process'))
-},{"./invariant":"/Users/yangwei/code/react-d3/node_modules/react/lib/invariant.js","_process":"/Users/yangwei/code/react-d3/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/traverseAllChildren.js":[function(require,module,exports){
-(function (process){
+},{"./invariant":"/home/eric/repos/react-d3/node_modules/react/lib/invariant.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/traverseAllChildren.js":[function(require,module,exports){
 /**
  * Copyright 2013-2014, Facebook, Inc.
  * All rights reserved.
@@ -44437,7 +44326,7 @@ var traverseAllChildrenImpl =
         callback(traverseContext, children, storageName, indexSoFar);
         subtreeCount = 1;
       } else if (type === 'object') {
-        ("production" !== process.env.NODE_ENV ? invariant(
+        ("production" !== "development" ? invariant(
           !children || children.nodeType !== 1,
           'traverseAllChildren(...): Encountered an invalid child; DOM ' +
           'elements are not valid children of React components.'
@@ -44490,9 +44379,7 @@ function traverseAllChildren(children, callback, traverseContext) {
 
 module.exports = traverseAllChildren;
 
-}).call(this,require('_process'))
-},{"./ReactElement":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactElement.js","./ReactInstanceHandles":"/Users/yangwei/code/react-d3/node_modules/react/lib/ReactInstanceHandles.js","./invariant":"/Users/yangwei/code/react-d3/node_modules/react/lib/invariant.js","_process":"/Users/yangwei/code/react-d3/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/yangwei/code/react-d3/node_modules/react/lib/warning.js":[function(require,module,exports){
-(function (process){
+},{"./ReactElement":"/home/eric/repos/react-d3/node_modules/react/lib/ReactElement.js","./ReactInstanceHandles":"/home/eric/repos/react-d3/node_modules/react/lib/ReactInstanceHandles.js","./invariant":"/home/eric/repos/react-d3/node_modules/react/lib/invariant.js"}],"/home/eric/repos/react-d3/node_modules/react/lib/warning.js":[function(require,module,exports){
 /**
  * Copyright 2014, Facebook, Inc.
  * All rights reserved.
@@ -44517,7 +44404,7 @@ var emptyFunction = require("./emptyFunction");
 
 var warning = emptyFunction;
 
-if ("production" !== process.env.NODE_ENV) {
+if ("production" !== "development") {
   warning = function(condition, format ) {for (var args=[],$__0=2,$__1=arguments.length;$__0<$__1;$__0++) args.push(arguments[$__0]);
     if (format === undefined) {
       throw new Error(
@@ -44535,99 +44422,10 @@ if ("production" !== process.env.NODE_ENV) {
 
 module.exports = warning;
 
-}).call(this,require('_process'))
-},{"./emptyFunction":"/Users/yangwei/code/react-d3/node_modules/react/lib/emptyFunction.js","_process":"/Users/yangwei/code/react-d3/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js"}],"/Users/yangwei/code/react-d3/node_modules/react/react.js":[function(require,module,exports){
+},{"./emptyFunction":"/home/eric/repos/react-d3/node_modules/react/lib/emptyFunction.js"}],"/home/eric/repos/react-d3/node_modules/react/react.js":[function(require,module,exports){
 module.exports = require('./lib/React');
 
-},{"./lib/React":"/Users/yangwei/code/react-d3/node_modules/react/lib/React.js"}],"/Users/yangwei/code/react-d3/node_modules/watchify/node_modules/browserify/node_modules/process/browser.js":[function(require,module,exports){
-// shim for using process in browser
-
-var process = module.exports = {};
-
-process.nextTick = (function () {
-    var canSetImmediate = typeof window !== 'undefined'
-    && window.setImmediate;
-    var canMutationObserver = typeof window !== 'undefined'
-    && window.MutationObserver;
-    var canPost = typeof window !== 'undefined'
-    && window.postMessage && window.addEventListener
-    ;
-
-    if (canSetImmediate) {
-        return function (f) { return window.setImmediate(f) };
-    }
-
-    var queue = [];
-
-    if (canMutationObserver) {
-        var hiddenDiv = document.createElement("div");
-        var observer = new MutationObserver(function () {
-            var queueList = queue.slice();
-            queue.length = 0;
-            queueList.forEach(function (fn) {
-                fn();
-            });
-        });
-
-        observer.observe(hiddenDiv, { attributes: true });
-
-        return function nextTick(fn) {
-            if (!queue.length) {
-                hiddenDiv.setAttribute('yes', 'no');
-            }
-            queue.push(fn);
-        };
-    }
-
-    if (canPost) {
-        window.addEventListener('message', function (ev) {
-            var source = ev.source;
-            if ((source === window || source === null) && ev.data === 'process-tick') {
-                ev.stopPropagation();
-                if (queue.length > 0) {
-                    var fn = queue.shift();
-                    fn();
-                }
-            }
-        }, true);
-
-        return function nextTick(fn) {
-            queue.push(fn);
-            window.postMessage('process-tick', '*');
-        };
-    }
-
-    return function nextTick(fn) {
-        setTimeout(fn, 0);
-    };
-})();
-
-process.title = 'browser';
-process.browser = true;
-process.env = {};
-process.argv = [];
-
-function noop() {}
-
-process.on = noop;
-process.addListener = noop;
-process.once = noop;
-process.off = noop;
-process.removeListener = noop;
-process.removeAllListeners = noop;
-process.emit = noop;
-
-process.binding = function (name) {
-    throw new Error('process.binding is not supported');
-};
-
-// TODO(shtylman)
-process.cwd = function () { return '/' };
-process.chdir = function (dir) {
-    throw new Error('process.chdir is not supported');
-};
-
-},{}],"/Users/yangwei/code/react-d3/src/areachart.jsx":[function(require,module,exports){
+},{"./lib/React":"/home/eric/repos/react-d3/node_modules/react/lib/React.js"}],"/home/eric/repos/react-d3/src/areachart.jsx":[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -44768,7 +44566,7 @@ var AreaChart = React.createClass({displayName: "AreaChart",
 
 exports.AreaChart = AreaChart;
 
-},{"./common":"/Users/yangwei/code/react-d3/src/common/index.js","d3":"/Users/yangwei/code/react-d3/node_modules/d3/d3.js","lodash":"/Users/yangwei/code/react-d3/node_modules/lodash/dist/lodash.js","react":"/Users/yangwei/code/react-d3/node_modules/react/react.js"}],"/Users/yangwei/code/react-d3/src/barchart.jsx":[function(require,module,exports){
+},{"./common":"/home/eric/repos/react-d3/src/common/index.js","d3":"/home/eric/repos/react-d3/node_modules/d3/d3.js","lodash":"/home/eric/repos/react-d3/node_modules/lodash/dist/lodash.js","react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/src/barchart.jsx":[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -44928,7 +44726,7 @@ var BarChart = React.createClass({displayName: "BarChart",
 
 exports.BarChart = BarChart;
 
-},{"./common":"/Users/yangwei/code/react-d3/src/common/index.js","d3":"/Users/yangwei/code/react-d3/node_modules/d3/d3.js","lodash":"/Users/yangwei/code/react-d3/node_modules/lodash/dist/lodash.js","react":"/Users/yangwei/code/react-d3/node_modules/react/react.js"}],"/Users/yangwei/code/react-d3/src/common/axes.jsx":[function(require,module,exports){
+},{"./common":"/home/eric/repos/react-d3/src/common/index.js","d3":"/home/eric/repos/react-d3/node_modules/d3/d3.js","lodash":"/home/eric/repos/react-d3/node_modules/lodash/dist/lodash.js","react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/src/common/axes.jsx":[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -45114,7 +44912,7 @@ exports.YAxis = React.createClass({displayName: "YAxis",
 
 });
 
-},{"d3":"/Users/yangwei/code/react-d3/node_modules/d3/d3.js","react":"/Users/yangwei/code/react-d3/node_modules/react/react.js"}],"/Users/yangwei/code/react-d3/src/common/chart.jsx":[function(require,module,exports){
+},{"d3":"/home/eric/repos/react-d3/node_modules/d3/d3.js","react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/src/common/chart.jsx":[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -45130,13 +44928,13 @@ exports.Chart = React.createClass({displayName: "Chart",
   }
 });
 
-},{"react":"/Users/yangwei/code/react-d3/node_modules/react/react.js"}],"/Users/yangwei/code/react-d3/src/common/index.js":[function(require,module,exports){
+},{"react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/src/common/index.js":[function(require,module,exports){
 
 exports.XAxis = require('./axes').XAxis;
 exports.YAxis = require('./axes').YAxis;
 exports.Chart = require('./chart').Chart;
 
-},{"./axes":"/Users/yangwei/code/react-d3/src/common/axes.jsx","./chart":"/Users/yangwei/code/react-d3/src/common/chart.jsx"}],"/Users/yangwei/code/react-d3/src/index.js":[function(require,module,exports){
+},{"./axes":"/home/eric/repos/react-d3/src/common/axes.jsx","./chart":"/home/eric/repos/react-d3/src/common/chart.jsx"}],"/home/eric/repos/react-d3/src/index.js":[function(require,module,exports){
 var d3 = require('d3');
 var React = require('react');
 
@@ -45147,7 +44945,7 @@ exports.AreaChart = require('./areachart').AreaChart;
 exports.Treemap = require('./treemap').Treemap;
 exports.ScatterChart = require('./scatterchart').ScatterChart;
 
-},{"./areachart":"/Users/yangwei/code/react-d3/src/areachart.jsx","./barchart":"/Users/yangwei/code/react-d3/src/barchart.jsx","./linechart":"/Users/yangwei/code/react-d3/src/linechart.jsx","./piechart":"/Users/yangwei/code/react-d3/src/piechart.jsx","./scatterchart":"/Users/yangwei/code/react-d3/src/scatterchart.jsx","./treemap":"/Users/yangwei/code/react-d3/src/treemap.jsx","d3":"/Users/yangwei/code/react-d3/node_modules/d3/d3.js","react":"/Users/yangwei/code/react-d3/node_modules/react/react.js"}],"/Users/yangwei/code/react-d3/src/linechart.jsx":[function(require,module,exports){
+},{"./areachart":"/home/eric/repos/react-d3/src/areachart.jsx","./barchart":"/home/eric/repos/react-d3/src/barchart.jsx","./linechart":"/home/eric/repos/react-d3/src/linechart.jsx","./piechart":"/home/eric/repos/react-d3/src/piechart.jsx","./scatterchart":"/home/eric/repos/react-d3/src/scatterchart.jsx","./treemap":"/home/eric/repos/react-d3/src/treemap.jsx","d3":"/home/eric/repos/react-d3/node_modules/d3/d3.js","react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/src/linechart.jsx":[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -45367,7 +45165,7 @@ var LineChart = React.createClass({displayName: "LineChart",
 
 exports.LineChart = LineChart;
 
-},{"./common":"/Users/yangwei/code/react-d3/src/common/index.js","d3":"/Users/yangwei/code/react-d3/node_modules/d3/d3.js","lodash":"/Users/yangwei/code/react-d3/node_modules/lodash/dist/lodash.js","react":"/Users/yangwei/code/react-d3/node_modules/react/react.js"}],"/Users/yangwei/code/react-d3/src/piechart.jsx":[function(require,module,exports){
+},{"./common":"/home/eric/repos/react-d3/src/common/index.js","d3":"/home/eric/repos/react-d3/node_modules/d3/d3.js","lodash":"/home/eric/repos/react-d3/node_modules/lodash/dist/lodash.js","react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/src/piechart.jsx":[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -45562,7 +45360,7 @@ var PieChart = React.createClass({displayName: "PieChart",
 
 exports.PieChart = PieChart;
 
-},{"./common":"/Users/yangwei/code/react-d3/src/common/index.js","d3":"/Users/yangwei/code/react-d3/node_modules/d3/d3.js","lodash":"/Users/yangwei/code/react-d3/node_modules/lodash/dist/lodash.js","react":"/Users/yangwei/code/react-d3/node_modules/react/react.js"}],"/Users/yangwei/code/react-d3/src/scatterchart.jsx":[function(require,module,exports){
+},{"./common":"/home/eric/repos/react-d3/src/common/index.js","d3":"/home/eric/repos/react-d3/node_modules/d3/d3.js","lodash":"/home/eric/repos/react-d3/node_modules/lodash/dist/lodash.js","react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/src/scatterchart.jsx":[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -45736,7 +45534,7 @@ var ScatterChart = React.createClass({displayName: "ScatterChart",
 
 exports.ScatterChart = ScatterChart;
 
-},{"./common":"/Users/yangwei/code/react-d3/src/common/index.js","d3":"/Users/yangwei/code/react-d3/node_modules/d3/d3.js","lodash":"/Users/yangwei/code/react-d3/node_modules/lodash/dist/lodash.js","react":"/Users/yangwei/code/react-d3/node_modules/react/react.js"}],"/Users/yangwei/code/react-d3/src/treemap.jsx":[function(require,module,exports){
+},{"./common":"/home/eric/repos/react-d3/src/common/index.js","d3":"/home/eric/repos/react-d3/node_modules/d3/d3.js","lodash":"/home/eric/repos/react-d3/node_modules/lodash/dist/lodash.js","react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/src/treemap.jsx":[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -45885,7 +45683,7 @@ var Treemap = React.createClass({displayName: "Treemap",
 
 exports.Treemap = Treemap;
 
-},{"./common":"/Users/yangwei/code/react-d3/src/common/index.js","d3":"/Users/yangwei/code/react-d3/node_modules/d3/d3.js","react":"/Users/yangwei/code/react-d3/node_modules/react/react.js"}],"/Users/yangwei/code/react-d3/utils/datagen.js":[function(require,module,exports){
+},{"./common":"/home/eric/repos/react-d3/src/common/index.js","d3":"/home/eric/repos/react-d3/node_modules/d3/d3.js","react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/utils/datagen.js":[function(require,module,exports){
 var _ = require('lodash');
 
 exports.generateArrayOfPoints = function(n) {
@@ -46010,4 +45808,4 @@ var generateArrayOfTimeObjects = function(n) {
 
 exports.generateArrayOfTimeObjects = generateArrayOfTimeObjects;
 
-},{"lodash":"/Users/yangwei/code/react-d3/node_modules/lodash/dist/lodash.js"}]},{},["/Users/yangwei/code/react-d3/docs/examples/main.js"]);
+},{"lodash":"/home/eric/repos/react-d3/node_modules/lodash/dist/lodash.js"}]},{},["/home/eric/repos/react-d3/docs/examples/main.js"]);
