@@ -1,0 +1,6 @@
+- [ ] Run `npm run lint` and `npm test` and correct any errors
+- [ ] Increment version numbers in README.md and package.json
+- [ ] Run `npm build`
+- [ ] `cd` to build/cjs directory and check that all needed files are present
+- [ ] Test build in separate project directory using `npm link` from build/cjs directory and `npm link react-d3` in project directory
+- [ ] If everything is OK, run `npm publish`
