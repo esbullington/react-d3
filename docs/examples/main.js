@@ -67,7 +67,7 @@ var Demos = React.createClass({
           <div className="col-md-6">
             <pre ref='block'>
               <code className='js'>
-              {"var barData = [\n  {label: 'A', value: 5},\n  {label: 'B', value: 6},\n  ...\n  {label: 'F', value: 7}];"}
+              {"var barData = [\n  {label: 'A', value: 5},\n  {label: 'B', value: 6},\n  ...\n  {label: 'F', value: 7}\n];"}
               </code>
             </pre>
             <pre ref='block'>
@@ -87,7 +87,7 @@ var Demos = React.createClass({
           <div className="col-md-6">
             <pre ref='block'>
               <code className='js'>
-              {"var pieData = [\n  {label: 'Margarita', value: 20.0},\n  {label: 'John', value: 55.0},\n  {label: 'Tim', value: 25.0 }]"}
+              {"var pieData = [\n  {label: 'Margarita', value: 20.0},\n  {label: 'John', value: 55.0},\n  {label: 'Tim', value: 25.0 }\n];"}
               </code>
             </pre>
             <pre ref='block'>
@@ -107,7 +107,7 @@ var Demos = React.createClass({
           <div className="col-md-6">
             <pre ref='block'>
               <code className='js'>
-              {'var lineData = {\n  series1: [ { x: 0, y: 20 }, ... , { x: 6, y: 10 } ],\n  series2: [ { x: 0, y: 8 }, ..., { x: 6, y: 2 } ],\n  series3: [ { x: 0, y: 0 }, ..., { x: 6, y: 2 } ]\n}'}
+              {'var lineData = {\n  series1: [ { x: 0, y: 20 }, ... , { x: 6, y: 10 } ],\n  series2: [ { x: 0, y: 8 }, ..., { x: 6, y: 2 } ],\n  series3: [ { x: 0, y: 0 }, ..., { x: 6, y: 2 } ]\n};'}
               </code>
             </pre>
             <pre ref='block'>
@@ -155,7 +155,7 @@ var Demos = React.createClass({
           <div className="col-md-6">
             <pre ref='block'>
               <code className='js'>
-              {'//Sample data format (not actually rendered)\n//for actual data, see Apple stock data from Mike Bostock\'s chart:\n// http://bl.ocks.org/mbostock/3883195\nvar areaData = [\n  {date: 1177646400000, value: 582.13},\n  ...\n  {date: 1178078400000, value: 603}\n]'}
+              {'//Sample data format (not actually rendered)\n//for actual data, see Apple stock data from Mike Bostock\'s chart:\n// http://bl.ocks.org/mbostock/3883195\nvar areaData = [\n  {date: 1177646400000, value: 582.13},\n  ...\n  {date: 1178078400000, value: 603}\n];'}
               </code>
             </pre>
             <pre ref='block'>
@@ -182,7 +182,7 @@ var Demos = React.createClass({
           <div className="col-md-6">
             <pre ref='block'>
               <code className='js'>
-              {'//2014 World Most Populous Countries (millions)\n//http://www.prb.org/pdf14/2014-world-population-data-sheet_eng.pdf\n var treemapData = [\n  {label: "China", value: 1364},\n  {label: "India", value: 1296},\n...\n  {label: "Brazil", value: 203}\n ];'}
+              {'//2014 World Most Populous Countries (millions)\n//http://www.prb.org/pdf14/2014-world-population-data-sheet_eng.pdf\nvar treemapData = [\n  {label: "China", value: 1364},\n  {label: "India", value: 1296},\n...\n  {label: "Brazil", value: 203}\n];'}
               </code>
             </pre>
             <pre ref='block'>
