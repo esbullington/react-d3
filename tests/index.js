@@ -6,3 +6,4 @@ require('./areachart-tests');
 require('./piechart-tests');
 require('./treemap-tests');
 require('./scatterchart-tests');
+require('./legend-tests');
