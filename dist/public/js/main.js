@@ -88,7 +88,7 @@ var Demos = React.createClass({displayName: "Demos",
           React.createElement("div", {className: "col-md-6"}, 
             React.createElement("pre", {ref: "block"}, 
               React.createElement("code", {className: "js"}, 
-              "var pieData = [\n  {label: 'Margarita', value: 20.0},\n  {label: 'John', value: 55.0},\n  {label: 'Tim', value: 25.0 }]"
+              "var pieData = [\n  {label: 'Margarita', value: 20.0},\n  {label: 'John', value: 55.0},\n  {label: 'Tim', value: 25.0 }];"
               )
             ), 
             React.createElement("pre", {ref: "block"}, 
@@ -108,7 +108,7 @@ var Demos = React.createClass({displayName: "Demos",
           React.createElement("div", {className: "col-md-6"}, 
             React.createElement("pre", {ref: "block"}, 
               React.createElement("code", {className: "js"}, 
-              'var lineData = {\n  series1: [ { x: 0, y: 20 }, ... , { x: 6, y: 10 } ],\n  series2: [ { x: 0, y: 8 }, ..., { x: 6, y: 2 } ],\n  series3: [ { x: 0, y: 0 }, ..., { x: 6, y: 2 } ]\n}'
+              'var lineData = {\n  series1: [ { x: 0, y: 20 }, ... , { x: 6, y: 10 } ],\n  series2: [ { x: 0, y: 8 }, ..., { x: 6, y: 2 } ],\n  series3: [ { x: 0, y: 0 }, ..., { x: 6, y: 2 } ]\n};'
               )
             ), 
             React.createElement("pre", {ref: "block"}, 
@@ -156,7 +156,7 @@ var Demos = React.createClass({displayName: "Demos",
           React.createElement("div", {className: "col-md-6"}, 
             React.createElement("pre", {ref: "block"}, 
               React.createElement("code", {className: "js"}, 
-              '//Sample data format (not actually rendered)\n//for actual data, see Apple stock data from Mike Bostock\'s chart:\n// http://bl.ocks.org/mbostock/3883195\nvar areaData = [\n  {date: 1177646400000, value: 582.13},\n  ...\n  {date: 1178078400000, value: 603}\n]'
+              '//Sample data format (not actually rendered)\n//for actual data, see Apple stock data from Mike Bostock\'s chart:\n// http://bl.ocks.org/mbostock/3883195\nvar areaData = [\n  {date: 1177646400000, value: 582.13},\n  ...\n  {date: 1178078400000, value: 603}\n];'
               )
             ), 
             React.createElement("pre", {ref: "block"}, 
