@@ -103,7 +103,7 @@ var Demos = React.createClass({displayName: "Demos",
         ), 
         React.createElement("div", {className: "row"}, 
           React.createElement("div", {className: "col-md-6"}, 
-            React.createElement(LineChart, {data: lineData, width: 400, height: 200, title: "Line Chart"})
+            React.createElement(LineChart, {legend: true, data: lineData, width: 500, height: 300, title: "Line Chart"})
           ), 
           React.createElement("div", {className: "col-md-6"}, 
             React.createElement("pre", {ref: "block"}, 
@@ -113,7 +113,7 @@ var Demos = React.createClass({displayName: "Demos",
             ), 
             React.createElement("pre", {ref: "block"}, 
               React.createElement("code", {className: "html"}, 
-              '<LineChart\n  data={lineData}\n  width={400}\n  height={200}\n  title="Line Chart"\n/>'
+              '<LineChart\n  legend={true}\n  data={lineData}\n  width={500}\n  height={200}\n  title="Line Chart"\n/>'
               )
             )
           )
@@ -123,7 +123,7 @@ var Demos = React.createClass({displayName: "Demos",
         ), 
         React.createElement("div", {className: "row"}, 
           React.createElement("div", {className: "col-md-6"}, 
-            React.createElement(ScatterChart, {data: scatterData, width: 400, height: 200, title: "Scatter Chart"})
+            React.createElement(ScatterChart, {data: scatterData, width: 500, height: 200, title: "Scatter Chart"})
           ), 
           React.createElement("div", {className: "col-md-6"}, 
             React.createElement("pre", {ref: "block"}, 
@@ -44916,25 +44916,149 @@ exports.YAxis = React.createClass({displayName: "YAxis",
 'use strict';
 
 var React = require('react');
+var Legend = require('./legend').Legend;
 
 exports.Chart = React.createClass({displayName: "Chart",
   render: function() {
     return (
       React.createElement("div", null, 
-        React.createElement("h3", null, this.props.title), 
+        React.createElement("h4", null, this.props.title), 
         React.createElement("svg", {width: this.props.width, height: this.props.height}, this.props.children)
       )
     );
   }
 });
 
-},{"react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/src/common/index.js":[function(require,module,exports){
+exports.LegendChart = React.createClass({displayName: "LegendChart",
+
+  propTypes: {
+    legend: React.PropTypes.bool,
+    legendPosition: React.PropTypes.string,
+    sideOffset: React.PropTypes.number,
+    margins: React.PropTypes.object,
+    data: React.PropTypes.object,
+  },
+
+  getDefaultProps: function() {
+    return {
+      data: {},
+      legend: false,
+      legendPosition: 'right',
+      sideOffset: 90
+    };
+  },
+
+  _renderLegend: function() {
+    if (this.props.legend) {
+      return (
+        React.createElement(Legend, {
+          legendPosition: this.props.legendPosition, 
+          margins: this.props.margins, 
+          colors: this.props.colors, 
+          data: this.props.data, 
+          width: this.props.width, 
+          height: this.props.height, 
+          sideOffset: this.props.sideOffset}
+        ) 
+      );
+    }
+  },
+
+  render: function() {
+    return (
+      React.createElement("div", {style: {'width': this.props.width, 'height': this.props.height}}, 
+        React.createElement("h4", null, this.props.title), 
+        this._renderLegend(), 
+        React.createElement("svg", {width: this.props.width - this.props.sideOffset, height: this.props.height}, this.props.children)
+      )
+    );
+  }
+});
+
+},{"./legend":"/home/eric/repos/react-d3/src/common/legend.jsx","react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/src/common/index.js":[function(require,module,exports){
 
 exports.XAxis = require('./axes').XAxis;
 exports.YAxis = require('./axes').YAxis;
 exports.Chart = require('./chart').Chart;
+exports.LegendChart = require('./chart').LegendChart;
+exports.Legend = require('./legend').Legend;
 
-},{"./axes":"/home/eric/repos/react-d3/src/common/axes.jsx","./chart":"/home/eric/repos/react-d3/src/common/chart.jsx"}],"/home/eric/repos/react-d3/src/index.js":[function(require,module,exports){
+},{"./axes":"/home/eric/repos/react-d3/src/common/axes.jsx","./chart":"/home/eric/repos/react-d3/src/common/chart.jsx","./legend":"/home/eric/repos/react-d3/src/common/legend.jsx"}],"/home/eric/repos/react-d3/src/common/legend.jsx":[function(require,module,exports){
+'use strict';
+
+var React = require('react');
+var d3 = require('d3');
+
+exports.Legend = React.createClass({displayName: "Legend",
+
+  propTypes: {
+    width: React.PropTypes.number,
+    height: React.PropTypes.number,
+    margins: React.PropTypes.object,
+    text: React.PropTypes.string,
+    colors: React.PropTypes.func
+  },
+
+  getDefaultProps: function() {
+    return {
+      text: "#000",
+      colors: d3.scale.category20c()
+    };
+  },
+
+  render: function() {
+
+    var props = this.props;
+
+    var textStyle = {
+      'color': 'black',
+      'fontSize': '50%',
+      'verticalAlign': 'top'
+    };
+
+    var legendItems = [];
+    var idx = 0;
+    for(var seriesName in props.data) {
+
+      if (props.data.hasOwnProperty(seriesName)) {
+
+      var itemStyle = {
+        'color': props.colors(idx),
+        'lineHeight': '60%',
+        'fontSize': '200%'
+      };
+
+        var seriesValue = props.data[seriesName];
+        legendItems.push(
+              React.createElement("li", {style: itemStyle, key: idx}, 
+                React.createElement("span", {style: textStyle}, seriesName)
+              )
+            );
+        idx++;
+      }
+    }
+
+    // In preparation for legend positioning
+    var legendFloat = 'right';
+
+    var topMargin = props.margins.top;
+
+    var legendBlockStyle = {
+      'wordWrap': 'break-word',
+      'width': props.sideOffset,
+      'paddingLeft': '0',
+      'marginBottom': '0',
+      'marginTop': topMargin,
+      'float': legendFloat
+    };
+
+    return React.createElement("ul", {style: legendBlockStyle}, legendItems);
+  }
+
+});
+
+
+},{"d3":"/home/eric/repos/react-d3/node_modules/d3/d3.js","react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/src/index.js":[function(require,module,exports){
 var d3 = require('d3');
 var React = require('react');
 
@@ -44950,11 +45074,12 @@ exports.ScatterChart = require('./scatterchart').ScatterChart;
 
 var React = require('react');
 var d3 = require('d3');
+var _ = require('lodash');
 var common = require('./common');
 var Chart = common.Chart;
+var LegendChart = common.LegendChart;
 var XAxis = common.XAxis;
 var YAxis = common.YAxis;
-var _ = require('lodash');
 
 
 var Line = React.createClass({displayName: "Line",
@@ -45072,7 +45197,9 @@ var LineChart = React.createClass({displayName: "LineChart",
 
   getDefaultProps: function() {
     return {
-      margins: {top: 20, right: 30, bottom: 30, left: 30},
+      margins: {top: 10, right: 20, bottom: 30, left: 30},
+      legendOffset: 120,
+      titleOffset: 56,
       pointRadius: 3,
       width: 400,
       height: 200,
@@ -45103,8 +45230,18 @@ var LineChart = React.createClass({displayName: "LineChart",
   render: function() {
 
     // Calculate inner chart dimensions
-    var chartWidth = this.props.width - this.props.margins.left - this.props.margins.right;
-    var chartHeight = this.props.height - this.props.margins.top - this.props.margins.bottom;
+    var chartWidth, chartHeight;
+
+    chartWidth = this.props.width - this.props.margins.left - this.props.margins.right;
+    chartHeight = this.props.height - this.props.margins.top - this.props.margins.bottom;
+
+    if (this.props.legend) {
+      chartWidth = chartWidth - this.props.legendOffset;
+    }
+
+    if (this.props.title) {
+      chartHeight = chartHeight - this.props.titleOffset;
+    }
 
     var scales = this._calculateScales(this.props, chartWidth, chartHeight);
 
@@ -45131,8 +45268,54 @@ var LineChart = React.createClass({displayName: "LineChart",
       }
     }
 
+    if (this.props.legend) {
+      return (
+        React.createElement(LegendChart, {
+          legend: this.props.legend, 
+          data: this.props.data, 
+          margins: this.props.margins, 
+          colors: this.props.colors, 
+          width: this.props.width, 
+          height: this.props.height, 
+          title: this.props.title
+        }, 
+          React.createElement("g", {transform: trans}, 
+            dataSeriesArray, 
+            React.createElement(YAxis, {
+              yAxisClassName: "line y axis", 
+              yScale: scales.yScale, 
+              margins: this.props.margins, 
+              yAxisTickCount: this.props.yAxisTickCount, 
+              width: chartWidth, 
+              height: chartHeight, 
+              stroke: this.props.axesColor}
+            ), 
+            React.createElement(XAxis, {
+              xAxisClassName: "line x axis", 
+              strokeWidth: "1", 
+              hideOrigin: true, 
+              xScale: scales.xScale, 
+              data: this.props.data, 
+              margins: this.props.margins, 
+              width: chartWidth, 
+              height: chartHeight, 
+              stroke: this.props.axesColor}
+            )
+          )
+        )
+      );
+    }
+
     return (
-      React.createElement(Chart, {width: this.props.width, height: this.props.height, title: this.props.title}, 
+      React.createElement(Chart, {
+        legend: this.props.legend, 
+        data: this.props.data, 
+        margins: this.props.margins, 
+        colors: this.props.colors, 
+        width: this.props.width, 
+        height: this.props.height, 
+        title: this.props.title
+      }, 
         React.createElement("g", {transform: trans}, 
           dataSeriesArray, 
           React.createElement(YAxis, {
