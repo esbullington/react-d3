@@ -15,8 +15,9 @@ Current charts:
 * pie chart
 * area chart
 * treemap
+* scatter chart
 
-The basic charts generated from the examples/main.js ReactJS app can be [viewed here](http://esbullington.github.io/react-d3). Additional chart types are soon to come.
+The basic charts generated from the examples/main.js ReactJS app can be [viewed here](http://esbullington.github.io/react-d3). Additional chart types and chart animations are soon to come.
 
 ### Basic usage
 
@@ -39,7 +40,6 @@ However, I've diverged a bit from this original vision and am storing a bit of s
 
 ### Todo
 * Many more charts types to do:
-  - scatter chart
   - candlestick
   - radial gauge
   - and many more...
