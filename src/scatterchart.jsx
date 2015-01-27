@@ -72,6 +72,8 @@ var ScatterChart = React.createClass({
     legendOffset: React.PropTypes.number,
     titleOffset: React.PropTypes.number,
     pointRadius: React.PropTypes.number,
+    yHideOrigin: React.PropTypes.bool,
+    xHideOrigin: React.PropTypes.bool,
     width: React.PropTypes.number,
     height: React.PropTypes.number,
     axesColor: React.PropTypes.string,
@@ -160,7 +162,7 @@ var ScatterChart = React.createClass({
           <YAxis
             yAxisClassName="scatter y axis"
             yScale={scales.yScale}
-            hideOrigin={true}
+            yHideOrigin={this.props.yHideOrigin}
             margins={this.props.margins}
             yAxisTickCount={this.props.yAxisTickCount}
             width={chartWidth}
@@ -170,7 +172,7 @@ var ScatterChart = React.createClass({
           <XAxis
             xAxisClassName="scatter x axis"
             strokeWidth="1"
-            hideOrigin={true}
+            xHideOrigin={this.props.xHideOrigin}
             xScale={scales.xScale}
             data={this.props.data}
             margins={this.props.margins}

@@ -9,18 +9,19 @@ exports.XAxis = React.createClass({
     xAxisClassName: React.PropTypes.string.isRequired,
     xOrient: React.PropTypes.oneOf(['top', 'bottom']),
     xScale: React.PropTypes.func.isRequired,
+    xHideOrigin: React.PropTypes.bool,
     height: React.PropTypes.number.isRequired,
     fill: React.PropTypes.string,
     stroke: React.PropTypes.string,
     tickStroke: React.PropTypes.string,
-    strokeWidth: React.PropTypes.string,
-    hideOrigin: React.PropTypes.bool
+    strokeWidth: React.PropTypes.string
   },
 
   getDefaultProps: function() {
     return {
       xAxisClassName: 'x axis',
       xOrient: 'bottom',
+      xHideOrigin: false,
       fill: "none",
       stroke: "none",
       tickStroke: "#000",
@@ -75,7 +76,7 @@ exports.XAxis = React.createClass({
       .attr("stroke", props.stroke)
       .attr("stroke-width", props.strokeWidth);
 
-    if (props.hideOrigin) {
+    if (props.xHideOrigin) {
       // Hack to hide the x axis origin
       var originSelect = xAxisClassSelect + ' g:first-child';
       d3.selectAll(originSelect).style("opacity","0");
@@ -105,6 +106,7 @@ exports.YAxis = React.createClass({
     yAxisClassName: React.PropTypes.string,
     yOrient: React.PropTypes.oneOf(['left', 'right']),
     yScale: React.PropTypes.func.isRequired,
+    yHideOrigin: React.PropTypes.bool,
     fill: React.PropTypes.string,
     stroke: React.PropTypes.string,
     tickStroke: React.PropTypes.string,
@@ -115,6 +117,7 @@ exports.YAxis = React.createClass({
     return {
       yAxisClassName: 'y axis',
       yOrient: 'left',
+      yHideOrigin: false,
       fill: "none",
       stroke: "#000",
       tickStroke: "#000",
@@ -168,7 +171,7 @@ exports.YAxis = React.createClass({
       .attr("fill", props.fill)
       .attr("stroke", props.stroke);
 
-    if (props.hideOrigin) {
+    if (props.yHideOrigin) {
       // Hack to hide the x axis origin
       var originSelect = yAxisClassSelect + ' g:first-child';
       d3.selectAll(originSelect).style("opacity","0");
