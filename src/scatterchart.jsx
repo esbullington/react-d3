@@ -4,7 +4,6 @@ var React = require('react');
 var d3 = require('d3');
 var common = require('./common');
 var Chart = common.Chart;
-var LegendChart = common.LegendChart;
 var XAxis = common.XAxis;
 var YAxis = common.YAxis;
 var _ = require('lodash');
@@ -152,44 +151,6 @@ var ScatterChart = React.createClass({
         );
         index++;
       }
-    }
-
-    if (this.props.legend) {
-      return (
-        <LegendChart
-          legend={this.props.legend}
-          data={this.props.data}
-          margins={this.props.margins}
-          colors={this.props.colors}
-          width={this.props.width}
-          height={this.props.height}
-          title={this.props.title}
-        >
-        <g transform={trans}>
-          {dataSeriesArray}
-          <YAxis
-            yAxisClassName="scatter y axis"
-            yScale={scales.yScale}
-            margins={this.props.margins}
-            yAxisTickCount={this.props.yAxisTickCount}
-            width={chartWidth}
-            height={chartHeight}
-            stroke={this.props.axesColor}
-          />
-          <XAxis
-            xAxisClassName="scatter x axis"
-            strokeWidth="1"
-            hideOrigin={true}
-            xScale={scales.xScale}
-            data={this.props.data}
-            margins={this.props.margins}
-            width={chartWidth}
-            height={chartHeight}
-            stroke={this.props.axesColor}
-          />
-        </g>
-      </LegendChart>
-      );
     }
 
     return (

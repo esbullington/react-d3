@@ -5,7 +5,6 @@ var d3 = require('d3');
 var _ = require('lodash');
 var common = require('./common');
 var Chart = common.Chart;
-var LegendChart = common.LegendChart;
 var XAxis = common.XAxis;
 var YAxis = common.YAxis;
 
@@ -111,16 +110,75 @@ var DataSeries = React.createClass({
 
 });
 
+var Axes = React.createClass({
+
+  propTypes: {
+    xAxisClassName: React.PropTypes.string.isRequired,
+    xOrient: React.PropTypes.oneOf(['top', 'bottom']),
+    xScale: React.PropTypes.func.isRequired,
+    yAxisClassName: React.PropTypes.string.isRequired,
+    yOrient: React.PropTypes.oneOf(['left', 'right']),
+    yScale: React.PropTypes.func.isRequired,
+    chartHeight: React.PropTypes.number.isRequired,
+    chartWidth: React.PropTypes.number.isRequired,
+    fill: React.PropTypes.string,
+    stroke: React.PropTypes.string,
+    tickStroke: React.PropTypes.string,
+    strokeWidth: React.PropTypes.string,
+    hideOrigin: React.PropTypes.bool
+  },
+
+  getDefaultProps: function() {
+    return {
+      axesColor: '#000'
+    }
+  },
+
+  render: function() {
+
+    var props = this.props;
+
+    return (
+        <g>
+          <YAxis
+            yAxisClassName={props.yAxisClassName}
+            yScale={props.yScale}
+            yAxisTickCount={props.yAxisTickCount}
+            margins={props.margins}
+            width={props.chartWidth}
+            height={props.chartHeight}
+            stroke={props.axesColor}
+          />
+          <XAxis
+            xAxisClassName={props.xAxisClassName}
+            strokeWidth={props.strokeWidth}
+            hideOrigin={props.hideOrigin}
+            xScale={props.xScale}
+            margins={props.margins}
+            width={props.chartWidth}
+            height={props.chartHeight}
+            stroke={props.axesColor}
+          />
+        </g>
+    );
+  }
+
+});
+
+
 var LineChart = React.createClass({
 
   propTypes: {
     margins: React.PropTypes.object,
+    legendOffset: React.PropTypes.number,
+    titleOffset: React.PropTypes.number,
     pointRadius: React.PropTypes.number,
     width: React.PropTypes.number,
     height: React.PropTypes.number,
     axesColor: React.PropTypes.string,
     title: React.PropTypes.string,
-    colors: React.PropTypes.func
+    colors: React.PropTypes.func,
+    legend: React.PropTypes.bool
   },
 
   getDefaultProps: function() {
@@ -156,6 +214,8 @@ var LineChart = React.createClass({
   },
 
   render: function() {
+
+    var props = this.props;
 
     // Calculate inner chart dimensions
     var chartWidth, chartHeight;
@@ -196,44 +256,6 @@ var LineChart = React.createClass({
       }
     }
 
-    if (this.props.legend) {
-      return (
-        <LegendChart
-          legend={this.props.legend}
-          data={this.props.data}
-          margins={this.props.margins}
-          colors={this.props.colors}
-          width={this.props.width}
-          height={this.props.height}
-          title={this.props.title}
-        >
-          <g transform={trans}>
-            {dataSeriesArray}
-            <YAxis
-              yAxisClassName="line y axis"
-              yScale={scales.yScale}
-              margins={this.props.margins}
-              yAxisTickCount={this.props.yAxisTickCount}
-              width={chartWidth}
-              height={chartHeight}
-              stroke={this.props.axesColor}
-            />
-            <XAxis
-              xAxisClassName="line x axis"
-              strokeWidth="1"
-              hideOrigin={true}
-              xScale={scales.xScale}
-              data={this.props.data}
-              margins={this.props.margins}
-              width={chartWidth}
-              height={chartHeight}
-              stroke={this.props.axesColor}
-            />
-          </g>
-        </LegendChart>
-      );
-    }
-
     return (
       <Chart
         legend={this.props.legend}
@@ -246,24 +268,17 @@ var LineChart = React.createClass({
       >
         <g transform={trans}>
           {dataSeriesArray}
-          <YAxis
+          <Axes
             yAxisClassName="line y axis"
             yScale={scales.yScale}
-            margins={this.props.margins}
             yAxisTickCount={this.props.yAxisTickCount}
-            width={chartWidth}
-            height={chartHeight}
-            stroke={this.props.axesColor}
-          />
-          <XAxis
             xAxisClassName="line x axis"
+            xScale={scales.xScale}
             strokeWidth="1"
             hideOrigin={true}
-            xScale={scales.xScale}
-            data={this.props.data}
             margins={this.props.margins}
-            width={chartWidth}
-            height={chartHeight}
+            chartWidth={chartWidth}
+            chartHeight={chartHeight}
             stroke={this.props.axesColor}
           />
         </g>
