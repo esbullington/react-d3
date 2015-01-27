@@ -1,6 +1,6 @@
 {
   "name": "react-d3",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "ReactJS charts using d3",
   "author": "Eric S. Bullington",
   "homepage": "http://esbullington.github.io/react-d3/",
@@ -56,18 +56,23 @@
   "jshintConfig": {
     "browserify": true,
     "expr": true,
-    "globals"   : {
-      "describe"   : false,
-      "it"         : false,
-      "before"     : false,
-      "beforeEach" : false,
-      "after"      : false,
-      "afterEach"  : false
+    "globals": {
+      "describe": false,
+      "it": false,
+      "before": false,
+      "beforeEach": false,
+      "after": false,
+      "afterEach": false
     }
   },
   "browserify": {
     "transform": [
-      ["reactify", {"es6": true}]
+      [
+        "reactify",
+        {
+          "es6": true
+        }
+      ]
     ]
   }
 }
