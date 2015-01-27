@@ -113,7 +113,7 @@ var Demos = React.createClass({displayName: "Demos",
             ), 
             React.createElement("pre", {ref: "block"}, 
               React.createElement("code", {className: "html"}, 
-              '<LineChart\n  legend={true}\n  data={lineData}\n  width={500}\n  height={200}\n  title="Line Chart"\n/>'
+              '<LineChart\n  legend={true}\n  data={lineData}\n  width={500}\n  height={400}\n  title="Line Chart"\n/>'
               )
             )
           )
@@ -123,7 +123,7 @@ var Demos = React.createClass({displayName: "Demos",
         ), 
         React.createElement("div", {className: "row"}, 
           React.createElement("div", {className: "col-md-6"}, 
-            React.createElement(ScatterChart, {data: scatterData, width: 500, height: 200, title: "Scatter Chart"})
+            React.createElement(ScatterChart, {data: scatterData, width: 500, height: 400, title: "Scatter Chart"})
           ), 
           React.createElement("div", {className: "col-md-6"}, 
             React.createElement("pre", {ref: "block"}, 
@@ -133,7 +133,7 @@ var Demos = React.createClass({displayName: "Demos",
             ), 
             React.createElement("pre", {ref: "block"}, 
               React.createElement("code", {className: "html"}, 
-              '<ScatterChart\n  data={scatterData}\n  width={400}\n  height={200}\n  title="Scatter Chart"\n/>'
+              '<ScatterChart\n  data={scatterData}\n  width={500}\n  height={400}\n  title="Scatter Chart"\n/>'
               )
             )
           )
@@ -44736,7 +44736,7 @@ exports.XAxis = React.createClass({displayName: "XAxis",
 
   propTypes: {
     xAxisClassName: React.PropTypes.string.isRequired,
-    orient: React.PropTypes.oneOf(['top', 'bottom']),
+    xOrient: React.PropTypes.oneOf(['top', 'bottom']),
     xScale: React.PropTypes.func.isRequired,
     height: React.PropTypes.number.isRequired,
     fill: React.PropTypes.string,
@@ -44749,7 +44749,7 @@ exports.XAxis = React.createClass({displayName: "XAxis",
   getDefaultProps: function() {
     return {
       xAxisClassName: 'x axis',
-      orient: 'bottom',
+      xOrient: 'bottom',
       fill: "none",
       stroke: "none",
       tickStroke: "#000",
@@ -44770,7 +44770,7 @@ exports.XAxis = React.createClass({displayName: "XAxis",
   _renderAxis: function(props) {
     var xAxis = d3.svg.axis()
       .scale(props.xScale)
-      .orient("bottom");
+      .orient(props.xOrient);
 
     if (props.xAxisTickInterval) {
       xAxis.ticks(d3.time[props.xAxisTickInterval.unit], props.xAxisTickInterval.interval);
@@ -44832,7 +44832,7 @@ exports.YAxis = React.createClass({displayName: "YAxis",
 
   propTypes: {
     yAxisClassName: React.PropTypes.string,
-    orient: React.PropTypes.oneOf(['left', 'right']),
+    yOrient: React.PropTypes.oneOf(['left', 'right']),
     yScale: React.PropTypes.func.isRequired,
     fill: React.PropTypes.string,
     stroke: React.PropTypes.string,
@@ -44843,7 +44843,7 @@ exports.YAxis = React.createClass({displayName: "YAxis",
   getDefaultProps: function() {
     return {
       yAxisClassName: 'y axis',
-      orient: 'left',
+      yOrient: 'left',
       fill: "none",
       stroke: "#000",
       tickStroke: "#000",
@@ -44864,7 +44864,7 @@ exports.YAxis = React.createClass({displayName: "YAxis",
     var yAxis = d3.svg.axis()
       .ticks(props.yAxisTickCount)
       .scale(props.yScale)
-      .orient(this.props.orient);
+      .orient(this.props.yOrient);
 
     if (props.yAxisTickCount) {
       yAxis.ticks(props.yAxisTickCount);
@@ -44897,6 +44897,12 @@ exports.YAxis = React.createClass({displayName: "YAxis",
       .attr("fill", props.fill)
       .attr("stroke", props.stroke);
 
+    if (props.hideOrigin) {
+      // Hack to hide the x axis origin
+      var originSelect = yAxisClassSelect + ' g:first-child';
+      d3.selectAll(originSelect).style("opacity","0");
+    }
+
   },
 
   render: function() {
@@ -44918,7 +44924,7 @@ exports.YAxis = React.createClass({displayName: "YAxis",
 var React = require('react');
 var Legend = require('./legend').Legend;
 
-exports.Chart = React.createClass({displayName: "Chart",
+var PlainChart = React.createClass({displayName: "PlainChart",
   render: function() {
     return (
       React.createElement("div", null, 
@@ -44929,7 +44935,7 @@ exports.Chart = React.createClass({displayName: "Chart",
   }
 });
 
-exports.LegendChart = React.createClass({displayName: "LegendChart",
+var LegendChart = React.createClass({displayName: "LegendChart",
 
   propTypes: {
     legend: React.PropTypes.bool,
@@ -44974,6 +44980,30 @@ exports.LegendChart = React.createClass({displayName: "LegendChart",
     );
   }
 });
+
+exports.LegendChart = LegendChart;
+
+exports.Chart = React.createClass({displayName: "Chart",
+
+  propTypes: {
+    legend: React.PropTypes.bool,
+  },
+
+  getDefaultProps: function() {
+    return {
+      legend: false
+    };
+  },
+
+  render: function() {
+    if (this.props.legend) {
+      return React.createElement(LegendChart, React.__spread({},  this.props));
+    }
+    return React.createElement(PlainChart, React.__spread({},  this.props));
+  }
+
+});
+
 
 },{"./legend":"/home/eric/repos/react-d3/src/common/legend.jsx","react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/src/common/index.js":[function(require,module,exports){
 
@@ -45077,7 +45107,6 @@ var d3 = require('d3');
 var _ = require('lodash');
 var common = require('./common');
 var Chart = common.Chart;
-var LegendChart = common.LegendChart;
 var XAxis = common.XAxis;
 var YAxis = common.YAxis;
 
@@ -45183,16 +45212,75 @@ var DataSeries = React.createClass({displayName: "DataSeries",
 
 });
 
+var Axes = React.createClass({displayName: "Axes",
+
+  propTypes: {
+    xAxisClassName: React.PropTypes.string.isRequired,
+    xOrient: React.PropTypes.oneOf(['top', 'bottom']),
+    xScale: React.PropTypes.func.isRequired,
+    yAxisClassName: React.PropTypes.string.isRequired,
+    yOrient: React.PropTypes.oneOf(['left', 'right']),
+    yScale: React.PropTypes.func.isRequired,
+    chartHeight: React.PropTypes.number.isRequired,
+    chartWidth: React.PropTypes.number.isRequired,
+    fill: React.PropTypes.string,
+    stroke: React.PropTypes.string,
+    tickStroke: React.PropTypes.string,
+    strokeWidth: React.PropTypes.string,
+    hideOrigin: React.PropTypes.bool
+  },
+
+  getDefaultProps: function() {
+    return {
+      axesColor: '#000'
+    }
+  },
+
+  render: function() {
+
+    var props = this.props;
+
+    return (
+        React.createElement("g", null, 
+          React.createElement(YAxis, {
+            yAxisClassName: props.yAxisClassName, 
+            yScale: props.yScale, 
+            yAxisTickCount: props.yAxisTickCount, 
+            margins: props.margins, 
+            width: props.chartWidth, 
+            height: props.chartHeight, 
+            stroke: props.axesColor}
+          ), 
+          React.createElement(XAxis, {
+            xAxisClassName: props.xAxisClassName, 
+            strokeWidth: props.strokeWidth, 
+            hideOrigin: props.hideOrigin, 
+            xScale: props.xScale, 
+            margins: props.margins, 
+            width: props.chartWidth, 
+            height: props.chartHeight, 
+            stroke: props.axesColor}
+          )
+        )
+    );
+  }
+
+});
+
+
 var LineChart = React.createClass({displayName: "LineChart",
 
   propTypes: {
     margins: React.PropTypes.object,
+    legendOffset: React.PropTypes.number,
+    titleOffset: React.PropTypes.number,
     pointRadius: React.PropTypes.number,
     width: React.PropTypes.number,
     height: React.PropTypes.number,
     axesColor: React.PropTypes.string,
     title: React.PropTypes.string,
-    colors: React.PropTypes.func
+    colors: React.PropTypes.func,
+    legend: React.PropTypes.bool
   },
 
   getDefaultProps: function() {
@@ -45228,6 +45316,8 @@ var LineChart = React.createClass({displayName: "LineChart",
   },
 
   render: function() {
+
+    var props = this.props;
 
     // Calculate inner chart dimensions
     var chartWidth, chartHeight;
@@ -45268,44 +45358,6 @@ var LineChart = React.createClass({displayName: "LineChart",
       }
     }
 
-    if (this.props.legend) {
-      return (
-        React.createElement(LegendChart, {
-          legend: this.props.legend, 
-          data: this.props.data, 
-          margins: this.props.margins, 
-          colors: this.props.colors, 
-          width: this.props.width, 
-          height: this.props.height, 
-          title: this.props.title
-        }, 
-          React.createElement("g", {transform: trans}, 
-            dataSeriesArray, 
-            React.createElement(YAxis, {
-              yAxisClassName: "line y axis", 
-              yScale: scales.yScale, 
-              margins: this.props.margins, 
-              yAxisTickCount: this.props.yAxisTickCount, 
-              width: chartWidth, 
-              height: chartHeight, 
-              stroke: this.props.axesColor}
-            ), 
-            React.createElement(XAxis, {
-              xAxisClassName: "line x axis", 
-              strokeWidth: "1", 
-              hideOrigin: true, 
-              xScale: scales.xScale, 
-              data: this.props.data, 
-              margins: this.props.margins, 
-              width: chartWidth, 
-              height: chartHeight, 
-              stroke: this.props.axesColor}
-            )
-          )
-        )
-      );
-    }
-
     return (
       React.createElement(Chart, {
         legend: this.props.legend, 
@@ -45318,24 +45370,17 @@ var LineChart = React.createClass({displayName: "LineChart",
       }, 
         React.createElement("g", {transform: trans}, 
           dataSeriesArray, 
-          React.createElement(YAxis, {
+          React.createElement(Axes, {
             yAxisClassName: "line y axis", 
             yScale: scales.yScale, 
-            margins: this.props.margins, 
             yAxisTickCount: this.props.yAxisTickCount, 
-            width: chartWidth, 
-            height: chartHeight, 
-            stroke: this.props.axesColor}
-          ), 
-          React.createElement(XAxis, {
             xAxisClassName: "line x axis", 
+            xScale: scales.xScale, 
             strokeWidth: "1", 
             hideOrigin: true, 
-            xScale: scales.xScale, 
-            data: this.props.data, 
             margins: this.props.margins, 
-            width: chartWidth, 
-            height: chartHeight, 
+            chartWidth: chartWidth, 
+            chartHeight: chartHeight, 
             stroke: this.props.axesColor}
           )
         )
@@ -45615,17 +45660,22 @@ var ScatterChart = React.createClass({displayName: "ScatterChart",
 
   propTypes: {
     margins: React.PropTypes.object,
+    legendOffset: React.PropTypes.number,
+    titleOffset: React.PropTypes.number,
     pointRadius: React.PropTypes.number,
     width: React.PropTypes.number,
     height: React.PropTypes.number,
     axesColor: React.PropTypes.string,
     title: React.PropTypes.string,
-    colors: React.PropTypes.func
+    colors: React.PropTypes.func,
+    legend: React.PropTypes.bool
   },
 
   getDefaultProps: function() {
     return {
       margins: {top: 20, right: 30, bottom: 30, left: 30},
+      legendOffset: 120,
+      titleOffset: 56,
       pointRadius: 3,
       width: 400,
       height: 200,
@@ -45656,8 +45706,18 @@ var ScatterChart = React.createClass({displayName: "ScatterChart",
   render: function() {
 
     // Calculate inner chart dimensions
-    var chartWidth = this.props.width - this.props.margins.left - this.props.margins.right;
-    var chartHeight = this.props.height - this.props.margins.top - this.props.margins.bottom;
+    var chartWidth, chartHeight;
+
+    chartWidth = this.props.width - this.props.margins.left - this.props.margins.right;
+    chartHeight = this.props.height - this.props.margins.top - this.props.margins.bottom;
+
+    if (this.props.legend) {
+      chartWidth = chartWidth - this.props.legendOffset;
+    }
+
+    if (this.props.title) {
+      chartHeight = chartHeight - this.props.titleOffset;
+    }
 
     var scales = this._calculateScales(this.props, chartWidth, chartHeight);
 
@@ -45691,6 +45751,7 @@ var ScatterChart = React.createClass({displayName: "ScatterChart",
           React.createElement(YAxis, {
             yAxisClassName: "scatter y axis", 
             yScale: scales.yScale, 
+            hideOrigin: true, 
             margins: this.props.margins, 
             yAxisTickCount: this.props.yAxisTickCount, 
             width: chartWidth, 
