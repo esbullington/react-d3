@@ -123,7 +123,7 @@ var Demos = React.createClass({displayName: "Demos",
         ), 
         React.createElement("div", {className: "row"}, 
           React.createElement("div", {className: "col-md-6"}, 
-            React.createElement(ScatterChart, {data: scatterData, width: 500, height: 400, title: "Scatter Chart"})
+            React.createElement(ScatterChart, {data: scatterData, width: 500, height: 400, yHideOrigin: true, title: "Scatter Chart"})
           ), 
           React.createElement("div", {className: "col-md-6"}, 
             React.createElement("pre", {ref: "block"}, 
@@ -133,7 +133,7 @@ var Demos = React.createClass({displayName: "Demos",
             ), 
             React.createElement("pre", {ref: "block"}, 
               React.createElement("code", {className: "html"}, 
-              '<ScatterChart\n  data={scatterData}\n  width={500}\n  height={400}\n  title="Scatter Chart"\n/>'
+              '<ScatterChart\n  data={scatterData}\n  width={500}\n  height={400}\n  yHideOrigin={true}\n  title="Scatter Chart"\n/>'
               )
             )
           )
@@ -44738,18 +44738,19 @@ exports.XAxis = React.createClass({displayName: "XAxis",
     xAxisClassName: React.PropTypes.string.isRequired,
     xOrient: React.PropTypes.oneOf(['top', 'bottom']),
     xScale: React.PropTypes.func.isRequired,
+    xHideOrigin: React.PropTypes.bool,
     height: React.PropTypes.number.isRequired,
     fill: React.PropTypes.string,
     stroke: React.PropTypes.string,
     tickStroke: React.PropTypes.string,
-    strokeWidth: React.PropTypes.string,
-    hideOrigin: React.PropTypes.bool
+    strokeWidth: React.PropTypes.string
   },
 
   getDefaultProps: function() {
     return {
       xAxisClassName: 'x axis',
       xOrient: 'bottom',
+      xHideOrigin: false,
       fill: "none",
       stroke: "none",
       tickStroke: "#000",
@@ -44804,7 +44805,7 @@ exports.XAxis = React.createClass({displayName: "XAxis",
       .attr("stroke", props.stroke)
       .attr("stroke-width", props.strokeWidth);
 
-    if (props.hideOrigin) {
+    if (props.xHideOrigin) {
       // Hack to hide the x axis origin
       var originSelect = xAxisClassSelect + ' g:first-child';
       d3.selectAll(originSelect).style("opacity","0");
@@ -44834,6 +44835,7 @@ exports.YAxis = React.createClass({displayName: "YAxis",
     yAxisClassName: React.PropTypes.string,
     yOrient: React.PropTypes.oneOf(['left', 'right']),
     yScale: React.PropTypes.func.isRequired,
+    yHideOrigin: React.PropTypes.bool,
     fill: React.PropTypes.string,
     stroke: React.PropTypes.string,
     tickStroke: React.PropTypes.string,
@@ -44844,6 +44846,7 @@ exports.YAxis = React.createClass({displayName: "YAxis",
     return {
       yAxisClassName: 'y axis',
       yOrient: 'left',
+      yHideOrigin: false,
       fill: "none",
       stroke: "#000",
       tickStroke: "#000",
@@ -44897,7 +44900,7 @@ exports.YAxis = React.createClass({displayName: "YAxis",
       .attr("fill", props.fill)
       .attr("stroke", props.stroke);
 
-    if (props.hideOrigin) {
+    if (props.yHideOrigin) {
       // Hack to hide the x axis origin
       var originSelect = yAxisClassSelect + ' g:first-child';
       d3.selectAll(originSelect).style("opacity","0");
@@ -45218,16 +45221,17 @@ var Axes = React.createClass({displayName: "Axes",
     xAxisClassName: React.PropTypes.string.isRequired,
     xOrient: React.PropTypes.oneOf(['top', 'bottom']),
     xScale: React.PropTypes.func.isRequired,
+    xHideOrigin: React.PropTypes.bool,
     yAxisClassName: React.PropTypes.string.isRequired,
     yOrient: React.PropTypes.oneOf(['left', 'right']),
     yScale: React.PropTypes.func.isRequired,
+    yHideOrigin: React.PropTypes.bool,
     chartHeight: React.PropTypes.number.isRequired,
     chartWidth: React.PropTypes.number.isRequired,
     fill: React.PropTypes.string,
     stroke: React.PropTypes.string,
     tickStroke: React.PropTypes.string,
-    strokeWidth: React.PropTypes.string,
-    hideOrigin: React.PropTypes.bool
+    strokeWidth: React.PropTypes.string
   },
 
   getDefaultProps: function() {
@@ -45246,6 +45250,7 @@ var Axes = React.createClass({displayName: "Axes",
             yAxisClassName: props.yAxisClassName, 
             yScale: props.yScale, 
             yAxisTickCount: props.yAxisTickCount, 
+            yHideOrigin: props.yHideOrigin, 
             margins: props.margins, 
             width: props.chartWidth, 
             height: props.chartHeight, 
@@ -45254,7 +45259,7 @@ var Axes = React.createClass({displayName: "Axes",
           React.createElement(XAxis, {
             xAxisClassName: props.xAxisClassName, 
             strokeWidth: props.strokeWidth, 
-            hideOrigin: props.hideOrigin, 
+            xHideOrigin: props.xHideOrigin, 
             xScale: props.xScale, 
             margins: props.margins, 
             width: props.chartWidth, 
@@ -45275,6 +45280,8 @@ var LineChart = React.createClass({displayName: "LineChart",
     legendOffset: React.PropTypes.number,
     titleOffset: React.PropTypes.number,
     pointRadius: React.PropTypes.number,
+    yHideOrigin: React.PropTypes.bool,
+    xHideOrigin: React.PropTypes.bool,
     width: React.PropTypes.number,
     height: React.PropTypes.number,
     axesColor: React.PropTypes.string,
@@ -45374,10 +45381,11 @@ var LineChart = React.createClass({displayName: "LineChart",
             yAxisClassName: "line y axis", 
             yScale: scales.yScale, 
             yAxisTickCount: this.props.yAxisTickCount, 
+            yHideOrigin: this.props.yHideOrigin, 
             xAxisClassName: "line x axis", 
             xScale: scales.xScale, 
+            xHideOrigin: this.props.xHideOrigin, 
             strokeWidth: "1", 
-            hideOrigin: true, 
             margins: this.props.margins, 
             chartWidth: chartWidth, 
             chartHeight: chartHeight, 
@@ -45663,6 +45671,8 @@ var ScatterChart = React.createClass({displayName: "ScatterChart",
     legendOffset: React.PropTypes.number,
     titleOffset: React.PropTypes.number,
     pointRadius: React.PropTypes.number,
+    yHideOrigin: React.PropTypes.bool,
+    xHideOrigin: React.PropTypes.bool,
     width: React.PropTypes.number,
     height: React.PropTypes.number,
     axesColor: React.PropTypes.string,
@@ -45751,7 +45761,7 @@ var ScatterChart = React.createClass({displayName: "ScatterChart",
           React.createElement(YAxis, {
             yAxisClassName: "scatter y axis", 
             yScale: scales.yScale, 
-            hideOrigin: true, 
+            yHideOrigin: this.props.yHideOrigin, 
             margins: this.props.margins, 
             yAxisTickCount: this.props.yAxisTickCount, 
             width: chartWidth, 
@@ -45761,7 +45771,7 @@ var ScatterChart = React.createClass({displayName: "ScatterChart",
           React.createElement(XAxis, {
             xAxisClassName: "scatter x axis", 
             strokeWidth: "1", 
-            hideOrigin: true, 
+            xHideOrigin: this.props.xHideOrigin, 
             xScale: scales.xScale, 
             data: this.props.data, 
             margins: this.props.margins, 
