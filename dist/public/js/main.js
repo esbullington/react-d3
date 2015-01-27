@@ -45237,7 +45237,7 @@ var Axes = React.createClass({displayName: "Axes",
   getDefaultProps: function() {
     return {
       axesColor: '#000'
-    }
+    };
   },
 
   render: function() {
