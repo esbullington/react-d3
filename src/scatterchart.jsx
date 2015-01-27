@@ -69,17 +69,22 @@ var ScatterChart = React.createClass({
 
   propTypes: {
     margins: React.PropTypes.object,
+    legendOffset: React.PropTypes.number,
+    titleOffset: React.PropTypes.number,
     pointRadius: React.PropTypes.number,
     width: React.PropTypes.number,
     height: React.PropTypes.number,
     axesColor: React.PropTypes.string,
     title: React.PropTypes.string,
-    colors: React.PropTypes.func
+    colors: React.PropTypes.func,
+    legend: React.PropTypes.bool
   },
 
   getDefaultProps: function() {
     return {
       margins: {top: 20, right: 30, bottom: 30, left: 30},
+      legendOffset: 120,
+      titleOffset: 56,
       pointRadius: 3,
       width: 400,
       height: 200,
@@ -110,8 +115,18 @@ var ScatterChart = React.createClass({
   render: function() {
 
     // Calculate inner chart dimensions
-    var chartWidth = this.props.width - this.props.margins.left - this.props.margins.right;
-    var chartHeight = this.props.height - this.props.margins.top - this.props.margins.bottom;
+    var chartWidth, chartHeight;
+
+    chartWidth = this.props.width - this.props.margins.left - this.props.margins.right;
+    chartHeight = this.props.height - this.props.margins.top - this.props.margins.bottom;
+
+    if (this.props.legend) {
+      chartWidth = chartWidth - this.props.legendOffset;
+    }
+
+    if (this.props.title) {
+      chartHeight = chartHeight - this.props.titleOffset;
+    }
 
     var scales = this._calculateScales(this.props, chartWidth, chartHeight);
 
@@ -145,6 +160,7 @@ var ScatterChart = React.createClass({
           <YAxis
             yAxisClassName="scatter y axis"
             yScale={scales.yScale}
+            hideOrigin={true}
             margins={this.props.margins}
             yAxisTickCount={this.props.yAxisTickCount}
             width={chartWidth}

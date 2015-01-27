@@ -3,7 +3,7 @@
 var React = require('react');
 var Legend = require('./legend').Legend;
 
-exports.Chart = React.createClass({
+var PlainChart = React.createClass({
   render: function() {
     return (
       <div>
@@ -14,7 +14,7 @@ exports.Chart = React.createClass({
   }
 });
 
-exports.LegendChart = React.createClass({
+var LegendChart = React.createClass({
 
   propTypes: {
     legend: React.PropTypes.bool,
@@ -59,3 +59,27 @@ exports.LegendChart = React.createClass({
     );
   }
 });
+
+exports.LegendChart = LegendChart;
+
+exports.Chart = React.createClass({
+
+  propTypes: {
+    legend: React.PropTypes.bool,
+  },
+
+  getDefaultProps: function() {
+    return {
+      legend: false
+    };
+  },
+
+  render: function() {
+    if (this.props.legend) {
+      return <LegendChart {...this.props} />;
+    }
+    return <PlainChart {...this.props} />;
+  }
+
+});
+
