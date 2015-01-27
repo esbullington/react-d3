@@ -116,16 +116,17 @@ var Axes = React.createClass({
     xAxisClassName: React.PropTypes.string.isRequired,
     xOrient: React.PropTypes.oneOf(['top', 'bottom']),
     xScale: React.PropTypes.func.isRequired,
+    xHideOrigin: React.PropTypes.bool,
     yAxisClassName: React.PropTypes.string.isRequired,
     yOrient: React.PropTypes.oneOf(['left', 'right']),
     yScale: React.PropTypes.func.isRequired,
+    yHideOrigin: React.PropTypes.bool,
     chartHeight: React.PropTypes.number.isRequired,
     chartWidth: React.PropTypes.number.isRequired,
     fill: React.PropTypes.string,
     stroke: React.PropTypes.string,
     tickStroke: React.PropTypes.string,
-    strokeWidth: React.PropTypes.string,
-    hideOrigin: React.PropTypes.bool
+    strokeWidth: React.PropTypes.string
   },
 
   getDefaultProps: function() {
@@ -144,6 +145,7 @@ var Axes = React.createClass({
             yAxisClassName={props.yAxisClassName}
             yScale={props.yScale}
             yAxisTickCount={props.yAxisTickCount}
+            yHideOrigin={props.yHideOrigin}
             margins={props.margins}
             width={props.chartWidth}
             height={props.chartHeight}
@@ -152,7 +154,7 @@ var Axes = React.createClass({
           <XAxis
             xAxisClassName={props.xAxisClassName}
             strokeWidth={props.strokeWidth}
-            hideOrigin={props.hideOrigin}
+            xHideOrigin={props.xHideOrigin}
             xScale={props.xScale}
             margins={props.margins}
             width={props.chartWidth}
@@ -173,6 +175,8 @@ var LineChart = React.createClass({
     legendOffset: React.PropTypes.number,
     titleOffset: React.PropTypes.number,
     pointRadius: React.PropTypes.number,
+    yHideOrigin: React.PropTypes.bool,
+    xHideOrigin: React.PropTypes.bool,
     width: React.PropTypes.number,
     height: React.PropTypes.number,
     axesColor: React.PropTypes.string,
@@ -272,10 +276,11 @@ var LineChart = React.createClass({
             yAxisClassName="line y axis"
             yScale={scales.yScale}
             yAxisTickCount={this.props.yAxisTickCount}
+            yHideOrigin={this.props.yHideOrigin}
             xAxisClassName="line x axis"
             xScale={scales.xScale}
+            xHideOrigin={this.props.xHideOrigin}
             strokeWidth="1"
-            hideOrigin={true}
             margins={this.props.margins}
             chartWidth={chartWidth}
             chartHeight={chartHeight}
