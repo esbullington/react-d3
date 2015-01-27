@@ -7,7 +7,7 @@ exports.XAxis = React.createClass({
 
   propTypes: {
     xAxisClassName: React.PropTypes.string.isRequired,
-    orient: React.PropTypes.oneOf(['top', 'bottom']),
+    xOrient: React.PropTypes.oneOf(['top', 'bottom']),
     xScale: React.PropTypes.func.isRequired,
     height: React.PropTypes.number.isRequired,
     fill: React.PropTypes.string,
@@ -20,7 +20,7 @@ exports.XAxis = React.createClass({
   getDefaultProps: function() {
     return {
       xAxisClassName: 'x axis',
-      orient: 'bottom',
+      xOrient: 'bottom',
       fill: "none",
       stroke: "none",
       tickStroke: "#000",
@@ -41,7 +41,7 @@ exports.XAxis = React.createClass({
   _renderAxis: function(props) {
     var xAxis = d3.svg.axis()
       .scale(props.xScale)
-      .orient("bottom");
+      .orient(props.xOrient);
 
     if (props.xAxisTickInterval) {
       xAxis.ticks(d3.time[props.xAxisTickInterval.unit], props.xAxisTickInterval.interval);
@@ -103,7 +103,7 @@ exports.YAxis = React.createClass({
 
   propTypes: {
     yAxisClassName: React.PropTypes.string,
-    orient: React.PropTypes.oneOf(['left', 'right']),
+    yOrient: React.PropTypes.oneOf(['left', 'right']),
     yScale: React.PropTypes.func.isRequired,
     fill: React.PropTypes.string,
     stroke: React.PropTypes.string,
@@ -114,7 +114,7 @@ exports.YAxis = React.createClass({
   getDefaultProps: function() {
     return {
       yAxisClassName: 'y axis',
-      orient: 'left',
+      yOrient: 'left',
       fill: "none",
       stroke: "#000",
       tickStroke: "#000",
@@ -135,7 +135,7 @@ exports.YAxis = React.createClass({
     var yAxis = d3.svg.axis()
       .ticks(props.yAxisTickCount)
       .scale(props.yScale)
-      .orient(this.props.orient);
+      .orient(this.props.yOrient);
 
     if (props.yAxisTickCount) {
       yAxis.ticks(props.yAxisTickCount);
@@ -167,6 +167,12 @@ exports.YAxis = React.createClass({
       .attr("shape-rendering", "crispEdges")
       .attr("fill", props.fill)
       .attr("stroke", props.stroke);
+
+    if (props.hideOrigin) {
+      // Hack to hide the x axis origin
+      var originSelect = yAxisClassSelect + ' g:first-child';
+      d3.selectAll(originSelect).style("opacity","0");
+    }
 
   },
 
