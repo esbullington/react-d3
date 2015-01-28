@@ -113,7 +113,7 @@ var Demos = React.createClass({displayName: "Demos",
             ), 
             React.createElement("pre", {ref: "block"}, 
               React.createElement("code", {className: "html"}, 
-              '<LineChart\n  legend={true}\n  data={lineData}\n  width={500}\n  height={400}\n  title="Line Chart"\n/>'
+              '<LineChart\n  legend={true}\n  data={lineData}\n  width={500}\n  height={300}\n  title="Line Chart"\n/>'
               )
             )
           )
