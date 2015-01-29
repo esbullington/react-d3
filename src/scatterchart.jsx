@@ -38,10 +38,6 @@ var Circle = React.createClass({
     } 
   },
 
-  shouldComponentUpdate: function(nextProps, nextState) {
-    return this.props.hoverAnimation; 
-  },
-
   render: function() {
     return (
       <circle
@@ -52,8 +48,8 @@ var Circle = React.createClass({
         stroke={this.props.fill}
         strokeOpacity={this.props.strokeOpacity}
         strokeWidth={this.state.strokeWidth}
-        onMouseOver={this.animateCircle}
-        onMouseOut={this.restroreCircle}
+        onMouseOver={this.props.hoverAnimation ? this.animateCircle : null}
+        onMouseOut={this.props.hoverAnimation ? this.restoreCircle : null}
       />
     );
   },
@@ -65,7 +61,7 @@ var Circle = React.createClass({
     });
   },
 
-  restroreCircle: function() {
+  restoreCircle: function() {
     this.setState({ 
       circleRadius: this.state.circleRadius * ( 4 / 5 ),
       strokeWidth: 0   
