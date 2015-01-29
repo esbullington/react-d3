@@ -11,10 +11,13 @@ _By contributing code to React-d3, you are agreeing to release it under the MIT 
 * We try follow the rules contained in [Google's JavaScript Style Guide](http://google-styleguide.googlecode.com/svn/trunk/javascriptguide.xml).  No tabs, 2-space indents, etc.
 
 ## React-specific guidelines
-* Please try to avoid React `state`. There's no reason why a pure React chart should need mutable React `state`.  Data should be passed in to the top-level chart via `props` and then passed down to child components as needed.  This isn't because React `state` is inherently bad, but it breaks referential integrity, makes it hard to reason about errors, and prevents certain optimizations that are otherwise possible.  Yes, it's true that right now, `state` is used in several charts used to handle the d3 chart axes generation, but our hypocrisy will disappear when the pure React axes are merged.
+* Please try to avoid React `state` to the extent possible. Ideally, data should be passed in to the top-level chart via `props` and then passed down to child components as needed.  This isn't because React `state` is inherently bad, but it breaks referential integrity, makes it hard to reason about errors, and prevents certain optimizations that are otherwise possible.  The only exception to this guidelines is with respect ephemeral state within components, such as animations.  When data frame animations are enabled, we plan to use immutable cursors to model global application state.
 * In your components, please document/assert your prop types using React's `propTypes` and set default props if necessary.
 * Try to list React methods with custom methods at the top of components, and React methods at the bottom, in lifecycle order (this is not always the case in existing code).
 * Some React suggestions can be found [here](https://reactjsnews.com/react-style-guide-patterns-i-like/) and [here](http://blog.whn.se/post/69621609605/writing-good-react-components).  The second link in particular is helpful.
 
+## SVG Performance Notes
+* Whenever possible, do transforms on groups of items (using `<g>`) as opposed to individual items.
+ 
 ## Project Suggestions
 * This is open source, and we're all doing this on our own free will, by choice.  So please be nice to each other, and treat both users and fellow devs with respect when filing issues and submitting or commenting on pull requests.
