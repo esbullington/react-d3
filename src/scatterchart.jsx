@@ -23,10 +23,7 @@ var Circle = React.createClass({
 
   getDefaultProps: function() {
     return {
-      fill: '#1f77b4',
-      stroke: '#1f77b4',
-      strokeWidth: 0,
-      strokeOpacity: 0.5
+      fill: '#1f77b4'
     };
   },
 
@@ -34,20 +31,17 @@ var Circle = React.createClass({
     // state for animation usage
     return {
       circleRadius: this.props.r,
-      strokeWidth: this.props.strokeWidth
+      circleColor: this.props.fill
     } 
   },
 
   render: function() {
     return (
       <circle
+        fill={this.state.circleColor}
         cx={this.props.cx}
         cy={this.props.cy}
         r={this.state.circleRadius}
-        fill={this.props.fill}
-        stroke={this.props.fill}
-        strokeOpacity={this.props.strokeOpacity}
-        strokeWidth={this.state.strokeWidth}
         onMouseOver={this.props.hoverAnimation ? this.animateCircle : null}
         onMouseOut={this.props.hoverAnimation ? this.restoreCircle : null}
       />
@@ -57,16 +51,30 @@ var Circle = React.createClass({
   animateCircle: function() {
     this.setState({ 
       circleRadius: this.state.circleRadius * ( 5 / 4 ),
-      strokeWidth: 3 / 2 
+      circleColor: this.shade(this.props.fill, -0.2)
     });
   },
 
   restoreCircle: function() {
     this.setState({ 
       circleRadius: this.state.circleRadius * ( 4 / 5 ),
-      strokeWidth: 0   
+      circleColor: this.props.fill
     });
-  }
+  },
+
+  shade: function(hex, percent) {
+    var R, G, B, red, green, blue, number;
+    var min = Math.min, round = Math.round;
+    if(hex.length !== 7) { return hex; }
+    number = parseInt(hex.slice(1), 16); 
+    R = number >> 16;
+    G = number >> 8 & 0xFF;
+    B = number & 0xFF;
+    red = min( 255, round( ( 1 + percent ) * R )).toString(16);
+    green = min( 255, round( ( 1 + percent ) * G )).toString(16);
+    blue = min( 255, round( ( 1 + percent ) * B )).toString(16);
+    return '#' + red + green + blue; 
+  } 
 
 });
 
