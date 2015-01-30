@@ -25,10 +25,16 @@ describe('ScatterChart', function() {
     expect(circles).to.have.length(2 * points);
 
     var circleOne = circles[0];
-    expect(circleOne.getDOMNode().r.baseVal.value).to.equal(pointRadius);
+    var circleOneColor = circleOne.props.fill;
+
+    expect(circleOne.props.r).to.equal(pointRadius);
+
     TestUtils.Simulate.mouseOver(circleOne);
-    expect(circleOne.getDOMNode().r.baseVal.value).to.be.above(pointRadius);
+    expect(circleOne.props.r).to.be.above(pointRadius);
+    expect(circleOne.props.fill).to.not.equal(circleOneColor);
+
     TestUtils.Simulate.mouseOut(circleOne);
-    expect(circleOne.getDOMNode().r.baseVal.value).to.equal(pointRadius);
+    expect(circleOne.props.r).to.equal(pointRadius);
+    expect(circleOne.props.fill).to.equal(circleOneColor);
   });
 });
