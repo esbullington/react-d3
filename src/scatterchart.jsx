@@ -14,7 +14,11 @@ var Circle = React.createClass({
     cx: React.PropTypes.number,
     cy: React.PropTypes.number,
     r: React.PropTypes.number,
-    fill: React.PropTypes.string
+    fill: React.PropTypes.string,
+    stroke: React.PropTypes.string,
+    strokeWidth: React.PropTypes.number,
+    strokeOpacity: React.PropTypes.number,
+    hoverAnimation: React.PropTypes.bool
   },
 
   getDefaultProps: function() {
@@ -23,16 +27,54 @@ var Circle = React.createClass({
     };
   },
 
+  getInitialState: function() {
+    // state for animation usage
+    return {
+      circleRadius: this.props.r,
+      circleColor: this.props.fill
+    } 
+  },
+
   render: function() {
     return (
       <circle
+        fill={this.state.circleColor}
         cx={this.props.cx}
         cy={this.props.cy}
-        r={this.props.r}
-        fill={this.props.fill}
+        r={this.state.circleRadius}
+        onMouseOver={this.props.hoverAnimation ? this.animateCircle : null}
+        onMouseOut={this.props.hoverAnimation ? this.restoreCircle : null}
       />
     );
-  }
+  },
+
+  animateCircle: function() {
+    this.setState({ 
+      circleRadius: this.state.circleRadius * ( 5 / 4 ),
+      circleColor: this.shade(this.props.fill, -0.2)
+    });
+  },
+
+  restoreCircle: function() {
+    this.setState({ 
+      circleRadius: this.state.circleRadius * ( 4 / 5 ),
+      circleColor: this.props.fill
+    });
+  },
+
+  shade: function(hex, percent) {
+    var R, G, B, red, green, blue, number;
+    var min = Math.min, round = Math.round;
+    if(hex.length !== 7) { return hex; }
+    number = parseInt(hex.slice(1), 16); 
+    R = number >> 16;
+    G = number >> 8 & 0xFF;
+    B = number & 0xFF;
+    red = min( 255, round( ( 1 + percent ) * R )).toString(16);
+    green = min( 255, round( ( 1 + percent ) * G )).toString(16);
+    blue = min( 255, round( ( 1 + percent ) * B )).toString(16);
+    return '#' + red + green + blue; 
+  } 
 
 });
 
@@ -53,7 +95,7 @@ var DataSeries = React.createClass({
   render: function() {
 
     var circles = this.props.data.map(function(point, i) {
-      return (<Circle cx={this.props.xScale(point.x)} cy={this.props.yScale(point.y)} r={this.props.pointRadius} fill={this.props.color} key={this.props.seriesName + i} />);
+      return (<Circle cx={this.props.xScale(point.x)} cy={this.props.yScale(point.y)} r={this.props.pointRadius} fill={this.props.color} key={this.props.seriesName + i} hoverAnimation={this.props.hoverAnimation} />);
     }.bind(this));
 
     return (
@@ -79,7 +121,8 @@ var ScatterChart = React.createClass({
     axesColor: React.PropTypes.string,
     title: React.PropTypes.string,
     colors: React.PropTypes.func,
-    legend: React.PropTypes.bool
+    legend: React.PropTypes.bool,
+    hoverAnimation: React.PropTypes.bool,
   },
 
   getDefaultProps: function() {
@@ -92,7 +135,8 @@ var ScatterChart = React.createClass({
       height: 200,
       axesColor: '#000',
       title: '',
-      colors: d3.scale.category20c()
+      colors: d3.scale.category20c(),
+      hoverAnimation: true
     };
   },
 
@@ -149,6 +193,7 @@ var ScatterChart = React.createClass({
               color={this.props.colors(index)}
               pointRadius={this.props.pointRadius}
               key={seriesName}
+              hoverAnimation={this.props.hoverAnimation}
             />
         );
         index++;
