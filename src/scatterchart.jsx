@@ -8,7 +8,7 @@ var XAxis = common.XAxis;
 var YAxis = common.YAxis;
 var _ = require('lodash');
 
-var Circle = React.createClass({
+var Region = React.createClass({
 
   propTypes: {
     cx: React.PropTypes.number,
@@ -36,15 +36,23 @@ var Circle = React.createClass({
   },
 
   render: function() {
+    console.log(this.props);
     return (
-      <circle
-        fill={this.state.circleColor}
-        cx={this.props.cx}
-        cy={this.props.cy}
-        r={this.state.circleRadius}
-        onMouseOver={this.props.hoverAnimation ? this.animateCircle : null}
-        onMouseOut={this.props.hoverAnimation ? this.restoreCircle : null}
-      />
+      <g>
+        <circle
+          fill={this.state.circleColor}
+          cx={this.props.cx}
+          cy={this.props.cy}
+          r={this.state.circleRadius}
+        />
+        <path
+          d={this.props.d}
+          fillOpacity={0}
+          stroke='#999999'
+          onMouseOver={this.props.hoverAnimation ? this.animateCircle : null}
+          onMouseOut={this.props.hoverAnimation ? this.restoreCircle : null}
+        />
+      </g>
     );
   },
 
@@ -93,16 +101,46 @@ var DataSeries = React.createClass({
   },
 
   render: function() {
+    var xScale = this.props.xScale;
+    var yScale = this.props.yScale;
 
-    var circles = this.props.data.map(function(point, i) {
-      return (<Circle cx={this.props.xScale(point.x)} cy={this.props.yScale(point.y)} r={this.props.pointRadius} fill={this.props.color} key={this.props.seriesName + i} hoverAnimation={this.props.hoverAnimation} />);
-    }.bind(this));
+    var voronoi = d3.geom.voronoi()
+      .x(function(d){ return xScale(d.x) })
+      .y(function(d){ return yScale(d.y) })
+      .clipExtent([[0, 0], [ this.props.width , this.props.height]]);
+
+    function drawPath(d) {
+      if(d === undefined) {
+        return ; 
+      }
+      return 'M' + d.join(',') + 'Z';
+    }
+
+    var regions = voronoi(this.props.data).map(function(node, i) {
+      return (
+        <Region
+          cx={xScale(node.point.x)} 
+          cy={yScale(node.point.y)} 
+          r={this.props.pointRadius} 
+          fill={node.point.color} 
+          d={this._drawPath(node)}
+          hoverAnimation={this.props.hoverAnimation} 
+          key={i}
+        />);
+        }.bind(this));
 
     return (
       <g>
-        {circles}
+        {regions}
       </g>
     );
+  },
+
+  _drawPath: function(d) {
+    if(d === undefined) {
+      return; 
+    }  
+    return 'M' + d.join(',') + 'Z';
   }
 
 });
@@ -179,10 +217,10 @@ var ScatterChart = React.createClass({
     var trans = "translate(" + this.props.margins.left + "," + this.props.margins.top + ")";
 
     var index = 0;
-    var dataSeriesArray = [];
+    var allData = [];
     for(var seriesName in this.props.data) {
       if (this.props.data.hasOwnProperty(seriesName)) {
-        dataSeriesArray.push(
+        /*dataSeriesArray.push(
             <DataSeries
               xScale={scales.xScale}
               yScale={scales.yScale}
@@ -196,14 +234,27 @@ var ScatterChart = React.createClass({
               hoverAnimation={this.props.hoverAnimation}
             />
         );
+        */
+       // urg !!! ugly hack =(
+        this.props.data[seriesName].forEach(function(node) {
+          node.color = this.props.colors(index); 
+        }.bind(this));
+        allData = allData.concat(this.props.data[seriesName]);
         index++;
       }
     }
-
     return (
       <Chart width={this.props.width} height={this.props.height} title={this.props.title}>
         <g transform={trans}>
-          {dataSeriesArray}
+           <DataSeries
+            xScale={scales.xScale}
+            yScale={scales.yScale}
+            data={allData}
+            width={chartWidth}
+            height={chartHeight}
+            pointRadius={this.props.pointRadius}
+            hoverAnimation={this.props.hoverAnimation}
+          />
           <YAxis
             yAxisClassName="scatter y axis"
             yScale={scales.yScale}
