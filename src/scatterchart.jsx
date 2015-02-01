@@ -6,6 +6,9 @@ var common = require('./common');
 var Chart = common.Chart;
 var XAxis = common.XAxis;
 var YAxis = common.YAxis;
+var Voronoi = common.Voronoi;
+var EventEmitter = require('events').EventEmitter
+var pubsub = new EventEmitter;
 var _ = require('lodash');
 
 var Circle = React.createClass({
@@ -35,6 +38,16 @@ var Circle = React.createClass({
     } 
   },
 
+  componentDidMount: function() {
+    pubsub.on('animateCircle', this._animateCircle);
+    pubsub.on('restoreCircle', this._restoreCircle);
+  },
+
+  componentWillUnmount: function() {
+    pubsub.removeListener('animateCircle', this._animateCircle);
+    pubsub.removeListener('restoreCircle', this._restoreCircle);
+  },
+
   render: function() {
     return (
       <circle
@@ -42,24 +55,26 @@ var Circle = React.createClass({
         cx={this.props.cx}
         cy={this.props.cy}
         r={this.state.circleRadius}
-        onMouseOver={this.props.hoverAnimation ? this.animateCircle : null}
-        onMouseOut={this.props.hoverAnimation ? this.restoreCircle : null}
       />
     );
   },
 
-  animateCircle: function() {
-    this.setState({ 
-      circleRadius: this.state.circleRadius * ( 5 / 4 ),
-      circleColor: this.shade(this.props.fill, -0.2)
-    });
+  _animateCircle: function(id) {
+    if (this.props.id === id) {
+      this.setState({ 
+        circleRadius: this.state.circleRadius * ( 5 / 4 ),
+        circleColor: this.shade(this.props.fill, -0.2)
+      });
+    }
   },
 
-  restoreCircle: function() {
-    this.setState({ 
-      circleRadius: this.state.circleRadius * ( 4 / 5 ),
-      circleColor: this.props.fill
-    });
+  _restoreCircle: function(id) {
+    if (this.props.id === id) {
+      this.setState({ 
+        circleRadius: this.state.circleRadius * ( 4 / 5 ),
+        circleColor: this.props.fill
+      });
+    }
   },
 
   shade: function(hex, percent) {
@@ -95,7 +110,7 @@ var DataSeries = React.createClass({
   render: function() {
 
     var circles = this.props.data.map(function(point, i) {
-      return (<Circle cx={this.props.xScale(point.x)} cy={this.props.yScale(point.y)} r={this.props.pointRadius} fill={this.props.color} key={this.props.seriesName + i} hoverAnimation={this.props.hoverAnimation} />);
+      return (<Circle cx={this.props.xScale(point.x)} cy={this.props.yScale(point.y)} r={this.props.pointRadius} fill={this.props.color} key={this.props.seriesName + i} id={this.props.seriesName + i} />);
     }.bind(this));
 
     return (
@@ -140,11 +155,7 @@ var ScatterChart = React.createClass({
     };
   },
 
-  _calculateScales: function(props, chartWidth, chartHeight) {
-
-    var allValues = _.flatten(_.values(this.props.data), true);
-    var xValues = _.pluck(allValues, 'x');
-    var yValues = _.pluck(allValues, 'y');
+  _calculateScales: function(props, chartWidth, chartHeight, xValues, yValues) {
 
     var xScale = d3.scale.linear()
       .domain([d3.min([d3.min(xValues), 0]), d3.max(xValues)])
@@ -174,7 +185,31 @@ var ScatterChart = React.createClass({
       chartHeight = chartHeight - this.props.titleOffset;
     }
 
-    var scales = this._calculateScales(this.props, chartWidth, chartHeight);
+    var allValues = [];
+    var xValues = [];
+    var yValues = [];
+
+    // Set pubsub max listeners to total number of nodes to be created
+    pubsub.setMaxListeners(allValues.length);
+
+    for (var seriesName in this.props.data) {
+      if (this.props.data.hasOwnProperty(seriesName)) {
+        this.props.data[seriesName].forEach(function(item, idx) {
+          xValues.push(item.x);
+          yValues.push(item.y);
+          var pointItem = {
+            coord: {
+              x: item.x,
+              y: item.y,
+            },
+            id: seriesName + idx
+          };
+          allValues.push(pointItem);
+        })
+      }
+    }
+
+    var scales = this._calculateScales(this.props, chartWidth, chartHeight, xValues, yValues);
 
     var trans = "translate(" + this.props.margins.left + "," + this.props.margins.top + ")";
 
@@ -203,6 +238,14 @@ var ScatterChart = React.createClass({
     return (
       <Chart width={this.props.width} height={this.props.height} title={this.props.title}>
         <g transform={trans}>
+          <Voronoi
+            pubsub={pubsub}
+            data={allValues}
+            yScale={scales.yScale}
+            xScale={scales.xScale}
+            width={chartWidth}
+            height={chartHeight}
+          />
           {dataSeriesArray}
           <YAxis
             yAxisClassName="scatter y axis"
