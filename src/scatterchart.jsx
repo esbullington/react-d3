@@ -14,6 +14,7 @@ var _ = require('lodash');
 var Circle = React.createClass({
 
   propTypes: {
+    id: React.PropTypes.string,
     cx: React.PropTypes.number,
     cy: React.PropTypes.number,
     r: React.PropTypes.number,
@@ -110,7 +111,7 @@ var DataSeries = React.createClass({
   render: function() {
 
     var circles = this.props.data.map(function(point, i) {
-      return (<Circle cx={this.props.xScale(point.x)} cy={this.props.yScale(point.y)} r={this.props.pointRadius} fill={this.props.color} key={this.props.seriesName + i} id={this.props.seriesName + i} />);
+      return (<Circle cx={this.props.xScale(point.x)} cy={this.props.yScale(point.y)} r={this.props.pointRadius} fill={this.props.color} key={this.props.seriesName + i} id={this.props.seriesName + '-' + i} />);
     }.bind(this));
 
     return (
@@ -202,7 +203,7 @@ var ScatterChart = React.createClass({
               x: item.x,
               y: item.y,
             },
-            id: seriesName + idx
+            id: seriesName + '-' + idx
           };
           allValues.push(pointItem);
         })
