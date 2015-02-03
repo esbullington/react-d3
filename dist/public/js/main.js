@@ -44425,7 +44425,310 @@ module.exports = warning;
 },{"./emptyFunction":"/home/eric/repos/react-d3/node_modules/react/lib/emptyFunction.js"}],"/home/eric/repos/react-d3/node_modules/react/react.js":[function(require,module,exports){
 module.exports = require('./lib/React');
 
-},{"./lib/React":"/home/eric/repos/react-d3/node_modules/react/lib/React.js"}],"/home/eric/repos/react-d3/src/areachart.jsx":[function(require,module,exports){
+},{"./lib/React":"/home/eric/repos/react-d3/node_modules/react/lib/React.js"}],"/home/eric/repos/react-d3/node_modules/watchify/node_modules/browserify/node_modules/events/events.js":[function(require,module,exports){
+// Copyright Joyent, Inc. and other Node contributors.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a
+// copy of this software and associated documentation files (the
+// "Software"), to deal in the Software without restriction, including
+// without limitation the rights to use, copy, modify, merge, publish,
+// distribute, sublicense, and/or sell copies of the Software, and to permit
+// persons to whom the Software is furnished to do so, subject to the
+// following conditions:
+//
+// The above copyright notice and this permission notice shall be included
+// in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+// USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+function EventEmitter() {
+  this._events = this._events || {};
+  this._maxListeners = this._maxListeners || undefined;
+}
+module.exports = EventEmitter;
+
+// Backwards-compat with node 0.10.x
+EventEmitter.EventEmitter = EventEmitter;
+
+EventEmitter.prototype._events = undefined;
+EventEmitter.prototype._maxListeners = undefined;
+
+// By default EventEmitters will print a warning if more than 10 listeners are
+// added to it. This is a useful default which helps finding memory leaks.
+EventEmitter.defaultMaxListeners = 10;
+
+// Obviously not all Emitters should be limited to 10. This function allows
+// that to be increased. Set to zero for unlimited.
+EventEmitter.prototype.setMaxListeners = function(n) {
+  if (!isNumber(n) || n < 0 || isNaN(n))
+    throw TypeError('n must be a positive number');
+  this._maxListeners = n;
+  return this;
+};
+
+EventEmitter.prototype.emit = function(type) {
+  var er, handler, len, args, i, listeners;
+
+  if (!this._events)
+    this._events = {};
+
+  // If there is no 'error' event listener then throw.
+  if (type === 'error') {
+    if (!this._events.error ||
+        (isObject(this._events.error) && !this._events.error.length)) {
+      er = arguments[1];
+      if (er instanceof Error) {
+        throw er; // Unhandled 'error' event
+      }
+      throw TypeError('Uncaught, unspecified "error" event.');
+    }
+  }
+
+  handler = this._events[type];
+
+  if (isUndefined(handler))
+    return false;
+
+  if (isFunction(handler)) {
+    switch (arguments.length) {
+      // fast cases
+      case 1:
+        handler.call(this);
+        break;
+      case 2:
+        handler.call(this, arguments[1]);
+        break;
+      case 3:
+        handler.call(this, arguments[1], arguments[2]);
+        break;
+      // slower
+      default:
+        len = arguments.length;
+        args = new Array(len - 1);
+        for (i = 1; i < len; i++)
+          args[i - 1] = arguments[i];
+        handler.apply(this, args);
+    }
+  } else if (isObject(handler)) {
+    len = arguments.length;
+    args = new Array(len - 1);
+    for (i = 1; i < len; i++)
+      args[i - 1] = arguments[i];
+
+    listeners = handler.slice();
+    len = listeners.length;
+    for (i = 0; i < len; i++)
+      listeners[i].apply(this, args);
+  }
+
+  return true;
+};
+
+EventEmitter.prototype.addListener = function(type, listener) {
+  var m;
+
+  if (!isFunction(listener))
+    throw TypeError('listener must be a function');
+
+  if (!this._events)
+    this._events = {};
+
+  // To avoid recursion in the case that type === "newListener"! Before
+  // adding it to the listeners, first emit "newListener".
+  if (this._events.newListener)
+    this.emit('newListener', type,
+              isFunction(listener.listener) ?
+              listener.listener : listener);
+
+  if (!this._events[type])
+    // Optimize the case of one listener. Don't need the extra array object.
+    this._events[type] = listener;
+  else if (isObject(this._events[type]))
+    // If we've already got an array, just append.
+    this._events[type].push(listener);
+  else
+    // Adding the second element, need to change to array.
+    this._events[type] = [this._events[type], listener];
+
+  // Check for listener leak
+  if (isObject(this._events[type]) && !this._events[type].warned) {
+    var m;
+    if (!isUndefined(this._maxListeners)) {
+      m = this._maxListeners;
+    } else {
+      m = EventEmitter.defaultMaxListeners;
+    }
+
+    if (m && m > 0 && this._events[type].length > m) {
+      this._events[type].warned = true;
+      console.error('(node) warning: possible EventEmitter memory ' +
+                    'leak detected. %d listeners added. ' +
+                    'Use emitter.setMaxListeners() to increase limit.',
+                    this._events[type].length);
+      if (typeof console.trace === 'function') {
+        // not supported in IE 10
+        console.trace();
+      }
+    }
+  }
+
+  return this;
+};
+
+EventEmitter.prototype.on = EventEmitter.prototype.addListener;
+
+EventEmitter.prototype.once = function(type, listener) {
+  if (!isFunction(listener))
+    throw TypeError('listener must be a function');
+
+  var fired = false;
+
+  function g() {
+    this.removeListener(type, g);
+
+    if (!fired) {
+      fired = true;
+      listener.apply(this, arguments);
+    }
+  }
+
+  g.listener = listener;
+  this.on(type, g);
+
+  return this;
+};
+
+// emits a 'removeListener' event iff the listener was removed
+EventEmitter.prototype.removeListener = function(type, listener) {
+  var list, position, length, i;
+
+  if (!isFunction(listener))
+    throw TypeError('listener must be a function');
+
+  if (!this._events || !this._events[type])
+    return this;
+
+  list = this._events[type];
+  length = list.length;
+  position = -1;
+
+  if (list === listener ||
+      (isFunction(list.listener) && list.listener === listener)) {
+    delete this._events[type];
+    if (this._events.removeListener)
+      this.emit('removeListener', type, listener);
+
+  } else if (isObject(list)) {
+    for (i = length; i-- > 0;) {
+      if (list[i] === listener ||
+          (list[i].listener && list[i].listener === listener)) {
+        position = i;
+        break;
+      }
+    }
+
+    if (position < 0)
+      return this;
+
+    if (list.length === 1) {
+      list.length = 0;
+      delete this._events[type];
+    } else {
+      list.splice(position, 1);
+    }
+
+    if (this._events.removeListener)
+      this.emit('removeListener', type, listener);
+  }
+
+  return this;
+};
+
+EventEmitter.prototype.removeAllListeners = function(type) {
+  var key, listeners;
+
+  if (!this._events)
+    return this;
+
+  // not listening for removeListener, no need to emit
+  if (!this._events.removeListener) {
+    if (arguments.length === 0)
+      this._events = {};
+    else if (this._events[type])
+      delete this._events[type];
+    return this;
+  }
+
+  // emit removeListener for all listeners on all events
+  if (arguments.length === 0) {
+    for (key in this._events) {
+      if (key === 'removeListener') continue;
+      this.removeAllListeners(key);
+    }
+    this.removeAllListeners('removeListener');
+    this._events = {};
+    return this;
+  }
+
+  listeners = this._events[type];
+
+  if (isFunction(listeners)) {
+    this.removeListener(type, listeners);
+  } else {
+    // LIFO order
+    while (listeners.length)
+      this.removeListener(type, listeners[listeners.length - 1]);
+  }
+  delete this._events[type];
+
+  return this;
+};
+
+EventEmitter.prototype.listeners = function(type) {
+  var ret;
+  if (!this._events || !this._events[type])
+    ret = [];
+  else if (isFunction(this._events[type]))
+    ret = [this._events[type]];
+  else
+    ret = this._events[type].slice();
+  return ret;
+};
+
+EventEmitter.listenerCount = function(emitter, type) {
+  var ret;
+  if (!emitter._events || !emitter._events[type])
+    ret = 0;
+  else if (isFunction(emitter._events[type]))
+    ret = 1;
+  else
+    ret = emitter._events[type].length;
+  return ret;
+};
+
+function isFunction(arg) {
+  return typeof arg === 'function';
+}
+
+function isNumber(arg) {
+  return typeof arg === 'number';
+}
+
+function isObject(arg) {
+  return typeof arg === 'object' && arg !== null;
+}
+
+function isUndefined(arg) {
+  return arg === void 0;
+}
+
+},{}],"/home/eric/repos/react-d3/src/areachart.jsx":[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -45015,8 +45318,9 @@ exports.YAxis = require('./axes').YAxis;
 exports.Chart = require('./chart').Chart;
 exports.LegendChart = require('./chart').LegendChart;
 exports.Legend = require('./legend').Legend;
+exports.Voronoi = require('./voronoi').Voronoi;
 
-},{"./axes":"/home/eric/repos/react-d3/src/common/axes.jsx","./chart":"/home/eric/repos/react-d3/src/common/chart.jsx","./legend":"/home/eric/repos/react-d3/src/common/legend.jsx"}],"/home/eric/repos/react-d3/src/common/legend.jsx":[function(require,module,exports){
+},{"./axes":"/home/eric/repos/react-d3/src/common/axes.jsx","./chart":"/home/eric/repos/react-d3/src/common/chart.jsx","./legend":"/home/eric/repos/react-d3/src/common/legend.jsx","./voronoi":"/home/eric/repos/react-d3/src/common/voronoi.jsx"}],"/home/eric/repos/react-d3/src/common/legend.jsx":[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -45091,7 +45395,64 @@ exports.Legend = React.createClass({displayName: "Legend",
 });
 
 
-},{"d3":"/home/eric/repos/react-d3/node_modules/d3/d3.js","react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/src/index.js":[function(require,module,exports){
+},{"d3":"/home/eric/repos/react-d3/node_modules/d3/d3.js","react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/src/common/voronoi.jsx":[function(require,module,exports){
+'use strict';
+
+var React = require('react');
+
+var Polygon = React.createClass({displayName: "Polygon",
+
+  _animateCircle: function() {
+    this.props.pubsub.emit('animateCircle', this.props.id);
+  },
+
+  _restoreCircle: function() {
+    this.props.pubsub.emit('restoreCircle', this.props.id);
+  },
+
+  _drawPath: function(d) {
+    if(d === undefined) {
+      return; 
+    }  
+    return 'M' + d.join(',') + 'Z';
+  },
+
+  render: function() {
+    return React.createElement("path", {
+      onMouseOver: this._animateCircle, 
+      onMouseOut: this._restoreCircle, 
+      fill: "white", 
+      d: this._drawPath(this.props.vnode)});
+  }
+
+});
+
+
+exports.Voronoi = React.createClass({displayName: "Voronoi",
+
+  render: function() {
+    var xScale = this.props.xScale;
+    var yScale = this.props.yScale;
+
+    var voronoi = d3.geom.voronoi()
+      .x(function(d){ return xScale(d.coord.x) })
+      .y(function(d){ return yScale(d.coord.y) })
+      .clipExtent([[0, 0], [ this.props.width , this.props.height]]);
+
+    var regions = voronoi(this.props.data).map(function(vnode, idx) {
+      return React.createElement(Polygon, {pubsub: this.props.pubsub, key: idx, id: vnode.point.id, vnode: vnode});
+    }.bind(this));
+
+    return (
+      React.createElement("g", null, 
+        regions
+      )
+    );
+  }
+
+});
+
+},{"react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/src/index.js":[function(require,module,exports){
 var d3 = require('d3');
 var React = require('react');
 
@@ -45605,15 +45966,23 @@ var common = require('./common');
 var Chart = common.Chart;
 var XAxis = common.XAxis;
 var YAxis = common.YAxis;
+var Voronoi = common.Voronoi;
+var EventEmitter = require('events').EventEmitter
+var pubsub = new EventEmitter;
 var _ = require('lodash');
 
 var Circle = React.createClass({displayName: "Circle",
 
   propTypes: {
+    id: React.PropTypes.string,
     cx: React.PropTypes.number,
     cy: React.PropTypes.number,
     r: React.PropTypes.number,
-    fill: React.PropTypes.string
+    fill: React.PropTypes.string,
+    stroke: React.PropTypes.string,
+    strokeWidth: React.PropTypes.number,
+    strokeOpacity: React.PropTypes.number,
+    hoverAnimation: React.PropTypes.bool
   },
 
   getDefaultProps: function() {
@@ -45622,16 +45991,67 @@ var Circle = React.createClass({displayName: "Circle",
     };
   },
 
+  getInitialState: function() {
+    // state for animation usage
+    return {
+      circleRadius: this.props.r,
+      circleColor: this.props.fill
+    } 
+  },
+
+  componentDidMount: function() {
+    pubsub.on('animateCircle', this._animateCircle);
+    pubsub.on('restoreCircle', this._restoreCircle);
+  },
+
+  componentWillUnmount: function() {
+    pubsub.removeListener('animateCircle', this._animateCircle);
+    pubsub.removeListener('restoreCircle', this._restoreCircle);
+  },
+
   render: function() {
     return (
       React.createElement("circle", {
+        fill: this.state.circleColor, 
         cx: this.props.cx, 
         cy: this.props.cy, 
-        r: this.props.r, 
-        fill: this.props.fill}
+        r: this.state.circleRadius, 
+        id: this.props.id}
       )
     );
-  }
+  },
+
+  _animateCircle: function(id) {
+    if (this.props.id === id) {
+      this.setState({ 
+        circleRadius: this.state.circleRadius * ( 5 / 4 ),
+        circleColor: this.shade(this.props.fill, -0.2)
+      });
+    }
+  },
+
+  _restoreCircle: function(id) {
+    if (this.props.id === id) {
+      this.setState({ 
+        circleRadius: this.state.circleRadius * ( 4 / 5 ),
+        circleColor: this.props.fill
+      });
+    }
+  },
+
+  shade: function(hex, percent) {
+    var R, G, B, red, green, blue, number;
+    var min = Math.min, round = Math.round;
+    if(hex.length !== 7) { return hex; }
+    number = parseInt(hex.slice(1), 16); 
+    R = number >> 16;
+    G = number >> 8 & 0xFF;
+    B = number & 0xFF;
+    red = min( 255, round( ( 1 + percent ) * R )).toString(16);
+    green = min( 255, round( ( 1 + percent ) * G )).toString(16);
+    blue = min( 255, round( ( 1 + percent ) * B )).toString(16);
+    return '#' + red + green + blue; 
+  } 
 
 });
 
@@ -45652,7 +46072,7 @@ var DataSeries = React.createClass({displayName: "DataSeries",
   render: function() {
 
     var circles = this.props.data.map(function(point, i) {
-      return (React.createElement(Circle, {cx: this.props.xScale(point.x), cy: this.props.yScale(point.y), r: this.props.pointRadius, fill: this.props.color, key: this.props.seriesName + i}));
+      return (React.createElement(Circle, {cx: this.props.xScale(point.x), cy: this.props.yScale(point.y), r: this.props.pointRadius, fill: this.props.color, key: this.props.seriesName + i, id: this.props.seriesName + '-' + i}));
     }.bind(this));
 
     return (
@@ -45678,7 +46098,8 @@ var ScatterChart = React.createClass({displayName: "ScatterChart",
     axesColor: React.PropTypes.string,
     title: React.PropTypes.string,
     colors: React.PropTypes.func,
-    legend: React.PropTypes.bool
+    legend: React.PropTypes.bool,
+    hoverAnimation: React.PropTypes.bool,
   },
 
   getDefaultProps: function() {
@@ -45691,15 +46112,12 @@ var ScatterChart = React.createClass({displayName: "ScatterChart",
       height: 200,
       axesColor: '#000',
       title: '',
-      colors: d3.scale.category20c()
+      colors: d3.scale.category20c(),
+      hoverAnimation: true
     };
   },
 
-  _calculateScales: function(props, chartWidth, chartHeight) {
-
-    var allValues = _.flatten(_.values(this.props.data), true);
-    var xValues = _.pluck(allValues, 'x');
-    var yValues = _.pluck(allValues, 'y');
+  _calculateScales: function(props, chartWidth, chartHeight, xValues, yValues) {
 
     var xScale = d3.scale.linear()
       .domain([d3.min([d3.min(xValues), 0]), d3.max(xValues)])
@@ -45729,7 +46147,47 @@ var ScatterChart = React.createClass({displayName: "ScatterChart",
       chartHeight = chartHeight - this.props.titleOffset;
     }
 
-    var scales = this._calculateScales(this.props, chartWidth, chartHeight);
+    var allValues = [];
+    var xValues = [];
+    var yValues = [];
+    var coincidentCoordinateCheck = {};
+
+    for (var seriesName in this.props.data) {
+      if (this.props.data.hasOwnProperty(seriesName)) {
+        this.props.data[seriesName].forEach(function(item, idx) {
+          // Check for NaN since d3's Voronoi cannot handle NaN values
+          // Go ahead and Proceed to next iteration since we don't want NaN
+          // in allValues or in xValues or yValues
+          if (isNaN(item.x) || isNaN(item.y)) {
+            return;
+          }
+          xValues.push(item.x);
+          yValues.push(item.y);
+          var xyCoords = item.x + "-" + item.y;
+          if (xyCoords in coincidentCoordinateCheck) {
+            // Proceed to next iteration if the x y pair already exists
+            // d3's Voronoi cannot handle NaN values or coincident coords
+            // But we push them into xValues and yValues above because
+            // we still may handle them there (labels, etc.)
+            return;
+          }
+          coincidentCoordinateCheck[xyCoords] = '';
+          var pointItem = {
+            coord: {
+              x: item.x,
+              y: item.y,
+            },
+            id: seriesName + '-' + idx
+          };
+          allValues.push(pointItem);
+        })
+      }
+    }
+
+    // Set pubsub max listeners to total number of nodes to be created
+    pubsub.setMaxListeners(xValues.length + yValues.length)
+
+    var scales = this._calculateScales(this.props, chartWidth, chartHeight, xValues, yValues);
 
     var trans = "translate(" + this.props.margins.left + "," + this.props.margins.top + ")";
 
@@ -45747,7 +46205,8 @@ var ScatterChart = React.createClass({displayName: "ScatterChart",
               height: chartHeight, 
               color: this.props.colors(index), 
               pointRadius: this.props.pointRadius, 
-              key: seriesName}
+              key: seriesName, 
+              hoverAnimation: this.props.hoverAnimation}
             )
         );
         index++;
@@ -45757,6 +46216,14 @@ var ScatterChart = React.createClass({displayName: "ScatterChart",
     return (
       React.createElement(Chart, {width: this.props.width, height: this.props.height, title: this.props.title}, 
         React.createElement("g", {transform: trans}, 
+          React.createElement(Voronoi, {
+            pubsub: pubsub, 
+            data: allValues, 
+            yScale: scales.yScale, 
+            xScale: scales.xScale, 
+            width: chartWidth, 
+            height: chartHeight}
+          ), 
           dataSeriesArray, 
           React.createElement(YAxis, {
             yAxisClassName: "scatter y axis", 
@@ -45785,10 +46252,10 @@ var ScatterChart = React.createClass({displayName: "ScatterChart",
   }
 
 });
-
+exports.ScatterChartPubsub = pubsub;
 exports.ScatterChart = ScatterChart;
 
-},{"./common":"/home/eric/repos/react-d3/src/common/index.js","d3":"/home/eric/repos/react-d3/node_modules/d3/d3.js","lodash":"/home/eric/repos/react-d3/node_modules/lodash/dist/lodash.js","react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/src/treemap.jsx":[function(require,module,exports){
+},{"./common":"/home/eric/repos/react-d3/src/common/index.js","d3":"/home/eric/repos/react-d3/node_modules/d3/d3.js","events":"/home/eric/repos/react-d3/node_modules/watchify/node_modules/browserify/node_modules/events/events.js","lodash":"/home/eric/repos/react-d3/node_modules/lodash/dist/lodash.js","react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/src/treemap.jsx":[function(require,module,exports){
 'use strict';
 
 var React = require('react');
