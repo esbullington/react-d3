@@ -67,7 +67,7 @@ var Circle = React.createClass({
 
 });
 
-var DataSeries = React.createClass({
+var DataSeries = exports.DataSeries = React.createClass({
 
   propTypes: {
     data: React.PropTypes.array,
@@ -109,6 +109,7 @@ var DataSeries = React.createClass({
   }
 
 });
+
 
 var Axes = React.createClass({
 
@@ -168,7 +169,7 @@ var Axes = React.createClass({
 });
 
 
-var LineChart = React.createClass({
+var LineChart = exports.LineChart = React.createClass({
 
   propTypes: {
     margins: React.PropTypes.object,
@@ -293,5 +294,3 @@ var LineChart = React.createClass({
 
 
 });
-
-exports.LineChart = LineChart;

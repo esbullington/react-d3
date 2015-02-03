@@ -8,7 +8,7 @@ var XAxis = common.XAxis;
 var YAxis = common.YAxis;
 var Voronoi = common.Voronoi;
 var EventEmitter = require('events').EventEmitter
-var pubsub = new EventEmitter;
+var pubsub = exports.pubsub = new EventEmitter;
 var _ = require('lodash');
 
 var Circle = React.createClass({
@@ -95,7 +95,7 @@ var Circle = React.createClass({
 
 });
 
-var DataSeries = React.createClass({
+var DataSeries = exports.DataSeries = React.createClass({
 
   propTypes: {
     data: React.PropTypes.array,
@@ -124,7 +124,8 @@ var DataSeries = React.createClass({
 
 });
 
-var ScatterChart = React.createClass({
+
+var ScatterChart = exports.ScatterChart = React.createClass({
 
   propTypes: {
     margins: React.PropTypes.object,
@@ -292,5 +293,3 @@ var ScatterChart = React.createClass({
   }
 
 });
-exports.ScatterChartPubsub = pubsub;
-exports.ScatterChart = ScatterChart;

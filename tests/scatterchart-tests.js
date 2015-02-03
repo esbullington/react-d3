@@ -6,7 +6,7 @@ describe('ScatterChart', function() {
   it('renders scatterchart', function() {
     var React = require('react/addons');
     var ScatterChart = require('../src/scatterchart').ScatterChart;
-    var pubsub = require('../src/scatterchart').ScatterChartPubsub;
+    var pubsub = require('../src/scatterchart').pubsub;
     var generate = require('../utils/datagen').generateArrayOfPoints;
     var TestUtils = React.addons.TestUtils;
     var points = 5;

@@ -37,7 +37,7 @@ var Bar = React.createClass({
   }
 });
 
-var DataSeries = React.createClass({
+var DataSeries = exports.DataSeries = React.createClass({
 
   propTypes: {
     fill: React.PropTypes.string,
@@ -74,7 +74,7 @@ var DataSeries = React.createClass({
   }
 });
 
-var BarChart = React.createClass({
+var BarChart = exports.BarChart = React.createClass({
 
   propTypes: {
     data: React.PropTypes.array,
@@ -154,5 +154,3 @@ var BarChart = React.createClass({
   }
 
 });
-
-exports.BarChart = BarChart;
