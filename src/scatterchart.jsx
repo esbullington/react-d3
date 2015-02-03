@@ -190,15 +190,28 @@ var ScatterChart = React.createClass({
     var allValues = [];
     var xValues = [];
     var yValues = [];
-
-    // Set pubsub max listeners to total number of nodes to be created
-    pubsub.setMaxListeners(allValues.length);
+    var coincidentCoordinateCheck = {};
 
     for (var seriesName in this.props.data) {
       if (this.props.data.hasOwnProperty(seriesName)) {
         this.props.data[seriesName].forEach(function(item, idx) {
+          // Check for NaN since d3's Voronoi cannot handle NaN values
+          // Go ahead and Proceed to next iteration since we don't want NaN
+          // in allValues or in xValues or yValues
+          if (isNaN(item.x) || isNaN(item.y)) {
+            return;
+          }
           xValues.push(item.x);
           yValues.push(item.y);
+          var xyCoords = item.x + "-" + item.y;
+          if (xyCoords in coincidentCoordinateCheck) {
+            // Proceed to next iteration if the x y pair already exists
+            // d3's Voronoi cannot handle NaN values or coincident coords
+            // But we push them into xValues and yValues above because
+            // we still may handle them there (labels, etc.)
+            return;
+          }
+          coincidentCoordinateCheck[xyCoords] = '';
           var pointItem = {
             coord: {
               x: item.x,
@@ -210,6 +223,9 @@ var ScatterChart = React.createClass({
         })
       }
     }
+
+    // Set pubsub max listeners to total number of nodes to be created
+    pubsub.setMaxListeners(xValues.length + yValues.length)
 
     var scales = this._calculateScales(this.props, chartWidth, chartHeight, xValues, yValues);
 
