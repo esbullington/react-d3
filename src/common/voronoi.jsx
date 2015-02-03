@@ -1,10 +1,10 @@
-var React = require('react');
+'use strict';
 
+var React = require('react');
 
 var Polygon = React.createClass({
 
   _animateCircle: function() {
-    console.log('animating circle', this.props.id);
     this.props.pubsub.emit('animateCircle', this.props.id);
   },
 
@@ -18,7 +18,6 @@ var Polygon = React.createClass({
     }  
     return 'M' + d.join(',') + 'Z';
   },
-
 
   render: function() {
     return <path
@@ -54,4 +53,3 @@ exports.Voronoi = React.createClass({
   }
 
 });
-
