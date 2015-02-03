@@ -140,7 +140,7 @@ var DataSeries = React.createClass({
   }
 });
 
-var PieChart = React.createClass({
+var PieChart = exports.PieChart = React.createClass({
 
   getDefaultProps: function() {
     return {
@@ -189,5 +189,3 @@ var PieChart = React.createClass({
   }
 
 });
-
-exports.PieChart = PieChart;

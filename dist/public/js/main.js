@@ -44768,7 +44768,7 @@ var Area = React.createClass({displayName: "Area",
 });
 
 
-var DataSeries = React.createClass({displayName: "DataSeries",
+var DataSeries = exports.DataSeries = React.createClass({displayName: "DataSeries",
 
   render: function() {
 
@@ -44788,7 +44788,8 @@ var DataSeries = React.createClass({displayName: "DataSeries",
 
 });
 
-var AreaChart = React.createClass({displayName: "AreaChart",
+
+var AreaChart = exports.AreaChart = React.createClass({displayName: "AreaChart",
 
   propTypes: {
     data: React.PropTypes.array,
@@ -44867,8 +44868,6 @@ var AreaChart = React.createClass({displayName: "AreaChart",
 
 });
 
-exports.AreaChart = AreaChart;
-
 },{"./common":"/home/eric/repos/react-d3/src/common/index.js","d3":"/home/eric/repos/react-d3/node_modules/d3/d3.js","lodash":"/home/eric/repos/react-d3/node_modules/lodash/dist/lodash.js","react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/src/barchart.jsx":[function(require,module,exports){
 'use strict';
 
@@ -44909,7 +44908,7 @@ var Bar = React.createClass({displayName: "Bar",
   }
 });
 
-var DataSeries = React.createClass({displayName: "DataSeries",
+var DataSeries = exports.DataSeries = React.createClass({displayName: "DataSeries",
 
   propTypes: {
     fill: React.PropTypes.string,
@@ -44946,7 +44945,7 @@ var DataSeries = React.createClass({displayName: "DataSeries",
   }
 });
 
-var BarChart = React.createClass({displayName: "BarChart",
+var BarChart = exports.BarChart = React.createClass({displayName: "BarChart",
 
   propTypes: {
     data: React.PropTypes.array,
@@ -45026,8 +45025,6 @@ var BarChart = React.createClass({displayName: "BarChart",
   }
 
 });
-
-exports.BarChart = BarChart;
 
 },{"./common":"/home/eric/repos/react-d3/src/common/index.js","d3":"/home/eric/repos/react-d3/node_modules/d3/d3.js","lodash":"/home/eric/repos/react-d3/node_modules/lodash/dist/lodash.js","react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/src/common/axes.jsx":[function(require,module,exports){
 'use strict';
@@ -45533,7 +45530,7 @@ var Circle = React.createClass({displayName: "Circle",
 
 });
 
-var DataSeries = React.createClass({displayName: "DataSeries",
+var DataSeries = exports.DataSeries = React.createClass({displayName: "DataSeries",
 
   propTypes: {
     data: React.PropTypes.array,
@@ -45575,6 +45572,7 @@ var DataSeries = React.createClass({displayName: "DataSeries",
   }
 
 });
+
 
 var Axes = React.createClass({displayName: "Axes",
 
@@ -45634,7 +45632,7 @@ var Axes = React.createClass({displayName: "Axes",
 });
 
 
-var LineChart = React.createClass({displayName: "LineChart",
+var LineChart = exports.LineChart = React.createClass({displayName: "LineChart",
 
   propTypes: {
     margins: React.PropTypes.object,
@@ -45759,8 +45757,6 @@ var LineChart = React.createClass({displayName: "LineChart",
 
 
 });
-
-exports.LineChart = LineChart;
 
 },{"./common":"/home/eric/repos/react-d3/src/common/index.js","d3":"/home/eric/repos/react-d3/node_modules/d3/d3.js","lodash":"/home/eric/repos/react-d3/node_modules/lodash/dist/lodash.js","react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/src/piechart.jsx":[function(require,module,exports){
 'use strict';
@@ -45905,7 +45901,7 @@ var DataSeries = React.createClass({displayName: "DataSeries",
   }
 });
 
-var PieChart = React.createClass({displayName: "PieChart",
+var PieChart = exports.PieChart = React.createClass({displayName: "PieChart",
 
   getDefaultProps: function() {
     return {
@@ -45955,8 +45951,6 @@ var PieChart = React.createClass({displayName: "PieChart",
 
 });
 
-exports.PieChart = PieChart;
-
 },{"./common":"/home/eric/repos/react-d3/src/common/index.js","d3":"/home/eric/repos/react-d3/node_modules/d3/d3.js","lodash":"/home/eric/repos/react-d3/node_modules/lodash/dist/lodash.js","react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/src/scatterchart.jsx":[function(require,module,exports){
 'use strict';
 
@@ -45968,7 +45962,7 @@ var XAxis = common.XAxis;
 var YAxis = common.YAxis;
 var Voronoi = common.Voronoi;
 var EventEmitter = require('events').EventEmitter
-var pubsub = new EventEmitter;
+var pubsub = exports.pubsub = new EventEmitter;
 var _ = require('lodash');
 
 var Circle = React.createClass({displayName: "Circle",
@@ -46055,7 +46049,7 @@ var Circle = React.createClass({displayName: "Circle",
 
 });
 
-var DataSeries = React.createClass({displayName: "DataSeries",
+var DataSeries = exports.DataSeries = React.createClass({displayName: "DataSeries",
 
   propTypes: {
     data: React.PropTypes.array,
@@ -46084,7 +46078,8 @@ var DataSeries = React.createClass({displayName: "DataSeries",
 
 });
 
-var ScatterChart = React.createClass({displayName: "ScatterChart",
+
+var ScatterChart = exports.ScatterChart = React.createClass({displayName: "ScatterChart",
 
   propTypes: {
     margins: React.PropTypes.object,
@@ -46252,8 +46247,6 @@ var ScatterChart = React.createClass({displayName: "ScatterChart",
   }
 
 });
-exports.ScatterChartPubsub = pubsub;
-exports.ScatterChart = ScatterChart;
 
 },{"./common":"/home/eric/repos/react-d3/src/common/index.js","d3":"/home/eric/repos/react-d3/node_modules/d3/d3.js","events":"/home/eric/repos/react-d3/node_modules/watchify/node_modules/browserify/node_modules/events/events.js","lodash":"/home/eric/repos/react-d3/node_modules/lodash/dist/lodash.js","react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/src/treemap.jsx":[function(require,module,exports){
 'use strict';

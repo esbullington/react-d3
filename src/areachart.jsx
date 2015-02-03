@@ -37,7 +37,7 @@ var Area = React.createClass({
 });
 
 
-var DataSeries = React.createClass({
+var DataSeries = exports.DataSeries = React.createClass({
 
   render: function() {
 
@@ -57,7 +57,8 @@ var DataSeries = React.createClass({
 
 });
 
-var AreaChart = React.createClass({
+
+var AreaChart = exports.AreaChart = React.createClass({
 
   propTypes: {
     data: React.PropTypes.array,
@@ -135,5 +136,3 @@ var AreaChart = React.createClass({
   }
 
 });
-
-exports.AreaChart = AreaChart;
