@@ -56,6 +56,7 @@ var Circle = React.createClass({
         cx={this.props.cx}
         cy={this.props.cy}
         r={this.state.circleRadius}
+        id={this.props.id}
       />
     );
   },
@@ -275,5 +276,5 @@ var ScatterChart = React.createClass({
   }
 
 });
-
+exports.ScatterChartPubsub = pubsub;
 exports.ScatterChart = ScatterChart;
