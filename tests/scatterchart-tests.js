@@ -6,6 +6,7 @@ describe('ScatterChart', function() {
   it('renders scatterchart', function() {
     var React = require('react/addons');
     var ScatterChart = require('../src/scatterchart').ScatterChart;
+    var pubsub = require('../src/scatterchart').ScatterChartPubsub;
     var generate = require('../utils/datagen').generateArrayOfPoints;
     var TestUtils = React.addons.TestUtils;
     var points = 5;
@@ -28,12 +29,11 @@ describe('ScatterChart', function() {
     var circleOneColor = circleOne.props.fill;
 
     expect(circleOne.props.r).to.equal(pointRadius);
-
-    TestUtils.Simulate.mouseOver(circleOne);
+    pubsub.emit('animateCircle', circleOne.props.id);
     expect(circleOne.props.r).to.be.above(pointRadius);
     expect(circleOne.props.fill).to.not.equal(circleOneColor);
 
-    TestUtils.Simulate.mouseOut(circleOne);
+    pubsub.emit('restoreCircle', circleOne.props.id);
     expect(circleOne.props.r).to.equal(pointRadius);
     expect(circleOne.props.fill).to.equal(circleOneColor);
   });
