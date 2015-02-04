@@ -5,7 +5,13 @@ Modular ReactJS charts made using d3 chart utilities.
 
 [![Build Status](https://travis-ci.org/esbullington/react-d3.svg?branch=master)](https://travis-ci.org/esbullington/react-d3)
 
-Please consider supporting this project by hiring me for custom d3 visualizations, React, AngularJS, or Backbone frontend work, or backend work in Python, Lua, or Node.js. I'm also interested in functional languages. More at: [ericbullington.com](https://ericbullington.com)
+Please consider supporting this project by hiring me for your next contract job.  I do:
+* custom d3 visualizations.
+* React, AngularJS, or Backbone frontend work.
+* backend work in Python(Flask, Django), Lua(w/Nginx), or Node.js, particularly REST APIs.
+* I'm also interested in functional languages.
+
+More at: [ericbullington.com](https://ericbullington.com)
 
 ### Version
 [![npm version](https://badge.fury.io/js/react-d3.png)](https://www.npmjs.com/package/react-d3)
