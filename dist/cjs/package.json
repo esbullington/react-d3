@@ -1,22 +1,21 @@
 {
-  "name": "<%= pkg.name %>",
-  "version": "<%= pkg.version %>",
-  "description": "<%= pkg.description %>",
-  "author": "<%= pkg.author %>",
-  "homepage": "<%= pkg.homepage %>",
-  "keywords": "<%= pkg.keywords %>",
-  "license": "<%= pkg.license %>",
+  "name": "{{ pkg.name }}",
+  "version": "{{ pkg.version }}",
+  "description": "{{ pkg.description }}",
+  "author": "{{ pkg.author }}",
+  "homepage": "{{ pkg.homepage }}",
+  "keywords": "{{ pkg.keywords }}",
+  "license": "{{ pkg.license }}",
   "main": "index.js",
   "devDependencies": {
     "browserify": "~6.3.3"
   },
   "dependencies": {
     "d3": "^3.4.13",
-    "lodash": "^2.4.1",
     "react": "^0.12.1"
   },
   "repository": {
-    "type": "<%= pkg.repository.type %>",
-    "url": "<%= pkg.repository.url %>"
+    "type": "{{ pkg.repository.type }}",
+    "url": "{{ pkg.repository.url }}"
   }
 }

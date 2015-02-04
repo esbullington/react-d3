@@ -1,6 +1,7 @@
 'use strict';
 
 var React = require('react');
+var d3 = require('d3');
 
 var Polygon = React.createClass({
 
@@ -37,8 +38,8 @@ exports.Voronoi = React.createClass({
     var yScale = this.props.yScale;
 
     var voronoi = d3.geom.voronoi()
-      .x(function(d){ return xScale(d.coord.x) })
-      .y(function(d){ return yScale(d.coord.y) })
+      .x(function(d){ return xScale(d.coord.x); })
+      .y(function(d){ return yScale(d.coord.y); })
       .clipExtent([[0, 0], [ this.props.width , this.props.height]]);
 
     var regions = voronoi(this.props.data).map(function(vnode, idx) {

@@ -7,8 +7,8 @@ var Chart = common.Chart;
 var XAxis = common.XAxis;
 var YAxis = common.YAxis;
 var Voronoi = common.Voronoi;
-var EventEmitter = require('events').EventEmitter
-var pubsub = exports.pubsub = new EventEmitter;
+var EventEmitter = require('events').EventEmitter;
+var pubsub = exports.pubsub = new EventEmitter();
 
 var Circle = React.createClass({
 
@@ -35,7 +35,7 @@ var Circle = React.createClass({
     return {
       circleRadius: this.props.r,
       circleColor: this.props.fill
-    } 
+    };
   },
 
   componentDidMount: function() {
@@ -173,18 +173,20 @@ var ScatterChart = exports.ScatterChart = React.createClass({
 
   render: function() {
 
+    var props = this.props;
+
     // Calculate inner chart dimensions
     var chartWidth, chartHeight;
 
-    chartWidth = this.props.width - this.props.margins.left - this.props.margins.right;
-    chartHeight = this.props.height - this.props.margins.top - this.props.margins.bottom;
+    chartWidth = props.width - props.margins.left - props.margins.right;
+    chartHeight = props.height - props.margins.top - props.margins.bottom;
 
-    if (this.props.legend) {
-      chartWidth = chartWidth - this.props.legendOffset;
+    if (props.legend) {
+      chartWidth = chartWidth - props.legendOffset;
     }
 
-    if (this.props.title) {
-      chartHeight = chartHeight - this.props.titleOffset;
+    if (props.title) {
+      chartHeight = chartHeight - props.titleOffset;
     }
 
     var allValues = [];
@@ -192,61 +194,59 @@ var ScatterChart = exports.ScatterChart = React.createClass({
     var yValues = [];
     var coincidentCoordinateCheck = {};
 
-    for (var seriesName in this.props.data) {
-      if (this.props.data.hasOwnProperty(seriesName)) {
-        this.props.data[seriesName].forEach(function(item, idx) {
-          // Check for NaN since d3's Voronoi cannot handle NaN values
-          // Go ahead and Proceed to next iteration since we don't want NaN
-          // in allValues or in xValues or yValues
-          if (isNaN(item.x) || isNaN(item.y)) {
-            return;
-          }
-          xValues.push(item.x);
-          yValues.push(item.y);
-          var xyCoords = item.x + "-" + item.y;
-          if (xyCoords in coincidentCoordinateCheck) {
-            // Proceed to next iteration if the x y pair already exists
-            // d3's Voronoi cannot handle NaN values or coincident coords
-            // But we push them into xValues and yValues above because
-            // we still may handle them there (labels, etc.)
-            return;
-          }
-          coincidentCoordinateCheck[xyCoords] = '';
-          var pointItem = {
-            coord: {
-              x: item.x,
-              y: item.y,
-            },
-            id: seriesName + '-' + idx
-          };
-          allValues.push(pointItem);
-        })
-      }
-    }
+    Object.keys(props.data).forEach( function(seriesName) {
+      props.data[seriesName].forEach(function(item, idx) {
+        // Check for NaN since d3's Voronoi cannot handle NaN values
+        // Go ahead and Proceed to next iteration since we don't want NaN
+        // in allValues or in xValues or yValues
+        if (isNaN(item.x) || isNaN(item.y)) {
+          return;
+        }
+        xValues.push(item.x);
+        yValues.push(item.y);
+        var xyCoords = item.x + "-" + item.y;
+        if (xyCoords in coincidentCoordinateCheck) {
+          // Proceed to next iteration if the x y pair already exists
+          // d3's Voronoi cannot handle NaN values or coincident coords
+          // But we push them into xValues and yValues above because
+          // we still may handle them there (labels, etc.)
+          return;
+        }
+        coincidentCoordinateCheck[xyCoords] = '';
+        var pointItem = {
+          coord: {
+            x: item.x,
+            y: item.y,
+          },
+          id: seriesName + '-' + idx
+        };
+        allValues.push(pointItem);
+      });
+    });
 
     // Set pubsub max listeners to total number of nodes to be created
-    pubsub.setMaxListeners(xValues.length + yValues.length)
+    pubsub.setMaxListeners(xValues.length + yValues.length);
 
-    var scales = this._calculateScales(this.props, chartWidth, chartHeight, xValues, yValues);
+    var scales = this._calculateScales(props, chartWidth, chartHeight, xValues, yValues);
 
-    var trans = "translate(" + this.props.margins.left + "," + this.props.margins.top + ")";
+    var trans = "translate(" + props.margins.left + "," + props.margins.top + ")";
 
     var index = 0;
     var dataSeriesArray = [];
-    for(var seriesName in this.props.data) {
-      if (this.props.data.hasOwnProperty(seriesName)) {
+    for(var seriesName in props.data) {
+      if (props.data.hasOwnProperty(seriesName)) {
         dataSeriesArray.push(
             <DataSeries
               xScale={scales.xScale}
               yScale={scales.yScale}
               seriesName={seriesName}
-              data={this.props.data[seriesName]}
+              data={props.data[seriesName]}
               width={chartWidth}
               height={chartHeight}
-              color={this.props.colors(index)}
-              pointRadius={this.props.pointRadius}
+              color={props.colors(index)}
+              pointRadius={props.pointRadius}
               key={seriesName}
-              hoverAnimation={this.props.hoverAnimation}
+              hoverAnimation={props.hoverAnimation}
             />
         );
         index++;
@@ -254,7 +254,7 @@ var ScatterChart = exports.ScatterChart = React.createClass({
     }
 
     return (
-      <Chart width={this.props.width} height={this.props.height} title={this.props.title}>
+      <Chart width={props.width} height={props.height} title={props.title}>
         <g transform={trans}>
           <Voronoi
             pubsub={pubsub}
@@ -268,23 +268,23 @@ var ScatterChart = exports.ScatterChart = React.createClass({
           <YAxis
             yAxisClassName="scatter y axis"
             yScale={scales.yScale}
-            yHideOrigin={this.props.yHideOrigin}
-            margins={this.props.margins}
-            yAxisTickCount={this.props.yAxisTickCount}
+            yHideOrigin={props.yHideOrigin}
+            margins={props.margins}
+            yAxisTickCount={props.yAxisTickCount}
             width={chartWidth}
             height={chartHeight}
-            stroke={this.props.axesColor}
+            stroke={props.axesColor}
           />
           <XAxis
             xAxisClassName="scatter x axis"
             strokeWidth="1"
-            xHideOrigin={this.props.xHideOrigin}
+            xHideOrigin={props.xHideOrigin}
             xScale={scales.xScale}
-            data={this.props.data}
-            margins={this.props.margins}
+            data={props.data}
+            margins={props.margins}
             width={chartWidth}
             height={chartHeight}
-            stroke={this.props.axesColor}
+            stroke={props.axesColor}
           />
         </g>
       </Chart>

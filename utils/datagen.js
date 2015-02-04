@@ -1,4 +1,3 @@
-var _ = require('lodash');
 
 exports.generateArrayOfPoints = function(n) {
   var data = [];
@@ -71,12 +70,12 @@ var generatePartsOfWhole = function() {
   }
   numbers.pop();
   numbers.pop();
-  var sum = _.reduce(numbers, function(sum, num) {
+  var sum = numbers.reduce(function(sum, num) {
     return sum + num;
   });
   var remainder = 100 - sum;
   numbers.push(remainder);
-  var numbers = _.sortBy(numbers, function(v) { return v; });
+  var numbers = numbers.sort(function(v) { return v; });
   numbers.forEach( function(value, idx) {
     var i = idx % 10;
     var name = names[i];
