@@ -39190,6 +39190,7 @@ var YAxis = common.YAxis;
 var Voronoi = common.Voronoi;
 var EventEmitter = require('events').EventEmitter;
 var pubsub = exports.pubsub = new EventEmitter();
+var utils = require('./utils');
 
 var Circle = React.createClass({displayName: "Circle",
 
@@ -39245,7 +39246,7 @@ var Circle = React.createClass({displayName: "Circle",
     if (this.props.id === id) {
       this.setState({ 
         circleRadius: this.state.circleRadius * ( 5 / 4 ),
-        circleColor: this.shade(this.props.fill, -0.2)
+        circleColor: utils.shade(this.props.fill, -0.2)
       });
     }
   },
@@ -39257,21 +39258,7 @@ var Circle = React.createClass({displayName: "Circle",
         circleColor: this.props.fill
       });
     }
-  },
-
-  shade: function(hex, percent) {
-    var R, G, B, red, green, blue, number;
-    var min = Math.min, round = Math.round;
-    if(hex.length !== 7) { return hex; }
-    number = parseInt(hex.slice(1), 16); 
-    R = number >> 16;
-    G = number >> 8 & 0xFF;
-    B = number & 0xFF;
-    red = min( 255, round( ( 1 + percent ) * R )).toString(16);
-    green = min( 255, round( ( 1 + percent ) * G )).toString(16);
-    blue = min( 255, round( ( 1 + percent ) * B )).toString(16);
-    return '#' + red + green + blue; 
-  } 
+  }
 
 });
 
@@ -39338,19 +39325,7 @@ var ScatterChart = exports.ScatterChart = React.createClass({displayName: "Scatt
     };
   },
 
-  _calculateScales: function(props, chartWidth, chartHeight, xValues, yValues) {
-
-    var xScale = d3.scale.linear()
-      .domain([d3.min([d3.min(xValues), 0]), d3.max(xValues)])
-      .range([0, chartWidth]);
-
-    var yScale = d3.scale.linear()
-      .domain([d3.min([d3.min(yValues), 0]), d3.max(yValues)])
-      .range([chartHeight, 0]);
-
-    return {xScale: xScale, yScale: yScale};
-
-  },
+  _calculateScales: utils.calculateScales,
 
   render: function() {
 
@@ -39370,69 +39345,36 @@ var ScatterChart = exports.ScatterChart = React.createClass({displayName: "Scatt
       chartHeight = chartHeight - props.titleOffset;
     }
 
-    var allValues = [];
-    var xValues = [];
-    var yValues = [];
-    var coincidentCoordinateCheck = {};
+    // Returns an object of flattened allValues, xValues, and yValues
+    var flattenedData = utils.flattenData(props.data);
 
-    Object.keys(props.data).forEach( function(seriesName) {
-      props.data[seriesName].forEach(function(item, idx) {
-        // Check for NaN since d3's Voronoi cannot handle NaN values
-        // Go ahead and Proceed to next iteration since we don't want NaN
-        // in allValues or in xValues or yValues
-        if (isNaN(item.x) || isNaN(item.y)) {
-          return;
-        }
-        xValues.push(item.x);
-        yValues.push(item.y);
-        var xyCoords = item.x + "-" + item.y;
-        if (xyCoords in coincidentCoordinateCheck) {
-          // Proceed to next iteration if the x y pair already exists
-          // d3's Voronoi cannot handle NaN values or coincident coords
-          // But we push them into xValues and yValues above because
-          // we still may handle them there (labels, etc.)
-          return;
-        }
-        coincidentCoordinateCheck[xyCoords] = '';
-        var pointItem = {
-          coord: {
-            x: item.x,
-            y: item.y,
-          },
-          id: seriesName + '-' + idx
-        };
-        allValues.push(pointItem);
-      });
-    });
+    var allValues = flattenedData.allValues,
+        xValues = flattenedData.xValues,
+        yValues = flattenedData.yValues;
 
     // Set pubsub max listeners to total number of nodes to be created
     pubsub.setMaxListeners(xValues.length + yValues.length);
 
-    var scales = this._calculateScales(props, chartWidth, chartHeight, xValues, yValues);
+    var scales = this._calculateScales(chartWidth, chartHeight, xValues, yValues);
 
     var trans = "translate(" + props.margins.left + "," + props.margins.top + ")";
 
-    var index = 0;
-    var dataSeriesArray = [];
-    for(var seriesName in props.data) {
-      if (props.data.hasOwnProperty(seriesName)) {
-        dataSeriesArray.push(
-            React.createElement(DataSeries, {
-              xScale: scales.xScale, 
-              yScale: scales.yScale, 
-              seriesName: seriesName, 
-              data: props.data[seriesName], 
-              width: chartWidth, 
-              height: chartHeight, 
-              color: props.colors(index), 
-              pointRadius: props.pointRadius, 
-              key: seriesName, 
-              hoverAnimation: props.hoverAnimation}
-            )
-        );
-        index++;
-      }
-    }
+    var dataSeriesArray = Object.keys(props.data).map( function(seriesName, idx)  {
+      return (
+          React.createElement(DataSeries, {
+            xScale: scales.xScale, 
+            yScale: scales.yScale, 
+            seriesName: seriesName, 
+            data: props.data[seriesName], 
+            width: chartWidth, 
+            height: chartHeight, 
+            color: props.colors(idx), 
+            pointRadius: props.pointRadius, 
+            key: seriesName, 
+            hoverAnimation: props.hoverAnimation}
+          )
+      );
+    });
 
     return (
       React.createElement(Chart, {width: props.width, height: props.height, title: props.title}, 
@@ -39474,7 +39416,7 @@ var ScatterChart = exports.ScatterChart = React.createClass({displayName: "Scatt
 
 });
 
-},{"./common":"/home/eric/repos/react-d3/src/common/index.js","d3":"/home/eric/repos/react-d3/node_modules/d3/d3.js","events":"/home/eric/repos/react-d3/node_modules/watchify/node_modules/browserify/node_modules/events/events.js","react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/src/treemap.jsx":[function(require,module,exports){
+},{"./common":"/home/eric/repos/react-d3/src/common/index.js","./utils":"/home/eric/repos/react-d3/src/utils.js","d3":"/home/eric/repos/react-d3/node_modules/d3/d3.js","events":"/home/eric/repos/react-d3/node_modules/watchify/node_modules/browserify/node_modules/events/events.js","react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/src/treemap.jsx":[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -39623,7 +39565,93 @@ var Treemap = React.createClass({displayName: "Treemap",
 
 exports.Treemap = Treemap;
 
-},{"./common":"/home/eric/repos/react-d3/src/common/index.js","d3":"/home/eric/repos/react-d3/node_modules/d3/d3.js","react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/utils/datagen.js":[function(require,module,exports){
+},{"./common":"/home/eric/repos/react-d3/src/common/index.js","d3":"/home/eric/repos/react-d3/node_modules/d3/d3.js","react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/src/utils.js":[function(require,module,exports){
+var d3 = require('d3');
+
+
+exports.calculateScales = function(chartWidth, chartHeight, xValues, yValues)  {
+
+  var xScale, yScale;
+
+  xScale = d3.scale.linear()
+    .domain([d3.min([d3.min(xValues), 0]), d3.max(xValues)])
+    .range([0, chartWidth]);
+
+  yScale = d3.scale.linear()
+    .domain([d3.min([d3.min(yValues), 0]), d3.max(yValues)])
+    .range([chartHeight, 0]);
+
+  return {
+    xScale: xScale,
+    yScale: yScale
+  };
+
+}
+
+
+exports.flattenData = function(data)  {
+
+  var allValues = [];
+  var xValues = [];
+  var yValues = [];
+  var coincidentCoordinateCheck = {};
+
+  Object.keys(data).forEach( function(seriesName)  {
+    data[seriesName].forEach( function(item, idx)  {
+      // Check for NaN since d3's Voronoi cannot handle NaN values
+      // Go ahead and Proceed to next iteration since we don't want NaN
+      // in allValues or in xValues or yValues
+      if (isNaN(item.x) || isNaN(item.y)) {
+        return;
+      }
+      xValues.push(item.x);
+      yValues.push(item.y);
+      var xyCoords = item.x + "-" + item.y;
+      if (xyCoords in coincidentCoordinateCheck) {
+        // Proceed to next iteration if the x y pair already exists
+        // d3's Voronoi cannot handle NaN values or coincident coords
+        // But we push them into xValues and yValues above because
+        // we still may handle them there (labels, etc.)
+        return;
+      }
+      coincidentCoordinateCheck[xyCoords] = '';
+      var pointItem = {
+        coord: {
+          x: item.x,
+          y: item.y,
+        },
+        id: seriesName + '-' + idx
+      };
+      allValues.push(pointItem);
+    });
+  });
+  return {
+    allValues: allValues,
+    xValues: xValues,
+    yValues: yValues
+  }
+}
+
+
+
+exports.shade = function(hex, percent)  {
+
+  var R, G, B, red, green, blue, number;
+  var min = Math.min, round = Math.round;
+  if(hex.length !== 7) { return hex; }
+  number = parseInt(hex.slice(1), 16); 
+  R = number >> 16;
+  G = number >> 8 & 0xFF;
+  B = number & 0xFF;
+  red = min( 255, round( ( 1 + percent ) * R )).toString(16);
+  green = min( 255, round( ( 1 + percent ) * G )).toString(16);
+  blue = min( 255, round( ( 1 + percent ) * B )).toString(16);
+  return '#' + red + green + blue; 
+
+} 
+
+
+},{"d3":"/home/eric/repos/react-d3/node_modules/d3/d3.js"}],"/home/eric/repos/react-d3/utils/datagen.js":[function(require,module,exports){
 
 exports.generateArrayOfPoints = function(n) {
   var data = [];
