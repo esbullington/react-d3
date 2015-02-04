@@ -172,7 +172,7 @@ var ScatterChart = exports.ScatterChart = React.createClass({
     // Set pubsub max listeners to total number of nodes to be created
     pubsub.setMaxListeners(xValues.length + yValues.length)
 
-    var scales = this._calculateScales(this.props, chartWidth, chartHeight, xValues, yValues);
+    var scales = this._calculateScales(chartWidth, chartHeight, xValues, yValues);
 
     var trans = "translate(" + this.props.margins.left + "," + this.props.margins.top + ")";
 

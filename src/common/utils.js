@@ -2,7 +2,7 @@ var d3 = require('d3');
 
 
 var xScale, yScale;
-exports.calculateScales = (props, chartWidth, chartHeight, xValues, yValues) => {
+exports.calculateScales = (chartWidth, chartHeight, xValues, yValues) => {
 
     xScale = d3.scale.linear()
       .domain([d3.min([d3.min(xValues), 0]), d3.max(xValues)])
