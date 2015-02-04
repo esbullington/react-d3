@@ -2,7 +2,6 @@
 
 var React = require('react');
 var d3 = require('d3');
-var _ = require('lodash');
 var common = require('./common');
 var Chart = common.Chart;
 var XAxis = common.XAxis;

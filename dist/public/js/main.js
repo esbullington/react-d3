@@ -45465,7 +45465,6 @@ exports.ScatterChart = require('./scatterchart').ScatterChart;
 
 var React = require('react');
 var d3 = require('d3');
-var _ = require('lodash');
 var common = require('./common');
 var Chart = common.Chart;
 var XAxis = common.XAxis;
@@ -45773,12 +45772,11 @@ var LineChart = exports.LineChart = React.createClass({displayName: "LineChart",
 
 });
 
-},{"./common":"/home/eric/repos/react-d3/src/common/index.js","d3":"/home/eric/repos/react-d3/node_modules/d3/d3.js","lodash":"/home/eric/repos/react-d3/node_modules/lodash/dist/lodash.js","react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/src/piechart.jsx":[function(require,module,exports){
+},{"./common":"/home/eric/repos/react-d3/src/common/index.js","d3":"/home/eric/repos/react-d3/node_modules/d3/d3.js","react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/src/piechart.jsx":[function(require,module,exports){
 'use strict';
 
 var React = require('react');
 var d3 = require('d3');
-var _ = require('lodash');
 var Chart = require('./common').Chart;
 
 
@@ -45968,7 +45966,7 @@ var PieChart = exports.PieChart = React.createClass({displayName: "PieChart",
 
 });
 
-},{"./common":"/home/eric/repos/react-d3/src/common/index.js","d3":"/home/eric/repos/react-d3/node_modules/d3/d3.js","lodash":"/home/eric/repos/react-d3/node_modules/lodash/dist/lodash.js","react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/src/scatterchart.jsx":[function(require,module,exports){
+},{"./common":"/home/eric/repos/react-d3/src/common/index.js","d3":"/home/eric/repos/react-d3/node_modules/d3/d3.js","react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/src/scatterchart.jsx":[function(require,module,exports){
 'use strict';
 
 var React = require('react');
