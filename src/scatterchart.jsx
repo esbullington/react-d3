@@ -7,9 +7,9 @@ var Chart = common.Chart;
 var XAxis = common.XAxis;
 var YAxis = common.YAxis;
 var Voronoi = common.Voronoi;
-var EventEmitter = require('events').EventEmitter
-var pubsub = exports.pubsub = new EventEmitter;
-var utils = require('./common/utils');
+var EventEmitter = require('events').EventEmitter;
+var pubsub = exports.pubsub = new EventEmitter();
+var utils = require('./utils');
 
 var Circle = React.createClass({
 
@@ -36,7 +36,7 @@ var Circle = React.createClass({
     return {
       circleRadius: this.props.r,
       circleColor: this.props.fill
-    } 
+    };
   },
 
   componentDidMount: function() {
@@ -65,7 +65,7 @@ var Circle = React.createClass({
     if (this.props.id === id) {
       this.setState({ 
         circleRadius: this.state.circleRadius * ( 5 / 4 ),
-        circleColor: this._shade(this.props.fill, -0.2)
+        circleColor: utils.shade(this.props.fill, -0.2)
       });
     }
   },
@@ -77,9 +77,7 @@ var Circle = React.createClass({
         circleColor: this.props.fill
       });
     }
-  },
-
-  _shade: utils.shade 
+  }
 
 });
 
@@ -150,56 +148,55 @@ var ScatterChart = exports.ScatterChart = React.createClass({
 
   render: function() {
 
+    var props = this.props;
+
     // Calculate inner chart dimensions
     var chartWidth, chartHeight;
 
-    chartWidth = this.props.width - this.props.margins.left - this.props.margins.right;
-    chartHeight = this.props.height - this.props.margins.top - this.props.margins.bottom;
+    chartWidth = props.width - props.margins.left - props.margins.right;
+    chartHeight = props.height - props.margins.top - props.margins.bottom;
 
-    if (this.props.legend) {
-      chartWidth = chartWidth - this.props.legendOffset;
+    if (props.legend) {
+      chartWidth = chartWidth - props.legendOffset;
     }
 
-    if (this.props.title) {
-      chartHeight = chartHeight - this.props.titleOffset;
+    if (props.title) {
+      chartHeight = chartHeight - props.titleOffset;
     }
 
-    var allData = utils.concatData(this.props.data), 
-        allValues = allData.allValues,
-        xValues = allData.xValues,
-        yValues = allData.yValues;
+    // Returns an object of flattened allValues, xValues, and yValues
+    var flattenedData = utils.flattenData(props.data);
+
+    var allValues = flattenedData.allValues,
+        xValues = flattenedData.xValues,
+        yValues = flattenedData.yValues;
 
     // Set pubsub max listeners to total number of nodes to be created
-    pubsub.setMaxListeners(xValues.length + yValues.length)
+    pubsub.setMaxListeners(xValues.length + yValues.length);
 
     var scales = this._calculateScales(chartWidth, chartHeight, xValues, yValues);
 
-    var trans = "translate(" + this.props.margins.left + "," + this.props.margins.top + ")";
+    var trans = "translate(" + props.margins.left + "," + props.margins.top + ")";
 
-    var index = 0;
-    var dataSeriesArray = [];
-    for(var seriesName in this.props.data) {
-      if (this.props.data.hasOwnProperty(seriesName)) {
-        dataSeriesArray.push(
-            <DataSeries
-              xScale={scales.xScale}
-              yScale={scales.yScale}
-              seriesName={seriesName}
-              data={this.props.data[seriesName]}
-              width={chartWidth}
-              height={chartHeight}
-              color={this.props.colors(index)}
-              pointRadius={this.props.pointRadius}
-              key={seriesName}
-              hoverAnimation={this.props.hoverAnimation}
-            />
-        );
-        index++;
-      }
-    }
+    var dataSeriesArray = Object.keys(props.data).map( (seriesName, idx) => {
+      return (
+          <DataSeries
+            xScale={scales.xScale}
+            yScale={scales.yScale}
+            seriesName={seriesName}
+            data={props.data[seriesName]}
+            width={chartWidth}
+            height={chartHeight}
+            color={props.colors(idx)}
+            pointRadius={props.pointRadius}
+            key={seriesName}
+            hoverAnimation={props.hoverAnimation}
+          />
+      );
+    });
 
     return (
-      <Chart width={this.props.width} height={this.props.height} title={this.props.title}>
+      <Chart width={props.width} height={props.height} title={props.title}>
         <g transform={trans}>
           <Voronoi
             pubsub={pubsub}
@@ -213,23 +210,23 @@ var ScatterChart = exports.ScatterChart = React.createClass({
           <YAxis
             yAxisClassName="scatter y axis"
             yScale={scales.yScale}
-            yHideOrigin={this.props.yHideOrigin}
-            margins={this.props.margins}
-            yAxisTickCount={this.props.yAxisTickCount}
+            yHideOrigin={props.yHideOrigin}
+            margins={props.margins}
+            yAxisTickCount={props.yAxisTickCount}
             width={chartWidth}
             height={chartHeight}
-            stroke={this.props.axesColor}
+            stroke={props.axesColor}
           />
           <XAxis
             xAxisClassName="scatter x axis"
             strokeWidth="1"
-            xHideOrigin={this.props.xHideOrigin}
+            xHideOrigin={props.xHideOrigin}
             xScale={scales.xScale}
-            data={this.props.data}
-            margins={this.props.margins}
+            data={props.data}
+            margins={props.margins}
             width={chartWidth}
             height={chartHeight}
-            stroke={this.props.axesColor}
+            stroke={props.axesColor}
           />
         </g>
       </Chart>

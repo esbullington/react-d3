@@ -18,13 +18,13 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      'tests/index.js': ['browserify']
+      'tests/**/*.js': ['browserify']
     },
 
     browserify: {
       extensions: ['.jsx'],
       debug: true,
-      transform: [ 'reactify' ]
+      transform: [  ['reactify', {'es6': true}] ]
     },
 
     // test results reporter to use

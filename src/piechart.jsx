@@ -2,7 +2,6 @@
 
 var React = require('react');
 var d3 = require('d3');
-var _ = require('lodash');
 var Chart = require('./common').Chart;
 
 
@@ -25,7 +24,6 @@ var Arc = React.createClass({
   },
 
   render: function() {
-    // transform={"translate(" + arc.centroid() + ")"}
     var props = this.props;
     var arc = d3.svg.arc()
       .innerRadius(props.innerRadius)
@@ -40,6 +38,7 @@ var Arc = React.createClass({
     var x      = dist * (1.2 * Math.sin(angle));
     var y      = -dist * Math.cos(angle);
     var t = "translate(" + x + "," + y + ")";
+
     return (
       <g className="arc-group" >
         <path
@@ -70,7 +69,7 @@ var Arc = React.createClass({
             "fill": props.labelTextFill,
             "shapeRendering": "crispEdges"
           }}>
-          {this.props.label}
+          {props.label}
         </text>
         <text
           className='arc-value-text'
@@ -81,7 +80,7 @@ var Arc = React.createClass({
             "textAnchor": "middle",
             "fill": props.valueTextFill
           }}>
-          {this.props.value + "%"}
+          {props.value + "%"}
         </text>
       </g>
     );
@@ -106,6 +105,7 @@ var DataSeries = React.createClass({
   },
 
   render: function() {
+
     var props = this.props;
 
     var pie = d3.layout
@@ -114,11 +114,10 @@ var DataSeries = React.createClass({
 
     var arcData = pie(props.data);
 
-    var color = this.props.color;
+    var color = props.color;
 
-    var arcs = [];
-    arcData.forEach(function(arc, i) {
-      arcs.push(
+    var arcs = arcData.map(function(arc, i) {
+      return (
         <Arc
           startAngle={arc.startAngle}
           endAngle={arc.endAngle}
@@ -135,7 +134,7 @@ var DataSeries = React.createClass({
       );
     });
     return (
-      <g className="pie-group" transform={this.props.transform} >{arcs}</g>
+      <g className="pie-group" transform={props.transform} >{arcs}</g>
     );
   }
 });
@@ -161,28 +160,30 @@ var PieChart = exports.PieChart = React.createClass({
   render: function() {
     var props = this.props;
     var transform = "translate(" +
-      (this.props.cx || this.props.width/2) + "," +
-      (this.props.cy || this.props.height/2) + ")";
-    var data = _.pluck(this.props.data, 'value');
-    var labels = _.pluck(this.props.data, 'label');
+      (props.cx || props.width/2) + "," +
+      (props.cy || props.height/2) + ")";
+
+    var data = props.data.map( (item) => item.value );
+    var labels = props.data.map( (item) => item.label );
+
     return (
       <Chart
         className='pie-chart'
-        width={this.props.width}
-        height={this.props.height}
-        title={this.props.title}
+        width={props.width}
+        height={props.height}
+        title={props.title}
       >
         <DataSeries
-          labelTextFill={this.props.labelTextFill}
-          valueTextFill={this.props.valueTextFill}
+          labelTextFill={props.labelTextFill}
+          valueTextFill={props.valueTextFill}
           labels={labels}
-          color={this.props.color}
+          color={props.color}
           transform={transform}
           data={data}
-          width={this.props.width}
-          height={this.props.height}
-          radius={this.props.radius}
-          innerRadius={this.props.innerRadius}
+          width={props.width}
+          height={props.height}
+          radius={props.radius}
+          innerRadius={props.innerRadius}
         />
       </Chart>
     );

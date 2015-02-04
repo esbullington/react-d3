@@ -1,12 +1,13 @@
 'use strict';
 
 var fs  = require("fs");
-var _ = require('lodash');
+var Handlebars = require('handlebars');
 var pkg = require('../package.json');
 
-function build_task() {
+function buildTask() {
   var packageTemplate = fs.readFileSync('./dist/cjs/package.json').toString();
-  var buildPackage = _.template(packageTemplate, {pkg: pkg});
+  var template = Handlebars.compile(packageTemplate);
+  var buildPackage = template({pkg: pkg});
   try {
     JSON.parse(buildPackage);
   } catch (err) {
@@ -18,5 +19,5 @@ function build_task() {
 }
 
 if (require.main === module) {
-    build_task();
+    buildTask();
 }
