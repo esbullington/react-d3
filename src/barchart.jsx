@@ -6,8 +6,6 @@ var common = require('./common');
 var Chart = common.Chart;
 var XAxis = common.XAxis;
 var YAxis = common.YAxis;
-var _ = require('lodash');
-
 
 var Bar = React.createClass({
 
@@ -56,11 +54,12 @@ var DataSeries = exports.DataSeries = React.createClass({
   },
 
   render: function() {
+
     var props = this.props;
 
     var xScale = d3.scale.ordinal()
       .domain(d3.range(props.values.length))
-      .rangeRoundBands([0, this.props.width], this.props.padding);
+      .rangeRoundBands([0, props.width], props.padding);
 
     var bars = props.values.map(function(point, i) {
       return (
@@ -100,53 +99,55 @@ var BarChart = exports.BarChart = React.createClass({
 
   render: function() {
 
-    var values = _.pluck(this.props.data, 'value');
+    var props = this.props;
 
-    var labels = _.pluck(this.props.data, 'label');
+    var values = props.data.map( (item) => item.value );
 
-    var margins = this.props.margins;
+    var labels = props.data.map( (item) => item.label );
+
+    var margins = props.margins;
 
     var sideMargins = margins.left + margins.right;
     var topBottomMargins = margins.top + margins.bottom;
 
     var yScale = d3.scale.linear()
       .domain([d3.min([d3.min(values), 0]), d3.max(values)])
-      .range([this.props.height - topBottomMargins, 0]);
+      .range([props.height - topBottomMargins, 0]);
 
     var xScale = d3.scale.ordinal()
         .domain(labels)
-        .rangeRoundBands([0, this.props.width - sideMargins], 0.1);
+        .rangeRoundBands([0, props.width - sideMargins], 0.1);
 
     var trans = "translate(" + margins.left + "," + margins.top + ")";
 
     return (
-      <Chart width={this.props.width} height={this.props.height} title={this.props.title}>
+      <Chart width={props.width} height={props.height} title={props.title}>
         <g transform={trans} >
           <DataSeries
             values={values}
             yScale={yScale}
             xScale={yScale}
             margins={margins}
-            data={this.props.data}
-            width={this.props.width - sideMargins}
-            height={this.props.height - topBottomMargins}
-            fill={this.props.fill}
+            data={props.data}
+            width={props.width - sideMargins}
+            height={props.height - topBottomMargins}
+            fill={props.fill}
           />
           <YAxis
             yAxisClassName="bar y axis"
             yScale={yScale}
             margins={margins}
-            yAxisTickCount={this.props.yAxisTickCount}
-            width={this.props.width - sideMargins}
-            height={this.props.height - topBottomMargins}
+            yAxisTickCount={props.yAxisTickCount}
+            width={props.width - sideMargins}
+            height={props.height - topBottomMargins}
           />
           <XAxis
             xAxisClassName="bar x axis"
             xScale={xScale}
-            data={this.props.data}
+            data={props.data}
             margins={margins}
-            width={this.props.width - sideMargins}
-            height={this.props.height - topBottomMargins}
+            width={props.width - sideMargins}
+            height={props.height - topBottomMargins}
           />
         </g>
       </Chart>

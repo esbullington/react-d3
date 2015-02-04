@@ -1,7 +1,6 @@
 'use strict';
 
 var expect = require('chai').expect;  
-var _ = require('lodash');
 
 describe('PieChart', function() {
   it('renders piechart', function() {
@@ -12,7 +11,7 @@ describe('PieChart', function() {
 
     // Render a piechart using array data
     var data = generatePartsOfWhole();
-    var values = _.pluck(data, 'value');
+    var values = data.map( (item) => item.value );
 
     var piechart = TestUtils.renderIntoDocument(
       <PieChart data={data} width={400} height={200} />

@@ -44737,7 +44737,6 @@ var common = require('./common');
 var Chart = common.Chart;
 var XAxis = common.XAxis;
 var YAxis = common.YAxis;
-var _ = require('lodash');
 
 var Area = React.createClass({displayName: "Area",
 
@@ -44823,7 +44822,7 @@ var AreaChart = exports.AreaChart = React.createClass({displayName: "AreaChart",
     var yScale = d3.scale.linear()
       .range([props.height, 0]);
 
-    var values = _.pluck(props.data, 'value');
+    var values = props.data.map( function(item)  {return item.value;});
     yScale.domain([d3.min([d3.min(values), 0]), d3.max(values)]);
 
     var margin = {top: 20, right: 20, bottom: 30, left: 50};
@@ -44868,7 +44867,7 @@ var AreaChart = exports.AreaChart = React.createClass({displayName: "AreaChart",
 
 });
 
-},{"./common":"/home/eric/repos/react-d3/src/common/index.js","d3":"/home/eric/repos/react-d3/node_modules/d3/d3.js","lodash":"/home/eric/repos/react-d3/node_modules/lodash/dist/lodash.js","react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/src/barchart.jsx":[function(require,module,exports){
+},{"./common":"/home/eric/repos/react-d3/src/common/index.js","d3":"/home/eric/repos/react-d3/node_modules/d3/d3.js","react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/src/barchart.jsx":[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -44877,8 +44876,6 @@ var common = require('./common');
 var Chart = common.Chart;
 var XAxis = common.XAxis;
 var YAxis = common.YAxis;
-var _ = require('lodash');
-
 
 var Bar = React.createClass({displayName: "Bar",
 
@@ -44927,11 +44924,12 @@ var DataSeries = exports.DataSeries = React.createClass({displayName: "DataSerie
   },
 
   render: function() {
+
     var props = this.props;
 
     var xScale = d3.scale.ordinal()
       .domain(d3.range(props.values.length))
-      .rangeRoundBands([0, this.props.width], this.props.padding);
+      .rangeRoundBands([0, props.width], props.padding);
 
     var bars = props.values.map(function(point, i) {
       return (
@@ -44971,53 +44969,55 @@ var BarChart = exports.BarChart = React.createClass({displayName: "BarChart",
 
   render: function() {
 
-    var values = _.pluck(this.props.data, 'value');
+    var props = this.props;
 
-    var labels = _.pluck(this.props.data, 'label');
+    var values = props.data.map( function(item)  {return item.value;} );
 
-    var margins = this.props.margins;
+    var labels = props.data.map( function(item)  {return item.label;} );
+
+    var margins = props.margins;
 
     var sideMargins = margins.left + margins.right;
     var topBottomMargins = margins.top + margins.bottom;
 
     var yScale = d3.scale.linear()
       .domain([d3.min([d3.min(values), 0]), d3.max(values)])
-      .range([this.props.height - topBottomMargins, 0]);
+      .range([props.height - topBottomMargins, 0]);
 
     var xScale = d3.scale.ordinal()
         .domain(labels)
-        .rangeRoundBands([0, this.props.width - sideMargins], 0.1);
+        .rangeRoundBands([0, props.width - sideMargins], 0.1);
 
     var trans = "translate(" + margins.left + "," + margins.top + ")";
 
     return (
-      React.createElement(Chart, {width: this.props.width, height: this.props.height, title: this.props.title}, 
+      React.createElement(Chart, {width: props.width, height: props.height, title: props.title}, 
         React.createElement("g", {transform: trans}, 
           React.createElement(DataSeries, {
             values: values, 
             yScale: yScale, 
             xScale: yScale, 
             margins: margins, 
-            data: this.props.data, 
-            width: this.props.width - sideMargins, 
-            height: this.props.height - topBottomMargins, 
-            fill: this.props.fill}
+            data: props.data, 
+            width: props.width - sideMargins, 
+            height: props.height - topBottomMargins, 
+            fill: props.fill}
           ), 
           React.createElement(YAxis, {
             yAxisClassName: "bar y axis", 
             yScale: yScale, 
             margins: margins, 
-            yAxisTickCount: this.props.yAxisTickCount, 
-            width: this.props.width - sideMargins, 
-            height: this.props.height - topBottomMargins}
+            yAxisTickCount: props.yAxisTickCount, 
+            width: props.width - sideMargins, 
+            height: props.height - topBottomMargins}
           ), 
           React.createElement(XAxis, {
             xAxisClassName: "bar x axis", 
             xScale: xScale, 
-            data: this.props.data, 
+            data: props.data, 
             margins: margins, 
-            width: this.props.width - sideMargins, 
-            height: this.props.height - topBottomMargins}
+            width: props.width - sideMargins, 
+            height: props.height - topBottomMargins}
           )
         )
       )
@@ -45026,7 +45026,7 @@ var BarChart = exports.BarChart = React.createClass({displayName: "BarChart",
 
 });
 
-},{"./common":"/home/eric/repos/react-d3/src/common/index.js","d3":"/home/eric/repos/react-d3/node_modules/d3/d3.js","lodash":"/home/eric/repos/react-d3/node_modules/lodash/dist/lodash.js","react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/src/common/axes.jsx":[function(require,module,exports){
+},{"./common":"/home/eric/repos/react-d3/src/common/index.js","d3":"/home/eric/repos/react-d3/node_modules/d3/d3.js","react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/src/common/axes.jsx":[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -45490,12 +45490,13 @@ var Line = React.createClass({displayName: "Line",
   },
 
   render: function() {
+    var props = this.props;
     return (
       React.createElement("path", {
-        d: this.props.path, 
-        stroke: this.props.stroke, 
-        fill: this.props.fill, 
-        strokeWidth: this.props.strokeWidth}
+        d: props.path, 
+        stroke: props.stroke, 
+        fill: props.fill, 
+        strokeWidth: props.strokeWidth}
       )
     );
   }
@@ -45518,12 +45519,13 @@ var Circle = React.createClass({displayName: "Circle",
   },
 
   render: function() {
+    var props = this.props;
     return (
       React.createElement("circle", {
-        cx: this.props.cx, 
-        cy: this.props.cy, 
-        r: this.props.r, 
-        fill: this.props.fill}
+        cx: props.cx, 
+        cy: props.cy, 
+        r: props.r, 
+        fill: props.fill}
       )
     );
   }
@@ -45534,38 +45536,47 @@ var DataSeries = exports.DataSeries = React.createClass({displayName: "DataSerie
 
   propTypes: {
     data: React.PropTypes.array,
-    interpolate: React.PropTypes.string,
+    interpolationType: React.PropTypes.string,
     color: React.PropTypes.string
   },
 
   getDefaultProps: function() {
     return {
       data: [],
-      interpolate: 'linear',
+      interpolationType: 'linear',
       color: '#fff'
     };
   },
 
   render: function() {
-    var self = this;
+    var props = this.props;
     var interpolatePath = d3.svg.line()
         .x(function(d) {
-          return self.props.xScale(d.x);
+          return props.xScale(d.x);
         })
         .y(function(d) {
-          return self.props.yScale(d.y);
+          return props.yScale(d.y);
         })
-        .interpolate(this.props.interpolate);
+        .interpolate(props.interpolationType);
 
-    var circles = [];
-
-    this.props.data.forEach(function(point, i) {
-      circles.push(React.createElement(Circle, {cx: this.props.xScale(point.x), cy: this.props.yScale(point.y), r: this.props.pointRadius, fill: this.props.color, key: this.props.seriesName + i}));
-    }.bind(this));
+    var circles = props.data.map(function(point, i) {
+      return (
+        React.createElement(Circle, {
+          cx: props.xScale(point.x), 
+          cy: props.yScale(point.y), 
+          r: props.pointRadius, 
+          fill: props.color, 
+          key: props.seriesName + i}
+        )
+      );
+    });
 
     return (
       React.createElement("g", null, 
-        React.createElement(Line, {path: interpolatePath(this.props.data), stroke: this.props.color}), 
+        React.createElement(Line, {
+          path: interpolatePath(props.data), 
+          stroke: props.color}
+        ), 
         circles
       )
     );
@@ -45665,9 +45676,13 @@ var LineChart = exports.LineChart = React.createClass({displayName: "LineChart",
 
   _calculateScales: function(props, chartWidth, chartHeight) {
 
-    var allValues = _.flatten(_.values(this.props.data), true);
-    var xValues = _.pluck(allValues, 'x');
-    var yValues = _.pluck(allValues, 'y');
+    var nestedValues = Object.keys(props.data).map( function(seriesName)  {
+      return props.data[seriesName];
+    });
+
+    var allValues = [].concat.apply([], nestedValues);
+    var xValues = allValues.map( function(item)  {return item.x;} );
+    var yValues = allValues.map( function(item)  {return item.y;} );
 
     var xScale = d3.scale.linear()
       .domain([d3.min([d3.min(xValues), 0]), d3.max(xValues)])
@@ -45688,35 +45703,35 @@ var LineChart = exports.LineChart = React.createClass({displayName: "LineChart",
     // Calculate inner chart dimensions
     var chartWidth, chartHeight;
 
-    chartWidth = this.props.width - this.props.margins.left - this.props.margins.right;
-    chartHeight = this.props.height - this.props.margins.top - this.props.margins.bottom;
+    chartWidth = props.width - props.margins.left - props.margins.right;
+    chartHeight = props.height - props.margins.top - props.margins.bottom;
 
-    if (this.props.legend) {
-      chartWidth = chartWidth - this.props.legendOffset;
+    if (props.legend) {
+      chartWidth = chartWidth - props.legendOffset;
     }
 
-    if (this.props.title) {
-      chartHeight = chartHeight - this.props.titleOffset;
+    if (props.title) {
+      chartHeight = chartHeight - props.titleOffset;
     }
 
-    var scales = this._calculateScales(this.props, chartWidth, chartHeight);
+    var scales = this._calculateScales(props, chartWidth, chartHeight);
 
-    var trans = "translate(" + this.props.margins.left + "," + this.props.margins.top + ")";
+    var trans = "translate(" + props.margins.left + "," + props.margins.top + ")";
 
     var index = 0;
     var dataSeriesArray = [];
-    for(var seriesName in this.props.data) {
-      if (this.props.data.hasOwnProperty(seriesName)) {
+    for(var seriesName in props.data) {
+      if (props.data.hasOwnProperty(seriesName)) {
         dataSeriesArray.push(
             React.createElement(DataSeries, {
               xScale: scales.xScale, 
               yScale: scales.yScale, 
               seriesName: seriesName, 
-              data: this.props.data[seriesName], 
+              data: props.data[seriesName], 
               width: chartWidth, 
               height: chartHeight, 
-              color: this.props.colors(index), 
-              pointRadius: this.props.pointRadius, 
+              color: props.colors(index), 
+              pointRadius: props.pointRadius, 
               key: seriesName}
             )
         );
@@ -45726,29 +45741,29 @@ var LineChart = exports.LineChart = React.createClass({displayName: "LineChart",
 
     return (
       React.createElement(Chart, {
-        legend: this.props.legend, 
-        data: this.props.data, 
-        margins: this.props.margins, 
-        colors: this.props.colors, 
-        width: this.props.width, 
-        height: this.props.height, 
-        title: this.props.title
+        legend: props.legend, 
+        data: props.data, 
+        margins: props.margins, 
+        colors: props.colors, 
+        width: props.width, 
+        height: props.height, 
+        title: props.title
       }, 
         React.createElement("g", {transform: trans}, 
           dataSeriesArray, 
           React.createElement(Axes, {
             yAxisClassName: "line y axis", 
             yScale: scales.yScale, 
-            yAxisTickCount: this.props.yAxisTickCount, 
-            yHideOrigin: this.props.yHideOrigin, 
+            yAxisTickCount: props.yAxisTickCount, 
+            yHideOrigin: props.yHideOrigin, 
             xAxisClassName: "line x axis", 
             xScale: scales.xScale, 
-            xHideOrigin: this.props.xHideOrigin, 
+            xHideOrigin: props.xHideOrigin, 
             strokeWidth: "1", 
-            margins: this.props.margins, 
+            margins: props.margins, 
             chartWidth: chartWidth, 
             chartHeight: chartHeight, 
-            stroke: this.props.axesColor}
+            stroke: props.axesColor}
           )
         )
       )
@@ -45786,7 +45801,6 @@ var Arc = React.createClass({displayName: "Arc",
   },
 
   render: function() {
-    // transform={"translate(" + arc.centroid() + ")"}
     var props = this.props;
     var arc = d3.svg.arc()
       .innerRadius(props.innerRadius)
@@ -45801,6 +45815,7 @@ var Arc = React.createClass({displayName: "Arc",
     var x      = dist * (1.2 * Math.sin(angle));
     var y      = -dist * Math.cos(angle);
     var t = "translate(" + x + "," + y + ")";
+
     return (
       React.createElement("g", {className: "arc-group"}, 
         React.createElement("path", {
@@ -45831,7 +45846,7 @@ var Arc = React.createClass({displayName: "Arc",
             "fill": props.labelTextFill,
             "shapeRendering": "crispEdges"
           }}, 
-          this.props.label
+          props.label
         ), 
         React.createElement("text", {
           className: "arc-value-text", 
@@ -45842,7 +45857,7 @@ var Arc = React.createClass({displayName: "Arc",
             "textAnchor": "middle",
             "fill": props.valueTextFill
           }}, 
-          this.props.value + "%"
+          props.value + "%"
         )
       )
     );
@@ -45867,6 +45882,7 @@ var DataSeries = React.createClass({displayName: "DataSeries",
   },
 
   render: function() {
+
     var props = this.props;
 
     var pie = d3.layout
@@ -45875,11 +45891,10 @@ var DataSeries = React.createClass({displayName: "DataSeries",
 
     var arcData = pie(props.data);
 
-    var color = this.props.color;
+    var color = props.color;
 
-    var arcs = [];
-    arcData.forEach(function(arc, i) {
-      arcs.push(
+    var arcs = arcData.map(function(arc, i) {
+      return (
         React.createElement(Arc, {
           startAngle: arc.startAngle, 
           endAngle: arc.endAngle, 
@@ -45896,7 +45911,7 @@ var DataSeries = React.createClass({displayName: "DataSeries",
       );
     });
     return (
-      React.createElement("g", {className: "pie-group", transform: this.props.transform}, arcs)
+      React.createElement("g", {className: "pie-group", transform: props.transform}, arcs)
     );
   }
 });
@@ -45922,28 +45937,30 @@ var PieChart = exports.PieChart = React.createClass({displayName: "PieChart",
   render: function() {
     var props = this.props;
     var transform = "translate(" +
-      (this.props.cx || this.props.width/2) + "," +
-      (this.props.cy || this.props.height/2) + ")";
-    var data = _.pluck(this.props.data, 'value');
-    var labels = _.pluck(this.props.data, 'label');
+      (props.cx || props.width/2) + "," +
+      (props.cy || props.height/2) + ")";
+
+    var data = props.data.map( function(item)  {return item.value;} );
+    var labels = props.data.map( function(item)  {return item.label;} );
+
     return (
       React.createElement(Chart, {
         className: "pie-chart", 
-        width: this.props.width, 
-        height: this.props.height, 
-        title: this.props.title
+        width: props.width, 
+        height: props.height, 
+        title: props.title
       }, 
         React.createElement(DataSeries, {
-          labelTextFill: this.props.labelTextFill, 
-          valueTextFill: this.props.valueTextFill, 
+          labelTextFill: props.labelTextFill, 
+          valueTextFill: props.valueTextFill, 
           labels: labels, 
-          color: this.props.color, 
+          color: props.color, 
           transform: transform, 
           data: data, 
-          width: this.props.width, 
-          height: this.props.height, 
-          radius: this.props.radius, 
-          innerRadius: this.props.innerRadius}
+          width: props.width, 
+          height: props.height, 
+          radius: props.radius, 
+          innerRadius: props.innerRadius}
         )
       )
     );
@@ -45963,7 +45980,6 @@ var YAxis = common.YAxis;
 var Voronoi = common.Voronoi;
 var EventEmitter = require('events').EventEmitter
 var pubsub = exports.pubsub = new EventEmitter;
-var _ = require('lodash');
 
 var Circle = React.createClass({displayName: "Circle",
 
@@ -46248,7 +46264,7 @@ var ScatterChart = exports.ScatterChart = React.createClass({displayName: "Scatt
 
 });
 
-},{"./common":"/home/eric/repos/react-d3/src/common/index.js","d3":"/home/eric/repos/react-d3/node_modules/d3/d3.js","events":"/home/eric/repos/react-d3/node_modules/watchify/node_modules/browserify/node_modules/events/events.js","lodash":"/home/eric/repos/react-d3/node_modules/lodash/dist/lodash.js","react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/src/treemap.jsx":[function(require,module,exports){
+},{"./common":"/home/eric/repos/react-d3/src/common/index.js","d3":"/home/eric/repos/react-d3/node_modules/d3/d3.js","events":"/home/eric/repos/react-d3/node_modules/watchify/node_modules/browserify/node_modules/events/events.js","react":"/home/eric/repos/react-d3/node_modules/react/react.js"}],"/home/eric/repos/react-d3/src/treemap.jsx":[function(require,module,exports){
 'use strict';
 
 var React = require('react');

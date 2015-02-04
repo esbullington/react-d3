@@ -9,7 +9,6 @@ var YAxis = common.YAxis;
 var Voronoi = common.Voronoi;
 var EventEmitter = require('events').EventEmitter
 var pubsub = exports.pubsub = new EventEmitter;
-var _ = require('lodash');
 
 var Circle = React.createClass({
 

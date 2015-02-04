@@ -27,12 +27,13 @@ var Line = React.createClass({
   },
 
   render: function() {
+    var props = this.props;
     return (
       <path
-        d={this.props.path}
-        stroke={this.props.stroke}
-        fill={this.props.fill}
-        strokeWidth={this.props.strokeWidth}
+        d={props.path}
+        stroke={props.stroke}
+        fill={props.fill}
+        strokeWidth={props.strokeWidth}
       />
     );
   }
@@ -55,12 +56,13 @@ var Circle = React.createClass({
   },
 
   render: function() {
+    var props = this.props;
     return (
       <circle
-        cx={this.props.cx}
-        cy={this.props.cy}
-        r={this.props.r}
-        fill={this.props.fill}
+        cx={props.cx}
+        cy={props.cy}
+        r={props.r}
+        fill={props.fill}
       />
     );
   }
@@ -71,38 +73,47 @@ var DataSeries = exports.DataSeries = React.createClass({
 
   propTypes: {
     data: React.PropTypes.array,
-    interpolate: React.PropTypes.string,
+    interpolationType: React.PropTypes.string,
     color: React.PropTypes.string
   },
 
   getDefaultProps: function() {
     return {
       data: [],
-      interpolate: 'linear',
+      interpolationType: 'linear',
       color: '#fff'
     };
   },
 
   render: function() {
-    var self = this;
+    var props = this.props;
     var interpolatePath = d3.svg.line()
         .x(function(d) {
-          return self.props.xScale(d.x);
+          return props.xScale(d.x);
         })
         .y(function(d) {
-          return self.props.yScale(d.y);
+          return props.yScale(d.y);
         })
-        .interpolate(this.props.interpolate);
+        .interpolate(props.interpolationType);
 
-    var circles = [];
-
-    this.props.data.forEach(function(point, i) {
-      circles.push(<Circle cx={this.props.xScale(point.x)} cy={this.props.yScale(point.y)} r={this.props.pointRadius} fill={this.props.color} key={this.props.seriesName + i} />);
-    }.bind(this));
+    var circles = props.data.map(function(point, i) {
+      return (
+        <Circle
+          cx={props.xScale(point.x)}
+          cy={props.yScale(point.y)}
+          r={props.pointRadius}
+          fill={props.color}
+          key={props.seriesName + i}
+        />
+      );
+    });
 
     return (
       <g>
-        <Line path={interpolatePath(this.props.data)} stroke={this.props.color} />
+        <Line
+          path={interpolatePath(props.data)}
+          stroke={props.color}
+        />
         {circles}
       </g>
     );
@@ -202,9 +213,13 @@ var LineChart = exports.LineChart = React.createClass({
 
   _calculateScales: function(props, chartWidth, chartHeight) {
 
-    var allValues = _.flatten(_.values(this.props.data), true);
-    var xValues = _.pluck(allValues, 'x');
-    var yValues = _.pluck(allValues, 'y');
+    var nestedValues = Object.keys(props.data).map( (seriesName) => {
+      return props.data[seriesName];
+    });
+
+    var allValues = [].concat.apply([], nestedValues);
+    var xValues = allValues.map( (item) => item.x );
+    var yValues = allValues.map( (item) => item.y );
 
     var xScale = d3.scale.linear()
       .domain([d3.min([d3.min(xValues), 0]), d3.max(xValues)])
@@ -225,35 +240,35 @@ var LineChart = exports.LineChart = React.createClass({
     // Calculate inner chart dimensions
     var chartWidth, chartHeight;
 
-    chartWidth = this.props.width - this.props.margins.left - this.props.margins.right;
-    chartHeight = this.props.height - this.props.margins.top - this.props.margins.bottom;
+    chartWidth = props.width - props.margins.left - props.margins.right;
+    chartHeight = props.height - props.margins.top - props.margins.bottom;
 
-    if (this.props.legend) {
-      chartWidth = chartWidth - this.props.legendOffset;
+    if (props.legend) {
+      chartWidth = chartWidth - props.legendOffset;
     }
 
-    if (this.props.title) {
-      chartHeight = chartHeight - this.props.titleOffset;
+    if (props.title) {
+      chartHeight = chartHeight - props.titleOffset;
     }
 
-    var scales = this._calculateScales(this.props, chartWidth, chartHeight);
+    var scales = this._calculateScales(props, chartWidth, chartHeight);
 
-    var trans = "translate(" + this.props.margins.left + "," + this.props.margins.top + ")";
+    var trans = "translate(" + props.margins.left + "," + props.margins.top + ")";
 
     var index = 0;
     var dataSeriesArray = [];
-    for(var seriesName in this.props.data) {
-      if (this.props.data.hasOwnProperty(seriesName)) {
+    for(var seriesName in props.data) {
+      if (props.data.hasOwnProperty(seriesName)) {
         dataSeriesArray.push(
             <DataSeries
               xScale={scales.xScale}
               yScale={scales.yScale}
               seriesName={seriesName}
-              data={this.props.data[seriesName]}
+              data={props.data[seriesName]}
               width={chartWidth}
               height={chartHeight}
-              color={this.props.colors(index)}
-              pointRadius={this.props.pointRadius}
+              color={props.colors(index)}
+              pointRadius={props.pointRadius}
               key={seriesName}
             />
         );
@@ -263,29 +278,29 @@ var LineChart = exports.LineChart = React.createClass({
 
     return (
       <Chart
-        legend={this.props.legend}
-        data={this.props.data}
-        margins={this.props.margins}
-        colors={this.props.colors}
-        width={this.props.width}
-        height={this.props.height}
-        title={this.props.title}
+        legend={props.legend}
+        data={props.data}
+        margins={props.margins}
+        colors={props.colors}
+        width={props.width}
+        height={props.height}
+        title={props.title}
       >
         <g transform={trans}>
           {dataSeriesArray}
           <Axes
             yAxisClassName="line y axis"
             yScale={scales.yScale}
-            yAxisTickCount={this.props.yAxisTickCount}
-            yHideOrigin={this.props.yHideOrigin}
+            yAxisTickCount={props.yAxisTickCount}
+            yHideOrigin={props.yHideOrigin}
             xAxisClassName="line x axis"
             xScale={scales.xScale}
-            xHideOrigin={this.props.xHideOrigin}
+            xHideOrigin={props.xHideOrigin}
             strokeWidth="1"
-            margins={this.props.margins}
+            margins={props.margins}
             chartWidth={chartWidth}
             chartHeight={chartHeight}
-            stroke={this.props.axesColor}
+            stroke={props.axesColor}
           />
         </g>
       </Chart>
