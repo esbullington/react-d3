@@ -39,6 +39,14 @@ Then, import into your ReactJS project:
 
 The charts are then available under the `rd3` namespace, which you can then use as shown on the [demonstration page](http://esbullington.github.io/react-d3).
 
+#### Namespaced Require
+* var BarChart = require('react-d3').BarChart;
+* var LineChart = require('react-d3').LineChart;
+* var PieChart = require('react-d3').PieChart;
+* var AreaChart = require('react-d3').AreaChart;
+* var Treemap = require('react-d3').Treemap;
+* var ScatterChart = require('react-d3').ScatterChart;
+
 ### JSFiddle
 There's a development build available for experimentation on JSFiddle: [http://jsfiddle.net/esbullington/jp9dkh1g/](http://jsfiddle.net/esbullington/jp9dkh1g/)
 
