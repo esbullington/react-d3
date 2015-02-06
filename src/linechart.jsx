@@ -6,6 +6,7 @@ var common = require('./common');
 var Chart = common.Chart;
 var XAxis = common.XAxis;
 var YAxis = common.YAxis;
+var utils = require('./utils')
 
 
 var Line = React.createClass({
@@ -210,27 +211,7 @@ var LineChart = exports.LineChart = React.createClass({
     };
   },
 
-  _calculateScales: function(props, chartWidth, chartHeight) {
-
-    var nestedValues = Object.keys(props.data).map( (seriesName) => {
-      return props.data[seriesName];
-    });
-
-    var allValues = [].concat.apply([], nestedValues);
-    var xValues = allValues.map( (item) => item.x );
-    var yValues = allValues.map( (item) => item.y );
-
-    var xScale = d3.scale.linear()
-      .domain([d3.min([d3.min(xValues), 0]), d3.max(xValues)])
-      .range([0, chartWidth]);
-
-    var yScale = d3.scale.linear()
-      .domain([d3.min([d3.min(yValues), 0]), d3.max(yValues)])
-      .range([chartHeight, 0]);
-
-    return {xScale: xScale, yScale: yScale};
-
-  },
+  _calculateScales: utils.calculateScales, 
 
   render: function() {
 
@@ -250,30 +231,31 @@ var LineChart = exports.LineChart = React.createClass({
       chartHeight = chartHeight - props.titleOffset;
     }
 
-    var scales = this._calculateScales(props, chartWidth, chartHeight);
+    var flattenedData = utils.flattenData(props.data);
+
+    var allValues = flattenedData.allValues,
+        xValues = flattenedData.xValues,
+        yValues = flattenedData.yValues;
+
+    var scales = this._calculateScales(chartWidth, chartHeight, xValues, yValues);
 
     var trans = "translate(" + props.margins.left + "," + props.margins.top + ")";
 
-    var index = 0;
-    var dataSeriesArray = [];
-    for(var seriesName in props.data) {
-      if (props.data.hasOwnProperty(seriesName)) {
-        dataSeriesArray.push(
-            <DataSeries
-              xScale={scales.xScale}
-              yScale={scales.yScale}
-              seriesName={seriesName}
-              data={props.data[seriesName]}
-              width={chartWidth}
-              height={chartHeight}
-              color={props.colors(index)}
-              pointRadius={props.pointRadius}
-              key={seriesName}
-            />
-        );
-        index++;
-      }
-    }
+    var dataSeriesArray = Object.keys(props.data).map( (seriesName, idx) => {
+      return (
+          <DataSeries
+            xScale={scales.xScale}
+            yScale={scales.yScale}
+            seriesName={seriesName}
+            data={props.data[seriesName]}
+            width={chartWidth}
+            height={chartHeight}
+            color={props.colors(idx)}
+            pointRadius={props.pointRadius}
+            key={seriesName}
+          /> 
+      ) 
+    });
 
     return (
       <Chart
