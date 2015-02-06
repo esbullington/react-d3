@@ -11,9 +11,9 @@ _By contributing code to React-d3, you are agreeing to release it under the MIT 
 * We try follow the rules contained in [Google's JavaScript Style Guide](http://google-styleguide.googlecode.com/svn/trunk/javascriptguide.xml).  No tabs, 2-space indents, etc.
 
 ## React-specific guidelines
-* Please try to avoid React `state` to the extent possible. Ideally, data should be passed in to the top-level chart via `props` and then passed down to child components as needed.  This isn't because React `state` is inherently bad, but it breaks referential integrity, makes it hard to reason about errors, and prevents certain optimizations that are otherwise possible.  The only exception to this guidelines is with respect ephemeral state within components, such as animations.  When data frame animations are enabled, we plan to use immutable cursors to model global application state.
+* Please try to avoid React `state` to the extent possible. Ideally, data should be passed in to the top-level chart via `props` and then passed down to child components as needed.  This isn't because React `state` is inherently bad, but it breaks referential integrity, makes it hard to reason about errors, and prevents certain optimizations that are otherwise possible.
 * In your components, please document/assert your prop types using React's `propTypes` and set default props if necessary.
-* Try to list React methods with custom methods at the top of components, and React methods at the bottom, in lifecycle order (this is not always the case in existing code).
+* Try to list React methods with custom methods at the top of components, and React methods at the bottom, in lifecycle order (this is not always the case in existing code). Non-lifecycle functions should be preceded by an underscore, as is the emerging style for React.
 * Some React suggestions can be found [here](https://reactjsnews.com/react-style-guide-patterns-i-like/) and [here](http://blog.whn.se/post/69621609605/writing-good-react-components).  The second link in particular is helpful.
 
 ## SVG Performance Notes
