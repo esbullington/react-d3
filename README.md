@@ -1,5 +1,5 @@
 ## react-d3
-Modular ReactJS charts made using d3 chart utilities.
+Modular ReactJS charts made using d3 chart utilities. Examples of available charts can be [viewed here](http://esbullington.github.io/react-d3).
 
 **Caution:**  alpha state software. Chart APIs will change.
 
@@ -9,23 +9,13 @@ Please consider supporting this project by hiring me for your next contract job.
 * custom d3 visualizations.
 * React, AngularJS, or Backbone frontend work.
 * backend work in Python(Flask, Django), Lua(w/Nginx), or Node.js, particularly REST APIs.
-* I'm also interested in functional languages.
 
 More at: [ericbullington.com](https://ericbullington.com)
 
 ### Version
 [![npm version](https://badge.fury.io/js/react-d3.png)](https://www.npmjs.com/package/react-d3)
 
-### Chart types
-Current charts:
-* bar chart
-* line chart
-* pie chart
-* area chart
-* treemap
-* scatter chart
-
-The basic charts generated from the examples/main.js ReactJS app can be [viewed here](http://esbullington.github.io/react-d3). Additional chart types and chart animations are soon to come.
+ Additional chart types and chart animations are soon to come.
 
 ### Basic usage
 
@@ -37,15 +27,18 @@ Then, import into your ReactJS project:
 
 `var rd3 = require('react-d3');`
 
-The charts are then available under the `rd3` namespace, which you can then use as shown on the [demonstration page](http://esbullington.github.io/react-d3).
+The charts are then available under the `rd3` namespace, which you can then use as shown on the [demonstration page](http://esbullington.github.io/react-d3):
 
-#### Namespaced Require
-* var BarChart = require('react-d3').BarChart;
-* var LineChart = require('react-d3').LineChart;
-* var PieChart = require('react-d3').PieChart;
-* var AreaChart = require('react-d3').AreaChart;
-* var Treemap = require('react-d3').Treemap;
-* var ScatterChart = require('react-d3').ScatterChart;
+### Available Charts
+
+```
+var BarChart = rd3.BarChart;
+var LineChart = rd3.LineChart;
+var PieChart = rd3.PieChart;
+var AreaChart = rd3.AreaChart;
+var Treemap = rd3.Treemap;
+var ScatterChart = rd3.ScatterChart;
+```
 
 ### JSFiddle
 There's a development build available for experimentation on JSFiddle: [http://jsfiddle.net/esbullington/jp9dkh1g/](http://jsfiddle.net/esbullington/jp9dkh1g/)
