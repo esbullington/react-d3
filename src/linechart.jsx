@@ -24,18 +24,65 @@ var Line = React.createClass({
   getDefaultProps: function() {
     return {
       stroke: '#1f77b4',
+      strokeWidth: 2,
       fill: 'none',
       className: 'rd3-linechart-path'
     };
   },
 
+  getInitialState: function() {
+    // state for animation usage
+    return {
+      lineStrokeWidth: this.props.strokeWidth,
+      lineStroke: this.props.stroke
+    };
+  },
+
+
+  componentDidMount: function() {
+    pubsub.on('animateCircle', this._animateLine);
+    pubsub.on('restoreCircle', this._restoreLine);
+  },
+
+  componentWillUnmount: function() {
+    pubsub.removeListener('animateCircle', this._animateLine);
+    pubsub.removeListener('restoreCircle', this._restoreLine);
+  },
+
+  _animateLine: function(id) {
+    console.log('animating');
+    if (this.props.id === id.split('-')[0]) {
+      this.setState({ 
+        lineStrokeWidth: this.state.lineStrokeWidth * 2,
+        lineStroke: utils.shade(this.props.stroke, -0.2)
+      });
+    }
+  },
+
+  _restoreLine: function(id) {
+    console.log('restoring');
+    if (this.props.id === id.split('-')[0]) {
+      this.setState({ 
+        lineStrokeWidth: this.props.strokeWidth,
+        lineStroke: this.props.stroke
+      });
+    }
+  },
+
+  _test: function(e) {
+    e.preventDefault();
+  },
+
   render: function() {
     var props = this.props;
+    var state = this.state;
     return (
       <path
+        onMouseOver={this._test}
+        onMouseOut={this._test}
         d={props.path}
-        stroke={props.stroke}
-        strokeWidth={props.strokeWidth}
+        stroke={state.lineStroke}
+        strokeWidth={state.lineStrokeWidth}
         fill={props.fill}
         className={props.className}
       />
@@ -95,8 +142,7 @@ var Circle = React.createClass({
   _animateCircle: function(id) {
     if (this.props.id === id) {
       this.setState({ 
-        circleRadius: this.state.circleRadius * ( 5 / 4 ),
-        circleColor: utils.shade(this.props.fill, -0.2)
+        circleRadius: this.state.circleRadius * ( 5 / 4 )
       });
     }
   },
@@ -104,8 +150,7 @@ var Circle = React.createClass({
   _restoreCircle: function(id) {
     if (this.props.id === id) {
       this.setState({ 
-        circleRadius: this.state.circleRadius * ( 4 / 5 ),
-        circleColor: this.props.fill
+        circleRadius: this.props.r
       });
     }
   }
@@ -157,6 +202,7 @@ var DataSeries = exports.DataSeries = React.createClass({
         <Line
           path={interpolatePath(props.data)}
           stroke={props.color}
+          id={props.seriesName}
         />
         {circles}
       </g>
@@ -314,6 +360,7 @@ var LineChart = exports.LineChart = React.createClass({
         title={props.title}
       >
         <g transform={trans}>
+          {dataSeriesArray}
           <Voronoi
             pubsub={pubsub}
             data={allValues}
@@ -322,7 +369,6 @@ var LineChart = exports.LineChart = React.createClass({
             width={chartWidth}
             height={chartHeight}
           />
-          {dataSeriesArray}
           <Axes
             yAxisClassName="line y axis"
             yScale={scales.yScale}

@@ -25,6 +25,7 @@ var Polygon = React.createClass({
       onMouseOver={this._animateCircle}
       onMouseOut={this._restoreCircle}
       fill="white"
+      opacity="0"
       d={this._drawPath(this.props.vnode)} />;
   }
 

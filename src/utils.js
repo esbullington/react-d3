@@ -20,6 +20,27 @@ exports.calculateScales = (chartWidth, chartHeight, xValues, yValues) => {
 
 };
 
+// debounce from Underscore.js
+// MIT License: https://raw.githubusercontent.com/jashkenas/underscore/master/LICENSE
+// Copyright (c) 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative
+// Reporters & Editors
+exports.debounce = function(func, wait, immediate) {
+  var timeout;
+  return function() {
+    var context = this, args = arguments;
+    var later = function() {
+      timeout = null;
+      if (!immediate) {
+        func.apply(context, args);
+      }
+    };
+    var callNow = immediate && !timeout;
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+    if (callNow) func.apply(context, args);
+  };
+}; 
+
 
 exports.flattenData = (data) => {
 
