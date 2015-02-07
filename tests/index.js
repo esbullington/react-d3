@@ -6,3 +6,4 @@ require('./treemap-tests');
 require('./scatterchart-tests');
 require('./legend-tests');
 require('./voronoi-tests');
+require('./utils-tests');
