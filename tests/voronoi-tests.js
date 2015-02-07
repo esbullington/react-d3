@@ -16,7 +16,7 @@ describe('Voronoi', function() {
       series2: generate(points)
     };
     var allData = utils.flattenData(data);
-    var scales = utils.calculateScales(width, height, allData.xValues, allData.yValues)
+    var scales = utils.calculateScales(width, height, allData.xValues, allData.yValues);
     
     var voronoi = TestUtils.renderIntoDocument(
       <Voronoi

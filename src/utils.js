@@ -18,7 +18,7 @@ exports.calculateScales = (chartWidth, chartHeight, xValues, yValues) => {
     yScale: yScale
   };
 
-}
+};
 
 
 exports.flattenData = (data) => {
@@ -61,8 +61,8 @@ exports.flattenData = (data) => {
     allValues: allValues,
     xValues: xValues,
     yValues: yValues
-  }
-}
+  };
+};
 
 
 
@@ -80,5 +80,5 @@ exports.shade = (hex, percent) => {
   blue = min( 255, round( ( 1 + percent ) * B )).toString(16);
   return '#' + red + green + blue; 
 
-} 
+}; 
 
