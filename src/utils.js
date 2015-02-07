@@ -38,7 +38,7 @@ exports.flattenData = (data) => {
       }
       xValues.push(item.x);
       yValues.push(item.y);
-      var xyCoords = item.x + "-" + item.y;
+      var xyCoords = `${ item.x }-${ item.y }`;
       if (xyCoords in coincidentCoordinateCheck) {
         // Proceed to next iteration if the x y pair already exists
         // d3's Voronoi cannot handle NaN values or coincident coords
@@ -52,7 +52,7 @@ exports.flattenData = (data) => {
           x: item.x,
           y: item.y,
         },
-        id: seriesName + '-' + idx
+        id: `${ seriesName }-${ idx }`
       };
       allValues.push(pointItem);
     });
@@ -78,7 +78,7 @@ exports.shade = (hex, percent) => {
   red = min( 255, round( ( 1 + percent ) * R )).toString(16);
   green = min( 255, round( ( 1 + percent ) * G )).toString(16);
   blue = min( 255, round( ( 1 + percent ) * B )).toString(16);
-  return '#' + red + green + blue; 
+  return `#${ red }${ green }${ blue }`; 
 
 }; 
 
