@@ -24,7 +24,7 @@ var Line = React.createClass({
   getDefaultProps: function() {
     return {
       stroke: '#1f77b4',
-      strokeWidth: 2,
+      strokeWidth: 1.5,
       fill: 'none',
       className: 'rd3-linechart-path'
     };
