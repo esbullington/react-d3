@@ -19,8 +19,9 @@ describe('LineChart', function() {
     );
 
     // Verify that it has the same number of bars as the array's length
-    var paths = TestUtils.scryRenderedDOMComponentsWithTag(
-      linechart, 'path');
+    var paths = TestUtils.scryRenderedDOMComponentsWithClass(
+      linechart, 'rd3-linechart-path');
     expect(paths).to.have.length(2);
+
   });
 });

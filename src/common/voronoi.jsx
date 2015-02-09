@@ -6,11 +6,11 @@ var d3 = require('d3');
 var Polygon = React.createClass({
 
   _animateCircle: function() {
-    this.props.pubsub.emit('animateCircle', this.props.id);
+    this.props.pubsub.emit('animate', this.props.id);
   },
 
   _restoreCircle: function() {
-    this.props.pubsub.emit('restoreCircle', this.props.id);
+    this.props.pubsub.emit('restore', this.props.id);
   },
 
   _drawPath: function(d) {
@@ -25,6 +25,7 @@ var Polygon = React.createClass({
       onMouseOver={this._animateCircle}
       onMouseOut={this._restoreCircle}
       fill="white"
+      opacity="0"
       d={this._drawPath(this.props.vnode)} />;
   }
 

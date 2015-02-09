@@ -6,7 +6,10 @@ var common = require('./common');
 var Chart = common.Chart;
 var XAxis = common.XAxis;
 var YAxis = common.YAxis;
-
+var Voronoi = common.Voronoi;
+var EventEmitter = require('events').EventEmitter;
+var pubsub = exports.pubsub = new EventEmitter();
+var utils = require('./utils');
 
 var Line = React.createClass({
 
@@ -21,18 +24,63 @@ var Line = React.createClass({
   getDefaultProps: function() {
     return {
       stroke: '#1f77b4',
-      fill: 'none'
+      strokeWidth: 1.5,
+      fill: 'none',
+      className: 'rd3-linechart-path'
     };
+  },
+
+  getInitialState: function() {
+    // state for animation usage
+    return {
+      lineStrokeWidth: this.props.strokeWidth,
+      lineStroke: this.props.stroke
+    };
+  },
+
+
+  componentDidMount: function() {
+    pubsub.on('animate', this._animateLine);
+    pubsub.on('restore', this._restoreLine);
+  },
+
+  componentWillUnmount: function() {
+    pubsub.removeListener('animate', this._animateLine);
+    pubsub.removeListener('restore', this._restoreLine);
+  },
+
+  _animateLine: function(id) {
+    if (this.props.id === id.split('-')[0]) {
+      this.setState({ 
+        lineStrokeWidth: this.state.lineStrokeWidth * 1.8
+      });
+    }
+  },
+
+  _restoreLine: function(id) {
+    if (this.props.id === id.split('-')[0]) {
+      this.setState({ 
+        lineStrokeWidth: this.props.strokeWidth
+      });
+    }
+  },
+
+  _test: function(e) {
+    e.preventDefault();
   },
 
   render: function() {
     var props = this.props;
+    var state = this.state;
     return (
       <path
+        onMouseOver={this._test}
+        onMouseOut={this._test}
         d={props.path}
-        stroke={props.stroke}
+        stroke={state.lineStroke}
+        strokeWidth={state.lineStrokeWidth}
         fill={props.fill}
-        strokeWidth={props.strokeWidth}
+        className={props.className}
       />
     );
   }
@@ -50,8 +98,27 @@ var Circle = React.createClass({
 
   getDefaultProps: function() {
     return {
-      fill: '#1f77b4'
+      fill: '#1f77b4',
+      className: 'rd3-linechart-circle'
     };
+  },
+
+  getInitialState: function() {
+    // state for animation usage
+    return {
+      circleRadius: this.props.r,
+      circleColor: this.props.fill
+    };
+  },
+
+  componentDidMount: function() {
+    pubsub.on('animateCircle', this._animateCircle);
+    pubsub.on('restoreCircle', this._restoreCircle);
+  },
+
+  componentWillUnmount: function() {
+    pubsub.removeListener('animateCircle', this._animateCircle);
+    pubsub.removeListener('restoreCircle', this._restoreCircle);
   },
 
   render: function() {
@@ -60,10 +127,28 @@ var Circle = React.createClass({
       <circle
         cx={props.cx}
         cy={props.cy}
-        r={props.r}
-        fill={props.fill}
+        r={this.state.circleRadius}
+        fill={this.state.circleColor}
+        id={props.id}
+        className={props.className}
       />
     );
+  },
+  
+  _animateCircle: function(id) {
+    if (this.props.id === id) {
+      this.setState({ 
+        circleRadius: this.state.circleRadius * ( 5 / 4 )
+      });
+    }
+  },
+
+  _restoreCircle: function(id) {
+    if (this.props.id === id) {
+      this.setState({ 
+        circleRadius: this.props.r
+      });
+    }
   }
 
 });
@@ -103,6 +188,7 @@ var DataSeries = exports.DataSeries = React.createClass({
           r={props.pointRadius}
           fill={props.color}
           key={props.seriesName + i}
+          id={props.seriesName + '-' + i}
         />
       );
     });
@@ -112,6 +198,7 @@ var DataSeries = exports.DataSeries = React.createClass({
         <Line
           path={interpolatePath(props.data)}
           stroke={props.color}
+          id={props.seriesName}
         />
         {circles}
       </g>
@@ -210,27 +297,7 @@ var LineChart = exports.LineChart = React.createClass({
     };
   },
 
-  _calculateScales: function(props, chartWidth, chartHeight) {
-
-    var nestedValues = Object.keys(props.data).map( (seriesName) => {
-      return props.data[seriesName];
-    });
-
-    var allValues = [].concat.apply([], nestedValues);
-    var xValues = allValues.map( (item) => item.x );
-    var yValues = allValues.map( (item) => item.y );
-
-    var xScale = d3.scale.linear()
-      .domain([d3.min([d3.min(xValues), 0]), d3.max(xValues)])
-      .range([0, chartWidth]);
-
-    var yScale = d3.scale.linear()
-      .domain([d3.min([d3.min(yValues), 0]), d3.max(yValues)])
-      .range([chartHeight, 0]);
-
-    return {xScale: xScale, yScale: yScale};
-
-  },
+  _calculateScales: utils.calculateScales, 
 
   render: function() {
 
@@ -250,30 +317,33 @@ var LineChart = exports.LineChart = React.createClass({
       chartHeight = chartHeight - props.titleOffset;
     }
 
-    var scales = this._calculateScales(props, chartWidth, chartHeight);
+    var flattenedData = utils.flattenData(props.data);
+
+    var allValues = flattenedData.allValues,
+        xValues = flattenedData.xValues,
+        yValues = flattenedData.yValues;
+
+    pubsub.setMaxListeners(xValues.length + yValues.length);
+
+    var scales = this._calculateScales(chartWidth, chartHeight, xValues, yValues);
 
     var trans = "translate(" + props.margins.left + "," + props.margins.top + ")";
 
-    var index = 0;
-    var dataSeriesArray = [];
-    for(var seriesName in props.data) {
-      if (props.data.hasOwnProperty(seriesName)) {
-        dataSeriesArray.push(
-            <DataSeries
-              xScale={scales.xScale}
-              yScale={scales.yScale}
-              seriesName={seriesName}
-              data={props.data[seriesName]}
-              width={chartWidth}
-              height={chartHeight}
-              color={props.colors(index)}
-              pointRadius={props.pointRadius}
-              key={seriesName}
-            />
-        );
-        index++;
-      }
-    }
+    var dataSeriesArray = Object.keys(props.data).map( (seriesName, idx) => {
+      return (
+          <DataSeries
+            xScale={scales.xScale}
+            yScale={scales.yScale}
+            seriesName={seriesName}
+            data={props.data[seriesName]}
+            width={chartWidth}
+            height={chartHeight}
+            color={props.colors(idx)}
+            pointRadius={props.pointRadius}
+            key={seriesName}
+          /> 
+      ); 
+    });
 
     return (
       <Chart
@@ -287,6 +357,14 @@ var LineChart = exports.LineChart = React.createClass({
       >
         <g transform={trans}>
           {dataSeriesArray}
+          <Voronoi
+            pubsub={pubsub}
+            data={allValues}
+            xScale={scales.xScale}
+            yScale={scales.yScale}
+            width={chartWidth}
+            height={chartHeight}
+          />
           <Axes
             yAxisClassName="line y axis"
             yScale={scales.yScale}

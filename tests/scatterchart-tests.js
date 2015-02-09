@@ -29,11 +29,11 @@ describe('ScatterChart', function() {
     var circleOneColor = circleOne.props.fill;
 
     expect(circleOne.props.r).to.equal(pointRadius);
-    pubsub.emit('animateCircle', circleOne.props.id);
+    pubsub.emit('animate', circleOne.props.id);
     expect(circleOne.props.r).to.be.above(pointRadius);
     expect(circleOne.props.fill).to.not.equal(circleOneColor);
 
-    pubsub.emit('restoreCircle', circleOne.props.id);
+    pubsub.emit('restore', circleOne.props.id);
     expect(circleOne.props.r).to.equal(pointRadius);
     expect(circleOne.props.fill).to.equal(circleOneColor);
   });
