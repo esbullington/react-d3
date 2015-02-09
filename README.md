@@ -79,4 +79,4 @@ However, I've diverged a bit from this original vision and am storing a bit of s
 ### License
 MIT
 
-Copyright (c) 2014 Eric. S Bullington, Lim Yang Wei, and project [contributors](https://github.com/esbullington/react-d3/graphs/contributors)
+Copyright (c) 2014-2015 Eric. S Bullington, Lim Yang Wei, and project [contributors](https://github.com/esbullington/react-d3/graphs/contributors)
