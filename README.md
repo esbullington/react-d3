@@ -54,14 +54,22 @@ With this approach, ReactJS itself is responsible for the SVG markup.  d3 is use
 
 However, I've diverged a bit from this original vision and am storing a bit of state in top-level chart components in order to leverage d3's axis generators, at least until I develop native React chart axes.
 
-### Todo
-* Many more charts types to do:
-  - candlestick
-  - radial gauge
-  - and many more...
-* Add optional animation to charts using ReactJS transitions
-* Demos galore
-* Documentation
+### Roadmap
+
+* v0.3.0:
+  * Additional charts types:
+    - candlestick
+    - table
+  * Axes labels
+  * Tooltips
+
+* v0.4.0:
+  * Additional charts types:
+    - slopegraphs
+  * Pure React axes
+
+* v0.5.0:
+  * Data frame animations
 
 ### Changelog
 
