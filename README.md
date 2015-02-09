@@ -1,5 +1,5 @@
 ## react-d3
-Modular ReactJS charts made using d3 chart utilities. Examples of available charts can be [viewed here](http://esbullington.github.io/react-d3).
+Modular ReactJS charts made using d3 chart utilities. Examples of available charts can be [viewed here](http://esbullington.github.io/react-d3-website).
 
 **Caution:**  alpha state software. Chart APIs will change.
 
