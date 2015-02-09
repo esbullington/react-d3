@@ -40,13 +40,13 @@ var Circle = React.createClass({
   },
 
   componentDidMount: function() {
-    pubsub.on('animateCircle', this._animateCircle);
-    pubsub.on('restoreCircle', this._restoreCircle);
+    pubsub.on('animate', this._animateCircle);
+    pubsub.on('restore', this._restoreCircle);
   },
 
   componentWillUnmount: function() {
-    pubsub.removeListener('animateCircle', this._animateCircle);
-    pubsub.removeListener('restoreCircle', this._restoreCircle);
+    pubsub.removeListener('animate', this._animateCircle);
+    pubsub.removeListener('restore', this._restoreCircle);
   },
 
   render: function() {
@@ -73,7 +73,7 @@ var Circle = React.createClass({
   _restoreCircle: function(id) {
     if (this.props.id === id) {
       this.setState({ 
-        circleRadius: this.state.circleRadius * ( 4 / 5 ),
+        circleRadius: this.props.r,
         circleColor: this.props.fill
       });
     }

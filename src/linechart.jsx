@@ -40,31 +40,27 @@ var Line = React.createClass({
 
 
   componentDidMount: function() {
-    pubsub.on('animateCircle', this._animateLine);
-    pubsub.on('restoreCircle', this._restoreLine);
+    pubsub.on('animate', this._animateLine);
+    pubsub.on('restore', this._restoreLine);
   },
 
   componentWillUnmount: function() {
-    pubsub.removeListener('animateCircle', this._animateLine);
-    pubsub.removeListener('restoreCircle', this._restoreLine);
+    pubsub.removeListener('animate', this._animateLine);
+    pubsub.removeListener('restore', this._restoreLine);
   },
 
   _animateLine: function(id) {
-    console.log('animating');
     if (this.props.id === id.split('-')[0]) {
       this.setState({ 
-        lineStrokeWidth: this.state.lineStrokeWidth * 2,
-        lineStroke: utils.shade(this.props.stroke, -0.2)
+        lineStrokeWidth: this.state.lineStrokeWidth * 1.8
       });
     }
   },
 
   _restoreLine: function(id) {
-    console.log('restoring');
     if (this.props.id === id.split('-')[0]) {
       this.setState({ 
-        lineStrokeWidth: this.props.strokeWidth,
-        lineStroke: this.props.stroke
+        lineStrokeWidth: this.props.strokeWidth
       });
     }
   },
