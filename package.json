@@ -31,7 +31,7 @@
     "mocha": "^2.0.1",
     "nodemon": "^1.2.1",
     "reactify": "^0.17.1",
-    "uglifyjs": "^2.3.6",
+    "uglify-js": "^2.3.6",
     "watchify": "^2.1.1"
   },
   "dependencies": {
