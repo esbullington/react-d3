@@ -63,13 +63,13 @@ exports.XAxis = React.createClass({
       .call(xAxis);
 
     // Style each of the tick lines
-    d3.select(xAxisClassSelect)
+    d3.selectAll(xAxisClassSelect)
       .selectAll('line')
       .attr("shape-rendering", "crispEdges")
       .attr("stroke", props.tickStroke);
 
     // Style the main axis line
-    d3.select(xAxisClassSelect)
+    d3.selectAll(xAxisClassSelect)
       .select('path')
       .attr("shape-rendering", "crispEdges")
       .attr("fill", props.fill)
