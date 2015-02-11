@@ -23,17 +23,35 @@ var Demos = React.createClass({
   },
 
   componentDidMount: function() {
-    // Apple stock data from Mike Bostock's chart at
-    // http://bl.ocks.org/mbostock/3883195
-    var parseDate = d3.time.format("%d-%b-%y").parse;
-    d3.tsv("data/applestock.tsv", function(error, data) {
+
+    // Browser data from Mike Bostock's chart at
+    // http://bl.ocks.org/mbostock/3885211
+    var parseDate = d3.time.format("%y-%b-%d").parse;
+    d3.tsv("data/browsers.tsv", function(error, data) {
       data.forEach(function(d) {
         d.date = parseDate(d.date);
-        d.value = +d.value;
+        d.IE = +d.IE;
+        d.Chrome = +d.Chrome;
+        d.Firefox = +d.Firefox;
+        d.Safari = +d.Safari;
+        d.Opera = +d.Opera;
       });
-      this.setState({areaData: data});
-    }.bind(this))
 
+      var newData = Object.keys(data[0]).map((name) => {
+        return {
+          'name': name,
+          'values': data.map( (d) => {
+            return {
+              y: d[name]/100,
+              date: d['date']
+            };
+          })
+        };
+      });
+
+      this.setState({areaData: newData});
+
+    }.bind(this));
   },
 
   render: function() {
@@ -147,8 +165,7 @@ var Demos = React.createClass({
               data={this.state.areaData}
               width={400}
               height={300}
-              yAxisTickCount={4}
-              xAxisTickInterval={{unit: 'year', interval: 1}}
+              xAxisTickInterval={{unit: 'month', interval: 2}}
               title="Area Chart"
             />
           </div>
