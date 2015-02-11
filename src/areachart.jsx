@@ -44,13 +44,13 @@ var DataSeries = exports.DataSeries = React.createClass({
 
     var area = d3.svg.area()
       .x(function(d) { return props.xScale(d.date); })
-      .y0(this.props.height)
-      .y1(function(d) { return props.yScale(d.value); });
+      .y0(function(d) { return props.yScale(d.y0); })
+      .y1(function(d) { return props.yScale(d.y0 + d.y); });
 
-    var path = area(this.props.data);
+    var path = area(props.data);
 
     return (
-      <Area path={path} />
+      <Area fill={props.colors(props.name)} path={path} />
     );
   }
 
@@ -72,7 +72,6 @@ var AreaChart = exports.AreaChart = React.createClass({
     return {
       data: [],
       yAxisTickCount: 4,
-      xAxisTickInterval: {unit: 'years', interval: 1},
       width: 400,
       height: 200,
       title: ''
@@ -83,16 +82,39 @@ var AreaChart = exports.AreaChart = React.createClass({
 
     var props = this.props;
 
-    var xScale = d3.time.scale()
-      .range([0, props.width]);
-
-    xScale.domain(d3.extent(props.data, function(d) { return d.date; }));
-
     var yScale = d3.scale.linear()
       .range([props.height, 0]);
 
-    var values = props.data.map( (item) => item.value);
-    yScale.domain([d3.min([d3.min(values), 0]), d3.max(values)]);
+    var xValues = [];
+    var seriesNames = [];
+    props.data.forEach( (series) => {
+      seriesNames.push(series.name);
+      series.values.forEach((val, idx) => {
+        xValues.push(val.date);
+      })
+    })
+
+    var xScale;
+    if (xValues.length > 0 && Object.prototype.toString.call(xValues[0]) === '[object Date]' && props.xAxisTickInterval) {
+      xScale = d3.time.scale()
+        .range([0, props.width]);
+    } else {
+      xScale = d3.scale.linear()
+        .range([0, props.width]);
+    }
+
+    xScale.domain(d3.extent(xValues));
+
+    var colors = d3.scale.category20();
+
+    colors.domain(seriesNames);
+
+    var stack = d3.layout.stack()
+      .values(function(d) { return d.values; });
+
+    var filteredData = props.data.filter( (series) => series.name !== 'date');
+
+    var layers = stack(filteredData);
 
     var margin = {top: 20, right: 20, bottom: 30, left: 50};
 
@@ -106,17 +128,27 @@ var AreaChart = exports.AreaChart = React.createClass({
         title={this.props.title}
       >
         <g transform={trans} >
-          <DataSeries
-            xScale={xScale}
-            yScale={yScale}
-            data={this.props.data}
-            width={this.props.width}
-            height={this.props.height}
-          />
+          {layers.map( (d, idx) => {
+            return (
+                <DataSeries
+                  key={idx}
+                  name={d.name}
+                  colors={colors}
+                  index={idx}
+                  xScale={xScale}
+                  yScale={yScale}
+                  data={d.values}
+                  width={props.width}
+                  height={props.height}
+                />
+              );
+            })
+          }
           <XAxis
             xAxisClassName="area x axis"
             xScale={xScale}
             xAxisTickInterval={this.props.xAxisTickInterval}
+            xAxisTickCount={4}
             margin={margin}
             width={this.props.width}
             height={this.props.height}
