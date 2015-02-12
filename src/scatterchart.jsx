@@ -85,20 +85,33 @@ var DataSeries = exports.DataSeries = React.createClass({
 
   propTypes: {
     data: React.PropTypes.array,
-    color: React.PropTypes.string
+    color: React.PropTypes.string,
+    xAccessor: React.PropTypes.func,
+    yAccessor: React.PropTypes.func
   },
 
   getDefaultProps: function() {
     return {
       data: [],
-      color: '#fff'
+      color: '#fff',
+      xAccessor: (d) => d.x,
+      yAccessor: (d) => d.y
     };
   },
 
   render: function() {
 
-    var circles = this.props.data.map(function(point, i) {
-      return (<Circle cx={this.props.xScale(point.x)} cy={this.props.yScale(point.y)} r={this.props.pointRadius} fill={this.props.color} key={this.props.seriesName + i} id={this.props.seriesName + '-' + i} />);
+    var props = this.props;
+
+    var circles = props.data.map(function(point, i) {
+      return (<Circle
+        cx={props.xScale(props.xAccessor(point))}
+        cy={props.yScale(props.yAccessor(point))}
+        r={props.pointRadius}
+        fill={props.color}
+        key={props.seriesName + i}
+        id={props.seriesName + '-' + i}
+      />);
     }.bind(this));
 
     return (
@@ -126,7 +139,9 @@ var ScatterChart = exports.ScatterChart = React.createClass({
     colors: React.PropTypes.func,
     legend: React.PropTypes.bool,
     hoverAnimation: React.PropTypes.bool,
-  },
+    xAccessor: React.PropTypes.func,
+    yAccessor: React.PropTypes.func
+ },
 
   getDefaultProps: function() {
     return {
@@ -138,7 +153,9 @@ var ScatterChart = exports.ScatterChart = React.createClass({
       axesColor: '#000',
       title: '',
       colors: d3.scale.category20c(),
-      hoverAnimation: true
+      hoverAnimation: true,
+      xAccessor: (d) => d.x,
+      yAccessor: (d) => d.y
     };
   },
 
@@ -163,7 +180,7 @@ var ScatterChart = exports.ScatterChart = React.createClass({
     }
 
     // Returns an object of flattened allValues, xValues, and yValues
-    var flattenedData = utils.flattenData(props.data);
+    var flattenedData = utils.flattenData(props);
 
     var allValues = flattenedData.allValues,
         xValues = flattenedData.xValues,
