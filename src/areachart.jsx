@@ -78,7 +78,6 @@ var AreaChart = exports.AreaChart = React.createClass({
       colors: d3.scale.category20c(),
       margins: {top: 10, right: 20, bottom: 30, left: 30},
       legendOffset: 120,
-      titleOffset: 56,
       yAxisTickCount: 4,
       width: 400,
       height: 200,
@@ -99,10 +98,6 @@ var AreaChart = exports.AreaChart = React.createClass({
 
     if (props.legend) {
       chartWidth = chartWidth - props.legendOffset;
-    }
-
-    if (props.title) {
-      chartHeight = chartHeight - props.titleOffset;
     }
 
     if (!Array.isArray(props.data)) {

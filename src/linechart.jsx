@@ -265,7 +265,6 @@ var LineChart = exports.LineChart = React.createClass({
   propTypes: {
     margins: React.PropTypes.object,
     legendOffset: React.PropTypes.number,
-    titleOffset: React.PropTypes.number,
     pointRadius: React.PropTypes.number,
     yHideOrigin: React.PropTypes.bool,
     xHideOrigin: React.PropTypes.bool,
@@ -279,9 +278,8 @@ var LineChart = exports.LineChart = React.createClass({
 
   getDefaultProps: function() {
     return {
-      margins: {top: 10, right: 20, bottom: 30, left: 30},
+      margins: {top: 10, right: 20, bottom: 40, left: 30},
       legendOffset: 120,
-      titleOffset: 56,
       pointRadius: 3,
       width: 400,
       height: 200,
@@ -305,10 +303,6 @@ var LineChart = exports.LineChart = React.createClass({
 
     if (props.legend) {
       chartWidth = chartWidth - props.legendOffset;
-    }
-
-    if (props.title) {
-      chartHeight = chartHeight - props.titleOffset;
     }
 
     if (!Array.isArray(props.data)) {
