@@ -31,7 +31,10 @@ describe('Utils Test', () => {
 
     var pointsGenerated = Object.keys(data).length * points;
 
-    var { allValues, xValues, yValues }= utils.flattenData(data);
+    var xAccessor = (d) => d.x;
+    var yAccessor = (d) => d.y;
+    var { allValues, xValues, yValues }= utils.flattenData(data, xAccessor, yAccessor);
+
     expect(allValues).to.have.length(pointsGenerated);
     expect(xValues).to.have.length(pointsGenerated);
     expect(yValues).to.have.length(pointsGenerated);
