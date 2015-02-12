@@ -42,14 +42,14 @@ exports.debounce = function(func, wait, immediate) {
 }; 
 
 
-exports.flattenData = (data) => {
+exports.flattenData = (props) => {
 
   var allValues = [];
   var xValues = [];
   var yValues = [];
   var coincidentCoordinateCheck = {};
 
-  data.forEach( (series) => {
+  props.data.forEach( (series) => {
     series.values.forEach( (item, idx) => {
       // Check for NaN since d3's Voronoi cannot handle NaN values
       // Go ahead and Proceed to next iteration since we don't want NaN
@@ -57,9 +57,11 @@ exports.flattenData = (data) => {
       if (isNaN(item.x) || isNaN(item.y)) {
         return;
       }
-      xValues.push(item.x);
-      yValues.push(item.y);
-      var xyCoords = `${ item.x }-${ item.y }`;
+      var x = props.xAccessor(item)
+      var y = props.yAccessor(item)
+      xValues.push(x);
+      yValues.push(y);
+      var xyCoords = `${ x }-${ y }`;
       if (xyCoords in coincidentCoordinateCheck) {
         // Proceed to next iteration if the x y pair already exists
         // d3's Voronoi cannot handle NaN values or coincident coords
@@ -70,8 +72,8 @@ exports.flattenData = (data) => {
       coincidentCoordinateCheck[xyCoords] = '';
       var pointItem = {
         coord: {
-          x: item.x,
-          y: item.y,
+          x: x,
+          y: y,
         },
         id: `${ series.name }-${ idx }`
       };
