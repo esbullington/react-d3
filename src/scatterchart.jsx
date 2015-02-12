@@ -180,7 +180,7 @@ var ScatterChart = exports.ScatterChart = React.createClass({
     }
 
     // Returns an object of flattened allValues, xValues, and yValues
-    var flattenedData = utils.flattenData(props);
+    var flattenedData = utils.flattenData(props.data, props.xAccessor, props.yAccessor);
 
     var allValues = flattenedData.allValues,
         xValues = flattenedData.xValues,

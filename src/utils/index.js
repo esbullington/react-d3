@@ -42,14 +42,14 @@ exports.debounce = function(func, wait, immediate) {
 }; 
 
 
-exports.flattenData = (props) => {
+exports.flattenData = (data, xAccessor, yAccessor) => {
 
   var allValues = [];
   var xValues = [];
   var yValues = [];
   var coincidentCoordinateCheck = {};
 
-  props.data.forEach( (series) => {
+  data.forEach( (series) => {
     series.values.forEach( (item, idx) => {
       // Check for NaN since d3's Voronoi cannot handle NaN values
       // Go ahead and Proceed to next iteration since we don't want NaN
@@ -57,8 +57,8 @@ exports.flattenData = (props) => {
       if (isNaN(item.x) || isNaN(item.y)) {
         return;
       }
-      var x = props.xAccessor(item)
-      var y = props.yAccessor(item)
+      var x = xAccessor(item)
+      var y = yAccessor(item)
       xValues.push(x);
       yValues.push(y);
       var xyCoords = `${ x }-${ y }`;
