@@ -103,10 +103,6 @@ var AreaChart = exports.AreaChart = React.createClass({
       chartHeight = chartHeight - props.titleOffset;
     }
 
-    console.log('chartWidth', chartWidth);
-    console.log('chartHeight', chartHeight);
-
-
     if (!Array.isArray(props.data)) {
       props.data = [props.data];
     }
