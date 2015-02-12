@@ -152,14 +152,18 @@ var DataSeries = exports.DataSeries = React.createClass({
   propTypes: {
     data: React.PropTypes.array,
     interpolationType: React.PropTypes.string,
-    color: React.PropTypes.string
+    color: React.PropTypes.string,
+    xAccessor: React.PropTypes.func,
+    yAccessor: React.PropTypes.func
   },
 
   getDefaultProps: function() {
     return {
       data: [],
       interpolationType: 'linear',
-      color: '#fff'
+      color: '#fff',
+      xAccessor: (d) => d.x,
+      yAccessor: (d) => d.y
     };
   },
 
@@ -167,18 +171,18 @@ var DataSeries = exports.DataSeries = React.createClass({
     var props = this.props;
     var interpolatePath = d3.svg.line()
         .x(function(d) {
-          return props.xScale(d.x);
+          return props.xScale(props.xAccessor(d));
         })
         .y(function(d) {
-          return props.yScale(d.y);
+          return props.yScale(props.yAccessor(d));
         })
         .interpolate(props.interpolationType);
 
     var circles = props.data.map(function(point, i) {
       return (
         <Circle
-          cx={props.xScale(point.x)}
-          cy={props.yScale(point.y)}
+          cx={props.xScale(props.xAccessor(point))}
+          cy={props.yScale(props.yAccessor(point))}
           r={props.pointRadius}
           fill={props.color}
           key={props.seriesName + i}
@@ -273,7 +277,9 @@ var LineChart = exports.LineChart = React.createClass({
     axesColor: React.PropTypes.string,
     title: React.PropTypes.string,
     colors: React.PropTypes.func,
-    legend: React.PropTypes.bool
+    legend: React.PropTypes.bool,
+    xAccessor: React.PropTypes.func,
+    yAccessor: React.PropTypes.func
   },
 
   getDefaultProps: function() {
@@ -285,7 +291,9 @@ var LineChart = exports.LineChart = React.createClass({
       height: 200,
       axesColor: '#000',
       title: '',
-      colors: d3.scale.category20c()
+      colors: d3.scale.category20c(),
+      xAccessor: (d) => d.x,
+      yAccessor: (d) => d.y
     };
   },
 
