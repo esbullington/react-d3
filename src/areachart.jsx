@@ -38,7 +38,7 @@ var Area = React.createClass({
 
 var DataSeries = exports.DataSeries = React.createClass({
 
-  render: function() {
+  render() {
 
     var props = this.props;
 
@@ -60,15 +60,19 @@ var DataSeries = exports.DataSeries = React.createClass({
 var AreaChart = exports.AreaChart = React.createClass({
 
   propTypes: {
-    data: React.PropTypes.array,
+    data: React.PropTypes.oneOfType([
+      React.PropTypes.array,
+      React.PropTypes.object
+    ]),
     yAxisTickCount: React.PropTypes.number,
     xAxisTickInterval: React.PropTypes.object,
     width: React.PropTypes.number,
     height: React.PropTypes.number,
-    title: React.PropTypes.string
+    title: React.PropTypes.string,
+    xAccessor: React.PropTypes.string
   },
 
-  getDefaultProps: function() {
+  getDefaultProps() {
     return {
       data: [],
       yAxisTickCount: 4,
@@ -78,9 +82,12 @@ var AreaChart = exports.AreaChart = React.createClass({
     };
   },
 
-  render: function() {
+  render() {
 
     var props = this.props;
+    if (!Array.isArray(props.data)) {
+      props.data = [props.data];
+    }
 
     var yScale = d3.scale.linear()
       .range([props.height, 0]);
@@ -120,6 +127,22 @@ var AreaChart = exports.AreaChart = React.createClass({
 
     var trans = "translate(" + margin.left + "," + margin.top + ")";
 
+    var dataSeries = layers.map( (d, idx) => {
+      return (
+          <DataSeries
+            key={idx}
+            name={d.name}
+            colors={colors}
+            index={idx}
+            xScale={xScale}
+            yScale={yScale}
+            data={d.values}
+            width={props.width}
+            height={props.height}
+          />
+        );
+      });
+
     return (
       <Chart
         ref='chart'
@@ -128,22 +151,7 @@ var AreaChart = exports.AreaChart = React.createClass({
         title={this.props.title}
       >
         <g transform={trans} >
-          {layers.map( (d, idx) => {
-            return (
-                <DataSeries
-                  key={idx}
-                  name={d.name}
-                  colors={colors}
-                  index={idx}
-                  xScale={xScale}
-                  yScale={yScale}
-                  data={d.values}
-                  width={props.width}
-                  height={props.height}
-                />
-              );
-            })
-          }
+          {dataSeries}
           <XAxis
             xAxisClassName="area x axis"
             xScale={xScale}
