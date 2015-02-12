@@ -27,30 +27,9 @@ var Demos = React.createClass({
     // Browser data from Mike Bostock's chart at
     // http://bl.ocks.org/mbostock/3885211
     var parseDate = d3.time.format("%y-%b-%d").parse;
-    d3.tsv("data/browsers.tsv", function(error, data) {
-      data.forEach(function(d) {
-        d.date = parseDate(d.date);
-        d.IE = +d.IE;
-        d.Chrome = +d.Chrome;
-        d.Firefox = +d.Firefox;
-        d.Safari = +d.Safari;
-        d.Opera = +d.Opera;
-      });
-
-      var newData = Object.keys(data[0]).map((name) => {
-        return {
-          'name': name,
-          'values': data.map( (d) => {
-            return {
-              y: d[name]/100,
-              date: d['date']
-            };
-          })
-        };
-      });
-
-      this.setState({areaData: newData[1]});
-
+    d3.json("data/stackedAreaData.json", function(error, data) {
+      console.log('stacked data', data);
+      this.setState({areaData: data});
     }.bind(this));
   },
 
@@ -164,9 +143,14 @@ var Demos = React.createClass({
             <AreaChart
               data={this.state.areaData}
               width={400}
-              height={300}
-              xAxisTickInterval={{unit: 'month', interval: 2}}
+              height={400}
+              xAxisTickInterval={{unit: 'year', interval: 2}}
               title="Area Chart"
+              xAccessor={(d)=> {
+                  return new Date(d[0]);
+                }
+              }
+              yAccessor={(d)=>d[1]}
             />
           </div>
           <div className="col-md-6">

@@ -11,9 +11,7 @@ var Area = React.createClass({
 
   propTypes: {
     path: React.PropTypes.string,
-    fill: React.PropTypes.string,
-    height: React.PropTypes.number,
-    width: React.PropTypes.number
+    fill: React.PropTypes.string
   },
 
   getDefaultProps: function() {
@@ -43,9 +41,9 @@ var DataSeries = exports.DataSeries = React.createClass({
     var props = this.props;
 
     var area = d3.svg.area()
-      .x(function(d) { return props.xScale(d.date); })
+      .x(function(d) { return props.xScale(props.xAccessor(d)); })
       .y0(function(d) { return props.yScale(d.y0); })
-      .y1(function(d) { return props.yScale(d.y0 + d.y); });
+      .y1(function(d) { return props.yScale(d.y0 + props.yAccessor(d)); });
 
     var path = area(props.data);
 
@@ -66,15 +64,21 @@ var AreaChart = exports.AreaChart = React.createClass({
     ]),
     yAxisTickCount: React.PropTypes.number,
     xAxisTickInterval: React.PropTypes.object,
+    colors: React.PropTypes.func,
     width: React.PropTypes.number,
     height: React.PropTypes.number,
     title: React.PropTypes.string,
-    xAccessor: React.PropTypes.string
+    xAccessor: React.PropTypes.func,
+    yAccessor: React.PropTypes.func
   },
 
   getDefaultProps() {
     return {
       data: [],
+      colors: d3.scale.category20c(),
+      margins: {top: 10, right: 20, bottom: 30, left: 30},
+      legendOffset: 120,
+      titleOffset: 56,
       yAxisTickCount: 4,
       width: 400,
       height: 200,
@@ -85,60 +89,81 @@ var AreaChart = exports.AreaChart = React.createClass({
   render() {
 
     var props = this.props;
+
+    // Calculate inner chart dimensions
+    var chartWidth, chartHeight;
+    chartWidth = props.width - props.margins.left - props.margins.right;
+    chartHeight = props.height - props.margins.top - props.margins.bottom;
+
+    if (props.legend) {
+      chartWidth = chartWidth - props.legendOffset;
+    }
+
+    if (props.title) {
+      chartHeight = chartHeight - props.titleOffset;
+    }
+
+    console.log('chartWidth', chartWidth);
+    console.log('chartHeight', chartHeight);
+
+
     if (!Array.isArray(props.data)) {
       props.data = [props.data];
     }
 
     var yScale = d3.scale.linear()
-      .range([props.height, 0]);
+      .range([chartHeight, 0]);
 
     var xValues = [];
+    var yValues = [];
     var seriesNames = [];
     props.data.forEach( (series) => {
       seriesNames.push(series.name);
       series.values.forEach((val, idx) => {
-        xValues.push(val.date);
+        xValues.push(props.xAccessor(val));
+        yValues.push(props.yAccessor(val));
       })
     })
 
     var xScale;
     if (xValues.length > 0 && Object.prototype.toString.call(xValues[0]) === '[object Date]' && props.xAxisTickInterval) {
       xScale = d3.time.scale()
-        .range([0, props.width]);
+        .range([0, chartWidth]);
     } else {
       xScale = d3.scale.linear()
-        .range([0, props.width]);
+        .range([0, chartWidth]);
     }
 
     xScale.domain(d3.extent(xValues));
+    yScale.domain(d3.extent(yValues));
 
-    var colors = d3.scale.category20();
+    // var colors = d3.scale.category20();
 
-    colors.domain(seriesNames);
+    props.colors.domain(seriesNames);
 
     var stack = d3.layout.stack()
+      .x(props.xAccessor)
+      .y(props.yAccessor)
+      .offset('expand')
+      .order('reverse')
       .values(function(d) { return d.values; });
 
-    var filteredData = props.data.filter( (series) => series.name !== 'date');
+    var layers = stack(props.data);
 
-    var layers = stack(filteredData);
-
-    var margin = {top: 20, right: 20, bottom: 30, left: 50};
-
-    var trans = "translate(" + margin.left + "," + margin.top + ")";
+    var trans = "translate(" + props.margins.left + "," + props.margins.top + ")";
 
     var dataSeries = layers.map( (d, idx) => {
       return (
           <DataSeries
             key={idx}
             name={d.name}
-            colors={colors}
+            colors={props.colors}
             index={idx}
             xScale={xScale}
             yScale={yScale}
             data={d.values}
-            width={props.width}
-            height={props.height}
+            xAccessor={props.xAccessor}
+            yAccessor={props.yAccessor}
           />
         );
       });
@@ -146,8 +171,9 @@ var AreaChart = exports.AreaChart = React.createClass({
     return (
       <Chart
         ref='chart'
-        width={this.props.width + margin.left + margin.right}
-        height={this.props.height + margin.top + margin.bottom}
+        width={this.props.width}
+        height={this.props.height}
+        margins={this.props.margins}
         title={this.props.title}
       >
         <g transform={trans} >
@@ -157,17 +183,17 @@ var AreaChart = exports.AreaChart = React.createClass({
             xScale={xScale}
             xAxisTickInterval={this.props.xAxisTickInterval}
             xAxisTickCount={4}
-            margin={margin}
-            width={this.props.width}
-            height={this.props.height}
+            margins={props.margins}
+            width={chartWidth}
+            height={chartHeight}
           />
           <YAxis
             yAxisClassName="area y axis"
             yScale={yScale}
-            margin={margin}
+            margins={props.margins}
             yAxisTickCount={this.props.yAxisTickCount}
-            width={this.props.width}
-            height={this.props.height}
+            width={chartWidth}
+            height={props.height}
           />
         </g>
       </Chart>
