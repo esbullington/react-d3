@@ -297,8 +297,6 @@ var LineChart = exports.LineChart = React.createClass({
     };
   },
 
-  _calculateScales: utils.calculateScales, 
-
   render: function() {
 
     var props = this.props;
@@ -317,7 +315,7 @@ var LineChart = exports.LineChart = React.createClass({
       props.data = [props.data];
     }
 
-    var flattenedData = utils.flattenData(props.data);
+    var flattenedData = utils.flattenData(props);
 
     var allValues = flattenedData.allValues,
         xValues = flattenedData.xValues,
@@ -325,7 +323,7 @@ var LineChart = exports.LineChart = React.createClass({
 
     pubsub.setMaxListeners(xValues.length + yValues.length);
 
-    var scales = this._calculateScales(chartWidth, chartHeight, xValues, yValues);
+    var scales = utils.calculateScales(chartWidth, chartHeight, xValues, yValues);
 
     var trans = "translate(" + props.margins.left + "," + props.margins.top + ")";
 
