@@ -83,7 +83,7 @@ var DataSeries = React.createClass({
           cellColor={color(i)} 
           label={node[label]}
           fontSize={this.props.fontSize}
-+         textColor={this.props.textColor}
+          textColor={this.props.textColor}
           key={i}
         /> 
       ); 
