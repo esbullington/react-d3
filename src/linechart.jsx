@@ -315,7 +315,7 @@ var LineChart = exports.LineChart = React.createClass({
       props.data = [props.data];
     }
 
-    var flattenedData = utils.flattenData(props);
+    var flattenedData = utils.flattenData(props.data, props.xAccessor, props.yAccessor);
 
     var allValues = flattenedData.allValues,
         xValues = flattenedData.xValues,
