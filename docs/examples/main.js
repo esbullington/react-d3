@@ -74,48 +74,8 @@ var Demos = React.createClass({
     return (
       <div className="container">
         <a href="https://github.com/esbullington/react-d3"><img style={{position: "absolute", top: "0", right: "0", border: "0"}} src="https://camo.githubusercontent.com/a6677b08c955af8400f44c6298f40e7d19cc5b2d/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677261795f3664366436642e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" /></a>
-        <h2 className="page-header">
-          react-d3
-        </h2>
         <div className="row">
-          <div className="col-md-6">
-            <BarChart data={barData} width={500} height={200} title="Bar Chart"/>
-          </div>
-          <div className="col-md-6">
-            <pre ref='block'>
-              <code className='js'>
-              {"var barData = [\n  {label: 'A', value: 5},\n  {label: 'B', value: 6},\n  ...\n  {label: 'F', value: 7}\n];"}
-              </code>
-            </pre>
-            <pre ref='block'>
-              <code className='html'>
-                {"<BarChart\n  data={barData}\n  width={500}\n  height={200}\n  fill={'#3182bd'}\n  title='Bar Chart'\n/>"}
-              </code>
-            </pre>
-          </div>
-        </div>
-        <div className="row">
-          <hr/>
-        </div>
-        <div className="row">
-          <div className="col-md-6">
-            <PieChart data={pieData} width={450} height={400} radius={110} innerRadius={20} title="Pie Chart" />
-          </div>
-          <div className="col-md-6">
-            <pre ref='block'>
-              <code className='js'>
-              {"var pieData = [\n  {label: 'Margarita', value: 20.0},\n  {label: 'John', value: 55.0},\n  {label: 'Tim', value: 25.0 }\n];"}
-              </code>
-            </pre>
-            <pre ref='block'>
-              <code className='html'>
-                {'<PieChart\n  data={pieData}\n  width={400}\n  height={400}\n  radius={100}\n  innerRadius={20}\n  title="Pie Chart"\n/>'}
-              </code>
-            </pre>
-          </div>
-        </div>
-        <div className="row">
-          <hr/>
+          <h3 className="page-header">react-d3: Multiple series charts</h3>
         </div>
         <div className="row">
           <div className="col-md-6">
@@ -124,12 +84,32 @@ var Demos = React.createClass({
           <div className="col-md-6">
             <pre ref='block'>
               <code className='js'>
-              {'var lineData = {\n  series1: [ { x: 0, y: 20 }, ... , { x: 6, y: 10 } ],\n  series2: [ { x: 0, y: 8 }, ..., { x: 6, y: 2 } ],\n  series3: [ { x: 0, y: 0 }, ..., { x: 6, y: 2 } ]\n};'}
+              {
+`var lineData = [
+  {
+    name: "series1",
+    values: [ { x: 0, y: 20 }, ..., { x: 24, y: 10 } ]
+  },
+  ....
+  {
+    name: "series2",
+    values: [ { x: 70, y: 82 }, ..., { x: 76, y: 82 } ]
+  }
+];`
+              }
               </code>
             </pre>
             <pre ref='block'>
               <code className='html'>
-              {'<LineChart\n  legend={true}\n  data={lineData}\n  width={500}\n  height={300}\n  title="Line Chart"\n/>'}
+              {
+`<LineChart
+  legend={true}
+  data={lineData}
+  width={500}
+  height={300}
+  title="Line Chart"
+/>`
+              }
               </code>
             </pre>
           </div>
@@ -144,17 +124,34 @@ var Demos = React.createClass({
           <div className="col-md-6">
             <pre ref='block'>
               <code className='js'>
-              {'var scatterData = {\n  series1: [ { x: 0, y: 20 }, ..., { x: 24, y: 10 } ],\n  series2: [ { x: 40, y: 40 }, ..., { x: 69, y: 50 } ],\n  series3: [ { x: 70, y: 82 }, ..., { x: 76, y: 82 } ]\n};'}
+              {
+`var scatterData = [
+  {
+    name: "series1",
+    values: [ { x: 0, y: 20 }, ..., { x: 24, y: 10 } ]
+  },
+  ....
+  {
+    name: "series3",
+    values: [ { x: 70, y: 82 }, ..., { x: 76, y: 82 } ]
+  }
+];`
+              }
               </code>
             </pre>
             <pre ref='block'>
               <code className='html'>
-              {'<ScatterChart\n  data={scatterData}\n  width={500}\n  height={400}\n  yHideOrigin={true}\n  title="Scatter Chart"\n/>'}
+              {`<ScatterChart
+  data={scatterData}
+  width={500}
+  height={400}
+  yHideOrigin={true}
+  title="Scatter Chart"
+/>`}
               </code>
             </pre>
           </div>
         </div>
-
         <div className="row">
           <hr/>
         </div>
@@ -162,7 +159,7 @@ var Demos = React.createClass({
           <div className="col-md-6">
             <AreaChart
               data={this.state.areaData}
-              width={400}
+              width={500}
               height={400}
               xAxisTickInterval={{unit: 'year', interval: 2}}
               title="Area Chart"
@@ -176,12 +173,98 @@ var Demos = React.createClass({
           <div className="col-md-6">
             <pre ref='block'>
               <code className='js'>
-              {'//Sample data format (not actually rendered)\n//for actual data, see Apple stock data from Mike Bostock\'s chart:\n// http://bl.ocks.org/mbostock/3883195\nvar areaData = [\n  {date: 1177646400000, value: 582.13},\n  ...\n  {date: 1178078400000, value: 603}\n];'}
+              {
+`var areaData = [
+  {
+    name: "series1",
+    values: [ { x: [object Date], y: 20.5 }, ..., { x: [object Date], y: 4.2 } ]
+  },
+  ...
+  {
+    name: "series2",
+    values: [ { x: [object Date], y: 3.2 }, ..., { x: [object Date], y: 11.2 } ]
+  }
+];`
+              }
               </code>
             </pre>
             <pre ref='block'>
               <code className='html'>
-                {'<AreaChart\n  data={areaData}\n  width={400}\n  height={300}\n  yAxisTickCount={4}\n  xAxisTickInterval={{unit: "year", interval: 1}}\n  title="Area Chart"\n/>'}
+                {
+`<AreaChart
+  data={areaData}
+  width={400}
+  height={300}
+  xAxisTickInterval={{unit: 'year', interval: 2}}
+  title="Area Chart"
+/>`
+                }
+              </code>
+            </pre>
+          </div>
+        </div>
+        <div className="row">
+          <h3 className="page-header">react-d3: Single series charts</h3>
+        </div>
+        <div className="row">
+          <div className="col-md-6">
+            <BarChart data={barData} width={500} height={200} title="Bar Chart"/>
+          </div>
+          <div className="col-md-6">
+            <pre ref='block'>
+              <code className='js'>
+              {`var barData = [
+  {label: 'A', value: 5},
+  {label: 'B', value: 6},
+  ...
+  {label: 'F', value: 7}
+];`}
+              </code>
+            </pre>
+            <pre ref='block'>
+              <code className='html'>
+                {`<BarChart
+  data={barData}
+  width={500}
+  height={200}
+  fill={'#3182bd'}
+  title='Bar Chart'
+/>`}
+              </code>
+            </pre>
+          </div>
+        </div>
+        <div className="row">
+          <hr/>
+        </div>
+        <div className="row">
+          <div className="col-md-6">
+            <PieChart data={pieData} width={450} height={400} radius={110} innerRadius={20} title="Pie Chart" />
+          </div>
+          <div className="col-md-6">
+            <pre ref='block'>
+              <code className='js'>
+              {
+`var pieData = [
+  {label: 'Margarita', value: 20.0},
+  {label: 'John', value: 55.0},
+  {label: 'Tim', value: 25.0 }
+];`
+              }
+              </code>
+            </pre>
+            <pre ref='block'>
+              <code className='html'>
+                {
+`<PieChart
+  data={pieData}
+  width={400}
+  height={400}
+  radius={100}
+  innerRadius={20}
+  title="Pie Chart"
+/>`
+                }
               </code>
             </pre>
           </div>
@@ -203,12 +286,30 @@ var Demos = React.createClass({
           <div className="col-md-6">
             <pre ref='block'>
               <code className='js'>
-              {'//2014 World Most Populous Countries (millions)\n//http://www.prb.org/pdf14/2014-world-population-data-sheet_eng.pdf\nvar treemapData = [\n  {label: "China", value: 1364},\n  {label: "India", value: 1296},\n...\n  {label: "Brazil", value: 203}\n];'}
+              {
+`//2014 World Most Populous Countries (millions)
+//http://www.prb.org/pdf14/2014-world-population-data-sheet_eng.pdf
+var treemapData = [
+  {label: "China", value: 1364},
+  {label: "India", value: 1296},
+...
+  {label: "Brazil", value: 203}
+];`
+              }
               </code>
             </pre>
             <pre ref='block'>
               <code className='html'>
-                {'<Treemap\n  data={treemapData}\n  width={450}\n  height={250}\n  textColor="#484848"\n  fontSize="10px"\n  title="Treemap"\n/>'}
+                {
+`<Treemap
+  data={treemapData}
+  width={450}
+  height={250}
+  textColor="#484848"
+  fontSize="10px"
+  title="Treemap"
+/>`
+                }
               </code>
             </pre>
           </div>
