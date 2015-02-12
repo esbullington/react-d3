@@ -49,7 +49,7 @@ var Demos = React.createClass({
         };
       });
 
-      this.setState({areaData: newData});
+      this.setState({areaData: newData[1]});
 
     }.bind(this));
   },
