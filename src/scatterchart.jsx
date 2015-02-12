@@ -116,7 +116,6 @@ var ScatterChart = exports.ScatterChart = React.createClass({
   propTypes: {
     margins: React.PropTypes.object,
     legendOffset: React.PropTypes.number,
-    titleOffset: React.PropTypes.number,
     pointRadius: React.PropTypes.number,
     yHideOrigin: React.PropTypes.bool,
     xHideOrigin: React.PropTypes.bool,
@@ -133,7 +132,6 @@ var ScatterChart = exports.ScatterChart = React.createClass({
     return {
       margins: {top: 20, right: 30, bottom: 30, left: 30},
       legendOffset: 120,
-      titleOffset: 56,
       pointRadius: 3,
       width: 400,
       height: 200,
@@ -158,10 +156,6 @@ var ScatterChart = exports.ScatterChart = React.createClass({
 
     if (props.legend) {
       chartWidth = chartWidth - props.legendOffset;
-    }
-
-    if (props.title) {
-      chartHeight = chartHeight - props.titleOffset;
     }
 
     if (!Array.isArray(props.data)) {
