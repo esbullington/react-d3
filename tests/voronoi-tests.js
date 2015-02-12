@@ -10,11 +10,21 @@ describe('Voronoi', function() {
     var TestUtils = React.addons.TestUtils;
     var utils = require('../src/utils');
 
-    var points = 5, width = 300, height = 200;
-    var data = {
-      series1: generate(points),
-      series2: generate(points)
-    };
+    var points = 5,
+        width = 300,
+        height = 200;
+
+    var data = [
+      {
+        name: "series1",
+        values: generate(5)
+      },
+      {
+        name: "series2",
+        values: generate(5)
+      }
+    ];
+
     var allData = utils.flattenData(data);
     var scales = utils.calculateScales(width, height, allData.xValues, allData.yValues);
     
