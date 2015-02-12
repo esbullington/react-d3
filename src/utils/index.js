@@ -39,10 +39,17 @@ exports.debounce = function(func, wait, immediate) {
     timeout = setTimeout(later, wait);
     if (callNow) func.apply(context, args);
   };
-}; 
+};
 
 
 exports.flattenData = (data, xAccessor, yAccessor) => {
+
+  // Check if second parameter is an obj of accesors
+  var accesors = (typeof xAccessor === "object" ? xAccessor : {});
+  if (xAccessor && typeof xAccessor === "function") {accesors.x = xAccessor;}
+  if (yAccessor && typeof yAccessor === "function") {accesors.y = yAccessor;}
+
+  var values = {};
 
   var allValues = [];
   var xValues = [];
@@ -51,16 +58,29 @@ exports.flattenData = (data, xAccessor, yAccessor) => {
 
   data.forEach( (series) => {
     series.values.forEach( (item, idx) => {
+
+      // Iterate through all props in the current value object
+      Object.keys(item).forEach( (dimension) => {
+        // Create prop in values object for each dimension
+        if (!values[dimension]) {values[dimension] = [];}
+
+        // Push dimension to the corresponding array,
+        // using an accesor if it exists
+        values[dimension].push(
+          accesors[dimension] ?
+            accesors[dimension](item[dimension]) :
+            item[dimension]
+          );
+      });
+
       // Check for NaN since d3's Voronoi cannot handle NaN values
       // Go ahead and Proceed to next iteration since we don't want NaN
       // in allValues or in xValues or yValues
       if (isNaN(item.x) || isNaN(item.y)) {
         return;
       }
-      var x = xAccessor(item)
-      var y = yAccessor(item)
-      xValues.push(x);
-      yValues.push(y);
+      var x = accesors.x ? accesors.x(item) : item.x;
+      var y = accesors.y ? accesors.y(item) : item.y;
       var xyCoords = `${ x }-${ y }`;
       if (xyCoords in coincidentCoordinateCheck) {
         // Proceed to next iteration if the x y pair already exists
@@ -81,11 +101,11 @@ exports.flattenData = (data, xAccessor, yAccessor) => {
     });
   });
 
-  return {
-    allValues: allValues,
-    xValues: xValues,
-    yValues: yValues
-  };
+
+  values.allValues= allValues;
+  values.xValues= values.x;
+  values.yValues= values.y;
+  return values;
 };
 
 
@@ -95,14 +115,13 @@ exports.shade = (hex, percent) => {
   var R, G, B, red, green, blue, number;
   var min = Math.min, round = Math.round;
   if(hex.length !== 7) { return hex; }
-  number = parseInt(hex.slice(1), 16); 
+  number = parseInt(hex.slice(1), 16);
   R = number >> 16;
   G = number >> 8 & 0xFF;
   B = number & 0xFF;
   red = min( 255, round( ( 1 + percent ) * R )).toString(16);
   green = min( 255, round( ( 1 + percent ) * G )).toString(16);
   blue = min( 255, round( ( 1 + percent ) * B )).toString(16);
-  return `#${ red }${ green }${ blue }`; 
+  return `#${ red }${ green }${ blue }`;
 
-}; 
-
+};
