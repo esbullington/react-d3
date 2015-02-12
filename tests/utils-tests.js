@@ -13,11 +13,22 @@ describe('Utils Test', () => {
   it('flatten data and calculate scales', () => {
 
     var generate = require('../utils/datagen').generateArrayOfPoints;
-    var points = 5, width = 300, height = 200;
-    var data = {
-        series1: generate(points),
-        series2: generate(points)
-      };
+
+    var points = 5,
+        width = 300,
+        height = 200;
+
+    var data = [
+      {
+        name: "series1",
+        values: generate(5)
+      },
+      {
+        name: "series2",
+        values: generate(5)
+      }
+    ];
+
     var pointsGenerated = Object.keys(data).length * points;
 
     var { allValues, xValues, yValues }= utils.flattenData(data);
