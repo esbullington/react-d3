@@ -49,8 +49,8 @@ exports.flattenData = (data) => {
   var yValues = [];
   var coincidentCoordinateCheck = {};
 
-  Object.keys(data).forEach( (seriesName) => {
-    data[seriesName].forEach( (item, idx) => {
+  data.forEach( (series) => {
+    series.values.forEach( (item, idx) => {
       // Check for NaN since d3's Voronoi cannot handle NaN values
       // Go ahead and Proceed to next iteration since we don't want NaN
       // in allValues or in xValues or yValues
@@ -73,11 +73,12 @@ exports.flattenData = (data) => {
           x: item.x,
           y: item.y,
         },
-        id: `${ seriesName }-${ idx }`
+        id: `${ series.name }-${ idx }`
       };
       allValues.push(pointItem);
     });
   });
+
   return {
     allValues: allValues,
     xValues: xValues,

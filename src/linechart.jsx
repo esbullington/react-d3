@@ -65,17 +65,11 @@ var Line = React.createClass({
     }
   },
 
-  _test: function(e) {
-    e.preventDefault();
-  },
-
   render: function() {
     var props = this.props;
     var state = this.state;
     return (
       <path
-        onMouseOver={this._test}
-        onMouseOut={this._test}
         d={props.path}
         stroke={state.lineStroke}
         strokeWidth={state.lineStrokeWidth}
@@ -317,6 +311,10 @@ var LineChart = exports.LineChart = React.createClass({
       chartHeight = chartHeight - props.titleOffset;
     }
 
+    if (!Array.isArray(props.data)) {
+      props.data = [props.data];
+    }
+
     var flattenedData = utils.flattenData(props.data);
 
     var allValues = flattenedData.allValues,
@@ -329,18 +327,18 @@ var LineChart = exports.LineChart = React.createClass({
 
     var trans = "translate(" + props.margins.left + "," + props.margins.top + ")";
 
-    var dataSeriesArray = Object.keys(props.data).map( (seriesName, idx) => {
+    var dataSeriesArray = props.data.map( (series, idx) => {
       return (
           <DataSeries
             xScale={scales.xScale}
             yScale={scales.yScale}
-            seriesName={seriesName}
-            data={props.data[seriesName]}
+            seriesName={series.name}
+            data={series.values}
             width={chartWidth}
             height={chartHeight}
             color={props.colors(idx)}
             pointRadius={props.pointRadius}
-            key={seriesName}
+            key={series.name}
           /> 
       ); 
     });

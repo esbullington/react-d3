@@ -164,6 +164,10 @@ var ScatterChart = exports.ScatterChart = React.createClass({
       chartHeight = chartHeight - props.titleOffset;
     }
 
+    if (!Array.isArray(props.data)) {
+      props.data = [props.data];
+    }
+
     // Returns an object of flattened allValues, xValues, and yValues
     var flattenedData = utils.flattenData(props.data);
 
@@ -178,18 +182,18 @@ var ScatterChart = exports.ScatterChart = React.createClass({
 
     var trans = "translate(" + props.margins.left + "," + props.margins.top + ")";
 
-    var dataSeriesArray = Object.keys(props.data).map( (seriesName, idx) => {
+    var dataSeriesArray = props.data.map( (series, idx) => {
       return (
           <DataSeries
             xScale={scales.xScale}
             yScale={scales.yScale}
-            seriesName={seriesName}
-            data={props.data[seriesName]}
+            seriesName={series.name}
+            data={series.values}
             width={chartWidth}
             height={chartHeight}
             color={props.colors(idx)}
             pointRadius={props.pointRadius}
-            key={seriesName}
+            key={series.name}
             hoverAnimation={props.hoverAnimation}
           />
       );
