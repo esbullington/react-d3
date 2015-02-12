@@ -82,7 +82,9 @@ var AreaChart = exports.AreaChart = React.createClass({
       yAxisTickCount: 4,
       width: 400,
       height: 200,
-      title: ''
+      title: '',
+      xAccessor: (d) => d.x,
+      yAccessor: (d) => d.y
     };
   },
 
@@ -118,8 +120,8 @@ var AreaChart = exports.AreaChart = React.createClass({
       series.values.forEach((val, idx) => {
         xValues.push(props.xAccessor(val));
         yValues.push(props.yAccessor(val));
-      })
-    })
+      });
+    });
 
     var xScale;
     if (xValues.length > 0 && Object.prototype.toString.call(xValues[0]) === '[object Date]' && props.xAxisTickInterval) {
