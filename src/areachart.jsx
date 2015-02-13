@@ -62,6 +62,8 @@ var AreaChart = exports.AreaChart = React.createClass({
       React.PropTypes.array,
       React.PropTypes.object
     ]),
+    legend: React.PropTypes.bool,
+    legendOffset: React.PropTypes.number,
     yAxisTickCount: React.PropTypes.number,
     xAxisTickInterval: React.PropTypes.object,
     colors: React.PropTypes.func,
@@ -78,6 +80,7 @@ var AreaChart = exports.AreaChart = React.createClass({
       colors: d3.scale.category20c(),
       margins: {top: 10, right: 20, bottom: 30, left: 30},
       legendOffset: 120,
+      legend: false,
       yAxisTickCount: 4,
       width: 400,
       height: 200,
@@ -130,8 +133,6 @@ var AreaChart = exports.AreaChart = React.createClass({
     xScale.domain(d3.extent(xValues));
     yScale.domain(d3.extent(yValues));
 
-    // var colors = d3.scale.category20();
-
     props.colors.domain(seriesNames);
 
     var stack = d3.layout.stack()
@@ -163,19 +164,21 @@ var AreaChart = exports.AreaChart = React.createClass({
 
     return (
       <Chart
-        ref='chart'
-        width={this.props.width}
-        height={this.props.height}
-        margins={this.props.margins}
-        title={this.props.title}
+        legend={props.legend}
+        data={props.data}
+        margins={props.margins}
+        colors={props.colors}
+        width={props.width}
+        height={props.height}
+        title={props.title}
       >
         <g transform={trans} >
           {dataSeries}
           <XAxis
             xAxisClassName="area x axis"
             xScale={xScale}
-            xAxisTickInterval={this.props.xAxisTickInterval}
-            xAxisTickCount={4}
+            xAxisTickInterval={props.xAxisTickInterval}
+            xAxisTickCount={props.xAxisTickCount}
             margins={props.margins}
             width={chartWidth}
             height={chartHeight}
@@ -184,6 +187,7 @@ var AreaChart = exports.AreaChart = React.createClass({
             yAxisClassName="area y axis"
             yScale={yScale}
             margins={props.margins}
+            yAxisTickInterval={props.yAxisTickInterval}
             yAxisTickCount={this.props.yAxisTickCount}
             width={chartWidth}
             height={props.height}

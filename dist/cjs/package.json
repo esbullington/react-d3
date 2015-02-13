@@ -8,11 +8,11 @@
   "license": "{{ pkg.license }}",
   "main": "index.js",
   "devDependencies": {
-    "browserify": "~6.3.3"
+    "browserify": "^8.0.0"
   },
   "dependencies": {
-    "d3": "^3.4.13",
-    "react": "^0.12.1"
+    "d3": "^3.5.0",
+    "react": "^0.12.0"
   },
   "repository": {
     "type": "{{ pkg.repository.type }}",
