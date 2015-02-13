@@ -16,13 +16,13 @@ var Bar = React.createClass({
     offset: React.PropTypes.number
   },
 
-  getDefaultProps: function() {
+  getDefaultProps() {
     return {
       offset: 0
     };
   },
 
-  render: function() {
+  render() {
     return (
       <rect
         fill={this.props.fill}
@@ -46,14 +46,14 @@ var DataSeries = exports.DataSeries = React.createClass({
     offset: React.PropTypes.number
   },
 
-  getDefaultProps: function() {
+  getDefaultProps() {
     return {
       padding: 0.1,
       data: []
     };
   },
 
-  render: function() {
+  render() {
 
     var props = this.props;
 
@@ -85,7 +85,7 @@ var BarChart = exports.BarChart = React.createClass({
     title: React.PropTypes.string
   },
 
-  getDefaultProps: function() {
+  getDefaultProps() {
     return {
       data: [],
       yAxisTickCount: 4,
@@ -97,7 +97,7 @@ var BarChart = exports.BarChart = React.createClass({
     };
   },
 
-  render: function() {
+  render() {
 
     var props = this.props;
 
