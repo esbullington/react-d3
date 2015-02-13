@@ -68,6 +68,14 @@ However, I've diverged a bit from this original vision and am storing a bit of s
 
 ### Changelog
 
+####0.2.0:
+- Added scatterchart (Thanks @yang-wei!)
+- Adopted consistent data format for multi-series chart
+- Mouseover animation for both line chart and scatter chart
+- Added JSHinting
+- Factored out axes
+- Added chart legend
+
 ####0.1.0:
 - Added treemap (Thanks @yang-wei!)
 - Restructured project for improved npm compatibility
