@@ -12,11 +12,18 @@ describe('ScatterChart', function() {
     var points = 5;
     var pointRadius = 5;
 
-    // Render a scatterchart using array data
-    var data = {
-      series1: generate(points),
-      series2: generate(points)
-    };
+    // Render a scatterchart 
+    var data = [
+      {
+        name: "series1",
+        values: generate(5)
+      },
+      {
+        name: "series2",
+        values: generate(5)
+      }
+    ];
+
     var scatterchart = TestUtils.renderIntoDocument(
       <ScatterChart data={data} width={400} height={200} pointRadius={pointRadius} />
     );

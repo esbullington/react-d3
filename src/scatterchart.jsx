@@ -85,20 +85,33 @@ var DataSeries = exports.DataSeries = React.createClass({
 
   propTypes: {
     data: React.PropTypes.array,
-    color: React.PropTypes.string
+    color: React.PropTypes.string,
+    xAccessor: React.PropTypes.func,
+    yAccessor: React.PropTypes.func
   },
 
   getDefaultProps: function() {
     return {
       data: [],
-      color: '#fff'
+      color: '#fff',
+      xAccessor: (d) => d.x,
+      yAccessor: (d) => d.y
     };
   },
 
   render: function() {
 
-    var circles = this.props.data.map(function(point, i) {
-      return (<Circle cx={this.props.xScale(point.x)} cy={this.props.yScale(point.y)} r={this.props.pointRadius} fill={this.props.color} key={this.props.seriesName + i} id={this.props.seriesName + '-' + i} />);
+    var props = this.props;
+
+    var circles = props.data.map(function(point, i) {
+      return (<Circle
+        cx={props.xScale(props.xAccessor(point))}
+        cy={props.yScale(props.yAccessor(point))}
+        r={props.pointRadius}
+        fill={props.color}
+        key={props.seriesName + i}
+        id={props.seriesName + '-' + i}
+      />);
     }.bind(this));
 
     return (
@@ -116,7 +129,6 @@ var ScatterChart = exports.ScatterChart = React.createClass({
   propTypes: {
     margins: React.PropTypes.object,
     legendOffset: React.PropTypes.number,
-    titleOffset: React.PropTypes.number,
     pointRadius: React.PropTypes.number,
     yHideOrigin: React.PropTypes.bool,
     xHideOrigin: React.PropTypes.bool,
@@ -127,20 +139,23 @@ var ScatterChart = exports.ScatterChart = React.createClass({
     colors: React.PropTypes.func,
     legend: React.PropTypes.bool,
     hoverAnimation: React.PropTypes.bool,
-  },
+    xAccessor: React.PropTypes.func,
+    yAccessor: React.PropTypes.func
+ },
 
   getDefaultProps: function() {
     return {
       margins: {top: 20, right: 30, bottom: 30, left: 30},
       legendOffset: 120,
-      titleOffset: 56,
       pointRadius: 3,
       width: 400,
       height: 200,
       axesColor: '#000',
       title: '',
       colors: d3.scale.category20c(),
-      hoverAnimation: true
+      hoverAnimation: true,
+      xAccessor: (d) => d.x,
+      yAccessor: (d) => d.y
     };
   },
 
@@ -160,12 +175,12 @@ var ScatterChart = exports.ScatterChart = React.createClass({
       chartWidth = chartWidth - props.legendOffset;
     }
 
-    if (props.title) {
-      chartHeight = chartHeight - props.titleOffset;
+    if (!Array.isArray(props.data)) {
+      props.data = [props.data];
     }
 
     // Returns an object of flattened allValues, xValues, and yValues
-    var flattenedData = utils.flattenData(props.data);
+    var flattenedData = utils.flattenData(props.data, props.xAccessor, props.yAccessor);
 
     var allValues = flattenedData.allValues,
         xValues = flattenedData.xValues,
@@ -178,18 +193,18 @@ var ScatterChart = exports.ScatterChart = React.createClass({
 
     var trans = "translate(" + props.margins.left + "," + props.margins.top + ")";
 
-    var dataSeriesArray = Object.keys(props.data).map( (seriesName, idx) => {
+    var dataSeriesArray = props.data.map( (series, idx) => {
       return (
           <DataSeries
             xScale={scales.xScale}
             yScale={scales.yScale}
-            seriesName={seriesName}
-            data={props.data[seriesName]}
+            seriesName={series.name}
+            data={series.values}
             width={chartWidth}
             height={chartHeight}
             color={props.colors(idx)}
             pointRadius={props.pointRadius}
-            key={seriesName}
+            key={series.name}
             hoverAnimation={props.hoverAnimation}
           />
       );

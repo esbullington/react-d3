@@ -10,10 +10,16 @@ describe('Legend', function() {
     var TestUtils = React.addons.TestUtils;
 
     // Render a linechart using array data
-    var data = {
-      series1: generate(5),
-      series2: generate(5)
-    };
+    var data = [
+      {
+        name: "series1",
+        values: generate(5)
+      },
+      {
+        name: "series2",
+        values: generate(5)
+      }
+    ];
 
     var legend = TestUtils.renderIntoDocument(
       <Legend 

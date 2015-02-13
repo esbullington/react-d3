@@ -65,17 +65,11 @@ var Line = React.createClass({
     }
   },
 
-  _test: function(e) {
-    e.preventDefault();
-  },
-
   render: function() {
     var props = this.props;
     var state = this.state;
     return (
       <path
-        onMouseOver={this._test}
-        onMouseOut={this._test}
         d={props.path}
         stroke={state.lineStroke}
         strokeWidth={state.lineStrokeWidth}
@@ -158,14 +152,18 @@ var DataSeries = exports.DataSeries = React.createClass({
   propTypes: {
     data: React.PropTypes.array,
     interpolationType: React.PropTypes.string,
-    color: React.PropTypes.string
+    color: React.PropTypes.string,
+    xAccessor: React.PropTypes.func,
+    yAccessor: React.PropTypes.func
   },
 
   getDefaultProps: function() {
     return {
       data: [],
       interpolationType: 'linear',
-      color: '#fff'
+      color: '#fff',
+      xAccessor: (d) => d.x,
+      yAccessor: (d) => d.y
     };
   },
 
@@ -173,18 +171,18 @@ var DataSeries = exports.DataSeries = React.createClass({
     var props = this.props;
     var interpolatePath = d3.svg.line()
         .x(function(d) {
-          return props.xScale(d.x);
+          return props.xScale(props.xAccessor(d));
         })
         .y(function(d) {
-          return props.yScale(d.y);
+          return props.yScale(props.yAccessor(d));
         })
         .interpolate(props.interpolationType);
 
     var circles = props.data.map(function(point, i) {
       return (
         <Circle
-          cx={props.xScale(point.x)}
-          cy={props.yScale(point.y)}
+          cx={props.xScale(props.xAccessor(point))}
+          cy={props.yScale(props.yAccessor(point))}
           r={props.pointRadius}
           fill={props.color}
           key={props.seriesName + i}
@@ -271,7 +269,6 @@ var LineChart = exports.LineChart = React.createClass({
   propTypes: {
     margins: React.PropTypes.object,
     legendOffset: React.PropTypes.number,
-    titleOffset: React.PropTypes.number,
     pointRadius: React.PropTypes.number,
     yHideOrigin: React.PropTypes.bool,
     xHideOrigin: React.PropTypes.bool,
@@ -280,24 +277,25 @@ var LineChart = exports.LineChart = React.createClass({
     axesColor: React.PropTypes.string,
     title: React.PropTypes.string,
     colors: React.PropTypes.func,
-    legend: React.PropTypes.bool
+    legend: React.PropTypes.bool,
+    xAccessor: React.PropTypes.func,
+    yAccessor: React.PropTypes.func
   },
 
   getDefaultProps: function() {
     return {
-      margins: {top: 10, right: 20, bottom: 30, left: 30},
+      margins: {top: 10, right: 20, bottom: 40, left: 30},
       legendOffset: 120,
-      titleOffset: 56,
       pointRadius: 3,
       width: 400,
       height: 200,
       axesColor: '#000',
       title: '',
-      colors: d3.scale.category20c()
+      colors: d3.scale.category20c(),
+      xAccessor: (d) => d.x,
+      yAccessor: (d) => d.y
     };
   },
-
-  _calculateScales: utils.calculateScales, 
 
   render: function() {
 
@@ -313,11 +311,11 @@ var LineChart = exports.LineChart = React.createClass({
       chartWidth = chartWidth - props.legendOffset;
     }
 
-    if (props.title) {
-      chartHeight = chartHeight - props.titleOffset;
+    if (!Array.isArray(props.data)) {
+      props.data = [props.data];
     }
 
-    var flattenedData = utils.flattenData(props.data);
+    var flattenedData = utils.flattenData(props.data, props.xAccessor, props.yAccessor);
 
     var allValues = flattenedData.allValues,
         xValues = flattenedData.xValues,
@@ -325,22 +323,22 @@ var LineChart = exports.LineChart = React.createClass({
 
     pubsub.setMaxListeners(xValues.length + yValues.length);
 
-    var scales = this._calculateScales(chartWidth, chartHeight, xValues, yValues);
+    var scales = utils.calculateScales(chartWidth, chartHeight, xValues, yValues);
 
     var trans = "translate(" + props.margins.left + "," + props.margins.top + ")";
 
-    var dataSeriesArray = Object.keys(props.data).map( (seriesName, idx) => {
+    var dataSeriesArray = props.data.map( (series, idx) => {
       return (
           <DataSeries
             xScale={scales.xScale}
             yScale={scales.yScale}
-            seriesName={seriesName}
-            data={props.data[seriesName]}
+            seriesName={series.name}
+            data={series.values}
             width={chartWidth}
             height={chartHeight}
             color={props.colors(idx)}
             pointRadius={props.pointRadius}
-            key={seriesName}
+            key={series.name}
           /> 
       ); 
     });

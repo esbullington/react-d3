@@ -31,10 +31,7 @@ exports.Legend = React.createClass({
     };
 
     var legendItems = [];
-    var idx = 0;
-    for(var seriesName in props.data) {
-
-      if (props.data.hasOwnProperty(seriesName)) {
+    props.data.forEach( (series, idx) => {
 
       var itemStyle = {
         'color': props.colors(idx),
@@ -42,15 +39,13 @@ exports.Legend = React.createClass({
         'fontSize': '200%'
       };
 
-        var seriesValue = props.data[seriesName];
-        legendItems.push(
-              <li style={itemStyle} key={idx} >
-                <span style={textStyle}>{seriesName}</span>
-              </li>
-            );
-        idx++;
-      }
-    }
+      legendItems.push(
+            <li style={itemStyle} key={idx} >
+              <span style={textStyle}>{series.name}</span>
+            </li>
+          );
+
+    })
 
     // In preparation for legend positioning
     var legendFloat = 'right';

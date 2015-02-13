@@ -21,7 +21,10 @@ var LegendChart = React.createClass({
     legendPosition: React.PropTypes.string,
     sideOffset: React.PropTypes.number,
     margins: React.PropTypes.object,
-    data: React.PropTypes.object,
+    data: React.PropTypes.oneOfType([
+      React.PropTypes.object,
+      React.PropTypes.array
+    ])
   },
 
   getDefaultProps: function() {
