@@ -230,21 +230,34 @@ var Demos = React.createClass({
               height={400}
               xAxisTickInterval={{unit: 'month', interval: 1}}
               title="Candlestick Chart"
-              xAccessor={(d)=> {
-                  return d.x;
-                }
-              }
             />
           </div>
           <div className="col-md-6">
             <pre ref='block'>
               <code className='js'>
-              {'              yAccessor={(d)=>d.close}  var lineData = {\n  series1: [ { x: 0, y: 20 }, ... , { x: 6, y: 10 } ],\n  series2: [ { x: 0, y: 8 }, ..., { x: 6, y: 2 } ],\n  series3: [ { x: 0, y: 0 }, ..., { x: 6, y: 2 } ]\n};'}
+              {
+`var ohlcData = [
+  {
+    name: "AAPL",
+    values: [ { x: [object Date], open: 451.69, high: 456.23, low: 435, close: 439.88 }, 
+              { x: [object Date], open: 437.82, high: 453.21, low: 435.86 , close: 449.83 }, 
+              ... ]
+  }
+];`
+              }
               </code>
             </pre>
             <pre ref='block'>
               <code className='html'>
-              {'<CandleStickChart\n  legend={true}\n  data={lineData}\n  width={500}\n  height={300}\n  title="Candlestick Chart"\n/>'}
+                {
+`<CandleStickChart
+  data={ohlcData}
+  width={500}
+  height={400}
+  xAxisTickInterval={{unit: 'month', interval: 1}}
+  title="Candlestick Chart"
+/>`
+                }
               </code>
             </pre>
           </div>

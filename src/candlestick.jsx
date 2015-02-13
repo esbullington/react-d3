@@ -52,6 +52,56 @@ var Wicks = React.createClass({
 });
 
 
+
+var Candles = React.createClass({
+
+  propTypes: {
+    data: React.PropTypes.array.isRequired,
+    strokeWidth: React.PropTypes.number,
+    stroke: React.PropTypes.string,
+    xScale: React.PropTypes.func.isRequired,
+    yScale: React.PropTypes.func.isRequired,
+    xAccessor: React.PropTypes.func.isRequired,
+    yAccessor: React.PropTypes.func.isRequired
+  },
+
+  getDefaultProps: function() {
+    return {
+      stroke: '#000',
+      strokeWidth: 1,
+      fillup: "green",
+      filldown: "red",
+      shapeRendering: "crispEdges"
+    };
+  },
+
+  render: function() {
+    var xRange = this.props.xScale.range(),
+        width = Math.abs(xRange[0] - xRange[1]),
+        candleWidth = (width / (this.props.data.length + 2)) * 0.5;
+
+    var candles = this.props.data
+        .map(function(d, idx) {
+          var ohlc = this.props.yAccessor(d),
+            x = this.props.xScale(this.props.xAccessor(d)) - 0.5 * candleWidth,
+            y = this.props.yScale(Math.max(ohlc.open, ohlc.close)),
+            height = Math.abs(this.props.yScale(ohlc.open) - this.props.yScale(ohlc.close)),
+            y2 = this.props.yScale(ohlc.low),
+            className = (ohlc.open <= ohlc.close) ? 'up' : 'down',
+            fill = (ohlc.open <= ohlc.close) ? this.props.fillup : this.props.filldown;
+
+          return <rect key={idx} className={className} fill={fill}
+                  x={x}
+                  y={y}
+                  width={candleWidth}
+                  height={height} />
+        }, this);
+    return (
+      <g className="rd3-candlestick-candles">{candles}</g>
+    );
+  }
+});
+
 var DataSeries = exports.DataSeries = React.createClass({
 
   render() {
@@ -67,17 +117,20 @@ var DataSeries = exports.DataSeries = React.createClass({
           yAccessor={props.yAccessor}
           data={props.data}
           />
+        <Candles 
+          xScale={props.xScale}
+          yScale={props.yScale}
+          xAccessor={props.xAccessor}
+          yAccessor={props.yAccessor}
+          data={props.data}
+          />
       </g>
     );
   }
 
 });
 /*
-        <Candles 
-          xScale={xScale}
-          yScale={yScale}
-          data={props.data}
-          />
+
 */
 
 var CandleStickChart = exports.CandleStickChart = React.createClass({
