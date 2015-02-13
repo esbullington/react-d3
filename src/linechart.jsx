@@ -192,11 +192,11 @@ var DataSeries = exports.DataSeries = React.createClass({
     if (this._isDate(props.data[0], xAccessor)) {
         interpolatePath.x(function(d) {
           return props.xScale(props.xAccessor(d).getTime());
-        })
+        });
     } else {
         interpolatePath.x(function(d) {
           return props.xScale(props.xAccessor(d));
-        })
+        });
     }
 
     // Map over data to generate SVG circles at data points

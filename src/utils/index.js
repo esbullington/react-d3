@@ -22,7 +22,7 @@ exports.calculateScales = (chartWidth, chartHeight, xValues, yValues) => {
       .range([chartHeight, 0]);
   }
 
-  yScale.domain(d3.extent(yValues))
+  yScale.domain(d3.extent(yValues));
 
   return {
     xScale: xScale,
@@ -68,8 +68,8 @@ exports.flattenData = (data, xAccessor, yAccessor) => {
       if (isNaN(xAccessor(item)) || isNaN(yAccessor(item))) {
         return;
       }
-      var x = xAccessor(item)
-      var y = yAccessor(item)
+      var x = xAccessor(item);
+      var y = yAccessor(item);
       xValues.push(x);
       yValues.push(y);
       var xyCoords = `${ x }-${ y }`;
