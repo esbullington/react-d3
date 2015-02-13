@@ -85,7 +85,7 @@ var DataSeries = exports.DataSeries = React.createClass({
 
   propTypes: {
     data: React.PropTypes.array,
-    color: React.PropTypes.string,
+    fill: React.PropTypes.string,
     xAccessor: React.PropTypes.func,
     yAccessor: React.PropTypes.func
   },
@@ -93,7 +93,7 @@ var DataSeries = exports.DataSeries = React.createClass({
   getDefaultProps: function() {
     return {
       data: [],
-      color: '#fff',
+      fill: '#fff',
       xAccessor: (d) => d.x,
       yAccessor: (d) => d.y
     };
@@ -123,7 +123,7 @@ var DataSeries = exports.DataSeries = React.createClass({
         cx={cx}
         cy={cy}
         r={props.pointRadius}
-        fill={props.color}
+        fill={props.fill}
         key={props.seriesName + i}
         id={props.seriesName + '-' + i}
       />);
@@ -227,7 +227,7 @@ var ScatterChart = exports.ScatterChart = React.createClass({
             data={series.values}
             width={chartWidth}
             height={chartHeight}
-            color={props.colors(idx)}
+            fill={props.colors(idx)}
             pointRadius={props.pointRadius}
             key={series.name}
             hoverAnimation={props.hoverAnimation}

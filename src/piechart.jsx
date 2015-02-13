@@ -20,7 +20,9 @@ var Arc = React.createClass({
     startAngle: React.PropTypes.number,
     endAngle: React.PropTypes.number,
     innerRadius: React.PropTypes.number,
-    outerRadius: React.PropTypes.number
+    outerRadius: React.PropTypes.number,
+    labelTextFill: React.PropTypes.string,
+    valueTextFill: React.PropTypes.string
   },
 
   render: function() {
@@ -52,7 +54,7 @@ var Arc = React.createClass({
           x2="0"
           y1={-radius - 2}
           y2={-radius - 26}
-          stroke={"black"}
+          stroke={props.labelTextFill}
           transform={rotate}
           style={{
             "fill": props.labelTextFill,
@@ -93,14 +95,15 @@ var DataSeries = React.createClass({
     transform: React.PropTypes.string,
     data: React.PropTypes.array,
     innerRadius: React.PropTypes.number,
-    radius: React.PropTypes.number
+    radius: React.PropTypes.number,
+    colors: React.PropTypes.func
   },
 
   getDefaultProps: function() {
     return {
       innerRadius: 0,
       data: [],
-      color: d3.scale.category20c()
+      colors: d3.scale.category20c()
     };
   },
 
@@ -114,8 +117,6 @@ var DataSeries = React.createClass({
 
     var arcData = pie(props.data);
 
-    var color = props.color;
-
     var arcs = arcData.map(function(arc, i) {
       return (
         <Arc
@@ -125,7 +126,7 @@ var DataSeries = React.createClass({
           innerRadius={props.innerRadius}
           labelTextFill={props.labelTextFill}
           valueTextFill={props.valueTextFill}
-          fill={color(i)}
+          fill={props.colors(i)}
           label={props.labels[i]}
           value={props.data[i]}
           key={i}
@@ -153,7 +154,7 @@ var PieChart = exports.PieChart = React.createClass({
     cy: React.PropTypes.number,
     labelTextFill: React.PropTypes.string,
     valueTextFill: React.PropTypes.string,
-    color: React.PropTypes.func,
+    colors: React.PropTypes.func,
     title: React.PropTypes.string
   },
 
@@ -177,7 +178,7 @@ var PieChart = exports.PieChart = React.createClass({
           labelTextFill={props.labelTextFill}
           valueTextFill={props.valueTextFill}
           labels={labels}
-          color={props.color}
+          colors={props.colors}
           transform={transform}
           data={data}
           width={props.width}
