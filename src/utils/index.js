@@ -44,10 +44,10 @@ exports.debounce = function(func, wait, immediate) {
 
 exports.flattenData = (data, xAccessor, yAccessor) => {
 
-  // Check if second parameter is an obj of accesors
-  var accesors = (typeof xAccessor === "object" ? xAccessor : {});
-  if (xAccessor && typeof xAccessor === "function") {accesors.x = xAccessor;}
-  if (yAccessor && typeof yAccessor === "function") {accesors.y = yAccessor;}
+  // Check if second parameter is an obj of accessors
+  var accessors = (typeof xAccessor === "object" ? xAccessor : {});
+  if (xAccessor && typeof xAccessor === "function") {accessors.x = xAccessor;}
+  if (yAccessor && typeof yAccessor === "function") {accessors.y = yAccessor;}
 
   var values = {};
 
@@ -61,14 +61,17 @@ exports.flattenData = (data, xAccessor, yAccessor) => {
 
       // Iterate through all props in the current value object
       Object.keys(item).forEach( (dimension) => {
+
         // Create prop in values object for each dimension
-        if (!values[dimension]) {values[dimension] = [];}
+        if (!values[dimension]) {
+          values[dimension] = [];
+        }
 
         // Push dimension to the corresponding array,
         // using an accesor if it exists
         values[dimension].push(
-          accesors[dimension] ?
-            accesors[dimension](item[dimension]) :
+          accessors[dimension] ?
+            accessors[dimension](item) :
             item[dimension]
           );
       });
@@ -79,8 +82,8 @@ exports.flattenData = (data, xAccessor, yAccessor) => {
       if (isNaN(item.x) || isNaN(item.y)) {
         return;
       }
-      var x = accesors.x ? accesors.x(item) : item.x;
-      var y = accesors.y ? accesors.y(item) : item.y;
+      var x = accessors.x ? accessors.x(item) : item.x;
+      var y = accessors.y ? accessors.y(item) : item.y;
       var xyCoords = `${ x }-${ y }`;
       if (xyCoords in coincidentCoordinateCheck) {
         // Proceed to next iteration if the x y pair already exists
