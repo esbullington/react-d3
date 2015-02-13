@@ -167,29 +167,63 @@ var DataSeries = exports.DataSeries = React.createClass({
     };
   },
 
+  _isDate: function(d, accessor) {
+    return Object.prototype.toString.call(accessor(d)) === '[object Date]';
+  },
+
   render: function() {
+
     var props = this.props;
+
+    var xAccessor = props.xAccessor,
+        yAccessor = props.yAccessor;
+
+    // Create array of paths, which we'll map over
+    // to generate SVG lines
     var interpolatePath = d3.svg.line()
-        .x(function(d) {
-          return props.xScale(props.xAccessor(d));
-        })
         .y(function(d) {
           return props.yScale(props.yAccessor(d));
         })
         .interpolate(props.interpolationType);
 
+    // Check whether or not an arbitrary data element
+    // is a date object (at index 0 here)
+    // If it's a date, then we set the x scale a bit differently
+    if (this._isDate(props.data[0], xAccessor)) {
+        interpolatePath.x(function(d) {
+          return props.xScale(props.xAccessor(d).getTime());
+        })
+    } else {
+        interpolatePath.x(function(d) {
+          return props.xScale(props.xAccessor(d));
+        })
+    }
+
+    // Map over data to generate SVG circles at data points
+    // if datum is a date object, treat it a bit differently
     var circles = props.data.map(function(point, i) {
+      var cx, cy;
+      if (this._isDate(point, xAccessor)) {
+        cx = props.xScale(xAccessor(point).getTime());
+      } else {
+        cx = props.xScale(xAccessor(point));
+      }
+      if (this._isDate(point, yAccessor)) {
+        cy = props.yScale(yAccessor(point).getTime());
+      } else {
+        cy = props.yScale(yAccessor(point));
+      }
       return (
         <Circle
-          cx={props.xScale(props.xAccessor(point))}
-          cy={props.yScale(props.yAccessor(point))}
+          cx={cx}
+          cy={cy}
           r={props.pointRadius}
           fill={props.color}
           key={props.seriesName + i}
           id={props.seriesName + '-' + i}
         />
       );
-    });
+    }, this);
 
     return (
       <g>
@@ -339,6 +373,8 @@ var LineChart = exports.LineChart = React.createClass({
             color={props.colors(idx)}
             pointRadius={props.pointRadius}
             key={series.name}
+            xAccessor={props.xAccessor}
+            yAccessor={props.yAccessor}
           /> 
       ); 
     });

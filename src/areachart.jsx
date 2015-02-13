@@ -130,8 +130,6 @@ var AreaChart = exports.AreaChart = React.createClass({
     xScale.domain(d3.extent(xValues));
     yScale.domain(d3.extent(yValues));
 
-    // var colors = d3.scale.category20();
-
     props.colors.domain(seriesNames);
 
     var stack = d3.layout.stack()
@@ -174,8 +172,8 @@ var AreaChart = exports.AreaChart = React.createClass({
           <XAxis
             xAxisClassName="area x axis"
             xScale={xScale}
-            xAxisTickInterval={this.props.xAxisTickInterval}
-            xAxisTickCount={4}
+            xAxisTickInterval={props.xAxisTickInterval}
+            xAxisTickCount={props.xAxisTickCount}
             margins={props.margins}
             width={chartWidth}
             height={chartHeight}
@@ -184,6 +182,7 @@ var AreaChart = exports.AreaChart = React.createClass({
             yAxisClassName="area y axis"
             yScale={yScale}
             margins={props.margins}
+            yAxisTickInterval={props.yAxisTickInterval}
             yAxisTickCount={this.props.yAxisTickCount}
             width={chartWidth}
             height={props.height}
