@@ -1,21 +1,12 @@
 ## react-d3
-Modular ReactJS charts made using d3 chart utilities. Examples of available charts can be [viewed here](http://esbullington.github.io/react-d3-website).
+Modular ReactJS charts made using d3 chart utilities. Examples of available charts can be [viewed here](http://esbullington.github.io/react-d3-website). Work on project documentation has started [here](https://github.com/esbullington/react-d3/wiki).
 
-**Caution:**  alpha state software. Chart APIs will change.
+**Caution:**  alpha state software. Chart APIs will change. Breaking changes will occur at each minor (0.x) release, until we reach version 1.0.  At that point, we'll closely follow the [semver](http://semver.org/) specification.
 
 [![Build Status](https://travis-ci.org/esbullington/react-d3.svg?branch=master)](https://travis-ci.org/esbullington/react-d3)
 
-Please consider supporting this project by hiring me for your next contract job.  I do:
-* custom d3 visualizations.
-* React, AngularJS, or Backbone frontend work.
-* backend work in Python(Flask, Django), Lua(w/Nginx), or Node.js, particularly REST APIs.
-
-More at: [ericbullington.com](https://ericbullington.com)
-
 ### Version
 [![npm version](https://badge.fury.io/js/react-d3.png)](https://www.npmjs.com/package/react-d3)
-
- Additional chart types and chart animations are soon to come.
 
 ### Basic usage
 
@@ -83,6 +74,14 @@ However, I've diverged a bit from this original vision and am storing a bit of s
 
 ####0.0.1:
 - Initial release with linechart, barchart and areachart follow in subsequent patch updates
+
+### Project sustainability
+Please help to support this project by hiring me for your next contract job.  I do:
+* custom d3 and/or React visualizations.
+* React, AngularJS, or Backbone frontend work.
+* backend work in Python(Flask, Django), Lua(w/Nginx), or Node.js, particularly REST APIs.
+
+More at: [ericbullington.com](https://ericbullington.com)
 
 ### License
 MIT
