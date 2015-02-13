@@ -1,6 +1,9 @@
 ## react-d3
 Modular ReactJS charts made using d3 chart utilities. Examples of available charts can be [viewed here](http://esbullington.github.io/react-d3-website). Work on project documentation has started [here](https://github.com/esbullington/react-d3/wiki).
 
+![react-d3 chart images](https://raw.githubusercontent.com/esbullington/react-d3-website/gh-pages/img/multiseries.png)
+![react-d3 chart images](https://raw.githubusercontent.com/esbullington/react-d3-website/gh-pages/img/singleseries.png)
+
 **Caution:**  alpha state software. Chart APIs will change. Breaking changes will occur at each minor (0.x) release, until we reach version 1.0.  At that point, we'll closely follow the [semver](http://semver.org/) specification.
 
 [![Build Status](https://travis-ci.org/esbullington/react-d3.svg?branch=master)](https://travis-ci.org/esbullington/react-d3)
