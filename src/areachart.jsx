@@ -11,9 +11,7 @@ var Area = React.createClass({
 
   propTypes: {
     path: React.PropTypes.string,
-    fill: React.PropTypes.string,
-    height: React.PropTypes.number,
-    width: React.PropTypes.number
+    fill: React.PropTypes.string
   },
 
   getDefaultProps: function() {
@@ -38,19 +36,19 @@ var Area = React.createClass({
 
 var DataSeries = exports.DataSeries = React.createClass({
 
-  render: function() {
+  render() {
 
     var props = this.props;
 
     var area = d3.svg.area()
-      .x(function(d) { return props.xScale(d.date); })
-      .y0(this.props.height)
-      .y1(function(d) { return props.yScale(d.value); });
+      .x(function(d) { return props.xScale(props.xAccessor(d)); })
+      .y0(function(d) { return props.yScale(d.y0); })
+      .y1(function(d) { return props.yScale(d.y0 + props.yAccessor(d)); });
 
-    var path = area(this.props.data);
+    var path = area(props.data);
 
     return (
-      <Area path={path} />
+      <Area fill={props.colors(props.name)} path={path} />
     );
   }
 
@@ -60,74 +58,135 @@ var DataSeries = exports.DataSeries = React.createClass({
 var AreaChart = exports.AreaChart = React.createClass({
 
   propTypes: {
-    data: React.PropTypes.array,
+    data: React.PropTypes.oneOfType([
+      React.PropTypes.array,
+      React.PropTypes.object
+    ]),
     yAxisTickCount: React.PropTypes.number,
     xAxisTickInterval: React.PropTypes.object,
+    colors: React.PropTypes.func,
     width: React.PropTypes.number,
     height: React.PropTypes.number,
-    title: React.PropTypes.string
+    title: React.PropTypes.string,
+    xAccessor: React.PropTypes.func,
+    yAccessor: React.PropTypes.func
   },
 
-  getDefaultProps: function() {
+  getDefaultProps() {
     return {
       data: [],
+      colors: d3.scale.category20c(),
+      margins: {top: 10, right: 20, bottom: 30, left: 30},
+      legendOffset: 120,
       yAxisTickCount: 4,
-      xAxisTickInterval: {unit: 'years', interval: 1},
       width: 400,
       height: 200,
-      title: ''
+      title: '',
+      xAccessor: (d) => d.x,
+      yAccessor: (d) => d.y
     };
   },
 
-  render: function() {
+  render() {
 
     var props = this.props;
 
-    var xScale = d3.time.scale()
-      .range([0, props.width]);
+    // Calculate inner chart dimensions
+    var chartWidth, chartHeight;
+    chartWidth = props.width - props.margins.left - props.margins.right;
+    chartHeight = props.height - props.margins.top - props.margins.bottom;
 
-    xScale.domain(d3.extent(props.data, function(d) { return d.date; }));
+    if (props.legend) {
+      chartWidth = chartWidth - props.legendOffset;
+    }
+
+    if (!Array.isArray(props.data)) {
+      props.data = [props.data];
+    }
 
     var yScale = d3.scale.linear()
-      .range([props.height, 0]);
+      .range([chartHeight, 0]);
 
-    var values = props.data.map( (item) => item.value);
-    yScale.domain([d3.min([d3.min(values), 0]), d3.max(values)]);
+    var xValues = [];
+    var yValues = [];
+    var seriesNames = [];
+    props.data.forEach( (series) => {
+      seriesNames.push(series.name);
+      series.values.forEach((val, idx) => {
+        xValues.push(props.xAccessor(val));
+        yValues.push(props.yAccessor(val));
+      });
+    });
 
-    var margin = {top: 20, right: 20, bottom: 30, left: 50};
+    var xScale;
+    if (xValues.length > 0 && Object.prototype.toString.call(xValues[0]) === '[object Date]' && props.xAxisTickInterval) {
+      xScale = d3.time.scale()
+        .range([0, chartWidth]);
+    } else {
+      xScale = d3.scale.linear()
+        .range([0, chartWidth]);
+    }
 
-    var trans = "translate(" + margin.left + "," + margin.top + ")";
+    xScale.domain(d3.extent(xValues));
+    yScale.domain(d3.extent(yValues));
+
+    // var colors = d3.scale.category20();
+
+    props.colors.domain(seriesNames);
+
+    var stack = d3.layout.stack()
+      .x(props.xAccessor)
+      .y(props.yAccessor)
+      .offset('expand')
+      .order('reverse')
+      .values(function(d) { return d.values; });
+
+    var layers = stack(props.data);
+
+    var trans = "translate(" + props.margins.left + "," + props.margins.top + ")";
+
+    var dataSeries = layers.map( (d, idx) => {
+      return (
+          <DataSeries
+            key={idx}
+            name={d.name}
+            colors={props.colors}
+            index={idx}
+            xScale={xScale}
+            yScale={yScale}
+            data={d.values}
+            xAccessor={props.xAccessor}
+            yAccessor={props.yAccessor}
+          />
+        );
+      });
 
     return (
       <Chart
         ref='chart'
-        width={this.props.width + margin.left + margin.right}
-        height={this.props.height + margin.top + margin.bottom}
+        width={this.props.width}
+        height={this.props.height}
+        margins={this.props.margins}
         title={this.props.title}
       >
         <g transform={trans} >
-          <DataSeries
-            xScale={xScale}
-            yScale={yScale}
-            data={this.props.data}
-            width={this.props.width}
-            height={this.props.height}
-          />
+          {dataSeries}
           <XAxis
             xAxisClassName="area x axis"
             xScale={xScale}
             xAxisTickInterval={this.props.xAxisTickInterval}
-            margin={margin}
-            width={this.props.width}
-            height={this.props.height}
+            xAxisTickCount={4}
+            margins={props.margins}
+            width={chartWidth}
+            height={chartHeight}
           />
           <YAxis
             yAxisClassName="area y axis"
             yScale={yScale}
-            margin={margin}
+            margins={props.margins}
             yAxisTickCount={this.props.yAxisTickCount}
-            width={this.props.width}
-            height={this.props.height}
+            width={chartWidth}
+            height={props.height}
           />
         </g>
       </Chart>
