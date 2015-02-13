@@ -126,7 +126,6 @@ var Demos = React.createClass({
         <div className="row">
           <div className="col-md-6">
             <ScatterChart
-              legend={true}
               data={scatterData} width={500} height={400} title="Scatter Chart" />
           </div>
           <div className="col-md-6">
