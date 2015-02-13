@@ -167,6 +167,7 @@ var ScatterChart = exports.ScatterChart = React.createClass({
       data: [],
       margins: {top: 20, right: 30, bottom: 30, left: 30},
       legendOffset: 120,
+      legend: false,
       pointRadius: 3,
       width: 400,
       height: 200,
@@ -237,7 +238,13 @@ var ScatterChart = exports.ScatterChart = React.createClass({
     });
 
     return (
-      <Chart width={props.width} height={props.height} title={props.title}>
+      <Chart 
+        legend={props.legend}
+        data={props.data}
+        margins={props.margins}
+        colors={props.colors}
+        width={props.width} height={props.height}
+        title={props.title}>
         <g transform={trans}>
           <Voronoi
             pubsub={pubsub}

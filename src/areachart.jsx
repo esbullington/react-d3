@@ -62,6 +62,8 @@ var AreaChart = exports.AreaChart = React.createClass({
       React.PropTypes.array,
       React.PropTypes.object
     ]),
+    legend: React.PropTypes.bool,
+    legendOffset: React.PropTypes.number,
     yAxisTickCount: React.PropTypes.number,
     xAxisTickInterval: React.PropTypes.object,
     colors: React.PropTypes.func,
@@ -78,6 +80,7 @@ var AreaChart = exports.AreaChart = React.createClass({
       colors: d3.scale.category20c(),
       margins: {top: 10, right: 20, bottom: 30, left: 30},
       legendOffset: 120,
+      legend: false,
       yAxisTickCount: 4,
       width: 400,
       height: 200,
@@ -161,11 +164,13 @@ var AreaChart = exports.AreaChart = React.createClass({
 
     return (
       <Chart
-        ref='chart'
-        width={this.props.width}
-        height={this.props.height}
-        margins={this.props.margins}
-        title={this.props.title}
+        legend={props.legend}
+        data={props.data}
+        margins={props.margins}
+        colors={props.colors}
+        width={props.width}
+        height={props.height}
+        title={props.title}
       >
         <g transform={trans} >
           {dataSeries}
