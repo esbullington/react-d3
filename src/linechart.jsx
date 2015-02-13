@@ -152,7 +152,7 @@ var DataSeries = exports.DataSeries = React.createClass({
   propTypes: {
     data: React.PropTypes.array,
     interpolationType: React.PropTypes.string,
-    color: React.PropTypes.string,
+    fill: React.PropTypes.string,
     xAccessor: React.PropTypes.func,
     yAccessor: React.PropTypes.func
   },
@@ -161,7 +161,7 @@ var DataSeries = exports.DataSeries = React.createClass({
     return {
       data: [],
       interpolationType: 'linear',
-      color: '#fff',
+      fill: '#fff',
       xAccessor: (d) => d.x,
       yAccessor: (d) => d.y
     };
@@ -218,7 +218,7 @@ var DataSeries = exports.DataSeries = React.createClass({
           cx={cx}
           cy={cy}
           r={props.pointRadius}
-          fill={props.color}
+          fill={props.fill}
           key={props.seriesName + i}
           id={props.seriesName + '-' + i}
         />
@@ -229,7 +229,7 @@ var DataSeries = exports.DataSeries = React.createClass({
       <g>
         <Line
           path={interpolatePath(props.data)}
-          stroke={props.color}
+          stroke={props.fill}
           id={props.seriesName}
         />
         {circles}
@@ -370,7 +370,7 @@ var LineChart = exports.LineChart = React.createClass({
             data={series.values}
             width={chartWidth}
             height={chartHeight}
-            color={props.colors(idx)}
+            fill={props.colors(idx)}
             pointRadius={props.pointRadius}
             key={series.name}
             xAccessor={props.xAccessor}

@@ -7,7 +7,7 @@ var Chart = require('./common').Chart;
 var Cell = React.createClass({
 
   propTypes: {
-    cellColor: React.PropTypes.string,
+    fill: React.PropTypes.string,
     width: React.PropTypes.number,
     height: React.PropTypes.number,
     label: React.PropTypes.string
@@ -26,7 +26,7 @@ var Cell = React.createClass({
     return (
       <g transform={t}>
         <rect
-          fill={this.props.cellColor} 
+          fill={this.props.fill} 
           width={this.props.width}
           height={this.props.height}
         />
@@ -64,7 +64,7 @@ var DataSeries = React.createClass({
     var value = this.props.value;
     var label = this.props.label;
 
-    var color = d3.scale.category20c();
+    var colors = d3.scale.category20c();
 
     var treemap = d3.layout.treemap()
                     // make sure calculation loop through all objects inside array 
@@ -80,7 +80,7 @@ var DataSeries = React.createClass({
           y={node.y}
           width={node.dx}
           height={node.dy}
-          cellColor={color(i)} 
+          fill={colors(i)} 
           label={node[label]}
           fontSize={this.props.fontSize}
           textColor={this.props.textColor}
@@ -121,7 +121,7 @@ var Treemap = React.createClass({
       heigth: 200,
       title: '',
       textColor: '#f7f7f7',
-      fontSize: '0.65em'
+      fontSize: '0.85em'
     };
   },
 
