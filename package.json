@@ -32,7 +32,8 @@
     "nodemon": "^1.2.1",
     "reactify": "^0.17.1",
     "uglify-js": "^2.3.6",
-    "watchify": "^2.1.1"
+    "watchify": "^2.1.1",
+    "react-tools": "^0.12.2"
   },
   "dependencies": {
     "d3": "^3.4.13",

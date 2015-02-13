@@ -7,3 +7,5 @@ exports.PieChart = require('./piechart').PieChart;
 exports.AreaChart = require('./areachart').AreaChart;
 exports.Treemap = require('./treemap').Treemap;
 exports.ScatterChart = require('./scatterchart').ScatterChart;
+exports.CandleStickChart = require('./candlestick').CandleStickChart;
+

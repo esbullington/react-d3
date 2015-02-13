@@ -7,6 +7,7 @@ var datagen = require('../../utils/datagen');
 var rd3 = require('../../src');
 var BarChart = rd3.BarChart;
 var LineChart = rd3.LineChart;
+var CandleStickChart = rd3.CandleStickChart;
 var PieChart = rd3.PieChart;
 var AreaChart = rd3.AreaChart;
 var Treemap = rd3.Treemap;
@@ -18,11 +19,12 @@ var Demos = React.createClass({
 
   getInitialState: function() {
     return {
-      areaData: []
+      areaData: [],
+      ohlcData: []
     }
   },
 
-  componentDidMount: function() {
+  componentWillMount: function() {
     // Apple stock data from Mike Bostock's chart at
     // http://bl.ocks.org/mbostock/3883195
     var parseDate = d3.time.format("%d-%b-%y").parse;
@@ -32,6 +34,20 @@ var Demos = React.createClass({
         d.value = +d.value;
       });
       this.setState({areaData: data});
+    }.bind(this))
+    d3.tsv("data/AAPL_ohlc.tsv", function(error, data) {
+      var series = { name: "AAPL", values: [] };
+
+      data.map(function(d) {
+        d.date = new Date(+d.date);
+        d.open = +d.open;
+        d.high = +d.high;
+        d.low = +d.low;
+        d.close = +d.close;
+        series.values.push({ x: d.date, open: d.open, high: d.high, low: d.low, close: d.close});
+      });
+      this.setState({ ohlcData: [series] });
+      console.log(series);
     }.bind(this))
 
   },
@@ -113,6 +129,26 @@ var Demos = React.createClass({
             <pre ref='block'>
               <code className='html'>
               {'<LineChart\n  legend={true}\n  data={lineData}\n  width={500}\n  height={300}\n  title="Line Chart"\n/>'}
+              </code>
+            </pre>
+          </div>
+        </div>
+        <div className="row">
+          <hr/>
+        </div>
+        <div className="row">
+          <div className="col-md-6">
+            <CandleStickChart legend={true} data={this.state.ohlcData} width={500} height={300} title="Candlestick Chart" />
+          </div>
+          <div className="col-md-6">
+            <pre ref='block'>
+              <code className='js'>
+              {'var lineData = {\n  series1: [ { x: 0, y: 20 }, ... , { x: 6, y: 10 } ],\n  series2: [ { x: 0, y: 8 }, ..., { x: 6, y: 2 } ],\n  series3: [ { x: 0, y: 0 }, ..., { x: 6, y: 2 } ]\n};'}
+              </code>
+            </pre>
+            <pre ref='block'>
+              <code className='html'>
+              {'<CandleStickChart\n  legend={true}\n  data={lineData}\n  width={500}\n  height={300}\n  title="Candlestick Chart"\n/>'}
               </code>
             </pre>
           </div>
