@@ -1,5 +1,7 @@
 ## react-d3
-Modular ReactJS charts made using d3 chart utilities. Examples of available charts can be [viewed here](http://esbullington.github.io/react-d3-website). Work on project documentation has started [here](https://github.com/esbullington/react-d3/wiki).
+Modular ReactJS charts made using d3 chart utilities. Work on project documentation has started [here](https://github.com/esbullington/react-d3/wiki). A few examples of the available charts can be seen below, the others can be [viewed here](http://esbullington.github.io/react-d3-website), side-by-side with the React code that generates the charts.
+
+![react-d3 chart images](https://raw.githubusercontent.com/esbullington/react-d3-website/gh-pages/img/multiseries.png)
 
 **Caution:**  alpha state software. Chart APIs will change. Breaking changes will occur at each minor (0.x) release, until we reach version 1.0.  At that point, we'll closely follow the [semver](http://semver.org/) specification.
 
@@ -31,8 +33,10 @@ var Treemap = rd3.Treemap;
 var ScatterChart = rd3.ScatterChart;
 ```
 
+For usage, please see [here](http://esbullington.github.io/react-d3-website).  API documentation is also coming online over the coming days.
+
 ### JSFiddle
-There's a development build available for experimentation on JSFiddle: [http://jsfiddle.net/esbullington/jp9dkh1g/](http://jsfiddle.net/esbullington/jp9dkh1g/)
+There's a development build available for experimentation on JSFiddle: [http://jsfiddle.net/esbullington/jp9dkh1g/](https://cdn.rawgit.com/esbullington/react-d3/dc92f90910c0b2878d1031428604e2f50ef7bfdd/dist/public/js/react-d3.min.js)
 
 Please note that this build should probably not be used in production, since it bundles all of react-d3's dependencies in a single bundle (this is also the cause of the "Cannot read property 'firstChild' of undefined" error message on the JS console, which occurs when there are two React libraries in the same namespace).
 
