@@ -1,4 +1,6 @@
 ## Code Contributions
+:+1::tada: First off, thanks for taking the time to contribute! :tada::+1:  
+
 _By contributing code to React-d3, you are agreeing to release it under the MIT License._
 
 ## Coding Rules
@@ -18,6 +20,13 @@ _By contributing code to React-d3, you are agreeing to release it under the MIT 
 
 ## SVG Performance Notes
 * Whenever possible, do transforms on groups of items (using `<g>`) as opposed to individual items.
- 
+
+## Git Commit Messages
+
+* Use the present tense ("Add feature" not "Added feature")
+* Use the imperative mood ("Move cursor to..." not "Moves cursor to...")
+* Limit the first line to 72 characters or less
+* Reference issues and pull requests liberally
+
 ## Project Suggestions
 * This is open source, and we're all doing this on our own free will, by choice.  So please be nice to each other, and treat both users and fellow devs with respect when filing issues and submitting or commenting on pull requests.
