@@ -31,6 +31,7 @@ exports.Legend = React.createClass({
     };
 
     var legendItems = [];
+
     props.data.forEach( (series, idx) => {
 
       var itemStyle = {
@@ -45,7 +46,7 @@ exports.Legend = React.createClass({
             </li>
           );
 
-    })
+    });
 
     // In preparation for legend positioning
     var legendFloat = 'right';

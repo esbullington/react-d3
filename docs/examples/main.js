@@ -95,7 +95,13 @@ var Demos = React.createClass({
         </div>
         <div className="row">
           <div className="col-md-6">
-            <LineChart legend={true} data={lineData} width={500} height={300} title="Line Chart" />
+            <LineChart
+              legend={true}
+              data={lineData}
+              width={500}
+              height={300}
+              title="Line Chart"
+            />
           </div>
           <div className="col-md-6">
             <pre ref='block'>
@@ -135,7 +141,8 @@ var Demos = React.createClass({
         </div>
         <div className="row">
           <div className="col-md-6">
-            <ScatterChart data={scatterData} width={500} height={400} yHideOrigin={true} title="Scatter Chart" />
+            <ScatterChart
+              data={scatterData} width={500} height={400} title="Scatter Chart" />
           </div>
           <div className="col-md-6">
             <pre ref='block'>
@@ -161,7 +168,6 @@ var Demos = React.createClass({
   data={scatterData}
   width={500}
   height={400}
-  yHideOrigin={true}
   title="Scatter Chart"
 />`}
               </code>

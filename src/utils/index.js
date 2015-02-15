@@ -5,13 +5,24 @@ exports.calculateScales = (chartWidth, chartHeight, xValues, yValues) => {
 
   var xScale, yScale;
 
-  xScale = d3.scale.linear()
-    .domain([d3.min([d3.min(xValues), 0]), d3.max(xValues)])
-    .range([0, chartWidth]);
+  if (xValues.length > 0 && Object.prototype.toString.call(xValues[0]) === '[object Date]') {
+    xScale = d3.time.scale()
+      .range([0, chartWidth]);
+  } else {
+    xScale = d3.scale.linear()
+      .range([0, chartWidth]);
+  }
+  xScale.domain(d3.extent(xValues));
 
-  yScale = d3.scale.linear()
-    .domain([d3.min([d3.min(yValues), 0]), d3.max(yValues)])
-    .range([chartHeight, 0]);
+  if (yValues.length > 0 && Object.prototype.toString.call(yValues[0]) === '[object Date]') {
+    yScale = d3.time.scale()
+      .range([chartHeight, 0]);
+  } else {
+    yScale = d3.scale.linear()
+      .range([chartHeight, 0]);
+  }
+
+  yScale.domain(d3.extent(yValues));
 
   return {
     xScale: xScale,
@@ -44,13 +55,6 @@ exports.debounce = function(func, wait, immediate) {
 
 exports.flattenData = (data, xAccessor, yAccessor) => {
 
-  // Check if second parameter is an obj of accessors
-  var accessors = (typeof xAccessor === "object" ? xAccessor : {});
-  if (xAccessor && typeof xAccessor === "function") {accessors.x = xAccessor;}
-  if (yAccessor && typeof yAccessor === "function") {accessors.y = yAccessor;}
-
-  var values = {};
-
   var allValues = [];
   var xValues = [];
   var yValues = [];
@@ -58,32 +62,16 @@ exports.flattenData = (data, xAccessor, yAccessor) => {
 
   data.forEach( (series) => {
     series.values.forEach( (item, idx) => {
-
-      // Iterate through all props in the current value object
-      Object.keys(item).forEach( (dimension) => {
-
-        // Create prop in values object for each dimension
-        if (!values[dimension]) {
-          values[dimension] = [];
-        }
-
-        // Push dimension to the corresponding array,
-        // using an accesor if it exists
-        values[dimension].push(
-          accessors[dimension] ?
-            accessors[dimension](item) :
-            item[dimension]
-          );
-      });
-
       // Check for NaN since d3's Voronoi cannot handle NaN values
       // Go ahead and Proceed to next iteration since we don't want NaN
       // in allValues or in xValues or yValues
-      if (isNaN(item.x) || isNaN(item.y)) {
+      if (isNaN(xAccessor(item)) || isNaN(yAccessor(item))) {
         return;
       }
-      var x = accessors.x ? accessors.x(item) : item.x;
-      var y = accessors.y ? accessors.y(item) : item.y;
+      var x = xAccessor(item);
+      var y = yAccessor(item);
+      xValues.push(x);
+      yValues.push(y);
       var xyCoords = `${ x }-${ y }`;
       if (xyCoords in coincidentCoordinateCheck) {
         // Proceed to next iteration if the x y pair already exists
@@ -104,13 +92,12 @@ exports.flattenData = (data, xAccessor, yAccessor) => {
     });
   });
 
-
-  values.allValues= allValues;
-  values.xValues= values.x;
-  values.yValues= values.y;
-  return values;
+  return {
+    allValues: allValues,
+    xValues: xValues,
+    yValues: yValues
+  };
 };
-
 
 
 exports.shade = (hex, percent) => {

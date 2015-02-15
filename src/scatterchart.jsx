@@ -85,7 +85,7 @@ var DataSeries = exports.DataSeries = React.createClass({
 
   propTypes: {
     data: React.PropTypes.array,
-    color: React.PropTypes.string,
+    fill: React.PropTypes.string,
     xAccessor: React.PropTypes.func,
     yAccessor: React.PropTypes.func
   },
@@ -93,7 +93,7 @@ var DataSeries = exports.DataSeries = React.createClass({
   getDefaultProps: function() {
     return {
       data: [],
-      color: '#fff',
+      fill: '#fff',
       xAccessor: (d) => d.x,
       yAccessor: (d) => d.y
     };
@@ -104,11 +104,26 @@ var DataSeries = exports.DataSeries = React.createClass({
     var props = this.props;
 
     var circles = props.data.map(function(point, i) {
+
+      var xAccessor = props.xAccessor,
+          yAccessor = props.yAccessor,
+          cx, cy;
+      if (Object.prototype.toString.call(xAccessor(point)) === '[object Date]') {
+        cx = props.xScale(xAccessor(point).getTime());
+      } else {
+        cx = props.xScale(xAccessor(point));
+      }
+      if (Object.prototype.toString.call(yAccessor(point)) === '[object Date]') {
+        cy = props.yScale(yAccessor(point).getTime());
+      } else {
+        cy = props.yScale(yAccessor(point));
+      }
+
       return (<Circle
-        cx={props.xScale(props.xAccessor(point))}
-        cy={props.yScale(props.yAccessor(point))}
+        cx={cx}
+        cy={cy}
         r={props.pointRadius}
-        fill={props.color}
+        fill={props.fill}
         key={props.seriesName + i}
         id={props.seriesName + '-' + i}
       />);
@@ -127,6 +142,10 @@ var DataSeries = exports.DataSeries = React.createClass({
 var ScatterChart = exports.ScatterChart = React.createClass({
 
   propTypes: {
+    data: React.PropTypes.oneOfType([
+      React.PropTypes.array,
+      React.PropTypes.object
+    ]),
     margins: React.PropTypes.object,
     legendOffset: React.PropTypes.number,
     pointRadius: React.PropTypes.number,
@@ -145,8 +164,10 @@ var ScatterChart = exports.ScatterChart = React.createClass({
 
   getDefaultProps: function() {
     return {
+      data: [],
       margins: {top: 20, right: 30, bottom: 30, left: 30},
       legendOffset: 120,
+      legend: false,
       pointRadius: 3,
       width: 400,
       height: 200,
@@ -164,6 +185,10 @@ var ScatterChart = exports.ScatterChart = React.createClass({
   render: function() {
 
     var props = this.props;
+
+    if (this.props.data && this.props.data.length < 1) {
+      return <g></g>;
+    }
 
     // Calculate inner chart dimensions
     var chartWidth, chartHeight;
@@ -202,16 +227,24 @@ var ScatterChart = exports.ScatterChart = React.createClass({
             data={series.values}
             width={chartWidth}
             height={chartHeight}
-            color={props.colors(idx)}
+            fill={props.colors(idx)}
             pointRadius={props.pointRadius}
             key={series.name}
             hoverAnimation={props.hoverAnimation}
+            xAccessor={props.xAccessor}
+            yAccessor={props.yAccessor}
           />
       );
     });
 
     return (
-      <Chart width={props.width} height={props.height} title={props.title}>
+      <Chart 
+        legend={props.legend}
+        data={props.data}
+        margins={props.margins}
+        colors={props.colors}
+        width={props.width} height={props.height}
+        title={props.title}>
         <g transform={trans}>
           <Voronoi
             pubsub={pubsub}
@@ -236,6 +269,7 @@ var ScatterChart = exports.ScatterChart = React.createClass({
             xAxisClassName="scatter x axis"
             strokeWidth="1"
             xHideOrigin={props.xHideOrigin}
+            xAxisTickInterval={props.xAxisTickInterval}
             xScale={scales.xScale}
             data={props.data}
             margins={props.margins}
