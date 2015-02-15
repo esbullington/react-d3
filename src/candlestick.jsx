@@ -6,6 +6,13 @@ var common = require('./common');
 var Chart = common.Chart;
 var XAxis = common.XAxis;
 var YAxis = common.YAxis;
+var Voronoi = common.Voronoi;
+
+var EventEmitter = require('events').EventEmitter;
+var pubsub = exports.pubsub = new EventEmitter();
+
+var utils = require('./utils');
+
 
 var Wicks = React.createClass({
 
@@ -19,7 +26,7 @@ var Wicks = React.createClass({
     yAccessor: React.PropTypes.func.isRequired
   },
 
-  getDefaultProps: function() {
+  getDefaultProps() {
     return {
       stroke: '#000',
       strokeWidth: 1,
@@ -27,7 +34,7 @@ var Wicks = React.createClass({
     };
   },
 
-  render: function() {
+  render() {
     var wicks = this.props.data
         .map(function(d, idx) {
           var ohlc = this.props.yAccessor(d),
@@ -46,11 +53,68 @@ var Wicks = React.createClass({
                   y2={y2} />
         }, this);
     return (
-      <g className="rd3-candlestick-wicks">{wicks}</g>
+      <g className="rd3-wicks">{wicks}</g>
     );
   }
 });
 
+
+var Candle = React.createClass({
+  getInitialState() {
+    // state for animation usage
+    return {
+      candleWidth: this.props.width,
+      candleFill: this.props.fill
+    };
+  },
+
+  getDefaultProps() {
+    return {
+      stroke: '#000',
+      strokeWidth: 1,
+      shapeRendering: "crispEdges"
+    };
+  },
+  componentDidMount() {
+    pubsub.on('animate', this._animateCandle);
+    pubsub.on('restore', this._restoreCandle);
+  },
+
+  componentWillUnmount() {
+    pubsub.removeListener('animate', this._animateCandle);
+    pubsub.removeListener('restore', this._restoreCandle);
+  },
+
+  _animateCandle(id) {
+    if (this.props.idx == id.split('-')[1]) {
+      this.setState({ 
+        candleWidth: this.props.width * 1.5,
+        candleFill: utils.shade(this.props.fill, -0.2)
+      });
+    }
+  },
+
+  _restoreCandle(id) {
+    if (this.props.idx == id.split('-')[1]) {
+      this.setState({ 
+        candleWidth: this.props.width,
+        candleFill: this.props.fill
+      });
+    }
+  },
+
+  render() {
+    return (<rect key={this.props.idx} 
+                  className={this.props.className} fill={this.state.candleFill}
+                  x={this.props.x - ((this.state.candleWidth - this.props.width) / 2)}
+                  y={this.props.y}
+                  stroke={this.props.stroke}
+                  strokeWidth={this.props.strokeWidth}
+                  style={{ shapeRendering: this.props.shapeRendering }}
+                  width={this.state.candleWidth}
+                  height={this.props.height} />);
+  }
+})
 
 
 var Candles = React.createClass({
@@ -62,20 +126,22 @@ var Candles = React.createClass({
     xScale: React.PropTypes.func.isRequired,
     yScale: React.PropTypes.func.isRequired,
     xAccessor: React.PropTypes.func.isRequired,
-    yAccessor: React.PropTypes.func.isRequired
+    yAccessor: React.PropTypes.func.isRequired,
+    fillUp: React.PropTypes.string.isRequired,
+    fillDown: React.PropTypes.string.isRequired
   },
 
-  getDefaultProps: function() {
+  getDefaultProps() {
     return {
       stroke: '#000',
       strokeWidth: 1,
-      fillup: "green",
-      filldown: "red",
+      fillUp: "green",
+      fillDown: "red",
       shapeRendering: "crispEdges"
     };
   },
 
-  render: function() {
+  render() {
     var xRange = this.props.xScale.range(),
         width = Math.abs(xRange[0] - xRange[1]),
         candleWidth = (width / (this.props.data.length + 2)) * 0.5;
@@ -88,28 +154,34 @@ var Candles = React.createClass({
             height = Math.abs(this.props.yScale(ohlc.open) - this.props.yScale(ohlc.close)),
             y2 = this.props.yScale(ohlc.low),
             className = (ohlc.open <= ohlc.close) ? 'up' : 'down',
-            fill = (ohlc.open <= ohlc.close) ? this.props.fillup : this.props.filldown;
+            fill = (ohlc.open <= ohlc.close) ? this.props.fillUp : this.props.fillDown;
 
-          return <rect key={idx} className={className} fill={fill}
+          return <Candle key={idx} className={className} fill={fill}
+                  idx={idx}
                   x={x}
                   y={y}
                   width={candleWidth}
                   height={height} />
         }, this);
     return (
-      <g className="rd3-candlestick-candles">{candles}</g>
+      <g className="rd3-candles">{candles}</g>
     );
   }
 });
 
 var DataSeries = exports.DataSeries = React.createClass({
 
+  propTypes: {
+    fillUp: React.PropTypes.string.isRequired,
+    fillDown: React.PropTypes.string.isRequired
+  },
+
   render() {
 
     var props = this.props;
 
     return (
-      <g>
+      <g className="rd3-candlestick">
         <Wicks 
           xScale={props.xScale}
           yScale={props.yScale}
@@ -122,6 +194,8 @@ var DataSeries = exports.DataSeries = React.createClass({
           yScale={props.yScale}
           xAccessor={props.xAccessor}
           yAccessor={props.yAccessor}
+          fillUp={props.fillUp}
+          fillDown={props.fillDown}
           data={props.data}
           />
       </g>
@@ -129,9 +203,8 @@ var DataSeries = exports.DataSeries = React.createClass({
   }
 
 });
-/*
 
-*/
+
 
 var CandleStickChart = exports.CandleStickChart = React.createClass({
 
@@ -142,7 +215,8 @@ var CandleStickChart = exports.CandleStickChart = React.createClass({
     ]),
     yAxisTickCount: React.PropTypes.number,
     xAxisTickInterval: React.PropTypes.object,
-    colors: React.PropTypes.func,
+    fillUp: React.PropTypes.func,
+    fillDown: React.PropTypes.func,
     width: React.PropTypes.number,
     height: React.PropTypes.number,
     title: React.PropTypes.string,
@@ -153,7 +227,8 @@ var CandleStickChart = exports.CandleStickChart = React.createClass({
   getDefaultProps() {
     return {
       data: [],
-      colors: d3.scale.category20c(),
+      fillUp: function (i) { return "white"; },
+      fillDown: d3.scale.category20c(),
       margins: {top: 10, right: 20, bottom: 30, left: 40},
       legendOffset: 120,
       yAxisTickCount: 4,
@@ -182,59 +257,30 @@ var CandleStickChart = exports.CandleStickChart = React.createClass({
       props.data = [props.data];
     }
 
-    var yScale = d3.scale.linear()
-      .range([chartHeight, 0]);
+    var flattenedData = utils.flattenData(props.data, props.xAccessor, props.yAccessor);
 
-    var xValues = [];
-    var yValues = [];
-    var seriesNames = [];
-    props.data.forEach( (series) => {
-      seriesNames.push(series.name);
-      series.values.forEach((val, idx) => {
-        xValues.push(props.xAccessor(val));
-        var ohlc = props.yAccessor(val);
-        yValues.push(ohlc.low);
-        yValues.push(ohlc.high);
-      });
-    });
+    var allValues = flattenedData.allValues,
+        xValues = flattenedData.xValues,
+        yValues = flattenedData.yValues;
 
-    var xScale;
-    if (xValues.length > 0 && Object.prototype.toString.call(xValues[0]) === '[object Date]' && props.xAxisTickInterval) {
-      xScale = d3.time.scale()
-        .range([0, chartWidth]);
-    } else {
-      xScale = d3.scale.linear()
-        .range([0, chartWidth]);
-    }
+    pubsub.setMaxListeners(xValues.length + yValues.length);
 
-    xScale.domain(d3.extent(xValues));
-    yScale.domain(d3.extent(yValues));
-
-    // var colors = d3.scale.category20();
-
-    props.colors.domain(seriesNames);
-
-    var stack = d3.layout.stack()
-      .x(props.xAccessor)
-      .y(props.yAccessor)
-      .offset('expand')
-      .order('reverse')
-      .values(function(d) { return d.values; });
-
-    var layers = stack(props.data);
+    var scales = utils.calculateScales(chartWidth, chartHeight, xValues, yValues);
 
     var trans = "translate(" + props.margins.left + "," + props.margins.top + ")";
 
-    var dataSeries = layers.map( (d, idx) => {
+    var dataSeries = props.data.map( (series, idx) => {
       return (
           <DataSeries
             key={idx}
-            name={d.name}
+            name={series.name}
             colors={props.colors}
             index={idx}
-            xScale={xScale}
-            yScale={yScale}
-            data={d.values}
+            xScale={scales.xScale}
+            yScale={scales.yScale}
+            data={series.values}
+            fillUp={this.props.fillUp(idx)}
+            fillDown={this.props.fillDown(idx)}
             xAccessor={props.xAccessor}
             yAccessor={props.yAccessor}
           />
@@ -251,9 +297,17 @@ var CandleStickChart = exports.CandleStickChart = React.createClass({
       >
         <g transform={trans} >
           {dataSeries}
+          <Voronoi
+            pubsub={pubsub}
+            data={allValues}
+            xScale={scales.xScale}
+            yScale={scales.yScale}
+            width={chartWidth}
+            height={chartHeight}
+          />
           <XAxis
             xAxisClassName="area x axis"
-            xScale={xScale}
+            xScale={scales.xScale}
             xAxisTickInterval={this.props.xAxisTickInterval}
             xAxisTickCount={4}
             margins={props.margins}
@@ -261,8 +315,8 @@ var CandleStickChart = exports.CandleStickChart = React.createClass({
             height={chartHeight}
           />
           <YAxis
-            yAxisClassName="area y axis"
-            yScale={yScale}
+            yAxisClassName="line y axis"
+            yScale={scales.yScale}
             margins={props.margins}
             yAxisTickCount={this.props.yAxisTickCount}
             width={chartWidth}

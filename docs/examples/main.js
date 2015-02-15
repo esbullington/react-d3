@@ -44,7 +44,6 @@ var Demos = React.createClass({
         series.values.push({ x: d.date, open: d.open, high: d.high, low: d.low, close: d.close});
       });
       this.setState({ ohlcData: [series] });
-      console.log(series);
     }.bind(this));
   },
 
