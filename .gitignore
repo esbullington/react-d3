@@ -12,3 +12,6 @@ npm-debug.log
 
 # Build directory
 build/
+
+#intellij
+.idea/
