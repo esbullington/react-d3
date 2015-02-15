@@ -62,17 +62,47 @@ exports.flattenData = (data, xAccessor, yAccessor) => {
 
   data.forEach( (series) => {
     series.values.forEach( (item, idx) => {
+
+      var x = xAccessor(item);
+
       // Check for NaN since d3's Voronoi cannot handle NaN values
       // Go ahead and Proceed to next iteration since we don't want NaN
       // in allValues or in xValues or yValues
-      if (isNaN(xAccessor(item)) || isNaN(yAccessor(item))) {
+      if (isNaN(x)) {
         return;
       }
-      var x = xAccessor(item);
-      var y = yAccessor(item);
       xValues.push(x);
-      yValues.push(y);
-      var xyCoords = `${ x }-${ y }`;
+
+      var y = yAccessor(item);
+
+      // when yAccessor returns an object (as in the case of candlestick)
+      // iterate over the keys and push all the values to yValues array
+      var yNode;
+      if (Object.keys(y).length > 0) {
+        Object.keys(y).forEach(function (key) {
+          // Check for NaN since d3's Voronoi cannot handle NaN values
+          // Go ahead and Proceed to next iteration since we don't want NaN
+          // in allValues or in xValues or yValues
+          if (isNaN(y[key])) {
+            return;
+          }
+          yValues.push(y[key]);
+          // if multiple y points are to be plotted for a single x
+          // as in the case of candlestick, default to y value of 0
+          yNode = 0;
+        });
+      } else {
+        // Check for NaN since d3's Voronoi cannot handle NaN values
+        // Go ahead and Proceed to next iteration since we don't want NaN
+        // in allValues or in xValues or yValues
+        if (isNaN(y)) {
+          return;
+        }
+        yValues.push(y);
+        yNode = y;
+      }
+
+      var xyCoords = `${ x }-${ yNode }`;
       if (xyCoords in coincidentCoordinateCheck) {
         // Proceed to next iteration if the x y pair already exists
         // d3's Voronoi cannot handle NaN values or coincident coords
@@ -84,7 +114,7 @@ exports.flattenData = (data, xAccessor, yAccessor) => {
       var pointItem = {
         coord: {
           x: x,
-          y: y,
+          y: yNode,
         },
         id: `${ series.name }-${ idx }`
       };
