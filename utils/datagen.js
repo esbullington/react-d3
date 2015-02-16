@@ -113,6 +113,31 @@ exports.generateArrayOfTimeObjects = function(n) {
   });
 };
 
+exports.generateArrayOfTimeOHLCObjects = function(n) {
+  function randomDate(start, end) {
+      return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+  }
+
+  randomDate(new Date(2000, 0, 1), new Date())
+  var data = [];
+  for (var i = 0; i < n; i++) {
+    var date = randomDate(new Date(2012, 0, 1), new Date());
+    var ohlc = { 
+                  open: Math.random() * 1000,
+                  close: Math.random() * 1000
+                };
+    ohlc.high = Math.max(ohlc.open, ohlc.close) * (1 + Math.random());
+    ohlc.low = Math.min(ohlc.open, ohlc.close) * (1 - Math.random());
+    ohlc.x = date.valueOf();
+
+    data.push(ohlc);
+  } 
+  return data.sort(function(a, b) {
+    return a.x - b.x;
+  });
+};
+
+
 exports.generateArrayOfObjects = function(n) {
   var data = [];
   for (var i = 0; i < n; i++) {

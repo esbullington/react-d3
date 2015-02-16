@@ -35,7 +35,8 @@
     "react-tools": "^0.12.2",
     "reactify": "^1.0.0",
     "uglify-js": "^2.4.16",
-    "watchify": "^2.3.0"
+    "watchify": "^2.3.0",
+    "react-tools": "^0.12.2"
   },
   "dependencies": {
     "d3": "^3.5.0",

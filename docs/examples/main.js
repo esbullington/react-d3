@@ -7,6 +7,7 @@ var datagen = require('../../utils/datagen');
 var rd3 = require('../../src');
 var BarChart = rd3.BarChart;
 var LineChart = rd3.LineChart;
+var CandleStickChart = rd3.CandleStickChart;
 var PieChart = rd3.PieChart;
 var AreaChart = rd3.AreaChart;
 var Treemap = rd3.Treemap;
@@ -18,17 +19,31 @@ var Demos = React.createClass({
 
   getInitialState: function() {
     return {
-      areaData: []
+      areaData: [],
+      ohlcData: []
     }
   },
 
-  componentDidMount: function() {
-
+  componentWillMount: function() {
     // Browser data adapted from nvd3's stacked area data
     // http://nvd3.org/examples/stackedArea.html
     var parseDate = d3.time.format("%y-%b-%d").parse;
     d3.json("data/stackedAreaData.json", function(error, data) {
       this.setState({areaData: data});
+    }.bind(this));
+
+    d3.tsv("data/AAPL_ohlc.tsv", function(error, data) {
+      var series = { name: "AAPL", values: [] };
+
+      data.map(function(d) {
+        d.date = new Date(+d.date);
+        d.open = +d.open;
+        d.high = +d.high;
+        d.low = +d.low;
+        d.close = +d.close;
+        series.values.push({ x: d.date, open: d.open, high: d.high, low: d.low, close: d.close});
+      });
+      this.setState({ ohlcData: [series] });
     }.bind(this));
   },
 
@@ -209,6 +224,50 @@ var Demos = React.createClass({
             </pre>
           </div>
         </div>
+        <div className="row">
+          <hr/>
+        </div>
+        <div className="row">
+          <div className="col-md-6">
+            <CandleStickChart
+              data={this.state.ohlcData}
+              width={500}
+              height={400}
+              xAxisTickInterval={{unit: 'month', interval: 1}}
+              title="Candlestick Chart"
+            />
+          </div>
+          <div className="col-md-6">
+            <pre ref='block'>
+              <code className='js'>
+              {
+`var ohlcData = [
+  {
+    name: "AAPL",
+    values: [ { x: [object Date], open: 451.69, high: 456.23, low: 435, close: 439.88 }, 
+              { x: [object Date], open: 437.82, high: 453.21, low: 435.86 , close: 449.83 }, 
+              ... ]
+  }
+];`
+              }
+              </code>
+            </pre>
+            <pre ref='block'>
+              <code className='html'>
+                {
+`<CandleStickChart
+  data={ohlcData}
+  width={500}
+  height={400}
+  xAxisTickInterval={{unit: 'month', interval: 1}}
+  title="Candlestick Chart"
+/>`
+                }
+              </code>
+            </pre>
+          </div>
+        </div>
+
         <div className="row">
           <h3 className="page-header">react-d3: Single series charts</h3>
         </div>
