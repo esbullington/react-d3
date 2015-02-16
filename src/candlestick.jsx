@@ -228,6 +228,7 @@ var CandleStickChart = exports.CandleStickChart = React.createClass({
     return {
       data: [],
       fillUp: function (i) { return "white"; },
+      xAxisTickInterval: {unit: 'year', interval: 1},
       fillDown: d3.scale.category20c(),
       margins: {top: 10, right: 20, bottom: 30, left: 40},
       legendOffset: 120,
@@ -306,7 +307,7 @@ var CandleStickChart = exports.CandleStickChart = React.createClass({
             height={chartHeight}
           />
           <XAxis
-            xAxisClassName="area x axis"
+            xAxisClassName="line x axis"
             xScale={scales.xScale}
             xAxisTickInterval={this.props.xAxisTickInterval}
             xAxisTickCount={4}

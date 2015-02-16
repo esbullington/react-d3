@@ -52,7 +52,6 @@ exports.debounce = function(func, wait, immediate) {
   };
 };
 
-
 exports.flattenData = (data, xAccessor, yAccessor) => {
 
   var allValues = [];
@@ -74,11 +73,10 @@ exports.flattenData = (data, xAccessor, yAccessor) => {
       xValues.push(x);
 
       var y = yAccessor(item);
-
       // when yAccessor returns an object (as in the case of candlestick)
       // iterate over the keys and push all the values to yValues array
       var yNode;
-      if (Object.keys(y).length > 0) {
+      if (typeof y === 'object' && Object.keys(y).length > 0) {
         Object.keys(y).forEach(function (key) {
           // Check for NaN since d3's Voronoi cannot handle NaN values
           // Go ahead and Proceed to next iteration since we don't want NaN
