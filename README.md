@@ -20,7 +20,7 @@ Then, import into your ReactJS project:
 
 `var rd3 = require('react-d3');`
 
-The charts are then available under the `rd3` namespace, which you can then use as shown on the [demonstration page](http://esbullington.github.io/react-d3):
+The charts are then available under the `rd3` namespace, which you can then use as shown on the [demonstration page](http://esbullington.github.io/react-d3-website/):
 
 ### Available Charts
 
