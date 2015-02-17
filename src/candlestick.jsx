@@ -307,7 +307,7 @@ var CandleStickChart = exports.CandleStickChart = React.createClass({
             height={chartHeight}
           />
           <XAxis
-            xAxisClassName="line x axis"
+            xAxisClassName="candlestick x axis"
             xScale={scales.xScale}
             xAxisTickInterval={this.props.xAxisTickInterval}
             xAxisTickCount={4}
@@ -316,7 +316,7 @@ var CandleStickChart = exports.CandleStickChart = React.createClass({
             height={chartHeight}
           />
           <YAxis
-            yAxisClassName="line y axis"
+            yAxisClassName="candlestick y axis"
             yScale={scales.yScale}
             margins={props.margins}
             yAxisTickCount={this.props.yAxisTickCount}
