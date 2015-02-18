@@ -6,6 +6,7 @@ var common = require('./common');
 var Chart = common.Chart;
 var XAxis = common.XAxis;
 var YAxis = common.YAxis;
+var Brush = common.Brush;
 var Voronoi = common.Voronoi;
 var EventEmitter = require('events').EventEmitter;
 var pubsub = exports.pubsub = new EventEmitter();
@@ -246,14 +247,22 @@ var ScatterChart = exports.ScatterChart = React.createClass({
         width={props.width} height={props.height}
         title={props.title}>
         <g transform={trans}>
-          <Voronoi
-            pubsub={pubsub}
-            data={allValues}
-            yScale={scales.yScale}
-            xScale={scales.xScale}
-            width={chartWidth}
-            height={chartHeight}
-          />
+          {props.brushEnabled ?
+            /* Brushes and Voronois are incompatible, at the moment */
+            <Brush
+              yScale={scales.yScale}
+              xScale={scales.xScale}
+            />
+            :
+            <Voronoi
+              pubsub={pubsub}
+              data={allValues}
+              yScale={scales.yScale}
+              xScale={scales.xScale}
+              width={chartWidth}
+              height={chartHeight}
+            />
+          }
           {dataSeriesArray}
           <YAxis
             yAxisClassName="scatter y axis"
