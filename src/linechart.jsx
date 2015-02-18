@@ -283,9 +283,10 @@ var Axes = React.createClass({
           />
           <XAxis
             xAxisClassName={props.xAxisClassName}
+            xScale={props.xScale}
+            xAxisTickCount={props.xAxisTickCount}
             strokeWidth={props.strokeWidth}
             xHideOrigin={props.xHideOrigin}
-            xScale={props.xScale}
             margins={props.margins}
             width={props.chartWidth}
             height={props.chartHeight}
@@ -401,12 +402,15 @@ var LineChart = exports.LineChart = React.createClass({
           />
           <Axes
             yAxisClassName="line y axis"
-            yScale={scales.yScale}
             yAxisTickCount={props.yAxisTickCount}
+            yScale={scales.yScale}
             yHideOrigin={props.yHideOrigin}
+
             xAxisClassName="line x axis"
+            xAxisTickCount={props.xAxisTickCount}
             xScale={scales.xScale}
             xHideOrigin={props.xHideOrigin}
+
             strokeWidth="1"
             margins={props.margins}
             chartWidth={chartWidth}
