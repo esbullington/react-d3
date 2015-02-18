@@ -160,7 +160,8 @@ var ScatterChart = exports.ScatterChart = React.createClass({
     legend: React.PropTypes.bool,
     hoverAnimation: React.PropTypes.bool,
     xAccessor: React.PropTypes.func,
-    yAccessor: React.PropTypes.func
+    yAccessor: React.PropTypes.func,
+    brushEnabled: React.PropTypes.bool
  },
 
   getDefaultProps: function() {
@@ -177,7 +178,8 @@ var ScatterChart = exports.ScatterChart = React.createClass({
       colors: d3.scale.category20c(),
       hoverAnimation: true,
       xAccessor: (d) => d.x,
-      yAccessor: (d) => d.y
+      yAccessor: (d) => d.y,
+      brushEnabled: false
     };
   },
 
