@@ -48,8 +48,9 @@ var Brush = React.createClass({
         y={extent.y[0]}
         width={extent.x[1] - extent.x[0]}
         height={extent.y[1] - extent.y[0]}
-        fill={(this.state.brushing ? this.props.brushingFill : this.props.fill)}
-        opacity={(this.state.brushing ? this.props.brushingOpacity : this.props.opacity)}/>
+        fill={this.state.brushing ? this.props.brushingFill : this.props.fill}
+        opacity={this.state.brushing ? this.props.brushingOpacity : this.props.opacity}
+        />
       </g>
   },
 
