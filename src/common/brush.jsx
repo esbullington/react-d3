@@ -5,6 +5,7 @@ var d3 = require('d3');
 
 var Brush = React.createClass({
   propTypes: {
+    updateExtentAction: React.PropTypes.func.isRequired,
     fill: React.PropTypes.string,
     opacity: React.PropTypes.number,
     brushingFill: React.PropTypes.string,
@@ -23,75 +24,80 @@ var Brush = React.createClass({
 
   getInitialState() {
     return {
-      brushing: false
+      brushing: false,
+      mouseStartX: 0,
+      mouseStartY: 0,
+      elX: 0,
+      elY: 0,
+      mouseX: 0,
+      mouseY: 0
     }
   },
 
-  // Create the brush when the component mounts
-  componentDidMount() {
-    this._bindBrush();
-  },
-
-  // Update styles using componentDidUpdate() rather than render(),
-  // as it will cause an error on the first render call because the
-  // component is not mounted as so does not have a DOM representation
-  // for d3 to modify yet
-  componentDidUpdate() {
-    this._applyStyles();
-  },
-
-  componentWillReceiveProps(nextProps) {
-    // Don't update the brush when brushing - it'll cancel the drag event
-    if (!this.state.brushing) this._updateBrushScales(nextProps);
-  },
-
   render() {
-    return <g className={(this.state.brushing && 'brushing') + ' brush'}></g>
+    var extent = this._calculateScales()
+    return <g
+      className={(this.state.brushing && 'brushing') + ' brush'}
+      onMouseDown={this._brushStart}
+      onMouseMove={this._brush}
+      onMouseUp={this._brushEnd}
+      >
+      <rect width={this.props.xScale.range()[1]} height={this.props.yScale.range()[0]} opacity={.00001}/>
+      <rect
+        x={extent.x[0]}
+        y={extent.y[0]}
+        width={extent.x[1] - extent.x[0]}
+        height={extent.y[1] - extent.y[0]}
+        fill={(this.state.brushing ? this.props.brushingFill : this.props.fill)}
+        opacity={(this.state.brushing ? this.props.brushingOpacity : this.props.opacity)}/>
+      </g>
   },
 
-  _applyStyles() {
-    // Should include this for error checking
-    // if (!this.getDOMNode()) {return}
-    var g = d3.select(this.getDOMNode())
-
-    g.select('.extent')
-      .attr({
-        fill: (this.state.brushing ? this.props.brushingFill : this.props.fill),
-        opacity: (this.state.brushing ? this.props.brushingOpacity : this.props.opacity)
-      })
-  },
-
-  _bindBrush() {
-    // Create brush
-    this.brush = d3.svg.brush()
-      .x(this.props.xScale)
-      .y(this.props.yScale)
-      .on('brush', this.props.onBrush)
-      .on('brushstart', this._brushStart)
-      .on('brushend', this._brushEnd)
-
-    // Append brush to DOM - can we do this with React?
-    // Or handle everything with React?
-    d3.select(this.getDOMNode())
-      .call(this.brush)
-  },
-
-  _brushStart () {
+  _brush (e) {
+    if (!this.state.brushing) return
     this.setState({
-      brushing: true
+      mouseX: e.clientX,
+      mouseY: e.clientY
     })
   },
 
-  _brushEnd () {
+  _brushStart (e) {
+    var elPos = this.getDOMNode().getBoundingClientRect()
     this.setState({
-      brushing: false
+      brushing: true,
+      mouseStartX: e.clientX,
+      mouseStartY: e.clientY,
+      elX: elPos.left,
+      elY: elPos.top,
+      mouseX: e.clientX,
+      mouseY: e.clientY
     })
   },
 
-  _updateBrushScales(props) {
-    this.brush
-      .x(props.xScale)
-      .y(props.yScale)
+  _brushEnd (e) {
+    var clientX = e.clientX, clientY = e.clientY;
+    this.setState({
+      brushing: false,
+      mouseX: e.clientX,
+      mouseY: e.clientY
+    })
+  },
+
+  _calculateBox (payload) {
+    return {x: [d3.min(payload.x), d3.max(payload.x)], y: [d3.min(payload.y), d3.max(payload.y)]}
+  },
+
+  _calculateScales () {
+    return this._calculateBox({
+      x: [
+        this.state.mouseStartX - this.state.elX,
+        this.state.mouseX - this.state.elX
+      ],
+      y: [
+        this.state.mouseStartY - this.state.elY,
+        this.state.mouseY - this.state.elY
+      ]
+    })
   }
 })
 
