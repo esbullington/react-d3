@@ -29,14 +29,18 @@ gulp.task('clean:build', function() {
 });
 
 function bundler(entry) {
-  var es6ify = require('es6ify');
-
+  // var es6ify = require('es6ify');
+  var globalShim = require('browserify-global-shim').configure({
+    "react": "React",
+    "d3": "d3"
+  });
   var opts = {
           entries: entry // Only need initial file, browserify finds the deps
           //, transform: [reactify] // adding transform here does not give the react transforms, so add it as a .transform()
           , standalone: 'rd3' // enable the build to have UMD and expose window.rsc if no module system is used
           , extensions: [ '.jsx', '.js' ]
           , fullPaths: false
+          //, external: ["react", "d3"]
         };
   if (!config.production) {
     //opts.entries = watchEntry // building the demo
@@ -49,11 +53,11 @@ function bundler(entry) {
   var bundler = browserify(opts);
 
   bundler
-    //.external(["react", "d3"]) // this informs browserify that when you see require("react") or require("d3") it will be available, trust me
-    .transform(reactify) // We want to convert JSX to normal javascript
-    .transform(es6ify.configure(/.jsx/)) // ES6 to ES5
+    .external(["react", "d3"]) // this informs browserify that when you see require("react") or require("d3") it will be available, trust me
+    .transform(reactify, { harmony : true } ) // We want to convert JSX to normal javascript
+    .transform(globalShim) // We want to convert JSX to normal javascript
     ;
-
+/**/
   return config.production ? bundler : watchify(bundler);
 }
 
