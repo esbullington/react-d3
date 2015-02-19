@@ -11,12 +11,18 @@ describe('CandleStickChart', function() {
 
     // Render a areachart using single-series data object
     var length = 5;
-    var data = {
-      name: 'blah',
-      values: generate(length)
-    };
+    var data = [
+      {
+        name: 'series1',
+        values: generate(length)
+      },
+      {
+        name: 'series2',
+        values: generate(length)
+      }
+    ];
 
-    var candlestick = TestUtils.renderIntoDocument(
+    var candlestickChart = TestUtils.renderIntoDocument(
       <CandleStickChart
         data={data}
         width={500}
@@ -25,16 +31,15 @@ describe('CandleStickChart', function() {
         title="Candlestick Chart" />
     );
 
-    // Verify that it has the same number of areas as the data's length
-    var candlestick = TestUtils.findRenderedDOMComponentWithClass(
-      candlestick, 'rd3-candlestick');
-    var candles = TestUtils.scryRenderedDOMComponentsWithClass(candlestick, "rd3-candles");
-    var wicks = TestUtils.scryRenderedDOMComponentsWithClass(candlestick, "rd3-wicks");
-    expect(candles).have.length(1);
-    expect(wicks).have.length(1);
+    var candlestickGroup = TestUtils.findRenderedDOMComponentWithClass(
+      candlestickChart, 'rd3-candlestick');
+    expect(candlestickGroup).to.exist;
 
-    expect(Object.keys(candles[0]._renderedChildren)).have.length(length);
-    expect(Object.keys(wicks[0]._renderedChildren)).have.length(length);
+    var wicks = TestUtils.scryRenderedDOMComponentsWithClass(candlestickChart, 'rd3-candlestick-line');
+    var candles = TestUtils.scryRenderedDOMComponentsWithClass(candlestickChart, 'rd3-candlestick-rect');
+
+    expect(wicks).have.length(Object.keys(data).length * length);
+    expect(candles).have.length(Object.keys(data).length * length);
 
   });
 });
