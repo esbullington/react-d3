@@ -24,7 +24,7 @@ var config = {
 };
 
 gulp.task('clean:build', function() {
-  del.sync(['build'], { force: true} );
+  del.sync(['build/'], { force: true} );
   //return del(['build'], { force : true }, cb); this one fails so using the sync option
 });
 
@@ -40,7 +40,6 @@ function bundler(entry) {
           , standalone: 'rd3' // enable the build to have UMD and expose window.rsc if no module system is used
           , extensions: [ '.jsx', '.js' ]
           , fullPaths: false
-          //, external: ["react", "d3"]
         };
   if (!config.production) {
     //opts.entries = watchEntry // building the demo
@@ -55,9 +54,9 @@ function bundler(entry) {
   bundler
     .external(["react", "d3"]) // this informs browserify that when you see require("react") or require("d3") it will be available, trust me
     .transform(reactify, { harmony : true } ) // We want to convert JSX to normal javascript
-    .transform(globalShim) // We want to convert JSX to normal javascript
+    .transform(globalShim) // replace require('react') and require('d3') with (window.React) and (window.d3)
     ;
-/**/
+
   return config.production ? bundler : watchify(bundler);
 }
 
@@ -96,23 +95,23 @@ function bundleShare(b) {
 }
 
 
-var data = gulp.src('dist/public/data/*').pipe(gulp.dest('build/public/data'));
+var data = function() { return gulp.src('dist/public/data/*').pipe(gulp.dest('build/public/data')); }
 
-var html = gulp.src('dist/public/*.html').pipe(gulp.dest('build/public'));
+var html = function() { return gulp.src('dist/public/*.html').pipe(gulp.dest('build/public')) };
 
 gulp.task('copy', function() {
   return plugins.merge(data, html);
 });
 
 gulp.task('docs', ['clean:build'], function() {
-  return plugins.merge(data, html, compileJS(["./docs/examples/main.js"]));
+  return plugins.merge(data(), html(), compileJS(["./docs/examples/main.js"]));
 });
 
 gulp.task('watch', ['clean:build', 'serve'], function() {
   config.production = false;
   compileJS(["./docs/examples/main.js"]);
-  gulp.watch('dist/public/data/*', [data], reload);
-  gulp.watch('dist/public/*.html', [html], reload);
+  gulp.watch('dist/public/data/*', [data()], reload);
+  gulp.watch('dist/public/*.html', [html()], reload);
 
 });
 
@@ -132,13 +131,17 @@ gulp.task('minified', ['clean:build'], function() {
   var copyMin = gulp.src('build/public/js/*').pipe(gulp.dest('dist/public/js'));
 });
 
-gulp.task('release', ['minified'], function() {
-  // FIXME
-  // why do jsx --harmony -x jsx src build/cjs && jsx --harmony src build/cjs
-  // if needed, have to figure out how to use or use gulp-react plugin
+gulp.task('release', ['minified'], function(cb) {
 
-  // var reactTools = require('react-tools');
-  // reactTools.transform(sourceCodeAsString, options);
+  // replacement for jsx --harmony -x jsx src build/cjs && jsx --harmony src build/cjs
+  var react = require('gulp-react');
+  gulp.src(['src/**/*.js', 'src/**/*.jsx'])
+        .pipe(react({harmony: true}))
+        .pipe(gulp.dest('build/cjs'));
+
+  // replacement for cp *.md build/cjs && cp .npmignore build/cjs
+  gulp.src(['*.md', '.npmignore'])
+        .pipe(gulp.dest('build/cjs'));
 
   var fs  = require("fs");
   var Handlebars = require('handlebars');
@@ -148,6 +151,7 @@ gulp.task('release', ['minified'], function() {
 
   var mkdirp = require('mkdirp');
 
+  // replacement for node scripts/build.js
   mkdirp(path.join(__dirname, 'build', 'cjs'), function(err) {
     var packageTemplate = fs.readFileSync(path.join(__dirname, 'dist/cjs/package.json')).toString();
     var template = Handlebars.compile(packageTemplate);
@@ -160,6 +164,7 @@ gulp.task('release', ['minified'], function() {
     }
     fs.writeFileSync('./build/cjs/package.json', buildPackage);
     console.log('CJS package.json file rendered');
+    cb();
   });
 });
 
@@ -195,12 +200,29 @@ gulp.task('test', function (cb) {
 });
 
 gulp.task('lint', function () {
-  // FIXME this does not work as the gulp-jsxhint plugin is not ready, figure out a different way to fix this
-  var jsxhint = require('gulp-jsxhint');
+  var jshint = require('gulp-jshint');
+  var react = require('gulp-react');
+  var stylish = require('jshint-stylish');
 
-  return gulp.src(['src/**/*.js', 'src/**/*.jsx']).
-    pipe(jsxhint());
+  var jshintConfig = {
+    "browserify": true,
+    "expr": true,
+    "esnext": true,
+    "globals": {
+      "describe": false,
+      "it": false,
+      "before": false,
+      "beforeEach": false,
+      "after": false,
+      "afterEach": false
+    }
+  }
 
+  return gulp.src(['src/**/*.js', 'src/**/*.jsx'])
+        .pipe(react({harmony: true}))
+        .pipe(jshint(jshintConfig))
+        .pipe(jshint.reporter(stylish))
+        ;
 });
 
 
@@ -208,9 +230,9 @@ gulp.task("default", function() {
   console.log("gulp docs        -> To build the docs folder");
   console.log("gulp watch       -> Launch a web browser on localhost:4000 and also watche for changes to src/**/*.js(x)?, dist/public/*.html, dist/public/data/*");
   console.log("gulp minified    -> compile the javascript with entry as src/index.js and create dist/public/js/react-d3.min.js");
-  console.log("gulp release     -> FIXME****** currently only generates the package.json under dist/cjs/ ** what is the purpose of this?");
+  console.log("gulp release     -> creates a release for npm under build/cjs which can be pulished to npm");
   console.log("gulp clean:build -> clean the build directory");
   console.log("gulp serve       -> Launch a web browser on localhost:4000 and server from 'build/public'");
   console.log("gulp test        -> execute the tests with config file karma.conf.js");
-  console.log("gulp lint        -> FIXME****** the plugin is not available for use, need to figure out some other option");
+  console.log("gulp lint        -> lint *.js and *.jsx code under src/");
 });
