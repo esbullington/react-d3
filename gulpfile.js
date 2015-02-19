@@ -27,7 +27,6 @@ function bundler(entry) {
       watchify = require('watchify'),
       browserify = require('browserify');
 
-  // var es6ify = require('es6ify');
   var globalShim = require('browserify-global-shim').configure({
     "react": "React",
     "d3": "d3"
@@ -117,7 +116,7 @@ gulp.task('minified', ['clean:build'], function() {
   var gulpFilter = require('gulp-filter');
   var jsfilter = gulpFilter(['*.js']);
 
-  compileJS(["./src/index.js"])
+  var jsMin = compileJS(["./src/index.js"])
     .pipe(jsfilter)
     .pipe(plugins.rename({ extname: '.min.js' }))
     .pipe(plugins.sourcemaps.init({loadMaps: true}))
@@ -127,6 +126,7 @@ gulp.task('minified', ['clean:build'], function() {
     ;
 
   var copyMin = gulp.src('build/public/js/*').pipe(gulp.dest('dist/public/js'));
+  return merge(copyMin, jsMin);
 });
 
 gulp.task('release', ['minified'], function(cb) {
@@ -147,20 +147,17 @@ gulp.task('release', ['minified'], function(cb) {
 
   var pkg = require(path.join(__dirname, 'package.json'));
 
-  var mkdirp = require('mkdirp');
-
   // replacement for node scripts/build.js
-  mkdirp(path.join(__dirname, 'build', 'cjs'), function(err) {
-    var packageTemplate = fs.readFileSync(path.join(__dirname, 'dist/cjs/package.json')).toString();
-    var template = Handlebars.compile(packageTemplate);
-    var buildPackage = template({pkg: pkg});
-    try {
-      JSON.parse(buildPackage);
-    } catch (err) {
-      console.error('package.json parse error: ', err);
-      process.exit(1);
-    }
-    fs.writeFileSync('./build/cjs/package.json', buildPackage);
+  var packageTemplate = fs.readFileSync(path.join(__dirname, 'dist/cjs/package.json')).toString();
+  var template = Handlebars.compile(packageTemplate);
+  var buildPackage = template({pkg: pkg});
+  try {
+    JSON.parse(buildPackage);
+  } catch (err) {
+    console.error('package.json parse error: ', err);
+    process.exit(1);
+  }
+  fs.writeFile(path.join(__dirname, 'build', 'cjs', 'package.json'), buildPackage, function() {
     console.log('CJS package.json file rendered');
     cb();
   });
