@@ -390,7 +390,7 @@ var LineChart = exports.LineChart = React.createClass({
         height={props.height}
         title={props.title}
       >
-        <g transform={trans}>
+        <g transform={trans} className='rd3-linechart'>
           {dataSeriesArray}
           <Voronoi
             pubsub={pubsub}
@@ -401,12 +401,12 @@ var LineChart = exports.LineChart = React.createClass({
             height={chartHeight}
           />
           <Axes
-            yAxisClassName="line y axis"
+            yAxisClassName='rd3-linechart-axis y axis'
             yAxisTickCount={props.yAxisTickCount}
             yScale={scales.yScale}
             yHideOrigin={props.yHideOrigin}
 
-            xAxisClassName="line x axis"
+            xAxisClassName='rd3-linechart-axis x axis'
             xAxisTickCount={props.xAxisTickCount}
             xScale={scales.xScale}
             xHideOrigin={props.xHideOrigin}
@@ -420,7 +420,6 @@ var LineChart = exports.LineChart = React.createClass({
         </g>
       </Chart>
     );
-  },
-
+  }
 
 });
