@@ -4,18 +4,10 @@ console.time('Loading plugins');
 
 var gulp = require('gulp'),
   plugins = require('gulp-load-plugins')(),
-  del = require('del')
-  ;
-
-var browserify = require('browserify');
-var source = require('vinyl-source-stream');
-var reactify = require('reactify');
-var watchify = require('watchify');
-var buffer = require('vinyl-buffer');
-
-
-plugins.browserSync = require('browser-sync')
-plugins.merge = require('merge-stream');
+  source = require('vinyl-source-stream'),
+  buffer = require('vinyl-buffer'),
+  browserSync = require('browser-sync'),
+  merge = require('merge-stream');
 
 console.timeEnd('Loading plugins');
 
@@ -24,11 +16,17 @@ var config = {
 };
 
 gulp.task('clean:build', function() {
+  var del = require('del');
+
   del.sync(['build/'], { force: true} );
   //return del(['build'], { force : true }, cb); this one fails so using the sync option
 });
 
 function bundler(entry) {
+  var reactify = require('reactify'),
+      watchify = require('watchify'),
+      browserify = require('browserify');
+
   // var es6ify = require('es6ify');
   var globalShim = require('browserify-global-shim').configure({
     "react": "React",
@@ -77,7 +75,7 @@ function compileJS(entry) {
   w.on('time', function (time) {
       if (!config.production) {
         console.log('Bundle updated in %s ms', time);
-        plugins.browserSync.reload();
+        browserSync.reload();
       }
     })
   .on('error', console.error.bind(console));
@@ -100,11 +98,11 @@ var data = function() { return gulp.src('dist/public/data/*').pipe(gulp.dest('bu
 var html = function() { return gulp.src('dist/public/*.html').pipe(gulp.dest('build/public')) };
 
 gulp.task('copy', function() {
-  return plugins.merge(data, html);
+  return merge(data, html);
 });
 
 gulp.task('docs', ['clean:build'], function() {
-  return plugins.merge(data(), html(), compileJS(["./docs/examples/main.js"]));
+  return merge(data(), html(), compileJS(["./docs/examples/main.js"]));
 });
 
 gulp.task('watch', ['clean:build', 'serve'], function() {
@@ -175,11 +173,11 @@ function reload(updateEvent, buildTime) {
     console.log("%s updated", updateEvent.path);
   }
 
-  plugins.browserSync.reload();
+  browserSync.reload();
 }
 
 gulp.task('serve', function() {
-  plugins.browserSync({
+  browserSync({
     server: {
       baseDir: ["build/public"]
     },
