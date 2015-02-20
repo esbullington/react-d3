@@ -3,6 +3,151 @@
 var React = require('react');
 var d3 = require('d3');
 
+// Implementation of AxisTicks and AxisLine 
+// derived from d3's axis.js
+// copyright Mike Bostock 2010-2015
+// need to add LICENSE from d3
+
+var AxisTicks = React.createClass({
+
+  getDefaultProps() {
+    return {
+      innerTickSize: 6,
+      outerTickSize: 6,
+      tickPadding: 3,
+      tickArguments: [10],
+      tickValues: null,
+      d3_identity: (d)=>d,
+      tickFormat: null
+    };
+  },
+
+  render() {
+    var props = this.props;
+
+
+    var tr,
+        ticks,
+        scale,
+        adjustedScale,
+        textAnchor,
+        tickFormat,
+        y1, y2, dy, x1, x2, dx;
+
+    var sign = props.yScale ? -1 : 1;
+
+    // We can use this along with sign 
+    // if we want to remove the hardcoded y, y2, x, x2, etc below
+    var tickSpacing = Math.max(props.innerTickSize, 0) + props.tickPadding;  
+
+    scale = props.yScale ? props.yScale : props.xScale;
+
+    var ticks = props.tickValues == null ? (scale.ticks ? scale.ticks.apply(scale, props.tickArguments) : scale.domain()) : props.tickValues;
+    var tickFormat = props.tickFormat_ == null ? (scale.tickFormat ? scale.tickFormat.apply(scale, props.tickArguments) : props.d3_identity) : props.tickFormat_;
+
+    adjustedScale = scale.rangeBand ? (d) => { return scale(d) + scale.rangeBand() / 2; } : scale;
+
+    if (props.xScale) {
+      tr = (tick) => `translate(${adjustedScale(tick)},0)`;
+      textAnchor = "middle";
+      y2 = props.innerTickSize * sign;
+      y1 = tickSpacing * sign;
+      dy =  sign < 0 ? "0em" : ".71em";
+    } else if (props.yScale) {
+      tr = (tick) => `translate(0,${adjustedScale(tick)})`;
+      textAnchor = "end"
+      x2 = props.innerTickSize * sign;
+      x1 = tickSpacing * sign;
+      dy = ".32em";
+    }
+
+
+    return (
+      <g>
+        {ticks.map( (tick, i) => {
+          return  <g key={i} className="tick" transform={tr(tick)} >
+                    <line style={{shapeRendering:'crispEdges',opacity:'1',stroke:'#000'}} x2={x2} y2={y2} >
+                    </line>
+                    <text
+                      strokeWidth="0.01"
+                      dy={dy} x={x1} y={y1}
+                      stroke='#000'
+                      textAnchor={textAnchor}
+                    >
+                      {tickFormat(tick)}
+                    </text>
+                  </g>
+          })
+        }
+      </g>
+    );
+  }
+
+});
+
+var AxisLine = React.createClass({
+
+  propTypes: {
+    scale: React.PropTypes.func.isRequired,
+    innerTickSize: React.PropTypes.number,
+    outerTickSize: React.PropTypes.number,
+    tickPadding: React.PropTypes.number,
+    tickArguments: React.PropTypes.array,
+    fill: React.PropTypes.string,
+    stroke: React.PropTypes.string
+  },
+
+  getDefaultProps() {
+    return {
+      innerTickSize: 6,
+      outerTickSize: 6,
+      tickPadding: 3,
+      tickArguments: [10],
+      tickValues: null,
+      tickFormat: null 
+    };
+  },
+
+
+  _d3_scaleExtent(domain) {
+    var start = domain[0], stop = domain[domain.length - 1];
+    return start < stop ? [start, stop] : [stop, start];
+  },
+
+  _d3_scaleRange(scale) {
+    return scale.rangeExtent ? scale.rangeExtent() : this._d3_scaleExtent(scale.range());
+  },
+
+  render() {
+
+    var props = this.props;
+    var sign = props.orient === "top" || props.orient === "left" ? -1 : 1;
+
+    var range = this._d3_scaleRange(props.scale);
+
+    var d;
+
+    if (props.orient === "bottom" || props.orient === "top") {
+      d = "M" + range[0] + "," + sign * props.outerTickSize + "V0H" + range[1] + "V" + sign * props.outerTickSize;
+    } else {
+      d = "M" + sign * props.outerTickSize + "," + range[0] + "H0V" + range[1] + "H" + sign * props.outerTickSize;
+    }
+
+
+    return (
+      <path
+        className="domain"
+        d={d}
+        style={{'shapeRendering':'crispEdges'}}
+        fill="none"
+        stroke={props.stroke}
+        strokeWidth={props.strokeWidth}
+      >
+      </path>
+    );
+  }
+});
+
 exports.XAxis = React.createClass({
 
   propTypes: {
@@ -30,69 +175,34 @@ exports.XAxis = React.createClass({
     };
   },
 
-
-  componentDidMount: function() {
-    this._renderAxis(this.props);
-  },
-
-  componentWillReceiveProps: function(props) {
-    this._renderAxis(props);
-  },
-
-  _renderAxis: function(props) {
-    var xAxis = d3.svg.axis()
-      .scale(props.xScale)
-      .orient(props.xOrient);
-
-    if (props.xAxisTickInterval) {
-      xAxis.ticks(d3.time[props.xAxisTickInterval.unit], props.xAxisTickInterval.interval);
-    } else if (props.xAxisTickCount) {
-      xAxis.ticks(props.xAxisTickCount);
-    }
-
-    var xAxisClassSelect = props.xAxisClassName.replace(/ /g, '.');
-
-    if (xAxisClassSelect[0] != '.') {
-      xAxisClassSelect = '.' + xAxisClassSelect;
-    }
-
-    var node = this.refs.xaxis.getDOMNode();
-
-    d3.select(node)
-      .attr("class", props.xAxisClassName)
-      .call(xAxis);
-
-    // Style each of the tick lines
-    d3.selectAll(xAxisClassSelect)
-      .selectAll('line')
-      .attr("shape-rendering", "crispEdges")
-      .attr("stroke", props.tickStroke);
-
-    // Style the main axis line
-    d3.selectAll(xAxisClassSelect)
-      .select('path')
-      .attr("shape-rendering", "crispEdges")
-      .attr("fill", props.fill)
-      .attr("stroke", props.stroke)
-      .attr("stroke-width", props.strokeWidth);
-
-    if (props.xHideOrigin) {
-      // Hack to hide the x axis origin
-      var originSelect = xAxisClassSelect + ' g:first-child';
-      d3.selectAll(originSelect).style("opacity","0");
-    }
-
-  },
-
   render: function() {
     var props = this.props;
+    window.xScale = props.xScale;
     var t = "translate(0," + props.height + ")";
+
+    var tickArguments;
+    if (props.xAxisTickCount) {
+      tickArguments = [props.xAxisTickCount];
+    }
+    
+    if (props.xAxisTickInterval) {
+      tickArguments = [d3.time[props.xAxisTickInterval.unit], props.xAxisTickInterval.interval];
+    }
+
     return (
       <g
-        ref='xaxis'
         className={props.xAxisClassName}
         transform={t}
       >
+        <AxisTicks
+          tickArguments={tickArguments}
+          xScale={props.xScale}
+        />
+        <AxisLine
+          scale={props.xScale}
+          orient={props.xOrient}
+          {...props}
+        />
       </g>
     );
   }
@@ -121,71 +231,36 @@ exports.YAxis = React.createClass({
       fill: "none",
       stroke: "#000",
       tickStroke: "#000",
-      strokeWidth: "none"
+      strokeWidth: "1"
     };
   },
 
-  componentDidMount: function() {
-    this._renderAxis(this.props);
-  },
-
-  componentWillReceiveProps: function(props) {
-    this._renderAxis(props);
-  },
-
-  _renderAxis: function(props) {
-
-    var yAxis = d3.svg.axis()
-      .ticks(props.yAxisTickCount)
-      .scale(props.yScale)
-      .orient(this.props.yOrient);
-
-    if (props.yAxisTickCount) {
-      yAxis.ticks(props.yAxisTickCount);
-    } else if (props.yAxisTickInterval) {
-      yAxis.ticks(d3.time[props.yAxisTickInterval.unit], props.yAxisTickInterval.interval);
-    }
-
-    var yAxisClassSelect = props.yAxisClassName.replace(/ /g, '.');
-
-    if (yAxisClassSelect[0] != '.') {
-      yAxisClassSelect = '.' + yAxisClassSelect;
-    }
-
-    var node = this.refs.yaxis.getDOMNode();
-
-    d3.select(node)
-      .attr("class", props.yAxisClassName)
-      .call(yAxis);
-
-    // Style each of the tick lines
-    d3.selectAll(yAxisClassSelect)
-      .selectAll('line')
-      .attr("shape-rendering", "crispEdges")
-      .attr("stroke", props.tickStroke);
-
-    // Style the main axis line
-    d3.selectAll(yAxisClassSelect)
-      .select('path')
-      .attr("shape-rendering", "crispEdges")
-      .attr("fill", props.fill)
-      .attr("stroke", props.stroke);
-
-    if (props.yHideOrigin) {
-      // Hack to hide the x axis origin
-      var originSelect = yAxisClassSelect + ' g:first-child';
-      d3.selectAll(originSelect).style("opacity","0");
-    }
-
-  },
-
   render: function() {
+
     var props = this.props;
+
+    var tickArguments;
+    if (props.yAxisTickCount) {
+      tickArguments = [props.yAxisTickCount];
+    }
+    
+    if (props.yAxisTickInterval) {
+      tickArguments = [d3.time[props.yAxisTickInterval.unit], props.yAxisTickInterval.interval];
+    }
+
     return (
       <g
-        ref='yaxis'
         className={props.yAxisClassName}
       >
+        <AxisTicks
+          tickArguments={tickArguments}
+          yScale={props.yScale}
+        />
+        <AxisLine
+          scale={props.yScale}
+          orient={props.yOrient}
+          {...props}
+        />
       </g>
     );
   }
