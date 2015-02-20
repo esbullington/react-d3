@@ -159,7 +159,8 @@ exports.XAxis = React.createClass({
     fill: React.PropTypes.string,
     stroke: React.PropTypes.string,
     tickStroke: React.PropTypes.string,
-    strokeWidth: React.PropTypes.string
+    strokeWidth: React.PropTypes.string,
+    xAxisOffset: React.PropTypes.number
   },
 
   getDefaultProps: function() {
@@ -171,21 +172,22 @@ exports.XAxis = React.createClass({
       stroke: "none",
       tickStroke: "#000",
       strokeWidth: "none",
-      hideOrigin: false
+      hideOrigin: false,
+      xAxisOffset: 0
     };
   },
 
   render: function() {
     var props = this.props;
-    window.xScale = props.xScale;
-    var t = "translate(0," + props.height + ")";
+
+    var t = `translate(0,${props.xAxisOffset + props.height})`;
 
     var tickArguments;
-    if (props.xAxisTickCount) {
+    if (typeof props.xAxisTickCount !== 'undefined') {
       tickArguments = [props.xAxisTickCount];
     }
     
-    if (props.xAxisTickInterval) {
+    if (typeof props.xAxisTickInterval !== 'undefined') {
       tickArguments = [d3.time[props.xAxisTickInterval.unit], props.xAxisTickInterval.interval];
     }
 
@@ -220,7 +222,8 @@ exports.YAxis = React.createClass({
     fill: React.PropTypes.string,
     stroke: React.PropTypes.string,
     tickStroke: React.PropTypes.string,
-    strokeWidth: React.PropTypes.string
+    strokeWidth: React.PropTypes.string,
+    yAxisOffset: React.PropTypes.number
   },
 
   getDefaultProps: function() {
@@ -231,13 +234,16 @@ exports.YAxis = React.createClass({
       fill: "none",
       stroke: "#000",
       tickStroke: "#000",
-      strokeWidth: "1"
+      strokeWidth: "1",
+      yAxisOffset: 0
     };
   },
 
   render: function() {
 
     var props = this.props;
+
+    var t = `translate(${props.yAxisOffset},0)`;
 
     var tickArguments;
     if (props.yAxisTickCount) {
@@ -251,6 +257,7 @@ exports.YAxis = React.createClass({
     return (
       <g
         className={props.yAxisClassName}
+        transform={t}
       >
         <AxisTicks
           tickArguments={tickArguments}

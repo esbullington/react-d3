@@ -216,7 +216,7 @@ var ScatterChart = exports.ScatterChart = React.createClass({
 
     var scales = this._calculateScales(chartWidth, chartHeight, xValues, yValues);
 
-    var trans = "translate(" + props.margins.left + "," + props.margins.top + ")";
+    var trans = "translate(" + (props.yAxisOffset < 0 ? props.margins.left + Math.abs(props.yAxisOffset) : props.margins.left) + "," + props.margins.top + ")";
 
     var dataSeriesArray = props.data.map( (series, idx) => {
       return (
@@ -255,24 +255,26 @@ var ScatterChart = exports.ScatterChart = React.createClass({
             height={chartHeight}
           />
           {dataSeriesArray}
-          <YAxis
-            yAxisClassName="scatter y axis"
-            yScale={scales.yScale}
-            yHideOrigin={props.yHideOrigin}
-            margins={props.margins}
-            yAxisTickCount={props.yAxisTickCount}
-            width={chartWidth}
-            height={chartHeight}
-            stroke={props.axesColor}
-          />
           <XAxis
             xAxisClassName="scatter x axis"
             strokeWidth="1"
             xHideOrigin={props.xHideOrigin}
             xAxisTickInterval={props.xAxisTickInterval}
+            xAxisOffset={props.xAxisOffset}
             xScale={scales.xScale}
             data={props.data}
             margins={props.margins}
+            width={chartWidth}
+            height={chartHeight}
+            stroke={props.axesColor}
+          />
+          <YAxis
+            yAxisClassName="scatter y axis"
+            yScale={scales.yScale}
+            yAxisOffset={props.yAxisOffset}
+            yHideOrigin={props.yHideOrigin}
+            margins={props.margins}
+            yAxisTickCount={props.yAxisTickCount}
             width={chartWidth}
             height={chartHeight}
             stroke={props.axesColor}
