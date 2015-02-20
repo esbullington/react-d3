@@ -96,8 +96,8 @@ With this approach, React itself is responsible for generating the SVG markup.  
 ####0.0.1:
 - Initial release with linechart, barchart and areachart follow in subsequent patch updates
 
-### Project sustainability
-Please help to support this project by hiring me for your next contract job.  I do:
+### Available for work
+Consider me for your next contract job.  I do:
 * custom d3 and/or React visualizations.
 * React, AngularJS, or Backbone frontend work.
 * backend work in Python(Flask, Django), Lua(w/Nginx), or Node.js, particularly REST APIs.
