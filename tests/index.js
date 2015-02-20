@@ -7,5 +7,5 @@ require('./scatterchart-tests');
 require('./candlestick-tests');
 require('./legend-tests');
 require('./voronoi-tests');
-
+require('./axes-tests');
 require('./utils-tests');
