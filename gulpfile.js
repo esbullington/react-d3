@@ -134,14 +134,15 @@ gulp.task('copymisc', function(cb) {
 
   // replacement for jsx --harmony -x jsx src build/cjs && jsx --harmony src build/cjs
   var react = require('gulp-react');
-  gulp.src(['src/**/*.js', 'src/**/*.jsx'])
+  var npmAssets = gulp.src(['src/**/*.js', 'src/**/*.jsx'])
         .pipe(react({harmony: true}))
         .pipe(gulp.dest('build/cjs'));
 
   // replacement for cp *.md build/cjs && cp .npmignore build/cjs
-  gulp.src(['*.md', '.npmignore'])
+  var misc = gulp.src(['*.md', '.npmignore'])
         .pipe(gulp.dest('build/cjs'));
 
+  return merge(npmAssets, misc);
 });
 
 
