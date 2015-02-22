@@ -154,7 +154,8 @@ var DataSeries = exports.DataSeries = React.createClass({
     interpolationType: React.PropTypes.string,
     fill: React.PropTypes.string,
     xAccessor: React.PropTypes.func,
-    yAccessor: React.PropTypes.func
+    yAccessor: React.PropTypes.func,
+    displayDataPoints: React.PropTypes.bool
   },
 
   getDefaultProps: function() {
@@ -163,7 +164,8 @@ var DataSeries = exports.DataSeries = React.createClass({
       interpolationType: 'linear',
       fill: '#fff',
       xAccessor: (d) => d.x,
-      yAccessor: (d) => d.y
+      yAccessor: (d) => d.y,
+      displayDataPoints: true
     };
   },
 
@@ -199,31 +201,35 @@ var DataSeries = exports.DataSeries = React.createClass({
         });
     }
 
-    // Map over data to generate SVG circles at data points
-    // if datum is a date object, treat it a bit differently
-    var circles = props.data.map(function(point, i) {
-      var cx, cy;
-      if (this._isDate(point, xAccessor)) {
-        cx = props.xScale(xAccessor(point).getTime());
-      } else {
-        cx = props.xScale(xAccessor(point));
-      }
-      if (this._isDate(point, yAccessor)) {
-        cy = props.yScale(yAccessor(point).getTime());
-      } else {
-        cy = props.yScale(yAccessor(point));
-      }
-      return (
-        <Circle
-          cx={cx}
-          cy={cy}
-          r={props.pointRadius}
-          fill={props.fill}
-          key={props.seriesName + i}
-          id={props.seriesName + '-' + i}
-        />
-      );
-    }, this);
+    var circles = null;
+
+    if (props.displayDataPoints) {
+      // Map over data to generate SVG circles at data points
+      // if datum is a date object, treat it a bit differently
+      var circles = props.data.map(function(point, i) {
+        var cx, cy;
+        if (this._isDate(point, xAccessor)) {
+          cx = props.xScale(xAccessor(point).getTime());
+        } else {
+          cx = props.xScale(xAccessor(point));
+        }
+        if (this._isDate(point, yAccessor)) {
+          cy = props.yScale(yAccessor(point).getTime());
+        } else {
+          cy = props.yScale(yAccessor(point));
+        }
+        return (
+          <Circle
+            cx={cx}
+            cy={cy}
+            r={props.pointRadius}
+            fill={props.fill}
+            key={props.seriesName + i}
+            id={props.seriesName + '-' + i}
+          />
+        );
+      }, this);
+    }
 
     return (
       <g>
@@ -314,7 +320,8 @@ var LineChart = exports.LineChart = React.createClass({
     colors: React.PropTypes.func,
     legend: React.PropTypes.bool,
     xAccessor: React.PropTypes.func,
-    yAccessor: React.PropTypes.func
+    yAccessor: React.PropTypes.func,
+    displayDataPoints: React.PropTypes.bool
   },
 
   getDefaultProps: function() {
@@ -328,7 +335,8 @@ var LineChart = exports.LineChart = React.createClass({
       title: '',
       colors: d3.scale.category20c(),
       xAccessor: (d) => d.x,
-      yAccessor: (d) => d.y
+      yAccessor: (d) => d.y,
+      displayDataPoints: true
     };
   },
 
@@ -376,8 +384,9 @@ var LineChart = exports.LineChart = React.createClass({
             key={series.name}
             xAccessor={props.xAccessor}
             yAccessor={props.yAccessor}
-          /> 
-      ); 
+            displayDataPoints={props.displayDataPoints}
+          />
+      );
     });
 
     return (
