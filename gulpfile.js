@@ -129,17 +129,24 @@ gulp.task('minified', ['clean:build'], function() {
   return merge(copyMin, jsMin);
 });
 
-gulp.task('release', ['minified'], function(cb) {
+
+gulp.task('copymisc', function(cb) {
 
   // replacement for jsx --harmony -x jsx src build/cjs && jsx --harmony src build/cjs
   var react = require('gulp-react');
-  gulp.src(['src/**/*.js', 'src/**/*.jsx'])
+  var npmAssets = gulp.src(['src/**/*.js', 'src/**/*.jsx'])
         .pipe(react({harmony: true}))
         .pipe(gulp.dest('build/cjs'));
 
   // replacement for cp *.md build/cjs && cp .npmignore build/cjs
-  gulp.src(['*.md', '.npmignore'])
+  var misc = gulp.src(['*.md', '.npmignore'])
         .pipe(gulp.dest('build/cjs'));
+
+  return merge(npmAssets, misc);
+});
+
+
+gulp.task('release', ['copymisc', 'minified'], function(cb) {
 
   var fs  = require("fs");
   var Handlebars = require('handlebars');
@@ -157,8 +164,10 @@ gulp.task('release', ['minified'], function(cb) {
     console.error('package.json parse error: ', err);
     process.exit(1);
   }
-  fs.writeFile(path.join(__dirname, 'build', 'cjs', 'package.json'), buildPackage, function() {
-    console.log('CJS package.json file rendered');
+
+  fs.writeFile(path.join(__dirname, 'build', 'cjs', 'package.json'), buildPackage, function(err) {
+  if (err) console.log(err);
+    else console.log('CJS package.json file rendered');
     cb();
   });
 });
