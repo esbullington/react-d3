@@ -328,13 +328,17 @@ var LineChart = exports.LineChart = React.createClass({
       title: '',
       colors: d3.scale.category20c(),
       xAccessor: (d) => d.x,
-      yAccessor: (d) => d.y
+      yAccessor: (d) => d.y,
+      interpolate: false,
+      interpolationType: null,
     };
   },
 
   render: function() {
 
     var props = this.props;
+
+    var interpolationType = props.interpolationType || (props.interpolate ? 'cardinal' : 'linear');
 
     // Calculate inner chart dimensions
     var chartWidth, chartHeight;
@@ -376,8 +380,9 @@ var LineChart = exports.LineChart = React.createClass({
             key={series.name}
             xAccessor={props.xAccessor}
             yAccessor={props.yAccessor}
-          /> 
-      ); 
+            interpolationType={interpolationType}
+          />
+      );
     });
 
     return (
