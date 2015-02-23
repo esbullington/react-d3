@@ -5,8 +5,32 @@ var d3 = require('d3');
 
 // Implementation of AxisTicks and AxisLine 
 // derived from d3's axis.js
-// copyright Mike Bostock 2010-2015
-// need to add LICENSE from d3
+// Copyright (c) 2010-2015, Michael Bostock
+// All rights reserved.
+//
+// Redistribution and use in source and binary forms, with or without
+// modification, are permitted provided that the following conditions are met:
+//
+// * Redistributions of source code must retain the above copyright notice, this
+//   list of conditions and the following disclaimer.
+//
+// * Redistributions in binary form must reproduce the above copyright notice,
+//   this list of conditions and the following disclaimer in the documentation
+//   and/or other materials provided with the distribution.
+//
+// * The name Michael Bostock may not be used to endorse or promote products
+//   derived from this software without specific prior written permission.
+//
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+// AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+// IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+// DISCLAIMED. IN NO EVENT SHALL MICHAEL BOSTOCK BE LIABLE FOR ANY DIRECT,
+// INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+// BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY
+// OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+// NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+// EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 var AxisTicks = React.createClass({
 
@@ -18,6 +42,7 @@ var AxisTicks = React.createClass({
       tickArguments: [10],
       tickValues: null,
       d3_identity: (d)=>d,
+      tickFormatting: (d)=>d,
       tickFormat: null
     };
   },
@@ -179,7 +204,6 @@ exports.XAxis = React.createClass({
 
   render: function() {
     var props = this.props;
-
     var t = `translate(0,${props.xAxisOffset + props.height})`;
 
     var tickArguments;
@@ -197,6 +221,7 @@ exports.XAxis = React.createClass({
         transform={t}
       >
         <AxisTicks
+          tickFormatting={props.tickFormatting}
           tickArguments={tickArguments}
           xScale={props.xScale}
         />
@@ -260,6 +285,7 @@ exports.YAxis = React.createClass({
         transform={t}
       >
         <AxisTicks
+          tickFormatting={props.tickFormatting}
           tickArguments={tickArguments}
           yScale={props.yScale}
         />
