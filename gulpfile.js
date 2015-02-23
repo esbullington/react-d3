@@ -217,6 +217,7 @@ gulp.task('lint', function () {
     "browserify": true,
     "expr": true,
     "esnext": true,
+    "eqnull": true,
     "globals": {
       "describe": false,
       "it": false,
