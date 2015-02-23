@@ -189,6 +189,7 @@ var Demos = React.createClass({
                 }
               }
               yAccessor={(d)=>d[1]}
+              xAxisLabel={"Year"}
             />
           </div>
           <div className="col-md-6">
@@ -235,6 +236,10 @@ var Demos = React.createClass({
               height={400}
               yAxisOffset={-10}
               title="Candlestick Chart"
+              yAxisLabel="Stock Price / $"
+              xAxisLabel="Date"
+              yAxisLabelOffset={40}
+              xAxisLabelOffset={40}
             />
           </div>
           <div className="col-md-6">
@@ -263,6 +268,9 @@ var Demos = React.createClass({
   xAxisTickInterval={{unit: 'month', interval: 1}}
   yAxisOffset={-10}
   title="Candlestick Chart"
+  yAxisLabel="Stock Price / $"
+  xAxisLabel="Date"
+  yAxisLabelOffset={40}
 />`
                 }
               </code>

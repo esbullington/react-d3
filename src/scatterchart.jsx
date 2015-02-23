@@ -161,13 +161,18 @@ var ScatterChart = exports.ScatterChart = React.createClass({
     legend: React.PropTypes.bool,
     hoverAnimation: React.PropTypes.bool,
     xAccessor: React.PropTypes.func,
-    yAccessor: React.PropTypes.func
+    yAccessor: React.PropTypes.func,
+    yAxisLabel: React.PropTypes.string,
+    xAxisLabel: React.PropTypes.string,
+    yAxisLabelOffset: React.PropTypes.number,
+    xAxisLabelOffset: React.PropTypes.number
+
  },
 
   getDefaultProps: function() {
     return {
       data: [],
-      margins: {top: 20, right: 30, bottom: 30, left: 30},
+      margins: {top: 20, right: 30, bottom: 40, left: 40},
       legendOffset: 120,
       legend: false,
       pointRadius: 3,
@@ -178,7 +183,11 @@ var ScatterChart = exports.ScatterChart = React.createClass({
       colors: d3.scale.category20c(),
       hoverAnimation: true,
       xAccessor: (d) => d.x,
-      yAccessor: (d) => d.y
+      yAccessor: (d) => d.y,
+      yAxisLabel: '',
+      xAxisLabel: '',
+      yAxisLabelOffset: 30,
+      xAxisLabelOffset: 35
     };
   },
 
@@ -240,7 +249,7 @@ var ScatterChart = exports.ScatterChart = React.createClass({
     });
 
     return (
-      <Chart 
+      <Chart
         legend={props.legend}
         data={props.data}
         margins={props.margins}
@@ -257,6 +266,17 @@ var ScatterChart = exports.ScatterChart = React.createClass({
             height={chartHeight}
           />
           {dataSeriesArray}
+          <YAxis
+            yAxisClassName="scatter y axis"
+            yScale={scales.yScale}
+            yHideOrigin={props.yHideOrigin}
+            margins={props.margins}
+            yAxisTickCount={props.yAxisTickCount}
+            width={chartWidth}
+            height={chartHeight}
+            stroke={props.axesColor}
+            label={props.yAxisLabel}
+          />
           <XAxis
             xAxisClassName="scatter x axis"
             strokeWidth="1"
@@ -269,17 +289,7 @@ var ScatterChart = exports.ScatterChart = React.createClass({
             width={chartWidth}
             height={chartHeight}
             stroke={props.axesColor}
-          />
-          <YAxis
-            yAxisClassName="scatter y axis"
-            yScale={scales.yScale}
-            yAxisOffset={props.yAxisOffset}
-            yHideOrigin={props.yHideOrigin}
-            margins={props.margins}
-            yAxisTickCount={props.yAxisTickCount}
-            width={chartWidth}
-            height={chartHeight}
-            stroke={props.axesColor}
+            label={props.xAxisLabel}
           />
         </g>
       </Chart>
