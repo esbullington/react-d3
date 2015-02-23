@@ -218,14 +218,16 @@ var CandleStickChart = exports.CandleStickChart = React.createClass({
       React.PropTypes.object
     ]),
     yAxisTickCount: React.PropTypes.number,
+    yAxisFormatter: React.PropTypes.func,
+    yAccessor: React.PropTypes.func,
     xAxisTickInterval: React.PropTypes.object,
+    xAxisFormatter: React.PropTypes.func,
+    xAccessor: React.PropTypes.func,
     fillUp: React.PropTypes.func,
     fillDown: React.PropTypes.func,
     width: React.PropTypes.number,
     height: React.PropTypes.number,
     title: React.PropTypes.string,
-    xAccessor: React.PropTypes.func,
-    yAccessor: React.PropTypes.func
   },
 
   getDefaultProps() {
@@ -312,6 +314,7 @@ var CandleStickChart = exports.CandleStickChart = React.createClass({
             xScale={scales.xScale}
             xAxisTickInterval={props.xAxisTickInterval}
             xAxisOffset={props.xAxisOffset}
+            xAxisFormatter={props.xAxisFormatter}
             margins={props.margins}
             width={chartWidth}
             height={chartHeight}
@@ -321,6 +324,7 @@ var CandleStickChart = exports.CandleStickChart = React.createClass({
             yScale={scales.yScale}
             yAxisOffset={props.yAxisOffset}
             yAxisTickCount={props.yAxisTickCount}
+            yAxisFormatter={props.yAxisFormatter}
             margins={props.margins}
             width={chartWidth}
             height={props.height}
