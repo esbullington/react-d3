@@ -29,12 +29,14 @@ var Cell = React.createClass({
           fill={this.props.fill} 
           width={this.props.width}
           height={this.props.height}
+          className='rd3-treemap-rect'
         />
         <text
           x={this.props.width / 2}
           y={this.props.height / 2}
           dy='.35em'
           style={textStyle}
+          className='rd3-treemap-text'
         >
           {this.props.label}
         </text>
@@ -133,13 +135,15 @@ var Treemap = React.createClass({
         width={this.props.width}
         height={this.props.height}
       >
-        <DataSeries
-          width={this.props.width}
-          height={this.props.height}
-          data={this.props.data}
-          textColor={this.props.textColor}
-          fontSize={this.props.fontSize}
-        />
+        <g className='rd3-treemap'>
+          <DataSeries
+            width={this.props.width}
+            height={this.props.height}
+            data={this.props.data}
+            textColor={this.props.textColor}
+            fontSize={this.props.fontSize}
+          />
+        </g>
       </Chart>
     );
   }
