@@ -42,14 +42,12 @@ var Arc = React.createClass({
     var t = "translate(" + x + "," + y + ")";
 
     return (
-      <g className="arc-group" >
+      <g className='rd3-piechart-arc' >
         <path
-          className='arc'
           d={arc()}
           fill={props.fill}
         />
         <line
-          className='arc-line'
           x1="0"
           x2="0"
           y1={-radius - 2}
@@ -63,7 +61,7 @@ var Arc = React.createClass({
         >
         </line>
         <text
-          className='arc-label-text'
+          className='rd3-piechart-label'
           transform={t}
           dy=".35em"
           style={{
@@ -74,7 +72,7 @@ var Arc = React.createClass({
           {props.label}
         </text>
         <text
-          className='arc-value-text'
+          className='rd3-piechart-text'
           transform={"translate(" + arc.centroid() + ")"}
           dy=".35em"
           style={{
@@ -135,7 +133,7 @@ var DataSeries = React.createClass({
       );
     });
     return (
-      <g className="pie-group" transform={props.transform} >{arcs}</g>
+      <g className="rd3-piechart-pie" transform={props.transform} >{arcs}</g>
     );
   }
 });
@@ -169,23 +167,24 @@ var PieChart = exports.PieChart = React.createClass({
 
     return (
       <Chart
-        className='pie-chart'
         width={props.width}
         height={props.height}
         title={props.title}
       >
-        <DataSeries
-          labelTextFill={props.labelTextFill}
-          valueTextFill={props.valueTextFill}
-          labels={labels}
-          colors={props.colors}
-          transform={transform}
-          data={data}
-          width={props.width}
-          height={props.height}
-          radius={props.radius}
-          innerRadius={props.innerRadius}
-        />
+        <g className='rd3-piechart'>
+          <DataSeries
+            labelTextFill={props.labelTextFill}
+            valueTextFill={props.valueTextFill}
+            labels={labels}
+            colors={props.colors}
+            transform={transform}
+            data={data}
+            width={props.width}
+            height={props.height}
+            radius={props.radius}
+            innerRadius={props.innerRadius}
+          />
+        </g>
       </Chart>
     );
   }

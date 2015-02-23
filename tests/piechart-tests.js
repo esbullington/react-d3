@@ -19,14 +19,15 @@ describe('PieChart', function() {
 
 
     // Verify that it has the same number of pies as the array's length
-    var pie = TestUtils.findRenderedDOMComponentWithTag(
-      piechart, 'svg');
+    var pie = TestUtils.findRenderedDOMComponentWithClass(
+      piechart, 'rd3-piechart');
     expect(pie).to.exist;
+    expect(pie.tagName).to.equal('G');
 
-    var pieGroup = TestUtils.findRenderedDOMComponentWithClass(pie, 'pie-group');
+    var pieGroup = TestUtils.findRenderedDOMComponentWithClass(piechart, 'rd3-piechart-pie');
     expect(pieGroup).to.exist;
 
-    var chartSeries = TestUtils.scryRenderedDOMComponentsWithClass(pieGroup, 'arc-group');
+    var chartSeries = TestUtils.scryRenderedDOMComponentsWithClass(piechart, 'rd3-piechart-arc');
     expect(chartSeries.length).to.equal(values.length);
 
   });

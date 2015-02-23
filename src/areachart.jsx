@@ -24,7 +24,7 @@ var Area = React.createClass({
 
     return (
       <path
-        className="area-path"
+        className="rd3-areachart-path"
         d={this.props.path}
         fill={this.props.fill}
       />
@@ -85,6 +85,7 @@ var AreaChart = exports.AreaChart = React.createClass({
       width: 400,
       height: 200,
       title: '',
+      className: 'rd3-areachart',
       xAccessor: (d) => d.x,
       yAccessor: (d) => d.y
     };
@@ -172,10 +173,10 @@ var AreaChart = exports.AreaChart = React.createClass({
         height={props.height}
         title={props.title}
       >
-        <g transform={trans} >
+        <g transform={trans} className={props.className}>
           {dataSeries}
           <XAxis
-            xAxisClassName="area x axis"
+            xAxisClassName="rd3-areachart-axis x axis"
             xScale={xScale}
             xAxisTickInterval={props.xAxisTickInterval}
             xAxisTickCount={props.xAxisTickCount}
@@ -184,7 +185,7 @@ var AreaChart = exports.AreaChart = React.createClass({
             height={chartHeight}
           />
           <YAxis
-            yAxisClassName="area y axis"
+            yAxisClassName="rd3-areachart-axis y axis"
             yScale={yScale}
             margins={props.margins}
             yAxisTickInterval={props.yAxisTickInterval}

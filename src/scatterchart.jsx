@@ -27,7 +27,8 @@ var Circle = React.createClass({
 
   getDefaultProps: function() {
     return {
-      fill: '#1f77b4'
+      fill: '#1f77b4',
+      className: 'rd3-scatterchart-circle'
     };
   },
 
@@ -57,6 +58,7 @@ var Circle = React.createClass({
         cy={this.props.cy}
         r={this.state.circleRadius}
         id={this.props.id}
+        className={this.props.className}
       />
     );
   },
@@ -245,7 +247,7 @@ var ScatterChart = exports.ScatterChart = React.createClass({
         colors={props.colors}
         width={props.width} height={props.height}
         title={props.title}>
-        <g transform={trans}>
+        <g transform={trans} className='rd3-scatterchart'>
           <Voronoi
             pubsub={pubsub}
             data={allValues}

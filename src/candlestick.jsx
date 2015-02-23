@@ -28,6 +28,7 @@ var Wicks = React.createClass({
 
   getDefaultProps() {
     return {
+      className: 'rd3-candlestick-line',
       stroke: '#000',
       strokeWidth: 1,
       shapeRendering: "crispEdges"
@@ -47,13 +48,14 @@ var Wicks = React.createClass({
                   stroke={this.props.stroke}
                   strokeWidth={this.props.strokeWidth}
                   style={{ shapeRendering: this.props.shapeRendering }}
+                  className={this.props.className}
                   x1={x1}
                   y1={y1}
                   x2={x2}
                   y2={y2} />
         }, this);
     return (
-      <g className="rd3-wicks">{wicks}</g>
+      <g className='rd3-candlestick-wicks'>{wicks}</g>
     );
   }
 });
@@ -72,7 +74,8 @@ var Candle = React.createClass({
     return {
       stroke: '#000',
       strokeWidth: 1,
-      shapeRendering: "crispEdges"
+      shapeRendering: 'crispEdges',
+      className: 'rd3-candlestick-rect'
     };
   },
   componentDidMount() {
@@ -153,7 +156,8 @@ var Candles = React.createClass({
             y = this.props.yScale(Math.max(ohlc.open, ohlc.close)),
             height = Math.abs(this.props.yScale(ohlc.open) - this.props.yScale(ohlc.close)),
             y2 = this.props.yScale(ohlc.low),
-            className = (ohlc.open <= ohlc.close) ? 'up' : 'down',
+            ohlcClass = (ohlc.open <= ohlc.close) ? 'up' : 'down',
+            className = `${ ohlcClass } rd3-candlestick-rect`,
             fill = (ohlc.open <= ohlc.close) ? this.props.fillUp : this.props.fillDown;
 
           return <Candle key={idx} className={className} fill={fill}
@@ -164,7 +168,7 @@ var Candles = React.createClass({
                   height={height} />
         }, this);
     return (
-      <g className="rd3-candles">{candles}</g>
+      <g className='rd3-candlestick-candles'>{candles}</g>
     );
   }
 });
@@ -181,7 +185,7 @@ var DataSeries = exports.DataSeries = React.createClass({
     var props = this.props;
 
     return (
-      <g className="rd3-candlestick">
+      <g>
         <Wicks 
           xScale={props.xScale}
           yScale={props.yScale}
@@ -293,7 +297,7 @@ var CandleStickChart = exports.CandleStickChart = React.createClass({
         margins={this.props.margins}
         title={this.props.title}
       >
-        <g transform={trans} >
+        <g transform={trans} className='rd3-candlestick'>
           {dataSeries}
           <Voronoi
             pubsub={pubsub}
@@ -304,7 +308,7 @@ var CandleStickChart = exports.CandleStickChart = React.createClass({
             height={chartHeight}
           />
           <XAxis
-            xAxisClassName="candlestick x axis"
+            xAxisClassName='rd3-candlestick-axis x axis'
             xScale={scales.xScale}
             xAxisTickInterval={props.xAxisTickInterval}
             xAxisOffset={props.xAxisOffset}
@@ -313,7 +317,7 @@ var CandleStickChart = exports.CandleStickChart = React.createClass({
             height={chartHeight}
           />
           <YAxis
-            yAxisClassName="candlestick y axis"
+            yAxisClassName='rd3-candlestick-axis y axis'
             yScale={scales.yScale}
             yAxisOffset={props.yAxisOffset}
             yAxisTickCount={props.yAxisTickCount}

@@ -16,11 +16,11 @@ describe('ScatterChart', function() {
     var data = [
       {
         name: "series1",
-        values: generate(5)
+        values: generate(points)
       },
       {
         name: "series2",
-        values: generate(5)
+        values: generate(points)
       }
     ];
 
@@ -28,9 +28,14 @@ describe('ScatterChart', function() {
       <ScatterChart data={data} width={400} height={200} pointRadius={pointRadius} />
     );
 
-    var circles = TestUtils.scryRenderedDOMComponentsWithTag(
-      scatterchart, 'circle');
-    expect(circles).to.have.length(2 * points);
+    var scatterchartGroup = TestUtils.findRenderedDOMComponentWithClass(
+      scatterchart, 'rd3-scatterchart');
+    expect(scatterchartGroup).to.exist;
+    expect(scatterchartGroup.tagName).to.equal('G');
+
+    var circles = TestUtils.scryRenderedDOMComponentsWithClass(
+      scatterchart, 'rd3-scatterchart-circle');
+    expect(circles).to.have.length(Object.keys(data).length * points);
 
     var circleOne = circles[0];
     var circleOneColor = circleOne.props.fill;

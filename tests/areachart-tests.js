@@ -19,11 +19,16 @@ describe('AreaChart', function() {
       <AreaChart data={data} width={400} height={200} />
     );
 
-    // Verify that it has the same number of areas as the data's length
+    var areachartGroup = TestUtils.findRenderedDOMComponentWithClass(
+      areachart, 'rd3-areachart');
+    expect(areachartGroup).to.exist;
+    expect(areachartGroup.tagName).to.equal('G');
+
     var area = TestUtils.findRenderedDOMComponentWithClass(
-      areachart, 'area-path');
+      areachart, 'rd3-areachart-path');
     expect(area.props.d).to.exist;
   });
+
   it('renders stacked areachart with array of objects data', function() {
     var React = require('react/addons');
     var AreaChart = require('../src/areachart').AreaChart;
@@ -46,8 +51,9 @@ describe('AreaChart', function() {
     );
 
     // Verify that it has the same number of areas as the array's length
-    var area = TestUtils.scryRenderedDOMComponentsWithClass(
-      areachart, 'area-path');
-    expect(area[0].props.d).to.exist;
+    var areas = TestUtils.scryRenderedDOMComponentsWithClass(
+      areachart, 'rd3-areachart-path');
+    expect(areas).to.have.length(data.length)
+
   });
 });
