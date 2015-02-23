@@ -7,7 +7,8 @@ var gulp = require('gulp'),
   source = require('vinyl-source-stream'),
   buffer = require('vinyl-buffer'),
   browserSync = require('browser-sync'),
-  merge = require('merge-stream');
+  merge = require('merge-stream'),
+  chalk = require('chalk');
 
 console.timeEnd('Loading plugins');
 
@@ -84,6 +85,10 @@ function compileJS(entry) {
 
 function bundleShare(b) {
   return b.bundle()
+    .on('error', function(err){
+      console.log(chalk.red(err.toString()));
+      this.end();
+    })
     .pipe(source('main.js')) // TODO change this to react-d3.js after the npm run scripts are retired and changing docs/public/index.html to use react-d3.js instead of main.js
     .pipe(buffer())
     .pipe(plugins.sourcemaps.init({loadMaps: true}))
