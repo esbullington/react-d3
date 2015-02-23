@@ -189,7 +189,7 @@ var AreaChart = exports.AreaChart = React.createClass({
             yScale={yScale}
             margins={props.margins}
             yAxisTickInterval={props.yAxisTickInterval}
-            yAxisTickCount={this.props.yAxisTickCount}
+            yAxisTickCount={props.yAxisTickCount}
             width={chartWidth}
             height={props.height}
           />

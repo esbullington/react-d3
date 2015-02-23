@@ -232,11 +232,9 @@ var CandleStickChart = exports.CandleStickChart = React.createClass({
     return {
       data: [],
       fillUp: function (i) { return "white"; },
-      xAxisTickInterval: {unit: 'year', interval: 1},
       fillDown: d3.scale.category20c(),
       margins: {top: 10, right: 20, bottom: 30, left: 40},
       legendOffset: 120,
-      yAxisTickCount: 4,
       width: 400,
       height: 200,
       title: '',
@@ -272,7 +270,7 @@ var CandleStickChart = exports.CandleStickChart = React.createClass({
 
     var scales = utils.calculateScales(chartWidth, chartHeight, xValues, yValues);
 
-    var trans = "translate(" + props.margins.left + "," + props.margins.top + ")";
+    var trans = "translate(" + (props.yAxisOffset < 0 ? props.margins.left + Math.abs(props.yAxisOffset) : props.margins.left) + "," + props.margins.top + ")";
 
     var dataSeries = props.data.map( (series, idx) => {
       return (
@@ -294,7 +292,6 @@ var CandleStickChart = exports.CandleStickChart = React.createClass({
 
     return (
       <Chart
-        ref='chart'
         width={this.props.width}
         height={this.props.height}
         margins={this.props.margins}
@@ -313,8 +310,8 @@ var CandleStickChart = exports.CandleStickChart = React.createClass({
           <XAxis
             xAxisClassName='rd3-candlestick-axis x axis'
             xScale={scales.xScale}
-            xAxisTickInterval={this.props.xAxisTickInterval}
-            xAxisTickCount={4}
+            xAxisTickInterval={props.xAxisTickInterval}
+            xAxisOffset={props.xAxisOffset}
             margins={props.margins}
             width={chartWidth}
             height={chartHeight}
@@ -322,8 +319,9 @@ var CandleStickChart = exports.CandleStickChart = React.createClass({
           <YAxis
             yAxisClassName='rd3-candlestick-axis y axis'
             yScale={scales.yScale}
+            yAxisOffset={props.yAxisOffset}
+            yAxisTickCount={props.yAxisTickCount}
             margins={props.margins}
-            yAxisTickCount={this.props.yAxisTickCount}
             width={chartWidth}
             height={props.height}
           />
