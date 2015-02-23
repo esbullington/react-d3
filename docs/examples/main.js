@@ -178,6 +178,44 @@ var Demos = React.createClass({
         </div>
         <div className="row">
           <div className="col-md-6">
+            <ScatterChart
+              data={scatterData} width={500} height={400} title="Scatter Chart with Brush" brushEnabled={true}/>
+          </div>
+          <div className="col-md-6">
+            <pre ref='block'>
+              <code className='js'>
+              {
+`var scatterData = [
+  {
+    name: "series1",
+    values: [ { x: 0, y: 20 }, ..., { x: 24, y: 10 } ]
+  },
+  ....
+  {
+    name: "series3",
+    values: [ { x: 70, y: 82 }, ..., { x: 76, y: 82 } ]
+  }
+];`
+              }
+              </code>
+            </pre>
+            <pre ref='block'>
+              <code className='html'>
+              {`<ScatterChart
+  data={scatterData}
+  width={500}
+  height={400}
+  title="Scatter Chart"
+/>`}
+              </code>
+            </pre>
+          </div>
+        </div>
+        <div className="row">
+          <hr/>
+        </div>
+        <div className="row">
+          <div className="col-md-6">
             <AreaChart
               data={this.state.areaData}
               width={500}

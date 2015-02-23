@@ -6,6 +6,7 @@ var common = require('./common');
 var Chart = common.Chart;
 var XAxis = common.XAxis;
 var YAxis = common.YAxis;
+var Brush = common.Brush;
 var Voronoi = common.Voronoi;
 var EventEmitter = require('events').EventEmitter;
 var pubsub = exports.pubsub = new EventEmitter();
@@ -159,7 +160,8 @@ var ScatterChart = exports.ScatterChart = React.createClass({
     legend: React.PropTypes.bool,
     hoverAnimation: React.PropTypes.bool,
     xAccessor: React.PropTypes.func,
-    yAccessor: React.PropTypes.func
+    yAccessor: React.PropTypes.func,
+    brushEnabled: React.PropTypes.bool
  },
 
   getDefaultProps: function() {
@@ -176,7 +178,8 @@ var ScatterChart = exports.ScatterChart = React.createClass({
       colors: d3.scale.category20c(),
       hoverAnimation: true,
       xAccessor: (d) => d.x,
-      yAccessor: (d) => d.y
+      yAccessor: (d) => d.y,
+      brushEnabled: false
     };
   },
 
@@ -246,14 +249,22 @@ var ScatterChart = exports.ScatterChart = React.createClass({
         width={props.width} height={props.height}
         title={props.title}>
         <g transform={trans}>
-          <Voronoi
-            pubsub={pubsub}
-            data={allValues}
-            yScale={scales.yScale}
-            xScale={scales.xScale}
-            width={chartWidth}
-            height={chartHeight}
-          />
+          {props.brushEnabled ?
+            /* Brushes and Voronois are incompatible, at the moment */
+            <Brush
+              yScale={scales.yScale}
+              xScale={scales.xScale}
+            />
+            :
+            <Voronoi
+              pubsub={pubsub}
+              data={allValues}
+              yScale={scales.yScale}
+              xScale={scales.xScale}
+              width={chartWidth}
+              height={chartHeight}
+            />
+          }
           {dataSeriesArray}
           <XAxis
             xAxisClassName="scatter x axis"
