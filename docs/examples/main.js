@@ -233,7 +233,7 @@ var Demos = React.createClass({
               data={this.state.ohlcData}
               width={500}
               height={400}
-              xAxisTickInterval={{unit: 'month', interval: 1}}
+              yAxisOffset={-10}
               title="Candlestick Chart"
             />
           </div>
@@ -246,7 +246,8 @@ var Demos = React.createClass({
     name: "AAPL",
     values: [ { x: [object Date], open: 451.69, high: 456.23, low: 435, close: 439.88 }, 
               { x: [object Date], open: 437.82, high: 453.21, low: 435.86 , close: 449.83 }, 
-              ... ]
+              ... 
+            ]
   }
 ];`
               }
@@ -260,6 +261,7 @@ var Demos = React.createClass({
   width={500}
   height={400}
   xAxisTickInterval={{unit: 'month', interval: 1}}
+  yAxisOffset={-10}
   title="Candlestick Chart"
 />`
                 }

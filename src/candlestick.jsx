@@ -266,7 +266,7 @@ var CandleStickChart = exports.CandleStickChart = React.createClass({
 
     var scales = utils.calculateScales(chartWidth, chartHeight, xValues, yValues);
 
-    var trans = "translate(" + props.margins.left + "," + props.margins.top + ")";
+    var trans = "translate(" + (props.yAxisOffset < 0 ? props.margins.left + Math.abs(props.yAxisOffset) : props.margins.left) + "," + props.margins.top + ")";
 
     var dataSeries = props.data.map( (series, idx) => {
       return (
@@ -307,6 +307,7 @@ var CandleStickChart = exports.CandleStickChart = React.createClass({
             xAxisClassName="candlestick x axis"
             xScale={scales.xScale}
             xAxisTickInterval={props.xAxisTickInterval}
+            xAxisOffset={props.xAxisOffset}
             margins={props.margins}
             width={chartWidth}
             height={chartHeight}
@@ -314,8 +315,9 @@ var CandleStickChart = exports.CandleStickChart = React.createClass({
           <YAxis
             yAxisClassName="candlestick y axis"
             yScale={scales.yScale}
-            margins={props.margins}
+            yAxisOffset={props.yAxisOffset}
             yAxisTickCount={props.yAxisTickCount}
+            margins={props.margins}
             width={chartWidth}
             height={props.height}
           />
