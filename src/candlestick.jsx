@@ -219,7 +219,7 @@ var CandleStickChart = exports.CandleStickChart = React.createClass({
     ]),
     yAxisTickCount: React.PropTypes.number,
     yAxisFormatter: React.PropTypes.func,
-    yAccessor: React.PropTypes.func
+    yAccessor: React.PropTypes.func,
     xAxisTickInterval: React.PropTypes.object,
     xAxisFormatter: React.PropTypes.func,
     xAccessor: React.PropTypes.func,
