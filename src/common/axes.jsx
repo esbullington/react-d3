@@ -67,8 +67,8 @@ var AxisTicks = React.createClass({
 
     scale = props.yScale ? props.yScale : props.xScale;
 
-    var ticks = props.tickValues == null ? (scale.ticks ? scale.ticks.apply(scale, props.tickArguments) : scale.domain()) : props.tickValues;
-    var tickFormat = props.tickFormat_ == null ? (scale.tickFormat ? scale.tickFormat.apply(scale, props.tickArguments) : props.d3_identity) : props.tickFormat_;
+    ticks = props.tickValues == null ? (scale.ticks ? scale.ticks.apply(scale, props.tickArguments) : scale.domain()) : props.tickValues;
+    tickFormat = props.tickFormat_ == null ? (scale.tickFormat ? scale.tickFormat.apply(scale, props.tickArguments) : props.d3_identity) : props.tickFormat_;
 
     adjustedScale = scale.rangeBand ? (d) => { return scale(d) + scale.rangeBand() / 2; } : scale;
 
@@ -80,7 +80,7 @@ var AxisTicks = React.createClass({
       dy =  sign < 0 ? "0em" : ".71em";
     } else if (props.yScale) {
       tr = (tick) => `translate(0,${adjustedScale(tick)})`;
-      textAnchor = "end"
+      textAnchor = "end";
       x2 = props.innerTickSize * sign;
       x1 = tickSpacing * sign;
       dy = ".32em";
@@ -101,7 +101,7 @@ var AxisTicks = React.createClass({
                     >
                       {tickFormat(tick)}
                     </text>
-                  </g>
+                  </g>;
           })
         }
       </g>

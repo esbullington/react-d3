@@ -206,7 +206,7 @@ var DataSeries = exports.DataSeries = React.createClass({
     if (props.displayDataPoints) {
       // Map over data to generate SVG circles at data points
       // if datum is a date object, treat it a bit differently
-      var circles = props.data.map(function(point, i) {
+      circles = props.data.map(function(point, i) {
         var cx, cy;
         if (this._isDate(point, xAccessor)) {
           cx = props.xScale(xAccessor(point).getTime());

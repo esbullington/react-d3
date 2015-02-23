@@ -52,7 +52,7 @@ var Wicks = React.createClass({
                   x1={x1}
                   y1={y1}
                   x2={x2}
-                  y2={y2} />
+                  y2={y2} />;
         }, this);
     return (
       <g className='rd3-candlestick-wicks'>{wicks}</g>
@@ -117,7 +117,8 @@ var Candle = React.createClass({
                   width={this.state.candleWidth}
                   height={this.props.height} />);
   }
-})
+
+});
 
 
 var Candles = React.createClass({
@@ -165,7 +166,7 @@ var Candles = React.createClass({
                   x={x}
                   y={y}
                   width={candleWidth}
-                  height={height} />
+                  height={height} />;
         }, this);
     return (
       <g className='rd3-candlestick-candles'>{candles}</g>
