@@ -7,13 +7,6 @@ var Chart = require('./common').Chart;
 
 var Arc = React.createClass({
 
-  getDefaultProps: function() {
-    return {
-      labelTextFill: "black",
-      valueTextFill: "white"
-    };
-  },
-
   propTypes: {
     fill: React.PropTypes.string,
     d: React.PropTypes.string,
@@ -25,7 +18,14 @@ var Arc = React.createClass({
     valueTextFill: React.PropTypes.string
   },
 
-  render: function() {
+  getDefaultProps() {
+    return {
+      labelTextFill: "black",
+      valueTextFill: "white"
+    };
+  },
+
+  render() {
     var props = this.props;
     var arc = d3.svg.arc()
       .innerRadius(props.innerRadius)
