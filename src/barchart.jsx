@@ -30,7 +30,7 @@ var Bar = React.createClass({
         height={this.props.height}
         x={this.props.offset}
         y={this.props.availableHeight  - this.props.height}
-        className='rd3-barchart-rect'
+        className='rd3-barchart-bar'
       />
     );
   }
@@ -135,7 +135,7 @@ var BarChart = exports.BarChart = React.createClass({
             fill={props.fill}
           />
           <YAxis
-            yAxisClassName='rd3-barchart-axis y axis'
+            yAxisClassName='rd3-barchart-yaxis'
             yScale={yScale}
             margins={margins}
             yAxisTickCount={props.yAxisTickCount}
@@ -143,7 +143,7 @@ var BarChart = exports.BarChart = React.createClass({
             height={props.height - topBottomMargins}
           />
           <XAxis
-            xAxisClassName='rd3-barchart-axis x axis'
+            xAxisClassName='rd3-barchart-xaxis'
             xScale={xScale}
             data={props.data}
             margins={margins}
