@@ -13,32 +13,34 @@ var Cell = React.createClass({
     label: React.PropTypes.string
   },
 
-  render: function() {
+  render() {
+
+    var props = this.props;
     
     var textStyle = {
       'textAnchor': 'middle',
-      'fill': this.props.textColor,
-      'fontSize': this.props.fontSize
+      'fill': props.textColor,
+      'fontSize': props.fontSize
     };
 
-    var t = 'translate(' + this.props.x + ',' + this.props.y + ')';
+    var t = `translate(${props.x}, ${props.y}  )`;
 
     return (
       <g transform={t}>
         <rect
-          fill={this.props.fill} 
-          width={this.props.width}
-          height={this.props.height}
-          className='rd3-treemap-rect'
+          fill={props.fill} 
+          width={props.width}
+          height={props.height}
+          className='rd3-treemap-cell'
         />
         <text
-          x={this.props.width / 2}
-          y={this.props.height / 2}
+          x={props.width / 2}
+          y={props.height / 2}
           dy='.35em'
           style={textStyle}
-          className='rd3-treemap-text'
+          className='rd3-treemap-cell-text'
         >
-          {this.props.label}
+          {props.label}
         </text>
       </g>
     );
@@ -52,7 +54,7 @@ var DataSeries = React.createClass({
     value: React.PropTypes.string
   },
  
-  getDefaultProps: function() {
+  getDefaultProps() {
     return {
       data: [],
       value: 'value',
@@ -60,22 +62,24 @@ var DataSeries = React.createClass({
     };
   },
 
-  render: function() {
+  render() {
+
+    var props = this.props;
     
-    var data = this.props.data;
-    var value = this.props.value;
-    var label = this.props.label;
+    var data = props.data;
+    var value = props.value;
+    var label = props.label;
 
     var colors = d3.scale.category20c();
 
     var treemap = d3.layout.treemap()
                     // make sure calculation loop through all objects inside array 
-                    .children(function(d) { return d; })
-                    .size([this.props.width, this.props.height])
+                    .children((d)=> d)
+                    .size([props.width, props.height])
                     .sticky(true)
-                    .value(function(d) { return d[value]; });
+                    .value((d)=> { return d[value]; });
     
-    var cells = treemap(data).map(function(node, i) {
+    var cells = treemap(data).map((node, i) => {
       return (
         <Cell
           x={node.x}
@@ -84,15 +88,15 @@ var DataSeries = React.createClass({
           height={node.dy}
           fill={colors(i)} 
           label={node[label]}
-          fontSize={this.props.fontSize}
-          textColor={this.props.textColor}
+          fontSize={props.fontSize}
+          textColor={props.textColor}
           key={i}
         /> 
       ); 
     }, this);
 
     return (
-      <g transform={this.props.transform} className='treemap'>
+      <g transform={props.transform} className='treemap'>
         {cells}
       </g>
     );
@@ -116,7 +120,7 @@ var Treemap = React.createClass({
 
   },
 
-  getDefaultProps: function() {
+  getDefaultProps() {
     return {
       data: [], 
       width: 400,
@@ -127,21 +131,23 @@ var Treemap = React.createClass({
     };
   },
 
-  render: function() {
+  render() {
+
+    var props = this.props;
     
     return (
       <Chart 
-        title={this.props.title}
-        width={this.props.width}
-        height={this.props.height}
+        title={props.title}
+        width={props.width}
+        height={props.height}
       >
         <g className='rd3-treemap'>
           <DataSeries
-            width={this.props.width}
-            height={this.props.height}
-            data={this.props.data}
-            textColor={this.props.textColor}
-            fontSize={this.props.fontSize}
+            width={props.width}
+            height={props.height}
+            data={props.data}
+            textColor={props.textColor}
+            fontSize={props.fontSize}
           />
         </g>
       </Chart>

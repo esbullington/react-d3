@@ -14,17 +14,17 @@ var Area = React.createClass({
     fill: React.PropTypes.string
   },
 
-  getDefaultProps: function() {
+  getDefaultProps() {
     return {
       fill: '#3182bd'
     };
   },
 
-  render: function() {
+  render() {
 
     return (
       <path
-        className="rd3-areachart-path"
+        className="rd3-areachart-area"
         d={this.props.path}
         fill={this.props.fill}
       />
@@ -41,9 +41,9 @@ var DataSeries = exports.DataSeries = React.createClass({
     var props = this.props;
 
     var area = d3.svg.area()
-      .x(function(d) { return props.xScale(props.xAccessor(d)); })
-      .y0(function(d) { return props.yScale(d.y0); })
-      .y1(function(d) { return props.yScale(d.y0 + props.yAccessor(d)); });
+      .x((d)=> { return props.xScale(props.xAccessor(d)); })
+      .y0((d)=> { return props.yScale(d.y0); })
+      .y1((d)=> { return props.yScale(d.y0 + props.yAccessor(d)); });
 
     var path = area(props.data);
 
@@ -141,7 +141,7 @@ var AreaChart = exports.AreaChart = React.createClass({
       .y(props.yAccessor)
       .offset('expand')
       .order('reverse')
-      .values(function(d) { return d.values; });
+      .values((d)=> { return d.values; });
 
     var layers = stack(props.data);
 
@@ -176,7 +176,7 @@ var AreaChart = exports.AreaChart = React.createClass({
         <g transform={trans} className={props.className}>
           {dataSeries}
           <XAxis
-            xAxisClassName="rd3-areachart-axis x axis"
+            xAxisClassName="rd3-areachart-xaxis"
             xScale={xScale}
             xAxisTickInterval={props.xAxisTickInterval}
             xAxisTickCount={props.xAxisTickCount}
@@ -185,7 +185,7 @@ var AreaChart = exports.AreaChart = React.createClass({
             height={chartHeight}
           />
           <YAxis
-            yAxisClassName="rd3-areachart-axis y axis"
+            yAxisClassName="rd3-areachart-yaxis"
             yScale={yScale}
             margins={props.margins}
             yAxisTickInterval={props.yAxisTickInterval}

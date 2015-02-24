@@ -25,14 +25,14 @@ var Circle = React.createClass({
     hoverAnimation: React.PropTypes.bool
   },
 
-  getDefaultProps: function() {
+  getDefaultProps() {
     return {
       fill: '#1f77b4',
       className: 'rd3-scatterchart-circle'
     };
   },
 
-  getInitialState: function() {
+  getInitialState() {
     // state for animation usage
     return {
       circleRadius: this.props.r,
@@ -40,17 +40,17 @@ var Circle = React.createClass({
     };
   },
 
-  componentDidMount: function() {
+  componentDidMount() {
     pubsub.on('animate', this._animateCircle);
     pubsub.on('restore', this._restoreCircle);
   },
 
-  componentWillUnmount: function() {
+  componentWillUnmount() {
     pubsub.removeListener('animate', this._animateCircle);
     pubsub.removeListener('restore', this._restoreCircle);
   },
 
-  render: function() {
+  render() {
     return (
       <circle
         fill={this.state.circleColor}
@@ -63,7 +63,7 @@ var Circle = React.createClass({
     );
   },
 
-  _animateCircle: function(id) {
+  _animateCircle(id) {
     if (this.props.id === id) {
       this.setState({ 
         circleRadius: this.state.circleRadius * ( 5 / 4 ),
@@ -72,7 +72,7 @@ var Circle = React.createClass({
     }
   },
 
-  _restoreCircle: function(id) {
+  _restoreCircle(id) {
     if (this.props.id === id) {
       this.setState({ 
         circleRadius: this.props.r,
@@ -92,7 +92,7 @@ var DataSeries = exports.DataSeries = React.createClass({
     yAccessor: React.PropTypes.func
   },
 
-  getDefaultProps: function() {
+  getDefaultProps() {
     return {
       data: [],
       fill: '#fff',
@@ -101,11 +101,11 @@ var DataSeries = exports.DataSeries = React.createClass({
     };
   },
 
-  render: function() {
+  render() {
 
     var props = this.props;
 
-    var circles = props.data.map(function(point, i) {
+    var circles = props.data.map((point, i) => {
 
       var xAccessor = props.xAccessor,
           yAccessor = props.yAccessor,
@@ -129,7 +129,7 @@ var DataSeries = exports.DataSeries = React.createClass({
         key={props.seriesName + i}
         id={props.seriesName + '-' + i}
       />);
-    }.bind(this));
+    }, this);
 
     return (
       <g>
@@ -164,7 +164,7 @@ var ScatterChart = exports.ScatterChart = React.createClass({
     yAccessor: React.PropTypes.func
  },
 
-  getDefaultProps: function() {
+  getDefaultProps() {
     return {
       data: [],
       margins: {top: 20, right: 30, bottom: 30, left: 30},
@@ -184,7 +184,7 @@ var ScatterChart = exports.ScatterChart = React.createClass({
 
   _calculateScales: utils.calculateScales,
 
-  render: function() {
+  render() {
 
     var props = this.props;
 
