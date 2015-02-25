@@ -333,8 +333,7 @@ var LineChart = exports.LineChart = React.createClass({
     legend: React.PropTypes.bool,
     xAccessor: React.PropTypes.func,
     yAccessor: React.PropTypes.func,
-    displayDataPoints: React.PropTypes.bool
-    xAxisLabel: React.PropTypes.string,
+    displayDataPoints: React.PropTypes.bool,
     yAxisLabel: React.PropTypes.string,
     yAxisLabelOffset: React.PropTypes.number,
     xAxisLabelOffset: React.PropTypes.number
@@ -354,8 +353,7 @@ var LineChart = exports.LineChart = React.createClass({
       yAccessor: (d) => d.y,
       interpolate: false,
       interpolationType: null,
-      displayDataPoints: true
-      xAxisLabel: '',
+      displayDataPoints: true,
       yAxisLabel: '',
       yAxisLabelOffset: 30,
       xAxisLabelOffset: 30

@@ -229,7 +229,6 @@ var CandleStickChart = exports.CandleStickChart = React.createClass({
     width: React.PropTypes.number,
     height: React.PropTypes.number,
     title: React.PropTypes.string,
-    yAccessor: React.PropTypes.func,
     yAxisLabel: React.PropTypes.string,
     xAxisLabel: React.PropTypes.string,
     yAxisLabelOffset: React.PropTypes.number,
