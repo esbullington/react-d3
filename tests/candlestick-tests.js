@@ -27,7 +27,6 @@ describe('CandleStickChart', function() {
         data={data}
         width={500}
         height={400}
-        // xAxisTickInterval={{unit: 'month', interval: 1}}
         title="Candlestick Chart" />
     );
 
@@ -35,8 +34,8 @@ describe('CandleStickChart', function() {
       candlestickChart, 'rd3-candlestick');
     expect(candlestickGroup).to.exist;
 
-    var wicks = TestUtils.scryRenderedDOMComponentsWithClass(candlestickChart, 'rd3-candlestick-line');
-    var candles = TestUtils.scryRenderedDOMComponentsWithClass(candlestickChart, 'rd3-candlestick-rect');
+    var wicks = TestUtils.scryRenderedDOMComponentsWithClass(candlestickChart, 'rd3-candlestick-wick');
+    var candles = TestUtils.scryRenderedDOMComponentsWithClass(candlestickChart, 'rd3-candlestick-candle');
 
     expect(wicks).have.length(Object.keys(data).length * length);
     expect(candles).have.length(Object.keys(data).length * length);
