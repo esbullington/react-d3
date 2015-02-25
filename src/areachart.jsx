@@ -71,14 +71,18 @@ var AreaChart = exports.AreaChart = React.createClass({
     height: React.PropTypes.number,
     title: React.PropTypes.string,
     xAccessor: React.PropTypes.func,
-    yAccessor: React.PropTypes.func
+    yAccessor: React.PropTypes.func,
+    yAxisLabel: React.PropTypes.string,
+    xAxisLabel: React.PropTypes.string,
+    yAxisLabelOffset: React.PropTypes.number,
+    xAxisLabelOffset: React.PropTypes.number
   },
 
   getDefaultProps() {
     return {
       data: [],
       colors: d3.scale.category20c(),
-      margins: {top: 10, right: 20, bottom: 30, left: 30},
+      margins: {top: 10, right: 20, bottom: 40, left: 40},
       legendOffset: 120,
       legend: false,
       yAxisTickCount: 4,
@@ -87,7 +91,11 @@ var AreaChart = exports.AreaChart = React.createClass({
       title: '',
       className: 'rd3-areachart',
       xAccessor: (d) => d.x,
-      yAccessor: (d) => d.y
+      yAccessor: (d) => d.y,
+      yAxisLabel: '',
+      xAxisLabel: '',
+      yAxisLabelOffset: 30,
+      xAxisLabelOffset: 35
     };
   },
 
@@ -183,6 +191,8 @@ var AreaChart = exports.AreaChart = React.createClass({
             margins={props.margins}
             width={chartWidth}
             height={chartHeight}
+            label={props.xAxisLabel}
+            labelOffset={props.xAxisLabelOffset}
           />
           <YAxis
             yAxisClassName="rd3-areachart-axis y axis"
@@ -192,6 +202,8 @@ var AreaChart = exports.AreaChart = React.createClass({
             yAxisTickCount={props.yAxisTickCount}
             width={chartWidth}
             height={props.height}
+            label={props.yAxisLabel}
+            labelOffset={props.xAxisLabelOffset}
           />
         </g>
       </Chart>

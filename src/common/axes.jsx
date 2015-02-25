@@ -185,7 +185,8 @@ exports.XAxis = React.createClass({
     stroke: React.PropTypes.string,
     tickStroke: React.PropTypes.string,
     strokeWidth: React.PropTypes.string,
-    xAxisOffset: React.PropTypes.number
+    xAxisOffset: React.PropTypes.number,
+    xAxisLabelOffset: React.PropTypes.number
   },
 
   getDefaultProps: function() {
@@ -198,7 +199,9 @@ exports.XAxis = React.createClass({
       tickStroke: "#000",
       strokeWidth: "none",
       hideOrigin: false,
-      xAxisOffset: 0
+      xAxisOffset: 0,
+      labelOffset: 35,
+      label: ''
     };
   },
 
@@ -230,6 +233,9 @@ exports.XAxis = React.createClass({
           orient={props.xOrient}
           {...props}
         />
+      <text y={props.labelOffset} x={props.width/2} textAnchor='middle' >
+          {props.label}
+        </text>
       </g>
     );
   }
@@ -248,7 +254,8 @@ exports.YAxis = React.createClass({
     stroke: React.PropTypes.string,
     tickStroke: React.PropTypes.string,
     strokeWidth: React.PropTypes.string,
-    yAxisOffset: React.PropTypes.number
+    yAxisOffset: React.PropTypes.number,
+    labelOffset: React.PropTypes.number
   },
 
   getDefaultProps: function() {
@@ -260,7 +267,9 @@ exports.YAxis = React.createClass({
       stroke: "#000",
       tickStroke: "#000",
       strokeWidth: "1",
-      yAxisOffset: 0
+      yAxisOffset: 0,
+      labelOffset: 30,
+      label: ''
     };
   },
 
@@ -294,6 +303,9 @@ exports.YAxis = React.createClass({
           orient={props.yOrient}
           {...props}
         />
+      <text x={-props.height/2} y={-props.labelOffset} textAnchor='middle' transform="rotate(270)">
+        {props.label}
+      </text>
       </g>
     );
   }

@@ -83,7 +83,11 @@ var BarChart = exports.BarChart = React.createClass({
     margins: React.PropTypes.object,
     height: React.PropTypes.number,
     fill: React.PropTypes.string,
-    title: React.PropTypes.string
+    title: React.PropTypes.string,
+    yAxisLabel: React.PropTypes.string,
+    xAxisLabel: React.PropTypes.string,
+    yAxisLabelOffset: React.PropTypes.number,
+    xAxisLabelOffset: React.PropTypes.number
   },
 
   getDefaultProps() {
@@ -94,7 +98,11 @@ var BarChart = exports.BarChart = React.createClass({
       height: 200,
       margins: {top: 20, right: 30, bottom: 30, left: 30},
       fill: "#3182bd",
-      title: ''
+      title: '',
+      yAxisLabel: '',
+      xAxisLabel: '',
+      yAxisLabelOffset: 30,
+      xAxisLabelOffset: 30
     };
   },
 
@@ -141,6 +149,8 @@ var BarChart = exports.BarChart = React.createClass({
             yAxisTickCount={props.yAxisTickCount}
             width={props.width - sideMargins}
             height={props.height - topBottomMargins}
+            label={props.yAxisLabel}
+            labelOffset={props.yAxisLabelOffset}
           />
           <XAxis
             xAxisClassName='rd3-barchart-axis x axis'
@@ -149,6 +159,8 @@ var BarChart = exports.BarChart = React.createClass({
             margins={margins}
             width={props.width - sideMargins}
             height={props.height - topBottomMargins}
+            label={props.xAxisLabel}
+            labelOffset={props.xAxisLabelOffset}
           />
         </g>
       </Chart>

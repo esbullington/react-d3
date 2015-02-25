@@ -262,12 +262,20 @@ var Axes = React.createClass({
     fill: React.PropTypes.string,
     stroke: React.PropTypes.string,
     tickStroke: React.PropTypes.string,
-    strokeWidth: React.PropTypes.string
+    strokeWidth: React.PropTypes.string,
+    yAxisLabel: React.PropTypes.string,
+    xAxisLabel: React.PropTypes.string,
+    yAxisLabelOffset: React.PropTypes.number,
+    xAxisLabelOffset: React.PropTypes.number
   },
 
   getDefaultProps: function() {
     return {
-      axesColor: '#000'
+      axesColor: '#000',
+      yAxisLabel: '',
+      xAxisLabel: '',
+      yAxisLabelOffset: 30,
+      xAxisLabelOffset: 35
     };
   },
 
@@ -286,6 +294,8 @@ var Axes = React.createClass({
             width={props.chartWidth}
             height={props.chartHeight}
             stroke={props.axesColor}
+            label={props.yAxisLabel}
+            labelOffset={props.yAxisLabelOffset}
           />
           <XAxis
             xAxisClassName={props.xAxisClassName}
@@ -297,6 +307,8 @@ var Axes = React.createClass({
             width={props.chartWidth}
             height={props.chartHeight}
             stroke={props.axesColor}
+            label={props.xAxisLabel}
+            labelOffset={props.xAxisLabelOffset}
           />
         </g>
     );
@@ -321,12 +333,15 @@ var LineChart = exports.LineChart = React.createClass({
     legend: React.PropTypes.bool,
     xAccessor: React.PropTypes.func,
     yAccessor: React.PropTypes.func,
-    displayDataPoints: React.PropTypes.bool
+    displayDataPoints: React.PropTypes.bool,
+    yAxisLabel: React.PropTypes.string,
+    yAxisLabelOffset: React.PropTypes.number,
+    xAxisLabelOffset: React.PropTypes.number
   },
 
   getDefaultProps: function() {
     return {
-      margins: {top: 10, right: 20, bottom: 40, left: 30},
+      margins: {top: 10, right: 20, bottom: 40, left: 40},
       legendOffset: 120,
       pointRadius: 3,
       width: 400,
@@ -338,7 +353,10 @@ var LineChart = exports.LineChart = React.createClass({
       yAccessor: (d) => d.y,
       interpolate: false,
       interpolationType: null,
-      displayDataPoints: true
+      displayDataPoints: true,
+      yAxisLabel: '',
+      yAxisLabelOffset: 30,
+      xAxisLabelOffset: 30
     };
   },
 
@@ -419,11 +437,15 @@ var LineChart = exports.LineChart = React.createClass({
             yAxisTickCount={props.yAxisTickCount}
             yScale={scales.yScale}
             yHideOrigin={props.yHideOrigin}
+            yAxisLabel={props.yAxisLabel}
+            yAxisLabelOffset={props.yAxisLabelOffset}
 
             xAxisClassName='rd3-linechart-axis x axis'
             xAxisTickCount={props.xAxisTickCount}
             xScale={scales.xScale}
             xHideOrigin={props.xHideOrigin}
+            xAxisLabel={props.xAxisLabel}
+            xAxisLabelOffset={props.xAxisLabelOffset}
 
             strokeWidth="1"
             margins={props.margins}

@@ -229,6 +229,10 @@ var CandleStickChart = exports.CandleStickChart = React.createClass({
     width: React.PropTypes.number,
     height: React.PropTypes.number,
     title: React.PropTypes.string,
+    yAxisLabel: React.PropTypes.string,
+    xAxisLabel: React.PropTypes.string,
+    yAxisLabelOffset: React.PropTypes.number,
+    xAxisLabelOffset: React.PropTypes.number
   },
 
   getDefaultProps() {
@@ -236,13 +240,17 @@ var CandleStickChart = exports.CandleStickChart = React.createClass({
       data: [],
       fillUp: function (i) { return "white"; },
       fillDown: d3.scale.category20c(),
-      margins: {top: 10, right: 20, bottom: 30, left: 40},
+      margins: {top: 10, right: 20, bottom: 40, left: 50},
       legendOffset: 120,
       width: 400,
       height: 200,
       title: '',
       xAccessor: (d) => d.x,
-      yAccessor: (d) => ({ open: d.open, high: d.high, low: d.low, close: d.close })
+      yAccessor: (d) => ({ open: d.open, high: d.high, low: d.low, close: d.close }),
+      yAxisLabel: '',
+      xAxisLabel: '',
+      yAxisLabelOffset: 30,
+      xAxisLabelOffset: 30
     };
   },
 
@@ -319,6 +327,8 @@ var CandleStickChart = exports.CandleStickChart = React.createClass({
             margins={props.margins}
             width={chartWidth}
             height={chartHeight}
+            label={props.xAxisLabel}
+            labelOffset={props.xAxisLabelOffset}
           />
           <YAxis
             yAxisClassName='rd3-candlestick-axis y axis'
@@ -329,6 +339,8 @@ var CandleStickChart = exports.CandleStickChart = React.createClass({
             margins={props.margins}
             width={chartWidth}
             height={props.height}
+            label={props.yAxisLabel}
+            labelOffset={props.yAxisLabelOffset}
           />
         </g>
       </Chart>
