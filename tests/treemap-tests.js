@@ -23,7 +23,7 @@ describe('Treemap', function() {
     expect(treemapGroup.tagName).to.equal('G');
     
     // Verify that it has the same number of nodes as the array's length
-    var cells = TestUtils.scryRenderedDOMComponentsWithClass(treemap, 'rd3-treemap-rect');
+    var cells = TestUtils.scryRenderedDOMComponentsWithClass(treemap, 'rd3-treemap-cell');
 
     // Note that the first node generated will always be the parent node 
     expect(Number(cells[0].getDOMNode().getAttribute('width'))).to.equal(width);
@@ -32,7 +32,7 @@ describe('Treemap', function() {
     expect(cells.length).to.equal(data.length + 1);
 
     var labels = TestUtils.scryRenderedDOMComponentsWithClass(
-      treemap, 'rd3-treemap-text');
+      treemap, 'rd3-treemap-cell-text');
 
     expect(labels[0].getDOMNode().textContent).to.be.empty;
     expect(labels.length).to.equal(data.length + 1);
