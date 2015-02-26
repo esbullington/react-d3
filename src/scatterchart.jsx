@@ -7,9 +7,8 @@ var Chart = common.Chart;
 var XAxis = common.XAxis;
 var YAxis = common.YAxis;
 var Voronoi = common.Voronoi;
-var EventEmitter = require('events').EventEmitter;
-var pubsub = exports.pubsub = new EventEmitter();
 var utils = require('./utils');
+var immstruct = require('immstruct');
 
 var Circle = React.createClass({
 
@@ -36,24 +35,33 @@ var Circle = React.createClass({
     // state for animation usage
     return {
       circleRadius: this.props.r,
-      circleColor: this.props.fill
+      circleFill: this.props.fill,
+      unobserve: null
     };
   },
 
   componentDidMount() {
-    pubsub.on('animate', this._animateCircle);
-    pubsub.on('restore', this._restoreCircle);
+    var props = this.props;
+    // The circle reference is observed when both it is set to
+    // active, and to inactive, so we have to check which one
+    var unobserve = props.voronoiRef.observe(() => {
+      var circleStatus = props.voronoiRef.cursor().deref();
+      if (circleStatus === 'active') {
+        this._animateCircle(props.id);
+      } else if (circleStatus === 'inactive') {
+        this._restoreCircle(props.id);
+      }
+    });
   },
 
   componentWillUnmount() {
-    pubsub.removeListener('animate', this._animateCircle);
-    pubsub.removeListener('restore', this._restoreCircle);
+    props.voronoiRef.destroy();
   },
 
   render() {
     return (
       <circle
-        fill={this.state.circleColor}
+        fill={this.state.circleFill}
         cx={this.props.cx}
         cy={this.props.cy}
         r={this.state.circleRadius}
@@ -63,22 +71,26 @@ var Circle = React.createClass({
     );
   },
 
-  _animateCircle(id) {
-    if (this.props.id === id) {
-      this.setState({ 
-        circleRadius: this.state.circleRadius * ( 5 / 4 ),
-        circleColor: utils.shade(this.props.fill, -0.2)
-      });
+  _handleMouseoverEvent(id) {
+    if (circleStatus === 'active') {
+      this._animateCircle(id);
+    } else {
+      this._restoreCircle(id);
     }
   },
 
+  _animateCircle(id) {
+    this.setState({ 
+      circleRadius: this.state.circleRadius * ( 5 / 4 ),
+      circleFill: utils.shade(this.props.fill, -0.2)
+    });
+  },
+
   _restoreCircle(id) {
-    if (this.props.id === id) {
-      this.setState({ 
-        circleRadius: this.props.r,
-        circleColor: this.props.fill
-      });
-    }
+    this.setState({ 
+      circleRadius: this.props.r,
+      circleFill: this.props.fill
+    });
   }
 
 });
@@ -121,7 +133,19 @@ var DataSeries = exports.DataSeries = React.createClass({
         cy = props.yScale(yAccessor(point));
       }
 
+      var id = props.seriesName + '-' + i;
+
+      // Create an immstruct reference for the circle id
+      // and set it to 'inactive'
+      props.structure.cursor('voronoi').set(id, 'inactive');
+
+      // Having set the Voronoi circle id cursor to 'inactive'
+      // We now pass on the Voronoi circle id reference to the 
+      // circle component, where it will be observed and dereferenced
+      var voronoiRef = props.structure.reference(['voronoi', id]);
+
       return (<Circle
+        voronoiRef={voronoiRef}
         cx={cx}
         cy={cy}
         r={props.pointRadius}
@@ -186,6 +210,8 @@ var ScatterChart = exports.ScatterChart = React.createClass({
 
   render() {
 
+    var structure = immstruct('scatterChart', { voronoi: {}});
+
     var props = this.props;
 
     if (this.props.data && this.props.data.length < 1) {
@@ -213,9 +239,6 @@ var ScatterChart = exports.ScatterChart = React.createClass({
         xValues = flattenedData.xValues,
         yValues = flattenedData.yValues;
 
-    // Set pubsub max listeners to total number of nodes to be created
-    pubsub.setMaxListeners(xValues.length + yValues.length);
-
     var scales = this._calculateScales(chartWidth, chartHeight, xValues, yValues);
 
     var trans = "translate(" + (props.yAxisOffset < 0 ? props.margins.left + Math.abs(props.yAxisOffset) : props.margins.left) + "," + props.margins.top + ")";
@@ -223,6 +246,7 @@ var ScatterChart = exports.ScatterChart = React.createClass({
     var dataSeriesArray = props.data.map( (series, idx) => {
       return (
           <DataSeries
+            structure={structure}
             xScale={scales.xScale}
             yScale={scales.yScale}
             seriesName={series.name}
@@ -249,7 +273,7 @@ var ScatterChart = exports.ScatterChart = React.createClass({
         title={props.title}>
         <g transform={trans} className='rd3-scatterchart'>
           <Voronoi
-            pubsub={pubsub}
+            structure={structure}
             data={allValues}
             yScale={scales.yScale}
             xScale={scales.xScale}

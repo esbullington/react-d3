@@ -6,11 +6,13 @@ var d3 = require('d3');
 var Polygon = React.createClass({
 
   _animateCircle: function() {
-    this.props.pubsub.emit('animate', this.props.id);
+    this.props.structure.cursor('voronoi').cursor(this.props.id).update(()=>'active');
+    // this.props.pubsub.emit('animate', this.props.id);
   },
 
   _restoreCircle: function() {
-    this.props.pubsub.emit('restore', this.props.id);
+    this.props.structure.cursor('voronoi').cursor(this.props.id).update(()=>'inactive');
+    // this.props.pubsub.emit('restore', this.props.id);
   },
 
   _drawPath: function(d) {
@@ -44,7 +46,7 @@ exports.Voronoi = React.createClass({
       .clipExtent([[0, 0], [ this.props.width , this.props.height]]);
 
     var regions = voronoi(this.props.data).map(function(vnode, idx) {
-      return <Polygon pubsub={this.props.pubsub} key={idx} id={vnode.point.id} vnode={vnode} />;
+      return <Polygon structure={this.props.structure} key={idx} id={vnode.point.id} vnode={vnode} />;
     }.bind(this));
 
     return (
