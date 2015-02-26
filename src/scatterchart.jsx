@@ -258,7 +258,7 @@ var ScatterChart = exports.ScatterChart = React.createClass({
           />
           {dataSeriesArray}
           <XAxis
-            xAxisClassName="scatter x axis"
+            xAxisClassName="rd3-scatterchart-xaxis"
             strokeWidth="1"
             xHideOrigin={props.xHideOrigin}
             xAxisTickInterval={props.xAxisTickInterval}
@@ -271,7 +271,7 @@ var ScatterChart = exports.ScatterChart = React.createClass({
             stroke={props.axesColor}
           />
           <YAxis
-            yAxisClassName="scatter y axis"
+            yAxisClassName="rd3-scatterchart-yaxis"
             yScale={scales.yScale}
             yAxisOffset={props.yAxisOffset}
             yHideOrigin={props.yHideOrigin}
