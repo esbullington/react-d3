@@ -10,7 +10,7 @@ var Voronoi = common.Voronoi;
 var utils = require('./utils');
 var immstruct = require('immstruct');
 
-var Circle = React.createClass({
+var Circle = exports.Circle = React.createClass({
 
   propTypes: {
     id: React.PropTypes.string,
@@ -35,8 +35,7 @@ var Circle = React.createClass({
     // state for animation usage
     return {
       circleRadius: this.props.r,
-      circleFill: this.props.fill,
-      unobserve: null
+      circleFill: this.props.fill
     };
   },
 
@@ -69,14 +68,6 @@ var Circle = React.createClass({
         className={this.props.className}
       />
     );
-  },
-
-  _handleMouseoverEvent(id) {
-    if (circleStatus === 'active') {
-      this._animateCircle(id);
-    } else {
-      this._restoreCircle(id);
-    }
   },
 
   _animateCircle(id) {
@@ -151,7 +142,7 @@ var DataSeries = exports.DataSeries = React.createClass({
         r={props.pointRadius}
         fill={props.fill}
         key={props.seriesName + i}
-        id={props.seriesName + '-' + i}
+        id={id}
       />);
     }, this);
 
