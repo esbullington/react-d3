@@ -7,9 +7,8 @@ var Chart = common.Chart;
 var XAxis = common.XAxis;
 var YAxis = common.YAxis;
 var Voronoi = common.Voronoi;
-var EventEmitter = require('events').EventEmitter;
-var pubsub = exports.pubsub = new EventEmitter();
 var utils = require('./utils');
+var immstruct = require('immstruct');
 
 var Line = React.createClass({
 
@@ -38,31 +37,34 @@ var Line = React.createClass({
     };
   },
 
-
-  componentDidMount: function() {
-    pubsub.on('animate', this._animateLine);
-    pubsub.on('restore', this._restoreLine);
+  componentDidMount() {
+    var props = this.props;
+    // The circle reference is observed when both it is set to
+    // active, and to inactive, so we have to check which one
+    var unobserve = props.voronoiSeriesRef.observe(() => {
+      var lineStatus = props.voronoiSeriesRef.cursor().deref();
+      if (lineStatus === 'active') {
+        this._animateLine(props.id);
+      } else if (lineStatus === 'inactive') {
+        this._restoreLine(props.id);
+      }
+    });
   },
 
   componentWillUnmount: function() {
-    pubsub.removeListener('animate', this._animateLine);
-    pubsub.removeListener('restore', this._restoreLine);
+    props.voronoiSeriesRef.destroy();
   },
 
   _animateLine: function(id) {
-    if (this.props.id === id.split('-')[0]) {
-      this.setState({ 
-        lineStrokeWidth: this.state.lineStrokeWidth * 1.8
-      });
-    }
+    this.setState({ 
+      lineStrokeWidth: this.state.lineStrokeWidth * 1.8
+    });
   },
 
   _restoreLine: function(id) {
-    if (this.props.id === id.split('-')[0]) {
-      this.setState({ 
-        lineStrokeWidth: this.props.strokeWidth
-      });
-    }
+    this.setState({ 
+      lineStrokeWidth: this.props.strokeWidth
+    });
   },
 
   render: function() {
@@ -105,14 +107,25 @@ var Circle = React.createClass({
     };
   },
 
-  componentDidMount: function() {
-    pubsub.on('animateCircle', this._animateCircle);
-    pubsub.on('restoreCircle', this._restoreCircle);
+  componentDidMount() {
+    var props = this.props;
+    // The circle reference is observed when both it is set to
+    // active, and to inactive, so we have to check which one
+    var unobserve = props.voronoiRef.observe(() => {
+      var circleStatus = props.voronoiRef.cursor().deref();
+      var seriesName = props.id.split('-')[0];
+      if (circleStatus === 'active') {
+        this._animateCircle(props.id);
+        props.structure.cursor('voronoiSeries').cursor(seriesName).update(()=>'active');
+      } else if (circleStatus === 'inactive') {
+        this._restoreCircle(props.id);
+        props.structure.cursor('voronoiSeries').cursor(seriesName).update(()=>'inactive');
+      }
+    });
   },
 
   componentWillUnmount: function() {
-    pubsub.removeListener('animateCircle', this._animateCircle);
-    pubsub.removeListener('restoreCircle', this._restoreCircle);
+    props.voronoiRef.destroy();
   },
 
   render: function() {
@@ -130,19 +143,15 @@ var Circle = React.createClass({
   },
   
   _animateCircle: function(id) {
-    if (this.props.id === id) {
-      this.setState({ 
-        circleRadius: this.state.circleRadius * ( 5 / 4 )
-      });
-    }
+    this.setState({ 
+      circleRadius: this.state.circleRadius * ( 5 / 4 )
+    });
   },
 
   _restoreCircle: function(id) {
-    if (this.props.id === id) {
-      this.setState({ 
-        circleRadius: this.props.r
-      });
-    }
+    this.setState({ 
+      circleRadius: this.props.r
+    });
   }
 
 });
@@ -201,6 +210,17 @@ var DataSeries = exports.DataSeries = React.createClass({
         });
     }
 
+
+    // Create an immstruct reference for the series name
+    // and set it to 'inactive'
+    props.structure.cursor('voronoiSeries').set(props.seriesName, 'inactive');
+
+    // Having set the Voronoi line series name cursor to 'inactive'
+    // We now pass on the Voronoi line series name reference to the 
+    // *both* the line and circle component
+    var voronoiSeriesRef = props.structure.reference(['voronoiSeries', props.seriesName]);
+
+
     var circles = null;
 
     if (props.displayDataPoints) {
@@ -218,8 +238,23 @@ var DataSeries = exports.DataSeries = React.createClass({
         } else {
           cy = props.yScale(yAccessor(point));
         }
+
+        var id= props.seriesName + '-' + i;
+
+        // Create an immstruct reference for the circle id
+        // and set it to 'inactive'
+        props.structure.cursor('voronoi').set(id, 'inactive');
+
+        // Having set the Voronoi circle id cursor to 'inactive'
+        // We now pass on the Voronoi circle id reference to the 
+        // circle component, where it will be observed and dereferenced
+        var voronoiRef = props.structure.reference(['voronoi', id]);
+
         return (
           <Circle
+            voronoiRef={voronoiRef}
+            voronoiSeriesRef={voronoiSeriesRef}
+            structure={props.structure}
             cx={cx}
             cy={cy}
             r={props.pointRadius}
@@ -234,9 +269,10 @@ var DataSeries = exports.DataSeries = React.createClass({
     return (
       <g>
         <Line
+          voronoiSeriesRef={voronoiSeriesRef}
           path={interpolatePath(props.data)}
           stroke={props.fill}
-          id={props.seriesName}
+          seriesName={props.seriesName}
         />
         {circles}
       </g>
@@ -344,6 +380,8 @@ var LineChart = exports.LineChart = React.createClass({
 
   render: function() {
 
+    var structure = immstruct('lineChart', { voronoi: {}, voronoiSeries: {}});
+
     var props = this.props;
 
     var interpolationType = props.interpolationType || (props.interpolate ? 'cardinal' : 'linear');
@@ -368,8 +406,6 @@ var LineChart = exports.LineChart = React.createClass({
         xValues = flattenedData.xValues,
         yValues = flattenedData.yValues;
 
-    pubsub.setMaxListeners(xValues.length + yValues.length);
-
     var scales = utils.calculateScales(chartWidth, chartHeight, xValues, yValues);
 
     var trans = "translate(" + props.margins.left + "," + props.margins.top + ")";
@@ -377,6 +413,7 @@ var LineChart = exports.LineChart = React.createClass({
     var dataSeriesArray = props.data.map( (series, idx) => {
       return (
           <DataSeries
+            structure={structure}
             xScale={scales.xScale}
             yScale={scales.yScale}
             seriesName={series.name}
@@ -407,7 +444,7 @@ var LineChart = exports.LineChart = React.createClass({
         <g transform={trans} className='rd3-linechart'>
           {dataSeriesArray}
           <Voronoi
-            pubsub={pubsub}
+            structure={structure}
             data={allValues}
             xScale={scales.xScale}
             yScale={scales.yScale}
