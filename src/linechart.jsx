@@ -415,12 +415,12 @@ var LineChart = exports.LineChart = React.createClass({
             height={chartHeight}
           />
           <Axes
-            yAxisClassName='rd3-linechart-axis y axis'
+            yAxisClassName='rd3-linechart-yaxis'
             yAxisTickCount={props.yAxisTickCount}
             yScale={scales.yScale}
             yHideOrigin={props.yHideOrigin}
 
-            xAxisClassName='rd3-linechart-axis x axis'
+            xAxisClassName='rd3-linechart-xaxis'
             xAxisTickCount={props.xAxisTickCount}
             xScale={scales.xScale}
             xHideOrigin={props.xHideOrigin}
