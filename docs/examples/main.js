@@ -100,6 +100,7 @@ var Demos = React.createClass({
               width={500}
               height={300}
               title="Line Chart"
+              yAxisLabel="Altitude"
             />
           </div>
           <div className="col-md-6">

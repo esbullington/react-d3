@@ -35,7 +35,12 @@ module.exports = React.createClass({
 
     var props = this.props;
 
-    var t = `translate(${props.yAxisOffset},0)`;
+    var t;
+    if (props.yOrient === 'right') {
+       t = `translate(${props.yAxisOffset + props.width},0)`;
+    } else {
+       t = `translate(${props.yAxisOffset},0)`;
+    }
 
     var tickArguments;
     if (props.yAxisTickCount) {
@@ -51,6 +56,19 @@ module.exports = React.createClass({
         className={props.yAxisClassName}
         transform={t}
       >
+        <AxisTicks
+          tickFormatting={props.tickFormatting}
+          tickArguments={tickArguments}
+          yScale={props.yScale}
+          orient={props.yOrient}
+          height={props.height}
+          width={props.width}
+        />
+        <AxisLine
+          scale={props.yScale}
+          orient={props.yOrient}
+          {...props}
+        />
         <Label
           label={props.yAxisLabel}
           offset={props.yAxisLabelOffset}
@@ -58,16 +76,6 @@ module.exports = React.createClass({
           margins={props.margins}
           height={props.height}
           width={props.width}
-        />
-        <AxisTicks
-          tickFormatting={props.tickFormatting}
-          tickArguments={tickArguments}
-          yScale={props.yScale}
-        />
-        <AxisLine
-          scale={props.yScale}
-          orient={props.yOrient}
-          {...props}
         />
       </g>
     );
