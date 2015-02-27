@@ -1,0 +1,2 @@
+
+exports.PropTypesMixin = require('./PropTypesMixin');
