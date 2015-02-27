@@ -7,40 +7,18 @@ var common = require('../common');
 var Chart = common.Chart;
 var XAxis = common.XAxis;
 var YAxis = common.YAxis;
+var mixins = require('../mixins');
+var CartesianChartPropsMixin = mixins.CartesianChartPropsMixin;
+
 
 module.exports = React.createClass({
 
-  propTypes: {
-    data: React.PropTypes.oneOfType([
-      React.PropTypes.array,
-      React.PropTypes.object
-    ]),
-    legend: React.PropTypes.bool,
-    legendOffset: React.PropTypes.number,
-    yAxisTickCount: React.PropTypes.number,
-    xAxisTickInterval: React.PropTypes.object,
-    colors: React.PropTypes.func,
-    width: React.PropTypes.number,
-    height: React.PropTypes.number,
-    title: React.PropTypes.string,
-    xAccessor: React.PropTypes.func,
-    yAccessor: React.PropTypes.func
-  },
+  mixins: [ CartesianChartPropsMixin ],
 
   getDefaultProps() {
     return {
-      data: [],
-      colors: d3.scale.category20c(),
-      margins: {top: 10, right: 20, bottom: 30, left: 30},
-      legendOffset: 120,
-      legend: false,
       yAxisTickCount: 4,
-      width: 400,
-      height: 200,
-      title: '',
-      className: 'rd3-areachart',
-      xAccessor: (d) => d.x,
-      yAccessor: (d) => d.y
+      className: 'rd3-areachart'
     };
   },
 
