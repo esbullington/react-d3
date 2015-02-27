@@ -36,7 +36,7 @@ module.exports = React.createClass({
       var seriesName = props.id.split('-')[0];
       if (circleStatus === 'active') {
         this._animateCircle(props.id);
-        var voronoiSeriesCursor = props.structure.cursor('voronoiSeries')
+        var voronoiSeriesCursor = props.structure.cursor('voronoiSeries');
         if (voronoiSeriesCursor) {
           voronoiSeriesCursor.cursor(seriesName).update(()=>'active');
         }
@@ -48,7 +48,7 @@ module.exports = React.createClass({
   },
 
   componentWillUnmount: function() {
-    props.voronoiRef.destroy();
+    this.props.voronoiRef.destroy();
   },
 
   render: function() {
