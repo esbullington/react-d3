@@ -11,7 +11,6 @@ module.exports = React.createClass({
     xAxisClassName: React.PropTypes.string.isRequired,
     xOrient: React.PropTypes.oneOf(['top', 'bottom']),
     xScale: React.PropTypes.func.isRequired,
-    xHideOrigin: React.PropTypes.bool,
     height: React.PropTypes.number.isRequired,
     fill: React.PropTypes.string,
     stroke: React.PropTypes.string,
@@ -24,12 +23,10 @@ module.exports = React.createClass({
     return {
       xAxisClassName: 'x axis',
       xOrient: 'bottom',
-      xHideOrigin: false,
       fill: "none",
       stroke: "none",
       tickStroke: "#000",
       strokeWidth: "none",
-      hideOrigin: false,
       xAxisOffset: 0
     };
   },
