@@ -386,8 +386,8 @@ var LineChart = exports.LineChart = React.createClass({
             fill={props.colors(idx)}
             pointRadius={props.pointRadius}
             key={series.name}
-            xAccessor={props.xAccessor}
-            yAccessor={props.yAccessor}
+            xAccessor={series.xAccessor || props.xAccessor}
+            yAccessor={series.yAccessor || props.yAccessor}
             interpolationType={interpolationType}
             displayDataPoints={props.displayDataPoints}
           />
