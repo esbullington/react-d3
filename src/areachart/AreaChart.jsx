@@ -2,60 +2,13 @@
 
 var React = require('react');
 var d3 = require('d3');
-var common = require('./common');
+var DataSeries = require('./DataSeries');
+var common = require('../common');
 var Chart = common.Chart;
 var XAxis = common.XAxis;
 var YAxis = common.YAxis;
 
-var Area = React.createClass({
-
-  propTypes: {
-    path: React.PropTypes.string,
-    fill: React.PropTypes.string
-  },
-
-  getDefaultProps() {
-    return {
-      fill: '#3182bd'
-    };
-  },
-
-  render() {
-
-    return (
-      <path
-        className="rd3-areachart-area"
-        d={this.props.path}
-        fill={this.props.fill}
-      />
-    );
-  }
-
-});
-
-
-var DataSeries = exports.DataSeries = React.createClass({
-
-  render() {
-
-    var props = this.props;
-
-    var area = d3.svg.area()
-      .x((d)=> { return props.xScale(props.xAccessor(d)); })
-      .y0((d)=> { return props.yScale(d.y0); })
-      .y1((d)=> { return props.yScale(d.y0 + props.yAccessor(d)); });
-
-    var path = area(props.data);
-
-    return (
-      <Area fill={props.colors(props.name)} path={path} />
-    );
-  }
-
-});
-
-
-var AreaChart = exports.AreaChart = React.createClass({
+module.exports = React.createClass({
 
   propTypes: {
     data: React.PropTypes.oneOfType([
