@@ -36,7 +36,7 @@ module.exports =  {
       xOrient: 'bottom',
       xAxisLabel: '',
       xAxisLabelOffset: 35,
-      yOrient: 'left',
+      yOrient: 'right',
       yAxisLabel: '',
       yAxisLabelOffset: 35,
       margins: {top: 10, right: 20, bottom: 40, left: 30},

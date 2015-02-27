@@ -21,7 +21,6 @@ module.exports = React.createClass({
   render() {
     var props = this.props;
 
-
     var tr,
         ticks,
         scale,
@@ -31,9 +30,6 @@ module.exports = React.createClass({
         y1, y2, dy, x1, x2, dx;
 
     var sign = props.yScale ? -1 : 1;
-
-    // We can use this along with sign 
-    // if we want to remove the hardcoded y, y2, x, x2, etc below
     var tickSpacing = Math.max(props.innerTickSize, 0) + props.tickPadding;  
 
     scale = props.yScale ? props.yScale : props.xScale;
@@ -43,36 +39,57 @@ module.exports = React.createClass({
 
     adjustedScale = scale.rangeBand ? (d) => { return scale(d) + scale.rangeBand() / 2; } : scale;
 
-    if (props.xScale) {
-      tr = (tick) => `translate(${adjustedScale(tick)},0)`;
-      textAnchor = "middle";
-      y2 = props.innerTickSize * sign;
-      y1 = tickSpacing * sign;
-      dy =  sign < 0 ? "0em" : ".71em";
-    } else if (props.yScale) {
-      tr = (tick) => `translate(0,${adjustedScale(tick)})`;
-      textAnchor = "end";
-      x2 = props.innerTickSize * sign;
-      x1 = tickSpacing * sign;
-      dy = ".32em";
+    // Still working on this
+    // Ticks and lines are not fully aligned
+    // in some orientations
+    switch (props.orient) {
+      case 'top':
+        tr = (tick) => `translate(${adjustedScale(tick)},0)`;
+        textAnchor = "middle";
+        y2 = props.innerTickSize * sign;
+        y1 = tickSpacing * sign;
+        dy =  sign < 0 ? "0em" : ".71em";
+        break;
+      case 'bottom':
+        tr = (tick) => `translate(${adjustedScale(tick)},0)`;
+        textAnchor = "middle";
+        y2 = props.innerTickSize * sign;
+        y1 = tickSpacing * sign;
+        dy =  sign < 0 ? "0em" : ".71em";
+        break;
+      case 'left':
+        tr = (tick) => `translate(0,${adjustedScale(tick)})`;
+        textAnchor = "end";
+        x2 = props.innerTickSize * sign;
+        x1 = tickSpacing * sign;
+        dy = ".32em";
+        break;
+      case 'right':
+        tr = (tick) => `translate(0,${adjustedScale(tick)})`;
+        textAnchor = "end";
+        x2 = props.innerTickSize;
+        x1 = tickSpacing * sign;
+        dy = ".32em";
+        break;
     }
-
 
     return (
       <g>
         {ticks.map( (tick, i) => {
-          return  <g key={i} className="tick" transform={tr(tick)} >
-                    <line style={{shapeRendering:'crispEdges',opacity:'1',stroke:'#000'}} x2={x2} y2={y2} >
-                    </line>
-                    <text
-                      strokeWidth="0.01"
-                      dy={dy} x={x1} y={y1}
-                      stroke='#000'
-                      textAnchor={textAnchor}
-                    >
-                      {tickFormat(tick)}
-                    </text>
-                  </g>;
+          return (
+            <g key={i} className="tick" transform={tr(tick)} >
+              <line style={{shapeRendering:'crispEdges',opacity:'1',stroke:'#000'}} x2={x2} y2={y2} >
+              </line>
+              <text
+                strokeWidth="0.01"
+                dy={dy} x={x1} y={y1}
+                stroke='#000'
+                textAnchor={textAnchor}
+              >
+                {tickFormat(tick)}
+              </text>
+            </g>
+          );
           })
         }
       </g>

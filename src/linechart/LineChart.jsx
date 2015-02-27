@@ -58,16 +58,14 @@ module.exports = React.createClass({
 
     // Set margins if label is set
     // var xAxisLabel = 'test label';
-    var xAxisLabel = 'test';
-    if (xAxisLabel) {
+    if (props.xAxisLabel) {
       var orient = props.xOrient;
       props.margins[orient] = props.margins[orient] + 10;
     }
 
     // Set margins if label is set
     // var xAxisLabel = 'test label';
-    var yAxisLabel = 'test two';
-    if (yAxisLabel) {
+    if (props.yAxisLabel) {
       var orient = props.yOrient;
       props.margins[orient] = props.margins[orient] + 10;
     }
@@ -133,7 +131,8 @@ module.exports = React.createClass({
             width={chartWidth}
             height={chartHeight}
             stroke={props.axesColor}
-            yAxisLabel={yAxisLabel}
+            yOrient={props.yOrient}
+            yAxisLabel={props.yAxisLabel}
             yAxisLabelOffset={props.yAxisLabelOffset}
           />
           <XAxis
@@ -146,7 +145,8 @@ module.exports = React.createClass({
             width={chartWidth}
             height={chartHeight}
             stroke={props.axesColor}
-            xAxisLabel={xAxisLabel}
+            xOrient={props.xOrient}
+            xAxisLabel={props.xAxisLabel}
             xAxisLabelOffset={props.xAxisLabelOffset}
           />
         </g>
