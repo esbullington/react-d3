@@ -2,161 +2,16 @@
 
 var React = require('react');
 var d3 = require('d3');
-var common = require('./common');
+var common = require('../common');
 var Chart = common.Chart;
 var XAxis = common.XAxis;
 var YAxis = common.YAxis;
 var Voronoi = common.Voronoi;
-var utils = require('./utils');
+var utils = require('../utils');
 var immstruct = require('immstruct');
+var DataSeries = require('./DataSeries');
 
-var Circle = exports.Circle = React.createClass({
-
-  propTypes: {
-    id: React.PropTypes.string,
-    cx: React.PropTypes.number,
-    cy: React.PropTypes.number,
-    r: React.PropTypes.number,
-    fill: React.PropTypes.string,
-    stroke: React.PropTypes.string,
-    strokeWidth: React.PropTypes.number,
-    strokeOpacity: React.PropTypes.number,
-    hoverAnimation: React.PropTypes.bool
-  },
-
-  getDefaultProps() {
-    return {
-      fill: '#1f77b4',
-      className: 'rd3-scatterchart-circle'
-    };
-  },
-
-  getInitialState() {
-    // state for animation usage
-    return {
-      circleRadius: this.props.r,
-      circleFill: this.props.fill
-    };
-  },
-
-  componentDidMount() {
-    var props = this.props;
-    // The circle reference is observed when both it is set to
-    // active, and to inactive, so we have to check which one
-    var unobserve = props.voronoiRef.observe(() => {
-      var circleStatus = props.voronoiRef.cursor().deref();
-      if (circleStatus === 'active') {
-        this._animateCircle(props.id);
-      } else if (circleStatus === 'inactive') {
-        this._restoreCircle(props.id);
-      }
-    });
-  },
-
-  componentWillUnmount() {
-    props.voronoiRef.destroy();
-  },
-
-  render() {
-    return (
-      <circle
-        fill={this.state.circleFill}
-        cx={this.props.cx}
-        cy={this.props.cy}
-        r={this.state.circleRadius}
-        id={this.props.id}
-        className={this.props.className}
-      />
-    );
-  },
-
-  _animateCircle(id) {
-    this.setState({ 
-      circleRadius: this.state.circleRadius * ( 5 / 4 ),
-      circleFill: utils.shade(this.props.fill, -0.2)
-    });
-  },
-
-  _restoreCircle(id) {
-    this.setState({ 
-      circleRadius: this.props.r,
-      circleFill: this.props.fill
-    });
-  }
-
-});
-
-var DataSeries = exports.DataSeries = React.createClass({
-
-  propTypes: {
-    data: React.PropTypes.array,
-    fill: React.PropTypes.string,
-    xAccessor: React.PropTypes.func,
-    yAccessor: React.PropTypes.func
-  },
-
-  getDefaultProps() {
-    return {
-      data: [],
-      fill: '#fff',
-      xAccessor: (d) => d.x,
-      yAccessor: (d) => d.y
-    };
-  },
-
-  render() {
-
-    var props = this.props;
-
-    var circles = props.data.map((point, i) => {
-
-      var xAccessor = props.xAccessor,
-          yAccessor = props.yAccessor,
-          cx, cy;
-      if (Object.prototype.toString.call(xAccessor(point)) === '[object Date]') {
-        cx = props.xScale(xAccessor(point).getTime());
-      } else {
-        cx = props.xScale(xAccessor(point));
-      }
-      if (Object.prototype.toString.call(yAccessor(point)) === '[object Date]') {
-        cy = props.yScale(yAccessor(point).getTime());
-      } else {
-        cy = props.yScale(yAccessor(point));
-      }
-
-      var id = props.seriesName + '-' + i;
-
-      // Create an immstruct reference for the circle id
-      // and set it to 'inactive'
-      props.structure.cursor('voronoi').set(id, 'inactive');
-
-      // Having set the Voronoi circle id cursor to 'inactive'
-      // We now pass on the Voronoi circle id reference to the 
-      // circle component, where it will be observed and dereferenced
-      var voronoiRef = props.structure.reference(['voronoi', id]);
-
-      return (<Circle
-        voronoiRef={voronoiRef}
-        cx={cx}
-        cy={cy}
-        r={props.pointRadius}
-        fill={props.fill}
-        key={props.seriesName + i}
-        id={id}
-      />);
-    }, this);
-
-    return (
-      <g>
-        {circles}
-      </g>
-    );
-  }
-
-});
-
-
-var ScatterChart = exports.ScatterChart = React.createClass({
+module.exports = React.createClass({
 
   propTypes: {
     data: React.PropTypes.oneOfType([
