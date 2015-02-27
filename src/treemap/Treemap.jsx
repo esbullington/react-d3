@@ -2,6 +2,7 @@
 
 var React = require('react');
 var Chart = require('../common').Chart;
+var DataSeries = require('./DataSeries');
 
 module.exports = React.createClass({
 
@@ -54,5 +55,3 @@ module.exports = React.createClass({
   }
 
 });
-
-exports.Treemap = Treemap;
