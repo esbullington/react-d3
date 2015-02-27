@@ -56,6 +56,23 @@ module.exports = React.createClass({
       props.data = [props.data];
     }
 
+    // Set margins if label is set
+    // var xAxisLabel = 'test label';
+    var xAxisLabel = 'test';
+    if (xAxisLabel) {
+      var orient = props.xOrient;
+      props.margins[orient] = props.margins[orient] + 10;
+    }
+
+    // Set margins if label is set
+    // var xAxisLabel = 'test label';
+    var yAxisLabel = 'test two';
+    if (yAxisLabel) {
+      var orient = props.yOrient;
+      props.margins[orient] = props.margins[orient] + 10;
+    }
+
+
     var flattenedData = utils.flattenData(props.data, props.xAccessor, props.yAccessor);
 
     var allValues = flattenedData.allValues,
@@ -107,29 +124,31 @@ module.exports = React.createClass({
             width={chartWidth}
             height={chartHeight}
           />
-          <g>
-            <YAxis
-              yAxisClassName="rd3-linechart-yaxis"
-              yScale={scales.yScale}
-              yAxisTickCount={props.yAxisTickCount}
-              yHideOrigin={props.yHideOrigin}
-              margins={props.margins}
-              width={chartWidth}
-              height={chartHeight}
-              stroke={props.axesColor}
-            />
-            <XAxis
-              xAxisClassName="rd3-linechart-xaxis"
-              xScale={scales.xScale}
-              xAxisTickCount={props.xAxisTickCount}
-              strokeWidth={props.strokeWidth}
-              xHideOrigin={props.xHideOrigin}
-              margins={props.margins}
-              width={chartWidth}
-              height={chartHeight}
-              stroke={props.axesColor}
-            />
-          </g>
+          <YAxis
+            yAxisClassName="rd3-linechart-yaxis"
+            yScale={scales.yScale}
+            yAxisTickCount={props.yAxisTickCount}
+            yHideOrigin={props.yHideOrigin}
+            margins={props.margins}
+            width={chartWidth}
+            height={chartHeight}
+            stroke={props.axesColor}
+            yAxisLabel={yAxisLabel}
+            yAxisLabelOffset={props.yAxisLabelOffset}
+          />
+          <XAxis
+            xAxisClassName="rd3-linechart-xaxis"
+            xScale={scales.xScale}
+            xAxisTickCount={props.xAxisTickCount}
+            strokeWidth={props.strokeWidth}
+            xHideOrigin={props.xHideOrigin}
+            margins={props.margins}
+            width={chartWidth}
+            height={chartHeight}
+            stroke={props.axesColor}
+            xAxisLabel={xAxisLabel}
+            xAxisLabelOffset={props.xAxisLabelOffset}
+          />
         </g>
       </Chart>
     );
