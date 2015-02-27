@@ -2,28 +2,20 @@
 
 var React = require('react');
 var d3 = require('d3');
+var immstruct = require('immstruct');
+var utils = require('./utils');
 var common = require('./common');
 var Chart = common.Chart;
 var XAxis = common.XAxis;
 var YAxis = common.YAxis;
 var Voronoi = common.Voronoi;
 
-var EventEmitter = require('events').EventEmitter;
-var pubsub = exports.pubsub = new EventEmitter();
 
-var utils = require('./utils');
-
-
-var Wicks = React.createClass({
+var Wick = React.createClass({
 
   propTypes: {
-    data: React.PropTypes.array.isRequired,
     strokeWidth: React.PropTypes.number,
-    stroke: React.PropTypes.string,
-    xScale: React.PropTypes.func.isRequired,
-    yScale: React.PropTypes.func.isRequired,
-    xAccessor: React.PropTypes.func.isRequired,
-    yAccessor: React.PropTypes.func.isRequired
+    stroke: React.PropTypes.string
   },
 
   getDefaultProps() {
@@ -36,28 +28,19 @@ var Wicks = React.createClass({
   },
 
   render() {
-    var wicks = this.props.data
-        .map( (d, idx) => {
-          var ohlc = this.props.yAccessor(d),
-            x1 = this.props.xScale(this.props.xAccessor(d)),
-            y1 = this.props.yScale(ohlc.high),
-            x2 = x1,
-            y2 = this.props.yScale(ohlc.low);
-
-          return <line key={idx}
-                  stroke={this.props.stroke}
-                  strokeWidth={this.props.strokeWidth}
-                  style={{ shapeRendering: this.props.shapeRendering }}
-                  className={this.props.className}
-                  x1={x1}
-                  y1={y1}
-                  x2={x2}
-                  y2={y2} />;
-        }, this);
-    return (
-      <g className='rd3-candlestick-wicks'>{wicks}</g>
-    );
+    var props = this.props;
+    return <line
+            stroke={props.stroke}
+            strokeWidth={props.strokeWidth}
+            style={{ shapeRendering: props.shapeRendering }}
+            className={props.className}
+            x1={props.x1}
+            y1={props.y1}
+            x2={props.x2}
+            y2={props.y2}
+          />;
   }
+
 });
 
 
@@ -78,102 +61,58 @@ var Candle = React.createClass({
       className: 'rd3-candlestick-candle'
     };
   },
+
   componentDidMount() {
-    pubsub.on('animate', this._animateCandle);
-    pubsub.on('restore', this._restoreCandle);
+    var props = this.props;
+    // The circle reference is observed when both it is set to
+    // active, and to inactive, so we have to check which one
+    props.voronoiRef.observe(() => {
+      var candleStatus = props.voronoiRef.cursor().deref();
+      if (candleStatus === 'active') {
+        this._animateCandle(props.id);
+      } else if (candleStatus === 'inactive') {
+        this._restoreCandle(props.id);
+      }
+    });
   },
 
   componentWillUnmount() {
-    pubsub.removeListener('animate', this._animateCandle);
-    pubsub.removeListener('restore', this._restoreCandle);
+    props.voronoiRef.destroy();
   },
 
+
   _animateCandle(id) {
-    if (this.props.idx == id.split('-')[1]) {
-      this.setState({ 
-        candleWidth: this.props.width * 1.5,
-        candleFill: utils.shade(this.props.fill, -0.2)
-      });
-    }
+    this.setState({ 
+      candleWidth: this.props.width * 1.5,
+      candleFill: utils.shade(this.props.fill, -0.2)
+    });
   },
 
   _restoreCandle(id) {
-    if (this.props.idx == id.split('-')[1]) {
-      this.setState({ 
-        candleWidth: this.props.width,
-        candleFill: this.props.fill
-      });
-    }
+    this.setState({ 
+      candleWidth: this.props.width,
+      candleFill: this.props.fill
+    });
   },
 
   render() {
-    return (<rect key={this.props.idx} 
-                  className={this.props.className} fill={this.state.candleFill}
-                  x={this.props.x - ((this.state.candleWidth - this.props.width) / 2)}
-                  y={this.props.y}
-                  stroke={this.props.stroke}
-                  strokeWidth={this.props.strokeWidth}
-                  style={{ shapeRendering: this.props.shapeRendering }}
-                  width={this.state.candleWidth}
-                  height={this.props.height} />);
-  }
-
-});
-
-
-var Candles = React.createClass({
-
-  propTypes: {
-    data: React.PropTypes.array.isRequired,
-    strokeWidth: React.PropTypes.number,
-    stroke: React.PropTypes.string,
-    xScale: React.PropTypes.func.isRequired,
-    yScale: React.PropTypes.func.isRequired,
-    xAccessor: React.PropTypes.func.isRequired,
-    yAccessor: React.PropTypes.func.isRequired,
-    fillUp: React.PropTypes.string.isRequired,
-    fillDown: React.PropTypes.string.isRequired
-  },
-
-  getDefaultProps() {
-    return {
-      stroke: '#000',
-      strokeWidth: 1,
-      fillUp: "green",
-      fillDown: "red",
-      shapeRendering: "crispEdges",
-      className: "rd3-candlestick-candle"
-    };
-  },
-
-  render() {
-    var xRange = this.props.xScale.range(),
-        width = Math.abs(xRange[0] - xRange[1]),
-        candleWidth = (width / (this.props.data.length + 2)) * 0.5;
-
-    var candles = this.props.data
-        .map((d, idx)=> {
-          var ohlc = this.props.yAccessor(d),
-            x = this.props.xScale(this.props.xAccessor(d)) - 0.5 * candleWidth,
-            y = this.props.yScale(Math.max(ohlc.open, ohlc.close)),
-            height = Math.abs(this.props.yScale(ohlc.open) - this.props.yScale(ohlc.close)),
-            y2 = this.props.yScale(ohlc.low),
-            ohlcClass = (ohlc.open <= ohlc.close) ? 'up' : 'down',
-            className = `${ ohlcClass } rd3-candlestick-rect`,
-            fill = (ohlc.open <= ohlc.close) ? this.props.fillUp : this.props.fillDown;
-
-          return <Candle key={idx} className={this.props.className} fill={fill}
-                  idx={idx}
-                  x={x}
-                  y={y}
-                  width={candleWidth}
-                  height={height} />;
-        }, this);
     return (
-      <g className='rd3-candlestick-candles'>{candles}</g>
+      <rect
+        className={this.props.className}
+        fill={this.state.candleFill}
+        x={this.props.x - ((this.state.candleWidth - this.props.width) / 2)}
+        y={this.props.y}
+        stroke={this.props.stroke}
+        strokeWidth={this.props.strokeWidth}
+        style={{ shapeRendering: this.props.shapeRendering }}
+        width={this.state.candleWidth}
+        height={this.props.height}
+      />
     );
   }
+
 });
+
 
 var DataSeries = exports.DataSeries = React.createClass({
 
@@ -186,24 +125,65 @@ var DataSeries = exports.DataSeries = React.createClass({
 
     var props = this.props;
 
+    var xRange = this.props.xScale.range(),
+        width = Math.abs(xRange[0] - xRange[1]),
+        candleWidth = (width / (this.props.data.length + 2)) * 0.5;
+
+    var dataSeries = this.props.data
+        .map((d, idx)=> {
+          // Candles
+          var ohlc = this.props.yAccessor(d),
+            x = this.props.xScale(this.props.xAccessor(d)) - 0.5 * candleWidth,
+            y = this.props.yScale(Math.max(ohlc.open, ohlc.close)),
+            height = Math.abs(this.props.yScale(ohlc.open) - this.props.yScale(ohlc.close)),
+            y2 = this.props.yScale(ohlc.low),
+            ohlcClass = (ohlc.open <= ohlc.close) ? 'up' : 'down',
+            className = `${ ohlcClass } rd3-candlestick-rect`,
+            fill = (ohlc.open <= ohlc.close) ? this.props.fillUp : this.props.fillDown;
+
+          //Wicks
+          var x1 = this.props.xScale(this.props.xAccessor(d)),
+            y1 = this.props.yScale(ohlc.high),
+            x2 = x1,
+            y2 = this.props.yScale(ohlc.low);
+
+          // Create unique id: series + index
+          var id = props.series.name + '-' + idx;
+
+          // Create an immstruct reference for the candle id
+          // and set it to 'inactive'
+          props.structure.cursor('voronoi').set(id, 'inactive');
+
+          // Having set the Voronoi circle id cursor to 'inactive'
+          // We now pass on the Voronoi circle id reference to the 
+          // circle component, where it will be observed and dereferenced
+          var voronoiRef = props.structure.reference(['voronoi', id]);
+
+
+          return (
+            <g key={idx} >
+              <Wick
+                x1={x1}
+                x2={x2}
+                y1={y1}
+                y2={y2}
+              />
+              <Candle
+                voronoiRef={voronoiRef}
+                fill={fill}
+                id={id}
+                x={x}
+                y={y}
+                width={candleWidth}
+                height={height}
+              />
+            </g>
+          );
+        }, this);
+
     return (
       <g>
-        <Wicks 
-          xScale={props.xScale}
-          yScale={props.yScale}
-          xAccessor={props.xAccessor}
-          yAccessor={props.yAccessor}
-          data={props.data}
-          />
-        <Candles 
-          xScale={props.xScale}
-          yScale={props.yScale}
-          xAccessor={props.xAccessor}
-          yAccessor={props.yAccessor}
-          fillUp={props.fillUp}
-          fillDown={props.fillDown}
-          data={props.data}
-          />
+        {dataSeries}
       </g>
     );
   }
@@ -212,7 +192,7 @@ var DataSeries = exports.DataSeries = React.createClass({
 
 
 
-var CandleStickChart = exports.CandleStickChart = React.createClass({
+var CandlestickChart = exports.CandlestickChart = React.createClass({
 
   propTypes: {
     data: React.PropTypes.oneOfType([
@@ -249,6 +229,8 @@ var CandleStickChart = exports.CandleStickChart = React.createClass({
 
   render() {
 
+    var structure = immstruct('candlestickChart', { voronoi: {} });
+
     var props = this.props;
 
     // Calculate inner chart dimensions
@@ -270,7 +252,6 @@ var CandleStickChart = exports.CandleStickChart = React.createClass({
         xValues = flattenedData.xValues,
         yValues = flattenedData.yValues;
 
-    pubsub.setMaxListeners(xValues.length + yValues.length);
 
     var scales = utils.calculateScales(chartWidth, chartHeight, xValues, yValues);
 
@@ -279,6 +260,8 @@ var CandleStickChart = exports.CandleStickChart = React.createClass({
     var dataSeries = props.data.map( (series, idx) => {
       return (
           <DataSeries
+            structure={structure}
+            series={series}
             key={idx}
             name={series.name}
             colors={props.colors}
@@ -304,7 +287,7 @@ var CandleStickChart = exports.CandleStickChart = React.createClass({
         <g transform={trans} className="rd3-candlestick">
           {dataSeries}
           <Voronoi
-            pubsub={pubsub}
+            structure={structure}
             data={allValues}
             xScale={scales.xScale}
             yScale={scales.yScale}

@@ -2,10 +2,10 @@
 
 var expect = require('chai').expect;  
 
-describe('CandleStickChart', function() {
+describe('CandlestickChart', function() {
   it('renders single candlestick chart', function() {
     var React = require('react/addons');
-    var CandleStickChart = require('../src/candlestick').CandleStickChart;
+    var CandlestickChart = require('../src/candlestick').CandlestickChart;
     var generate = require('../utils/datagen').generateArrayOfTimeOHLCObjects;
     var TestUtils = React.addons.TestUtils;
 
@@ -23,7 +23,7 @@ describe('CandleStickChart', function() {
     ];
 
     var candlestickChart = TestUtils.renderIntoDocument(
-      <CandleStickChart
+      <CandlestickChart
         data={data}
         width={500}
         height={400}
