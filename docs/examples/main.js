@@ -7,7 +7,7 @@ var datagen = require('../../utils/datagen');
 var rd3 = require('../../src');
 var BarChart = rd3.BarChart;
 var LineChart = rd3.LineChart;
-var CandleStickChart = rd3.CandleStickChart;
+var CandlestickChart = rd3.CandlestickChart;
 var PieChart = rd3.PieChart;
 var AreaChart = rd3.AreaChart;
 var Treemap = rd3.Treemap;
@@ -229,7 +229,7 @@ var Demos = React.createClass({
         </div>
         <div className="row">
           <div className="col-md-6">
-            <CandleStickChart
+            <CandlestickChart
               data={this.state.ohlcData}
               width={500}
               height={400}
@@ -256,7 +256,7 @@ var Demos = React.createClass({
             <pre ref='block'>
               <code className='html'>
                 {
-`<CandleStickChart
+`<CandlestickChart
   data={ohlcData}
   width={500}
   height={400}
