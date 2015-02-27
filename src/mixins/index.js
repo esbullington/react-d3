@@ -1,0 +1,2 @@
+
+exports.CartesianChartPropsMixin = require('./CartesianChartPropsMixin');
