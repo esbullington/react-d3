@@ -1,6 +1,7 @@
 'use strict';
 
 var React = require('react');
+var d3 = require('d3');
 
 module.exports =  {
 
@@ -41,6 +42,6 @@ module.exports =  {
       xAccessor: (d) => d.x,
       yAccessor: (d) => d.y
     };
-  },
+  }
 
-}
+};
