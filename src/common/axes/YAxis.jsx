@@ -11,7 +11,6 @@ module.exports = React.createClass({
     yAxisClassName: React.PropTypes.string,
     yOrient: React.PropTypes.oneOf(['left', 'right']),
     yScale: React.PropTypes.func.isRequired,
-    yHideOrigin: React.PropTypes.bool,
     fill: React.PropTypes.string,
     stroke: React.PropTypes.string,
     tickStroke: React.PropTypes.string,
@@ -23,7 +22,6 @@ module.exports = React.createClass({
     return {
       yAxisClassName: 'y axis',
       yOrient: 'left',
-      yHideOrigin: false,
       fill: "none",
       stroke: "#000",
       tickStroke: "#000",
