@@ -4,6 +4,7 @@ var React = require('react');
 var d3 = require('d3');
 var AxisTicks = require('./AxisTicks');
 var AxisLine = require('./AxisLine');
+var Label = require('./Label');
 
 module.exports = React.createClass({
 
@@ -27,7 +28,8 @@ module.exports = React.createClass({
       stroke: "none",
       tickStroke: "#000",
       strokeWidth: "none",
-      xAxisOffset: 0
+      xAxisOffset: 0,
+      label: ''
     };
   },
 
@@ -49,6 +51,13 @@ module.exports = React.createClass({
         className={props.xAxisClassName}
         transform={t}
       >
+        <Label
+          label={props.xAxisLabel}
+          offset={props.xAxisLabelOffset}
+          orient={props.xOrient}
+          margins={props.margins}
+          width={props.width}
+        />
         <AxisTicks
           tickFormatting={props.tickFormatting}
           tickArguments={tickArguments}
