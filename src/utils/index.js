@@ -62,6 +62,7 @@ exports.flattenData = (data, xAccessor, yAccessor) => {
   data.forEach( (series) => {
     series.values.forEach( (item, idx) => {
 
+      xAccessor = series.xAccessor || xAccessor;
       var x = xAccessor(item);
 
       // Check for NaN since d3's Voronoi cannot handle NaN values
@@ -72,6 +73,7 @@ exports.flattenData = (data, xAccessor, yAccessor) => {
       }
       xValues.push(x);
 
+      yAccessor = series.yAccessor || yAccessor;
       var y = yAccessor(item);
       // when yAccessor returns an object (as in the case of candlestick)
       // iterate over the keys and push all the values to yValues array
