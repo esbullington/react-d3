@@ -1,0 +1,2 @@
+
+exports.AreaChart = require('./AreaChart');
