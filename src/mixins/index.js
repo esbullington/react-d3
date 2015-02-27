@@ -1,2 +1,2 @@
 
-exports.PropTypesMixin = require('./PropTypesMixin');
+exports.CartesianChartPropsMixin = require('./CartesianChartPropsMixin');
