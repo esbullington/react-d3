@@ -45,7 +45,7 @@ module.exports = React.createClass({
   },
 
   componentWillUnmount: function() {
-    props.voronoiSeriesRef.destroy();
+    this.props.voronoiSeriesRef.destroy();
   },
 
   _animateLine: function(id) {

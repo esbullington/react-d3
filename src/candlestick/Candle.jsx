@@ -38,7 +38,7 @@ module.exports = React.createClass({
   },
 
   componentWillUnmount() {
-    props.voronoiRef.destroy();
+    this.props.voronoiRef.destroy();
   },
 
 
