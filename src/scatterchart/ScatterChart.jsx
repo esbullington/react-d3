@@ -10,45 +10,23 @@ var Voronoi = common.Voronoi;
 var utils = require('../utils');
 var immstruct = require('immstruct');
 var DataSeries = require('./DataSeries');
+var CartesianChartPropsMixin = require('../mixins').CartesianChartPropsMixin;
 
 module.exports = React.createClass({
 
+  mixins: [ CartesianChartPropsMixin ],
+
   propTypes: {
-    data: React.PropTypes.oneOfType([
-      React.PropTypes.array,
-      React.PropTypes.object
-    ]),
     margins: React.PropTypes.object,
-    legendOffset: React.PropTypes.number,
     pointRadius: React.PropTypes.number,
-    yHideOrigin: React.PropTypes.bool,
-    xHideOrigin: React.PropTypes.bool,
-    width: React.PropTypes.number,
-    height: React.PropTypes.number,
-    axesColor: React.PropTypes.string,
-    title: React.PropTypes.string,
-    colors: React.PropTypes.func,
-    legend: React.PropTypes.bool,
-    hoverAnimation: React.PropTypes.bool,
-    xAccessor: React.PropTypes.func,
-    yAccessor: React.PropTypes.func
+    hoverAnimation: React.PropTypes.bool
  },
 
   getDefaultProps() {
     return {
-      data: [],
-      margins: {top: 20, right: 30, bottom: 30, left: 30},
-      legendOffset: 120,
-      legend: false,
       pointRadius: 3,
-      width: 400,
-      height: 200,
-      axesColor: '#000',
-      title: '',
-      colors: d3.scale.category20c(),
-      hoverAnimation: true,
-      xAccessor: (d) => d.x,
-      yAccessor: (d) => d.y
+      margins: {top: 10, right: 20, bottom: 40, left: 30},
+      hoverAnimation: true
     };
   },
 
@@ -77,6 +55,19 @@ module.exports = React.createClass({
     if (!Array.isArray(props.data)) {
       props.data = [props.data];
     }
+
+    // Set margins if label is set
+    if (props.xAxisLabel) {
+      var orient = props.xOrient;
+      props.margins[orient] = props.margins[orient] + 10;
+    }
+
+    // Set margins if label is set
+    if (props.yAxisLabel) {
+      var orient = props.yOrient;
+      props.margins[orient] = props.margins[orient] + 10;
+    }
+
 
     // Returns an object of flattened allValues, xValues, and yValues
     var flattenedData = utils.flattenData(props.data, props.xAccessor, props.yAccessor);
@@ -115,7 +106,8 @@ module.exports = React.createClass({
         data={props.data}
         margins={props.margins}
         colors={props.colors}
-        width={props.width} height={props.height}
+        width={props.width}
+        height={props.height}
         title={props.title}>
         <g transform={trans} className='rd3-scatterchart'>
           <Voronoi
@@ -130,10 +122,12 @@ module.exports = React.createClass({
           <XAxis
             xAxisClassName="rd3-scatterchart-xaxis"
             strokeWidth="1"
-            xHideOrigin={props.xHideOrigin}
             xAxisTickInterval={props.xAxisTickInterval}
             xAxisOffset={props.xAxisOffset}
             xScale={scales.xScale}
+            xAxisLabel={props.xAxisLabel}
+            xAxisLabelOffset={props.xAxisLabelOffset}
+            xOrient={props.xOrient}
             data={props.data}
             margins={props.margins}
             width={chartWidth}
@@ -143,10 +137,12 @@ module.exports = React.createClass({
           <YAxis
             yAxisClassName="rd3-scatterchart-yaxis"
             yScale={scales.yScale}
-            yAxisOffset={props.yAxisOffset}
-            yHideOrigin={props.yHideOrigin}
-            margins={props.margins}
             yAxisTickCount={props.yAxisTickCount}
+            yAxisOffset={props.yAxisOffset}
+            yAxisLabel={props.yAxisLabel}
+            yAxisLabelOffset={props.yAxisLabelOffset}
+            yOrient={props.yOrient}
+            margins={props.margins}
             width={chartWidth}
             height={chartHeight}
             stroke={props.axesColor}
