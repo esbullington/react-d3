@@ -19,6 +19,7 @@ module.exports = React.createClass({
   mixins: [ CartesianChartPropsMixin ],
 
   propTypes: {
+    margins: React.PropTypes.object,
     pointRadius: React.PropTypes.number,
     colors: React.PropTypes.func,
     displayDataPoints: React.PropTypes.bool
@@ -26,6 +27,7 @@ module.exports = React.createClass({
 
   getDefaultProps: function() {
     return {
+      margins: {top: 10, right: 20, bottom: 40, left: 30},
       className: 'rd3-linechart',
       pointRadius: 3,
       interpolate: false,
@@ -122,25 +124,11 @@ module.exports = React.createClass({
             width={chartWidth}
             height={chartHeight}
           />
-          <YAxis
-            yAxisClassName="rd3-linechart-yaxis"
-            yScale={scales.yScale}
-            yAxisTickCount={props.yAxisTickCount}
-            yHideOrigin={props.yHideOrigin}
-            margins={props.margins}
-            width={chartWidth}
-            height={chartHeight}
-            stroke={props.axesColor}
-            yOrient={props.yOrient}
-            yAxisLabel={props.yAxisLabel}
-            yAxisLabelOffset={props.yAxisLabelOffset}
-          />
           <XAxis
             xAxisClassName="rd3-linechart-xaxis"
             xScale={scales.xScale}
             xAxisTickCount={props.xAxisTickCount}
             strokeWidth={props.strokeWidth}
-            xHideOrigin={props.xHideOrigin}
             margins={props.margins}
             width={chartWidth}
             height={chartHeight}
@@ -148,6 +136,18 @@ module.exports = React.createClass({
             xOrient={props.xOrient}
             xAxisLabel={props.xAxisLabel}
             xAxisLabelOffset={props.xAxisLabelOffset}
+          />
+          <YAxis
+            yAxisClassName="rd3-linechart-yaxis"
+            yScale={scales.yScale}
+            yAxisTickCount={props.yAxisTickCount}
+            margins={props.margins}
+            width={chartWidth}
+            height={chartHeight}
+            stroke={props.axesColor}
+            yOrient={props.yOrient}
+            yAxisLabel={props.yAxisLabel}
+            yAxisLabelOffset={props.yAxisLabelOffset}
           />
         </g>
       </Chart>
