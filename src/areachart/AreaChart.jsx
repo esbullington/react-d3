@@ -15,8 +15,13 @@ module.exports = React.createClass({
 
   mixins: [ CartesianChartPropsMixin ],
 
+  propTypes: {
+    margins: React.PropTypes.object
+ },
+
   getDefaultProps() {
     return {
+      margins: {top: 10, right: 20, bottom: 40, left: 30},
       yAxisTickCount: 4,
       className: 'rd3-areachart'
     };

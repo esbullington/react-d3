@@ -142,6 +142,8 @@ var Demos = React.createClass({
         <div className="row">
           <div className="col-md-6">
             <ScatterChart
+              yAxisLabel="Y Values"
+              xAxisLabel="X Values"
               data={scatterData} width={500} height={400} title="Scatter Chart" />
           </div>
           <div className="col-md-6">
