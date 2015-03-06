@@ -89,7 +89,7 @@ function bundleShare(b) {
       console.log(chalk.red(err.toString()));
       this.end();
     })
-    .pipe(source('main.js')) // TODO change this to react-d3.js after the npm run scripts are retired and changing docs/public/index.html to use react-d3.js instead of main.js
+    .pipe(source('react-d3.js'))
     .pipe(buffer())
     .pipe(plugins.sourcemaps.init({loadMaps: true}))
     .pipe(plugins.sourcemaps.write('./'))
@@ -118,9 +118,9 @@ gulp.task('watch', ['clean:build', 'serve'], function() {
 });
 
 gulp.task('minified', ['clean:build'], function() {
+  config.production = true;
   var gulpFilter = require('gulp-filter');
   var jsfilter = gulpFilter(['*.js']);
-
   var jsMin = compileJS(["./src/index.js"])
     .pipe(jsfilter)
     .pipe(plugins.rename({ extname: '.min.js' }))
@@ -150,6 +150,8 @@ gulp.task('copymisc', function(cb) {
   return merge(npmAssets, misc);
 });
 
+
+gulp.task('build', ['minified', 'docs']);
 
 gulp.task('release', ['copymisc', 'minified'], function(cb) {
 
@@ -195,7 +197,8 @@ gulp.task('serve', function() {
     ui: {
       port: 9080
     },
-    port: 4000
+    port: 4000,
+    open: false
   });
 });
 
@@ -237,12 +240,13 @@ gulp.task('lint', function () {
 
 
 gulp.task("default", function() {
-  console.log("gulp docs        -> To build the docs folder");
-  console.log("gulp watch       -> Launch a web browser on localhost:4000 and also watche for changes to src/**/*.js(x)?, dist/public/*.html, dist/public/data/*");
-  console.log("gulp minified    -> compile the javascript with entry as src/index.js and create dist/public/js/react-d3.min.js");
-  console.log("gulp release     -> creates a release for npm under build/cjs which can be pulished to npm");
-  console.log("gulp clean:build -> clean the build directory");
+  console.log("gulp build       -> Build all");
+  console.log("gulp docs        -> Build the docs folder");
+  console.log("gulp watch       -> Watch for changes to src/**/*.js(x)?, dist/public/*.html, dist/public/data/*");
+  console.log("gulp minified    -> Compile the javascript with entry as src/index.js and create dist/public/js/react-d3.min.js");
+  console.log("gulp release     -> Create a release for npm under build/cjs which can be pulished to npm");
+  console.log("gulp clean:build -> Clean the build directory");
   console.log("gulp serve       -> Launch a web browser on localhost:4000 and server from 'build/public'");
-  console.log("gulp test        -> execute the tests with config file karma.conf.js");
-  console.log("gulp lint        -> lint *.js and *.jsx code under src/");
+  console.log("gulp test        -> Execute the tests with config file karma.conf.js");
+  console.log("gulp lint        -> Lint *.js and *.jsx code under src/");
 });

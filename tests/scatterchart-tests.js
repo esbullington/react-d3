@@ -6,11 +6,13 @@ describe('ScatterChart', function() {
   it('renders scatterchart', function() {
     var React = require('react/addons');
     var ScatterChart = require('../src/scatterchart').ScatterChart;
-    var pubsub = require('../src/scatterchart').pubsub;
+    var immstruct = require('immstruct');
     var generate = require('../utils/datagen').generateArrayOfPoints;
     var TestUtils = React.addons.TestUtils;
     var points = 5;
     var pointRadius = 5;
+
+    var structure = immstruct('scatterChart', { voronoi: {}, voronoiSeries: {}});
 
     // Render a scatterchart 
     var data = [
@@ -25,7 +27,7 @@ describe('ScatterChart', function() {
     ];
 
     var scatterchart = TestUtils.renderIntoDocument(
-      <ScatterChart data={data} width={400} height={200} pointRadius={pointRadius} />
+      <ScatterChart structure={structure} data={data} width={400} height={200} pointRadius={pointRadius} />
     );
 
     var scatterchartGroup = TestUtils.findRenderedDOMComponentWithClass(
@@ -41,11 +43,11 @@ describe('ScatterChart', function() {
     var circleOneColor = circleOne.props.fill;
 
     expect(circleOne.props.r).to.equal(pointRadius);
-    pubsub.emit('animate', circleOne.props.id);
+    structure.cursor('voronoi').cursor(circleOne.props.id).update(()=> 'active' );
     expect(circleOne.props.r).to.be.above(pointRadius);
     expect(circleOne.props.fill).to.not.equal(circleOneColor);
 
-    pubsub.emit('restore', circleOne.props.id);
+    structure.cursor('voronoi').cursor(circleOne.props.id).update(()=> 'inactive' );
     expect(circleOne.props.r).to.equal(pointRadius);
     expect(circleOne.props.fill).to.equal(circleOneColor);
   });

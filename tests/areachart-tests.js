@@ -25,7 +25,7 @@ describe('AreaChart', function() {
     expect(areachartGroup.tagName).to.equal('G');
 
     var area = TestUtils.findRenderedDOMComponentWithClass(
-      areachart, 'rd3-areachart-path');
+      areachart, 'rd3-areachart-area');
     expect(area.props.d).to.exist;
   });
 
@@ -52,7 +52,7 @@ describe('AreaChart', function() {
 
     // Verify that it has the same number of areas as the array's length
     var areas = TestUtils.scryRenderedDOMComponentsWithClass(
-      areachart, 'rd3-areachart-path');
+      areachart, 'rd3-areachart-area');
     expect(areas).to.have.length(data.length)
 
   });

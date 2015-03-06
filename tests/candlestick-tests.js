@@ -2,10 +2,10 @@
 
 var expect = require('chai').expect;  
 
-describe('CandleStickChart', function() {
+describe('CandlestickChart', function() {
   it('renders single candlestick chart', function() {
     var React = require('react/addons');
-    var CandleStickChart = require('../src/candlestick').CandleStickChart;
+    var CandlestickChart = require('../src/candlestick').CandlestickChart;
     var generate = require('../utils/datagen').generateArrayOfTimeOHLCObjects;
     var TestUtils = React.addons.TestUtils;
 
@@ -23,11 +23,10 @@ describe('CandleStickChart', function() {
     ];
 
     var candlestickChart = TestUtils.renderIntoDocument(
-      <CandleStickChart
+      <CandlestickChart
         data={data}
         width={500}
         height={400}
-        // xAxisTickInterval={{unit: 'month', interval: 1}}
         title="Candlestick Chart" />
     );
 
@@ -35,8 +34,8 @@ describe('CandleStickChart', function() {
       candlestickChart, 'rd3-candlestick');
     expect(candlestickGroup).to.exist;
 
-    var wicks = TestUtils.scryRenderedDOMComponentsWithClass(candlestickChart, 'rd3-candlestick-line');
-    var candles = TestUtils.scryRenderedDOMComponentsWithClass(candlestickChart, 'rd3-candlestick-rect');
+    var wicks = TestUtils.scryRenderedDOMComponentsWithClass(candlestickChart, 'rd3-candlestick-wick');
+    var candles = TestUtils.scryRenderedDOMComponentsWithClass(candlestickChart, 'rd3-candlestick-candle');
 
     expect(wicks).have.length(Object.keys(data).length * length);
     expect(candles).have.length(Object.keys(data).length * length);
