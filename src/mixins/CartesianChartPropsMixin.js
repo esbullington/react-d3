@@ -26,7 +26,8 @@ module.exports =  {
     height: React.PropTypes.number,
     xAccessor: React.PropTypes.func,
     yAccessor: React.PropTypes.func,
-    title: React.PropTypes.string
+    title: React.PropTypes.string,
+    viewBox: React.PropTypes.string
   },
 
   getDefaultProps: function() {

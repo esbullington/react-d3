@@ -102,6 +102,7 @@ module.exports = React.createClass({
 
     return (
       <Chart 
+        viewBox={props.viewBox}
         legend={props.legend}
         data={props.data}
         margins={props.margins}

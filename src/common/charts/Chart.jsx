@@ -8,6 +8,7 @@ module.exports = React.createClass({
 
   propTypes: {
     legend: React.PropTypes.bool,
+    viewBox: React.PropTypes.string
   },
 
   getDefaultProps: function() {

@@ -99,6 +99,7 @@ module.exports = React.createClass({
 
     return (
       <Chart
+        viewBox={props.viewBox}
         width={this.props.width}
         height={this.props.height}
         margins={this.props.margins}
