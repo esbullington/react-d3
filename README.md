@@ -60,22 +60,25 @@ With this approach, React itself is responsible for generating the SVG markup.  
 
 ### Roadmap
 
-* v0.3.0:
-  * Additional charts types:
-    - candlestick
-    - table
-  * Axes labels
-  * Pure React axes
-
 * v0.4.0:
   * Additional charts types:
     - slopegraph
+    - table
   * Tooltips
 
 * v0.5.0:
   * Data frame animations
 
 ### Changelog
+
+####0.3.0:
+- Pure React axes (library is 100% React-rendered now)
+- Added candestickchart (Thanks @rrag!)
+- Gulp build system (Thanks @rrag!)
+- Axes labels
+- New project structure with only 1 component per file
+- Various new config options (documentation in progress)
+- Various bug fixes
 
 ####0.2.0:
 - Added scatterchart (Thanks @yang-wei!)
