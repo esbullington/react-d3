@@ -3,7 +3,7 @@
 var React = require('react');
 var d3 = require('d3');
 
-exports.Legend = React.createClass({
+module.exports = React.createClass({
 
   propTypes: {
     width: React.PropTypes.number,
