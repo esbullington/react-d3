@@ -32,12 +32,12 @@ module.exports = React.createClass({
     var props = this.props;
 
     // Calculate inner chart dimensions
-    var chartWidth, chartHeight;
-    chartWidth = props.width - props.margins.left - props.margins.right;
-    chartHeight = props.height - props.margins.top - props.margins.bottom;
+    var innerWidth, innerHeight;
+    innerWidth = props.width - props.margins.left - props.margins.right;
+    innerHeight = props.height - props.margins.top - props.margins.bottom;
 
     if (props.legend) {
-      chartWidth = chartWidth - props.legendOffset;
+      innerWidth = innerWidth - props.legendOffset;
     }
 
     if (!Array.isArray(props.data)) {
@@ -45,7 +45,7 @@ module.exports = React.createClass({
     }
 
     var yScale = d3.scale.linear()
-      .range([chartHeight, 0]);
+      .range([innerHeight, 0]);
 
     var xValues = [];
     var yValues = [];
@@ -61,10 +61,10 @@ module.exports = React.createClass({
     var xScale;
     if (xValues.length > 0 && Object.prototype.toString.call(xValues[0]) === '[object Date]' && props.xAxisTickInterval) {
       xScale = d3.time.scale()
-        .range([0, chartWidth]);
+        .range([0, innerWidth]);
     } else {
       xScale = d3.scale.linear()
-        .range([0, chartWidth]);
+        .range([0, innerWidth]);
     }
 
     xScale.domain(d3.extent(xValues));
@@ -121,8 +121,8 @@ module.exports = React.createClass({
             xAxisLabelOffset={props.xAxisLabelOffset}
             xOrient={props.xOrient}
             margins={props.margins}
-            width={chartWidth}
-            height={chartHeight}
+            width={innerWidth}
+            height={innerHeight}
           />
           <YAxis
             yAxisClassName="rd3-areachart-yaxis"
@@ -133,7 +133,7 @@ module.exports = React.createClass({
             yAxisLabelOffset={props.yAxisLabelOffset}
             yOrient={props.yOrient}
             margins={props.margins}
-            width={chartWidth}
+            width={innerWidth}
             height={props.height}
           />
         </g>

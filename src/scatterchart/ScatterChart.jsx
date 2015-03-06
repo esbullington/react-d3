@@ -43,13 +43,13 @@ module.exports = React.createClass({
     }
 
     // Calculate inner chart dimensions
-    var chartWidth, chartHeight;
+    var innerWidth, innerHeight;
 
-    chartWidth = props.width - props.margins.left - props.margins.right;
-    chartHeight = props.height - props.margins.top - props.margins.bottom;
+    innerWidth = props.width - props.margins.left - props.margins.right;
+    innerHeight = props.height - props.margins.top - props.margins.bottom;
 
     if (props.legend) {
-      chartWidth = chartWidth - props.legendOffset;
+      innerWidth = innerWidth - props.legendOffset;
     }
 
     if (!Array.isArray(props.data)) {
@@ -76,7 +76,7 @@ module.exports = React.createClass({
         xValues = flattenedData.xValues,
         yValues = flattenedData.yValues;
 
-    var scales = this._calculateScales(chartWidth, chartHeight, xValues, yValues);
+    var scales = this._calculateScales(innerWidth, innerHeight, xValues, yValues);
 
     var trans = "translate(" + (props.yAxisOffset < 0 ? props.margins.left + Math.abs(props.yAxisOffset) : props.margins.left) + "," + props.margins.top + ")";
 
@@ -88,8 +88,8 @@ module.exports = React.createClass({
             yScale={scales.yScale}
             seriesName={series.name}
             data={series.values}
-            width={chartWidth}
-            height={chartHeight}
+            width={innerWidth}
+            height={innerHeight}
             fill={props.colors(idx)}
             pointRadius={props.pointRadius}
             key={series.name}
@@ -116,8 +116,8 @@ module.exports = React.createClass({
             data={allValues}
             yScale={scales.yScale}
             xScale={scales.xScale}
-            width={chartWidth}
-            height={chartHeight}
+            width={innerWidth}
+            height={innerHeight}
           />
           {dataSeriesArray}
           <XAxis
@@ -131,8 +131,8 @@ module.exports = React.createClass({
             xOrient={props.xOrient}
             data={props.data}
             margins={props.margins}
-            width={chartWidth}
-            height={chartHeight}
+            width={innerWidth}
+            height={innerHeight}
             stroke={props.axesColor}
           />
           <YAxis
@@ -144,8 +144,8 @@ module.exports = React.createClass({
             yAxisLabelOffset={props.yAxisLabelOffset}
             yOrient={props.yOrient}
             margins={props.margins}
-            width={chartWidth}
-            height={chartHeight}
+            width={innerWidth}
+            height={innerHeight}
             stroke={props.axesColor}
           />
         </g>

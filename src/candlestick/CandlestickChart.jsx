@@ -54,12 +54,12 @@ module.exports = React.createClass({
     var props = this.props;
 
     // Calculate inner chart dimensions
-    var chartWidth, chartHeight;
-    chartWidth = props.width - props.margins.left - props.margins.right;
-    chartHeight = props.height - props.margins.top - props.margins.bottom;
+    var innerWidth, innerHeight;
+    innerWidth = props.width - props.margins.left - props.margins.right;
+    innerHeight = props.height - props.margins.top - props.margins.bottom;
 
     if (props.legend) {
-      chartWidth = chartWidth - props.legendOffset;
+      innerWidth = innerWidth - props.legendOffset;
     }
 
     if (!Array.isArray(props.data)) {
@@ -73,7 +73,7 @@ module.exports = React.createClass({
         yValues = flattenedData.yValues;
 
 
-    var scales = utils.calculateScales(chartWidth, chartHeight, xValues, yValues);
+    var scales = utils.calculateScales(innerWidth, innerHeight, xValues, yValues);
 
     var trans = "translate(" + (props.yAxisOffset < 0 ? props.margins.left + Math.abs(props.yAxisOffset) : props.margins.left) + "," + props.margins.top + ")";
 
@@ -112,8 +112,8 @@ module.exports = React.createClass({
             data={allValues}
             xScale={scales.xScale}
             yScale={scales.yScale}
-            width={chartWidth}
-            height={chartHeight}
+            width={innerWidth}
+            height={innerHeight}
           />
           <XAxis
             xAxisClassName="rd3-candlestick-xaxis"
@@ -125,8 +125,8 @@ module.exports = React.createClass({
             xAxisLabelOffset={props.xAxisLabelOffset}
             xOrient={props.xOrient}
             margins={props.margins}
-            width={chartWidth}
-            height={chartHeight}
+            width={innerWidth}
+            height={innerHeight}
           />
           <YAxis
             yAxisClassName="rd3-candlestick-yaxis"
@@ -138,7 +138,7 @@ module.exports = React.createClass({
             yAxisLabelOffset={props.yAxisLabelOffset}
             yOrient={props.yOrient}
             margins={props.margins}
-            width={chartWidth}
+            width={innerWidth}
             height={props.height}
           />
         </g>
