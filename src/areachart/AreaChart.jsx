@@ -2,92 +2,28 @@
 
 var React = require('react');
 var d3 = require('d3');
-var common = require('./common');
+var DataSeries = require('./DataSeries');
+var common = require('../common');
 var Chart = common.Chart;
 var XAxis = common.XAxis;
 var YAxis = common.YAxis;
-
-var Area = React.createClass({
-
-  propTypes: {
-    path: React.PropTypes.string,
-    fill: React.PropTypes.string
-  },
-
-  getDefaultProps: function() {
-    return {
-      fill: '#3182bd'
-    };
-  },
-
-  render: function() {
-
-    return (
-      <path
-        className="rd3-areachart-path"
-        d={this.props.path}
-        fill={this.props.fill}
-      />
-    );
-  }
-
-});
+var mixins = require('../mixins');
+var CartesianChartPropsMixin = mixins.CartesianChartPropsMixin;
 
 
-var DataSeries = exports.DataSeries = React.createClass({
+module.exports = React.createClass({
 
-  render() {
-
-    var props = this.props;
-
-    var area = d3.svg.area()
-      .x(function(d) { return props.xScale(props.xAccessor(d)); })
-      .y0(function(d) { return props.yScale(d.y0); })
-      .y1(function(d) { return props.yScale(d.y0 + props.yAccessor(d)); });
-
-    var path = area(props.data);
-
-    return (
-      <Area fill={props.colors(props.name)} path={path} />
-    );
-  }
-
-});
-
-
-var AreaChart = exports.AreaChart = React.createClass({
+  mixins: [ CartesianChartPropsMixin ],
 
   propTypes: {
-    data: React.PropTypes.oneOfType([
-      React.PropTypes.array,
-      React.PropTypes.object
-    ]),
-    legend: React.PropTypes.bool,
-    legendOffset: React.PropTypes.number,
-    yAxisTickCount: React.PropTypes.number,
-    xAxisTickInterval: React.PropTypes.object,
-    colors: React.PropTypes.func,
-    width: React.PropTypes.number,
-    height: React.PropTypes.number,
-    title: React.PropTypes.string,
-    xAccessor: React.PropTypes.func,
-    yAccessor: React.PropTypes.func
-  },
+    margins: React.PropTypes.object
+ },
 
   getDefaultProps() {
     return {
-      data: [],
-      colors: d3.scale.category20c(),
-      margins: {top: 10, right: 20, bottom: 30, left: 30},
-      legendOffset: 120,
-      legend: false,
+      margins: {top: 10, right: 20, bottom: 40, left: 45},
       yAxisTickCount: 4,
-      width: 400,
-      height: 200,
-      title: '',
-      className: 'rd3-areachart',
-      xAccessor: (d) => d.x,
-      yAccessor: (d) => d.y
+      className: 'rd3-areachart'
     };
   },
 
@@ -96,12 +32,12 @@ var AreaChart = exports.AreaChart = React.createClass({
     var props = this.props;
 
     // Calculate inner chart dimensions
-    var chartWidth, chartHeight;
-    chartWidth = props.width - props.margins.left - props.margins.right;
-    chartHeight = props.height - props.margins.top - props.margins.bottom;
+    var innerWidth, innerHeight;
+    innerWidth = props.width - props.margins.left - props.margins.right;
+    innerHeight = props.height - props.margins.top - props.margins.bottom;
 
     if (props.legend) {
-      chartWidth = chartWidth - props.legendOffset;
+      innerWidth = innerWidth - props.legendOffset;
     }
 
     if (!Array.isArray(props.data)) {
@@ -109,7 +45,7 @@ var AreaChart = exports.AreaChart = React.createClass({
     }
 
     var yScale = d3.scale.linear()
-      .range([chartHeight, 0]);
+      .range([innerHeight, 0]);
 
     var xValues = [];
     var yValues = [];
@@ -125,10 +61,10 @@ var AreaChart = exports.AreaChart = React.createClass({
     var xScale;
     if (xValues.length > 0 && Object.prototype.toString.call(xValues[0]) === '[object Date]' && props.xAxisTickInterval) {
       xScale = d3.time.scale()
-        .range([0, chartWidth]);
+        .range([0, innerWidth]);
     } else {
       xScale = d3.scale.linear()
-        .range([0, chartWidth]);
+        .range([0, innerWidth]);
     }
 
     xScale.domain(d3.extent(xValues));
@@ -141,7 +77,7 @@ var AreaChart = exports.AreaChart = React.createClass({
       .y(props.yAccessor)
       .offset('expand')
       .order('reverse')
-      .values(function(d) { return d.values; });
+      .values((d)=> { return d.values; });
 
     var layers = stack(props.data);
 
@@ -165,6 +101,7 @@ var AreaChart = exports.AreaChart = React.createClass({
 
     return (
       <Chart
+        viewBox={props.viewBox}
         legend={props.legend}
         data={props.data}
         margins={props.margins}
@@ -176,21 +113,27 @@ var AreaChart = exports.AreaChart = React.createClass({
         <g transform={trans} className={props.className}>
           {dataSeries}
           <XAxis
-            xAxisClassName="rd3-areachart-axis x axis"
+            xAxisClassName="rd3-areachart-xaxis"
             xScale={xScale}
             xAxisTickInterval={props.xAxisTickInterval}
             xAxisTickCount={props.xAxisTickCount}
+            xAxisLabel={props.xAxisLabel}
+            xAxisLabelOffset={props.xAxisLabelOffset}
+            xOrient={props.xOrient}
             margins={props.margins}
-            width={chartWidth}
-            height={chartHeight}
+            width={innerWidth}
+            height={innerHeight}
           />
           <YAxis
-            yAxisClassName="rd3-areachart-axis y axis"
+            yAxisClassName="rd3-areachart-yaxis"
             yScale={yScale}
-            margins={props.margins}
             yAxisTickInterval={props.yAxisTickInterval}
             yAxisTickCount={props.yAxisTickCount}
-            width={chartWidth}
+            yAxisLabel={props.yAxisLabel}
+            yAxisLabelOffset={props.yAxisLabelOffset}
+            yOrient={props.yOrient}
+            margins={props.margins}
+            width={innerWidth}
             height={props.height}
           />
         </g>
