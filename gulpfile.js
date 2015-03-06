@@ -34,7 +34,6 @@ function bundler(entry) {
   });
   var opts = {
           entries: entry // Only need initial file, browserify finds the deps
-          //, transform: [reactify] // adding transform here does not give the react transforms, so add it as a .transform()
           , standalone: 'rd3' // enable the build to have UMD and expose window.rsc if no module system is used
           , extensions: [ '.jsx', '.js' ]
           , fullPaths: false
@@ -121,17 +120,15 @@ gulp.task('minified', ['clean:build'], function() {
   config.production = true;
   var gulpFilter = require('gulp-filter');
   var jsfilter = gulpFilter(['*.js']);
-  var jsMin = compileJS(["./src/index.js"])
+  return compileJS(["./src/index.js"])
     .pipe(jsfilter)
     .pipe(plugins.rename({ extname: '.min.js' }))
     .pipe(plugins.sourcemaps.init({loadMaps: true}))
     .pipe(plugins.uglify())
     .pipe(plugins.sourcemaps.write('./'))
     .pipe(gulp.dest('build/public/js'))
+    .pipe(gulp.dest('dist/public/js'))
     ;
-
-  var copyMin = gulp.src('build/public/js/*').pipe(gulp.dest('dist/public/js'));
-  return merge(copyMin, jsMin);
 });
 
 
