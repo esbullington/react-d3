@@ -31,14 +31,14 @@ module.exports = React.createClass({
       .outerRadius(props.outerRadius)
       .startAngle(props.startAngle)
       .endAngle(props.endAngle);
-    var rotate = "rotate(" + (props.startAngle+props.endAngle)/2 * (180/Math.PI) + ")";
+    var rotate = `rotate(${ (props.startAngle+props.endAngle)/2 * (180/Math.PI) })`;
     var positions = arc.centroid();
     var radius = props.outerRadius;
     var dist   = radius + 35;
     var angle  = (props.startAngle + props.endAngle) / 2;
     var x      = dist * (1.2 * Math.sin(angle));
     var y      = -dist * Math.cos(angle);
-    var t = "translate(" + x + "," + y + ")";
+    var t = `translate(${x},${y})`;
 
     return (
       <g className='rd3-piechart-arc' >
@@ -72,7 +72,7 @@ module.exports = React.createClass({
         </text>
         <text
           className='rd3-piechart-text'
-          transform={"translate(" + arc.centroid() + ")"}
+          transform={`translate(${arc.centroid()})`}
           dy=".35em"
           style={{
             "shapeRendering": "crispEdges",
