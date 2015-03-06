@@ -21,7 +21,7 @@ module.exports = React.createClass({
 
   getDefaultProps() {
     return {
-      margins: {top: 10, right: 20, bottom: 40, left: 30},
+      margins: {top: 10, right: 20, bottom: 40, left: 45},
       yAxisTickCount: 4,
       className: 'rd3-areachart'
     };
@@ -117,6 +117,9 @@ module.exports = React.createClass({
             xScale={xScale}
             xAxisTickInterval={props.xAxisTickInterval}
             xAxisTickCount={props.xAxisTickCount}
+            xAxisLabel={props.xAxisLabel}
+            xAxisLabelOffset={props.xAxisLabelOffset}
+            xOrient={props.xOrient}
             margins={props.margins}
             width={chartWidth}
             height={chartHeight}
@@ -124,9 +127,12 @@ module.exports = React.createClass({
           <YAxis
             yAxisClassName="rd3-areachart-yaxis"
             yScale={yScale}
-            margins={props.margins}
             yAxisTickInterval={props.yAxisTickInterval}
             yAxisTickCount={props.yAxisTickCount}
+            yAxisLabel={props.yAxisLabel}
+            yAxisLabelOffset={props.yAxisLabelOffset}
+            yOrient={props.yOrient}
+            margins={props.margins}
             width={chartWidth}
             height={props.height}
           />

@@ -35,7 +35,7 @@ module.exports =  {
       data: [],
       xOrient: 'bottom',
       xAxisLabel: '',
-      xAxisLabelOffset: 35,
+      xAxisLabelOffset: 38,
       yOrient: 'left',
       yAxisLabel: '',
       yAxisLabelOffset: 35,

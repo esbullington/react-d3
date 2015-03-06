@@ -27,7 +27,7 @@ module.exports = React.createClass({
 
   getDefaultProps: function() {
     return {
-      margins: {top: 10, right: 20, bottom: 40, left: 30},
+      margins: {top: 10, right: 20, bottom: 40, left: 45},
       className: 'rd3-linechart',
       pointRadius: 3,
       interpolate: false,
@@ -57,21 +57,6 @@ module.exports = React.createClass({
     if (!Array.isArray(props.data)) {
       props.data = [props.data];
     }
-
-    // Set margins if label is set
-    // var xAxisLabel = 'test label';
-    if (props.xAxisLabel) {
-      var orient = props.xOrient;
-      props.margins[orient] = props.margins[orient] + 10;
-    }
-
-    // Set margins if label is set
-    // var xAxisLabel = 'test label';
-    if (props.yAxisLabel) {
-      var orient = props.yOrient;
-      props.margins[orient] = props.margins[orient] + 10;
-    }
-
 
     var flattenedData = utils.flattenData(props.data, props.xAccessor, props.yAccessor);
 
@@ -127,28 +112,30 @@ module.exports = React.createClass({
           />
           <XAxis
             xAxisClassName="rd3-linechart-xaxis"
-            xScale={scales.xScale}
+            xAxisFormatter={props.xAxisFormatter}
+            xAxisLabel={props.xAxisLabel}
+            xAxisLabelOffset={props.xAxisLabelOffset}
             xAxisTickCount={props.xAxisTickCount}
-            strokeWidth={props.strokeWidth}
+            xOrient={props.xOrient}
+            xScale={scales.xScale}
             margins={props.margins}
             width={chartWidth}
             height={chartHeight}
             stroke={props.axesColor}
-            xOrient={props.xOrient}
-            xAxisLabel={props.xAxisLabel}
-            xAxisLabelOffset={props.xAxisLabelOffset}
+            strokeWidth={props.strokeWidth}
           />
           <YAxis
             yAxisClassName="rd3-linechart-yaxis"
-            yScale={scales.yScale}
+            yAxisFormatter={props.yAxisFormatter}
+            yAxisLabel={props.yAxisLabel}
+            yAxisLabelOffset={props.yAxisLabelOffset}
             yAxisTickCount={props.yAxisTickCount}
+            yScale={scales.yScale}
+            yOrient={props.yOrient}
             margins={props.margins}
             width={chartWidth}
             height={chartHeight}
             stroke={props.axesColor}
-            yOrient={props.yOrient}
-            yAxisLabel={props.yAxisLabel}
-            yAxisLabelOffset={props.yAxisLabelOffset}
           />
         </g>
       </Chart>
