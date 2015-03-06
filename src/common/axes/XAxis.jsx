@@ -23,6 +23,7 @@ module.exports = React.createClass({
   getDefaultProps: function() {
     return {
       xAxisClassName: 'x axis',
+      xAxisLabelOffset: 10,
       xOrient: 'bottom',
       fill: "none",
       stroke: "none",
@@ -35,6 +36,7 @@ module.exports = React.createClass({
 
   render: function() {
     var props = this.props;
+
     var t = `translate(0,${props.xAxisOffset + props.height})`;
 
     var tickArguments;

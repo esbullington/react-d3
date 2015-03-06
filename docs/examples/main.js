@@ -101,6 +101,7 @@ var Demos = React.createClass({
               height={300}
               title="Line Chart"
               yAxisLabel="Altitude"
+              xAxisLabel="Elapsed Time (sec)"
             />
           </div>
           <div className="col-md-6">
@@ -130,6 +131,8 @@ var Demos = React.createClass({
   width={500}
   height={300}
   title="Line Chart"
+  yAxisLabel="Altitude"
+  xAxisLabel="Elapsed Time (sec)"
 />`
               }
               </code>
@@ -142,8 +145,6 @@ var Demos = React.createClass({
         <div className="row">
           <div className="col-md-6">
             <ScatterChart
-              yAxisLabel="Y Values"
-              xAxisLabel="X Values"
               data={scatterData} width={500} height={400} title="Scatter Chart" />
           </div>
           <div className="col-md-6">
@@ -166,12 +167,14 @@ var Demos = React.createClass({
             </pre>
             <pre ref='block'>
               <code className='html'>
-              {`<ScatterChart
+              {
+`<ScatterChart
   data={scatterData}
   width={500}
   height={400}
   title="Scatter Chart"
-/>`}
+/>`
+              }
               </code>
             </pre>
           </div>
@@ -185,8 +188,10 @@ var Demos = React.createClass({
               data={this.state.areaData}
               width={500}
               height={400}
-              xAxisTickInterval={{unit: 'year', interval: 2}}
               title="Area Chart"
+              xAxisTickInterval={{unit: 'year', interval: 2}}
+              xAxisLabel="Year"
+              yAxisLabel="Share Price"
               xAccessor={(d)=> {
                   return new Date(d[0]);
                 }

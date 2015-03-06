@@ -37,7 +37,7 @@ module.exports = React.createClass({
       data: [],
       fillUp: (i) => "white",
       fillDown: d3.scale.category20c(),
-      margins: {top: 10, right: 20, bottom: 30, left: 40},
+      margins: {top: 10, right: 20, bottom: 30, left: 45},
       legendOffset: 120,
       width: 400,
       height: 200,
@@ -121,6 +121,9 @@ module.exports = React.createClass({
             xAxisTickInterval={props.xAxisTickInterval}
             xAxisOffset={props.xAxisOffset}
             xAxisFormatter={props.xAxisFormatter}
+            xAxisLabel={props.xAxisLabel}
+            xAxisLabelOffset={props.xAxisLabelOffset}
+            xOrient={props.xOrient}
             margins={props.margins}
             width={chartWidth}
             height={chartHeight}
@@ -131,6 +134,9 @@ module.exports = React.createClass({
             yAxisOffset={props.yAxisOffset}
             yAxisTickCount={props.yAxisTickCount}
             yAxisFormatter={props.yAxisFormatter}
+            yAxisLabel={props.yAxisLabel}
+            yAxisLabelOffset={props.yAxisLabelOffset}
+            yOrient={props.yOrient}
             margins={props.margins}
             width={chartWidth}
             height={props.height}
