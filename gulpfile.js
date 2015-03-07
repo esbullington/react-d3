@@ -121,17 +121,15 @@ gulp.task('minified', ['clean:build'], function() {
   config.production = true;
   var gulpFilter = require('gulp-filter');
   var jsfilter = gulpFilter(['*.js']);
-  var jsMin = compileJS(["./src/index.js"])
+  return compileJS(["./src/index.js"])
     .pipe(jsfilter)
     .pipe(plugins.rename({ extname: '.min.js' }))
     .pipe(plugins.sourcemaps.init({loadMaps: true}))
     .pipe(plugins.uglify())
     .pipe(plugins.sourcemaps.write('./'))
     .pipe(gulp.dest('build/public/js'))
+    .pipe(gulp.dest('dist/public/js'))
     ;
-
-  var copyMin = gulp.src('build/public/js/*').pipe(gulp.dest('dist/public/js'));
-  return merge(copyMin, jsMin);
 });
 
 
