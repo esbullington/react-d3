@@ -34,7 +34,6 @@ function bundler(entry) {
   });
   var opts = {
           entries: entry // Only need initial file, browserify finds the deps
-          //, transform: [reactify] // adding transform here does not give the react transforms, so add it as a .transform()
           , standalone: 'rd3' // enable the build to have UMD and expose window.rsc if no module system is used
           , extensions: [ '.jsx', '.js' ]
           , fullPaths: false
@@ -241,7 +240,7 @@ gulp.task("default", function() {
   console.log("gulp build       -> Build all");
   console.log("gulp docs        -> Build the docs folder");
   console.log("gulp watch       -> Watch for changes to src/**/*.js(x)?, dist/public/*.html, dist/public/data/*");
-  console.log("gulp minified    -> Compile the javascript with entry as src/index.js and create dist/public/js/react-d3.min.js");
+  // console.log("gulp minified    -> Compile the javascript with entry as src/index.js and create dist/public/js/react-d3.min.js"); Currently broken, use npm run minified
   console.log("gulp release     -> Create a release for npm under build/cjs which can be pulished to npm");
   console.log("gulp clean:build -> Clean the build directory");
   console.log("gulp serve       -> Launch a web browser on localhost:4000 and server from 'build/public'");
