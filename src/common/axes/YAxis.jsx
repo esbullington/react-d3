@@ -19,19 +19,19 @@ module.exports = React.createClass({
     yAxisOffset: React.PropTypes.number
   },
 
-  getDefaultProps: function() {
+  getDefaultProps() {
     return {
       yAxisClassName: 'y axis',
       yOrient: 'left',
-      fill: "none",
-      stroke: "#000",
-      tickStroke: "#000",
-      strokeWidth: "1",
+      fill: 'none',
+      stroke: '#000',
+      tickStroke: '#000',
+      strokeWidth: '1',
       yAxisOffset: 0
     };
   },
 
-  render: function() {
+  render() {
 
     var props = this.props;
 
