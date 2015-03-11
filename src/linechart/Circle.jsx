@@ -12,14 +12,14 @@ module.exports = React.createClass({
     fill: React.PropTypes.string
   },
 
-  getDefaultProps: function() {
+  getDefaultProps() {
     return {
       fill: '#1f77b4',
       className: 'rd3-linechart-circle'
     };
   },
 
-  getInitialState: function() {
+  getInitialState() {
     // state for animation usage
     return {
       circleRadius: this.props.r,
@@ -44,11 +44,11 @@ module.exports = React.createClass({
     });
   },
 
-  componentWillUnmount: function() {
+  componentWillUnmount() {
     this.props.voronoiRef.destroy();
   },
 
-  render: function() {
+  render() {
     var props = this.props;
     return (
       <circle
@@ -62,13 +62,13 @@ module.exports = React.createClass({
     );
   },
   
-  _animateCircle: function(id) {
+  _animateCircle(id) {
     this.setState({ 
       circleRadius: this.state.circleRadius * ( 5 / 4 )
     });
   },
 
-  _restoreCircle: function(id) {
+  _restoreCircle(id) {
     this.setState({ 
       circleRadius: this.props.r
     });
