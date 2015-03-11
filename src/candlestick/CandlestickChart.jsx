@@ -35,7 +35,7 @@ module.exports = React.createClass({
   getDefaultProps() {
     return {
       data: [],
-      fillUp: (i) => "white",
+      fillUp: (i) => 'white',
       fillDown: d3.scale.category20c(),
       margins: {top: 10, right: 20, bottom: 30, left: 45},
       legendOffset: 120,
@@ -75,7 +75,7 @@ module.exports = React.createClass({
 
     var scales = utils.calculateScales(innerWidth, innerHeight, xValues, yValues);
 
-    var trans = "translate(" + (props.yAxisOffset < 0 ? props.margins.left + Math.abs(props.yAxisOffset) : props.margins.left) + "," + props.margins.top + ")";
+    var trans = `translate(${ props.yAxisOffset < 0 ? props.margins.left + Math.abs(props.yAxisOffset) : props.margins.left},${ props.margins.top })`;
 
     var dataSeries = props.data.map( (series, idx) => {
       return (
@@ -105,7 +105,7 @@ module.exports = React.createClass({
         margins={this.props.margins}
         title={this.props.title}
       >
-        <g transform={trans} className="rd3-candlestick">
+        <g transform={trans} className='rd3-candlestick'>
           {dataSeries}
           <Voronoi
             structure={structure}
@@ -116,7 +116,7 @@ module.exports = React.createClass({
             height={innerHeight}
           />
           <XAxis
-            xAxisClassName="rd3-candlestick-xaxis"
+            xAxisClassName='rd3-candlestick-xaxis'
             xScale={scales.xScale}
             xAxisTickInterval={props.xAxisTickInterval}
             xAxisOffset={props.xAxisOffset}
@@ -129,7 +129,7 @@ module.exports = React.createClass({
             height={innerHeight}
           />
           <YAxis
-            yAxisClassName="rd3-candlestick-yaxis"
+            yAxisClassName='rd3-candlestick-yaxis'
             yScale={scales.yScale}
             yAxisOffset={props.yAxisOffset}
             yAxisTickCount={props.yAxisTickCount}

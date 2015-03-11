@@ -20,21 +20,21 @@ module.exports = React.createClass({
     xAxisOffset: React.PropTypes.number
   },
 
-  getDefaultProps: function() {
+  getDefaultProps() {
     return {
       xAxisClassName: 'x axis',
       xAxisLabelOffset: 10,
       xOrient: 'bottom',
-      fill: "none",
-      stroke: "none",
-      tickStroke: "#000",
-      strokeWidth: "none",
+      fill: 'none',
+      stroke: 'none',
+      tickStroke: '#000',
+      strokeWidth: 'none',
       xAxisOffset: 0,
       label: ''
     };
   },
 
-  render: function() {
+  render() {
     var props = this.props;
 
     var t = `translate(0,${props.xAxisOffset + props.height})`;

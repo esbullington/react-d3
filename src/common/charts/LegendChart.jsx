@@ -16,7 +16,7 @@ module.exports = React.createClass({
     ])
   },
 
-  getDefaultProps: function() {
+  getDefaultProps() {
     return {
       data: {},
       legend: false,
@@ -25,7 +25,7 @@ module.exports = React.createClass({
     };
   },
 
-  _renderLegend: function() {
+  _renderLegend() {
     if (this.props.legend) {
       return (
         <Legend 
@@ -41,7 +41,7 @@ module.exports = React.createClass({
     }
   },
 
-  render: function() {
+  render() {
     return (
       <div style={{'width': this.props.width, 'height': this.props.height}} >
         <h4>{this.props.title}</h4>

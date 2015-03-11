@@ -81,7 +81,7 @@ module.exports = React.createClass({
 
     var layers = stack(props.data);
 
-    var trans = "translate(" + props.margins.left + "," + props.margins.top + ")";
+    var trans = `translate(${ props.margins.left },${ props.margins.top })`;
 
     var dataSeries = layers.map( (d, idx) => {
       return (
@@ -113,7 +113,7 @@ module.exports = React.createClass({
         <g transform={trans} className={props.className}>
           {dataSeries}
           <XAxis
-            xAxisClassName="rd3-areachart-xaxis"
+            xAxisClassName='rd3-areachart-xaxis'
             xScale={xScale}
             xAxisTickInterval={props.xAxisTickInterval}
             xAxisTickCount={props.xAxisTickCount}
@@ -125,7 +125,7 @@ module.exports = React.createClass({
             height={innerHeight}
           />
           <YAxis
-            yAxisClassName="rd3-areachart-yaxis"
+            yAxisClassName='rd3-areachart-yaxis'
             yScale={yScale}
             yAxisTickInterval={props.yAxisTickInterval}
             yAxisTickCount={props.yAxisTickCount}

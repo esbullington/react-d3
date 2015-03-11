@@ -19,8 +19,8 @@ module.exports = React.createClass({
 
   getDefaultProps() {
     return {
-      labelTextFill: "black",
-      valueTextFill: "white"
+      labelTextFill: 'black',
+      valueTextFill: 'white'
     };
   },
 
@@ -47,39 +47,39 @@ module.exports = React.createClass({
           fill={props.fill}
         />
         <line
-          x1="0"
-          x2="0"
+          x1='0'
+          x2='0'
           y1={-radius - 2}
           y2={-radius - 26}
           stroke={props.labelTextFill}
           transform={rotate}
           style={{
-            "fill": props.labelTextFill,
-            "strokeWidth": 2,
+            'fill': props.labelTextFill,
+            'strokeWidth': 2,
           }}>
         >
         </line>
         <text
           className='rd3-piechart-label'
           transform={t}
-          dy=".35em"
+          dy='.35em'
           style={{
-            "textAnchor": "middle",
-            "fill": props.labelTextFill,
-            "shapeRendering": "crispEdges"
+            'textAnchor': 'middle',
+            'fill': props.labelTextFill,
+            'shapeRendering': 'crispEdges'
           }}>
           {props.label}
         </text>
         <text
           className='rd3-piechart-text'
           transform={`translate(${arc.centroid()})`}
-          dy=".35em"
+          dy='.35em'
           style={{
-            "shapeRendering": "crispEdges",
-            "textAnchor": "middle",
-            "fill": props.valueTextFill
+            'shapeRendering': 'crispEdges',
+            'textAnchor': 'middle',
+            'fill': props.valueTextFill
           }}>
-          {props.value + "%"}
+          {props.value + '%'}
         </text>
       </g>
     );

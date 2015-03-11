@@ -13,7 +13,7 @@ module.exports = React.createClass({
     stroke: React.PropTypes.string
   },
 
-  getDefaultProps: function() {
+  getDefaultProps() {
     return {
       stroke: '#1f77b4',
       strokeWidth: 1.5,
@@ -22,7 +22,7 @@ module.exports = React.createClass({
     };
   },
 
-  getInitialState: function() {
+  getInitialState() {
     // state for animation usage
     return {
       lineStrokeWidth: this.props.strokeWidth,
@@ -44,23 +44,23 @@ module.exports = React.createClass({
     });
   },
 
-  componentWillUnmount: function() {
+  componentWillUnmount() {
     this.props.voronoiSeriesRef.destroy();
   },
 
-  _animateLine: function(id) {
+  _animateLine(id) {
     this.setState({ 
       lineStrokeWidth: this.state.lineStrokeWidth * 1.8
     });
   },
 
-  _restoreLine: function(id) {
+  _restoreLine(id) {
     this.setState({ 
       lineStrokeWidth: this.props.strokeWidth
     });
   },
 
-  render: function() {
+  render() {
     var props = this.props;
     var state = this.state;
     return (

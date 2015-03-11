@@ -53,7 +53,7 @@ module.exports = React.createClass({
         .domain(labels)
         .rangeRoundBands([0, props.width - sideMargins], 0.1);
 
-    var trans = "translate(" + margins.left + "," + margins.top + ")";
+    var trans = `translate(${ margins.left },${ margins.top })`;
 
     return (
       <Chart width={props.width} height={props.height} title={props.title}>

@@ -17,7 +17,7 @@ module.exports = React.createClass({
     displayDataPoints: React.PropTypes.bool
   },
 
-  getDefaultProps: function() {
+  getDefaultProps() {
     return {
       data: [],
       interpolationType: 'linear',
@@ -28,11 +28,11 @@ module.exports = React.createClass({
     };
   },
 
-  _isDate: function(d, accessor) {
+  _isDate(d, accessor) {
     return Object.prototype.toString.call(accessor(d)) === '[object Date]';
   },
 
-  render: function() {
+  render() {
 
     var props = this.props;
 

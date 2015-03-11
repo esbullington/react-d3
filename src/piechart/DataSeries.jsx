@@ -15,7 +15,7 @@ module.exports = React.createClass({
     colors: React.PropTypes.func
   },
 
-  getDefaultProps: function() {
+  getDefaultProps() {
     return {
       innerRadius: 0,
       data: [],
@@ -23,7 +23,7 @@ module.exports = React.createClass({
     };
   },
 
-  render: function() {
+  render() {
 
     var props = this.props;
 
@@ -33,7 +33,7 @@ module.exports = React.createClass({
 
     var arcData = pie(props.data);
 
-    var arcs = arcData.map(function(arc, i) {
+    var arcs = arcData.map((arc, i) => {
       return (
         <Arc
           startAngle={arc.startAngle}
@@ -51,7 +51,7 @@ module.exports = React.createClass({
       );
     });
     return (
-      <g className="rd3-piechart-pie" transform={props.transform} >{arcs}</g>
+      <g className='rd3-piechart-pie' transform={props.transform} >{arcs}</g>
     );
   }
 });
