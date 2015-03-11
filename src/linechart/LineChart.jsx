@@ -25,7 +25,7 @@ module.exports = React.createClass({
     displayDataPoints: React.PropTypes.bool
   },
 
-  getDefaultProps: function() {
+  getDefaultProps() {
     return {
       margins: {top: 10, right: 20, bottom: 40, left: 45},
       className: 'rd3-linechart',
@@ -36,7 +36,7 @@ module.exports = React.createClass({
     };
   },
 
-  render: function() {
+  render() {
 
     var structure = immstruct('lineChart', { voronoi: {}, voronoiSeries: {}});
 
@@ -66,7 +66,7 @@ module.exports = React.createClass({
 
     var scales = utils.calculateScales(innerWidth, innerHeight, xValues, yValues);
 
-    var trans = "translate(" + props.margins.left + "," + props.margins.top + ")";
+    var trans = `translate(${ props.margins.left },${ props.margins.top })`;
 
     var dataSeriesArray = props.data.map( (series, idx) => {
       return (
@@ -111,7 +111,7 @@ module.exports = React.createClass({
             height={innerHeight}
           />
           <XAxis
-            xAxisClassName="rd3-linechart-xaxis"
+            xAxisClassName='rd3-linechart-xaxis'
             xAxisFormatter={props.xAxisFormatter}
             xAxisLabel={props.xAxisLabel}
             xAxisLabelOffset={props.xAxisLabelOffset}
@@ -125,7 +125,7 @@ module.exports = React.createClass({
             strokeWidth={props.strokeWidth}
           />
           <YAxis
-            yAxisClassName="rd3-linechart-yaxis"
+            yAxisClassName='rd3-linechart-yaxis'
             yAxisFormatter={props.yAxisFormatter}
             yAxisLabel={props.yAxisLabel}
             yAxisLabelOffset={props.yAxisLabelOffset}
