@@ -7,7 +7,7 @@ module.exports = React.createClass({
 
   render() {
     var props = this.props;
-    var strokeWidth = "0.01";
+    var strokeWidth = '0.01';
     if (props.label) {
       switch (props.orient) {
         case 'top':
@@ -34,7 +34,7 @@ module.exports = React.createClass({
               strokeWidth={strokeWidth}
               y={-props.offset} x={-props.height/2}
               textAnchor='middle'
-              transform="rotate(270)">
+              transform='rotate(270)'>
               {props.label}
             </text>
           );
@@ -44,7 +44,7 @@ module.exports = React.createClass({
               strokeWidth={strokeWidth}
               y={props.offset} x={-props.height/2}
               textAnchor='middle'
-              transform="rotate(270)">
+              transform='rotate(270)'>
               {props.label}
             </text>
           );
