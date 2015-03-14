@@ -55,8 +55,8 @@ module.exports = React.createClass({
           transform={rotate}
           style={{
             'fill': props.labelTextFill,
-            'strokeWidth': 2,
-          }}>
+            'strokeWidth': 2
+          }}
         >
         </line>
         <text
