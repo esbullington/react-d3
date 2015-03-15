@@ -6,7 +6,7 @@ describe('BarChart', function() {
   it('renders barchart', function() {
     var React = require('react/addons');
     var BarChart = require('../src/barchart').BarChart;
-    var generate = require('../utils/datagen').generateArrayOfNumbers;
+    var generate = require('./utils/datagen').generateArrayOfNumbers;
     var TestUtils = React.addons.TestUtils;
 
     // Render a barchart using array data

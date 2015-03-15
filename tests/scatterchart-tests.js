@@ -7,7 +7,7 @@ describe('ScatterChart', function() {
     var React = require('react/addons');
     var ScatterChart = require('../src/scatterchart').ScatterChart;
     var immstruct = require('immstruct');
-    var generate = require('../utils/datagen').generateArrayOfPoints;
+    var generate = require('./utils/datagen').generateArrayOfPoints;
     var TestUtils = React.addons.TestUtils;
     var points = 5;
     var pointRadius = 5;
