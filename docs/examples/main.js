@@ -3,7 +3,6 @@
 var React = require('react');
 var d3 = require('d3');
 var hljs = require("highlight.js");
-var datagen = require('../../utils/datagen');
 var rd3 = require('../../src');
 var BarChart = rd3.BarChart;
 var LineChart = rd3.LineChart;
