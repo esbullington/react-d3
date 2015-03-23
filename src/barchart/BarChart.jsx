@@ -73,6 +73,7 @@ module.exports = React.createClass({
             yScale={yScale}
             margins={margins}
             yAxisTickCount={props.yAxisTickCount}
+            tickFormatting={props.yAxisFormatter}
             width={props.width - sideMargins}
             height={props.height - topBottomMargins}
           />
@@ -81,6 +82,7 @@ module.exports = React.createClass({
             xScale={xScale}
             data={props.data}
             margins={margins}
+            tickFormatting={props.xAxisFormatter}
             width={props.width - sideMargins}
             height={props.height - topBottomMargins}
           />

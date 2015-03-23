@@ -4,17 +4,15 @@ var React = require('react');
 var d3 = require('d3');
 
 module.exports = React.createClass({
-
+  statics: {
+  },
   getDefaultProps() {
     return {
       innerTickSize: 6,
       outerTickSize: 6,
       tickPadding: 3,
       tickArguments: [10],
-      tickValues: null,
-      d3_identity: (d)=>d,
-      tickFormatting: (d)=>d,
-      tickFormat: null
+      tickValues: null
     };
   },
 
@@ -35,7 +33,14 @@ module.exports = React.createClass({
     scale = props.yScale ? props.yScale : props.xScale;
 
     ticks = props.tickValues == null ? (scale.ticks ? scale.ticks.apply(scale, props.tickArguments) : scale.domain()) : props.tickValues;
-    tickFormat = props.tickFormat_ == null ? (scale.tickFormat ? scale.tickFormat.apply(scale, props.tickArguments) : props.d3_identity) : props.tickFormat_;
+    if (props.tickFormatting) {
+        tickFormat = props.tickFormatting
+    } else if (scale.tickFormat) {
+        tickFormat = scale.tickFormat.apply(scale, props.tickArguments)
+    } else {
+        tickFormat = (d)=> d;
+
+    }
 
     adjustedScale = scale.rangeBand ? (d) => { return scale(d) + scale.rangeBand() / 2; } : scale;
 
