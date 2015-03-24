@@ -4,8 +4,6 @@ var React = require('react');
 var d3 = require('d3');
 
 module.exports = React.createClass({
-  statics: {
-  },
   getDefaultProps() {
     return {
       innerTickSize: 6,
