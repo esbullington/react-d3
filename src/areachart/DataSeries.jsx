@@ -18,7 +18,7 @@ module.exports = React.createClass({
     var path = area(props.data);
 
     return (
-      <Area fill={props.colors(props.name)} path={path} />
+      <Area fill={props.colors(props.index)} path={path} />
     );
   }
 
