@@ -112,7 +112,7 @@ module.exports = React.createClass({
           />
           <XAxis
             xAxisClassName='rd3-linechart-xaxis'
-            xAxisFormatter={props.xAxisFormatter}
+            tickFormatting={props.xAxisFormatter}
             xAxisLabel={props.xAxisLabel}
             xAxisLabelOffset={props.xAxisLabelOffset}
             xAxisTickCount={props.xAxisTickCount}
@@ -126,7 +126,7 @@ module.exports = React.createClass({
           />
           <YAxis
             yAxisClassName='rd3-linechart-yaxis'
-            yAxisFormatter={props.yAxisFormatter}
+            tickFormatting={props.yAxisFormatter}
             yAxisLabel={props.yAxisLabel}
             yAxisLabelOffset={props.yAxisLabelOffset}
             yAxisTickCount={props.yAxisTickCount}
