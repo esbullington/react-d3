@@ -61,6 +61,11 @@
     "watch": "gulp watch",
     "minified": "gulp release && npm run build && NODE_ENV=production browserify -t [ reactify --es6 ] --standalone rd3 ./build/cjs/index.js | uglifyjs -c > dist/public/js/react-d3.min.js"
   },
+  "browserify": {
+    "transform": [
+      ["reactify", { "es6": true } ]
+    ]
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/esbullington/react-d3.git"
