@@ -30,8 +30,7 @@ module.exports = React.createClass({
       tickStroke: '#000',
       strokeWidth: 'none',
       xAxisOffset: 0,
-      label: '',
-      tickSize: null
+      label: ''
     };
   },
 

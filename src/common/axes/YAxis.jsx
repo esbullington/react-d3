@@ -27,8 +27,7 @@ module.exports = React.createClass({
       stroke: '#000',
       tickStroke: '#000',
       strokeWidth: '1',
-      yAxisOffset: 0,
-      tickSize: null
+      yAxisOffset: 0
     };
   },
 
