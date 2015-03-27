@@ -30,7 +30,8 @@ module.exports = React.createClass({
       tickStroke: '#000',
       strokeWidth: 'none',
       xAxisOffset: 0,
-      label: ''
+      label: '',
+      tickSize: null
     };
   },
 
@@ -64,12 +65,14 @@ module.exports = React.createClass({
           tickFormatting={props.tickFormatting}
           tickArguments={tickArguments}
           tickStroke={props.tickStroke}
+          innerTickSize={props.tickSize}
           scale={props.xScale}
           orient={props.xOrient}
         />
         <AxisLine
           scale={props.xScale}
           orient={props.xOrient}
+          outerTickSize={props.tickSize}
           {...props}
         />
       </g>

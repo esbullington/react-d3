@@ -27,7 +27,8 @@ module.exports = React.createClass({
       stroke: '#000',
       tickStroke: '#000',
       strokeWidth: '1',
-      yAxisOffset: 0
+      yAxisOffset: 0,
+      tickSize: null
     };
   },
 
@@ -60,6 +61,7 @@ module.exports = React.createClass({
           tickFormatting={props.tickFormatting}
           tickArguments={tickArguments}
           tickStroke={props.tickStroke}
+          innerTickSize={props.tickSize}
           scale={props.yScale}
           orient={props.yOrient}
           height={props.height}
@@ -68,6 +70,7 @@ module.exports = React.createClass({
         <AxisLine
           scale={props.yScale}
           orient={props.yOrient}
+          outerTickSize={props.tickSize}
           {...props}
         />
         <Label
