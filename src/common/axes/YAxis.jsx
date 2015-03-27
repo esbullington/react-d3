@@ -60,14 +60,14 @@ module.exports = React.createClass({
           tickFormatting={props.tickFormatting}
           tickArguments={tickArguments}
           tickStroke={props.tickStroke}
+          tickTextStroke={props.tickTextStroke}
           innerTickSize={props.tickSize}
           scale={props.yScale}
           orient={props.yOrient}
-          height={props.height}
-          width={props.width}
         />
         <AxisLine
           scale={props.yScale}
+          stroke={props.stroke}
           orient={props.yOrient}
           outerTickSize={props.tickSize}
           {...props}

@@ -105,7 +105,7 @@ module.exports = React.createClass({
               <text
                 strokeWidth="0.01"
                 dy={dy} x={x1} y={y1}
-                style={{stroke:props.tickStroke, fill:props.tickStroke}}
+                style={{stroke:props.tickTextStroke, fill:props.tickTextStroke}}
                 textAnchor={textAnchor}
               >
                 {tickFormat(tick)}

@@ -20,6 +20,7 @@ module.exports = React.createClass({
       innerTickSize: 6,
       outerTickSize: 6,
       tickPadding: 3,
+      fill: 'none',
       tickArguments: [10],
       tickValues: null,
       tickFormat: null 
@@ -57,7 +58,7 @@ module.exports = React.createClass({
         className="domain"
         d={d}
         style={{'shapeRendering':'crispEdges'}}
-        fill="none"
+        fill={props.fill}
         stroke={props.stroke}
         strokeWidth={props.strokeWidth}
       >
