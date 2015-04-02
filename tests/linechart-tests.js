@@ -6,7 +6,7 @@ describe('LineChart', function() {
   it('renders linechart property with object data', function() {
     var React = require('react/addons');
     var LineChart = require('../src/linechart').LineChart;
-    var generate = require('../utils/datagen').generateArrayOfPoints;
+    var generate = require('./utils/datagen').generateArrayOfPoints;
     var TestUtils = React.addons.TestUtils;
 
     // Render a linechart using array data
@@ -33,7 +33,7 @@ describe('LineChart', function() {
   it('renders multi-series linechart with array of objects data', function() {
     var React = require('react/addons');
     var LineChart = require('../src/linechart').LineChart;
-    var generate = require('../utils/datagen').generateArrayOfPoints;
+    var generate = require('./utils/datagen').generateArrayOfPoints;
     var TestUtils = React.addons.TestUtils;
     var length = 5;
 

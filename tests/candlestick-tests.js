@@ -6,7 +6,7 @@ describe('CandlestickChart', function() {
   it('renders single candlestick chart', function() {
     var React = require('react/addons');
     var CandlestickChart = require('../src/candlestick').CandlestickChart;
-    var generate = require('../utils/datagen').generateArrayOfTimeOHLCObjects;
+    var generate = require('./utils/datagen').generateArrayOfTimeOHLCObjects;
     var TestUtils = React.addons.TestUtils;
 
     // Render a areachart using single-series data object

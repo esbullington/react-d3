@@ -7,7 +7,7 @@ describe('Axes', function() {
     var React = require('react/addons');
     var YAxis = require('../src/common/axes').YAxis;
     var XAxis = require('../src/common/axes').XAxis;
-    var generate = require('../utils/datagen').generateArrayOfPoints;
+    var generate = require('./utils/datagen').generateArrayOfPoints;
     var TestUtils = React.addons.TestUtils;
     var utils = require('../src/utils');
 

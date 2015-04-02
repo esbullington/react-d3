@@ -6,7 +6,7 @@ describe('Legend', function() {
   it('renders and tests legend component', function() {
     var React = require('react/addons');
     var Legend = require('../src/common/Legend');
-    var generate = require('../utils/datagen').generateArrayOfPoints;
+    var generate = require('./utils/datagen').generateArrayOfPoints;
     var TestUtils = React.addons.TestUtils;
 
     // Render a linechart using array data

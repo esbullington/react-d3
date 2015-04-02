@@ -6,7 +6,7 @@ describe('AreaChart', function() {
   it('renders areachart', function() {
     var React = require('react/addons');
     var AreaChart = require('../src/areachart').AreaChart;
-    var generate = require('../utils/datagen').generateArrayOfObjects;
+    var generate = require('./utils/datagen').generateArrayOfObjects;
     var TestUtils = React.addons.TestUtils;
 
     // Render a areachart using single-series data object
@@ -32,7 +32,7 @@ describe('AreaChart', function() {
   it('renders stacked areachart with array of objects data', function() {
     var React = require('react/addons');
     var AreaChart = require('../src/areachart').AreaChart;
-    var generate = require('../utils/datagen').generateArrayOfObjects;
+    var generate = require('./utils/datagen').generateArrayOfObjects;
     var TestUtils = React.addons.TestUtils;
 
     // Render a areachart using data in array of objects

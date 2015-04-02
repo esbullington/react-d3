@@ -12,7 +12,7 @@ describe('Utils Test', () => {
 
   it('flatten data and calculate scales', () => {
 
-    var generate = require('../utils/datagen').generateArrayOfPoints;
+    var generate = require('./utils/datagen').generateArrayOfPoints;
 
     var points = 5,
         width = 300,

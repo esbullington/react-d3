@@ -6,7 +6,7 @@ describe('Voronoi', function() {
   it('renders and tests voronoi component', function() {
     var React = require('react/addons');
     var Voronoi = require('../src/common/Voronoi');
-    var generate = require('../utils/datagen').generateArrayOfPoints;
+    var generate = require('./utils/datagen').generateArrayOfPoints;
     var TestUtils = React.addons.TestUtils;
     var utils = require('../src/utils');
 
