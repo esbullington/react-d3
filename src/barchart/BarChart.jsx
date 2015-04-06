@@ -7,8 +7,12 @@ var common = require('../common');
 var Chart = common.Chart;
 var XAxis = common.XAxis;
 var YAxis = common.YAxis;
+var mixins = require('../mixins');
+var CartesianChartPropsMixin = mixins.CartesianChartPropsMixin;
 
 module.exports = React.createClass({
+
+  mixins: [ CartesianChartPropsMixin ],
 
   propTypes: {
     data: React.PropTypes.array,
@@ -22,13 +26,9 @@ module.exports = React.createClass({
 
   getDefaultProps() {
     return {
-      data: [],
       yAxisTickCount: 4,
-      width: 500,
-      height: 200,
-      margins: {top: 20, right: 30, bottom: 30, left: 30},
-      fill: "#3182bd",
-      title: ''
+      margins: {top: 10, right: 20, bottom: 40, left: 45},
+      fill: "#3182bd"
     };
   },
 
@@ -70,6 +70,8 @@ module.exports = React.createClass({
           />
           <YAxis
             yAxisClassName='rd3-barchart-yaxis'
+            yAxisLabel={props.yAxisLabel}
+            yAxisLabelOffset={props.yAxisLabelOffset}
             yScale={yScale}
             margins={margins}
             yAxisTickCount={props.yAxisTickCount}
@@ -78,6 +80,8 @@ module.exports = React.createClass({
           />
           <XAxis
             xAxisClassName='rd3-barchart-xaxis'
+            xAxisLabel={props.xAxisLabel}
+            xAxisLabelOffset={props.xAxisLabelOffset}
             xScale={xScale}
             data={props.data}
             margins={margins}
