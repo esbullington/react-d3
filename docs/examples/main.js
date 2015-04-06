@@ -63,7 +63,7 @@ var Demos = React.createClass({
       } 
     ];
 
-    var barData = [{label: 'A', value: 5}, {label: 'B', value: 6}, {label: 'C', value: 2}, {label: 'D', value: 11}, {label: 'E', value: 2}, {label: 'F', value: 7}];
+    var barData = [{label: 'AA', value: 5}, {label: 'B', value: 6}, {label: 'C', value: 2}, {label: 'D', value: 11}, {label: 'E', value: 2}, {label: 'F', value: 7}];
     var pieData = [{label: "Margarita", value: 20.0}, {label: "John", value: 55.0}, {label: "Tim", value: 25.0 }];
 
     // 2014 Most Populous Countries
@@ -282,7 +282,7 @@ var Demos = React.createClass({
         </div>
         <div className="row">
           <div className="col-md-6">
-            <BarChart data={barData} width={500} height={200} title="Bar Chart"/>
+            <BarChart data={barData} width={500} height={300} title="Bar Chart" yAxisLabel="Label" xAxisLabel="Value"/>
           </div>
           <div className="col-md-6">
             <pre ref='block'>
@@ -303,6 +303,8 @@ var Demos = React.createClass({
   height={200}
   fill={'#3182bd'}
   title='Bar Chart'
+  yAxisLabel='Label'
+  xAxisLabel='Value'
 />`}
               </code>
             </pre>
