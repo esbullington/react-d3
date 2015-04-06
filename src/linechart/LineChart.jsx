@@ -18,6 +18,8 @@ module.exports = React.createClass({
 
   mixins: [ CartesianChartPropsMixin ],
 
+  displayName: 'LineChart',
+
   propTypes: {
     margins: React.PropTypes.object,
     pointRadius: React.PropTypes.number,

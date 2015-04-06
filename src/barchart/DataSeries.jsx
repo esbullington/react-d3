@@ -6,6 +6,8 @@ var Bar = require('./Bar');
 
 module.exports = React.createClass({
 
+  displayName: 'DataSeries',
+
   propTypes: {
     fill: React.PropTypes.string,
     title: React.PropTypes.string,

@@ -6,6 +6,8 @@ var utils = require('../utils');
 
 module.exports = React.createClass({
 
+  displayName: 'Circle',
+
   propTypes: {
     id: React.PropTypes.string,
     cx: React.PropTypes.number,

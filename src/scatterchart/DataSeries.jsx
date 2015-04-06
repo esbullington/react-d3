@@ -5,6 +5,8 @@ var Circle = require('./Circle');
 
 
 module.exports = React.createClass({
+  
+  displayName: 'DataSeries',
 
   propTypes: {
     data: React.PropTypes.array,

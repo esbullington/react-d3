@@ -6,6 +6,8 @@ var Area = require('./Area');
 
 module.exports = React.createClass({
 
+  displayName: 'DataSeries',
+  
   render() {
 
     var props = this.props;

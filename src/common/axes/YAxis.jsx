@@ -8,6 +8,8 @@ var Label = require('./Label');
 
 module.exports = React.createClass({
 
+  displayName: 'YAxis',
+
   propTypes: {
     yAxisClassName: React.PropTypes.string,
     yOrient: React.PropTypes.oneOf(['left', 'right']),

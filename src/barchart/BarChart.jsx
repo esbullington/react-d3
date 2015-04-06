@@ -14,6 +14,8 @@ module.exports = React.createClass({
 
   mixins: [ CartesianChartPropsMixin ],
 
+  displayName: 'BarChart',
+
   propTypes: {
     data: React.PropTypes.array,
     yAxisTickCount: React.PropTypes.number,

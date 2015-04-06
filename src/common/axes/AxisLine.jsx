@@ -5,6 +5,8 @@ var d3 = require('d3');
 
 module.exports = React.createClass({
 
+  displayName: 'AxisLine',
+
   propTypes: {
     scale: React.PropTypes.func.isRequired,
     innerTickSize: React.PropTypes.number,

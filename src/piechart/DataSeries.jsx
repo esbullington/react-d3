@@ -7,6 +7,8 @@ var Arc = require('./Arc');
 
 module.exports = React.createClass({
 
+  displayName: 'DataSeries',
+  
   propTypes: {
     transform: React.PropTypes.string,
     data: React.PropTypes.array,

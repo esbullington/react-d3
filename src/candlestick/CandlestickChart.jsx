@@ -14,6 +14,8 @@ var Voronoi = common.Voronoi;
 
 module.exports = React.createClass({
 
+  displayName: 'CandleStickChart',
+  
   propTypes: {
     data: React.PropTypes.oneOfType([
       React.PropTypes.array,

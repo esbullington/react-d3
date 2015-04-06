@@ -5,6 +5,8 @@ var React = require('react');
 
 module.exports = React.createClass({
 
+  displayName: 'Line',
+
   propTypes: {
     data: React.PropTypes.object,
     strokeWidth: React.PropTypes.number,

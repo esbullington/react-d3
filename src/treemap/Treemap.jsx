@@ -6,6 +6,8 @@ var DataSeries = require('./DataSeries');
 
 module.exports = React.createClass({
 
+  displayName: 'Treemap',
+
   propTypes: {
     margins: React.PropTypes.object,
     data: React.PropTypes.array, 

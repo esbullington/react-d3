@@ -6,6 +6,8 @@ var d3 = require('d3');
 
 module.exports = React.createClass({
 
+  displayName: 'Cell',
+
   propTypes: {
     fill: React.PropTypes.string,
     width: React.PropTypes.number,

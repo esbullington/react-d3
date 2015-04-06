@@ -7,6 +7,8 @@ var Cell = require('./Cell');
 
 module.exports = React.createClass({
   
+  displayName: 'DataSeries',
+  
   propTypes: {
     data: React.PropTypes.array,
     value: React.PropTypes.string

@@ -36,6 +36,8 @@ var Polygon = React.createClass({
 
 module.exports = React.createClass({
 
+  displayName: 'Voronoi',
+
   render: function() {
     var xScale = this.props.xScale;
     var yScale = this.props.yScale;

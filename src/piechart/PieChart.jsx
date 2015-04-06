@@ -7,6 +7,8 @@ var Chart = require('../common').Chart;
 
 module.exports = React.createClass({
 
+  displayName: 'PieChart',
+
   getDefaultProps: function() {
     return {
       title: ''

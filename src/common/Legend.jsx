@@ -5,6 +5,8 @@ var d3 = require('d3');
 
 module.exports = React.createClass({
 
+  displayName: 'Legend',
+
   propTypes: {
     width: React.PropTypes.number,
     height: React.PropTypes.number,

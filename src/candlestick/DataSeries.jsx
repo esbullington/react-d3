@@ -9,6 +9,8 @@ var Wick = require('./Wick');
 
 module.exports = React.createClass({
 
+  displayName: 'DataSeries',
+
   propTypes: {
     fillUp: React.PropTypes.string.isRequired,
     fillDown: React.PropTypes.string.isRequired

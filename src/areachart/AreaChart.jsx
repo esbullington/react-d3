@@ -14,6 +14,8 @@ var CartesianChartPropsMixin = mixins.CartesianChartPropsMixin;
 module.exports = React.createClass({
 
   mixins: [ CartesianChartPropsMixin ],
+  
+  displayName: 'AreaChart',
 
   propTypes: {
     margins: React.PropTypes.object

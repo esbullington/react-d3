@@ -5,6 +5,8 @@ var React = require('react');
 
 module.exports = React.createClass({
 
+  displayName: 'Circle',
+
   propTypes: {
     cx: React.PropTypes.number,
     cy: React.PropTypes.number,
