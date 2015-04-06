@@ -5,6 +5,8 @@ var React = require('react');
 
 module.exports = React.createClass({
 
+  displayName: 'Label',
+
   render() {
     var props = this.props;
     var strokeWidth = '0.01';

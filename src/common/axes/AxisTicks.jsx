@@ -4,6 +4,9 @@ var React = require('react');
 var d3 = require('d3');
 
 module.exports = React.createClass({
+
+  displayName: 'AxisTick',
+  
   propTypes: {
     scale: React.PropTypes.func.isRequired,
     orient: React.PropTypes.oneOf(['top','bottom','left','right']).isRequired,

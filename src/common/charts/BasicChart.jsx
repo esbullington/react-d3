@@ -3,6 +3,9 @@
 var React = require('react');
 
 module.exports = React.createClass({
+
+  displayName: 'BasicChart',
+
   render: function() {
     return (
       <div>

@@ -5,6 +5,8 @@ var Legend = require('../Legend');
 
 module.exports = React.createClass({
 
+  displayName: 'LegendChart',
+
   propTypes: {
     legend: React.PropTypes.bool,
     legendPosition: React.PropTypes.string,

@@ -6,6 +6,8 @@ var utils = require('../utils');
 
 module.exports = React.createClass({
 
+  displayName: 'Candle',
+
   getInitialState() {
     // state for animation usage
     return {

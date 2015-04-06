@@ -6,6 +6,8 @@ var BasicChart = require('./BasicChart');
 
 module.exports = React.createClass({
 
+  displayName: 'Chart',
+  
   propTypes: {
     legend: React.PropTypes.bool,
     viewBox: React.PropTypes.string

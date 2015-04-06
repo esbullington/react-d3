@@ -8,6 +8,8 @@ var Label = require('./Label');
 
 module.exports = React.createClass({
 
+  displayName: 'XAxis',
+  
   propTypes: {
     xAxisClassName: React.PropTypes.string.isRequired,
     xOrient: React.PropTypes.oneOf(['top', 'bottom']),

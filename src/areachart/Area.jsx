@@ -4,6 +4,8 @@ var React = require('react');
 
 module.exports = React.createClass({
 
+  displayName: 'Area',
+
   propTypes: {
     path: React.PropTypes.string,
     fill: React.PropTypes.string

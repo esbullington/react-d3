@@ -16,6 +16,8 @@ module.exports = React.createClass({
 
   mixins: [ CartesianChartPropsMixin ],
 
+  displayName: 'ScatterChart',
+  
   propTypes: {
     margins: React.PropTypes.object,
     pointRadius: React.PropTypes.number,
