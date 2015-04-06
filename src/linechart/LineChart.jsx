@@ -24,7 +24,8 @@ module.exports = React.createClass({
     margins: React.PropTypes.object,
     pointRadius: React.PropTypes.number,
     colors: React.PropTypes.func,
-    displayDataPoints: React.PropTypes.bool
+    displayDataPoints: React.PropTypes.bool,
+    hoverAnimation: React.PropTypes.bool
   },
 
   getDefaultProps() {
@@ -34,7 +35,8 @@ module.exports = React.createClass({
       pointRadius: 3,
       interpolate: false,
       interpolationType: null,
-      displayDataPoints: true
+      displayDataPoints: true,
+      hoverAnimation: true
     };
   },
 
@@ -104,14 +106,14 @@ module.exports = React.createClass({
       >
         <g transform={trans} className={props.className}>
           {dataSeriesArray}
-          <Voronoi
+          {props.hoverAnimation ? <Voronoi
             structure={structure}
             data={allValues}
             xScale={scales.xScale}
             yScale={scales.yScale}
             width={innerWidth}
             height={innerHeight}
-          />
+          /> : <g/> }
           <XAxis
             xAxisClassName='rd3-linechart-xaxis'
             tickFormatting={props.xAxisFormatter}
