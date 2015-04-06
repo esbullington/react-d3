@@ -59,14 +59,17 @@ module.exports = React.createClass({
         <AxisTicks
           tickFormatting={props.tickFormatting}
           tickArguments={tickArguments}
-          yScale={props.yScale}
+          tickStroke={props.tickStroke}
+          tickTextStroke={props.tickTextStroke}
+          innerTickSize={props.tickSize}
+          scale={props.yScale}
           orient={props.yOrient}
-          height={props.height}
-          width={props.width}
         />
         <AxisLine
           scale={props.yScale}
+          stroke={props.stroke}
           orient={props.yOrient}
+          outerTickSize={props.tickSize}
           {...props}
         />
         <Label

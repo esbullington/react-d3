@@ -4,10 +4,22 @@ var React = require('react');
 var d3 = require('d3');
 
 module.exports = React.createClass({
+  propTypes: {
+    scale: React.PropTypes.func.isRequired,
+    orient: React.PropTypes.oneOf(['top','bottom','left','right']).isRequired,
+    tickArguments : React.PropTypes.array,
+    tickValues: React.PropTypes.array,
+    innerTickSize: React.PropTypes.number,
+    outerTickSize: React.PropTypes.number,
+    tickPadding: React.PropTypes.number,
+    tickFormat: React.PropTypes.func,
+    tickStroke: React.PropTypes.string
+  },
   getDefaultProps() {
     return {
       innerTickSize: 6,
       outerTickSize: 6,
+      tickStroke: '#000',
       tickPadding: 3,
       tickArguments: [10],
       tickValues: null
@@ -23,14 +35,21 @@ module.exports = React.createClass({
         adjustedScale,
         textAnchor,
         tickFormat,
-        y1, y2, dy, x1, x2, dx;
+        y0, y1, y2, dy, x0, x1, x2, dx;
 
-    var sign = props.yScale ? -1 : 1;
-    var tickSpacing = Math.max(props.innerTickSize, 0) + props.tickPadding;  
+    var sign = props.orient === 'top' || props.orient === 'right' ? -1 : 1;
+    var tickSpacing = Math.max(props.innerTickSize, 0) + props.tickPadding;
 
-    scale = props.yScale ? props.yScale : props.xScale;
+    scale = props.scale;
 
-    ticks = props.tickValues == null ? (scale.ticks ? scale.ticks.apply(scale, props.tickArguments) : scale.domain()) : props.tickValues;
+    if (props.tickValues) {
+      ticks = props.tickValues;
+    } else if (scale.ticks) {
+      ticks = scale.ticks.apply(scale, props.tickArguments);
+    } else {
+      ticks = scale.domain();
+    }
+
     if (props.tickFormatting) {
         tickFormat = props.tickFormatting
     } else if (scale.tickFormat) {
@@ -63,15 +82,15 @@ module.exports = React.createClass({
       case 'left':
         tr = (tick) => `translate(0,${adjustedScale(tick)})`;
         textAnchor = "end";
-        x2 = props.innerTickSize * sign;
-        x1 = tickSpacing * sign;
+        x2 = props.innerTickSize * -sign;
+        x1 = tickSpacing * -sign;
         dy = ".32em";
         break;
       case 'right':
         tr = (tick) => `translate(0,${adjustedScale(tick)})`;
-        textAnchor = "end";
-        x2 = props.innerTickSize;
-        x1 = tickSpacing * sign;
+        textAnchor = "start";
+        x2 = props.innerTickSize * -sign;
+        x1 = tickSpacing * -sign;
         dy = ".32em";
         break;
     }
@@ -81,12 +100,12 @@ module.exports = React.createClass({
         {ticks.map( (tick, i) => {
           return (
             <g key={i} className="tick" transform={tr(tick)} >
-              <line style={{shapeRendering:'crispEdges',opacity:'1',stroke:'#000'}} x2={x2} y2={y2} >
+              <line style={{shapeRendering:'crispEdges',opacity:'1',stroke:props.tickStroke}} x2={x2} y2={y2} >
               </line>
               <text
                 strokeWidth="0.01"
                 dy={dy} x={x1} y={y1}
-                stroke='#000'
+                style={{stroke:props.tickTextStroke, fill:props.tickTextStroke}}
                 textAnchor={textAnchor}
               >
                 {tickFormat(tick)}
