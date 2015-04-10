@@ -46,6 +46,8 @@ module.exports = React.createClass({
 
     var props = this.props;
 
+    var data = props.data;
+
     var interpolationType = props.interpolationType || (props.interpolate ? 'cardinal' : 'linear');
 
     // Calculate inner chart dimensions
@@ -58,11 +60,11 @@ module.exports = React.createClass({
       innerWidth = innerWidth - props.legendOffset;
     }
 
-    if (!Array.isArray(props.data)) {
-      props.data = [props.data];
+    if (!Array.isArray(data)) {
+      data = [data];
     }
 
-    var flattenedData = utils.flattenData(props.data, props.xAccessor, props.yAccessor);
+    var flattenedData = utils.flattenData(data, props.xAccessor, props.yAccessor);
 
     var allValues = flattenedData.allValues,
         xValues = flattenedData.xValues,
@@ -72,7 +74,7 @@ module.exports = React.createClass({
 
     var trans = `translate(${ props.margins.left },${ props.margins.top })`;
 
-    var dataSeriesArray = props.data.map( (series, idx) => {
+    var dataSeriesArray = data.map( (series, idx) => {
       return (
           <DataSeries
             structure={structure}
@@ -97,7 +99,7 @@ module.exports = React.createClass({
       <Chart
         viewBox={props.viewBox}
         legend={props.legend}
-        data={props.data}
+        data={data}
         margins={props.margins}
         colors={props.colors}
         width={props.width}
