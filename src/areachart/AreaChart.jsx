@@ -33,6 +33,8 @@ module.exports = React.createClass({
 
     var props = this.props;
 
+    var data = props.data;
+
     // Calculate inner chart dimensions
     var innerWidth, innerHeight;
     innerWidth = props.width - props.margins.left - props.margins.right;
@@ -42,8 +44,8 @@ module.exports = React.createClass({
       innerWidth = innerWidth - props.legendOffset;
     }
 
-    if (!Array.isArray(props.data)) {
-      props.data = [props.data];
+    if (!Array.isArray(data)) {
+      data = [data];
     }
 
     var yScale = d3.scale.linear()
@@ -52,7 +54,7 @@ module.exports = React.createClass({
     var xValues = [];
     var yValues = [];
     var seriesNames = [];
-    props.data.forEach( (series) => {
+    data.forEach( (series) => {
       seriesNames.push(series.name);
       series.values.forEach((val, idx) => {
         xValues.push(props.xAccessor(val));
@@ -81,7 +83,7 @@ module.exports = React.createClass({
       .order('reverse')
       .values((d)=> { return d.values; });
 
-    var layers = stack(props.data);
+    var layers = stack(data);
 
     var trans = `translate(${ props.margins.left },${ props.margins.top })`;
 
@@ -105,7 +107,7 @@ module.exports = React.createClass({
       <Chart
         viewBox={props.viewBox}
         legend={props.legend}
-        data={props.data}
+        data={data}
         margins={props.margins}
         colors={props.colors}
         width={props.width}
