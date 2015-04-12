@@ -14,7 +14,7 @@ var CartesianChartPropsMixin = mixins.CartesianChartPropsMixin;
 module.exports = React.createClass({
 
   mixins: [ CartesianChartPropsMixin ],
-  
+
   displayName: 'AreaChart',
 
   propTypes: {
@@ -54,12 +54,16 @@ module.exports = React.createClass({
     var xValues = [];
     var yValues = [];
     var seriesNames = [];
+    var yMaxValues = [];
     data.forEach( (series) => {
+      var upper = 0;
       seriesNames.push(series.name);
       series.values.forEach((val, idx) => {
+        upper = Math.max(upper, props.yAccessor(val));
         xValues.push(props.xAccessor(val));
         yValues.push(props.yAccessor(val));
       });
+      yMaxValues.push(upper);
     });
 
     var xScale;
@@ -72,15 +76,13 @@ module.exports = React.createClass({
     }
 
     xScale.domain(d3.extent(xValues));
-    yScale.domain(d3.extent(yValues));
+    yScale.domain([0, d3.sum(yMaxValues)]);
 
     props.colors.domain(seriesNames);
 
     var stack = d3.layout.stack()
       .x(props.xAccessor)
       .y(props.yAccessor)
-      .offset('expand')
-      .order('reverse')
       .values((d)=> { return d.values; });
 
     var layers = stack(data);
