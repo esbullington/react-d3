@@ -37,7 +37,8 @@ module.exports = React.createClass({
         <Bar
           height={props.yScale(0) - props.yScale(point)}
           width={xScale.rangeBand()}
-          offset={xScale(i)}
+          x={xScale(i)}
+          y={props.yScale(Math.max(0, point))}
           availableHeight={props.height}
           fill={props.fill} key={i}
         />
