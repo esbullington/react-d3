@@ -9,6 +9,8 @@ module.exports = React.createClass({
   displayName: 'DataSeries',
 
   propTypes: {
+    values: React.PropTypes.array,
+    labels: React.PropTypes.array,
     fill: React.PropTypes.string,
     title: React.PropTypes.string,
     padding: React.PropTypes.number,
@@ -39,7 +41,8 @@ module.exports = React.createClass({
           width={xScale.rangeBand()}
           offset={xScale(i)}
           availableHeight={props.height}
-          fill={props.fill} key={i}
+          fill={props.fill}
+          key={props.labels[i] + i}
         />
       );
     });

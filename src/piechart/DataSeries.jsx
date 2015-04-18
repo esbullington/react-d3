@@ -8,7 +8,7 @@ var Arc = require('./Arc');
 module.exports = React.createClass({
 
   displayName: 'DataSeries',
-  
+
   propTypes: {
     transform: React.PropTypes.string,
     data: React.PropTypes.array,
@@ -47,7 +47,7 @@ module.exports = React.createClass({
           fill={props.colors(i)}
           label={props.labels[i]}
           value={props.data[i]}
-          key={i}
+          key={props.labels[i] + i}
           width={props.width}
         />
       );

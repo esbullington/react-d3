@@ -43,7 +43,7 @@ module.exports = React.createClass({
       };
 
       legendItems.push(
-            <li style={itemStyle} key={idx} >
+            <li style={itemStyle} key={series.name + idx} >
               <span style={textStyle}>{series.name}</span>
             </li>
           );
@@ -68,4 +68,3 @@ module.exports = React.createClass({
   }
 
 });
-

@@ -14,7 +14,7 @@ var CartesianChartPropsMixin = mixins.CartesianChartPropsMixin;
 module.exports = React.createClass({
 
   mixins: [ CartesianChartPropsMixin ],
-  
+
   displayName: 'AreaChart',
 
   propTypes: {
@@ -90,7 +90,7 @@ module.exports = React.createClass({
     var dataSeries = layers.map( (d, idx) => {
       return (
           <DataSeries
-            key={idx}
+            key={d.name + idx}
             name={d.name}
             colors={props.colors}
             index={idx}

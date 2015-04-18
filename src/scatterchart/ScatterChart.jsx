@@ -17,7 +17,7 @@ module.exports = React.createClass({
   mixins: [ CartesianChartPropsMixin ],
 
   displayName: 'ScatterChart',
-  
+
   propTypes: {
     margins: React.PropTypes.object,
     pointRadius: React.PropTypes.number,
@@ -88,13 +88,13 @@ module.exports = React.createClass({
             structure={structure}
             xScale={scales.xScale}
             yScale={scales.yScale}
-            seriesName={series.name}
+            name={series.name}
             data={series.values}
             width={innerWidth}
             height={innerHeight}
             fill={props.colors(idx)}
             pointRadius={props.pointRadius}
-            key={series.name}
+            key={series.name + idx}
             hoverAnimation={props.hoverAnimation}
             xAccessor={props.xAccessor}
             yAccessor={props.yAccessor}
@@ -103,7 +103,7 @@ module.exports = React.createClass({
     });
 
     return (
-      <Chart 
+      <Chart
         viewBox={props.viewBox}
         legend={props.legend}
         data={props.data}

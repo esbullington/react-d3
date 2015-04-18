@@ -9,7 +9,7 @@ var Circle = require('./Circle');
 module.exports = React.createClass({
 
   displayName: 'DataSeries',
-  
+
   propTypes: {
     data: React.PropTypes.array,
     interpolationType: React.PropTypes.string,
@@ -68,7 +68,7 @@ module.exports = React.createClass({
     props.structure.cursor('voronoiSeries').set(props.seriesName, 'inactive');
 
     // Having set the Voronoi line series name cursor to 'inactive'
-    // We now pass on the Voronoi line series name reference to the 
+    // We now pass on the Voronoi line series name reference to the
     // *both* the line and circle component
     var voronoiSeriesRef = props.structure.reference(['voronoiSeries', props.seriesName]);
 
@@ -98,7 +98,7 @@ module.exports = React.createClass({
         props.structure.cursor('voronoi').set(id, 'inactive');
 
         // Having set the Voronoi circle id cursor to 'inactive'
-        // We now pass on the Voronoi circle id reference to the 
+        // We now pass on the Voronoi circle id reference to the
         // circle component, where it will be observed and dereferenced
         var voronoiRef = props.structure.reference(['voronoi', id]);
 
