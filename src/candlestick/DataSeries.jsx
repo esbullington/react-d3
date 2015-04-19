@@ -42,14 +42,14 @@ module.exports = React.createClass({
             x2 = x1;
 
           // Create unique id: series + index
-          var id = props.series.name + '-' + idx;
+          var id = props.series.seriesName + '-' + idx;
 
           // Create an immstruct reference for the candle id
           // and set it to 'inactive'
           props.structure.cursor('voronoi').set(id, 'inactive');
 
           // Having set the Voronoi circle id cursor to 'inactive'
-          // We now pass on the Voronoi circle id reference to the 
+          // We now pass on the Voronoi circle id reference to the
           // circle component, where it will be observed and dereferenced
           var voronoiRef = props.structure.reference(['voronoi', id]);
 

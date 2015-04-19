@@ -93,7 +93,7 @@ module.exports = React.createClass({
       return (
           <DataSeries
             key={idx}
-            name={d.name}
+            seriesName={d.name}
             colors={props.colors}
             index={idx}
             xScale={xScale}
