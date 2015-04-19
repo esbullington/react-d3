@@ -44,6 +44,7 @@ module.exports = React.createClass({
           innerRadius={props.innerRadius}
           labelTextFill={props.labelTextFill}
           valueTextFill={props.valueTextFill}
+          valueTextFormatter={props.valueTextFormatter}
           fill={props.colors(i)}
           label={props.labels[i]}
           value={props.data[i]}

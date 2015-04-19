@@ -42,6 +42,9 @@ module.exports = React.createClass({
     var y      = -dist * Math.cos(angle);
     var t = `translate(${x},${y})`;
 
+    // make value text can be formatted
+    var formattedValue = props.valueTextFormatter(props.value);
+
     return (
       <g className='rd3-piechart-arc' >
         <path
@@ -73,7 +76,7 @@ module.exports = React.createClass({
           {props.label}
         </text>
         <text
-          className='rd3-piechart-text'
+          className='rd3-piechart-value'
           transform={`translate(${arc.centroid()})`}
           dy='.35em'
           style={{
@@ -81,7 +84,7 @@ module.exports = React.createClass({
             'textAnchor': 'middle',
             'fill': props.valueTextFill
           }}>
-          {props.value + '%'}
+          { formattedValue }
         </text>
       </g>
     );

@@ -11,7 +11,8 @@ module.exports = React.createClass({
 
   getDefaultProps: function() {
     return {
-      title: ''
+      title: '',
+      valueTextFormatter: (val) => `${ val }%`
     };
   },
 
@@ -21,6 +22,7 @@ module.exports = React.createClass({
     cy: React.PropTypes.number,
     labelTextFill: React.PropTypes.string,
     valueTextFill: React.PropTypes.string,
+    valueTextFormatter: React.PropTypes.func,
     colors: React.PropTypes.func,
     title: React.PropTypes.string
   },
@@ -42,6 +44,7 @@ module.exports = React.createClass({
           <DataSeries
             labelTextFill={props.labelTextFill}
             valueTextFill={props.valueTextFill}
+            valueTextFormatter={props.valueTextFormatter}
             labels={labels}
             colors={props.colors}
             transform={transform}
