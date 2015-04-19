@@ -78,7 +78,7 @@ module.exports = React.createClass({
     if (props.displayDataPoints) {
       // Map over data to generate SVG circles at data points
       // if datum is a date object, treat it a bit differently
-      circles = props.data.map(function(point, i) {
+      circles = props.data.map(function(point, idx) {
         var cx, cy;
         if (this._isDate(point, xAccessor)) {
           cx = props.xScale(xAccessor(point).getTime());
@@ -91,7 +91,7 @@ module.exports = React.createClass({
           cy = props.yScale(yAccessor(point));
         }
 
-        var id= props.seriesName + '-' + i;
+        var id= props.seriesName + '-' + idx;
 
         // Create an immstruct reference for the circle id
         // and set it to 'inactive'
@@ -111,8 +111,8 @@ module.exports = React.createClass({
             cy={cy}
             r={props.pointRadius}
             fill={props.fill}
-            key={props.seriesName + i}
-            id={props.seriesName + '-' + i}
+            key={idx}
+            id={props.seriesName + '-' + idx}
           />
         );
       }, this);

@@ -35,7 +35,7 @@ module.exports = React.createClass({
 
     var arcData = pie(props.data);
 
-    var arcs = arcData.map((arc, i) => {
+    var arcs = arcData.map((arc, idx) => {
       return (
         <Arc
           startAngle={arc.startAngle}
@@ -44,10 +44,10 @@ module.exports = React.createClass({
           innerRadius={props.innerRadius}
           labelTextFill={props.labelTextFill}
           valueTextFill={props.valueTextFill}
-          fill={props.colors(i)}
-          label={props.labels[i]}
-          value={props.data[i]}
-          key={props.labels[i] + i}
+          fill={props.colors(idx)}
+          label={props.labels[idx]}
+          value={props.data[idx]}
+          key={idx}
           width={props.width}
         />
       );

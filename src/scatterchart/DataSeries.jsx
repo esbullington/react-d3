@@ -28,7 +28,7 @@ module.exports = React.createClass({
 
     var props = this.props;
 
-    var circles = props.data.map((point, i) => {
+    var circles = props.data.map((point, idx) => {
 
       var xAccessor = props.xAccessor,
           yAccessor = props.yAccessor,
@@ -44,7 +44,7 @@ module.exports = React.createClass({
         cy = props.yScale(yAccessor(point));
       }
 
-      var id = props.name + '-' + i;
+      var id = props.name + '-' + idx;
 
       // Create an immstruct reference for the circle id
       // and set it to 'inactive'
@@ -61,7 +61,7 @@ module.exports = React.createClass({
         cy={cy}
         r={props.pointRadius}
         fill={props.fill}
-        key={props.name + i}
+        key={idx}
         id={id}
       />);
     }, this);

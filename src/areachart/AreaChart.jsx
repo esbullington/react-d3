@@ -90,8 +90,8 @@ module.exports = React.createClass({
     var dataSeries = layers.map( (d, idx) => {
       return (
           <DataSeries
-            key={d.name + idx}
-            name={d.name}
+            key={idx}
+            seriesName={d.name}
             colors={props.colors}
             index={idx}
             xScale={xScale}

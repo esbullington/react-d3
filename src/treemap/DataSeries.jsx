@@ -39,18 +39,18 @@ module.exports = React.createClass({
                     .sticky(true)
                     .value((d)=> { return d[value]; });
 
-    var cells = treemap(data).map((node, i) => {
+    var cells = treemap(data).map((node, idx) => {
       return (
         <Cell
           x={node.x}
           y={node.y}
           width={node.dx}
           height={node.dy}
-          fill={colors(i)}
+          fill={colors(idx)}
           label={node[label]}
           fontSize={props.fontSize}
           textColor={props.textColor}
-          key={label + i}
+          key={idx}
         />
       );
     }, this);
