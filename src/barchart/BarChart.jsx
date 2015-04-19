@@ -62,6 +62,7 @@ module.exports = React.createClass({
         <g transform={trans} className='rd3-barchart'>
           <DataSeries
             values={values}
+            labels={labels}
             yScale={yScale}
             xScale={yScale}
             margins={margins}

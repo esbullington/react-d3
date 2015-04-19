@@ -9,7 +9,7 @@ var Circle = require('./Circle');
 module.exports = React.createClass({
 
   displayName: 'DataSeries',
-  
+
   propTypes: {
     data: React.PropTypes.array,
     interpolationType: React.PropTypes.string,
@@ -68,7 +68,7 @@ module.exports = React.createClass({
     props.structure.cursor('voronoiSeries').set(props.seriesName, 'inactive');
 
     // Having set the Voronoi line series name cursor to 'inactive'
-    // We now pass on the Voronoi line series name reference to the 
+    // We now pass on the Voronoi line series name reference to the
     // *both* the line and circle component
     var voronoiSeriesRef = props.structure.reference(['voronoiSeries', props.seriesName]);
 
@@ -78,7 +78,7 @@ module.exports = React.createClass({
     if (props.displayDataPoints) {
       // Map over data to generate SVG circles at data points
       // if datum is a date object, treat it a bit differently
-      circles = props.data.map(function(point, i) {
+      circles = props.data.map(function(point, idx) {
         var cx, cy;
         if (this._isDate(point, xAccessor)) {
           cx = props.xScale(xAccessor(point).getTime());
@@ -91,14 +91,14 @@ module.exports = React.createClass({
           cy = props.yScale(yAccessor(point));
         }
 
-        var id= props.seriesName + '-' + i;
+        var id= props.seriesName + '-' + idx;
 
         // Create an immstruct reference for the circle id
         // and set it to 'inactive'
         props.structure.cursor('voronoi').set(id, 'inactive');
 
         // Having set the Voronoi circle id cursor to 'inactive'
-        // We now pass on the Voronoi circle id reference to the 
+        // We now pass on the Voronoi circle id reference to the
         // circle component, where it will be observed and dereferenced
         var voronoiRef = props.structure.reference(['voronoi', id]);
 
@@ -111,8 +111,8 @@ module.exports = React.createClass({
             cy={cy}
             r={props.pointRadius}
             fill={props.fill}
-            key={props.seriesName + i}
-            id={props.seriesName + '-' + i}
+            key={idx}
+            id={props.seriesName + '-' + idx}
           />
         );
       }, this);
