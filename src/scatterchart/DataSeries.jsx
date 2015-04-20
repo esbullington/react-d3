@@ -5,7 +5,7 @@ var Circle = require('./Circle');
 
 
 module.exports = React.createClass({
-  
+
   displayName: 'DataSeries',
 
   propTypes: {
@@ -28,7 +28,7 @@ module.exports = React.createClass({
 
     var props = this.props;
 
-    var circles = props.data.map((point, i) => {
+    var circles = props.data.map((point, idx) => {
 
       var xAccessor = props.xAccessor,
           yAccessor = props.yAccessor,
@@ -44,14 +44,14 @@ module.exports = React.createClass({
         cy = props.yScale(yAccessor(point));
       }
 
-      var id = props.seriesName + '-' + i;
+      var id = props.name + '-' + idx;
 
       // Create an immstruct reference for the circle id
       // and set it to 'inactive'
       props.structure.cursor('voronoi').set(id, 'inactive');
 
       // Having set the Voronoi circle id cursor to 'inactive'
-      // We now pass on the Voronoi circle id reference to the 
+      // We now pass on the Voronoi circle id reference to the
       // circle component, where it will be observed and dereferenced
       var voronoiRef = props.structure.reference(['voronoi', id]);
 
@@ -61,7 +61,7 @@ module.exports = React.createClass({
         cy={cy}
         r={props.pointRadius}
         fill={props.fill}
-        key={props.seriesName + i}
+        key={idx}
         id={id}
       />);
     }, this);

@@ -47,8 +47,10 @@ module.exports = React.createClass({
     var sideMargins = margins.left + margins.right;
     var topBottomMargins = margins.top + margins.bottom;
 
+    var minValue = Math.min(d3.min(values), 0);
+
     var yScale = d3.scale.linear()
-      .domain([d3.min([d3.min(values), 0]), d3.max(values)])
+      .domain([minValue, d3.max(values)])
       .range([props.height - topBottomMargins, 0]);
 
     var xScale = d3.scale.ordinal()
@@ -56,12 +58,13 @@ module.exports = React.createClass({
         .rangeRoundBands([0, props.width - sideMargins], 0.1);
 
     var trans = `translate(${ margins.left },${ margins.top })`;
-
+    
     return (
       <Chart width={props.width} height={props.height} title={props.title}>
         <g transform={trans} className='rd3-barchart'>
           <DataSeries
             values={values}
+            labels={labels}
             yScale={yScale}
             xScale={yScale}
             margins={margins}

@@ -8,7 +8,7 @@ var Arc = require('./Arc');
 module.exports = React.createClass({
 
   displayName: 'DataSeries',
-  
+
   propTypes: {
     transform: React.PropTypes.string,
     data: React.PropTypes.array,
@@ -35,7 +35,7 @@ module.exports = React.createClass({
 
     var arcData = pie(props.data);
 
-    var arcs = arcData.map((arc, i) => {
+    var arcs = arcData.map((arc, idx) => {
       return (
         <Arc
           startAngle={arc.startAngle}
@@ -45,10 +45,10 @@ module.exports = React.createClass({
           labelTextFill={props.labelTextFill}
           valueTextFill={props.valueTextFill}
           valueTextFormatter={props.valueTextFormatter}
-          fill={props.colors(i)}
-          label={props.labels[i]}
-          value={props.data[i]}
-          key={i}
+          fill={props.colors(idx)}
+          label={props.labels[idx]}
+          value={props.data[idx]}
+          key={idx}
           width={props.width}
         />
       );

@@ -9,6 +9,8 @@ module.exports = React.createClass({
   displayName: 'DataSeries',
 
   propTypes: {
+    values: React.PropTypes.array,
+    labels: React.PropTypes.array,
     fill: React.PropTypes.string,
     title: React.PropTypes.string,
     padding: React.PropTypes.number,
@@ -32,14 +34,16 @@ module.exports = React.createClass({
       .domain(d3.range(props.values.length))
       .rangeRoundBands([0, props.width], props.padding);
 
-    var bars = props.values.map(function(point, i) {
+    var bars = props.values.map(function(point, idx) {
       return (
         <Bar
           height={props.yScale(0) - props.yScale(point)}
           width={xScale.rangeBand()}
-          offset={xScale(i)}
+          x={xScale(idx)}
+          y={props.yScale(Math.max(0, point))}
           availableHeight={props.height}
-          fill={props.fill} key={i}
+          fill={props.fill}
+          key={idx}
         />
       );
     });
