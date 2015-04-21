@@ -16,7 +16,8 @@ module.exports = React.createClass({
     radius: React.PropTypes.number,
     colors: React.PropTypes.func,
     showInnerLabels: React.PropTypes.bool,
-    showOuterLabels: React.PropTypes.bool
+    showOuterLabels: React.PropTypes.bool,
+    sectorBorderColor: React.PropTypes.string
   },
 
   getDefaultProps() {
@@ -54,6 +55,7 @@ module.exports = React.createClass({
           width={props.width}
           showInnerLabels={props.showInnerLabels}
           showOuterLabels={props.showOuterLabels}
+          sectorBorderColor={props.sectorBorderColor}
         />
       );
     });

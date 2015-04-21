@@ -27,7 +27,8 @@ module.exports = React.createClass({
     colors: React.PropTypes.func,
     title: React.PropTypes.string,
     showInnerLabels: React.PropTypes.bool,
-    showOuterLabels: React.PropTypes.bool
+    showOuterLabels: React.PropTypes.bool,
+    sectorBorderColor: React.PropTypes.string
   },
 
   render: function() {
@@ -58,6 +59,7 @@ module.exports = React.createClass({
             innerRadius={props.innerRadius}
             showInnerLabels={props.showInnerLabels}
             showOuterLabels={props.showOuterLabels}
+            sectorBorderColor={props.sectorBorderColor}
           />
         </g>
       </Chart>
