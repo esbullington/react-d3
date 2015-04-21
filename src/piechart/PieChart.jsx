@@ -18,13 +18,16 @@ module.exports = React.createClass({
 
   propTypes: {
     radius: React.PropTypes.number,
+    data: React.PropTypes.array,
     cx: React.PropTypes.number,
     cy: React.PropTypes.number,
     labelTextFill: React.PropTypes.string,
     valueTextFill: React.PropTypes.string,
     valueTextFormatter: React.PropTypes.func,
     colors: React.PropTypes.func,
-    title: React.PropTypes.string
+    title: React.PropTypes.string,
+    showInnerLabels: React.PropTypes.bool,
+    showOuterLabels: React.PropTypes.bool
   },
 
   render: function() {
@@ -53,6 +56,8 @@ module.exports = React.createClass({
             height={props.height}
             radius={props.radius}
             innerRadius={props.innerRadius}
+            showInnerLabels={props.showInnerLabels}
+            showOuterLabels={props.showOuterLabels}
           />
         </g>
       </Chart>

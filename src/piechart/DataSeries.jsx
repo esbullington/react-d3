@@ -14,7 +14,9 @@ module.exports = React.createClass({
     data: React.PropTypes.array,
     innerRadius: React.PropTypes.number,
     radius: React.PropTypes.number,
-    colors: React.PropTypes.func
+    colors: React.PropTypes.func,
+    showInnerLabels: React.PropTypes.bool,
+    showOuterLabels: React.PropTypes.bool
   },
 
   getDefaultProps() {
@@ -50,6 +52,8 @@ module.exports = React.createClass({
           value={props.data[idx]}
           key={idx}
           width={props.width}
+          showInnerLabels={props.showInnerLabels}
+          showOuterLabels={props.showOuterLabels}
         />
       );
     });
