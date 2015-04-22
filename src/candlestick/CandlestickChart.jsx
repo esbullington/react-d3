@@ -21,9 +21,11 @@ module.exports = React.createClass({
       React.PropTypes.array,
       React.PropTypes.object
     ]),
+    yAxisTickValues: React.PropTypes.array,
     yAxisTickCount: React.PropTypes.number,
     yAxisFormatter: React.PropTypes.func,
     yAccessor: React.PropTypes.func,
+    xAxisTickValues: React.PropTypes.array,
     xAxisTickInterval: React.PropTypes.object,
     xAxisFormatter: React.PropTypes.func,
     xAccessor: React.PropTypes.func,
@@ -120,6 +122,7 @@ module.exports = React.createClass({
           <XAxis
             xAxisClassName='rd3-candlestick-xaxis'
             xScale={scales.xScale}
+            xAxisTickValues={props.xAxisTickValues}
             xAxisTickInterval={props.xAxisTickInterval}
             xAxisOffset={props.xAxisOffset}
             tickFormatting={props.xAxisFormatter}
@@ -133,6 +136,7 @@ module.exports = React.createClass({
           <YAxis
             yAxisClassName='rd3-candlestick-yaxis'
             yScale={scales.yScale}
+            yAxisTickValues={props.yAxisTickValues}
             yAxisOffset={props.yAxisOffset}
             yAxisTickCount={props.yAxisTickCount}
             tickFormatting={props.yAxisFormatter}

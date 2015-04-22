@@ -12,6 +12,7 @@ module.exports = React.createClass({
   
   propTypes: {
     xAxisClassName: React.PropTypes.string.isRequired,
+    xAxisTickValues: React.PropTypes.array,
     xOrient: React.PropTypes.oneOf(['top', 'bottom']),
     xScale: React.PropTypes.func.isRequired,
     height: React.PropTypes.number.isRequired,
@@ -63,6 +64,7 @@ module.exports = React.createClass({
           width={props.width}
         />
         <AxisTicks
+          tickValues={props.xAxisTickValues}
           tickFormatting={props.tickFormatting}
           tickArguments={tickArguments}
           tickStroke={props.tickStroke}

@@ -125,6 +125,7 @@ module.exports = React.createClass({
           <XAxis
             xAxisClassName="rd3-scatterchart-xaxis"
             strokeWidth="1"
+            xAxisTickValues={props.xAxisTickValues}
             xAxisTickInterval={props.xAxisTickInterval}
             xAxisOffset={props.xAxisOffset}
             xScale={scales.xScale}
@@ -141,6 +142,7 @@ module.exports = React.createClass({
           <YAxis
             yAxisClassName="rd3-scatterchart-yaxis"
             yScale={scales.yScale}
+            yAxisTickValues={props.yAxisTickValues}
             yAxisTickCount={props.yAxisTickCount}
             yAxisOffset={props.yAxisOffset}
             yAxisLabel={props.yAxisLabel}

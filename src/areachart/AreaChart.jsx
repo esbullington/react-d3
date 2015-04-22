@@ -121,6 +121,7 @@ module.exports = React.createClass({
           <XAxis
             xAxisClassName='rd3-areachart-xaxis'
             xScale={xScale}
+            xAxisTickValues={props.xAxisTickValues}
             xAxisTickInterval={props.xAxisTickInterval}
             xAxisTickCount={props.xAxisTickCount}
             xAxisLabel={props.xAxisLabel}
@@ -134,6 +135,7 @@ module.exports = React.createClass({
           <YAxis
             yAxisClassName='rd3-areachart-yaxis'
             yScale={yScale}
+            yAxisTickValues={props.yAxisTickValues}
             yAxisTickInterval={props.yAxisTickInterval}
             yAxisTickCount={props.yAxisTickCount}
             yAxisLabel={props.yAxisLabel}

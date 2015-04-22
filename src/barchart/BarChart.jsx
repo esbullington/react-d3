@@ -75,6 +75,7 @@ module.exports = React.createClass({
           />
           <YAxis
             yAxisClassName='rd3-barchart-yaxis'
+            yAxisTickValues={props.yAxisTickValues}
             yAxisLabel={props.yAxisLabel}
             yAxisLabelOffset={props.yAxisLabelOffset}
             yScale={yScale}
@@ -86,6 +87,7 @@ module.exports = React.createClass({
           />
           <XAxis
             xAxisClassName='rd3-barchart-xaxis'
+            xAxisTickValues={props.xAxisTickValues}
             xAxisLabel={props.xAxisLabel}
             xAxisLabelOffset={props.xAxisLabelOffset}
             xScale={xScale}
