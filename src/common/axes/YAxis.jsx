@@ -12,6 +12,7 @@ module.exports = React.createClass({
 
   propTypes: {
     yAxisClassName: React.PropTypes.string,
+    yAxisTickValues: React.PropTypes.array,
     yOrient: React.PropTypes.oneOf(['left', 'right']),
     yScale: React.PropTypes.func.isRequired,
     fill: React.PropTypes.string,
@@ -59,6 +60,7 @@ module.exports = React.createClass({
         transform={t}
       >
         <AxisTicks
+          tickValues={props.yAxisTickValues}
           tickFormatting={props.tickFormatting}
           tickArguments={tickArguments}
           tickStroke={props.tickStroke}
