@@ -7,6 +7,16 @@ var Area = require('./Area');
 module.exports = React.createClass({
 
   displayName: 'DataSeries',
+
+  propTypes: {
+    interpolationType: React.PropTypes.string
+  },
+
+  getDefaultProps() {
+    return {
+      interpolationType: 'linear'
+    };
+  },
   
   render() {
 
@@ -15,7 +25,8 @@ module.exports = React.createClass({
     var area = d3.svg.area()
       .x((d)=> { return props.xScale(props.xAccessor(d)); })
       .y0((d)=> { return props.yScale(d.y0); })
-      .y1((d)=> { return props.yScale(d.y0 + props.yAccessor(d)); });
+      .y1((d)=> { return props.yScale(d.y0 + props.yAccessor(d)); })
+      .interpolate(props.interpolationType);
 
     var path = area(props.data);
 
