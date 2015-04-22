@@ -8,6 +8,11 @@ module.exports = React.createClass({
   displayName: 'LegendChart',
 
   propTypes: {
+    title: React.PropTypes.node,
+    viewBox: React.PropTypes.string,
+    width: React.PropTypes.number,
+    height: React.PropTypes.number,
+    children: React.PropTypes.node,
     legend: React.PropTypes.bool,
     legendPosition: React.PropTypes.string,
     sideOffset: React.PropTypes.number,
@@ -43,10 +48,19 @@ module.exports = React.createClass({
     }
   },
 
+  _renderTitle() {
+    if (this.props.title != null) {
+      return (
+        <h4>{this.props.title}</h4>
+      );
+      return null;
+    }
+  },
+
   render() {
     return (
       <div style={{'width': this.props.width, 'height': this.props.height}} >
-        <h4>{this.props.title}</h4>
+        {this._renderTitle()}
         {this._renderLegend()}
         <svg viewBox={this.props.viewBox} width={this.props.width - this.props.sideOffset} height={this.props.height}>{this.props.children}</svg>
       </div>
