@@ -25,7 +25,9 @@ module.exports = React.createClass({
     pointRadius: React.PropTypes.number,
     colors: React.PropTypes.func,
     displayDataPoints: React.PropTypes.bool,
-    hoverAnimation: React.PropTypes.bool
+    hoverAnimation: React.PropTypes.bool,
+    interpolate: React.PropTypes.bool,
+    interpolationType: React.PropTypes.string
   },
 
   getDefaultProps() {

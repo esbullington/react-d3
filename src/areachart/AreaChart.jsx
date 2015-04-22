@@ -18,13 +18,17 @@ module.exports = React.createClass({
   displayName: 'AreaChart',
 
   propTypes: {
-    margins: React.PropTypes.object
+    margins: React.PropTypes.object,
+    interpolate: React.PropTypes.bool,
+    interpolationType: React.PropTypes.string
  },
 
   getDefaultProps() {
     return {
       margins: {top: 10, right: 20, bottom: 40, left: 45},
       yAxisTickCount: 4,
+      interpolate: false,
+      interpolationType: null,
       className: 'rd3-areachart'
     };
   },
@@ -34,6 +38,8 @@ module.exports = React.createClass({
     var props = this.props;
 
     var data = props.data;
+
+    var interpolationType = props.interpolationType || (props.interpolate ? 'cardinal' : 'linear');
 
     // Calculate inner chart dimensions
     var innerWidth, innerHeight;
@@ -101,6 +107,7 @@ module.exports = React.createClass({
             data={d.values}
             xAccessor={props.xAccessor}
             yAccessor={props.yAccessor}
+            interpolationType={interpolationType}
           />
         );
       });
