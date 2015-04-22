@@ -12,6 +12,7 @@ module.exports = React.createClass({
 
   propTypes: {
     data: React.PropTypes.array,
+    seriesName: React.PropTypes.string,
     interpolationType: React.PropTypes.string,
     fill: React.PropTypes.string,
     xAccessor: React.PropTypes.func,
@@ -22,6 +23,7 @@ module.exports = React.createClass({
   getDefaultProps() {
     return {
       data: [],
+      seriesName: "",
       interpolationType: 'linear',
       fill: '#fff',
       xAccessor: (d) => d.x,
@@ -38,6 +40,12 @@ module.exports = React.createClass({
 
     var props = this.props;
 
+    // Check to see if there is any data to draw lines/circles with
+    // Return null if there is nothing to draw (null will become <noscript>)
+    if (props.data.length === 0) {
+      return null;
+    }
+
     var xAccessor = props.xAccessor,
         yAccessor = props.yAccessor;
 
@@ -52,16 +60,16 @@ module.exports = React.createClass({
     // Check whether or not an arbitrary data element
     // is a date object (at index 0 here)
     // If it's a date, then we set the x scale a bit differently
+    // NOTE: a sparse array could still break this, even with the length check above
     if (this._isDate(props.data[0], xAccessor)) {
-        interpolatePath.x(function(d) {
-          return props.xScale(props.xAccessor(d).getTime());
-        });
+      interpolatePath.x(function(d) {
+        return props.xScale(props.xAccessor(d).getTime());
+      });
     } else {
-        interpolatePath.x(function(d) {
-          return props.xScale(props.xAccessor(d));
-        });
+      interpolatePath.x(function(d) {
+        return props.xScale(props.xAccessor(d));
+      });
     }
-
 
     // Create an immstruct reference for the series name
     // and set it to 'inactive'
@@ -91,7 +99,7 @@ module.exports = React.createClass({
           cy = props.yScale(yAccessor(point));
         }
 
-        var id= props.seriesName + '-' + idx;
+        var id = props.seriesName + '-' + idx;
 
         // Create an immstruct reference for the circle id
         // and set it to 'inactive'
