@@ -16,13 +16,17 @@ module.exports = React.createClass({
     innerRadius: React.PropTypes.number,
     outerRadius: React.PropTypes.number,
     labelTextFill: React.PropTypes.string,
-    valueTextFill: React.PropTypes.string
+    valueTextFill: React.PropTypes.string,
+    showInnerLabels: React.PropTypes.bool,
+    showOuterLabels: React.PropTypes.bool
   },
 
   getDefaultProps() {
     return {
       labelTextFill: 'black',
-      valueTextFill: 'white'
+      valueTextFill: 'white',
+      showInnerLabels: true,
+      showOuterLabels: true,
     };
   },
 
@@ -45,12 +49,9 @@ module.exports = React.createClass({
     // make value text can be formatted
     var formattedValue = props.valueTextFormatter(props.value);
 
-    return (
-      <g className='rd3-piechart-arc' >
-        <path
-          d={arc()}
-          fill={props.fill}
-        />
+    var outerLabels = null;
+    if (this.props.showOuterLabels) {
+      outerLabels = [
         <line
           x1='0'
           x2='0'
@@ -62,8 +63,9 @@ module.exports = React.createClass({
             'fill': props.labelTextFill,
             'strokeWidth': 2
           }}
-        >
+          >
         </line>
+        ,
         <text
           className='rd3-piechart-label'
           transform={t}
@@ -75,6 +77,12 @@ module.exports = React.createClass({
           }}>
           {props.label}
         </text>
+      ]
+    }
+
+    var innerLabels = null;
+    if (this.props.showInnerLabels) {
+      innerLabels = (
         <text
           className='rd3-piechart-value'
           transform={`translate(${arc.centroid()})`}
@@ -86,7 +94,18 @@ module.exports = React.createClass({
           }}>
           { formattedValue }
         </text>
+      );
+    }
+
+    return (
+      <g className='rd3-piechart-arc' >
+        <path
+          d={arc()}
+          fill={props.fill}
+        />
+        {outerLabels}
+        {innerLabels}
       </g>
     );
-  }
+  },
 });

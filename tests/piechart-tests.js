@@ -46,4 +46,28 @@ describe('PieChart', function() {
     expect(formattedValueTexts[0].getDOMNode().textContent).to.contain('$');
     
   });
+
+  it('doesnt show inner labels if not specified', function() {
+    var piechart = TestUtils.renderIntoDocument(
+      <PieChart 
+        data={data} width={400} height={200} 
+        showInnerLabels={false}
+      />
+    );
+    
+    var labels = TestUtils.scryRenderedDOMComponentsWithClass(piechart, 'rd3-piechart-value');
+    expect(labels.length).to.equal(0);    
+  });
+
+  it('doesnt show outer labels if not specified', function() {
+    var piechart = TestUtils.renderIntoDocument(
+      <PieChart 
+        data={data} width={400} height={200} 
+        showOuterLabels={false}
+      />
+    );
+    
+    var labels = TestUtils.scryRenderedDOMComponentsWithClass(piechart, 'rd3-piechart-label');
+    expect(labels.length).to.equal(0);    
+  });
 });
