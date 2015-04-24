@@ -17,6 +17,7 @@ module.exports = React.createClass({
     outerRadius: React.PropTypes.number,
     labelTextFill: React.PropTypes.string,
     valueTextFill: React.PropTypes.string,
+    sectorBorderColor: React.PropTypes.string,
     showInnerLabels: React.PropTypes.bool,
     showOuterLabels: React.PropTypes.bool
   },
@@ -26,7 +27,7 @@ module.exports = React.createClass({
       labelTextFill: 'black',
       valueTextFill: 'white',
       showInnerLabels: true,
-      showOuterLabels: true,
+      showOuterLabels: true
     };
   },
 
@@ -102,6 +103,7 @@ module.exports = React.createClass({
         <path
           d={arc()}
           fill={props.fill}
+          stroke={props.sectorBorderColor}
         />
         {outerLabels}
         {innerLabels}

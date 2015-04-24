@@ -315,7 +315,7 @@ var Demos = React.createClass({
         </div>
         <div className="row">
           <div className="col-md-6">
-            <PieChart data={pieData} width={450} height={400} radius={110} innerRadius={20} title="Pie Chart" />
+            <PieChart data={pieData} width={450} height={400} radius={110} innerRadius={20} sectorBorderColor="white" title="Pie Chart" />
           </div>
           <div className="col-md-6">
             <pre ref='block'>
@@ -338,6 +338,7 @@ var Demos = React.createClass({
   height={400}
   radius={100}
   innerRadius={20}
+  sectorBorderColor="white"
   title="Pie Chart"
 />`
                 }
