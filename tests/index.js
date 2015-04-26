@@ -1,3 +1,5 @@
+require('./legendchart-tests');
+require('./basicchart-tests');
 require('./barchart-tests');
 require('./linechart-tests');
 require('./areachart-tests');
