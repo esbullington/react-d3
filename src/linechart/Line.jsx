@@ -8,7 +8,6 @@ module.exports = React.createClass({
   displayName: 'Line',
 
   propTypes: {
-    data: React.PropTypes.object,
     strokeWidth: React.PropTypes.number,
     path: React.PropTypes.string,
     fill: React.PropTypes.string,
@@ -51,13 +50,13 @@ module.exports = React.createClass({
   },
 
   _animateLine(id) {
-    this.setState({ 
+    this.setState({
       lineStrokeWidth: this.state.lineStrokeWidth * 1.8
     });
   },
 
   _restoreLine(id) {
-    this.setState({ 
+    this.setState({
       lineStrokeWidth: this.props.strokeWidth
     });
   },
