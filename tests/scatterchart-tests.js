@@ -43,11 +43,15 @@ describe('ScatterChart', function() {
     var circleOneColor = circleOne.props.fill;
 
     expect(circleOne.props.r).to.equal(pointRadius);
-    structure.cursor('voronoi').cursor(circleOne.props.id).update(()=> 'active' );
+    // seems unnatural, dislike this approach
+    //structure.cursor('voronoi').cursor(circleOne.props.id).update(()=> 'active' );
+    TestUtils.Simulate.mouseOver(circleOne);
     expect(circleOne.props.r).to.be.above(pointRadius);
     expect(circleOne.props.fill).to.not.equal(circleOneColor);
 
-    structure.cursor('voronoi').cursor(circleOne.props.id).update(()=> 'inactive' );
+    //structure.cursor('voronoi').cursor(circleOne.props.id).update(()=> 'inactive' );
+    // https://github.com/facebook/react/issues/1297
+    TestUtils.SimulateNative.mouseOut(circleOne);
     expect(circleOne.props.r).to.equal(pointRadius);
     expect(circleOne.props.fill).to.equal(circleOneColor);
   });
