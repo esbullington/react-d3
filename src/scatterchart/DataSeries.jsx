@@ -1,7 +1,55 @@
 'use strict';
 
 var React = require('react');
-var Circle = require('./Circle');
+var d3 = require('d3');
+var CircleAndPolygon = require('./CircleAndPolygon');
+var shade = require('../utils').shade;
+
+// polygon acts as a container to handle animation(state)
+var Polygon = React.createClass({
+
+  getDefaultProps() {
+    return { 
+      initialRadius: 5,
+      initialFill: '#1f77b4'
+    }
+  },
+
+  getInitialState() {
+    return { 
+      circleRadius: 5,
+      circleFill : '#1f77b4'
+    }
+  },
+
+  _animateCircle() {
+    this.setState({ 
+      circleRadius: this.state.circleRadius * ( 5 / 4 ),
+      circleFill: shade(this.props.initialFill, 0.2)
+    });
+  },
+
+  _restoreCircle() {
+    this.setState({ 
+      circleRadius: this.props.initialRadius,
+      circleFill: this.props.initialFill
+    });
+  },
+
+  render: function() {
+    return (
+      <CircleAndPolygon
+        handleOnMouseOver={this._animateCircle}
+        handleOnMouseLeave={this._restoreCircle}
+        cx={this.props.cx}
+        cy={this.props.cy}
+        vnode={this.props.vnode}
+        r={this.state.circleRadius}
+        fill={this.state.circleFill}
+      />
+    )
+  }
+});
 
 
 module.exports = React.createClass({
@@ -23,16 +71,22 @@ module.exports = React.createClass({
       yAccessor: (d) => d.y
     };
   },
-
-  render() {
-
+  
+  render: function() {
     var props = this.props;
+    var xScale = props.xScale;
+    var yScale = props.yScale;
+    var xAccessor = props.xAccessor,
+        yAccessor = props.yAccessor,
+        cx, cy;
 
-    var circles = props.data.map((point, idx) => {
+    var voronoi = d3.geom.voronoi()
+      .x(function(d){ return xScale(d.coord.x); })
+      .y(function(d){ return yScale(d.coord.y); })
+      .clipExtent([[0, 0], [ props.width , props.height]]);
 
-      var xAccessor = props.xAccessor,
-          yAccessor = props.yAccessor,
-          cx, cy;
+    var regions = voronoi(this.props.data).map(function(vnode, idx) {
+      var point = vnode.point.coord;
       if (Object.prototype.toString.call(xAccessor(point)) === '[object Date]') {
         cx = props.xScale(xAccessor(point).getTime());
       } else {
@@ -43,32 +97,17 @@ module.exports = React.createClass({
       } else {
         cy = props.yScale(yAccessor(point));
       }
-
-      var id = props.name + '-' + idx;
-
-      // Create an immstruct reference for the circle id
-      // and set it to 'inactive'
-      props.structure.cursor('voronoi').set(id, 'inactive');
-
-      // Having set the Voronoi circle id cursor to 'inactive'
-      // We now pass on the Voronoi circle id reference to the
-      // circle component, where it will be observed and dereferenced
-      var voronoiRef = props.structure.reference(['voronoi', id]);
-
-      return (<Circle
-        voronoiRef={voronoiRef}
-        cx={cx}
-        cy={cy}
-        r={props.pointRadius}
-        fill={props.fill}
-        key={idx}
-        id={id}
-      />);
-    }, this);
+      return (
+          <Polygon 
+              key={idx} id={vnode.point.id} vnode={vnode} 
+              cx={cx} cy={cy} r={this}
+          />
+      )
+    }.bind(this));
 
     return (
-      <g>
-        {circles}
+      <g id="voronoi">
+        {regions}
       </g>
     );
   }
