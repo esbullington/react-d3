@@ -1,10 +1,11 @@
-#Misc nodejs ignores
+# Misc nodejs ignores
 node_modules
 browser-bundle.js
 browser-bundle.min.js
 npm-debug.log
 *~
-#Vim swap file
+
+# Vim swap file
 *.swp
 
 # npm package
@@ -13,5 +14,8 @@ npm-debug.log
 # Build directory
 build/
 
-#intellij
+# intellij
 .idea/
+
+# OSX
+.DS_Store
