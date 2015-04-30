@@ -18,8 +18,8 @@ module.exports = React.createClass({
   displayName: 'AreaChart',
 
   propTypes: {
-    margins: React.PropTypes.object,
-    interpolate: React.PropTypes.bool,
+    margins:           React.PropTypes.object,
+    interpolate:       React.PropTypes.bool,
     interpolationType: React.PropTypes.string
  },
 
@@ -100,7 +100,7 @@ module.exports = React.createClass({
           <DataSeries
             key={idx}
             seriesName={d.name}
-            colors={props.colors}
+            fill={props.colors(props.colorAccessor(d, idx))}
             index={idx}
             xScale={xScale}
             yScale={yScale}
@@ -119,6 +119,7 @@ module.exports = React.createClass({
         data={data}
         margins={props.margins}
         colors={props.colors}
+        colorAccessor={props.colorAccessor}
         width={props.width}
         height={props.height}
         title={props.title}
