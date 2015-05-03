@@ -2,55 +2,7 @@
 
 var React = require('react');
 var d3 = require('d3');
-var CircleAndPolygon = require('./CircleAndPolygon');
-var shade = require('../utils').shade;
-
-// polygon acts as a container to handle animation(state)
-var Polygon = React.createClass({
-
-  getDefaultProps() {
-    return { 
-      initialRadius: 5,
-      initialFill: '#1f77b4'
-    }
-  },
-
-  getInitialState() {
-    return { 
-      circleRadius: 5,
-      circleFill : '#1f77b4'
-    }
-  },
-
-  _animateCircle() {
-    this.setState({ 
-      circleRadius: this.state.circleRadius * ( 5 / 4 ),
-      circleFill: shade(this.props.initialFill, 0.2)
-    });
-  },
-
-  _restoreCircle() {
-    this.setState({ 
-      circleRadius: this.props.initialRadius,
-      circleFill: this.props.initialFill
-    });
-  },
-
-  render: function() {
-    return (
-      <CircleAndPolygon
-        handleOnMouseOver={this._animateCircle}
-        handleOnMouseLeave={this._restoreCircle}
-        cx={this.props.cx}
-        cy={this.props.cy}
-        vnode={this.props.vnode}
-        r={this.state.circleRadius}
-        fill={this.state.circleFill}
-      />
-    )
-  }
-});
-
+var VoronoiCircleContainer = require('./VoronoiCircleContainer');
 
 module.exports = React.createClass({
 
@@ -97,10 +49,11 @@ module.exports = React.createClass({
       } else {
         cy = props.yScale(yAccessor(point));
       }
+
       return (
-          <Polygon 
+          <VoronoiCircleContainer 
               key={idx} id={vnode.point.id} vnode={vnode} 
-              cx={cx} cy={cy} r={this}
+              cx={cx} cy={cy} circleRadius={props.circleRadius}
           />
       )
     }.bind(this));

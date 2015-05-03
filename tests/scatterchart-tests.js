@@ -6,13 +6,10 @@ describe('ScatterChart', function() {
   it('renders scatterchart', function() {
     var React = require('react/addons');
     var ScatterChart = require('../src/scatterchart').ScatterChart;
-    var immstruct = require('immstruct');
     var generate = require('./utils/datagen').generateArrayOfPoints;
     var TestUtils = React.addons.TestUtils;
     var points = 5;
-    var pointRadius = 5;
-
-    var structure = immstruct('scatterChart', { voronoi: {}, voronoiSeries: {}});
+    var circleRadius = 5;
 
     // Render a scatterchart 
     var data = [
@@ -27,7 +24,7 @@ describe('ScatterChart', function() {
     ];
 
     var scatterchart = TestUtils.renderIntoDocument(
-      <ScatterChart structure={structure} data={data} width={400} height={200} pointRadius={pointRadius} />
+      <ScatterChart data={data} width={400} height={200} circleRadius={circleRadius} />
     );
 
     var scatterchartGroup = TestUtils.findRenderedDOMComponentWithClass(
@@ -42,17 +39,15 @@ describe('ScatterChart', function() {
     var circleOne = circles[0];
     var circleOneColor = circleOne.props.fill;
 
-    expect(circleOne.props.r).to.equal(pointRadius);
-    // seems unnatural, dislike this approach
-    //structure.cursor('voronoi').cursor(circleOne.props.id).update(()=> 'active' );
+    expect(circleOne.props.r).to.equal(circleRadius);
     TestUtils.Simulate.mouseOver(circleOne);
-    expect(circleOne.props.r).to.be.above(pointRadius);
+    expect(circleOne.props.r).to.be.above(circleRadius);
     expect(circleOne.props.fill).to.not.equal(circleOneColor);
 
-    //structure.cursor('voronoi').cursor(circleOne.props.id).update(()=> 'inactive' );
+    // TestUtils.Simulate.mouseOut(circleOne) is not working here
     // https://github.com/facebook/react/issues/1297
     TestUtils.SimulateNative.mouseOut(circleOne);
-    expect(circleOne.props.r).to.equal(pointRadius);
+    expect(circleOne.props.r).to.equal(circleRadius);
     expect(circleOne.props.fill).to.equal(circleOneColor);
   });
 });

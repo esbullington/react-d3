@@ -18,13 +18,13 @@ module.exports = React.createClass({
 
   propTypes: {
     margins: React.PropTypes.object,
-    pointRadius: React.PropTypes.number,
+    circleRadius: React.PropTypes.number,
     hoverAnimation: React.PropTypes.bool
  },
 
   getDefaultProps() {
     return {
-      pointRadius: 3,
+      circleRadius: 3,
       margins: {top: 10, right: 20, bottom: 50, left: 45},
       hoverAnimation: true
     };
@@ -94,6 +94,8 @@ module.exports = React.createClass({
             yScale={scales.yScale}
             xAccessor={props.xAccessor}
             yAccessor={props.yAccessor}
+            hoverAnimation={props.hoverAnimation}
+            circleRadius={props.circleRadius}
             data={allValues}
             width={innerWidth}
             height={innerHeight}
