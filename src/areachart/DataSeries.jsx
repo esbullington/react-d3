@@ -9,6 +9,7 @@ module.exports = React.createClass({
   displayName: 'DataSeries',
 
   propTypes: {
+    fill:              React.PropTypes.string,
     interpolationType: React.PropTypes.string
   },
 
@@ -17,7 +18,7 @@ module.exports = React.createClass({
       interpolationType: 'linear'
     };
   },
-  
+
   render() {
 
     var props = this.props;
@@ -31,7 +32,7 @@ module.exports = React.createClass({
     var path = area(props.data);
 
     return (
-      <Area fill={props.colors(props.index)} path={path} />
+      <Area fill={props.fill} path={path} />
     );
   }
 

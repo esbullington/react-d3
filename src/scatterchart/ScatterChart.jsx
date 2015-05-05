@@ -17,15 +17,15 @@ module.exports = React.createClass({
   displayName: 'ScatterChart',
 
   propTypes: {
-    margins: React.PropTypes.object,
-    circleRadius: React.PropTypes.number,
+    margins:        React.PropTypes.object,
+    circleRadius:   React.PropTypes.number,
     hoverAnimation: React.PropTypes.bool
  },
 
   getDefaultProps() {
     return {
-      circleRadius: 3,
-      margins: {top: 10, right: 20, bottom: 50, left: 45},
+      margins:        {top: 10, right: 20, bottom: 50, left: 45},
+      circleRadius:   3,
       hoverAnimation: true
     };
   },
@@ -78,6 +78,25 @@ module.exports = React.createClass({
 
     var trans = "translate(" + (props.yAxisOffset < 0 ? props.margins.left + Math.abs(props.yAxisOffset) : props.margins.left) + "," + props.margins.top + ")";
 
+    var dataSeriesArray = props.data.map( (series, idx) => {
+      return (
+          <DataSeries
+            xScale={scales.xScale}
+            yScale={scales.yScale}
+            name={series.name}
+            data={series.values}
+            width={innerWidth}
+            height={innerHeight}
+            fill={props.colors(props.colorAccessor(series, idx))}
+            pointRadius={props.pointRadius}
+            key={idx}
+            hoverAnimation={props.hoverAnimation}
+            xAccessor={props.xAccessor}
+            yAccessor={props.yAccessor}
+          />
+      );
+    });
+
     return (
       <Chart
         viewBox={props.viewBox}
@@ -85,6 +104,7 @@ module.exports = React.createClass({
         data={props.data}
         margins={props.margins}
         colors={props.colors}
+        colorAccessor={props.colorAccessor}
         width={props.width}
         height={props.height}
         title={props.title}>

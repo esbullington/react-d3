@@ -7,28 +7,36 @@ module.exports = React.createClass({
   displayName: 'BasicChart',
 
   propTypes: {
-    title: React.PropTypes.node,
-    viewBox: React.PropTypes.string,
-    width: React.PropTypes.number,
-    height: React.PropTypes.number,
+    title:    React.PropTypes.node,
+    viewBox:  React.PropTypes.string,
+    width:    React.PropTypes.number,
+    height:   React.PropTypes.number,
     children: React.PropTypes.node,
   },
 
   _renderTitle() {
-    if (this.props.title != null) {
+    var props = this.props;
+
+    if (props.title != null) {
       return (
-        <h4>{this.props.title}</h4>
+        <h4>{props.title}</h4>
       );
+    } else {
+      return null;
     }
   },
 
   _renderChart: function() {
+    var props = this.props;
+
     return (
       <svg
-        viewBox={this.props.viewBox}
-        width={this.props.width}
-        height={this.props.height}
-      >{this.props.children}</svg>
+        viewBox={props.viewBox}
+        width={props.width}
+        height={props.height}
+      >
+        {props.children}
+      </svg>
     );
   },
 
@@ -40,8 +48,7 @@ module.exports = React.createClass({
           {this._renderChart()}
         </div>
       );
-    }
-    else {
+    } else {
       return this._renderChart();
     }
   }

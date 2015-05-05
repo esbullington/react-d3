@@ -11,7 +11,7 @@ Please read the [development documentation](https://github.com/esbullington/reac
 * All new charts and bug fixes should be tested by one or more specs (we use Karma with Chai for assertions, please see [here](https://github.com/esbullington/react-d3/blob/master/tests/piechart-tests.js) for an example test).  Tests are not required for minor new features, but would be appreciated.
 * Please try to include an example if you submit a new chart.
 * Please set the default use style on charts that use a multicolor palette to use d3's `d3.scale.category20c()` [color palette](https://github.com/mbostock/d3/wiki/Ordinal-Scales#category20c).  For single color charts, please set the default fill color to `#3182bd`.
-* We try follow the rules contained in [Google's JavaScript Style Guide](http://google-styleguide.googlecode.com/svn/trunk/javascriptguide.xml).  No tabs, 2-space indents, etc.
+* We try follow the rules contained in [Google's JavaScript Style Guide](https://google-styleguide.googlecode.com/svn/trunk/javascriptguide.xml).  No tabs, 2-space indents, etc.
 
 ## React-specific guidelines
 * Please try to avoid React `state` to the extent possible. Ideally, data should be passed in to the top-level chart via `props` and then passed down to child components as needed.  This isn't because React `state` is inherently bad, but it breaks referential integrity, makes it hard to reason about errors, and prevents certain optimizations that are otherwise possible.
@@ -21,6 +21,6 @@ Please read the [development documentation](https://github.com/esbullington/reac
 
 ## SVG Performance Notes
 * Whenever possible, do transforms on groups of items (using `<g>`) as opposed to individual items.
- 
+
 ## Project Suggestions
 * This is open source, and we're all doing this on our own free will, by choice.  So please be nice to each other, and treat both users and fellow devs with respect when filing issues and submitting or commenting on pull requests.

@@ -17,45 +17,49 @@ module.exports = React.createClass({
   displayName: 'CandleStickChart',
 
   propTypes: {
-    data: React.PropTypes.oneOfType([
-      React.PropTypes.array,
-      React.PropTypes.object
-    ]),
-    yAxisTickValues: React.PropTypes.array,
-    yAxisTickCount: React.PropTypes.number,
-    yAxisFormatter: React.PropTypes.func,
-    yAccessor: React.PropTypes.func,
-    xAxisTickValues: React.PropTypes.array,
+    data:              React.PropTypes.oneOfType([
+                         React.PropTypes.array,
+                         React.PropTypes.object
+                       ]),
+    yAxisTickValues:   React.PropTypes.array,
+    yAxisTickCount:    React.PropTypes.number,
+    yAxisFormatter:    React.PropTypes.func,
+    yAccessor:         React.PropTypes.func,
+    xAxisTickValues:   React.PropTypes.array,
     xAxisTickInterval: React.PropTypes.object,
-    xAxisFormatter: React.PropTypes.func,
-    xAccessor: React.PropTypes.func,
-    fillUp: React.PropTypes.func,
-    fillDown: React.PropTypes.func,
-    width: React.PropTypes.number,
-    height: React.PropTypes.number,
-    title: React.PropTypes.string,
+    xAxisFormatter:    React.PropTypes.func,
+    xAccessor:         React.PropTypes.func,
+    fillUp:            React.PropTypes.func,
+    fillUpAccessor:    React.PropTypes.func,
+    fillDown:          React.PropTypes.func,
+    fillDownAccessor:  React.PropTypes.func,
+    width:             React.PropTypes.number,
+    height:            React.PropTypes.number,
+    title:             React.PropTypes.string,
   },
 
   getDefaultProps() {
     return {
-      data: [],
-      fillUp: (i) => 'white',
-      fillDown: d3.scale.category20c(),
-      margins: {top: 10, right: 20, bottom: 30, left: 45},
-      legendOffset: 120,
-      width: 400,
-      height: 200,
-      title: '',
-      xAccessor: (d) => d.x,
-      yAccessor: (d) => ({ open: d.open, high: d.high, low: d.low, close: d.close })
+      data:             [],
+      fillUp:           (value) => 'white',
+      fillUpAccessor:   (d, idx) => idx,
+      fillDown:         d3.scale.category20c(),
+      fillDownAccessor: (d, idx) => idx,
+      margins:          {top: 10, right: 20, bottom: 30, left: 45},
+      legendOffset:     120,
+      width:            400,
+      height:           200,
+      title:            '',
+      xAccessor:        (d) => d.x,
+      yAccessor:        (d) => ({ open: d.open, high: d.high, low: d.low, close: d.close })
     };
   },
 
   render() {
 
-    var structure = immstruct('candlestickChart', { voronoi: {} });
-
     var props = this.props;
+
+    var structure = immstruct('candlestickChart', { voronoi: {} });
 
     // Calculate inner chart dimensions
     var innerWidth, innerHeight;
@@ -76,7 +80,6 @@ module.exports = React.createClass({
         xValues = flattenedData.xValues,
         yValues = flattenedData.yValues;
 
-
     var scales = utils.calculateScales(innerWidth, innerHeight, xValues, yValues);
 
     var trans = `translate(${ props.yAxisOffset < 0 ? props.margins.left + Math.abs(props.yAxisOffset) : props.margins.left},${ props.margins.top })`;
@@ -84,17 +87,15 @@ module.exports = React.createClass({
     var dataSeries = props.data.map( (series, idx) => {
       return (
           <DataSeries
-            structure={structure}
-            series={series}
             key={idx}
+            structure={structure}
             seriesName={series.name}
-            colors={props.colors}
             index={idx}
             xScale={scales.xScale}
             yScale={scales.yScale}
             data={series.values}
-            fillUp={this.props.fillUp(idx)}
-            fillDown={this.props.fillDown(idx)}
+            fillUp={props.fillUp(props.fillUpAccessor(series, idx))}
+            fillDown={props.fillDown(props.fillDownAccessor(series, idx))}
             xAccessor={props.xAccessor}
             yAccessor={props.yAccessor}
           />
@@ -104,10 +105,10 @@ module.exports = React.createClass({
     return (
       <Chart
         viewBox={props.viewBox}
-        width={this.props.width}
-        height={this.props.height}
-        margins={this.props.margins}
-        title={this.props.title}
+        width={props.width}
+        height={props.height}
+        margins={props.margins}
+        title={props.title}
       >
         <g transform={trans} className='rd3-candlestick'>
           {dataSeries}
