@@ -81,7 +81,6 @@ module.exports = React.createClass({
     var dataSeriesArray = props.data.map( (series, idx) => {
       return (
           <DataSeries
-            structure={structure}
             xScale={scales.xScale}
             yScale={scales.yScale}
             name={series.name}
