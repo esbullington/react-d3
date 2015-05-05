@@ -6,10 +6,8 @@ var common = require('../common');
 var Chart = common.Chart;
 var XAxis = common.XAxis;
 var YAxis = common.YAxis;
-var Voronoi = common.Voronoi;
+var DataSeries = require('./DataSeries')
 var utils = require('../utils');
-var immstruct = require('immstruct');
-var DataSeries = require('./DataSeries');
 var CartesianChartPropsMixin = require('../mixins').CartesianChartPropsMixin;
 
 module.exports = React.createClass({
@@ -20,13 +18,13 @@ module.exports = React.createClass({
 
   propTypes: {
     margins: React.PropTypes.object,
-    pointRadius: React.PropTypes.number,
+    circleRadius: React.PropTypes.number,
     hoverAnimation: React.PropTypes.bool
  },
 
   getDefaultProps() {
     return {
-      pointRadius: 3,
+      circleRadius: 3,
       margins: {top: 10, right: 20, bottom: 50, left: 45},
       hoverAnimation: true
     };
@@ -35,8 +33,6 @@ module.exports = React.createClass({
   _calculateScales: utils.calculateScales,
 
   render() {
-
-    var structure = immstruct('scatterChart', { voronoi: {}});
 
     var props = this.props;
 
@@ -82,26 +78,6 @@ module.exports = React.createClass({
 
     var trans = "translate(" + (props.yAxisOffset < 0 ? props.margins.left + Math.abs(props.yAxisOffset) : props.margins.left) + "," + props.margins.top + ")";
 
-    var dataSeriesArray = props.data.map( (series, idx) => {
-      return (
-          <DataSeries
-            structure={structure}
-            xScale={scales.xScale}
-            yScale={scales.yScale}
-            name={series.name}
-            data={series.values}
-            width={innerWidth}
-            height={innerHeight}
-            fill={props.colors(idx)}
-            pointRadius={props.pointRadius}
-            key={idx}
-            hoverAnimation={props.hoverAnimation}
-            xAccessor={props.xAccessor}
-            yAccessor={props.yAccessor}
-          />
-      );
-    });
-
     return (
       <Chart
         viewBox={props.viewBox}
@@ -113,15 +89,17 @@ module.exports = React.createClass({
         height={props.height}
         title={props.title}>
         <g transform={trans} className='rd3-scatterchart'>
-          <Voronoi
-            structure={structure}
-            data={allValues}
-            yScale={scales.yScale}
+          <DataSeries
             xScale={scales.xScale}
+            yScale={scales.yScale}
+            xAccessor={props.xAccessor}
+            yAccessor={props.yAccessor}
+            hoverAnimation={props.hoverAnimation}
+            circleRadius={props.circleRadius}
+            data={allValues}
             width={innerWidth}
             height={innerHeight}
           />
-          {dataSeriesArray}
           <XAxis
             xAxisClassName="rd3-scatterchart-xaxis"
             strokeWidth="1"

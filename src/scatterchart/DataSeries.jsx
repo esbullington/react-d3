@@ -1,8 +1,8 @@
 'use strict';
 
 var React = require('react');
-var Circle = require('./Circle');
-
+var d3 = require('d3');
+var VoronoiCircleContainer = require('./VoronoiCircleContainer');
 
 module.exports = React.createClass({
 
@@ -23,16 +23,22 @@ module.exports = React.createClass({
       yAccessor: (d) => d.y
     };
   },
-
-  render() {
-
+  
+  render: function() {
     var props = this.props;
+    var xScale = props.xScale;
+    var yScale = props.yScale;
+    var xAccessor = props.xAccessor,
+        yAccessor = props.yAccessor,
+        cx, cy;
 
-    var circles = props.data.map((point, idx) => {
+    var voronoi = d3.geom.voronoi()
+      .x(function(d){ return xScale(d.coord.x); })
+      .y(function(d){ return yScale(d.coord.y); })
+      .clipExtent([[0, 0], [ props.width , props.height]]);
 
-      var xAccessor = props.xAccessor,
-          yAccessor = props.yAccessor,
-          cx, cy;
+    var regions = voronoi(this.props.data).map(function(vnode, idx) {
+      var point = vnode.point.coord;
       if (Object.prototype.toString.call(xAccessor(point)) === '[object Date]') {
         cx = props.xScale(xAccessor(point).getTime());
       } else {
@@ -44,31 +50,17 @@ module.exports = React.createClass({
         cy = props.yScale(yAccessor(point));
       }
 
-      var id = props.name + '-' + idx;
-
-      // Create an immstruct reference for the circle id
-      // and set it to 'inactive'
-      props.structure.cursor('voronoi').set(id, 'inactive');
-
-      // Having set the Voronoi circle id cursor to 'inactive'
-      // We now pass on the Voronoi circle id reference to the
-      // circle component, where it will be observed and dereferenced
-      var voronoiRef = props.structure.reference(['voronoi', id]);
-
-      return (<Circle
-        voronoiRef={voronoiRef}
-        cx={cx}
-        cy={cy}
-        r={props.pointRadius}
-        fill={props.fill}
-        key={idx}
-        id={id}
-      />);
-    }, this);
+      return (
+          <VoronoiCircleContainer 
+              key={idx} id={vnode.point.id} vnode={vnode} 
+              cx={cx} cy={cy} circleRadius={props.circleRadius}
+          />
+      )
+    }.bind(this));
 
     return (
-      <g>
-        {circles}
+      <g id="voronoi">
+        {regions}
       </g>
     );
   }
