@@ -25,7 +25,7 @@ module.exports = React.createClass({
   getDefaultProps() {
     return {
       margins:        {top: 10, right: 20, bottom: 50, left: 45},
-      circleRadius:   3
+      circleRadius:   3,
       hoverAnimation: true
     };
   },
