@@ -55,7 +55,7 @@ module.exports = React.createClass({
               key={idx} id={vnode.point.id} vnode={vnode} 
               cx={cx} cy={cy} circleRadius={props.circleRadius}
           />
-      )
+      );
     }.bind(this));
 
     return (

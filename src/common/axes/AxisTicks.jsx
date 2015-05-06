@@ -54,9 +54,9 @@ module.exports = React.createClass({
     }
 
     if (props.tickFormatting) {
-        tickFormat = props.tickFormatting
+        tickFormat = props.tickFormatting;
     } else if (scale.tickFormat) {
-        tickFormat = scale.tickFormat.apply(scale, props.tickArguments)
+        tickFormat = scale.tickFormat.apply(scale, props.tickArguments);
     } else {
         tickFormat = (d)=> d;
 

@@ -14,14 +14,14 @@ module.exports = React.createClass({
       circleRadius: 3,
       initialFill: '#1f77b4',
       hoverAnimation: true
-    }
+    };
   },
 
   getInitialState() {
     return { 
       circleRadius: this.props.circleRadius,
       circleFill: this.props.initialFill
-    }
+    };
   },
 
   render() {
