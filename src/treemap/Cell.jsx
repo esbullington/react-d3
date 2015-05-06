@@ -30,10 +30,12 @@ module.exports = React.createClass({
     return (
       <g transform={t}>
         <rect
-          fill={props.fill} 
+          className='rd3-treemap-cell'
           width={props.width}
           height={props.height}
-          className='rd3-treemap-cell'
+          fill={props.fill} 
+          onMouseOver={props.handleMouseOver}
+          onMouseLeave={props.handleMouseLeave}
         />
         <text
           x={props.width / 2}
