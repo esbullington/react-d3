@@ -3,12 +3,9 @@
 var React = require('react');
 var d3 = require('d3');
 var DataSeries = require('./DataSeries');
-var common = require('../common');
-var Chart = common.Chart;
-var XAxis = common.XAxis;
-var YAxis = common.YAxis;
-var mixins = require('../mixins');
-var CartesianChartPropsMixin = mixins.CartesianChartPropsMixin;
+
+var { Chart, XAxis, YAxis } = require('../common');
+var { CartesianChartPropsMixin } = require('../mixins');
 
 module.exports = React.createClass({
 
