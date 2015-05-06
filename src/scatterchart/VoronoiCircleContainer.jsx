@@ -14,7 +14,7 @@ module.exports = React.createClass({
       circleRadius: 3,
       circleFill: '#1f77b4',
       hoverAnimation: true
-    }
+    };
   },
 
   getInitialState() {
@@ -22,6 +22,7 @@ module.exports = React.createClass({
       circleRadius: this.props.circleRadius,
       circleFill: this.props.circleFill
     }
+
   },
 
   render() {

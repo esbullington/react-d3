@@ -33,11 +33,48 @@ module.exports = React.createClass({
 
   render() {
     var props = this.props;
+
     var arc = d3.svg.arc()
       .innerRadius(props.innerRadius)
       .outerRadius(props.outerRadius)
       .startAngle(props.startAngle)
       .endAngle(props.endAngle);
+
+    return (
+      <g className='rd3-piechart-arc' >
+        <path
+          d={arc()}
+          fill={props.fill}
+          stroke={props.sectorBorderColor}
+        />
+        {props.showOuterLabels ? this.renderOuterLabel(props, arc) : null}
+        {props.showInnerLabels ? this.renderInnerLabel(props, arc) : null}
+      </g>
+    );
+  },
+
+  renderInnerLabel(props, arc) {
+
+    // make value text can be formatted
+    var formattedValue = props.valueTextFormatter(props.value);
+
+    return (
+        <text
+          className='rd3-piechart-value'
+          transform={`translate(${arc.centroid()})`}
+          dy='.35em'
+          style={{
+            'shapeRendering': 'crispEdges',
+            'textAnchor': 'middle',
+            'fill': props.valueTextFill
+          }}>
+          { formattedValue }
+        </text>
+      );
+  },
+
+  renderOuterLabel(props, arc) {
+
     var rotate = `rotate(${ (props.startAngle+props.endAngle)/2 * (180/Math.PI) })`;
     var positions = arc.centroid();
     var radius = props.outerRadius;
@@ -47,12 +84,8 @@ module.exports = React.createClass({
     var y      = -dist * Math.cos(angle);
     var t = `translate(${x},${y})`;
 
-    // make value text can be formatted
-    var formattedValue = props.valueTextFormatter(props.value);
-
-    var outerLabels = null;
-    if (this.props.showOuterLabels) {
-      outerLabels = [
+    return  (
+      <g>
         <line
           x1='0'
           x2='0'
@@ -66,7 +99,6 @@ module.exports = React.createClass({
           }}
           >
         </line>
-        ,
         <text
           className='rd3-piechart-label'
           transform={t}
@@ -78,36 +110,7 @@ module.exports = React.createClass({
           }}>
           {props.label}
         </text>
-      ]
-    }
-
-    var innerLabels = null;
-    if (this.props.showInnerLabels) {
-      innerLabels = (
-        <text
-          className='rd3-piechart-value'
-          transform={`translate(${arc.centroid()})`}
-          dy='.35em'
-          style={{
-            'shapeRendering': 'crispEdges',
-            'textAnchor': 'middle',
-            'fill': props.valueTextFill
-          }}>
-          { formattedValue }
-        </text>
-      );
-    }
-
-    return (
-      <g className='rd3-piechart-arc' >
-        <path
-          d={arc()}
-          fill={props.fill}
-          stroke={props.sectorBorderColor}
-        />
-        {outerLabels}
-        {innerLabels}
       </g>
     );
-  },
+  }
 });

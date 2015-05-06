@@ -11,7 +11,7 @@ module.exports = React.createClass({
     return { 
       circleRadius: 3,
       circleFill: '#1f77b4',
-    }
+    };
   },
 
   render() {
