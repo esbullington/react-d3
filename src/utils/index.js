@@ -114,7 +114,8 @@ exports.flattenData = (data, xAccessor, yAccessor) => {
           x: x,
           y: yNode,
         },
-        id: `${ series.name }-${ idx }`
+        id: `${ series.name }-${ idx }`,
+        seriesName: series.name
       };
       allValues.push(pointItem);
     });

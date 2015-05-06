@@ -12,7 +12,7 @@ module.exports = React.createClass({
   getDefaultProps() {
     return { 
       circleRadius: 3,
-      initialFill: '#1f77b4',
+      circleFill: '#1f77b4',
       hoverAnimation: true
     }
   },
@@ -20,7 +20,7 @@ module.exports = React.createClass({
   getInitialState() {
     return { 
       circleRadius: this.props.circleRadius,
-      circleFill: this.props.initialFill
+      circleFill: this.props.circleFill
     }
   },
 
@@ -56,14 +56,14 @@ module.exports = React.createClass({
   _animateCircle() {
     this.setState({ 
       circleRadius: this.props.circleRadius * ( 5 / 4 ),
-      circleFill: shade(this.props.initialFill, 0.2)
+      circleFill: shade(this.props.circleFill, 0.2)
     });
   },
 
   _restoreCircle() {
     this.setState({ 
       circleRadius: this.props.circleRadius,
-      circleFill: this.props.initialFill
+      circleFill: this.props.circleFill
     });
   },
 

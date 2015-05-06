@@ -2,13 +2,10 @@
 
 var React = require('react');
 var d3 = require('d3');
-var common = require('../common');
-var Chart = common.Chart;
-var XAxis = common.XAxis;
-var YAxis = common.YAxis;
+var { Chart, XAxis, YAxis } = require('../common');
 var DataSeries = require('./DataSeries')
 var utils = require('../utils');
-var CartesianChartPropsMixin = require('../mixins').CartesianChartPropsMixin;
+var { CartesianChartPropsMixin } = require('../mixins');
 
 module.exports = React.createClass({
 
@@ -73,9 +70,7 @@ module.exports = React.createClass({
     var allValues = flattenedData.allValues,
         xValues = flattenedData.xValues,
         yValues = flattenedData.yValues;
-
     var scales = this._calculateScales(innerWidth, innerHeight, xValues, yValues);
-
     var trans = "translate(" + (props.yAxisOffset < 0 ? props.margins.left + Math.abs(props.yAxisOffset) : props.margins.left) + "," + props.margins.top + ")";
 
     return (
@@ -84,7 +79,6 @@ module.exports = React.createClass({
         legend={props.legend}
         data={props.data}
         margins={props.margins}
-        colors={props.colors}
         width={props.width}
         height={props.height}
         title={props.title}>
@@ -97,6 +91,7 @@ module.exports = React.createClass({
             hoverAnimation={props.hoverAnimation}
             circleRadius={props.circleRadius}
             data={allValues}
+            colors={props.colors}
             width={innerWidth}
             height={innerHeight}
           />
