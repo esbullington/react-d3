@@ -7,16 +7,11 @@ var shade = require('../utils').shade;
 module.exports = React.createClass({
 
   propTypes: {
-    width: React.PropTypes.number,
-    height: React.PropTypes.number,
     fill: React.PropTypes.string,
-    x: React.PropTypes.number,
-    y: React.PropTypes.number
   },
 
   getDefaultProps() {
     return {
-      offset: 0,
       fill: '#3182BD'
     };
   },
