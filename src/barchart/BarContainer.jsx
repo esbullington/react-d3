@@ -26,12 +26,14 @@ module.exports = React.createClass({
 
   render() {
 
+    var props = this.props;
+
     return (
       <Bar
-        {...this.props}
+        {...props}
         fill={this.state.fill}
-        handleMouseOver={this._animateBar}
-        handleMouseLeave={this._restoreBar}
+        handleMouseOver={props.hoverAnimation ? this._animateBar : null}
+        handleMouseLeave={props.hoverAnimation ? this._restoreBar : null}
       />
     );
   },

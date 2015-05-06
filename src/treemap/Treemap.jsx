@@ -18,7 +18,8 @@ module.exports = React.createClass({
     fontSize: React.PropTypes.oneOfType([ 
       React.PropTypes.string,
       React.PropTypes.number
-    ])
+    ]),
+    hoverAnimation: React.PropTypes.bool
 
   },
 
@@ -29,7 +30,8 @@ module.exports = React.createClass({
       heigth: 200,
       title: '',
       textColor: '#f7f7f7',
-      fontSize: '0.85em'
+      fontSize: '0.85em',
+      hoverAnimation: true
     };
   },
 
@@ -50,6 +52,7 @@ module.exports = React.createClass({
             data={props.data}
             textColor={props.textColor}
             fontSize={props.fontSize}
+            hoverAnimation={props.hoverAnimation}
           />
         </g>
       </Chart>

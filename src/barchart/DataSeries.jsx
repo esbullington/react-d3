@@ -44,6 +44,7 @@ module.exports = React.createClass({
           availableHeight={props.height}
           fill={props.fill}
           key={idx}
+          hoverAnimation={props.hoverAnimation}
         />
       );
     });

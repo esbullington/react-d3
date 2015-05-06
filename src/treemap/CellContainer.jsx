@@ -24,12 +24,14 @@ module.exports = React.createClass({
 
   render() {
 
+    var props = this.props;
+
     return (
       <Cell 
-        {...this.props}
+        {...props}
         fill={this.state.fill}
-        handleMouseOver={this._animateCell}
-        handleMouseLeave={this._restoreCell}
+        handleMouseOver={props.hoverAnimation ? this._animateCell : null}
+        handleMouseLeave={props.hoverAnimation ? this._restoreCell : null}
       />
     );
   },

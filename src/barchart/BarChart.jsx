@@ -20,14 +20,16 @@ module.exports = React.createClass({
     margins: React.PropTypes.object,
     height: React.PropTypes.number,
     fill: React.PropTypes.string,
-    title: React.PropTypes.string
+    title: React.PropTypes.string,
+    hoverAnimation: React.PropTypes.bool
   },
 
   getDefaultProps() {
     return {
       yAxisTickCount: 4,
       margins: {top: 10, right: 20, bottom: 40, left: 45},
-      fill: "#3182bd"
+      fill: "#3182bd",
+      hoverAnimation: true
     };
   },
 
@@ -69,6 +71,7 @@ module.exports = React.createClass({
             width={props.width - sideMargins}
             height={props.height - topBottomMargins}
             fill={props.fill}
+            hoverAnimation={props.hoverAnimation}
           />
           <YAxis
             yAxisClassName='rd3-barchart-yaxis'
