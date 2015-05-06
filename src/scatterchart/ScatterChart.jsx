@@ -6,7 +6,7 @@ var common = require('../common');
 var Chart = common.Chart;
 var XAxis = common.XAxis;
 var YAxis = common.YAxis;
-var DataSeries = require('./DataSeries')
+var DataSeries = require('./DataSeries');
 var utils = require('../utils');
 var CartesianChartPropsMixin = require('../mixins').CartesianChartPropsMixin;
 

@@ -1,7 +1,7 @@
 'use strict';
 
 var React = require('react');
-var Bar = require('./Rect');
+var Bar = require('./Bar');
 var shade = require('../utils').shade;
 
 module.exports = React.createClass({

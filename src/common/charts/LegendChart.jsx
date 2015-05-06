@@ -53,8 +53,8 @@ module.exports = React.createClass({
       return (
         <h4>{this.props.title}</h4>
       );
-      return null;
     }
+    return null;
   },
 
   render() {
