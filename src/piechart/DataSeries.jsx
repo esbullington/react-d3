@@ -2,7 +2,7 @@
 
 var React = require('react');
 var d3 = require('d3');
-var Arc = require('./Arc');
+var ArcContainer = require('./ArcContainer');
 
 
 module.exports = React.createClass({
@@ -40,7 +40,7 @@ module.exports = React.createClass({
 
     var arcs = arcData.map((arc, idx) => {
       return (
-        <Arc
+        <ArcContainer
           startAngle={arc.startAngle}
           endAngle={arc.endAngle}
           outerRadius={props.radius}
