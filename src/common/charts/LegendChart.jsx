@@ -57,7 +57,6 @@ module.exports = React.createClass({
 
   _renderTitle() {
     var props = this.props;
-
     if (props.title != null) {
       return <h4>{props.title}</h4>;
     }
