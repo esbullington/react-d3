@@ -2,7 +2,7 @@
 
 var React = require('react');
 var d3 = require('d3');
-var Cell = require('./Cell');
+var CellContainer = require('./CellContainer');
 
 
 module.exports = React.createClass({
@@ -41,7 +41,7 @@ module.exports = React.createClass({
 
     var cells = treemap(data).map((node, idx) => {
       return (
-        <Cell
+        <CellContainer
           x={node.x}
           y={node.y}
           width={node.dx}
@@ -51,6 +51,7 @@ module.exports = React.createClass({
           fontSize={props.fontSize}
           textColor={props.textColor}
           key={idx}
+          hoverAnimation={props.hoverAnimation}
         />
       );
     }, this);

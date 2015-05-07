@@ -358,6 +358,7 @@ var Demos = React.createClass({
               data={treemapData}
               textColor="#484848"
               fontColor="12px"
+              hoverAnimation={false}
             />
           </div>
           <div className="col-md-6">
@@ -385,6 +386,7 @@ var treemapData = [
   textColor="#484848"
   fontSize="12px"
   title="Treemap"
+  hoverAnimation={false}
 />`
                 }
               </code>

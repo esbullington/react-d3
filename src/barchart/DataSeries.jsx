@@ -2,7 +2,7 @@
 
 var React = require('react');
 var d3 = require('d3');
-var Bar = require('./Bar');
+var BarContainer = require('./BarContainer');
 
 module.exports = React.createClass({
 
@@ -34,16 +34,17 @@ module.exports = React.createClass({
       .domain(d3.range(props.values.length))
       .rangeRoundBands([0, props.width], props.padding);
 
-    var bars = props.values.map(function(point, idx) {
+    var bars = props.values.map((point, idx) => {
       return (
-        <Bar
-          height={props.yScale(0) - props.yScale(point)}
+        <BarContainer
+          height={Math.abs(props.yScale(0) - props.yScale(point))}
           width={xScale.rangeBand()}
           x={xScale(idx)}
           y={props.yScale(Math.max(0, point))}
           availableHeight={props.height}
           fill={props.fill}
           key={idx}
+          hoverAnimation={props.hoverAnimation}
         />
       );
     });

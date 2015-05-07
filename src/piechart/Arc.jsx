@@ -46,6 +46,8 @@ module.exports = React.createClass({
           d={arc()}
           fill={props.fill}
           stroke={props.sectorBorderColor}
+          onMouseOver={props.handleMouseOver}
+          onMouseLeave={props.handleMouseLeave}
         />
         {props.showOuterLabels ? this.renderOuterLabel(props, arc) : null}
         {props.showInnerLabels ? this.renderInnerLabel(props, arc) : null}
@@ -54,10 +56,8 @@ module.exports = React.createClass({
   },
 
   renderInnerLabel(props, arc) {
-
     // make value text can be formatted
     var formattedValue = props.valueTextFormatter(props.value);
-
     return (
         <text
           className='rd3-piechart-value'

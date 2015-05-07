@@ -12,7 +12,8 @@ module.exports = React.createClass({
   getDefaultProps: function() {
     return {
       title: '',
-      valueTextFormatter: (val) => `${ val }%`
+      valueTextFormatter: (val) => `${ val }%`,
+      hoverAnimation: true
     };
   },
 
@@ -28,7 +29,8 @@ module.exports = React.createClass({
     title: React.PropTypes.string,
     showInnerLabels: React.PropTypes.bool,
     showOuterLabels: React.PropTypes.bool,
-    sectorBorderColor: React.PropTypes.string
+    sectorBorderColor: React.PropTypes.string,
+    hoverAnimation: React.PropTypes.bool
   },
 
   render: function() {
@@ -60,6 +62,7 @@ module.exports = React.createClass({
             showInnerLabels={props.showInnerLabels}
             showOuterLabels={props.showOuterLabels}
             sectorBorderColor={props.sectorBorderColor}
+            hoverAnimation={props.hoverAnimation}
           />
         </g>
       </Chart>
