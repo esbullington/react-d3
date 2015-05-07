@@ -9,35 +9,38 @@ module.exports = React.createClass({
 
   displayName: 'PieChart',
 
-  getDefaultProps: function() {
-    return {
-      title: '',
-      valueTextFormatter: (val) => `${ val }%`,
-      hoverAnimation: true
-    };
+  propTypes: {
+    data:               React.PropTypes.array,
+    radius:             React.PropTypes.number,
+    cx:                 React.PropTypes.number,
+    cy:                 React.PropTypes.number,
+    labelTextFill:      React.PropTypes.string,
+    valueTextFill:      React.PropTypes.string,
+    valueTextFormatter: React.PropTypes.func,
+    colors:             React.PropTypes.func,
+    colorAccessor:      React.PropTypes.func,
+    title:              React.PropTypes.string,
+    showInnerLabels:    React.PropTypes.bool,
+    showOuterLabels:    React.PropTypes.bool,
+    sectorBorderColor:  React.PropTypes.string
   },
 
-  propTypes: {
-    radius: React.PropTypes.number,
-    data: React.PropTypes.array,
-    cx: React.PropTypes.number,
-    cy: React.PropTypes.number,
-    labelTextFill: React.PropTypes.string,
-    valueTextFill: React.PropTypes.string,
-    valueTextFormatter: React.PropTypes.func,
-    colors: React.PropTypes.func,
-    title: React.PropTypes.string,
-    showInnerLabels: React.PropTypes.bool,
-    showOuterLabels: React.PropTypes.bool,
-    sectorBorderColor: React.PropTypes.string,
-    hoverAnimation: React.PropTypes.bool
+  getDefaultProps: function() {
+    return {
+      data:               [],
+      title:              '',
+      colors:             d3.scale.category20c(),
+      colorAccessor:      (d, idx) => idx,
+      valueTextFormatter: (val) => `${ val }%`
+    };
   },
 
   render: function() {
     var props = this.props;
+
     var transform = `translate(${ props.cx || props.width/2 },${ props.cy || props.height/2 })`;
 
-    var data = props.data.map( (item) => item.value );
+    var values = props.data.map( (item) => item.value );
     var labels = props.data.map( (item) => item.label );
 
     return (
@@ -51,10 +54,12 @@ module.exports = React.createClass({
             labelTextFill={props.labelTextFill}
             valueTextFill={props.valueTextFill}
             valueTextFormatter={props.valueTextFormatter}
+            data={props.data}
+            values={values}
             labels={labels}
             colors={props.colors}
+            colorAccessor={props.colorAccessor}
             transform={transform}
-            data={data}
             width={props.width}
             height={props.height}
             radius={props.radius}

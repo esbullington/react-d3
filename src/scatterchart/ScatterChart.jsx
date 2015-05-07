@@ -14,15 +14,15 @@ module.exports = React.createClass({
   displayName: 'ScatterChart',
 
   propTypes: {
-    margins: React.PropTypes.object,
-    circleRadius: React.PropTypes.number,
+    margins:        React.PropTypes.object,
+    pointRadius:    React.PropTypes.number,
     hoverAnimation: React.PropTypes.bool
  },
 
   getDefaultProps() {
     return {
-      circleRadius: 3,
-      margins: {top: 10, right: 20, bottom: 50, left: 45},
+      circleRadius:    3,
+      margins:        {top: 10, right: 20, bottom: 50, left: 45},
       hoverAnimation: true
     };
   },
@@ -79,6 +79,8 @@ module.exports = React.createClass({
         legend={props.legend}
         data={props.data}
         margins={props.margins}
+        colors={props.colors}
+        colorAccessor={props.colorAccessor}
         width={props.width}
         height={props.height}
         title={props.title}>

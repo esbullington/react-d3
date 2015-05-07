@@ -8,17 +8,19 @@ module.exports = React.createClass({
   displayName: 'Legend',
 
   propTypes: {
-    width: React.PropTypes.number,
-    height: React.PropTypes.number,
-    margins: React.PropTypes.object,
-    text: React.PropTypes.string,
-    colors: React.PropTypes.func
+    width:         React.PropTypes.number,
+    height:        React.PropTypes.number,
+    margins:       React.PropTypes.object,
+    text:          React.PropTypes.string,
+    colors:        React.PropTypes.func,
+    colorAccessor: React.PropTypes.func
   },
 
   getDefaultProps: function() {
     return {
-      text: "#000",
-      colors: d3.scale.category20c()
+      text:          "#000",
+      colors:        d3.scale.category20c(),
+      colorAccessor: (d, idx) => idx,
     };
   },
 
@@ -37,16 +39,23 @@ module.exports = React.createClass({
     props.data.forEach( (series, idx) => {
 
       var itemStyle = {
-        'color': props.colors(idx),
+        'color': props.colors(props.colorAccessor(series, idx)),
         'lineHeight': '60%',
         'fontSize': '200%'
       };
 
       legendItems.push(
-            <li style={itemStyle} key={idx} >
-              <span style={textStyle}>{series.name}</span>
-            </li>
-          );
+        <li
+          style={itemStyle}
+          key={idx}
+        >
+          <span
+            style={textStyle}
+          >
+            {series.name}
+          </span>
+        </li>
+      );
 
     });
 
