@@ -30,7 +30,7 @@ module.exports = React.createClass({
     var yScale = props.yScale;
     var xAccessor = props.xAccessor,
         yAccessor = props.yAccessor,
-        cx, cy;
+        cx, cy, circleFill;
 
     var voronoi = d3.geom.voronoi()
       .x(function(d){ return xScale(d.coord.x); })
@@ -50,9 +50,11 @@ module.exports = React.createClass({
         cy = props.yScale(yAccessor(point));
       }
 
+      circleFill = props.colors(vnode.point.seriesName);
+      
       return (
           <VoronoiCircleContainer 
-              key={idx} id={vnode.point.id} vnode={vnode} 
+              key={idx} circleFill={circleFill} vnode={vnode}
               cx={cx} cy={cy} circleRadius={props.circleRadius}
           />
       );
