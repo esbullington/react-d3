@@ -73,25 +73,6 @@ module.exports = React.createClass({
     var scales = this._calculateScales(innerWidth, innerHeight, xValues, yValues);
     var trans = "translate(" + (props.yAxisOffset < 0 ? props.margins.left + Math.abs(props.yAxisOffset) : props.margins.left) + "," + props.margins.top + ")";
 
-    var dataSeriesArray = props.data.map( (series, idx) => {
-      return (
-          <DataSeries
-            xScale={scales.xScale}
-            yScale={scales.yScale}
-            name={series.name}
-            data={series.values}
-            width={innerWidth}
-            height={innerHeight}
-            fill={props.colors(props.colorAccessor(series, idx))}
-            pointRadius={props.pointRadius}
-            key={idx}
-            hoverAnimation={props.hoverAnimation}
-            xAccessor={props.xAccessor}
-            yAccessor={props.yAccessor}
-          />
-      );
-    });
-
     return (
       <Chart
         viewBox={props.viewBox}
