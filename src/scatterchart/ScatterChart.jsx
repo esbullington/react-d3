@@ -51,19 +51,6 @@ module.exports = React.createClass({
       props.data = [props.data];
     }
 
-    // // Set margins if label is set
-    // if (props.xAxisLabel) {
-    //   var orient = props.xOrient;
-    //   props.margins[orient] = props.margins[orient] + 10;
-    // }
-    //
-    // // Set margins if label is set
-    // if (props.yAxisLabel) {
-    //   var orient = props.yOrient;
-    //   props.margins[orient] = props.margins[orient] + 10;
-    // }
-
-
     // Returns an object of flattened allValues, xValues, and yValues
     var flattenedData = utils.flattenData(props.data, props.xAccessor, props.yAccessor);
 
@@ -94,6 +81,7 @@ module.exports = React.createClass({
             circleRadius={props.circleRadius}
             data={allValues}
             colors={props.colors}
+            colorAccessor={(d, i) => d}
             width={innerWidth}
             height={innerHeight}
           />
