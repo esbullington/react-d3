@@ -22,7 +22,7 @@ module.exports = React.createClass({
 
   propTypes: {
     margins:           React.PropTypes.object,
-    pointRadius:       React.PropTypes.number,
+    circleRadius:       React.PropTypes.number,
     displayDataPoints: React.PropTypes.bool,
     hoverAnimation:    React.PropTypes.bool,
     interpolate:       React.PropTypes.bool,
@@ -33,7 +33,7 @@ module.exports = React.createClass({
     return {
       margins:           {top: 10, right: 20, bottom: 40, left: 45},
       className:         'rd3-linechart',
-      pointRadius:       3,
+      circleRadius:       3,
       interpolate:       false,
       interpolationType: null,
       displayDataPoints: true,
@@ -87,7 +87,7 @@ module.exports = React.createClass({
             width={innerWidth}
             height={innerHeight}
             fill={props.colors(props.colorAccessor(series, idx))}
-            pointRadius={props.pointRadius}
+            circleRadius={props.circleRadius}
             xAccessor={props.xAccessor}
             yAccessor={props.yAccessor}
             interpolationType={interpolationType}
