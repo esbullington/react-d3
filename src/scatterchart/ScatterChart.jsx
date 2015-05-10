@@ -14,15 +14,15 @@ module.exports = React.createClass({
   displayName: 'ScatterChart',
 
   propTypes: {
-    margins: React.PropTypes.object,
-    circleRadius: React.PropTypes.number,
+    margins:        React.PropTypes.object,
+    circleRadius:   React.PropTypes.number,
     hoverAnimation: React.PropTypes.bool
  },
 
   getDefaultProps() {
     return {
-      circleRadius: 3,
-      margins: {top: 10, right: 20, bottom: 50, left: 45},
+      circleRadius:    3,
+      margins:        {top: 10, right: 20, bottom: 50, left: 45},
       hoverAnimation: true
     };
   },
@@ -51,19 +51,6 @@ module.exports = React.createClass({
       props.data = [props.data];
     }
 
-    // // Set margins if label is set
-    // if (props.xAxisLabel) {
-    //   var orient = props.xOrient;
-    //   props.margins[orient] = props.margins[orient] + 10;
-    // }
-    //
-    // // Set margins if label is set
-    // if (props.yAxisLabel) {
-    //   var orient = props.yOrient;
-    //   props.margins[orient] = props.margins[orient] + 10;
-    // }
-
-
     // Returns an object of flattened allValues, xValues, and yValues
     var flattenedData = utils.flattenData(props.data, props.xAccessor, props.yAccessor);
 
@@ -79,6 +66,8 @@ module.exports = React.createClass({
         legend={props.legend}
         data={props.data}
         margins={props.margins}
+        colors={props.colors}
+        colorAccessor={props.colorAccessor}
         width={props.width}
         height={props.height}
         title={props.title}>
@@ -92,6 +81,7 @@ module.exports = React.createClass({
             circleRadius={props.circleRadius}
             data={allValues}
             colors={props.colors}
+            colorAccessor={(d, i) => d}
             width={innerWidth}
             height={innerHeight}
           />

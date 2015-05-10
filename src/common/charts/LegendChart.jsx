@@ -8,61 +8,69 @@ module.exports = React.createClass({
   displayName: 'LegendChart',
 
   propTypes: {
-    title: React.PropTypes.node,
-    viewBox: React.PropTypes.string,
-    width: React.PropTypes.number,
-    height: React.PropTypes.number,
-    children: React.PropTypes.node,
-    legend: React.PropTypes.bool,
+    colors:         React.PropTypes.func,
+    colorAccessor:  React.PropTypes.func,
+    title:          React.PropTypes.node,
+    viewBox:        React.PropTypes.string,
+    width:          React.PropTypes.number,
+    height:         React.PropTypes.number,
+    children:       React.PropTypes.node,
+    legend:         React.PropTypes.bool,
     legendPosition: React.PropTypes.string,
-    sideOffset: React.PropTypes.number,
-    margins: React.PropTypes.object,
-    data: React.PropTypes.oneOfType([
-      React.PropTypes.object,
-      React.PropTypes.array
-    ])
+    sideOffset:     React.PropTypes.number,
+    margins:        React.PropTypes.object,
+    data:           React.PropTypes.oneOfType([
+                      React.PropTypes.object,
+                      React.PropTypes.array
+                    ])
   },
 
   getDefaultProps() {
     return {
-      data: {},
-      legend: false,
+      data:           {},
+      legend:         false,
       legendPosition: 'right',
-      sideOffset: 90
+      sideOffset:     90,
+      colors:         d3.scale.category20c(),
+      colorAccessor:  (d, idx) => idx
     };
   },
 
   _renderLegend() {
-    if (this.props.legend) {
+    var props = this.props;
+
+    if (props.legend) {
       return (
-        <Legend 
-          legendPosition={this.props.legendPosition}
-          margins={this.props.margins}
-          colors={this.props.colors}
-          data={this.props.data}
-          width={this.props.width}
-          height={this.props.height}
-          sideOffset={this.props.sideOffset}
-        /> 
+        <Legend
+          legendPosition={props.legendPosition}
+          margins={props.margins}
+          colors={props.colors}
+          colorAccessor={props.colorAccessor}
+          data={props.data}
+          width={props.width}
+          height={props.height}
+          sideOffset={props.sideOffset}
+        />
       );
     }
   },
 
   _renderTitle() {
-    if (this.props.title != null) {
-      return (
-        <h4>{this.props.title}</h4>
-      );
+    var props = this.props;
+    if (props.title != null) {
+      return <h4>{props.title}</h4>;
     }
     return null;
   },
 
   render() {
+    var props = this.props;
+
     return (
-      <div style={{'width': this.props.width, 'height': this.props.height}} >
+      <div style={{'width': props.width, 'height': props.height}} >
         {this._renderTitle()}
         {this._renderLegend()}
-        <svg viewBox={this.props.viewBox} width={this.props.width - this.props.sideOffset} height={this.props.height}>{this.props.children}</svg>
+        <svg viewBox={props.viewBox} width={props.width - props.sideOffset} height={props.height}>{props.children}</svg>
       </div>
     );
   }

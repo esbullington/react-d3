@@ -21,24 +21,23 @@ module.exports = React.createClass({
   displayName: 'LineChart',
 
   propTypes: {
-    margins: React.PropTypes.object,
-    pointRadius: React.PropTypes.number,
-    colors: React.PropTypes.func,
+    margins:           React.PropTypes.object,
+    circleRadius:       React.PropTypes.number,
     displayDataPoints: React.PropTypes.bool,
-    hoverAnimation: React.PropTypes.bool,
-    interpolate: React.PropTypes.bool,
+    hoverAnimation:    React.PropTypes.bool,
+    interpolate:       React.PropTypes.bool,
     interpolationType: React.PropTypes.string
   },
 
   getDefaultProps() {
     return {
-      margins: {top: 10, right: 20, bottom: 40, left: 45},
-      className: 'rd3-linechart',
-      pointRadius: 3,
-      interpolate: false,
+      margins:           {top: 10, right: 20, bottom: 40, left: 45},
+      className:         'rd3-linechart',
+      circleRadius:       3,
+      interpolate:       false,
       interpolationType: null,
       displayDataPoints: true,
-      hoverAnimation: true
+      hoverAnimation:    true
     };
   },
 
@@ -79,6 +78,7 @@ module.exports = React.createClass({
     var dataSeriesArray = data.map( (series, idx) => {
       return (
           <DataSeries
+            key={idx}
             structure={structure}
             xScale={scales.xScale}
             yScale={scales.yScale}
@@ -86,9 +86,8 @@ module.exports = React.createClass({
             data={series.values}
             width={innerWidth}
             height={innerHeight}
-            fill={props.colors(idx)}
-            pointRadius={props.pointRadius}
-            key={idx}
+            fill={props.colors(props.colorAccessor(series, idx))}
+            circleRadius={props.circleRadius}
             xAccessor={props.xAccessor}
             yAccessor={props.yAccessor}
             interpolationType={interpolationType}
@@ -104,6 +103,7 @@ module.exports = React.createClass({
         data={data}
         margins={props.margins}
         colors={props.colors}
+        colorAccessor={props.colorAccessor}
         width={props.width}
         height={props.height}
         title={props.title}

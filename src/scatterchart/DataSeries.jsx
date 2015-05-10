@@ -12,7 +12,8 @@ module.exports = React.createClass({
     data: React.PropTypes.array,
     fill: React.PropTypes.string,
     xAccessor: React.PropTypes.func,
-    yAccessor: React.PropTypes.func
+    yAccessor: React.PropTypes.func,
+    colorAccessor: React.PropTypes.func
   },
 
   getDefaultProps() {
@@ -50,7 +51,7 @@ module.exports = React.createClass({
         cy = props.yScale(yAccessor(point));
       }
 
-      circleFill = props.colors(vnode.point.seriesName);
+      circleFill = props.colors(props.colorAccessor(vnode.point.seriesName, idx));
       
       return (
           <VoronoiCircleContainer 

@@ -10,21 +10,25 @@ module.exports = React.createClass({
   displayName: 'DataSeries',
 
   propTypes: {
-    transform: React.PropTypes.string,
-    data: React.PropTypes.array,
-    innerRadius: React.PropTypes.number,
-    radius: React.PropTypes.number,
-    colors: React.PropTypes.func,
-    showInnerLabels: React.PropTypes.bool,
-    showOuterLabels: React.PropTypes.bool,
+    data:              React.PropTypes.array,
+    values:            React.PropTypes.array,
+    labels:            React.PropTypes.array,
+    transform:         React.PropTypes.string,
+    innerRadius:       React.PropTypes.number,
+    radius:            React.PropTypes.number,
+    colors:            React.PropTypes.func,
+    colorAccessor:     React.PropTypes.func,
+    showInnerLabels:   React.PropTypes.bool,
+    showOuterLabels:   React.PropTypes.bool,
     sectorBorderColor: React.PropTypes.string
   },
 
   getDefaultProps() {
     return {
-      innerRadius: 0,
-      data: [],
-      colors: d3.scale.category20c()
+      data:          [],
+      innerRadius:   0,
+      colors:        d3.scale.category20c(),
+      colorAccessor: (d, idx) => idx
     };
   },
 
@@ -36,11 +40,12 @@ module.exports = React.createClass({
       .pie()
       .sort(null);
 
-    var arcData = pie(props.data);
+    var arcData = pie(props.values);
 
     var arcs = arcData.map((arc, idx) => {
       return (
         <ArcContainer
+          key={idx}
           startAngle={arc.startAngle}
           endAngle={arc.endAngle}
           outerRadius={props.radius}
@@ -48,10 +53,9 @@ module.exports = React.createClass({
           labelTextFill={props.labelTextFill}
           valueTextFill={props.valueTextFill}
           valueTextFormatter={props.valueTextFormatter}
-          fill={props.colors(idx)}
+          fill={props.colors(props.colorAccessor(props.data[idx], idx))}
+          value={props.values[idx]}
           label={props.labels[idx]}
-          value={props.data[idx]}
-          key={idx}
           width={props.width}
           showInnerLabels={props.showInnerLabels}
           showOuterLabels={props.showOuterLabels}
@@ -61,7 +65,9 @@ module.exports = React.createClass({
       );
     });
     return (
-      <g className='rd3-piechart-pie' transform={props.transform} >{arcs}</g>
+      <g className='rd3-piechart-pie' transform={props.transform} >
+        {arcs}
+      </g>
     );
   }
 });
