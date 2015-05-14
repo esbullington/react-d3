@@ -10,13 +10,11 @@ var Voronoi = common.Voronoi;
 var utils = require('../utils');
 var immstruct = require('immstruct');
 var DataSeries = require('./DataSeries');
-var mixins = require('../mixins');
-var CartesianChartPropsMixin = mixins.CartesianChartPropsMixin;
-
+var { CartesianChartPropsMixin, ViewBoxMixin } = require('../mixins');
 
 module.exports = React.createClass({
 
-  mixins: [ CartesianChartPropsMixin ],
+  mixins: [ CartesianChartPropsMixin, ViewBoxMixin ],
 
   displayName: 'LineChart',
 
@@ -54,12 +52,8 @@ module.exports = React.createClass({
     // Calculate inner chart dimensions
     var innerWidth, innerHeight;
 
-    innerWidth = props.width - props.margins.left - props.margins.right;
-    innerHeight = props.height - props.margins.top - props.margins.bottom;
-
-    if (props.legend) {
-      innerWidth = innerWidth - props.legendOffset;
-    }
+    innerWidth = this.getOuterDimensions().width - props.margins.left - props.margins.right;
+    innerHeight = this.getOuterDimensions().height - props.margins.top - props.margins.bottom;
 
     if (!Array.isArray(data)) {
       data = [data];
@@ -98,7 +92,7 @@ module.exports = React.createClass({
 
     return (
       <Chart
-        viewBox={props.viewBox}
+        viewBox={this.getViewBox()}
         legend={props.legend}
         data={data}
         margins={props.margins}
