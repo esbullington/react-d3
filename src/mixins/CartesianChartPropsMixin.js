@@ -27,12 +27,11 @@ module.exports =  {
     xAxisFormatter:    React.PropTypes.func,
     legend:            React.PropTypes.bool,
     legendOffset:      React.PropTypes.number,
-    width:             React.PropTypes.number,
-    height:            React.PropTypes.number,
+    width:             React.PropTypes.node,
+    height:            React.PropTypes.node,
     xAccessor:         React.PropTypes.func,
     yAccessor:         React.PropTypes.func,
-    title:             React.PropTypes.string,
-    viewBox:           React.PropTypes.string
+    title:             React.PropTypes.string
   },
 
   getDefaultProps: function() {
@@ -56,5 +55,4 @@ module.exports =  {
       yAccessor:        (d) => d.y
     };
   }
-
 };

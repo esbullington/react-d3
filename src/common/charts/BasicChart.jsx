@@ -1,14 +1,17 @@
 'use strict';
 
 var React = require('react');
+var mixins = require('../../mixins');
+var ViewBoxMixin = mixins.ViewBoxMixin;
 
 module.exports = React.createClass({
+
+  mixins: [ ViewBoxMixin ],
 
   displayName: 'BasicChart',
 
   propTypes: {
     title:    React.PropTypes.node,
-    viewBox:  React.PropTypes.string,
     width:    React.PropTypes.number,
     height:   React.PropTypes.number,
     children: React.PropTypes.node,
@@ -31,7 +34,7 @@ module.exports = React.createClass({
 
     return (
       <svg
-        viewBox={props.viewBox}
+        viewBox={this.getViewBox()}
         width={props.width}
         height={props.height}
       >
