@@ -2,8 +2,12 @@
 
 var React = require('react');
 var Legend = require('../Legend');
+var mixins = require('../../mixins');
+var ViewBoxMixin = mixins.ViewBoxMixin;
 
 module.exports = React.createClass({
+
+  mixins: [ ViewBoxMixin ],
 
   displayName: 'LegendChart',
 
@@ -11,9 +15,8 @@ module.exports = React.createClass({
     colors:         React.PropTypes.func,
     colorAccessor:  React.PropTypes.func,
     title:          React.PropTypes.node,
-    viewBox:        React.PropTypes.string,
-    width:          React.PropTypes.number,
-    height:         React.PropTypes.number,
+    width:          React.PropTypes.node,
+    height:         React.PropTypes.node,
     children:       React.PropTypes.node,
     legend:         React.PropTypes.bool,
     legendPosition: React.PropTypes.string,
@@ -47,9 +50,8 @@ module.exports = React.createClass({
           colors={props.colors}
           colorAccessor={props.colorAccessor}
           data={props.data}
-          width={props.width}
+          width={props.sideOffset}
           height={props.height}
-          sideOffset={props.sideOffset}
         />
       );
     }
@@ -70,7 +72,7 @@ module.exports = React.createClass({
       <div style={{'width': props.width, 'height': props.height}} >
         {this._renderTitle()}
         {this._renderLegend()}
-        <svg viewBox={props.viewBox} width={props.width - props.sideOffset} height={props.height}>{props.children}</svg>
+        <svg viewBox={this.getViewBox()} width={this.getOuterDimensions().width - props.sideOffset} height={props.height}>{props.children}</svg>
       </div>
     );
   }
