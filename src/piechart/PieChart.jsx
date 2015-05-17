@@ -22,7 +22,8 @@ module.exports = React.createClass({
     title:              React.PropTypes.string,
     showInnerLabels:    React.PropTypes.bool,
     showOuterLabels:    React.PropTypes.bool,
-    sectorBorderColor:  React.PropTypes.string
+    sectorBorderColor:  React.PropTypes.string,
+    hoverAnimation:     React.PropTypes.bool
   },
 
   getDefaultProps: function() {
@@ -31,7 +32,8 @@ module.exports = React.createClass({
       title:              '',
       colors:             d3.scale.category20c(),
       colorAccessor:      (d, idx) => idx,
-      valueTextFormatter: (val) => `${ val }%`
+      valueTextFormatter: (val) => `${ val }%`,
+      hoverAnimation:     true
     };
   },
 
