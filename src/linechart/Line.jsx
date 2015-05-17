@@ -26,9 +26,16 @@ module.exports = React.createClass({
   getInitialState() {
     // state for animation usage
     return {
-      lineStrokeWidth: this.props.strokeWidth,
-      lineStroke: this.props.stroke
+      lineStroke:      this.props.stroke,
+      lineStrokeWidth: this.props.strokeWidth
     };
+  },
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      lineStroke:      nextProps.stroke,
+      lineStrokeWidth: nextProps.strokeWidth
+    });
   },
 
   componentDidMount() {

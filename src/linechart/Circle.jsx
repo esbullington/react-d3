@@ -29,6 +29,13 @@ module.exports = React.createClass({
     };
   },
 
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      circleRadius: nextProps.r,
+      circleColor:  nextProps.fill
+    });
+  },
+
   componentDidMount() {
     var props = this.props;
     // The circle reference is observed when both it is set to
@@ -63,15 +70,15 @@ module.exports = React.createClass({
       />
     );
   },
-  
+
   _animateCircle(id) {
-    this.setState({ 
+    this.setState({
       circleRadius: this.state.circleRadius * ( 5 / 4 )
     });
   },
 
   _restoreCircle(id) {
-    this.setState({ 
+    this.setState({
       circleRadius: this.props.r
     });
   }
