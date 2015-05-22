@@ -57,7 +57,17 @@ module.exports = React.createClass({
     var trans = `translate(${ margins.left },${ margins.top })`;
 
     return (
-      <Chart width={props.width} height={props.height} title={props.title}>
+      <Chart
+        viewBox={props.viewBox}
+        legend={props.legend}
+        data={data}
+        margins={props.margins}
+        colors={props.colors}
+        colorAccessor={props.colorAccessor}
+        width={props.width}
+        height={props.height}
+        title={props.title}
+      >
         <g transform={trans} className='rd3-barchart'>
           <DataSeries
             values={values}
