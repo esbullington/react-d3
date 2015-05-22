@@ -9,20 +9,19 @@ module.exports = React.createClass({
   displayName: 'DataSeries',
 
   propTypes: {
-    values: React.PropTypes.array,
-    labels: React.PropTypes.array,
-    fill: React.PropTypes.string,
-    title: React.PropTypes.string,
-    padding: React.PropTypes.number,
-    width: React.PropTypes.number,
-    height: React.PropTypes.number,
-    offset: React.PropTypes.number
+    values:        React.PropTypes.array,
+    labels:        React.PropTypes.array,
+    colors:        React.PropTypes.func,
+    colorAccessor: React.PropTypes.func,
+    width:         React.PropTypes.number,
+    height:        React.PropTypes.number,
+    offset:        React.PropTypes.number
   },
 
   getDefaultProps() {
     return {
       padding: 0.1,
-      data: []
+      values: []
     };
   },
 
@@ -42,7 +41,7 @@ module.exports = React.createClass({
           x={xScale(idx)}
           y={props.yScale(Math.max(0, point))}
           availableHeight={props.height}
-          fill={props.fill}
+          fill={props.colors(props.colorAccessor(point, idx))}
           key={idx}
           hoverAnimation={props.hoverAnimation}
         />
