@@ -2,7 +2,7 @@
 
 var React = require('react');
 var d3 = require('d3');
-var Area = require('./Area');
+var AreaContainer = require('./AreaContainer');
 
 module.exports = React.createClass({
 
@@ -32,7 +32,11 @@ module.exports = React.createClass({
     var path = area(props.data);
 
     return (
-      <Area fill={props.fill} path={path} />
+      <AreaContainer 
+        fill={props.fill} 
+        hoverAnimation={props.hoverAnimation}
+        path={path} 
+      />
     );
   }
 

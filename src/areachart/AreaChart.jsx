@@ -3,12 +3,8 @@
 var React = require('react');
 var d3 = require('d3');
 var DataSeries = require('./DataSeries');
-var common = require('../common');
-var Chart = common.Chart;
-var XAxis = common.XAxis;
-var YAxis = common.YAxis;
-var mixins = require('../mixins');
-var CartesianChartPropsMixin = mixins.CartesianChartPropsMixin;
+var { Chart, XAxis, YAxis } = require('../common');
+var { CartesianChartPropsMixin } = require('../mixins');
 
 
 module.exports = React.createClass({
@@ -20,7 +16,8 @@ module.exports = React.createClass({
   propTypes: {
     margins:           React.PropTypes.object,
     interpolate:       React.PropTypes.bool,
-    interpolationType: React.PropTypes.string
+    interpolationType: React.PropTypes.string,
+    hoverAnimation:    React.PropTypes.bool,
  },
 
   getDefaultProps() {
@@ -29,7 +26,8 @@ module.exports = React.createClass({
       yAxisTickCount: 4,
       interpolate: false,
       interpolationType: null,
-      className: 'rd3-areachart'
+      className: 'rd3-areachart',
+      hoverAnimation: true
     };
   },
 
@@ -108,6 +106,7 @@ module.exports = React.createClass({
             xAccessor={props.xAccessor}
             yAccessor={props.yAccessor}
             interpolationType={interpolationType}
+            hoverAnimation={props.hoverAnimation}
           />
         );
       });
