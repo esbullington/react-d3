@@ -2,17 +2,10 @@
 
 var React = require('react');
 var d3 = require('d3');
-var common = require('../common');
-var Chart = common.Chart;
-var XAxis = common.XAxis;
-var YAxis = common.YAxis;
-var Voronoi = common.Voronoi;
+var { Chart, XAxis, YAxis } = require('../common');
+var DataSeries = require('./DataSeries')
 var utils = require('../utils');
-var immstruct = require('immstruct');
-var DataSeries = require('./DataSeries');
-var mixins = require('../mixins');
-var CartesianChartPropsMixin = mixins.CartesianChartPropsMixin;
-
+var { CartesianChartPropsMixin } = require('../mixins');
 
 module.exports = React.createClass({
 
@@ -21,35 +14,28 @@ module.exports = React.createClass({
   displayName: 'LineChart',
 
   propTypes: {
-    margins:           React.PropTypes.object,
-    circleRadius:       React.PropTypes.number,
-    displayDataPoints: React.PropTypes.bool,
-    hoverAnimation:    React.PropTypes.bool,
-    interpolate:       React.PropTypes.bool,
-    interpolationType: React.PropTypes.string
-  },
+    margins:        React.PropTypes.object,
+    circleRadius:   React.PropTypes.number,
+    hoverAnimation: React.PropTypes.bool
+ },
 
   getDefaultProps() {
     return {
-      margins:           {top: 10, right: 20, bottom: 40, left: 45},
-      className:         'rd3-linechart',
-      circleRadius:       3,
-      interpolate:       false,
-      interpolationType: null,
-      displayDataPoints: true,
-      hoverAnimation:    true
+      circleRadius:    3,
+      margins:        {top: 10, right: 20, bottom: 50, left: 45},
+      hoverAnimation: true
     };
   },
 
-  render() {
+  _calculateScales: utils.calculateScales,
 
-    var structure = immstruct('lineChart', { voronoi: {}, voronoiSeries: {}});
+  render() {
 
     var props = this.props;
 
-    var data = props.data;
-
-    var interpolationType = props.interpolationType || (props.interpolate ? 'cardinal' : 'linear');
+    if (this.props.data && this.props.data.length < 1) {
+      return <g></g>;
+    }
 
     // Calculate inner chart dimensions
     var innerWidth, innerHeight;
@@ -61,86 +47,71 @@ module.exports = React.createClass({
       innerWidth = innerWidth - props.legendOffset;
     }
 
-    if (!Array.isArray(data)) {
-      data = [data];
+    if (!Array.isArray(props.data)) {
+      props.data = [props.data];
     }
 
-    var flattenedData = utils.flattenData(data, props.xAccessor, props.yAccessor);
+    // Returns an object of flattened allValues, xValues, and yValues
+    var flattenedData = utils.flattenData(props.data, props.xAccessor, props.yAccessor);
 
     var allValues = flattenedData.allValues,
         xValues = flattenedData.xValues,
         yValues = flattenedData.yValues;
-
-    var scales = utils.calculateScales(innerWidth, innerHeight, xValues, yValues);
-
-    var trans = `translate(${ props.margins.left },${ props.margins.top })`;
-
-    var dataSeriesArray = data.map( (series, idx) => {
-      return (
-          <DataSeries
-            key={idx}
-            structure={structure}
-            xScale={scales.xScale}
-            yScale={scales.yScale}
-            seriesName={series.name}
-            data={series.values}
-            width={innerWidth}
-            height={innerHeight}
-            fill={props.colors(props.colorAccessor(series, idx))}
-            circleRadius={props.circleRadius}
-            xAccessor={props.xAccessor}
-            yAccessor={props.yAccessor}
-            interpolationType={interpolationType}
-            displayDataPoints={props.displayDataPoints}
-          />
-      );
-    });
+    var scales = this._calculateScales(innerWidth, innerHeight, xValues, yValues);
+    var trans = "translate(" + (props.yAxisOffset < 0 ? props.margins.left + Math.abs(props.yAxisOffset) : props.margins.left) + "," + props.margins.top + ")";
 
     return (
       <Chart
         viewBox={props.viewBox}
         legend={props.legend}
-        data={data}
+        data={props.data}
         margins={props.margins}
         colors={props.colors}
-        colorAccessor={props.colorAccessor}
+        colorAccessor={(d, i) => d}
         width={props.width}
         height={props.height}
-        title={props.title}
-      >
-        <g transform={trans} className={props.className}>
-          {dataSeriesArray}
-          {props.hoverAnimation ? <Voronoi
-            structure={structure}
-            data={allValues}
+        title={props.title}>
+        <g transform={trans} className='rd3-linechart'>
+          <DataSeries
             xScale={scales.xScale}
             yScale={scales.yScale}
+            xAccessor={props.xAccessor}
+            yAccessor={props.yAccessor}
+            hoverAnimation={props.hoverAnimation}
+            circleRadius={props.circleRadius}
+            data={props.data}
+            value={allValues}
+            colors={props.colors}
+            colorAccessor={(d, i) => d}
             width={innerWidth}
             height={innerHeight}
-          /> : <g/> }
+          />
           <XAxis
-            xAxisClassName='rd3-linechart-xaxis'
-            tickFormatting={props.xAxisFormatter}
+            xAxisClassName="rd3-linechart-xaxis"
+            strokeWidth="1"
             xAxisTickValues={props.xAxisTickValues}
+            xAxisTickInterval={props.xAxisTickInterval}
+            xAxisOffset={props.xAxisOffset}
+            xScale={scales.xScale}
             xAxisLabel={props.xAxisLabel}
             xAxisLabelOffset={props.xAxisLabelOffset}
-            xAxisTickCount={props.xAxisTickCount}
+            tickFormatting={props.xAxisFormatter}
             xOrient={props.xOrient}
-            xScale={scales.xScale}
+            data={props.data}
             margins={props.margins}
             width={innerWidth}
             height={innerHeight}
             stroke={props.axesColor}
-            strokeWidth={props.strokeWidth}
           />
           <YAxis
-            yAxisClassName='rd3-linechart-yaxis'
-            tickFormatting={props.yAxisFormatter}
+            yAxisClassName="rd3-linechart-yaxis"
+            yScale={scales.yScale}
             yAxisTickValues={props.yAxisTickValues}
+            yAxisTickCount={props.yAxisTickCount}
+            yAxisOffset={props.yAxisOffset}
             yAxisLabel={props.yAxisLabel}
             yAxisLabelOffset={props.yAxisLabelOffset}
-            yAxisTickCount={props.yAxisTickCount}
-            yScale={scales.yScale}
+            tickFormatting={props.yAxisFormatter}
             yOrient={props.yOrient}
             margins={props.margins}
             width={innerWidth}
