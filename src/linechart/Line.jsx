@@ -16,66 +16,20 @@ module.exports = React.createClass({
 
   getDefaultProps() {
     return {
-      stroke: '#1f77b4',
-      strokeWidth: 1.5,
+      stroke: '#3182bd',
       fill: 'none',
+      strokeWidth: 1,
       className: 'rd3-linechart-path'
     };
   },
 
-  getInitialState() {
-    // state for animation usage
-    return {
-      lineStroke:      this.props.stroke,
-      lineStrokeWidth: this.props.strokeWidth
-    };
-  },
-
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      lineStroke:      nextProps.stroke,
-      lineStrokeWidth: nextProps.strokeWidth
-    });
-  },
-
-  componentDidMount() {
-    var props = this.props;
-    // The circle reference is observed when both it is set to
-    // active, and to inactive, so we have to check which one
-    var unobserve = props.voronoiSeriesRef.observe(() => {
-      var lineStatus = props.voronoiSeriesRef.cursor().deref();
-      if (lineStatus === 'active') {
-        this._animateLine(props.id);
-      } else if (lineStatus === 'inactive') {
-        this._restoreLine(props.id);
-      }
-    });
-  },
-
-  componentWillUnmount() {
-    this.props.voronoiSeriesRef.destroy();
-  },
-
-  _animateLine(id) {
-    this.setState({
-      lineStrokeWidth: this.state.lineStrokeWidth * 1.8
-    });
-  },
-
-  _restoreLine(id) {
-    this.setState({
-      lineStrokeWidth: this.props.strokeWidth
-    });
-  },
-
   render() {
     var props = this.props;
-    var state = this.state;
     return (
       <path
         d={props.path}
-        stroke={state.lineStroke}
-        strokeWidth={state.lineStrokeWidth}
+        stroke={props.stroke}
+        strokeWidth={props.strokeWidth}
         fill={props.fill}
         className={props.className}
       />
