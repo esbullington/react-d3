@@ -66,10 +66,6 @@ module.exports = React.createClass({
     innerWidth = props.width - props.margins.left - props.margins.right;
     innerHeight = props.height - props.margins.top - props.margins.bottom;
 
-    if (props.legend) {
-      innerWidth = innerWidth - props.legendOffset;
-    }
-
     if (!Array.isArray(props.data)) {
       props.data = [props.data];
     }

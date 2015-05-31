@@ -11,12 +11,12 @@ module.exports = React.createClass({
     colors:         React.PropTypes.func,
     colorAccessor:  React.PropTypes.func,
     title:          React.PropTypes.node,
-    viewBox:        React.PropTypes.string,
-    width:          React.PropTypes.number,
-    height:         React.PropTypes.number,
+    width:          React.PropTypes.node,
+    height:         React.PropTypes.node,
     children:       React.PropTypes.node,
     legend:         React.PropTypes.bool,
     legendPosition: React.PropTypes.string,
+    viewBox:        React.PropTypes.string,
     sideOffset:     React.PropTypes.number,
     margins:        React.PropTypes.object,
     data:           React.PropTypes.oneOfType([
@@ -47,9 +47,8 @@ module.exports = React.createClass({
           colors={props.colors}
           colorAccessor={props.colorAccessor}
           data={props.data}
-          width={props.width}
+          width={props.sideOffset}
           height={props.height}
-          sideOffset={props.sideOffset}
         />
       );
     }
@@ -69,8 +68,14 @@ module.exports = React.createClass({
     return (
       <div style={{'width': props.width, 'height': props.height}} >
         {this._renderTitle()}
-        {this._renderLegend()}
-        <svg viewBox={props.viewBox} width={props.width - props.sideOffset} height={props.height}>{props.children}</svg>
+        <div style={{ display: 'table', width: '100%', height: '100%' }}>
+          <div style={{ display: 'table-cell' }}>
+            <svg viewBox={props.viewBox} width="100%" height="100%">{props.children}</svg>
+          </div>
+          <div style={{ display: 'table-cell', width: props.sideOffset, 'vertical-align': 'top' }}>
+            {this._renderLegend()}
+          </div>
+        </div>
       </div>
     );
   }
