@@ -72,7 +72,7 @@ module.exports = React.createClass({
           <div style={{ display: 'table-cell' }}>
             <svg viewBox={props.viewBox} width="100%" height="100%">{props.children}</svg>
           </div>
-          <div style={{ display: 'table-cell', width: props.sideOffset, 'vertical-align': 'top' }}>
+          <div style={{ display: 'table-cell', width: props.sideOffset, 'verticalAlign': 'top' }}>
             {this._renderLegend()}
           </div>
         </div>

@@ -67,7 +67,7 @@ module.exports = React.createClass({
       'paddingLeft': '0',
       'marginBottom': '0',
       'marginTop': topMargin,
-      'list-style-position': 'inside'
+      'listStylePosition': 'inside'
     };
 
     return <ul style={legendBlockStyle}>{legendItems}</ul>;

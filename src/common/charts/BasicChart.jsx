@@ -9,8 +9,8 @@ module.exports = React.createClass({
 
   propTypes: {
     title:    React.PropTypes.node,
-    width:    React.PropTypes.number,
-    height:   React.PropTypes.number,
+    width:    React.PropTypes.node,
+    height:   React.PropTypes.node,
     children: React.PropTypes.node,
   },
 

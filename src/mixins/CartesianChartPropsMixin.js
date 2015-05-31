@@ -27,10 +27,10 @@ module.exports =  {
     xAxisFormatter:    React.PropTypes.func,
     legend:            React.PropTypes.bool,
     legendOffset:      React.PropTypes.number,
-    width:             React.PropTypes.oneOf([
+    width:             React.PropTypes.oneOfType([
       React.PropTypes.number, React.PropTypes.string,
     ]),
-    height:            React.PropTypes.oneOf([
+    height:            React.PropTypes.oneOfType([
       React.PropTypes.number, React.PropTypes.string,
     ]),
     xAccessor:         React.PropTypes.func,
