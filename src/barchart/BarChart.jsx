@@ -14,13 +14,12 @@ module.exports = React.createClass({
   displayName: 'BarChart',
 
   propTypes: {
-    data: React.PropTypes.array,
+    data:           React.PropTypes.array,
     yAxisTickCount: React.PropTypes.number,
-    width: React.PropTypes.number,
-    margins: React.PropTypes.object,
-    height: React.PropTypes.number,
-    fill: React.PropTypes.string,
-    title: React.PropTypes.string,
+    width:          React.PropTypes.number,
+    margins:        React.PropTypes.object,
+    height:         React.PropTypes.number,
+    title:          React.PropTypes.string,
     hoverAnimation: React.PropTypes.bool
   },
 
@@ -28,7 +27,6 @@ module.exports = React.createClass({
     return {
       yAxisTickCount: 4,
       margins: {top: 10, right: 20, bottom: 40, left: 45},
-      fill: "#3182bd",
       hoverAnimation: true
     };
   },
@@ -57,9 +55,19 @@ module.exports = React.createClass({
         .rangeRoundBands([0, props.width - sideMargins], 0.1);
 
     var trans = `translate(${ margins.left },${ margins.top })`;
-    
+
     return (
-      <Chart width={props.width} height={props.height} title={props.title}>
+      <Chart
+        viewBox={props.viewBox}
+        legend={props.legend}
+        data={props.data}
+        margins={props.margins}
+        colors={props.colors}
+        colorAccessor={props.colorAccessor}
+        width={props.width}
+        height={props.height}
+        title={props.title}
+      >
         <g transform={trans} className='rd3-barchart'>
           <DataSeries
             values={values}
@@ -70,7 +78,8 @@ module.exports = React.createClass({
             data={props.data}
             width={props.width - sideMargins}
             height={props.height - topBottomMargins}
-            fill={props.fill}
+            colors={props.colors}
+            colorAccessor={props.colorAccessor}
             hoverAnimation={props.hoverAnimation}
           />
           <YAxis
