@@ -1,6 +1,7 @@
 'use strict';
 
 var React = require('react');
+var mixins = require('../../mixins');
 
 module.exports = React.createClass({
 
@@ -8,9 +9,8 @@ module.exports = React.createClass({
 
   propTypes: {
     title:    React.PropTypes.node,
-    viewBox:  React.PropTypes.string,
-    width:    React.PropTypes.number,
-    height:   React.PropTypes.number,
+    width:    React.PropTypes.node,
+    height:   React.PropTypes.node,
     children: React.PropTypes.node,
   },
 

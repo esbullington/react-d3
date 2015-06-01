@@ -59,18 +59,15 @@ module.exports = React.createClass({
 
     });
 
-    // In preparation for legend positioning
-    var legendFloat = 'right';
-
     var topMargin = props.margins.top;
 
     var legendBlockStyle = {
       'wordWrap': 'break-word',
-      'width': props.sideOffset,
+      'width': props.width,
       'paddingLeft': '0',
       'marginBottom': '0',
       'marginTop': topMargin,
-      'float': legendFloat
+      'listStylePosition': 'inside'
     };
 
     return <ul style={legendBlockStyle}>{legendItems}</ul>;

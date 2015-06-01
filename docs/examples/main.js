@@ -96,8 +96,14 @@ var Demos = React.createClass({
             <LineChart
               legend={true}
               data={lineData}
-              width={500}
-              height={300}
+              width='100%'
+              height={400}
+              viewBoxObject={{
+                x: 0,
+                y: 0,
+                width: 500,
+                height: 400
+              }}
               title="Line Chart"
               yAxisLabel="Altitude"
               xAxisLabel="Elapsed Time (sec)"
@@ -127,8 +133,14 @@ var Demos = React.createClass({
 `<LineChart
   legend={true}
   data={lineData}
-  width={500}
-  height={300}
+  width='100%'
+  height={400}
+  viewBoxObject={
+    x: 0,
+    y: 0,
+    width: 500,
+    height: 400
+  }
   title="Line Chart"
   yAxisLabel="Altitude"
   xAxisLabel="Elapsed Time (sec)"
@@ -185,7 +197,13 @@ var Demos = React.createClass({
           <div className="col-md-6">
             <AreaChart
               data={this.state.areaData}
-              width={500}
+              width="100%"
+              viewBoxObject={{
+                x: 0,
+                y: 0,
+                height: 400,
+                width: 500
+              }}
               height={400}
               title="Area Chart"
               xAxisTickInterval={{unit: 'year', interval: 2}}
@@ -221,8 +239,14 @@ var Demos = React.createClass({
                 {
 `<AreaChart
   data={areaData}
-  width={400}
+  width="100%"
   height={300}
+  viewBoxObject={
+    x: 0,
+    y: 0,
+    heigth: 400,
+    width: 500
+  }
   xAxisTickInterval={{unit: 'year', interval: 2}}
   title="Area Chart"
 />`
