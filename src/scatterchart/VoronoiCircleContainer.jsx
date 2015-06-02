@@ -9,69 +9,89 @@ module.exports = React.createClass({
 
   displayName: 'VornoiCircleContainer',
 
+  propTypes: {
+    circleFill:             React.PropTypes.string,
+    circleRadius:           React.PropTypes.number,
+    circleRadiusMultiplier: React.PropTypes.number,
+    className:              React.PropTypes.string,
+    hoverAnimation:         React.PropTypes.bool,
+    shadeMultiplier:        React.PropTypes.number,
+    vnode:                  React.PropTypes.array.isRequired
+  },
+
   getDefaultProps() {
-    return { 
-      circleRadius: 3,
-      circleFill: '#1f77b4',
-      hoverAnimation: true
+    return {
+      circleFill:             '#1f77b4',
+      circleRadius:           3,
+      circleRadiusMultiplier: 1.25,
+      className:              'rd3-scatterchart-voronoi-circle-container',
+      hoverAnimation:         true,
+      shadeMultiplier:        0.2
     };
   },
 
   getInitialState() {
-    return { 
-      circleRadius: this.props.circleRadius,
-      circleFill: this.props.circleFill
+    return {
+      circleFill:   this.props.circleFill,
+      circleRadius: this.props.circleRadius
     }
+  },
 
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      circleFill:   nextProps.circleFill,
+      circleRadius: nextProps.circleRadius
+    });
   },
 
   render() {
 
     var props = this.props;
 
-    // animation controller
-    var handleMouseOver, handleMouseLeave;
-    if(props.hoverAnimation) {
-      handleMouseOver = this._animateCircle;
-      handleMouseLeave = this._restoreCircle;
-    } else {
-      handleMouseOver = handleMouseLeave = null;
-    }
-
     return (
-      <g>
+      <g
+        className={props.className}
+      >
         <VoronoiCircle
-            handleMouseOver={handleMouseOver}
-            handleMouseLeave={handleMouseLeave}
-            voronoiPath={this._drawPath(props.vnode)}
-            cx={props.cx}
-            cy={props.cy}
-            circleRadius={this.state.circleRadius}
-            circleFill={this.state.circleFill}
-            className="rd3-scatterchart-circle"
+          circleFill={this.state.circleFill}
+          circleRadius={this.state.circleRadius}
+          cx={props.cx}
+          cy={props.cy}
+          handleMouseLeave={this._restoreCircle}
+          handleMouseOver={this._animateCircle}
+          voronoiPath={this._drawPath(props.vnode)}
         />
       </g>
     );
   },
 
   _animateCircle() {
-    this.setState({ 
-      circleRadius: this.props.circleRadius * ( 5 / 4 ),
-      circleFill: shade(this.props.circleFill, 0.2)
-    });
+    var props = this.props;
+
+    if(props.hoverAnimation) {
+      this.setState({
+        circleFill:   shade(props.circleFill, props.shadeMultiplier),
+        circleRadius: props.circleRadius * props.circleRadiusMultiplyer,
+      });
+    }
   },
 
   _restoreCircle() {
-    this.setState({ 
-      circleRadius: this.props.circleRadius,
-      circleFill: this.props.circleFill
-    });
+    var props = this.props;
+
+    if(this.props.hoverAnimation) {
+      this.setState({
+        circleFill:   this.props.circleFill
+        circleRadius: this.props.circleRadius
+      });
+    }
   },
 
   _drawPath: function(d) {
-    if(d === undefined) {
-      return; 
-    }  
+    if(typeof d === 'undefined') {
+      return 'M Z';
+    }
+
     return 'M' + d.join(',') + 'Z';
   },
 });

@@ -59,8 +59,8 @@ exports.flattenData = (data, xAccessor, yAccessor) => {
   var yValues = [];
   var coincidentCoordinateCheck = {};
 
-  data.forEach( (series) => {
-    series.values.forEach( (item, idx) => {
+  data.forEach( (series, i) => {
+    series.values.forEach( (item, j) => {
 
       var x = xAccessor(item);
 
@@ -100,8 +100,8 @@ exports.flattenData = (data, xAccessor, yAccessor) => {
         yNode = y;
       }
 
-      var xyCoords = `${ x }-${ yNode }`;
-      if (xyCoords in coincidentCoordinateCheck) {
+      var xyCoords = x + '-' + yNode;
+      if (coincidentCoordinateCheck.hasOwnProperty(xyCoords)) {
         // Proceed to next iteration if the x y pair already exists
         // d3's Voronoi cannot handle NaN values or coincident coords
         // But we push them into xValues and yValues above because
@@ -109,12 +109,15 @@ exports.flattenData = (data, xAccessor, yAccessor) => {
         return;
       }
       coincidentCoordinateCheck[xyCoords] = '';
+
       var pointItem = {
         coord: {
           x: x,
           y: yNode,
         },
-        id: `${ series.name }-${ idx }`,
+        d: item,
+        id: series.name + j,
+        seriesIndex: i,
         seriesName: series.name
       };
       allValues.push(pointItem);
