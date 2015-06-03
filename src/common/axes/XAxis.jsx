@@ -41,7 +41,7 @@ module.exports = React.createClass({
   render() {
     var props = this.props;
 
-    var t = 'translate(0,' + (props.xAxisOffset + props.height) + ')';
+    var t = `translate(0 ,${props.xAxisOffset + props.height})`;
 
     var tickArguments;
     if (typeof props.xAxisTickCount !== 'undefined') {

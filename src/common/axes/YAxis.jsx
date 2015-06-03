@@ -43,9 +43,9 @@ module.exports = React.createClass({
 
     var t;
     if (props.yOrient === 'right') {
-       t = 'translate(' + (props.yAxisOffset + props.width) + ',0)';
+       t = `translate(${props.yAxisOffset + props.width}, 0)`;
     } else {
-       t = 'translate(' + props.yAxisOffset + ',0)';
+       t = `translate(${props.yAxisOffset}, 0)`;
     }
 
     var tickArguments;
