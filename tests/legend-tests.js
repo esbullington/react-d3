@@ -22,10 +22,11 @@ describe('Legend', function() {
     ];
 
     var legend = TestUtils.renderIntoDocument(
-      <Legend 
+      <Legend
         data={data}
         margins={{top: 10, right: 20, bottom: 30, left: 30}}
-      /> 
+        width={90}
+      />
     );
 
     // Verify that legend list exists

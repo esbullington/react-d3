@@ -8,31 +8,34 @@ module.exports = React.createClass({
   displayName: 'LegendChart',
 
   propTypes: {
+    children:       React.PropTypes.node,
+    createClass:    React.PropTypes.string,
     colors:         React.PropTypes.func,
     colorAccessor:  React.PropTypes.func,
-    title:          React.PropTypes.node,
-    width:          React.PropTypes.node,
+    data:           React.PropTypes.array,
     height:         React.PropTypes.node,
-    children:       React.PropTypes.node,
     legend:         React.PropTypes.bool,
     legendPosition: React.PropTypes.string,
-    viewBox:        React.PropTypes.string,
-    sideOffset:     React.PropTypes.number,
     margins:        React.PropTypes.object,
-    data:           React.PropTypes.oneOfType([
-                      React.PropTypes.object,
-                      React.PropTypes.array
-                    ])
+    sideOffset:     React.PropTypes.number,
+    svgClassName:   React.PropTypes.string,
+    title:          React.PropTypes.node,
+    titleClassName: React.PropTypes.string,
+    viewBox:        React.PropTypes.string,
+    width:          React.PropTypes.node
   },
 
   getDefaultProps() {
     return {
-      data:           {},
+      className:      'rd3-legend-chart',
+      colors:         d3.scale.category20c(),
+      colorAccessor:  (d, idx) => idx,
+      data:           [],
       legend:         false,
       legendPosition: 'right',
       sideOffset:     90,
-      colors:         d3.scale.category20c(),
-      colorAccessor:  (d, idx) => idx
+      svgClassName:   'rd3-chart',
+      titleClassName: 'rd3-chart-title'
     };
   },
 
@@ -42,13 +45,12 @@ module.exports = React.createClass({
     if (props.legend) {
       return (
         <Legend
-          legendPosition={props.legendPosition}
-          margins={props.margins}
           colors={props.colors}
           colorAccessor={props.colorAccessor}
           data={props.data}
+          legendPosition={props.legendPosition}
+          margins={props.margins}
           width={props.sideOffset}
-          height={props.height}
         />
       );
     }
@@ -56,21 +58,46 @@ module.exports = React.createClass({
 
   _renderTitle() {
     var props = this.props;
+
     if (props.title != null) {
-      return <h4>{props.title}</h4>;
+      return (
+        <h4
+          className={props.titleClassName}
+        >
+          {props.title}
+        </h4>
+      );
     }
     return null;
+  },
+
+  _renderChart: function() {
+    var props = this.props;
+
+    return (
+      <svg
+        className={props.svgClassName}
+        height="100%"
+        viewBox={props.viewBox}
+        width="100%"
+      >
+        {props.children}
+      </svg>
+    );
   },
 
   render() {
     var props = this.props;
 
     return (
-      <div style={{'width': props.width, 'height': props.height}} >
+      <div
+        className={props.className}
+        style={{'width': props.width, 'height': props.height}}
+      >
         {this._renderTitle()}
         <div style={{ display: 'table', width: '100%', height: '100%' }}>
           <div style={{ display: 'table-cell' }}>
-            <svg viewBox={props.viewBox} width="100%" height="100%">{props.children}</svg>
+            {this._renderChart()}
           </div>
           <div style={{ display: 'table-cell', width: props.sideOffset, 'verticalAlign': 'top' }}>
             {this._renderLegend()}
