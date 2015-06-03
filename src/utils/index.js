@@ -117,8 +117,8 @@ exports.flattenData = (data, xAccessor, yAccessor) => {
         },
         d: item,
         id: series.name + j,
-        seriesIndex: i,
-        seriesName: series.name
+        series: series,
+        seriesIndex: i
       };
       allValues.push(pointItem);
     });
