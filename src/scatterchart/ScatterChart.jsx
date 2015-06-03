@@ -43,14 +43,15 @@ module.exports = React.createClass({
 
     var props = this.props;
     var data  = props.data;
+    var margins = props.margins;
 
-    if (!data || !Array.isArray(data) || data.length < 1) {
+    if (!data || data.length < 1) {
       return null;
     }
 
     // Calculate inner chart dimensions
-    var innerWidth  = this.getOuterDimensions().width - props.margins.left - props.margins.right;
-    var innerHeight = this.getOuterDimensions().height - props.margins.top - props.margins.bottom;
+    var innerWidth  = this.getOuterDimensions().width - margins.left - margins.right;
+    var innerHeight = this.getOuterDimensions().height - margins.top - margins.bottom;
 
     // Returns an object of flattened allValues, xValues, and yValues
     var flattenedData = utils.flattenData(data, props.xAccessor, props.yAccessor);
@@ -63,7 +64,8 @@ module.exports = React.createClass({
     var xScale  = scales.xScale;
     var yScale  = scales.yScale;
 
-    var transform = 'translate(' + (props.yAxisOffset < 0 ? props.margins.left + Math.abs(props.yAxisOffset) : props.margins.left) + ',' + props.margins.top + ')';
+    var x = props.yAxisOffset < 0 ? (margins.left + Math.abs(props.yAxisOffset)) : margins.left;
+    var transform = `translate(${x}, ${margins.top})`;
 
     return (
       <Chart
@@ -72,7 +74,7 @@ module.exports = React.createClass({
         data={data}
         height={props.height}
         legend={props.legend}
-        margins={props.margins}
+        margins={margins}
         title={props.title}
         viewBox={this.getViewBox()}
         width={props.width}
@@ -97,7 +99,7 @@ module.exports = React.createClass({
           <XAxis
             data={data}
             height={innerHeight}
-            margins={props.margins}
+            margins={margins}
             stroke={props.axesColor}
             strokeWidth={props.xAxisStrokeWidth.toString()}
             tickFormatting={props.xAxisFormatter}
@@ -115,7 +117,7 @@ module.exports = React.createClass({
             data={data}
             width={innerWidth}
             height={innerHeight}
-            margins={props.margins}
+            margins={margins}
             stroke={props.axesColor}
             strokeWidth={props.yAxisStrokeWidth.toString()}
             tickFormatting={props.yAxisFormatter}

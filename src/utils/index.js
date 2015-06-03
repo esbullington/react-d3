@@ -100,7 +100,7 @@ exports.flattenData = (data, xAccessor, yAccessor) => {
         yNode = y;
       }
 
-      var xyCoords = x + '-' + yNode;
+      var xyCoords = `${x}-${yNode}`;
       if (coincidentCoordinateCheck.hasOwnProperty(xyCoords)) {
         // Proceed to next iteration if the x y pair already exists
         // d3's Voronoi cannot handle NaN values or coincident coords
