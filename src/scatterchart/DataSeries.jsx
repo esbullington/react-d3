@@ -10,7 +10,8 @@ module.exports = React.createClass({
 
   propTypes: {
     circleRadius:  React.PropTypes.number.isRequired,
-    colors:        React.propTypes.func.isRequired,
+    className:     React.PropTypes.string,
+    colors:        React.PropTypes.func.isRequired,
     colorAccessor: React.PropTypes.func.isRequired,
     data:          React.PropTypes.array.isRequired,
     height:        React.PropTypes.number.isRequired,
@@ -22,7 +23,7 @@ module.exports = React.createClass({
 
   getDefaultProps() {
     return {
-      data: []
+      className: 'rd3-scatterchart-dataseries'
     };
   },
 
@@ -39,25 +40,31 @@ module.exports = React.createClass({
       .clipExtent([[0, 0], [ props.width , props.height]]);
 
     var regions = voronoi(props.data).map(function(vnode, idx) {
-      var point = vnode.point.coord;
+      var point = vnode.point;
+      var coord = point.coord;
+
+      var x = xAccessor(coord);
+      var y = yAccessor(coord);
+
+      // The circle coordinates
       var cx, cy;
 
-      if (Object.prototype.toString.call(xAccessor(point)) === '[object Date]') {
-        cx = xScale(xAccessor(point).getTime());
+      if (Object.prototype.toString.call(x) === '[object Date]') {
+        cx = xScale(x.getTime());
       } else {
-        cx = xScale(xAccessor(point));
+        cx = xScale(x);
       }
 
-      if (Object.prototype.toString.call(yAccessor(point)) === '[object Date]') {
-        cy = yScale(yAccessor(point).getTime());
+      if (Object.prototype.toString.call(y) === '[object Date]') {
+        cy = yScale(y.getTime());
       } else {
-        cy = yScale(yAccessor(point));
+        cy = yScale(y);
       }
 
       return (
         <VoronoiCircleContainer
           key={idx}
-          circleFill={props.colors(props.colorAccessor(vnode.point.d, idx))}
+          circleFill={props.colors(props.colorAccessor(point.d, point.seriesIndex))}
           circleRadius={props.circleRadius}
           cx={cx}
           cy={cy}
@@ -67,7 +74,9 @@ module.exports = React.createClass({
     });
 
     return (
-      <g>
+      <g
+        className={props.className}
+      >
         {regions}
       </g>
     );

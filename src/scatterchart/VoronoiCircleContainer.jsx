@@ -47,14 +47,15 @@ module.exports = React.createClass({
   render() {
 
     var props = this.props;
+    var state = this.state;
 
     return (
       <g
         className={props.className}
       >
         <VoronoiCircle
-          circleFill={this.state.circleFill}
-          circleRadius={this.state.circleRadius}
+          circleFill={state.circleFill}
+          circleRadius={state.circleRadius}
           cx={props.cx}
           cy={props.cy}
           handleMouseLeave={this._restoreCircle}
@@ -71,7 +72,7 @@ module.exports = React.createClass({
     if(props.hoverAnimation) {
       this.setState({
         circleFill:   shade(props.circleFill, props.shadeMultiplier),
-        circleRadius: props.circleRadius * props.circleRadiusMultiplyer,
+        circleRadius: props.circleRadius * props.circleRadiusMultiplier
       });
     }
   },
@@ -79,10 +80,10 @@ module.exports = React.createClass({
   _restoreCircle() {
     var props = this.props;
 
-    if(this.props.hoverAnimation) {
+    if(props.hoverAnimation) {
       this.setState({
-        circleFill:   this.props.circleFill
-        circleRadius: this.props.circleRadius
+        circleFill:   props.circleFill,
+        circleRadius: props.circleRadius
       });
     }
   },

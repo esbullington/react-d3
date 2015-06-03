@@ -14,21 +14,26 @@ module.exports = React.createClass({
   displayName: 'ScatterChart',
 
   propTypes: {
-    circleRadius:   React.PropTypes.number,
-    hoverAnimation: React.PropTypes.bool,
-    margins:        React.PropTypes.object
+    circleRadius:     React.PropTypes.number,
+    className:        React.PropTypes.string,
+    hoverAnimation:   React.PropTypes.bool,
+    margins:          React.PropTypes.object,
+    xAxisClassName:   React.PropTypes.string,
+    xAxisStrokeWidth: React.PropTypes.number,
+    yAxisClassName:   React.PropTypes.string,
+    yAxisStrokeWidth: React.PropTypes.number
  },
 
   getDefaultProps() {
     return {
-      chartClassName:   'rd3-scatterchart',
       circleRadius:     3,
+      className:        'rd3-scatterchart',
       hoverAnimation:   true,
       margins:          {top: 10, right: 20, bottom: 50, left: 45},
       xAxisClassName:   'rd3-scatterchart-xaxis',
-      xAxisStrokeWidth: '1',
+      xAxisStrokeWidth: 1,
       yAxisClassName:   'rd3-scatterchart-yaxis',
-      yAxisStrokeWidth: '1'
+      yAxisStrokeWidth: 1
     };
   },
 
@@ -73,8 +78,8 @@ module.exports = React.createClass({
         width={props.width}
       >
         <g
+          className={props.className}
           transform={transform}
-          className={props.chartClassName}
         >
           <DataSeries
             circleRadius={props.circleRadius}
@@ -84,17 +89,17 @@ module.exports = React.createClass({
             height={innerHeight}
             hoverAnimation={props.hoverAnimation}
             width={innerWidth}
-            xScale={xScale}
-            yScale={yScale}
             xAccessor={props.xAccessor}
+            xScale={xScale}
             yAccessor={props.yAccessor}
+            yScale={yScale}
           />
           <XAxis
             data={data}
             height={innerHeight}
             margins={props.margins}
             stroke={props.axesColor}
-            strokeWidth={props.xAxisStrokeWidth}
+            strokeWidth={props.xAxisStrokeWidth.toString()}
             tickFormatting={props.xAxisFormatter}
             width={innerWidth}
             xAxisClassName={props.xAxisClassName}
@@ -112,7 +117,7 @@ module.exports = React.createClass({
             height={innerHeight}
             margins={props.margins}
             stroke={props.axesColor}
-            strokeWidth={props.yAxisStrokeWidth}
+            strokeWidth={props.yAxisStrokeWidth.toString()}
             tickFormatting={props.yAxisFormatter}
             yAxisClassName={props.yAxisClassName}
             yAxisLabel={props.yAxisLabel}
