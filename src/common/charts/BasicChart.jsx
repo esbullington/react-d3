@@ -8,10 +8,21 @@ module.exports = React.createClass({
   displayName: 'BasicChart',
 
   propTypes: {
-    title:    React.PropTypes.node,
-    width:    React.PropTypes.node,
-    height:   React.PropTypes.node,
-    children: React.PropTypes.node,
+    children:       React.PropTypes.node,
+    className:      React.PropTypes.string,
+    height:         React.PropTypes.node,
+    svgClassName:   React.PropTypes.string,
+    title:          React.PropTypes.node,
+    titleClassName: React.PropTypes.string,
+    width:          React.PropTypes.node
+  },
+
+  getDefaultProps() {
+    return {
+      className:      'rd3-basic-chart',
+      svgClassName:   'rd3-chart',
+      titleClassName: 'rd3-chart-title'
+    };
   },
 
   _renderTitle() {
@@ -19,7 +30,11 @@ module.exports = React.createClass({
 
     if (props.title != null) {
       return (
-        <h4>{props.title}</h4>
+        <h4
+          className={props.titleClassName}
+        >
+          {props.title}
+        </h4>
       );
     } else {
       return null;
@@ -31,9 +46,10 @@ module.exports = React.createClass({
 
     return (
       <svg
+        className={props.svgClassName}
+        height={props.height}
         viewBox={props.viewBox}
         width={props.width}
-        height={props.height}
       >
         {props.children}
       </svg>
@@ -41,15 +57,15 @@ module.exports = React.createClass({
   },
 
   render: function() {
-    if (this.props.title != null) {
-      return (
-        <div>
-          {this._renderTitle()}
-          {this._renderChart()}
-        </div>
-      );
-    } else {
-      return this._renderChart();
-    }
+    var props = this.props;
+
+    return (
+      <div
+        className={props.className}
+      >
+        {this._renderTitle()}
+        {this._renderChart()}
+      </div>
+    );
   }
 });

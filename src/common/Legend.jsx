@@ -8,19 +8,23 @@ module.exports = React.createClass({
   displayName: 'Legend',
 
   propTypes: {
-    width:         React.PropTypes.number,
-    height:        React.PropTypes.number,
+    className:     React.PropTypes.string,
+    colors:        React.PropTypes.func,
+    colorAccessor: React.PropTypes.func,
+    data:          React.PropTypes.array.isRequired,
+    itemClassName: React.PropTypes.string,
     margins:       React.PropTypes.object,
     text:          React.PropTypes.string,
-    colors:        React.PropTypes.func,
-    colorAccessor: React.PropTypes.func
+    width:         React.PropTypes.number.isRequired
   },
 
   getDefaultProps: function() {
     return {
-      text:          "#000",
+      className:    'rd3-legend',
       colors:        d3.scale.category20c(),
       colorAccessor: (d, idx) => idx,
+      itemClassName: 'rd3-legend-item',
+      text:          '#000'
     };
   },
 
@@ -46,8 +50,9 @@ module.exports = React.createClass({
 
       legendItems.push(
         <li
-          style={itemStyle}
           key={idx}
+          className={props.itemClassName}
+          style={itemStyle}
         >
           <span
             style={textStyle}
@@ -70,7 +75,14 @@ module.exports = React.createClass({
       'listStylePosition': 'inside'
     };
 
-    return <ul style={legendBlockStyle}>{legendItems}</ul>;
+    return (
+      <ul
+        className={props.className}
+        style={legendBlockStyle}
+      >
+        {legendItems}
+      </ul>
+    );
   }
 
 });

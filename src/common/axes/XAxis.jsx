@@ -9,44 +9,45 @@ var Label = require('./Label');
 module.exports = React.createClass({
 
   displayName: 'XAxis',
-  
+
   propTypes: {
-    xAxisClassName: React.PropTypes.string.isRequired,
+    fill:            React.PropTypes.string,
+    height:          React.PropTypes.number.isRequired,
+    stroke:          React.PropTypes.string,
+    strokeWidth:     React.PropTypes.string,
+    tickStroke:      React.PropTypes.string,
+    xAxisClassName:  React.PropTypes.string,
+    xAxisLabel:      React.PropTypes.string,
     xAxisTickValues: React.PropTypes.array,
-    xOrient: React.PropTypes.oneOf(['top', 'bottom']),
-    xScale: React.PropTypes.func.isRequired,
-    height: React.PropTypes.number.isRequired,
-    fill: React.PropTypes.string,
-    stroke: React.PropTypes.string,
-    tickStroke: React.PropTypes.string,
-    strokeWidth: React.PropTypes.string,
-    xAxisOffset: React.PropTypes.number
+    xAxisOffset:     React.PropTypes.number,
+    xScale:          React.PropTypes.func.isRequired,
+    xOrient:         React.PropTypes.oneOf(['top', 'bottom'])
   },
 
   getDefaultProps() {
     return {
-      xAxisClassName: 'x axis',
+      fill:            'none',
+      stroke:          'none',
+      strokeWidth:     'none',
+      tickStroke:      '#000',
+      xAxisClassName:  'rd3-x-axis',
+      xAxisLabel:      '',
       xAxisLabelOffset: 10,
-      xOrient: 'bottom',
-      fill: 'none',
-      stroke: 'none',
-      tickStroke: '#000',
-      strokeWidth: 'none',
-      xAxisOffset: 0,
-      label: ''
+      xAxisOffset:      0,
+      xOrient:         'bottom'
     };
   },
 
   render() {
     var props = this.props;
 
-    var t = `translate(0,${props.xAxisOffset + props.height})`;
+    var t = `translate(0 ,${props.xAxisOffset + props.height})`;
 
     var tickArguments;
     if (typeof props.xAxisTickCount !== 'undefined') {
       tickArguments = [props.xAxisTickCount];
     }
-    
+
     if (typeof props.xAxisTickInterval !== 'undefined') {
       tickArguments = [d3.time[props.xAxisTickInterval.unit], props.xAxisTickInterval.interval];
     }
