@@ -2,15 +2,9 @@
 
 var React = require('react');
 var d3 = require('d3');
-var immstruct = require('immstruct');
 var utils = require('../utils');
 var DataSeries = require('./DataSeries');
-var common = require('../common');
-var Chart = common.Chart;
-var XAxis = common.XAxis;
-var YAxis = common.YAxis;
-var Voronoi = common.Voronoi;
-
+var { Chart, XAxis, YAxis } = require('../common');
 
 module.exports = React.createClass({
 
@@ -21,45 +15,48 @@ module.exports = React.createClass({
                          React.PropTypes.array,
                          React.PropTypes.object
                        ]),
-    yAxisTickValues:   React.PropTypes.array,
-    yAxisTickCount:    React.PropTypes.number,
-    yAxisFormatter:    React.PropTypes.func,
-    yAccessor:         React.PropTypes.func,
-    xAxisTickValues:   React.PropTypes.array,
-    xAxisTickInterval: React.PropTypes.object,
-    xAxisFormatter:    React.PropTypes.func,
-    xAccessor:         React.PropTypes.func,
     fillUp:            React.PropTypes.func,
     fillUpAccessor:    React.PropTypes.func,
     fillDown:          React.PropTypes.func,
     fillDownAccessor:  React.PropTypes.func,
-    width:             React.PropTypes.number,
     height:            React.PropTypes.number,
+    hoverAnimation:    React.PropTypes.bool,
     title:             React.PropTypes.string,
+    xAccessor:         React.PropTypes.func,
+    xAxisFormatter:    React.PropTypes.func,
+    xAxisTickInterval: React.PropTypes.object,
+    xAxisTickValues:   React.PropTypes.array,
+    yAccessor:         React.PropTypes.func,
+    yAxisFormatter:    React.PropTypes.func,
+    yAxisTickCount:    React.PropTypes.number,
+    yAxisTickValues:   React.PropTypes.array,
+    width:             React.PropTypes.number,
   },
 
   getDefaultProps() {
     return {
+      className:        'rd3-candlestick',
+      xAxisClassName:   'rd3-candlestick-xaxis',
+      yAxisClassName:   'rd3-candlestick-yaxis',
       data:             [],
-      fillUp:           (value) => 'white',
+      fillUp:           (value) => '#ffffff',
       fillUpAccessor:   (d, idx) => idx,
       fillDown:         d3.scale.category20c(),
       fillDownAccessor: (d, idx) => idx,
+      height:           200,
+      hoverAnimation:   true,
       margins:          {top: 10, right: 20, bottom: 30, left: 45},
       legendOffset:     120,
-      width:            400,
-      height:           200,
       title:            '',
       xAccessor:        (d) => d.x,
-      yAccessor:        (d) => ({ open: d.open, high: d.high, low: d.low, close: d.close })
+      yAccessor:        (d) => ({ open: d.open, high: d.high, low: d.low, close: d.close }),
+      width:            400,
     };
   },
 
   render() {
 
     var props = this.props;
-
-    var structure = immstruct('candlestickChart', { voronoi: {} });
 
     // Calculate inner chart dimensions
     var innerWidth, innerHeight;
@@ -69,13 +66,11 @@ module.exports = React.createClass({
     if (!Array.isArray(props.data)) {
       props.data = [props.data];
     }
-
     var flattenedData = utils.flattenData(props.data, props.xAccessor, props.yAccessor);
 
     var allValues = flattenedData.allValues,
         xValues = flattenedData.xValues,
         yValues = flattenedData.yValues;
-
     var scales = utils.calculateScales(innerWidth, innerHeight, xValues, yValues);
 
     var trans = `translate(${ props.yAxisOffset < 0 ? props.margins.left + Math.abs(props.yAxisOffset) : props.margins.left},${ props.margins.top })`;
@@ -84,7 +79,6 @@ module.exports = React.createClass({
       return (
           <DataSeries
             key={idx}
-            structure={structure}
             seriesName={series.name}
             index={idx}
             xScale={scales.xScale}
@@ -94,6 +88,7 @@ module.exports = React.createClass({
             fillDown={props.fillDown(props.fillDownAccessor(series, idx))}
             xAccessor={props.xAccessor}
             yAccessor={props.yAccessor}
+            hoverAnimation={props.hoverAnimation}
           />
         );
       });
@@ -106,18 +101,10 @@ module.exports = React.createClass({
         margins={props.margins}
         title={props.title}
       >
-        <g transform={trans} className='rd3-candlestick'>
+        <g transform={trans} className={props.className}>
           {dataSeries}
-          <Voronoi
-            structure={structure}
-            data={allValues}
-            xScale={scales.xScale}
-            yScale={scales.yScale}
-            width={innerWidth}
-            height={innerHeight}
-          />
           <XAxis
-            xAxisClassName='rd3-candlestick-xaxis'
+            xAxisClassName={props.xAxisClassName}
             xScale={scales.xScale}
             xAxisTickValues={props.xAxisTickValues}
             xAxisTickInterval={props.xAxisTickInterval}
@@ -131,7 +118,7 @@ module.exports = React.createClass({
             height={innerHeight}
           />
           <YAxis
-            yAxisClassName='rd3-candlestick-yaxis'
+            yAxisClassName={props.yAxisClassName}
             yScale={scales.yScale}
             yAxisTickValues={props.yAxisTickValues}
             yAxisOffset={props.yAxisOffset}
