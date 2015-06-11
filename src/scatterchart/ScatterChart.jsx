@@ -14,16 +14,26 @@ module.exports = React.createClass({
   displayName: 'ScatterChart',
 
   propTypes: {
-    margins:        React.PropTypes.object,
-    circleRadius:   React.PropTypes.number,
-    hoverAnimation: React.PropTypes.bool
+    circleRadius:     React.PropTypes.number,
+    className:        React.PropTypes.string,
+    hoverAnimation:   React.PropTypes.bool,
+    margins:          React.PropTypes.object,
+    xAxisClassName:   React.PropTypes.string,
+    xAxisStrokeWidth: React.PropTypes.number,
+    yAxisClassName:   React.PropTypes.string,
+    yAxisStrokeWidth: React.PropTypes.number
  },
 
   getDefaultProps() {
     return {
-      circleRadius:    3,
-      margins:        {top: 10, right: 20, bottom: 50, left: 45},
-      hoverAnimation: true
+      circleRadius:     3,
+      className:        'rd3-scatterchart',
+      hoverAnimation:   true,
+      margins:          {top: 10, right: 20, bottom: 50, left: 45},
+      xAxisClassName:   'rd3-scatterchart-xaxis',
+      xAxisStrokeWidth: 1,
+      yAxisClassName:   'rd3-scatterchart-yaxis',
+      yAxisStrokeWidth: 1
     };
   },
 
@@ -32,86 +42,93 @@ module.exports = React.createClass({
   render() {
 
     var props = this.props;
+    var data  = props.data;
+    var margins = props.margins;
 
-    if (this.props.data && this.props.data.length < 1) {
-      return <g></g>;
+    if (!data || data.length < 1) {
+      return null;
     }
 
     // Calculate inner chart dimensions
-    var innerWidth, innerHeight;
-
-    innerWidth = this.getOuterDimensions().width - props.margins.left - props.margins.right;
-    innerHeight = this.getOuterDimensions().height - props.margins.top - props.margins.bottom;
-
-    if (!Array.isArray(props.data)) {
-      props.data = [props.data];
-    }
+    var innerWidth  = this.getOuterDimensions().width - margins.left - margins.right;
+    var innerHeight = this.getOuterDimensions().height - margins.top - margins.bottom;
 
     // Returns an object of flattened allValues, xValues, and yValues
-    var flattenedData = utils.flattenData(props.data, props.xAccessor, props.yAccessor);
+    var flattenedData = utils.flattenData(data, props.xAccessor, props.yAccessor);
 
     var allValues = flattenedData.allValues,
-        xValues = flattenedData.xValues,
-        yValues = flattenedData.yValues;
-    var scales = this._calculateScales(innerWidth, innerHeight, xValues, yValues);
-    var trans = "translate(" + (props.yAxisOffset < 0 ? props.margins.left + Math.abs(props.yAxisOffset) : props.margins.left) + "," + props.margins.top + ")";
+        xValues   = flattenedData.xValues,
+        yValues   = flattenedData.yValues;
+
+    var scales  = this._calculateScales(innerWidth, innerHeight, xValues, yValues);
+    var xScale  = scales.xScale;
+    var yScale  = scales.yScale;
+
+    var x = props.yAxisOffset < 0 ? (margins.left + Math.abs(props.yAxisOffset)) : margins.left;
+    var transform = `translate(${x}, ${margins.top})`;
 
     return (
       <Chart
-        viewBox={this.getViewBox()}
-        legend={props.legend}
-        data={props.data}
-        margins={props.margins}
         colors={props.colors}
         colorAccessor={props.colorAccessor}
-        width={props.width}
+        data={data}
         height={props.height}
-        title={props.title}>
-        <g transform={trans} className='rd3-scatterchart'>
+        legend={props.legend}
+        margins={margins}
+        title={props.title}
+        viewBox={this.getViewBox()}
+        width={props.width}
+      >
+        <g
+          className={props.className}
+          transform={transform}
+        >
           <DataSeries
-            xScale={scales.xScale}
-            yScale={scales.yScale}
-            xAccessor={props.xAccessor}
-            yAccessor={props.yAccessor}
-            hoverAnimation={props.hoverAnimation}
             circleRadius={props.circleRadius}
-            data={allValues}
             colors={props.colors}
-            colorAccessor={(d, i) => d}
-            width={innerWidth}
+            colorAccessor={props.colorAccessor}
+            data={allValues}
             height={innerHeight}
+            hoverAnimation={props.hoverAnimation}
+            width={innerWidth}
+            xAccessor={props.xAccessor}
+            xScale={xScale}
+            yAccessor={props.yAccessor}
+            yScale={yScale}
           />
           <XAxis
-            xAxisClassName="rd3-scatterchart-xaxis"
-            strokeWidth="1"
-            xAxisTickValues={props.xAxisTickValues}
-            xAxisTickInterval={props.xAxisTickInterval}
-            xAxisOffset={props.xAxisOffset}
-            xScale={scales.xScale}
+            data={data}
+            height={innerHeight}
+            margins={margins}
+            stroke={props.axesColor}
+            strokeWidth={props.xAxisStrokeWidth.toString()}
+            tickFormatting={props.xAxisFormatter}
+            width={innerWidth}
+            xAxisClassName={props.xAxisClassName}
             xAxisLabel={props.xAxisLabel}
             xAxisLabelOffset={props.xAxisLabelOffset}
-            tickFormatting={props.xAxisFormatter}
+            xAxisOffset={props.xAxisOffset}
+            xAxisTickInterval={props.xAxisTickInterval}
+            xAxisTickValues={props.xAxisTickValues}
             xOrient={props.xOrient}
-            data={props.data}
-            margins={props.margins}
-            width={innerWidth}
-            height={innerHeight}
-            stroke={props.axesColor}
+            xScale={xScale}
           />
           <YAxis
-            yAxisClassName="rd3-scatterchart-yaxis"
-            yScale={scales.yScale}
-            yAxisTickValues={props.yAxisTickValues}
-            yAxisTickCount={props.yAxisTickCount}
-            yAxisOffset={props.yAxisOffset}
-            yAxisLabel={props.yAxisLabel}
-            yAxisLabelOffset={props.yAxisLabelOffset}
-            tickFormatting={props.yAxisFormatter}
-            yOrient={props.yOrient}
-            margins={props.margins}
+            data={data}
             width={innerWidth}
             height={innerHeight}
+            margins={margins}
             stroke={props.axesColor}
+            strokeWidth={props.yAxisStrokeWidth.toString()}
+            tickFormatting={props.yAxisFormatter}
+            yAxisClassName={props.yAxisClassName}
+            yAxisLabel={props.yAxisLabel}
+            yAxisLabelOffset={props.yAxisLabelOffset}
+            yAxisOffset={props.yAxisOffset}
+            yAxisTickValues={props.yAxisTickValues}
+            yAxisTickCount={props.yAxisTickCount}
+            yScale={yScale}
+            yOrient={props.yOrient}
           />
         </g>
       </Chart>

@@ -7,30 +7,44 @@ module.exports = React.createClass({
 
   displayName: 'VoronoiCircle',
 
+  propTypes: {
+    circleFill:       React.PropTypes.string.isRequired,
+    circleRadius:     React.PropTypes.number.isRequired,
+    className:        React.PropTypes.string,
+    cx:               React.PropTypes.number.isRequired,
+    cy:               React.PropTypes.number.isRequired,
+    handleMouseLeave: React.PropTypes.func.isRequired,
+    handleMouseOver:  React.PropTypes.func.isRequired,
+    pathFill:         React.PropTypes.string,
+    voronoiPath:      React.PropTypes.string.isRequired
+  },
+
   getDefaultProps() {
-    return { 
-      circleRadius: 3,
-      circleFill: '#1f77b4',
+    return {
+      className:    'rd3-scatterchart-voronoi-circle',
+      pathFill:     'white'
     };
   },
 
   render() {
+    var props = this.props;
+
     return (
       <g>
         <path
-          onMouseOver={this.props.handleMouseOver}
-          onMouseLeave={this.props.handleMouseLeave}
-          fill='white'
-          d={this.props.voronoiPath} 
+          d={props.voronoiPath}
+          fill={props.pathFill}
+          onMouseLeave={props.handleMouseLeave}
+          onMouseOver={props.handleMouseOver}
         />
         <circle
-          onMouseOver={this.props.handleMouseOver}
-          onMouseLeave={this.props.handleMouseLeave}
-          cx={this.props.cx}
-          cy={this.props.cy}
-          r={this.props.circleRadius}
-          fill={this.props.circleFill}
-          className="rd3-scatterchart-circle"
+          cx={props.cx}
+          cy={props.cy}
+          className={props.className}
+          fill={props.circleFill}
+          onMouseLeave={props.handleMouseLeave}
+          onMouseOver={props.handleMouseOver}
+          r={props.circleRadius}
         />
       </g>
     );

@@ -10,10 +10,13 @@ var points = 5;
 var circleRadius = 5;
 var data, scatterchart;
 
+var CHART_CLASS_NAME  = 'rd3-scatterchart';
+var CIRCLE_CLASS_NAME = 'rd3-scatterchart-voronoi-circle';
+
 describe('ScatterChart', function() {
 
   before(function() {
-    // Render a scatterchart 
+    // Render a scatterchart
     data = [
       {
         name: "series1",
@@ -25,7 +28,12 @@ describe('ScatterChart', function() {
       }
     ];
     scatterchart = TestUtils.renderIntoDocument(
-      <ScatterChart data={data} width={400} height={200} circleRadius={circleRadius} />
+      <ScatterChart
+        circleRadius={circleRadius}
+        data={data}
+        width={400}
+        height={200}
+      />
     );
 
   })
@@ -33,7 +41,7 @@ describe('ScatterChart', function() {
   it('renders scatter chart', function() {
 
     var scatterchartGroup = TestUtils.findRenderedDOMComponentWithClass(
-      scatterchart, 'rd3-scatterchart');
+      scatterchart, CHART_CLASS_NAME);
     expect(scatterchartGroup).to.exist;
     expect(scatterchartGroup.tagName).to.equal('G');
 
@@ -42,22 +50,22 @@ describe('ScatterChart', function() {
   it('renders same amount of circles with data', function() {
 
     var circles = TestUtils.scryRenderedDOMComponentsWithClass(
-      scatterchart, 'rd3-scatterchart-circle');
+      scatterchart, CIRCLE_CLASS_NAME);
     expect(circles).to.have.length(Object.keys(data).length * points);
-  
+
   });
 
-  it('circle color is different from other series', function() {
+  it('each series has unique circle color', function() {
 
     var circles = TestUtils.scryRenderedDOMComponentsWithClass(
-      scatterchart, 'rd3-scatterchart-circle');
+      scatterchart, CIRCLE_CLASS_NAME);
 
     // uses this naive approach because TestUtils does not have
     // something like findRenderedDOMComponentWithProps
     var firstCircle = circles[0],
         secondCircle = circles[1],
         lastCircle = circles[circles.length - 1];
-    
+
     // we know that first and second circle are in same series
     expect(firstCircle.props.fill).to.equal(secondCircle.props.fill);
 
@@ -66,24 +74,30 @@ describe('ScatterChart', function() {
 
   });
 
-  it('circle is animated when hovered', function() {
+  it('circle animates correctly', function() {
 
       var circle = TestUtils.scryRenderedDOMComponentsWithClass(
-        scatterchart, 'rd3-scatterchart-circle')[0];
+        scatterchart, CIRCLE_CLASS_NAME)[0];
 
-      // circle color before hovered
-      var circleColor = circle.props.fill;
+      // circle properties before hovered
+      var circleColor  = circle.props.fill;
 
+      // Before animation
       expect(circle.props.r).to.equal(circleRadius);
+      expect(circle.props.fill).to.equal(circleColor);
+
+      // Animation starts with hover
       TestUtils.Simulate.mouseOver(circle);
       expect(circle.props.r).to.be.above(circleRadius);
       expect(circle.props.fill).to.not.equal(circleColor);
 
       // TestUtils.Simulate.mouseOut(circle) is not working here
       // https://github.com/facebook/react/issues/1297
+      // Animation ends with end of hover
       TestUtils.SimulateNative.mouseOut(circle);
       expect(circle.props.r).to.equal(circleRadius);
-      expect(circle.props.fill).to.equal(circleColor);    
+      expect(circle.props.fill).to.equal(circleColor);
+
   });
 
 });
