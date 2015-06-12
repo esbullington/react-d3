@@ -25,6 +25,8 @@ module.exports = React.createClass({
 
   getDefaultProps() {
     return {
+			nameLabelProp: "label",
+			nameValueProp: "value",
       yAxisTickCount: 4,
       margins: {top: 10, right: 20, bottom: 40, left: 45},
       hoverAnimation: true
@@ -35,9 +37,9 @@ module.exports = React.createClass({
 
     var props = this.props;
 
-    var values = props.data.map( (item) => item.value );
+    var values = props.data.map( (item) => item[props.nameValueProp] );
 
-    var labels = props.data.map( (item) => item.label );
+    var labels = props.data.map( (item) => item[props.nameLabelProp] );
 
     var margins = props.margins;
 
