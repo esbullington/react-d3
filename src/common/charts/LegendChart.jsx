@@ -2,6 +2,7 @@
 
 var React = require('react');
 var Legend = require('../Legend');
+var d3 = require('d3');
 
 module.exports = React.createClass({
 
