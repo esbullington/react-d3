@@ -41,7 +41,6 @@ module.exports = React.createClass({
     var legendItems = [];
 
     props.data.forEach( (series, idx) => {
-
       var itemStyle = {
         'color': props.colors(props.colorAccessor(series, idx)),
         'lineHeight': '60%',
