@@ -2,139 +2,100 @@
 
 var React = require('react');
 var d3 = require('d3');
+var VoronoiCircleContainer = require('./VoronoiCircleContainer');
 var Line = require('./Line');
-var Circle = require('./Circle');
-
 
 module.exports = React.createClass({
 
   displayName: 'DataSeries',
 
   propTypes: {
+    color: React.PropTypes.func,
+    colorAccessor: React.PropTypes.func,
     data: React.PropTypes.array,
-    seriesName: React.PropTypes.string,
     interpolationType: React.PropTypes.string,
-    fill: React.PropTypes.string,
     xAccessor: React.PropTypes.func,
     yAccessor: React.PropTypes.func,
-    displayDataPoints: React.PropTypes.bool
   },
 
   getDefaultProps() {
     return {
       data: [],
-      seriesName: "",
-      interpolationType: 'linear',
-      fill: '#fff',
       xAccessor: (d) => d.x,
       yAccessor: (d) => d.y,
-      displayDataPoints: true
+      interpolationType: 'linear'
     };
   },
-
+  
   _isDate(d, accessor) {
-    return Object.prototype.toString.call(accessor(d)) === '[object Date]';
+      return Object.prototype.toString.call(accessor(d)) === '[object Date]';
   },
 
   render() {
-
     var props = this.props;
-
-    // Check to see if there is any data to draw lines/circles with
-    // Return null if there is nothing to draw (null will become <noscript>)
-    if (props.data.length === 0) {
-      return null;
-    }
-
+    var xScale = props.xScale;
+    var yScale = props.yScale;
     var xAccessor = props.xAccessor,
         yAccessor = props.yAccessor;
-
-    // Create array of paths, which we'll map over
-    // to generate SVG lines
+    
     var interpolatePath = d3.svg.line()
-        .y(function(d) {
-          return props.yScale(props.yAccessor(d));
-        })
+        .y( (d) => props.yScale(yAccessor(d)) )
         .interpolate(props.interpolationType);
 
-    // Check whether or not an arbitrary data element
-    // is a date object (at index 0 here)
-    // If it's a date, then we set the x scale a bit differently
-    // NOTE: a sparse array could still break this, even with the length check above
-    if (this._isDate(props.data[0], xAccessor)) {
-      interpolatePath.x(function(d) {
-        return props.xScale(props.xAccessor(d).getTime());
-      });
-    } else {
-      interpolatePath.x(function(d) {
-        return props.xScale(props.xAccessor(d));
-      });
-    }
-
-    // Create an immstruct reference for the series name
-    // and set it to 'inactive'
-    props.structure.cursor('voronoiSeries').set(props.seriesName, 'inactive');
-
-    // Having set the Voronoi line series name cursor to 'inactive'
-    // We now pass on the Voronoi line series name reference to the
-    // *both* the line and circle component
-    var voronoiSeriesRef = props.structure.reference(['voronoiSeries', props.seriesName]);
-
-
-    var circles = null;
-
-    if (props.displayDataPoints) {
-      // Map over data to generate SVG circles at data points
-      // if datum is a date object, treat it a bit differently
-      circles = props.data.map(function(point, idx) {
-        var cx, cy;
-        if (this._isDate(point, xAccessor)) {
-          cx = props.xScale(xAccessor(point).getTime());
+        if (this._isDate(props.data[0].values[0], xAccessor)) {
+          interpolatePath.x(function(d) {
+            return props.xScale(props.xAccessor(d).getTime());
+          });
         } else {
-          cx = props.xScale(xAccessor(point));
-        }
-        if (this._isDate(point, yAccessor)) {
-          cy = props.yScale(yAccessor(point).getTime());
-        } else {
-          cy = props.yScale(yAccessor(point));
+          interpolatePath.x(function(d) {
+            return props.xScale(props.xAccessor(d));
+          });
         }
 
-        var id = props.seriesName + '-' + idx;
+    var lines = props.data.map((series, idx) => {
+      return <Line 
+        path={interpolatePath(series.values)}
+        stroke={props.colors(props.colorAccessor(series, idx))}
+        seriesName={series.name}
+        key={idx}
+      />
+    });
 
-        // Create an immstruct reference for the circle id
-        // and set it to 'inactive'
-        props.structure.cursor('voronoi').set(id, 'inactive');
+    var voronoi = d3.geom.voronoi()
+      .x(function(d){ return xScale(d.coord.x); })
+      .y(function(d){ return yScale(d.coord.y); })
+      .clipExtent([[0, 0], [ props.width , props.height]]);
 
-        // Having set the Voronoi circle id cursor to 'inactive'
-        // We now pass on the Voronoi circle id reference to the
-        // circle component, where it will be observed and dereferenced
-        var voronoiRef = props.structure.reference(['voronoi', id]);
-
-        return (
-          <Circle
-            voronoiRef={voronoiRef}
-            voronoiSeriesRef={voronoiSeriesRef}
-            structure={props.structure}
-            cx={cx}
-            cy={cy}
-            r={props.circleRadius}
-            fill={props.fill}
-            key={idx}
-            id={props.seriesName + '-' + idx}
+    var cx, cy, circleFill;
+    var regions = voronoi(props.value).map(function(vnode, idx) {
+      var point = vnode.point.coord;
+      if (Object.prototype.toString.call(xAccessor(point)) === '[object Date]') {
+        cx = props.xScale(xAccessor(point).getTime());
+      } else {
+        cx = props.xScale(xAccessor(point));
+      }
+      if (Object.prototype.toString.call(yAccessor(point)) === '[object Date]') {
+        cy = props.yScale(yAccessor(point).getTime());
+      } else {
+        cy = props.yScale(yAccessor(point));
+      }
+      circleFill = props.colors(props.colorAccessor(vnode, vnode.point.seriesIndex));
+      
+      return (
+          <VoronoiCircleContainer 
+              key={idx} 
+              circleFill={circleFill}
+              vnode={vnode}
+              cx={cx} cy={cy} 
+              circleRadius={props.circleRadius}
           />
-        );
-      }, this);
-    }
+      );
+    }.bind(this));
 
     return (
       <g>
-        <Line
-          voronoiSeriesRef={voronoiSeriesRef}
-          path={interpolatePath(props.data)}
-          stroke={props.fill}
-          seriesName={props.seriesName}
-        />
-        {circles}
+        <g>{regions}</g>
+        <g>{lines}</g>
       </g>
     );
   }
