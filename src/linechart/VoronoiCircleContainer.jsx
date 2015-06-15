@@ -21,8 +21,7 @@ module.exports = React.createClass({
     return { 
       circleRadius: this.props.circleRadius,
       circleFill: this.props.circleFill
-    }
-
+    };
   },
 
   render() {

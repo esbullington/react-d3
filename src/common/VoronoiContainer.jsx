@@ -2,6 +2,7 @@
 
 var React = require('react');
 var d3 = require('d3');
+var shade = require('../utils').shade;
 var VoronoiCircle = require('./VoronoiCircle');
 
 module.exports = React.createClass({
@@ -20,7 +21,7 @@ module.exports = React.createClass({
     return { 
       circleRadius: this.props.circleRadius,
       circleFill: this.props.circleFill
-    }
+    };
   },
 
   render() {
