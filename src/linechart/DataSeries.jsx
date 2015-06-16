@@ -53,12 +53,14 @@ module.exports = React.createClass({
         }
 
     var lines = props.data.map((series, idx) => {
-      return <Line 
-        path={interpolatePath(series.values)}
-        stroke={props.colors(props.colorAccessor(series, idx))}
-        seriesName={series.name}
-        key={idx}
-      />
+      return (
+        <Line 
+          path={interpolatePath(series.values)}
+          stroke={props.colors(props.colorAccessor(series, idx))}
+          seriesName={series.name}
+          key={idx}
+        />
+      );
     });
 
     var voronoi = d3.geom.voronoi()

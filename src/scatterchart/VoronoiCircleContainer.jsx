@@ -34,7 +34,7 @@ module.exports = React.createClass({
     return {
       circleFill:   this.props.circleFill,
       circleRadius: this.props.circleRadius
-    }
+    };
   },
 
   componentWillReceiveProps(nextProps) {

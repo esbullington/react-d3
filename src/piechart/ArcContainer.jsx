@@ -17,7 +17,7 @@ module.exports = React.createClass({
       // fill is named as fill instead of initialFill to avoid
       // confusion when passing down props from top parent
       fill: this.props.fill
-    }
+    };
   },
 
   render() {

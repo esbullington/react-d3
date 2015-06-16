@@ -22,7 +22,7 @@ module.exports = React.createClass({
   getInitialState() {
     return { 
       fill: this.props.fill
-    }
+    };
   },
 
   render() {
