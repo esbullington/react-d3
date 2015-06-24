@@ -12,6 +12,7 @@ module.exports = React.createClass({
     path: React.PropTypes.string,
     stroke: React.PropTypes.string,
     strokeWidth: React.PropTypes.number,
+    strokeDashArray: React.PropTypes.string,
   },
 
   getDefaultProps() {
@@ -30,6 +31,7 @@ module.exports = React.createClass({
         d={props.path}
         stroke={props.stroke}
         strokeWidth={props.strokeWidth}
+        strokeDasharray={props.strokeDashArray}
         fill={props.fill}
         className={props.className}
       />
