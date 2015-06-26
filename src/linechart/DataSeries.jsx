@@ -57,6 +57,8 @@ module.exports = React.createClass({
         <Line 
           path={interpolatePath(series.values)}
           stroke={props.colors(props.colorAccessor(series, idx))}
+          strokeWidth={series.strokeWidth}
+          strokeDashArray={series.strokeDashArray}
           seriesName={series.name}
           key={idx}
         />
