@@ -8,7 +8,8 @@ var gulp = require('gulp'),
   buffer = require('vinyl-buffer'),
   browserSync = require('browser-sync'),
   merge = require('merge-stream'),
-  chalk = require('chalk');
+  chalk = require('chalk'),
+  karma = require('karma').server;
 
 console.timeEnd('Loading plugins');
 
@@ -200,11 +201,16 @@ gulp.task('serve', function() {
 });
 
 gulp.task('test', function (cb) {
-  var karma = require('karma').server;
-
   karma.start({
     configFile: __dirname + '/karma.conf.js',
     singleRun: true
+  }, cb);
+});
+
+gulp.task('tdd', function (cb) {
+  console.log("Running TDD");
+  karma.start({
+    configFile: __dirname + '/karma.conf.js'
   }, cb);
 });
 
@@ -244,6 +250,7 @@ gulp.task("default", function() {
   console.log("gulp release     -> Create a release for npm under build/cjs which can be pulished to npm");
   console.log("gulp clean:build -> Clean the build directory");
   console.log("gulp serve       -> Launch a web browser on localhost:4000 and server from 'build/public'");
-  console.log("gulp test        -> Execute the tests with config file karma.conf.js");
+  console.log("gulp test        -> Execute the tests once with config file karma.conf.js");
+  console.log("gulp tdd         -> Execute the tests continuosly with config file karma.conf.js");
   console.log("gulp lint        -> Lint *.js and *.jsx code under src/");
 });
