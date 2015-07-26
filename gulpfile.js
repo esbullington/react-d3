@@ -24,7 +24,7 @@ gulp.task('clean:build', function() {
 });
 
 function bundler(entry) {
-  var reactify = require('reactify'),
+  var babelify = require('babelify'),
       watchify = require('watchify'),
       browserify = require('browserify');
 
@@ -50,7 +50,7 @@ function bundler(entry) {
 
   bundler
     .external(["react", "d3"]) // this informs browserify that when you see require("react") or require("d3") it will be available, trust me
-    .transform(reactify, { harmony : true } ) // We want to convert JSX to normal javascript
+    .transform(babelify) // We want to convert JSX to normal javascript
     .transform(globalShim) // replace require('react') and require('d3') with (window.React) and (window.d3)
     ;
 
