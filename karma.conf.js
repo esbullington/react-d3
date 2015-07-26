@@ -43,7 +43,7 @@ module.exports = function(config) {
     logLevel: config.LOG_INFO,
 
     // enable / disable watching file and executing tests whenever any file changes
-    autoWatch: false,
+    autoWatch: true,
 
     plugins: [
       // 'karma-chrome-launcher',
@@ -59,11 +59,7 @@ module.exports = function(config) {
     //browsers: ['Chrome', 'Firefox', 'PhantomJS'],
     browsers: ['PhantomJS'],
 
-    browserNoActivityTimeout: 20000,
-
-    // Continuous Integration mode
-    // if true, Karma captures browsers, runs the tests and exits
-    singleRun: true
+    browserNoActivityTimeout: 20000
 
   });
 };
