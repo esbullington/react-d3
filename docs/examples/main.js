@@ -66,6 +66,32 @@ var Demos = React.createClass({
     ];
 
     var barData = [{label: 'AA', value: 5}, {label: 'B', value: 6}, {label: 'C', value: 2}, {label: 'D', value: 11}, {label: 'E', value: 2}, {label: 'F', value: 7}];
+    var barData2 = [
+  {
+    "name": "apples",
+    "values": [
+      { "x": 1, "y":  91},
+      { "x": 2, "y": 290},
+      { "x": 3, "y": 146},
+    ]
+  },
+  {  
+    "name": "oranges",
+    "values": [
+      { "x": 1, "y":  9},
+      { "x": 2, "y": 49},
+      { "x": 3, "y": 144},
+    ]
+  },
+  {  
+    "name": "grapes",
+    "values": [
+      { "x": 1, "y":  14},
+      { "x": 2, "y": 77},
+      { "x": 3, "y": 16},
+    ]
+  }
+  ];
     var pieData = [{label: "Margarita", value: 20.0}, {label: "John", value: 55.0}, {label: "Tim", value: 25.0 }];
 
     // 2014 Most Populous Countries
@@ -310,7 +336,7 @@ var Demos = React.createClass({
         </div>
         <div className="row">
           <div className="col-md-6">
-            <BarChart data={barData} width={500} height={300} title="Bar Chart" yAxisLabel="Label" xAxisLabel="Value"/>
+            <BarChart data={barData2} width={500} height={300} title="Bar Chart" yAxisLabel="Label" xAxisLabel="Value"/>
           </div>
           <div className="col-md-6">
             <pre ref='block'>
