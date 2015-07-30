@@ -15,6 +15,7 @@ module.exports = React.createClass({
   displayName: 'BarChart',
 
   propTypes: {
+    chartClassName:         React.PropTypes.string,
     data:                   React.PropTypes.array.isRequired,
     hoverAnimation:         React.PropTypes.bool,
     height:                 React.PropTypes.number,
@@ -25,16 +26,21 @@ module.exports = React.createClass({
     valuesAccessor:         React.PropTypes.func,
     title:                  React.PropTypes.string,
     width:                  React.PropTypes.number,
+    xAxisClassName:         React.PropTypes.string,
+    yAxisClassName:         React.PropTypes.string,
     yAxisTickCount:         React.PropTypes.number,
   },
 
   getDefaultProps() {
     return {
+      chartClassName:         'rd3-barchart',
       hoverAnimation:         true,
       margins:                {top: 10, right: 20, bottom: 40, left: 45},
       rangeRoundBandsPadding: 0.25,
       stackOffset:            'zero',
       valuesAccessor:         d => d.values,
+      xAxisClassName:         'rd3-barchart-xaxis',
+      yAxisClassName:         'rd3-barchart-yaxis',
       yAxisTickCount:         4,
     };
   },
@@ -99,7 +105,7 @@ module.exports = React.createClass({
         height={props.height}
         title={props.title}
       >
-        <g transform={trans} className='rd3-barchart'>
+        <g transform={trans} className={props.chartClassName}>
           <DataSeries
             yScale={yScale}
             xScale={xScale}
@@ -113,7 +119,7 @@ module.exports = React.createClass({
             valuesAccessor={props.valuesAccessor}
           />
           <YAxis
-            yAxisClassName='rd3-barchart-yaxis'
+            yAxisClassName={props.yAxisClassName}
             yAxisTickValues={props.yAxisTickValues}
             yAxisLabel={props.yAxisLabel}
             yAxisLabelOffset={props.yAxisLabelOffset}
@@ -125,7 +131,7 @@ module.exports = React.createClass({
             height={innerHeight}
           />
           <XAxis
-            xAxisClassName='rd3-barchart-xaxis'
+            xAxisClassName={props.xAxisClassName}
             xAxisTickValues={props.xAxisTickValues}
             xAxisLabel={props.xAxisLabel}
             xAxisLabelOffset={props.xAxisLabelOffset} 
