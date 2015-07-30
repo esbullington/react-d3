@@ -65,33 +65,33 @@ var Demos = React.createClass({
       } 
     ];
 
-    var barData = [{label: 'AA', value: 5}, {label: 'B', value: 6}, {label: 'C', value: 2}, {label: 'D', value: 11}, {label: 'E', value: 2}, {label: 'F', value: 7}];
-    var barData2 = [
-  {
-    "name": "apples",
-    "values": [
-      { "x": 1, "y":  91},
-      { "x": 2, "y": 290},
-      { "x": 3, "y": 146},
-    ]
-  },
-  {  
-    "name": "oranges",
-    "values": [
-      { "x": 1, "y":  9},
-      { "x": 2, "y": 49},
-      { "x": 3, "y": 144},
-    ]
-  },
-  {  
-    "name": "grapes",
-    "values": [
-      { "x": 1, "y":  14},
-      { "x": 2, "y": 77},
-      { "x": 3, "y": 16},
-    ]
-  }
-  ];
+    var barData = [
+      {
+        "name": "Series A",
+        "values": [
+          { "x": 1, "y":  91},
+          { "x": 2, "y": 290},
+          { "x": 3, "y": 146},
+        ]
+      },
+      {  
+        "name": "Series B",
+        "values": [
+          { "x": 1, "y":  9},
+          { "x": 2, "y": 49},
+          { "x": 3, "y": 144},
+        ]
+      },
+      {  
+        "name": "Series C",
+        "values": [
+          { "x": 1, "y":  14},
+          { "x": 2, "y": 77},
+          { "x": 3, "y": 16},
+        ]
+      }
+    ];
+
     var pieData = [{label: "Margarita", value: 20.0}, {label: "John", value: 55.0}, {label: "Tim", value: 25.0 }];
 
     // 2014 Most Populous Countries
@@ -330,22 +330,30 @@ var Demos = React.createClass({
             </pre>
           </div>
         </div>
+        
+        <div className="row">
+          <hr/>
+        </div>
 
         <div className="row">
-          <h3 className="page-header">react-d3: Single series charts</h3>
-        </div>
-        <div className="row">
           <div className="col-md-6">
-            <BarChart data={barData2} width={500} height={300} title="Bar Chart" yAxisLabel="Label" xAxisLabel="Value"/>
+            <BarChart data={barData} width={500} height={300} title="Bar Chart" yAxisLabel="Label" xAxisLabel="Value"/>
           </div>
           <div className="col-md-6">
             <pre ref='block'>
               <code className='js'>
               {`var barData = [
-  {label: 'A', value: 5},
-  {label: 'B', value: 6},
+  { 
+    "name": "Series A",
+    "values": [
+      { "x": 1, "y":  91},
+      ...
+  },
+  { 
+    "name": "Series B",
+     "values": [ ... ]
+  }
   ...
-  {label: 'F', value: 7}
 ];`}
               </code>
             </pre>
@@ -363,10 +371,13 @@ var Demos = React.createClass({
               </code>
             </pre>
           </div>
-        </div>
+
         <div className="row">
-          <hr/>
+          <h3 className="page-header">react-d3: Single series charts</h3>
         </div>
+       
+        </div>
+
         <div className="row">
           <div className="col-md-6">
             <PieChart data={pieData} width={450} height={400} radius={110} innerRadius={20} sectorBorderColor="white" title="Pie Chart" />
