@@ -33,6 +33,8 @@ module.exports = React.createClass({
       colors:             d3.scale.category20c(),
       colorAccessor:      (d, idx) => idx,
       valueTextFormatter: (val) => `${ val }%`,
+			labelsAccessor: d => d.label,
+			valuesAccessor: d => d.value,
       hoverAnimation:     true
     };
   },
@@ -40,10 +42,13 @@ module.exports = React.createClass({
   render: function() {
     var props = this.props;
 
+		var labelsAccessor = props.labelsAccessor;
+		var valuesAccessor = props.valuesAccessor;
+
     var transform = `translate(${ props.cx || props.width/2 },${ props.cy || props.height/2 })`;
 
-    var values = props.data.map( (item) => item.value );
-    var labels = props.data.map( (item) => item.label );
+    var values = props.data.map( (item) => valuesAccessor(item) );
+    var labels = props.data.map( (item) => labelsAccessor(item) );
 
     return (
       <Chart

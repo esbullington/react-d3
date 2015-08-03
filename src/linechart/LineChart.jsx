@@ -25,6 +25,8 @@ module.exports = React.createClass({
       className: 'rd3-linechart',
       hoverAnimation: true,
       margins:        {top: 10, right: 20, bottom: 50, left: 45},
+			labelsAccessor: d => d.name,
+			valuesAccessor: d => d.values,
       xAxisClassName: 'rd3-linechart-xaxis',
       yAxisClassName: 'rd3-linechart-yaxis',
     };
@@ -35,6 +37,9 @@ module.exports = React.createClass({
   render() {
 
     var props = this.props;
+
+		var labelsAccessor = props.labelsAccessor;
+		var valuesAccessor = props.valuesAccessor;
 
     if (this.props.data && this.props.data.length < 1) {
       return null;
@@ -51,7 +56,13 @@ module.exports = React.createClass({
     }
 
     // Returns an object of flattened allValues, xValues, and yValues
-    var flattenedData = utils.flattenData(props.data, props.xAccessor, props.yAccessor);
+    var flattenedData = utils.flattenData(
+			props.data,
+			labelsAccessor,
+			valuesAccessor,
+			props.xAccessor, 
+			props.yAccessor
+		);
 
     var allValues = flattenedData.allValues,
         xValues = flattenedData.xValues,
@@ -84,6 +95,8 @@ module.exports = React.createClass({
             colorAccessor={props.colorAccessor}
             width={innerWidth}
             height={innerHeight}
+						labelsAccessor={labelsAccessor}
+						valuesAccessor={valuesAccessor}
           />
           <XAxis
             xAxisClassName={props.xAxisClassName}

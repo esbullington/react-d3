@@ -36,6 +36,8 @@ module.exports = React.createClass({
       fontSize:       '0.85em',
       colors:         d3.scale.category20c(),
       colorAccessor:  (d, idx) => idx,
+			labelsAccessor: d => d.label,
+			valuesAccessor: d => d.value
     };
   },
 
@@ -59,6 +61,8 @@ module.exports = React.createClass({
             textColor={props.textColor}
             fontSize={props.fontSize}
             hoverAnimation={props.hoverAnimation}
+						labelsAccessor={props.labelsAccessor}
+						valuesAccessor={props.valuesAccessor}
           />
         </g>
       </Chart>

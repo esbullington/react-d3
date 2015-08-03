@@ -29,7 +29,9 @@ module.exports = React.createClass({
       circleRadius:     3,
       className:        'rd3-scatterchart',
       hoverAnimation:   true,
+			labelsAccessor: d => d.name,
       margins:          {top: 10, right: 20, bottom: 50, left: 45},
+			valuesAccessor: d => d.values,
       xAxisClassName:   'rd3-scatterchart-xaxis',
       xAxisStrokeWidth: 1,
       yAxisClassName:   'rd3-scatterchart-yaxis',
@@ -45,6 +47,11 @@ module.exports = React.createClass({
     var data  = props.data;
     var margins = props.margins;
 
+		var labelsAccessor = props.labelsAccessor;
+		var valuesAccessor = props.valuesAccessor;
+
+
+
     if (!data || data.length < 1) {
       return null;
     }
@@ -54,7 +61,13 @@ module.exports = React.createClass({
     var innerHeight = this.getOuterDimensions().height - margins.top - margins.bottom;
 
     // Returns an object of flattened allValues, xValues, and yValues
-    var flattenedData = utils.flattenData(data, props.xAccessor, props.yAccessor);
+    var flattenedData = utils.flattenData(
+			data, 
+			labelsAccessor,
+			valuesAccessor,
+			props.xAccessor, 
+			props.yAccessor
+		);
 
     var allValues = flattenedData.allValues,
         xValues   = flattenedData.xValues,
