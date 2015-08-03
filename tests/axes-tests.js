@@ -19,8 +19,12 @@ function generateData(points) {
 
   var xAccessor = (d) => d.x;
   var yAccessor = (d) => d.y;
+	var labelsAccessor = (d) => d.name;
+	var valuesAccessor = (d) => d.values;
 
-  return utils.flattenData(data, xAccessor, yAccessor);
+
+
+  return utils.flattenData(data, labelsAccessor, valuesAccessor, xAccessor, yAccessor);
 }
 
 describe('Axes', function() {
