@@ -28,13 +28,15 @@ module.exports = React.createClass({
   render() {
 
     var props = this.props;
+		var labelsAccessor = props.labelsAccessor;
+		var valuesAccessor = props.valuesAccessor;
 
     var treemap = d3.layout.treemap()
                     // make sure calculation loop through all objects inside array
                     .children( (d) => d)
                     .size([props.width, props.height])
                     .sticky(true)
-                    .value( (d) => { return d.value; });
+                    .value(valuesAccessor);
 
     var tree = treemap(props.data);
 
@@ -47,7 +49,7 @@ module.exports = React.createClass({
           width={node.dx}
           height={node.dy}
           fill={props.colors(props.colorAccessor(node, idx))}
-          label={node.label}
+          label={labelsAccessor(node)}
           fontSize={props.fontSize}
           textColor={props.textColor}
           hoverAnimation={props.hoverAnimation}

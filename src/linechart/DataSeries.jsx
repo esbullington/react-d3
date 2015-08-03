@@ -36,13 +36,15 @@ module.exports = React.createClass({
     var xScale = props.xScale;
     var yScale = props.yScale;
     var xAccessor = props.xAccessor,
-        yAccessor = props.yAccessor;
+        yAccessor = props.yAccessor,
+				valuesAccessor = props.valuesAccessor,
+				labelsAccessor = props.labelsAccessor;
     
     var interpolatePath = d3.svg.line()
         .y( (d) => props.yScale(yAccessor(d)) )
         .interpolate(props.interpolationType);
 
-        if (this._isDate(props.data[0].values[0], xAccessor)) {
+        if (this._isDate(valuesAccessor(props.data[0])[0], xAccessor)) {
           interpolatePath.x(function(d) {
             return props.xScale(props.xAccessor(d).getTime());
           });
@@ -55,11 +57,11 @@ module.exports = React.createClass({
     var lines = props.data.map((series, idx) => {
       return (
         <Line 
-          path={interpolatePath(series.values)}
+          path={interpolatePath(valuesAccessor(series))}
           stroke={props.colors(props.colorAccessor(series, idx))}
           strokeWidth={series.strokeWidth}
           strokeDashArray={series.strokeDashArray}
-          seriesName={series.name}
+          seriesName={labelsAccessor(series)}
           key={idx}
         />
       );
