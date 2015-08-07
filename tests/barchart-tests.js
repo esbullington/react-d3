@@ -6,11 +6,22 @@ describe('BarChart', function() {
   it('renders barchart', function() {
     var React = require('react/addons');
     var BarChart = require('../src/barchart').BarChart;
-    var generate = require('./utils/datagen').generateArrayOfNumbers;
+    var generate = require('./utils/datagen').generateArrayOfPoints;
     var TestUtils = React.addons.TestUtils;
+    var length = 5;
+
+    var data = [
+      {
+        name: "series1",
+        values: generate(length)
+      },
+      {
+        name: "series2",
+        values: generate(length)
+      }
+    ];
 
     // Render a barchart using array data
-    var data = generate(5);
     var barchart = TestUtils.renderIntoDocument(
       <BarChart data={data} width={400} height={200} />
     );
@@ -24,20 +35,31 @@ describe('BarChart', function() {
     // Verify that it has the same number of bars as the array's length
     var bars = TestUtils.scryRenderedDOMComponentsWithTag(
       barchart, 'rect');
-    expect(bars.length).to.equal(data.length);
+    expect(bars.length).to.equal(data.length * length);
   });
+
   it('renders barchart with negative values', function() {
     var React = require('react/addons');
     var BarChart = require('../src/barchart').BarChart;
-    var generate = require('./utils/datagen').generateArrayOfNumbers;
+    var generate = require('./utils/datagen').generateArrayOfPoints;
     var TestUtils = React.addons.TestUtils;
 
-    // Render a barchart using array data
-    var data = generate(5);
+    var length = 5;
+
+    var data = [
+      {
+        name: "series1",
+        values: generate(length)
+      },
+      {
+        name: "series2",
+        values: generate(length)
+      }
+    ];
 
     // Set a few values to negative numbers
-    data[1] = -100;
-    data[3] = -150;
+    data[0].values[1]['y'] = -100;
+    data[1].values[3]['y'] = -150;
 
     var barchart = TestUtils.renderIntoDocument(
       <BarChart data={data} width={400} height={200} />
@@ -52,6 +74,6 @@ describe('BarChart', function() {
     // Verify that it has the same number of bars as the array's length
     var bars = TestUtils.scryRenderedDOMComponentsWithTag(
       barchart, 'rect');
-    expect(bars.length).to.equal(data.length);
+    expect(bars.length).to.equal(data.length * length);
   });
 });

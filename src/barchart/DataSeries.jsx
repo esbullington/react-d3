@@ -9,47 +9,40 @@ module.exports = React.createClass({
   displayName: 'DataSeries',
 
   propTypes: {
-    values:        React.PropTypes.array,
-    labels:        React.PropTypes.array,
-    colors:        React.PropTypes.func,
-    colorAccessor: React.PropTypes.func,
-    width:         React.PropTypes.number,
-    height:        React.PropTypes.number,
-    offset:        React.PropTypes.number
-  },
-
-  getDefaultProps() {
-    return {
-      padding: 0.1,
-      values: []
-    };
+    _data:          React.PropTypes.array,
+    colors:         React.PropTypes.func,
+    colorAccessor:  React.PropTypes.func,
+    height:         React.PropTypes.number,
+    width:          React.PropTypes.number,
+    valuesAccessor: React.PropTypes.func,
   },
 
   render() {
-
-    var props = this.props;
-
-    var xScale = d3.scale.ordinal()
-      .domain(d3.range(props.values.length))
-      .rangeRoundBands([0, props.width], props.padding);
-
-    var bars = props.values.map((point, idx) => {
-      return (
-        <BarContainer
-          height={Math.abs(props.yScale(0) - props.yScale(point))}
-          width={xScale.rangeBand()}
-          x={xScale(idx)}
-          y={props.yScale(Math.max(0, point))}
-          availableHeight={props.height}
-          fill={props.colors(props.colorAccessor(point, idx))}
-          key={idx}
-          hoverAnimation={props.hoverAnimation}
-        />
-      );
-    });
-
     return (
-      <g>{bars}</g>
+      <g>{this._renderBarSeries()}</g>
     );
+  },
+
+  _renderBarSeries() {
+    var { _data, valuesAccessor } = this.props;
+    return _data.map((layer, seriesIdx) => {
+      return valuesAccessor(layer)
+             .map(segment => this._renderBarContainer(segment, seriesIdx))
+    });
+  },
+
+  _renderBarContainer(segment, seriesIdx) {
+    var { colors, colorAccessor, height, hoverAnimation, xScale, yScale } = this.props;
+    return (
+      <BarContainer
+        height={height - yScale(segment.y)}
+        width={xScale.rangeBand()}
+        x={xScale(segment.x)}
+        y={yScale( segment.y0 + segment.y )}
+        fill={colors(colorAccessor(segment, seriesIdx))}
+        hoverAnimation={hoverAnimation}
+      />
+    )
   }
+
 });
