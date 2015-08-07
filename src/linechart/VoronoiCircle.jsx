@@ -9,8 +9,8 @@ module.exports = React.createClass({
 
   getDefaultProps() {
     return { 
-      circleRadius: 3,
-      circleFill: '#1f77b4',
+      symbolRadius: 3,
+      symbolFill: '#1f77b4',
     };
   },
 
@@ -28,8 +28,8 @@ module.exports = React.createClass({
           onMouseLeave={this.props.handleMouseLeave}
           cx={this.props.cx}
           cy={this.props.cy}
-          r={this.props.circleRadius}
-          fill={this.props.circleFill}
+          r={this.props.symbolRadius}
+          fill={this.props.symbolFill}
           className="rd3-linechart-circle"
         />
       </g>

@@ -2,8 +2,7 @@
 
 var React = require('react');
 var d3 = require('d3');
-var VoronoiRectContainer = require('./VoronoiRectContainer');
-var VoronoiCircleContainer = require('./VoronoiCircleContainer');
+var VoronoiContainer = require('./VoronoiContainer');
 var Line = require('./Line');
 
 module.exports = React.createClass({
@@ -71,7 +70,7 @@ module.exports = React.createClass({
       .y(function(d){ return yScale(d.coord.y); })
       .clipExtent([[0, 0], [ props.width , props.height]]);
 
-    var cx, cy, circleFill;
+    var cx, cy, symbolFill;
     var regions = voronoi(props.value).map(function(vnode, idx) {
       var point = vnode.point.coord;
       if (Object.prototype.toString.call(xAccessor(point)) === '[object Date]') {
@@ -84,23 +83,25 @@ module.exports = React.createClass({
       } else {
         cy = props.yScale(yAccessor(point));
       }
-      circleFill = props.colors(props.colorAccessor(vnode, vnode.point.seriesIndex));
+      symbolFill = props.colors(props.colorAccessor(vnode, vnode.point.seriesIndex));
       
       return (
-          /*<VoronoiCircleContainer
+          /*<VoronoiContainer
+              symbol='circle'
               key={idx}
-              circleFill={circleFill}
+              symbolFill={symbolFill}
               vnode={vnode}
               cx={cx} cy={cy}
-              circleRadius={props.circleRadius}
+              symbolRadius={props.symbolRadius}
             />*/
-          <VoronoiRectContainer
+          <VoronoiContainer
+              symbol='rect'
               key={idx} 
-              rectFill={circleFill}
+              symbolFill={symbolFill}
               vnode={vnode}
-              x={cx} y={cy}
-              rectWidth={props.rectWidth}
-              rectHeight={props.rectHeight}
+              cx={cx} cy={cy}
+              symbolWidth={props.symbolWidth}
+              symbolHeight={props.symbolHeight}
           />
       );
     }.bind(this));

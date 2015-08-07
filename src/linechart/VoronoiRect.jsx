@@ -9,9 +9,9 @@ module.exports = React.createClass({
 
   getDefaultProps() {
     return { 
-      width: 6,
-      height: 6,
-      rectFill: '#1f77b4',
+      symbolWidth: 6,
+      symbolHeight: 6,
+      symbolFill: '#1f77b4',
     };
   },
 
@@ -27,11 +27,11 @@ module.exports = React.createClass({
         <rect
           onMouseOver={this.props.handleMouseOver}
           onMouseLeave={this.props.handleMouseLeave}
-          x={this.props.x - Math.round(this.props.width/2)}
-          y={this.props.y - Math.round(this.props.height/2)}
-          width={this.props.rectWidth}
-          height={this.props.rectHeight}
-          fill={this.props.rectFill}
+          x={this.props.cx - Math.round(this.props.symbolWidth/2)}
+          y={this.props.cy - Math.round(this.props.symbolHeight/2)}
+          width={this.props.symbolWidth}
+          height={this.props.symbolHeight}
+          fill={this.props.symbolFill}
           className="rd3-linechart-rect"
         />
       </g>
