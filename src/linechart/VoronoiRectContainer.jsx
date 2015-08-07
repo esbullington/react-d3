@@ -3,7 +3,7 @@
 var React = require('react');
 var d3 = require('d3');
 var shade = require('../utils').shade;
-var VoronoiCircle = require('./VoronoiRect');
+var VoronoiRect = require('./VoronoiRect');
 
 module.exports = React.createClass({
 
@@ -11,8 +11,8 @@ module.exports = React.createClass({
 
   getDefaultProps() {
     return { 
-      rectWidth: 3,
-      rectHeight: 3,
+      rectWidth: 6,
+      rectHeight: 6,
       rectFill: '#1f77b4',
       hoverAnimation: true
     };
@@ -49,6 +49,7 @@ module.exports = React.createClass({
             y={props.y}
             rectWidth={this.state.rectWidth}
             rectHeight={this.state.rectHeight}
+            rectFill={this.state.rectFill}
         />
       </g>
     );
@@ -63,9 +64,11 @@ module.exports = React.createClass({
   },
 
   _restoreRect() {
-    this.setState(
-      this.getInitialState()
-    );
+    this.setState({
+      rectWidth: this.props.rectWidth,
+      rectHeight: this.props.rectHeight,
+      rectFill: this.props.rectFill,
+    });
   },
 
   _drawPath: function(d) {

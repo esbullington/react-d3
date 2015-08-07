@@ -2,7 +2,8 @@
 
 var React = require('react');
 var d3 = require('d3');
-var VoronoiCircleContainer = require('./VoronoiRectContainer');
+var VoronoiRectContainer = require('./VoronoiRectContainer');
+var VoronoiCircleContainer = require('./VoronoiCircleContainer');
 var Line = require('./Line');
 
 module.exports = React.createClass({
@@ -86,13 +87,20 @@ module.exports = React.createClass({
       circleFill = props.colors(props.colorAccessor(vnode, vnode.point.seriesIndex));
       
       return (
+          /*<VoronoiCircleContainer
+              key={idx}
+              circleFill={circleFill}
+              vnode={vnode}
+              cx={cx} cy={cy}
+              circleRadius={props.circleRadius}
+            />*/
           <VoronoiRectContainer
               key={idx} 
               rectFill={circleFill}
               vnode={vnode}
               x={cx} y={cy}
-              rectWidth={4}
-              rectHeight={4}
+              rectWidth={props.rectWidth}
+              rectHeight={props.rectHeight}
           />
       );
     }.bind(this));
