@@ -14,18 +14,20 @@ module.exports = React.createClass({
   displayName: 'LineChart',
 
   propTypes: {
-    circleRadius:   React.PropTypes.number,
-    rectWidth:   React.PropTypes.number,
-    rectHeight:   React.PropTypes.number,
+    symbol:         React.PropTypes.string,
+    symbolRadius:   React.PropTypes.number,
+    symbolWidth:    React.PropTypes.number,
+    symbolHeight:   React.PropTypes.number,
     hoverAnimation: React.PropTypes.bool,
     margins:        React.PropTypes.object,
  },
 
   getDefaultProps() {
     return {
-      circleRadius:    3,
-      rectWidth: 6,
-      rectHeight: 6,
+      symbol: 'circle',
+      symbolRadius: 3,
+      symbolWidth: 6,
+      symbolHeight: 6,
       className: 'rd3-linechart',
       hoverAnimation: true,
       margins:        {top: 10, right: 20, bottom: 50, left: 45},
@@ -81,9 +83,10 @@ module.exports = React.createClass({
             xAccessor={props.xAccessor}
             yAccessor={props.yAccessor}
             hoverAnimation={props.hoverAnimation}
+            symbol={props.symbol}
             symbolRadius={props.symbolRadius}
-            symbolWidth={props.rectWidth}
-            symbolHeight={props.rectHeight}
+            symbolWidth={props.symbolWidth}
+            symbolHeight={props.symbolHeight}
             data={props.data}
             value={allValues}
             colors={props.colors}

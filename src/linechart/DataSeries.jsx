@@ -86,22 +86,15 @@ module.exports = React.createClass({
       symbolFill = props.colors(props.colorAccessor(vnode, vnode.point.seriesIndex));
       
       return (
-          /*<VoronoiContainer
-              symbol='circle'
-              key={idx}
-              symbolFill={symbolFill}
-              vnode={vnode}
-              cx={cx} cy={cy}
-              symbolRadius={props.symbolRadius}
-            />*/
           <VoronoiContainer
-              symbol='rect'
+              symbol={props.symbol}
               key={idx} 
               symbolFill={symbolFill}
               vnode={vnode}
               cx={cx} cy={cy}
               symbolWidth={props.symbolWidth}
               symbolHeight={props.symbolHeight}
+              symbolRadius={props.symbolRadius}
           />
       );
     }.bind(this));
