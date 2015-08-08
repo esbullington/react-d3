@@ -25,8 +25,6 @@ module.exports = React.createClass({
       className: 'rd3-linechart',
       hoverAnimation: true,
       margins:        {top: 10, right: 20, bottom: 50, left: 45},
-			labelsAccessor: d => d.name,
-			valuesAccessor: d => d.values,
       xAxisClassName: 'rd3-linechart-xaxis',
       yAxisClassName: 'rd3-linechart-yaxis',
     };
@@ -37,6 +35,7 @@ module.exports = React.createClass({
   render() {
 
     var props = this.props;
+    var { labelsAccessor, valuesAccessor } = props;
 
 		var labelsAccessor = props.labelsAccessor;
 		var valuesAccessor = props.valuesAccessor;

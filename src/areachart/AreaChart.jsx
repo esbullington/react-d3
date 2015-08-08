@@ -26,9 +26,7 @@ module.exports = React.createClass({
       interpolate: false,
       interpolationType: null,
       className: 'rd3-areachart',
-      hoverAnimation: true,
-			labelsAccessor: d => d.name,
-			valuesAccessor: d => d.values
+      hoverAnimation: true
     };
   },
 
@@ -36,9 +34,8 @@ module.exports = React.createClass({
 
     var props = this.props;
 
-    var data           = props.data;
-		var labelsAccessor = props.labelsAccessor;
-		var valuesAccessor = props.valuesAccessor;
+    var data = props.data;
+    var { labelsAccessor, valuesAccessor } = props;
 
     var interpolationType = props.interpolationType || (props.interpolate ? 'cardinal' : 'linear');
 
