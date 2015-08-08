@@ -28,8 +28,7 @@ module.exports = React.createClass({
   render() {
 
     var props = this.props;
-		var labelsAccessor = props.labelsAccessor;
-		var valuesAccessor = props.valuesAccessor;
+    var { labelsAccessor, valuesAccessor } = props;
 
     var treemap = d3.layout.treemap()
                     // make sure calculation loop through all objects inside array

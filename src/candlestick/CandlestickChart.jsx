@@ -59,9 +59,7 @@ module.exports = React.createClass({
   render() {
 
     var props = this.props;
-
-		var labelsAccessor = props.labelsAccessor;
-		var valuesAccessor = props.valuesAccessor;
+    var { labelsAccessor, valuesAccessor } = props;
 
     // Calculate inner chart dimensions
     var innerWidth, innerHeight;
