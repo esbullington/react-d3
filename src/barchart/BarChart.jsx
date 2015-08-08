@@ -23,7 +23,6 @@ module.exports = React.createClass({
     rangeRoundBandsPadding: React.PropTypes.number,
     // https://github.com/mbostock/d3/wiki/Stack-Layout#offset
     stackOffset:            React.PropTypes.oneOf(['silhouette', 'expand', 'wigget', 'zero']),
-    valuesAccessor:         React.PropTypes.func,
     title:                  React.PropTypes.string,
     width:                  React.PropTypes.number,
     xAxisClassName:         React.PropTypes.string,
@@ -38,7 +37,6 @@ module.exports = React.createClass({
       margins:                {top: 10, right: 20, bottom: 40, left: 45},
       rangeRoundBandsPadding: 0.25,
       stackOffset:            'zero',
-      valuesAccessor:         d => d.values,
       xAxisClassName:         'rd3-barchart-xaxis',
       yAxisClassName:         'rd3-barchart-yaxis',
       yAxisTickCount:         4,
