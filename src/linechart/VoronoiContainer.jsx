@@ -12,27 +12,27 @@ module.exports = React.createClass({
 
   getDefaultProps() {
     return {
-      symbol: 'circle',
-      symbolRadius: 3,
-      symbolWidth: 6,
-      symbolHeight: 6,
-      symbolFill: '#1f77b4',
+      marker: 'circle',
+      markerRadius: 3,
+      markerWidth: 6,
+      markerHeight: 6,
+      markerFill: '#1f77b4',
       hoverAnimation: true
     };
   },
 
   getInitialState() {
-    if (this.props.symbol == 'circle') {
+    if (this.props.marker == 'circle') {
       return {
-        symbolRadius: this.props.symbolRadius,
-        symbolFill: this.props.symbolFill,
+        markerRadius: this.props.markerRadius,
+        markerFill: this.props.markerFill,
       }
     }
     else {
       return {
-        symbolWidth: this.props.symbolWidth,
-        symbolHeight: this.props.symbolHeight,
-        symbolFill: this.props.symbolFill,
+        markerWidth: this.props.markerWidth,
+        markerHeight: this.props.markerHeight,
+        markerFill: this.props.markerFill,
       }
     }
   },
@@ -41,13 +41,13 @@ module.exports = React.createClass({
     // animation controller
     var handleMouseOver, handleMouseLeave;
     if(this.props.hoverAnimation) {
-      handleMouseOver = this._animateSymbol;
-      handleMouseLeave = this._restoreSymbol;
+      handleMouseOver = this._animateMarker;
+      handleMouseLeave = this._restoreMarker;
     } else {
       handleMouseOver = handleMouseLeave = null;
     }
 
-    switch (this.props.symbol) {
+    switch (this.props.marker) {
       case 'circle':
         return (
             <g>
@@ -57,8 +57,8 @@ module.exports = React.createClass({
                   voronoiPath={this._drawPath(this.props.vnode)}
                   cx={this.props.cx}
                   cy={this.props.cy}
-                  symbolRadius={this.state.symbolRadius}
-                  symbolFill={this.state.symbolFill}
+                  markerRadius={this.state.markerRadius}
+                  markerFill={this.state.markerFill}
                   />
             </g>
         );
@@ -72,35 +72,35 @@ module.exports = React.createClass({
                 voronoiPath={this._drawPath(this.props.vnode)}
                 cx={this.props.cx }
                 cy={this.props.cy}
-                symbolWidth={this.state.symbolWidth}
-                symbolHeight={this.state.symbolHeight}
-                symbolFill={this.state.symbolFill}
+                markerWidth={this.state.markerWidth}
+                markerHeight={this.state.markerHeight}
+                markerFill={this.state.markerFill}
                 />
           </g>
       );
       break;
     default:
-      console.log('Symbol to display data point is not available.');
+      console.log('Marker to display data point is not available.');
     }
   },
 
-  _animateSymbol() {
-    if (this.props.symbol == 'circle') {
+  _animateMarker() {
+    if (this.props.marker == 'circle') {
       this.setState({
-        symbolRadius: this.props.symbolRadius * ( 5 / 4 ),
-        symbolFill: shade(this.props.symbolFill, 0.2)
+        markerRadius: this.props.markerRadius * ( 5 / 4 ),
+        markerFill: shade(this.props.markerFill, 0.2)
       });
     }
     else {
       this.setState({
-        symbolWidth: this.props.symbolWidth * ( 5 / 4 ),
-        symbolHeight: this.props.symbolHeight * ( 5 / 4 ),
-        symbolFill: shade(this.props.symbolFill, 0.2)
+        markerWidth: this.props.markerWidth * ( 5 / 4 ),
+        markerHeight: this.props.markerHeight * ( 5 / 4 ),
+        markerFill: shade(this.props.markerFill, 0.2)
       });
     }
   },
 
-  _restoreSymbol() {
+  _restoreMarker() {
     this.setState(
       this.getInitialState()
     );

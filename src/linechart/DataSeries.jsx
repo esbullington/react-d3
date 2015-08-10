@@ -70,7 +70,7 @@ module.exports = React.createClass({
       .y(function(d){ return yScale(d.coord.y); })
       .clipExtent([[0, 0], [ props.width , props.height]]);
 
-    var cx, cy, symbolFill;
+    var cx, cy, markerFill;
     var regions = voronoi(props.value).map(function(vnode, idx) {
       var point = vnode.point.coord;
       if (Object.prototype.toString.call(xAccessor(point)) === '[object Date]') {
@@ -83,18 +83,18 @@ module.exports = React.createClass({
       } else {
         cy = props.yScale(yAccessor(point));
       }
-      symbolFill = props.colors(props.colorAccessor(vnode, vnode.point.seriesIndex));
+      markerFill = props.colors(props.colorAccessor(vnode, vnode.point.seriesIndex));
       
       return (
           <VoronoiContainer
-              symbol={props.symbol}
+              marker={props.marker}
               key={idx} 
-              symbolFill={symbolFill}
+              markerFill={markerFill}
               vnode={vnode}
               cx={cx} cy={cy}
-              symbolWidth={props.symbolWidth}
-              symbolHeight={props.symbolHeight}
-              symbolRadius={props.symbolRadius}
+              markerWidth={props.markerWidth}
+              markerHeight={props.markerHeight}
+              markerRadius={props.markerRadius}
           />
       );
     }.bind(this));
