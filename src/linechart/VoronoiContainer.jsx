@@ -63,8 +63,8 @@ module.exports = React.createClass({
             </g>
         );
         break;
-    case 'rect':
-      return (
+      case 'rect':
+        return (
           <g>
             <VoronoiRect
                 handleMouseOver={handleMouseOver}
@@ -77,10 +77,10 @@ module.exports = React.createClass({
                 markerFill={this.state.markerFill}
                 />
           </g>
-      );
-      break;
-    default:
-      console.log('Marker to display data point is not available.');
+        );
+        break;
+      default:
+        console.log('Marker to display data point is not available.');
     }
   },
 

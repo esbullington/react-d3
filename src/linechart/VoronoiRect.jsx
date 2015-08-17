@@ -2,6 +2,7 @@
 
 var React = require('react');
 var d3 = require('d3');
+var VoronoiArea = require('./VoronoiArea');
 
 module.exports = React.createClass({
 
@@ -18,11 +19,10 @@ module.exports = React.createClass({
   render() {
     return (
       <g>
-        <path
-          onMouseOver={this.props.handleMouseOver}
-          onMouseLeave={this.props.handleMouseLeave}
-          fill='white'
-          d={this.props.voronoiPath} 
+        <VoronoiArea
+          handleMouseOver={this.props.handleMouseOver}
+          handleMouseLeave={this.props.handleMouseLeave}
+          voronoiPath={this.props.voronoiPath}
         />
         <rect
           onMouseOver={this.props.handleMouseOver}
