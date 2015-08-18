@@ -95,6 +95,9 @@ module.exports = React.createClass({
               markerWidth={props.markerWidth}
               markerHeight={props.markerHeight}
               markerRadius={props.markerRadius}
+              markerOuterRadius={props.markerOuterRadius}
+              markerInnerRadius={props.markerInnerRadius}
+              markerFill={props.markerFill}
           />
       );
     }.bind(this));
