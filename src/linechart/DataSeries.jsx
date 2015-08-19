@@ -37,7 +37,31 @@ module.exports = React.createClass({
     var yScale = props.yScale;
     var xAccessor = props.xAccessor,
         yAccessor = props.yAccessor;
-    
+
+    var markerArray = new Array(0);
+    if (!Array.isArray(this.props.marker)) {
+      // use same marker for all data points
+      var markerCount = this.props.value.length;
+      var markerArray = new Array(0);
+      while (markerCount--) {
+        markerArray.push(this.props.marker);
+      }
+      // From ES6 on (not supported yet):
+      // var markerArray = new Array(this.props.value.length).fill(this.props.marker);
+    }
+    else {
+      // use different markers for data points
+      markerArray = this.props.marker.slice();
+      if (markerArray.length != this.props.value.length) {
+        // less markers than data points defined. use last defined marker for data points with undefined marker
+        var lastMarker = this.props.marker[this.props.marker.length - 1];
+        var diff = this.props.value.length - markerArray.length;
+        while (diff-- && diff > 0) {
+          markerArray.push(lastMarker);
+        }
+      }
+    }
+
     var interpolatePath = d3.svg.line()
         .y( (d) => props.yScale(yAccessor(d)) )
         .interpolate(props.interpolationType);
@@ -86,19 +110,18 @@ module.exports = React.createClass({
       markerFill = props.colors(props.colorAccessor(vnode, vnode.point.seriesIndex));
       
       return (
-          <VoronoiContainer
-              marker={props.marker}
-              key={idx} 
-              markerFill={markerFill}
-              vnode={vnode}
-              cx={cx} cy={cy}
-              markerWidth={props.markerWidth}
-              markerHeight={props.markerHeight}
-              markerRadius={props.markerRadius}
-              markerOuterRadius={props.markerOuterRadius}
-              markerInnerRadius={props.markerInnerRadius}
-              markerFill={props.markerFill}
-          />
+        <VoronoiContainer
+          marker={markerArray[idx]}
+          key={idx}
+          markerFill={markerFill}
+          vnode={vnode}
+          cx={cx} cy={cy}
+          markerWidth={props.markerWidth}
+          markerHeight={props.markerHeight}
+          markerRadius={props.markerRadius}
+          markerOuterRadius={props.markerOuterRadius}
+          markerInnerRadius={props.markerInnerRadius}
+        />
       );
     }.bind(this));
 

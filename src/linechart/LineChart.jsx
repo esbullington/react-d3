@@ -14,7 +14,10 @@ module.exports = React.createClass({
   displayName: 'LineChart',
 
   propTypes: {
-    marker:         React.PropTypes.string,
+    marker:         React.PropTypes.oneOfType([
+        React.PropTypes.string,
+        React.PropTypes.arrayOf(React.PropTypes.string)
+    ]),
     markerRadius:   React.PropTypes.number,
     markerWidth:    React.PropTypes.number,
     markerHeight:   React.PropTypes.number,
