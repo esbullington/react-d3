@@ -71,20 +71,6 @@ module.exports = React.createClass({
         height={props.height}
         title={props.title}>
         <g transform={trans} className={props.className}>
-          <DataSeries
-            xScale={scales.xScale}
-            yScale={scales.yScale}
-            xAccessor={props.xAccessor}
-            yAccessor={props.yAccessor}
-            hoverAnimation={props.hoverAnimation}
-            circleRadius={props.circleRadius}
-            data={props.data}
-            value={allValues}
-            colors={props.colors}
-            colorAccessor={props.colorAccessor}
-            width={innerWidth}
-            height={innerHeight}
-          />
           <XAxis
             xAxisClassName={props.xAxisClassName}
             strokeWidth="1"
@@ -117,6 +103,20 @@ module.exports = React.createClass({
             height={innerHeight}
             stroke={props.axesColor}
           />
+          <DataSeries
+              xScale={scales.xScale}
+              yScale={scales.yScale}
+              xAccessor={props.xAccessor}
+              yAccessor={props.yAccessor}
+              hoverAnimation={props.hoverAnimation}
+              circleRadius={props.circleRadius}
+              data={props.data}
+              value={allValues}
+              colors={props.colors}
+              colorAccessor={props.colorAccessor}
+              width={innerWidth}
+              height={innerHeight}
+              />
         </g>
       </Chart>
     );
