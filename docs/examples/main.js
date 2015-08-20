@@ -54,6 +54,7 @@ var Demos = React.createClass({
         values: [ { x: 0, y: 20 }, { x: 1, y: 30 }, { x: 2, y: 10 }, { x: 3, y: 5 }, { x: 4, y: 8 }, { x: 5, y: 15 }, { x: 6, y: 10 } ],
         strokeWidth: 3,
         strokeDashArray: "5,5",
+        markerName: ['star', 'circle', 'rect']
       },
       {
         name: 'series2',
@@ -147,11 +148,17 @@ var Demos = React.createClass({
     values: [ { x: 0, y: 20 }, ..., { x: 24, y: 10 } ],
     strokeWidth: 3,
     strokeDashArray: "5,5",
+    markerName: ['star', 'circle', 'rect'],
+    // because only the form of the marker of the three first points is defined,
+    // 'rect' is used for the following data points.
   },
-  ....
   {
     name: "series2",
     values: [ { x: 70, y: 82 }, ..., { x: 76, y: 82 } ]
+  }
+  {
+    name: 'series3',
+    values: [ { x: 0, y: 0 }, ..., { x: 6, y: 2 } ],
   }
 ];`
               }

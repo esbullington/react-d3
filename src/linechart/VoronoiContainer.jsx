@@ -12,7 +12,8 @@ module.exports = React.createClass({
 
   getDefaultProps() {
     return {
-      marker: 'circle'
+      markerName: 'circle',
+      hoverAnimation: true
     };
   },
 
@@ -26,7 +27,7 @@ module.exports = React.createClass({
       handleMouseOver = handleMouseLeave = null;
     }
 
-    switch (this.props.marker) {
+    switch (this.props.markerName) {
       case 'circle':
         return (
           <g>
@@ -70,6 +71,7 @@ module.exports = React.createClass({
         break;
       default:
         console.log('Marker to display data point is not available.');
+        return(<g></g>)
     }
   },
 

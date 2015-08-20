@@ -27,12 +27,7 @@ module.exports = React.createClass({
 
   getDefaultProps() {
     return {
-      marker: 'circle',
-      markerRadius: 3,
-      markerWidth: 6,
-      markerHeight: 6,
       className: 'rd3-linechart',
-      hoverAnimation: true,
       margins:        {top: 10, right: 20, bottom: 50, left: 45},
       xAxisClassName: 'rd3-linechart-xaxis',
       yAxisClassName: 'rd3-linechart-yaxis',
@@ -86,13 +81,13 @@ module.exports = React.createClass({
             xAccessor={props.xAccessor}
             yAccessor={props.yAccessor}
             hoverAnimation={props.hoverAnimation}
-            marker={props.marker}
+            /*marker={props.marker}
             markerRadius={props.markerRadius}
             markerWidth={props.markerWidth}
             markerHeight={props.markerHeight}
             markerOuterRadius={props.markerOuterRadius}
             markerInnerRadius={props.markerInnerRadius}
-            markerFill={props.markerFill}
+            markerFill={props.markerFill}*/
             data={props.data}
             value={allValues}
             colors={props.colors}

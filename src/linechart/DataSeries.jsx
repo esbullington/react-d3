@@ -37,46 +37,60 @@ module.exports = React.createClass({
     var yScale = props.yScale;
     var xAccessor = props.xAccessor,
         yAccessor = props.yAccessor;
-
-    var markerArray = new Array(0);
-    if (!Array.isArray(this.props.marker)) {
-      // use same marker for all data points
-      var markerCount = this.props.value.length;
-      var markerArray = new Array(0);
-      while (markerCount--) {
-        markerArray.push(this.props.marker);
-      }
-      // From ES6 on (not supported yet):
-      // var markerArray = new Array(this.props.value.length).fill(this.props.marker);
-    }
-    else {
-      // use different markers for data points
-      markerArray = this.props.marker.slice();
-      if (markerArray.length != this.props.value.length) {
-        // less markers than data points defined. use last defined marker for data points with undefined marker
-        var lastMarker = this.props.marker[this.props.marker.length - 1];
-        var diff = this.props.value.length - markerArray.length;
-        while (diff-- && diff > 0) {
-          markerArray.push(lastMarker);
-        }
-      }
-    }
+    var marker = new Array();
 
     var interpolatePath = d3.svg.line()
-        .y( (d) => props.yScale(yAccessor(d)) )
-        .interpolate(props.interpolationType);
+      .y( (d) => props.yScale(yAccessor(d)) )
+      .interpolate(props.interpolationType);
 
-        if (this._isDate(props.data[0].values[0], xAccessor)) {
-          interpolatePath.x(function(d) {
-            return props.xScale(props.xAccessor(d).getTime());
-          });
-        } else {
-          interpolatePath.x(function(d) {
-            return props.xScale(props.xAccessor(d));
-          });
-        }
+      if (this._isDate(props.data[0].values[0], xAccessor)) {
+        interpolatePath.x(function(d) {
+          return props.xScale(props.xAccessor(d).getTime());
+        });
+      } else {
+        interpolatePath.x(function(d) {
+          return props.xScale(props.xAccessor(d));
+        });
+      }
 
     var lines = props.data.map((series, idx) => {
+
+      // Make an array markerName containing the name (form) of the marker for each data point
+      var markerName = new Array(0);
+      if (!Array.isArray(series.markerName)) {
+        // use same marker for all data points
+        var markerCount = series.values.length;
+        while (markerCount--) {
+          markerName.push(series.markerName);
+        }
+        // From ES6 on (not supported yet):
+        // var markerName = new Array(this.props.values.length).fill(this.props.marker);
+      }
+      else {
+        // use different markers for data points
+        markerName = series.markerName.slice();
+        if (markerName.length != series.values.length) {
+          // less markers than data points defined. use last defined marker for data points with undefined marker
+          var lastMarker = series.markerName[series.markerName.length - 1];
+          var diff = series.values.length - markerName.length;
+          while (diff > 0 && diff--) {
+            markerName.push(lastMarker);
+          }
+        }
+      }
+
+      marker.push({
+        markerName: markerName,                       // per data point
+        markerWidth: series.markerWidth,              // same for one series
+        markerHeight: series.markerHeight,            // same for one series
+        markerRadius: series.markerRadius,            // same for one series
+        markerOuterRadius: series.markerOuterRadius,  // same for one series
+        markerInnerRadius: series.markerInnerRadius   // same for one series
+        // markerFill:
+        // - would be good to have that here too (is below now)
+        // - same for one series
+      });
+
       return (
         <Line 
           path={interpolatePath(series.values)}
@@ -108,19 +122,20 @@ module.exports = React.createClass({
         cy = props.yScale(yAccessor(point));
       }
       markerFill = props.colors(props.colorAccessor(vnode, vnode.point.seriesIndex));
-      
+
       return (
         <VoronoiContainer
-          marker={markerArray[idx]}
           key={idx}
-          markerFill={markerFill}
           vnode={vnode}
           cx={cx} cy={cy}
-          markerWidth={props.markerWidth}
-          markerHeight={props.markerHeight}
-          markerRadius={props.markerRadius}
-          markerOuterRadius={props.markerOuterRadius}
-          markerInnerRadius={props.markerInnerRadius}
+          markerName={marker[vnode.point.seriesIndex].markerName.shift()}
+            // assigns wrong if more than one series share a data point
+          markerFill={markerFill}
+          markerWidth={marker[vnode.point.seriesIndex].markerWidth}
+          markerHeight={marker[vnode.point.seriesIndex].markerHeight}
+          markerRadius={marker[vnode.point.seriesIndex].markerRadius}
+          markerOuterRadius={marker[vnode.point.seriesIndex].markerOuterRadius}
+          markerInnerRadius={marker[vnode.point.seriesIndex].markerInnerRadius}
         />
       );
     }.bind(this));
