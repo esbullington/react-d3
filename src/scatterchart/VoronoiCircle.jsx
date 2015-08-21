@@ -22,7 +22,7 @@ module.exports = React.createClass({
   getDefaultProps() {
     return {
       className:    'rd3-scatterchart-voronoi-circle',
-      pathFill:     'white'
+      pathFill:     'transparent'
     };
   },
 

@@ -106,18 +106,6 @@ module.exports = React.createClass({
         title={props.title}
       >
         <g transform={trans} className={props.chartClassName}>
-          <DataSeries
-            yScale={yScale}
-            xScale={xScale}
-            margins={margins}
-            _data={_data}
-            width={innerWidth}
-            height={innerHeight}
-            colors={props.colors}
-            colorAccessor={props.colorAccessor}
-            hoverAnimation={props.hoverAnimation}
-            valuesAccessor={props.valuesAccessor}
-          />
           <YAxis
             yAxisClassName={props.yAxisClassName}
             yAxisTickValues={props.yAxisTickValues}
@@ -141,6 +129,18 @@ module.exports = React.createClass({
             width={innerWidth}
             height={innerHeight}
           />
+          <DataSeries
+              yScale={yScale}
+              xScale={xScale}
+              margins={margins}
+              _data={_data}
+              width={innerWidth}
+              height={innerHeight}
+              colors={props.colors}
+              colorAccessor={props.colorAccessor}
+              hoverAnimation={props.hoverAnimation}
+              valuesAccessor={props.valuesAccessor}
+              />
         </g>
       </Chart>
     );

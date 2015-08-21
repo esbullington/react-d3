@@ -102,7 +102,6 @@ module.exports = React.createClass({
         title={props.title}
       >
         <g transform={trans} className={props.className}>
-          {dataSeries}
           <XAxis
             xAxisClassName={props.xAxisClassName}
             xScale={scales.xScale}
@@ -131,6 +130,7 @@ module.exports = React.createClass({
             width={innerWidth}
             height={props.height}
           />
+          {dataSeries}
         </g>
       </Chart>
     );
