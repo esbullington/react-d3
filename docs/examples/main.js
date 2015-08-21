@@ -135,6 +135,7 @@ var Demos = React.createClass({
               title="Line Chart"
               yAxisLabel="Altitude"
               xAxisLabel="Elapsed Time (sec)"
+              gridHorizontal={true}
             />
           </div>
           <div className="col-md-6">
@@ -174,6 +175,7 @@ var Demos = React.createClass({
   title="Line Chart"
   yAxisLabel="Altitude"
   xAxisLabel="Elapsed Time (sec)"
+  gridHorizontal={true}
 />`
               }
               </code>

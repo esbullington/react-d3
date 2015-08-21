@@ -22,7 +22,11 @@ module.exports = React.createClass({
     yAxisOffset:     React.PropTypes.number,
     yAxisTickValues: React.PropTypes.array,
     yOrient:         React.PropTypes.oneOf(['left', 'right']),
-    yScale:          React.PropTypes.func.isRequired
+    yScale:          React.PropTypes.func.isRequired,
+    gridVertical: React.PropTypes.bool,
+    gridVerticalStroke: React.PropTypes.string,
+    gridVerticalStrokeWidth: React.PropTypes.number,
+    gridVerticalStrokeDash: React.PropTypes.string
   },
 
   getDefaultProps() {
@@ -74,6 +78,10 @@ module.exports = React.createClass({
           scale={props.yScale}
           height={props.height}
           width={props.width}
+          gridHorizontal={props.gridHorizontal}
+          gridHorizontalStroke={props.gridHorizontalStroke}
+          gridHorizontalStrokeWidth={props.gridHorizontalStrokeWidth}
+          gridHorizontalStrokeDash={props.gridHorizontalStrokeDash}
         />
         <AxisLine
           orient={props.yOrient}

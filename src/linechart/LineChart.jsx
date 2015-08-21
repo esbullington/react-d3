@@ -87,9 +87,13 @@ module.exports = React.createClass({
             width={innerWidth}
             height={innerHeight}
             stroke={props.axesColor}
+            gridVertical={props.gridVertical}
+            gridVerticalStroke={props.gridVerticalStroke}
+            gridVerticalStrokeWidth={props.gridVerticalStrokeWidth}
+            gridVerticalStrokeDash={props.gridVerticalStrokeDash}
           />
           <YAxis
-            yAxisClassName={props.xAxisClassName}
+            yAxisClassName={props.yAxisClassName}
             yScale={scales.yScale}
             yAxisTickValues={props.yAxisTickValues}
             yAxisTickCount={props.yAxisTickCount}
@@ -102,6 +106,10 @@ module.exports = React.createClass({
             width={innerWidth}
             height={innerHeight}
             stroke={props.axesColor}
+            gridHorizontal={props.gridHorizontal}
+            gridHorizontalStroke={props.gridHorizontalStroke}
+            gridHorizontalStrokeWidth={props.gridHorizontalStrokeWidth}
+            gridHorizontalStrokeDash={props.gridHorizontalStrokeDash}
           />
           <DataSeries
               xScale={scales.xScale}

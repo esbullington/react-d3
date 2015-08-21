@@ -10,6 +10,8 @@ module.exports = React.createClass({
   propTypes: {
     scale: React.PropTypes.func.isRequired,
     orient: React.PropTypes.oneOf(['top','bottom','left','right']).isRequired,
+    height: React.PropTypes.number.isRequired,
+    width: React.PropTypes.number.isRequired,
     tickArguments : React.PropTypes.array,
     tickValues: React.PropTypes.array,
     innerTickSize: React.PropTypes.number,
@@ -22,7 +24,9 @@ module.exports = React.createClass({
     gridHorizontalStroke: React.PropTypes.string,
     gridVerticalStroke: React.PropTypes.string,
     gridHorizontalStrokeWidth: React.PropTypes.number,
-    gridVerticalStrokeWidth: React.PropTypes.number
+    gridVerticalStrokeWidth: React.PropTypes.number,
+    gridHorizontalStrokeDash: React.PropTypes.string,
+    gridVerticalStrokeDash: React.PropTypes.string
   },
   getDefaultProps() {
     return {
@@ -32,12 +36,14 @@ module.exports = React.createClass({
       tickPadding: 3,
       tickArguments: [10],
       tickValues: null,
-      gridHorizontal: true,
+      gridHorizontal: false,
       gridVertical: false,
-      gridHorizontalStroke: '#ADA8A8',
-      gridVerticalStroke: '#ADA8A8',
+      gridHorizontalStroke: '#D8D7D7',
+      gridVerticalStroke: '#D8D7D7',
       gridHorizontalStrokeWidth: 1,
-      gridVerticalStrokeWidth: 1
+      gridVerticalStrokeWidth: 1,
+      gridHorizontalStrokeDash: '5, 5',
+      gridVerticalStrokeDash: '5, 5'
     };
   },
 
@@ -52,11 +58,11 @@ module.exports = React.createClass({
         tickFormat,
         y0, y1, y2, dy, x0, x1, x2, dx;
 
-    var gridHorizontal = false;
-    var gridVertical = false;
-    var gridStrokeWidth = 1;
-    var gridStroke = '#ADA8A8';
-    var x2grid, y2grid;
+    var gridStrokeWidth,
+        gridStroke,
+        gridStrokeDashArray,
+        x2grid,
+        y2grid;
     var gridOn = false;
 
     var sign = props.orient === 'top' || props.orient === 'right' ? -1 : 1;
@@ -92,7 +98,6 @@ module.exports = React.createClass({
         y2 = props.innerTickSize * sign;
         y1 = tickSpacing * sign;
         dy =  sign < 0 ? "0em" : ".71em";
-        gridVertical = props.gridVertical;
         x2grid = 0;
         y2grid = props.height;
         break;
@@ -102,7 +107,6 @@ module.exports = React.createClass({
         y2 = props.innerTickSize * sign;
         y1 = tickSpacing * sign;
         dy =  sign < 0 ? "0em" : ".71em";
-        gridVertical = props.gridVertical;
         x2grid = 0;
         y2grid = -props.height;
         break;
@@ -112,7 +116,6 @@ module.exports = React.createClass({
         x2 = props.innerTickSize * -sign;
         x1 = tickSpacing * -sign;
         dy = ".32em";
-        gridHorizontal = props.gridHorizontal;
         x2grid = props.width;
         y2grid = 0;
         break;
@@ -122,21 +125,22 @@ module.exports = React.createClass({
         x2 = props.innerTickSize * -sign;
         x1 = tickSpacing * -sign;
         dy = ".32em";
-        gridHorizontal = props.gridHorizontal;
         x2grid = props.width;
         y2grid = 0;
         break;
     }
 
-    if (gridHorizontal) {
+    if (props.gridHorizontal) {
       gridOn = true;
       gridStrokeWidth = props.gridHorizontalStrokeWidth;
       gridStroke = props.gridHorizontalStroke;
+      gridStrokeDashArray = props.gridHorizontalStrokeDash;
     }
-    else if (gridVertical) {
+    else if (props.gridVertical) {
       gridOn = true;
       gridStrokeWidth = props.gridVerticalStrokeWidth;
       gridStroke = props.gridVerticalStroke;
+      gridStrokeDashArray = props.gridVerticalStrokeDash;
     }
 
     var gridLine = function(gridOn) {
@@ -145,7 +149,8 @@ module.exports = React.createClass({
           <line style={{
             strokeWidth: gridStrokeWidth,
             shapeRendering: 'crispEdges',
-            stroke: gridStroke
+            stroke: gridStroke,
+            strokeDasharray: gridStrokeDashArray
             }} x2={x2grid} y2={y2grid}></line>
         )
       }
