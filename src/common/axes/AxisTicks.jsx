@@ -10,6 +10,7 @@ module.exports = React.createClass({
   propTypes: {
     scale: React.PropTypes.func.isRequired,
     orient: React.PropTypes.oneOf(['top','bottom','left','right']).isRequired,
+    orient2nd: React.PropTypes.oneOf(['top','bottom','left','right']),
     height: React.PropTypes.number.isRequired,
     width: React.PropTypes.number.isRequired,
     tickArguments : React.PropTypes.array,
@@ -99,7 +100,7 @@ module.exports = React.createClass({
         y1 = tickSpacing * sign;
         dy =  sign < 0 ? "0em" : ".71em";
         x2grid = 0;
-        y2grid = props.height;
+        y2grid = -props.height;
         break;
       case 'bottom':
         tr = (tick) => `translate(${adjustedScale(tick)},0)`;
@@ -125,7 +126,7 @@ module.exports = React.createClass({
         x2 = props.innerTickSize * -sign;
         x1 = tickSpacing * -sign;
         dy = ".32em";
-        x2grid = props.width;
+        x2grid = -props.width;
         y2grid = 0;
         break;
     }
@@ -143,8 +144,13 @@ module.exports = React.createClass({
       gridStrokeDashArray = props.gridVerticalStrokeDash;
     }
 
-    var gridLine = function(gridOn) {
-      if (gridOn) {
+    // return grid line if grid is enabled and grid line is not on at same position as other axis.
+    var gridLine = function(pos) {
+      if (gridOn
+        && !(props.orient2nd == 'left' && pos == 0)
+        && !(props.orient2nd == 'right' && pos == props.width)
+        && !((props.orient == 'left' || props.orient == 'right') && pos == props.height)
+      ) {
         return (
           <line style={{
             strokeWidth: gridStrokeWidth,
@@ -161,13 +167,7 @@ module.exports = React.createClass({
       {ticks.map( (tick, idx) => {
         return (
           <g key={idx} className="tick" transform={tr(tick)} >
-
-            { /* plot grid line if it gird enabled and grid line is not on top of an axis */ }
-            {gridLine(
-                gridOn
-                && !((props.orient == 'bottom' || props.orient == 'top') && adjustedScale(tick) == 0)
-                && !((props.orient == 'left' || props.orient == 'right') && adjustedScale(tick) == props.height)
-            )}
+            {gridLine(adjustedScale(tick))}
             <line style={{shapeRendering:'crispEdges',opacity:'1',stroke:props.tickStroke}} x2={x2} y2={y2} >
             </line>
             <text

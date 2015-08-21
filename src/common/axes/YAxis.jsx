@@ -21,6 +21,7 @@ module.exports = React.createClass({
     yAxisLabel:      React.PropTypes.string,
     yAxisOffset:     React.PropTypes.number,
     yAxisTickValues: React.PropTypes.array,
+    xOrient:         React.PropTypes.oneOf(['top', 'bottom']),
     yOrient:         React.PropTypes.oneOf(['left', 'right']),
     yScale:          React.PropTypes.func.isRequired,
     gridVertical: React.PropTypes.bool,
@@ -38,6 +39,7 @@ module.exports = React.createClass({
       yAxisClassName: 'rd3-y-axis',
       yAxisLabel:     '',
       yAxisOffset:    0,
+      xOrient:        'bottom',
       yOrient:        'left'
     };
   },
@@ -70,6 +72,7 @@ module.exports = React.createClass({
         <AxisTicks
           innerTickSize={props.tickSize}
           orient={props.yOrient}
+          orient2nd={props.xOrient}
           tickArguments={tickArguments}
           tickFormatting={props.tickFormatting}
           tickStroke={props.tickStroke}

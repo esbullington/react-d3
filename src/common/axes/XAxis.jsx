@@ -23,6 +23,7 @@ module.exports = React.createClass({
     xAxisOffset:     React.PropTypes.number,
     xScale:          React.PropTypes.func.isRequired,
     xOrient:         React.PropTypes.oneOf(['top', 'bottom']),
+    yOrient:         React.PropTypes.oneOf(['left', 'right']),
     gridVertical:  React.PropTypes.bool,
     gridVerticalStroke: React.PropTypes.string,
     gridVerticalStrokeWidth: React.PropTypes.number,
@@ -39,7 +40,8 @@ module.exports = React.createClass({
       xAxisLabel:      '',
       xAxisLabelOffset: 10,
       xAxisOffset:      0,
-      xOrient:         'bottom'
+      xOrient:         'bottom',
+      yOrient:         'left'
     };
   },
 
@@ -62,13 +64,6 @@ module.exports = React.createClass({
         className={props.xAxisClassName}
         transform={t}
       >
-        <Label
-          label={props.xAxisLabel}
-          offset={props.xAxisLabelOffset}
-          orient={props.xOrient}
-          margins={props.margins}
-          width={props.width}
-        />
         <AxisTicks
           tickValues={props.xAxisTickValues}
           tickFormatting={props.tickFormatting}
@@ -78,6 +73,7 @@ module.exports = React.createClass({
           innerTickSize={props.tickSize}
           scale={props.xScale}
           orient={props.xOrient}
+          orient2nd={props.yOrient}
           height={props.height}
           width={props.width}
           gridVertical={props.gridVertical}
@@ -92,6 +88,13 @@ module.exports = React.createClass({
           outerTickSize={props.tickSize}
           {...props}
         />
+        <Label
+          label={props.xAxisLabel}
+          offset={props.xAxisLabelOffset}
+          orient={props.xOrient}
+          margins={props.margins}
+          width={props.width}
+          />
       </g>
     );
   }
