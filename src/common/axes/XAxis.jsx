@@ -13,6 +13,7 @@ module.exports = React.createClass({
   propTypes: {
     fill:            React.PropTypes.string,
     height:          React.PropTypes.number.isRequired,
+    width:           React.PropTypes.number.isRequired,
     stroke:          React.PropTypes.string,
     strokeWidth:     React.PropTypes.string,
     tickStroke:      React.PropTypes.string,
@@ -73,6 +74,8 @@ module.exports = React.createClass({
           innerTickSize={props.tickSize}
           scale={props.xScale}
           orient={props.xOrient}
+          height={props.height}
+          width={props.width}
         />
         <AxisLine
           scale={props.xScale}

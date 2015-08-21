@@ -16,6 +16,7 @@ module.exports = React.createClass({
     strokeWidth:     React.PropTypes.string,
     tickStroke:      React.PropTypes.string,
     width:           React.PropTypes.number.isRequired,
+    height:          React.PropTypes.number.isRequired,
     yAxisClassName:  React.PropTypes.string,
     yAxisLabel:      React.PropTypes.string,
     yAxisOffset:     React.PropTypes.number,
@@ -71,6 +72,8 @@ module.exports = React.createClass({
           tickTextStroke={props.tickTextStroke}
           tickValues={props.yAxisTickValues}
           scale={props.yScale}
+          height={props.height}
+          width={props.width}
         />
         <AxisLine
           orient={props.yOrient}
