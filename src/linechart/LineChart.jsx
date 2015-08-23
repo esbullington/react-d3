@@ -80,6 +80,7 @@ module.exports = React.createClass({
             circleRadius={props.circleRadius}
             data={props.data}
             value={allValues}
+            interpolationType={props.interpolationType}
             colors={props.colors}
             colorAccessor={props.colorAccessor}
             width={innerWidth}
