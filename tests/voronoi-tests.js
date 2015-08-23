@@ -27,8 +27,10 @@ describe('Voronoi', function() {
 
     var xAccessor = (d) => d.x;
     var yAccessor = (d) => d.y;
+		var labelsAccessor = (d) => d.name;
+		var valuesAccessor = (d) => d.values;
 
-    var allData = utils.flattenData(data, xAccessor, yAccessor);
+    var allData = utils.flattenData(data, labelsAccessor, valuesAccessor, xAccessor, yAccessor);
     var scales = utils.calculateScales(width, height, allData.xValues, allData.yValues);
     
     var voronoi = TestUtils.renderIntoDocument(

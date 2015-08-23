@@ -35,6 +35,7 @@ module.exports = React.createClass({
     var props = this.props;
 
     var data = props.data;
+    var { labelsAccessor, valuesAccessor } = props;
 
     var interpolationType = props.interpolationType || (props.interpolate ? 'cardinal' : 'linear');
 
@@ -56,8 +57,8 @@ module.exports = React.createClass({
     var yMaxValues = [];
     data.forEach( (series) => {
       var upper = 0;
-      seriesNames.push(series.name);
-      series.values.forEach((val, idx) => {
+      seriesNames.push(labelsAccessor(series));
+      valuesAccessor(series).forEach((val, idx) => {
         upper = Math.max(upper, props.yAccessor(val));
         xValues.push(props.xAccessor(val));
         yValues.push(props.yAccessor(val));
@@ -82,7 +83,7 @@ module.exports = React.createClass({
     var stack = d3.layout.stack()
       .x(props.xAccessor)
       .y(props.yAccessor)
-      .values((d)=> { return d.values; });
+      .values(valuesAccessor);
 
     var layers = stack(data);
 
@@ -92,12 +93,12 @@ module.exports = React.createClass({
       return (
           <DataSeries
             key={idx}
-            seriesName={d.name}
+            seriesName={labelsAccessor(d)}
             fill={props.colors(props.colorAccessor(d, idx))}
             index={idx}
             xScale={xScale}
             yScale={yScale}
-            data={d.values}
+            data={valuesAccessor(d)}
             xAccessor={props.xAccessor}
             yAccessor={props.yAccessor}
             interpolationType={interpolationType}

@@ -33,7 +33,16 @@ describe('Utils Test', () => {
 
     var xAccessor = (d) => d.x;
     var yAccessor = (d) => d.y;
-    var { allValues, xValues, yValues }= utils.flattenData(data, xAccessor, yAccessor);
+		var labelsAccessor = (d) => d.name;
+		var valuesAccessor = (d) => d.values;
+
+    var { allValues, xValues, yValues }= utils.flattenData(
+			data, 
+			labelsAccessor,
+			valuesAccessor,
+			xAccessor, 
+			yAccessor
+		);
 
     expect(allValues).to.have.length(pointsGenerated);
     expect(xValues).to.have.length(pointsGenerated);

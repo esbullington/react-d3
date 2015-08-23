@@ -44,6 +44,9 @@ module.exports = React.createClass({
     var props = this.props;
     var data  = props.data;
     var margins = props.margins;
+    var { labelsAccessor, valuesAccessor } = props;
+
+
 
     if (!data || data.length < 1) {
       return null;
@@ -54,7 +57,13 @@ module.exports = React.createClass({
     var innerHeight = this.getOuterDimensions().height - margins.top - margins.bottom;
 
     // Returns an object of flattened allValues, xValues, and yValues
-    var flattenedData = utils.flattenData(data, props.xAccessor, props.yAccessor);
+    var flattenedData = utils.flattenData(
+			data, 
+			labelsAccessor,
+			valuesAccessor,
+			props.xAccessor, 
+			props.yAccessor
+		);
 
     var allValues = flattenedData.allValues,
         xValues   = flattenedData.xValues,

@@ -46,10 +46,12 @@ module.exports = React.createClass({
       height:           200,
       hoverAnimation:   true,
       margins:          {top: 10, right: 20, bottom: 30, left: 45},
+			labelsAccessor:		d => d.name,
       legendOffset:     120,
       title:            '',
       xAccessor:        (d) => d.x,
       yAccessor:        (d) => ({ open: d.open, high: d.high, low: d.low, close: d.close }),
+			valuesAccessor:		d => d.values,
       width:            400,
     };
   },
@@ -57,6 +59,7 @@ module.exports = React.createClass({
   render() {
 
     var props = this.props;
+    var { labelsAccessor, valuesAccessor } = props;
 
     // Calculate inner chart dimensions
     var innerWidth, innerHeight;
@@ -66,7 +69,13 @@ module.exports = React.createClass({
     if (!Array.isArray(props.data)) {
       props.data = [props.data];
     }
-    var flattenedData = utils.flattenData(props.data, props.xAccessor, props.yAccessor);
+    var flattenedData = utils.flattenData(
+			props.data, 
+			labelsAccessor, 
+			valuesAccessor, 
+			props.xAccessor, 
+			props.yAccessor
+		);
 
     var allValues = flattenedData.allValues,
         xValues = flattenedData.xValues,
@@ -79,11 +88,11 @@ module.exports = React.createClass({
       return (
           <DataSeries
             key={idx}
-            seriesName={series.name}
+            seriesName={labelsAccessor(series)}
             index={idx}
             xScale={scales.xScale}
             yScale={scales.yScale}
-            data={series.values}
+            data={valuesAccessor(series)}
             fillUp={props.fillUp(props.fillUpAccessor(series, idx))}
             fillDown={props.fillDown(props.fillDownAccessor(series, idx))}
             xAccessor={props.xAccessor}

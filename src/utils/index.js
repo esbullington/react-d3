@@ -52,7 +52,7 @@ exports.debounce = function(func, wait, immediate) {
   };
 };
 
-exports.flattenData = (data, xAccessor, yAccessor) => {
+exports.flattenData = (data, labelsAccessor, valuesAccessor, xAccessor, yAccessor) => {
 
   var allValues = [];
   var xValues = [];
@@ -60,7 +60,7 @@ exports.flattenData = (data, xAccessor, yAccessor) => {
   var coincidentCoordinateCheck = {};
 
   data.forEach( (series, i) => {
-    series.values.forEach( (item, j) => {
+    valuesAccessor(series).forEach( (item, j) => {
 
       var x = xAccessor(item);
 
@@ -116,7 +116,7 @@ exports.flattenData = (data, xAccessor, yAccessor) => {
           y: yNode,
         },
         d: item,
-        id: series.name + j,
+        id: labelsAccessor(series) + j,
         series: series,
         seriesIndex: i
       };

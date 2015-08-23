@@ -23,7 +23,9 @@ module.exports = React.createClass({
     showInnerLabels:    React.PropTypes.bool,
     showOuterLabels:    React.PropTypes.bool,
     sectorBorderColor:  React.PropTypes.string,
-    hoverAnimation:     React.PropTypes.bool
+    hoverAnimation:     React.PropTypes.bool,
+    labelsAccessor:     React.PropTypes.func,
+    valuesAccessor:     React.PropTypes.func
   },
 
   getDefaultProps: function() {
@@ -33,17 +35,20 @@ module.exports = React.createClass({
       colors:             d3.scale.category20c(),
       colorAccessor:      (d, idx) => idx,
       valueTextFormatter: (val) => `${ val }%`,
+			labelsAccessor: d => d.label,
+			valuesAccessor: d => d.value,
       hoverAnimation:     true
     };
   },
 
   render: function() {
     var props = this.props;
+    var { labelsAccessor, valuesAccessor } = props;
 
     var transform = `translate(${ props.cx || props.width/2 },${ props.cy || props.height/2 })`;
 
-    var values = props.data.map( (item) => item.value );
-    var labels = props.data.map( (item) => item.label );
+    var values = props.data.map( (item) => valuesAccessor(item) );
+    var labels = props.data.map( (item) => labelsAccessor(item) );
 
     return (
       <Chart
