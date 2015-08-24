@@ -102,7 +102,6 @@ module.exports = React.createClass({
         title={props.title}
       >
         <g transform={trans} className={props.className}>
-          {dataSeries}
           <XAxis
             xAxisClassName={props.xAxisClassName}
             xScale={scales.xScale}
@@ -113,9 +112,14 @@ module.exports = React.createClass({
             xAxisLabel={props.xAxisLabel}
             xAxisLabelOffset={props.xAxisLabelOffset}
             xOrient={props.xOrient}
+            yOrient={props.yOrient}
             margins={props.margins}
             width={innerWidth}
             height={innerHeight}
+            gridVertical={props.gridVertical}
+            gridVerticalStroke={props.gridVerticalStroke}
+            gridVerticalStrokeWidth={props.gridVerticalStrokeWidth}
+            gridVerticalStrokeDash={props.gridVerticalStrokeDash}
           />
           <YAxis
             yAxisClassName={props.yAxisClassName}
@@ -126,11 +130,17 @@ module.exports = React.createClass({
             tickFormatting={props.yAxisFormatter}
             yAxisLabel={props.yAxisLabel}
             yAxisLabelOffset={props.yAxisLabelOffset}
+            xOrient={props.xOrient}
             yOrient={props.yOrient}
             margins={props.margins}
             width={innerWidth}
             height={props.height}
+            gridHorizontal={props.gridHorizontal}
+            gridHorizontalStroke={props.gridHorizontalStroke}
+            gridHorizontalStrokeWidth={props.gridHorizontalStrokeWidth}
+            gridHorizontalStrokeDash={props.gridHorizontalStrokeDash}
           />
+          {dataSeries}
         </g>
       </Chart>
     );

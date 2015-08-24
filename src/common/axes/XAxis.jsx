@@ -13,6 +13,7 @@ module.exports = React.createClass({
   propTypes: {
     fill:            React.PropTypes.string,
     height:          React.PropTypes.number.isRequired,
+    width:           React.PropTypes.number.isRequired,
     stroke:          React.PropTypes.string,
     strokeWidth:     React.PropTypes.string,
     tickStroke:      React.PropTypes.string,
@@ -21,7 +22,12 @@ module.exports = React.createClass({
     xAxisTickValues: React.PropTypes.array,
     xAxisOffset:     React.PropTypes.number,
     xScale:          React.PropTypes.func.isRequired,
-    xOrient:         React.PropTypes.oneOf(['top', 'bottom'])
+    xOrient:         React.PropTypes.oneOf(['top', 'bottom']),
+    yOrient:         React.PropTypes.oneOf(['left', 'right']),
+    gridVertical:  React.PropTypes.bool,
+    gridVerticalStroke: React.PropTypes.string,
+    gridVerticalStrokeWidth: React.PropTypes.number,
+    gridVerticalStrokeDash: React.PropTypes.string
   },
 
   getDefaultProps() {
@@ -34,7 +40,8 @@ module.exports = React.createClass({
       xAxisLabel:      '',
       xAxisLabelOffset: 10,
       xAxisOffset:      0,
-      xOrient:         'bottom'
+      xOrient:         'bottom',
+      yOrient:         'left'
     };
   },
 
@@ -57,13 +64,6 @@ module.exports = React.createClass({
         className={props.xAxisClassName}
         transform={t}
       >
-        <Label
-          label={props.xAxisLabel}
-          offset={props.xAxisLabelOffset}
-          orient={props.xOrient}
-          margins={props.margins}
-          width={props.width}
-        />
         <AxisTicks
           tickValues={props.xAxisTickValues}
           tickFormatting={props.tickFormatting}
@@ -73,6 +73,13 @@ module.exports = React.createClass({
           innerTickSize={props.tickSize}
           scale={props.xScale}
           orient={props.xOrient}
+          orient2nd={props.yOrient}
+          height={props.height}
+          width={props.width}
+          gridVertical={props.gridVertical}
+          gridVerticalStroke={props.gridVerticalStroke}
+          gridVerticalStrokeWidth={props.gridVerticalStrokeWidth}
+          gridVerticalStrokeDash={props.gridVerticalStrokeDash}
         />
         <AxisLine
           scale={props.xScale}
@@ -81,6 +88,13 @@ module.exports = React.createClass({
           outerTickSize={props.tickSize}
           {...props}
         />
+        <Label
+          label={props.xAxisLabel}
+          offset={props.xAxisLabelOffset}
+          orient={props.xOrient}
+          margins={props.margins}
+          width={props.width}
+          />
       </g>
     );
   }
