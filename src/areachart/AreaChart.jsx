@@ -119,6 +119,7 @@ module.exports = React.createClass({
         title={props.title}
       >
         <g transform={trans} className={props.className}>
+          {dataSeries}
           <XAxis
             xAxisClassName='rd3-areachart-xaxis'
             xScale={xScale}

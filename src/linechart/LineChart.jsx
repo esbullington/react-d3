@@ -114,19 +114,19 @@ module.exports = React.createClass({
             gridHorizontalStrokeDash={props.gridHorizontalStrokeDash}
           />
           <DataSeries
-              xScale={scales.xScale}
-              yScale={scales.yScale}
-              xAccessor={props.xAccessor}
-              yAccessor={props.yAccessor}
-              hoverAnimation={props.hoverAnimation}
-              circleRadius={props.circleRadius}
-              data={props.data}
-              value={allValues}
-              colors={props.colors}
-              colorAccessor={props.colorAccessor}
-              width={innerWidth}
-              height={innerHeight}
-              />
+            xScale={scales.xScale}
+            yScale={scales.yScale}
+            xAccessor={props.xAccessor}
+            yAccessor={props.yAccessor}
+            hoverAnimation={props.hoverAnimation}
+            circleRadius={props.circleRadius}
+            data={props.data}
+            value={allValues}
+            colors={props.colors}
+            colorAccessor={props.colorAccessor}
+            width={innerWidth}
+            height={innerHeight}
+            />
         </g>
       </Chart>
     );
