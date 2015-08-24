@@ -83,6 +83,7 @@ module.exports = React.createClass({
             hoverAnimation={props.hoverAnimation}
             data={props.data}
             value={allValues}
+            interpolationType={props.interpolationType}
             colors={props.colors}
             colorAccessor={props.colorAccessor}
             width={innerWidth}
