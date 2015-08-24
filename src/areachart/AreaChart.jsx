@@ -119,7 +119,6 @@ module.exports = React.createClass({
         title={props.title}
       >
         <g transform={trans} className={props.className}>
-          {dataSeries}
           <XAxis
             xAxisClassName='rd3-areachart-xaxis'
             xScale={xScale}
@@ -130,9 +129,14 @@ module.exports = React.createClass({
             xAxisLabelOffset={props.xAxisLabelOffset}
             tickFormatting={props.xAxisFormatter}
             xOrient={props.xOrient}
+            yOrient={props.yOrient}
             margins={props.margins}
             width={innerWidth}
             height={innerHeight}
+            gridVertical={props.gridVertical}
+            gridVerticalStroke={props.gridVerticalStroke}
+            gridVerticalStrokeWidth={props.gridVerticalStrokeWidth}
+            gridVerticalStrokeDash={props.gridVerticalStrokeDash}
           />
           <YAxis
             yAxisClassName='rd3-areachart-yaxis'
@@ -143,10 +147,15 @@ module.exports = React.createClass({
             yAxisLabel={props.yAxisLabel}
             yAxisLabelOffset={props.yAxisLabelOffset}
             tickFormatting={props.yAxisFormatter}
+            xOrient={props.xOrient}
             yOrient={props.yOrient}
             margins={props.margins}
             width={innerWidth}
             height={props.height}
+            gridHorizontal={props.gridHorizontal}
+            gridHorizontalStroke={props.gridHorizontalStroke}
+            gridHorizontalStrokeWidth={props.gridHorizontalStrokeWidth}
+            gridHorizontalStrokeDash={props.gridHorizontalStrokeDash}
           />
           {dataSeries}
         </g>

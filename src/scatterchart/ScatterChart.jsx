@@ -98,7 +98,12 @@ module.exports = React.createClass({
             xAxisTickInterval={props.xAxisTickInterval}
             xAxisTickValues={props.xAxisTickValues}
             xOrient={props.xOrient}
+            yOrient={props.yOrient}
             xScale={xScale}
+            gridVertical={props.gridVertical}
+            gridVerticalStroke={props.gridVerticalStroke}
+            gridVerticalStrokeWidth={props.gridVerticalStrokeWidth}
+            gridVerticalStrokeDash={props.gridVerticalStrokeDash}
           />
           <YAxis
             data={data}
@@ -115,7 +120,12 @@ module.exports = React.createClass({
             yAxisTickValues={props.yAxisTickValues}
             yAxisTickCount={props.yAxisTickCount}
             yScale={yScale}
+            xOrient={props.xOrient}
             yOrient={props.yOrient}
+            gridHorizontal={props.gridHorizontal}
+            gridHorizontalStroke={props.gridHorizontalStroke}
+            gridHorizontalStrokeWidth={props.gridHorizontalStrokeWidth}
+            gridHorizontalStrokeDash={props.gridHorizontalStrokeDash}
           />
           <DataSeries
             circleRadius={props.circleRadius}
