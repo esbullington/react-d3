@@ -75,6 +75,48 @@ module.exports = React.createClass({
         height={props.height}
         title={props.title}>
         <g transform={trans} className={props.className}>
+          <XAxis
+            xAxisClassName={props.xAxisClassName}
+            strokeWidth="1"
+            xAxisTickValues={props.xAxisTickValues}
+            xAxisTickInterval={props.xAxisTickInterval}
+            xAxisOffset={props.xAxisOffset}
+            xScale={scales.xScale}
+            xAxisLabel={props.xAxisLabel}
+            xAxisLabelOffset={props.xAxisLabelOffset}
+            tickFormatting={props.xAxisFormatter}
+            xOrient={props.xOrient}
+            yOrient={props.yOrient}
+            data={props.data}
+            margins={props.margins}
+            width={innerWidth}
+            height={innerHeight}
+            stroke={props.axesColor}
+            gridVertical={props.gridVertical}
+            gridVerticalStroke={props.gridVerticalStroke}
+            gridVerticalStrokeWidth={props.gridVerticalStrokeWidth}
+            gridVerticalStrokeDash={props.gridVerticalStrokeDash}
+          />
+          <YAxis
+            yAxisClassName={props.yAxisClassName}
+            yScale={scales.yScale}
+            yAxisTickValues={props.yAxisTickValues}
+            yAxisTickCount={props.yAxisTickCount}
+            yAxisOffset={props.yAxisOffset}
+            yAxisLabel={props.yAxisLabel}
+            yAxisLabelOffset={props.yAxisLabelOffset}
+            tickFormatting={props.yAxisFormatter}
+            xOrient={props.xOrient}
+            yOrient={props.yOrient}
+            margins={props.margins}
+            width={innerWidth}
+            height={innerHeight}
+            stroke={props.axesColor}
+            gridHorizontal={props.gridHorizontal}
+            gridHorizontalStroke={props.gridHorizontalStroke}
+            gridHorizontalStrokeWidth={props.gridHorizontalStrokeWidth}
+            gridHorizontalStrokeDash={props.gridHorizontalStrokeDash}
+          />
           <DataSeries
             xScale={scales.xScale}
             yScale={scales.yScale}
@@ -88,39 +130,7 @@ module.exports = React.createClass({
             colorAccessor={props.colorAccessor}
             width={innerWidth}
             height={innerHeight}
-          />
-          <XAxis
-            xAxisClassName={props.xAxisClassName}
-            strokeWidth="1"
-            xAxisTickValues={props.xAxisTickValues}
-            xAxisTickInterval={props.xAxisTickInterval}
-            xAxisOffset={props.xAxisOffset}
-            xScale={scales.xScale}
-            xAxisLabel={props.xAxisLabel}
-            xAxisLabelOffset={props.xAxisLabelOffset}
-            tickFormatting={props.xAxisFormatter}
-            xOrient={props.xOrient}
-            data={props.data}
-            margins={props.margins}
-            width={innerWidth}
-            height={innerHeight}
-            stroke={props.axesColor}
-          />
-          <YAxis
-            yAxisClassName={props.xAxisClassName}
-            yScale={scales.yScale}
-            yAxisTickValues={props.yAxisTickValues}
-            yAxisTickCount={props.yAxisTickCount}
-            yAxisOffset={props.yAxisOffset}
-            yAxisLabel={props.yAxisLabel}
-            yAxisLabelOffset={props.yAxisLabelOffset}
-            tickFormatting={props.yAxisFormatter}
-            yOrient={props.yOrient}
-            margins={props.margins}
-            width={innerWidth}
-            height={innerHeight}
-            stroke={props.axesColor}
-          />
+            />
         </g>
       </Chart>
     );

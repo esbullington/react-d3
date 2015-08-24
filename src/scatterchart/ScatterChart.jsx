@@ -83,19 +83,6 @@ module.exports = React.createClass({
           className={props.className}
           transform={transform}
         >
-          <DataSeries
-            circleRadius={props.circleRadius}
-            colors={props.colors}
-            colorAccessor={props.colorAccessor}
-            data={allValues}
-            height={innerHeight}
-            hoverAnimation={props.hoverAnimation}
-            width={innerWidth}
-            xAccessor={props.xAccessor}
-            xScale={xScale}
-            yAccessor={props.yAccessor}
-            yScale={yScale}
-          />
           <XAxis
             data={data}
             height={innerHeight}
@@ -111,7 +98,12 @@ module.exports = React.createClass({
             xAxisTickInterval={props.xAxisTickInterval}
             xAxisTickValues={props.xAxisTickValues}
             xOrient={props.xOrient}
+            yOrient={props.yOrient}
             xScale={xScale}
+            gridVertical={props.gridVertical}
+            gridVerticalStroke={props.gridVerticalStroke}
+            gridVerticalStrokeWidth={props.gridVerticalStrokeWidth}
+            gridVerticalStrokeDash={props.gridVerticalStrokeDash}
           />
           <YAxis
             data={data}
@@ -128,8 +120,26 @@ module.exports = React.createClass({
             yAxisTickValues={props.yAxisTickValues}
             yAxisTickCount={props.yAxisTickCount}
             yScale={yScale}
+            xOrient={props.xOrient}
             yOrient={props.yOrient}
+            gridHorizontal={props.gridHorizontal}
+            gridHorizontalStroke={props.gridHorizontalStroke}
+            gridHorizontalStrokeWidth={props.gridHorizontalStrokeWidth}
+            gridHorizontalStrokeDash={props.gridHorizontalStrokeDash}
           />
+          <DataSeries
+            circleRadius={props.circleRadius}
+            colors={props.colors}
+            colorAccessor={props.colorAccessor}
+            data={allValues}
+            height={innerHeight}
+            hoverAnimation={props.hoverAnimation}
+            width={innerWidth}
+            xAccessor={props.xAccessor}
+            xScale={xScale}
+            yAccessor={props.yAccessor}
+            yScale={yScale}
+            />
         </g>
       </Chart>
     );

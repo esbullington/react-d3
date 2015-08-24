@@ -136,6 +136,7 @@ var Demos = React.createClass({
               title="Line Chart"
               yAxisLabel="Altitude"
               xAxisLabel="Elapsed Time (sec)"
+              gridHorizontal={true}
             />
           </div>
           <div className="col-md-6">
@@ -148,9 +149,7 @@ var Demos = React.createClass({
     values: [ { x: 0, y: 20 }, ..., { x: 24, y: 10 } ],
     strokeWidth: 3,
     strokeDashArray: "5,5",
-    markerName: ['star', 'circle', 'rect'],
-    // because only the form of the marker of the three first points is defined,
-    // 'rect' is used for the following data points.
+    markerName: ['star', 'circle', 'rect']
   },
   {
     name: "series2",
@@ -181,6 +180,7 @@ var Demos = React.createClass({
   title="Line Chart"
   yAxisLabel="Altitude"
   xAxisLabel="Elapsed Time (sec)"
+  gridHorizontal={true}
 />`
               }
               </code>

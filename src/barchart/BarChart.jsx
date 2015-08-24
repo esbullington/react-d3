@@ -106,18 +106,6 @@ module.exports = React.createClass({
         title={props.title}
       >
         <g transform={trans} className={props.chartClassName}>
-          <DataSeries
-            yScale={yScale}
-            xScale={xScale}
-            margins={margins}
-            _data={_data}
-            width={innerWidth}
-            height={innerHeight}
-            colors={props.colors}
-            colorAccessor={props.colorAccessor}
-            hoverAnimation={props.hoverAnimation}
-            valuesAccessor={props.valuesAccessor}
-          />
           <YAxis
             yAxisClassName={props.yAxisClassName}
             yAxisTickValues={props.yAxisTickValues}
@@ -129,6 +117,12 @@ module.exports = React.createClass({
             tickFormatting={props.yAxisFormatter}
             width={innerWidth}
             height={innerHeight}
+            xOrient={props.xOrient}
+            yOrient={props.yOrient}
+            gridHorizontal={props.gridHorizontal}
+            gridHorizontalStroke={props.gridHorizontalStroke}
+            gridHorizontalStrokeWidth={props.gridHorizontalStrokeWidth}
+            gridHorizontalStrokeDash={props.gridHorizontalStrokeDash}
           />
           <XAxis
             xAxisClassName={props.xAxisClassName}
@@ -140,7 +134,25 @@ module.exports = React.createClass({
             tickFormatting={props.xAxisFormatter}
             width={innerWidth}
             height={innerHeight}
+            xOrient={props.xOrient}
+            yOrient={props.yOrient}
+            gridVertical={props.gridVertical}
+            gridVerticalStroke={props.gridVerticalStroke}
+            gridVerticalStrokeWidth={props.gridVerticalStrokeWidth}
+            gridVerticalStrokeDash={props.gridVerticalStrokeDash}
           />
+          <DataSeries
+            yScale={yScale}
+            xScale={xScale}
+            margins={margins}
+            _data={_data}
+            width={innerWidth}
+            height={innerHeight}
+            colors={props.colors}
+            colorAccessor={props.colorAccessor}
+            hoverAnimation={props.hoverAnimation}
+            valuesAccessor={props.valuesAccessor}
+            />
         </g>
       </Chart>
     );
