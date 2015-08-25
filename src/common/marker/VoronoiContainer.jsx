@@ -37,6 +37,7 @@ module.exports = React.createClass({
               cy={this.props.cy}
               markerRadius={this.props.markerRadius}
               markerFill={this.props.markerFill}
+              chartType={this.props.chartType}
               />
           </g>
         );
@@ -51,6 +52,7 @@ module.exports = React.createClass({
               markerWidth={this.props.markerWidth}
               markerHeight={this.props.markerHeight}
               markerFill={this.props.markerFill}
+              chartType={this.props.chartType}
               />
           </g>
         );
@@ -65,6 +67,7 @@ module.exports = React.createClass({
               markerOuterRadius={this.props.markerOuterRadius}
               markerInnerRadius={this.props.markerInnerRadius}
               markerFill={this.props.markerFill}
+              chartType={this.props.chartType}
               />
           </g>
         );

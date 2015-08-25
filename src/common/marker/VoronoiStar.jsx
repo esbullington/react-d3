@@ -15,7 +15,8 @@ module.exports = React.createClass({
       markerInnerRadius: 3,
       arms: 5,
       markerFill: '#1f77b4',
-      hoverAnimation: true
+      hoverAnimation: true,
+      chartType: 'chart'
     };
   },
 
@@ -49,7 +50,7 @@ module.exports = React.createClass({
           onMouseLeave={handleMouseLeave}
           fill={this.state.markerFill}
           d={this._calculateStarPoints(this.props.cx, this.props.cy, this.props.arms, this.state.markerOuterRadius, this.state.markerInnerRadius)}
-          className="rd3-linechart-star"
+          className={"rd3-" + this.props.chartType + "-star"}
         />
       </g>
     );

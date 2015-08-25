@@ -14,7 +14,8 @@ module.exports = React.createClass({
       markerWidth: 6,
       markerHeight: 6,
       markerFill: '#1f77b4',
-      hoverAnimation: true
+      hoverAnimation: true,
+      chartType: 'chart'
     };
   },
 
@@ -51,7 +52,7 @@ module.exports = React.createClass({
           width={this.state.markerWidth}
           height={this.state.markerHeight}
           fill={this.state.markerFill}
-          className="rd3-linechart-rect"
+          className={"rd3-" + this.props.chartType + "-rect"}
         />
       </g>
     );

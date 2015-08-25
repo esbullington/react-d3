@@ -13,7 +13,8 @@ module.exports = React.createClass({
     return { 
       markerRadius: 3,
       markerFill: '#1f77b4',
-      hoverAnimation: true
+      hoverAnimation: true,
+      chartType: 'chart'
     };
   },
 
@@ -48,7 +49,7 @@ module.exports = React.createClass({
           cy={this.props.cy}
           r={this.state.markerRadius}
           fill={this.state.markerFill}
-          className="rd3-linechart-circle"
+          className={"rd3-" + this.props.chartType + "-circle"}
         />
       </g>
     );

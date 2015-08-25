@@ -102,15 +102,23 @@ var Demos = React.createClass({
     var scatterData = [
       {
         name: "series1",
-        values: [ { x: 0, y: 20 }, { x: 5, y: 7 }, { x: 8, y: 3 }, { x: 13, y: 33 }, { x: 12, y: 10 }, { x: 13, y: 15 }, { x: 24, y: 8 }, { x: 25, y: 15 }, { x: 16, y: 10 }, { x: 16, y: 10 }, { x: 19, y: 30 }, { x: 14, y: 30 }]
+        values: [ { x: 0, y: 20 }, { x: 5, y: 7 }, { x: 8, y: 3 }, { x: 13, y: 33 }, { x: 12, y: 10 }, { x: 13, y: 15 }, { x: 24, y: 8 }, { x: 25, y: 15 }, { x: 16, y: 10 }, { x: 16, y: 10 }, { x: 19, y: 30 }, { x: 14, y: 30 }],
+        markerName: 'star',
+        markerOuterRadius: 8,
+        markerInnerRadius: 3
       },
       {
         name: "series2",
-        values: [ { x: 40, y: 30 }, { x: 35, y: 37 }, { x: 48, y: 37 }, { x: 38, y: 33 }, { x: 52, y: 60 }, { x: 51, y: 55 }, { x: 54, y: 48 }, { x: 45, y: 45 }, { x: 46, y: 50 }, { x: 66, y: 50 }, { x: 39, y: 36 }, { x: 54, y: 30 }]
+        values: [ { x: 40, y: 30 }, { x: 35, y: 37 }, { x: 48, y: 37 }, { x: 38, y: 33 }, { x: 52, y: 60 }, { x: 51, y: 55 }, { x: 54, y: 48 }, { x: 45, y: 45 }, { x: 46, y: 50 }, { x: 66, y: 50 }, { x: 39, y: 36 }, { x: 54, y: 30 }],
+        markerName: 'circle',
+        markerRadius: 4
       },
       {
         name: "series3",
-        values: [ { x: 80, y: 78 }, { x: 71, y: 58 }, { x: 78, y: 68 }, { x: 81, y: 47 },{ x: 72, y: 70 }, { x: 70, y: 88 }, { x: 81, y: 90 }, { x: 92, y: 80 }, { x: 81, y: 72 }, { x: 99, y: 95 }, { x: 67, y: 81 }, { x: 96, y: 78 }]
+        values: [ { x: 80, y: 78 }, { x: 71, y: 58 }, { x: 78, y: 68 }, { x: 81, y: 47 },{ x: 72, y: 70 }, { x: 70, y: 88 }, { x: 81, y: 90 }, { x: 92, y: 80 }, { x: 81, y: 72 }, { x: 99, y: 95 }, { x: 67, y: 81 }, { x: 96, y: 78 }],
+        markerName: 'rect',
+        markerWidth: 8,
+        markerHeight: 8
       }
     ];
 
@@ -193,7 +201,11 @@ var Demos = React.createClass({
         <div className="row">
           <div className="col-md-6">
             <ScatterChart
-              data={scatterData} width={500} height={400} title="Scatter Chart" />
+              data={scatterData}
+              width={500}
+              height={400}
+              title="Scatter Chart"
+            />
           </div>
           <div className="col-md-6">
             <pre ref='block'>
@@ -202,12 +214,18 @@ var Demos = React.createClass({
 `var scatterData = [
   {
     name: "series1",
-    values: [ { x: 0, y: 20 }, ..., { x: 24, y: 10 } ]
+    values: [ { x: 0, y: 20 }, ..., { x: 24, y: 10 } ],
+    markerName: 'star',
+    markerOuterRadius: 12,
+    markerInnerRadius: 4
   },
   ....
   {
     name: "series3",
-    values: [ { x: 70, y: 82 }, ..., { x: 76, y: 82 } ]
+    values: [ { x: 70, y: 82 }, ..., { x: 76, y: 82 } ],
+    markerName: 'rect',
+    markerWidth: 8,
+    markerHeight: 8
   }
 ];`
               }
