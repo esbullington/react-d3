@@ -2,7 +2,7 @@
 
 var React = require('react');
 var d3 = require('d3');
-var shade = require('../utils').shade;
+var shade = require('../../utils/index').shade;
 var VoronoiArea = require('./VoronoiArea');
 
 module.exports = React.createClass({

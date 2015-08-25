@@ -2,7 +2,7 @@
 
 var React = require('react');
 var d3 = require('d3');
-var VoronoiContainer = require('./VoronoiContainer');
+var VoronoiContainer = require('../common/marker/VoronoiContainer');
 var Line = require('./Line');
 
 module.exports = React.createClass({
