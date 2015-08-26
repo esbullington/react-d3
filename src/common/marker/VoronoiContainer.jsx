@@ -13,20 +13,10 @@ module.exports = React.createClass({
   getDefaultProps() {
     return {
       markerName: 'circle',
-      hoverAnimation: true
     };
   },
 
   render() {
-    // animation controller
-    var handleMouseOver, handleMouseLeave;
-    if(this.props.hoverAnimation) {
-      handleMouseOver = this._animateMarker;
-      handleMouseLeave = this._restoreMarker;
-    } else {
-      handleMouseOver = handleMouseLeave = null;
-    }
-
     switch (this.props.markerName) {
       case 'circle':
         return (
@@ -35,6 +25,7 @@ module.exports = React.createClass({
               voronoiPath={this._drawPath(this.props.vnode)}
               cx={this.props.cx}
               cy={this.props.cy}
+              hoverAnimation={this.props.hoverAnimation}
               markerRadius={this.props.markerRadius}
               markerFill={this.props.markerFill}
               chartType={this.props.chartType}
@@ -49,6 +40,7 @@ module.exports = React.createClass({
               voronoiPath={this._drawPath(this.props.vnode)}
               cx={this.props.cx }
               cy={this.props.cy}
+              hoverAnimation={this.props.hoverAnimation}
               markerWidth={this.props.markerWidth}
               markerHeight={this.props.markerHeight}
               markerFill={this.props.markerFill}
@@ -64,6 +56,7 @@ module.exports = React.createClass({
               voronoiPath={this._drawPath(this.props.vnode)}
               cx={this.props.cx }
               cy={this.props.cy}
+              hoverAnimation={this.props.hoverAnimation}
               markerOuterRadius={this.props.markerOuterRadius}
               markerInnerRadius={this.props.markerInnerRadius}
               markerFill={this.props.markerFill}

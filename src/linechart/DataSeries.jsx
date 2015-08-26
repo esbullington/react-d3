@@ -129,6 +129,7 @@ module.exports = React.createClass({
           vnode={vnode}
           cx={cx} cy={cy}
           chartType={'linechart'}
+          hoverAnimation={props.hoverAnimation}
           markerName={marker[vnode.point.seriesIndex].markerName.shift()}
             // assigns wrong if more than one series share a data point
           markerFill={markerFill}
