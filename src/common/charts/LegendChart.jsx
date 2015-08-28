@@ -60,7 +60,7 @@ module.exports = React.createClass({
   _renderTitle() {
     var props = this.props;
 
-    if (props.title != null) {
+    if (props.title != '' && props.title != null) {
       return (
         <h4
           className={props.titleClassName}
