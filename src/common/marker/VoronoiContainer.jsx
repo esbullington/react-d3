@@ -23,11 +23,13 @@ module.exports = React.createClass({
           <g>
             <VoronoiCircle
               voronoiPath={this._drawPath(this.props.vnode)}
+              point={this.props.point}
               cx={this.props.cx}
               cy={this.props.cy}
               hoverAnimation={this.props.hoverAnimation}
               markerRadius={this.props.markerRadius}
               markerFill={this.props.markerFill}
+              markerOnClick={this.props.markerOnClick}
               chartType={this.props.chartType}
               />
           </g>
@@ -38,12 +40,14 @@ module.exports = React.createClass({
           <g>
             <VoronoiRect
               voronoiPath={this._drawPath(this.props.vnode)}
+              point={this.props.point}
               cx={this.props.cx }
               cy={this.props.cy}
               hoverAnimation={this.props.hoverAnimation}
               markerWidth={this.props.markerWidth}
               markerHeight={this.props.markerHeight}
               markerFill={this.props.markerFill}
+              markerOnClick={this.props.markerOnClick}
               chartType={this.props.chartType}
               />
           </g>
@@ -54,12 +58,14 @@ module.exports = React.createClass({
           <g>
             <VoronoiStar
               voronoiPath={this._drawPath(this.props.vnode)}
+              point={this.props.point}
               cx={this.props.cx }
               cy={this.props.cy}
               hoverAnimation={this.props.hoverAnimation}
               markerOuterRadius={this.props.markerOuterRadius}
               markerInnerRadius={this.props.markerInnerRadius}
               markerFill={this.props.markerFill}
+              markerOnClick={this.props.markerOnClick}
               chartType={this.props.chartType}
               />
           </g>

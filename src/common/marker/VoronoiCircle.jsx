@@ -9,6 +9,8 @@ module.exports = React.createClass({
 
   displayName: 'VoronoiCircle',
 
+  handleOnClick: function(a) {},
+
   getDefaultProps() {
     return { 
       markerRadius: 3,
@@ -28,11 +30,16 @@ module.exports = React.createClass({
   render() {
     // animation controller
     var handleMouseOver, handleMouseLeave;
-    if(this.props.hoverAnimation) {
+    if(this.props.hoverAnimation || this.props.markerOnClick) {
       handleMouseOver = this._animateMarker;
       handleMouseLeave = this._restoreMarker;
     } else {
       handleMouseOver = handleMouseLeave = null;
+    }
+
+    // Callback when marker is clicked/touched
+    if(this.props.markerOnClick) {
+      this.handleOnClick = this.props.markerOnClick;
     }
 
     return (
@@ -40,11 +47,18 @@ module.exports = React.createClass({
         <VoronoiArea
           handleMouseOver={handleMouseOver}
           handleMouseLeave={handleMouseLeave}
+          handleOnClick={this._callClickCallback}
+          handleOnTouchStart={handleMouseOver}
+          handleOnTouchEnd={this._callClickCallback}
           voronoiPath={this.props.voronoiPath}
+          point={this.props.point}
         />
         <circle
           onMouseOver={handleMouseOver}
           onMouseLeave={handleMouseLeave}
+          onClick={this._callClickCallback}
+          onTouchStart={handleMouseOver}
+          onTouchEnd={this._callClickCallback}
           cx={this.props.cx}
           cy={this.props.cy}
           r={this.state.markerRadius}
@@ -66,5 +80,10 @@ module.exports = React.createClass({
     this.setState(
       this.getInitialState()
     );
+  },
+
+  _callClickCallback() {
+    this.handleMouseOver;
+    this.handleOnClick(this.props.point);
   }
 });

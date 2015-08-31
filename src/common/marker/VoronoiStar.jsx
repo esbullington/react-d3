@@ -9,6 +9,8 @@ module.exports = React.createClass({
 
   displayName: 'VoronoiStar',
 
+  handleOnClick: function(a) {},
+
   getDefaultProps() {
     return { 
       markerOuterRadius: 6,
@@ -31,11 +33,16 @@ module.exports = React.createClass({
   render() {
     // animation controller
     var handleMouseOver, handleMouseLeave;
-    if(this.props.hoverAnimation) {
+    if(this.props.hoverAnimation || this.props.markerOnClick) {
       handleMouseOver = this._animateMarker;
       handleMouseLeave = this._restoreMarker;
     } else {
       handleMouseOver = handleMouseLeave = null;
+    }
+
+    // Callback when marker is clicked/touched
+    if(this.props.markerOnClick) {
+      this.handleOnClick = this.props.markerOnClick;
     }
 
     return (
@@ -43,11 +50,18 @@ module.exports = React.createClass({
         <VoronoiArea
           handleMouseOver={handleMouseOver}
           handleMouseLeave={handleMouseLeave}
+          handleOnClick={this._callClickCallback}
+          handleOnTouchStart={handleMouseOver}
+          handleOnTouchEnd={this._callClickCallback}
           voronoiPath={this.props.voronoiPath}
+          point={this.props.point}
         />
         <path
           onMouseOver={handleMouseOver}
           onMouseLeave={handleMouseLeave}
+          onClick={this._callClickCallback}
+          onTouchStart={handleMouseOver}
+          onTouchEnd={this._callClickCallback}
           fill={this.state.markerFill}
           d={this._calculateStarPoints(this.props.cx, this.props.cy, this.props.arms, this.state.markerOuterRadius, this.state.markerInnerRadius)}
           className={"rd3-" + this.props.chartType + "-star"}
@@ -94,5 +108,10 @@ module.exports = React.createClass({
     this.setState(
         this.getInitialState()
     );
+  },
+
+  _callClickCallback() {
+    this.handleMouseOver;
+    this.handleOnClick(this.props.point);
   }
 });

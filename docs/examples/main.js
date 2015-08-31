@@ -15,11 +15,31 @@ var ScatterChart= rd3.ScatterChart;
 hljs.initHighlightingOnLoad();
 
 var Demos = React.createClass({
+  setSelectedValue: function(point) {
+    if (point) {
+      var state = this.state;
+      state.selectedX = point.x;
+      state.selectedY = point.y;
+      this.setState(state)
+    }
+  },
+
+  renderSelectedValue: function() {
+      var selectedValues = <div style={{margin: '30px'}}>Select a value!</div>;
+      if (this.state.selectedX != null && this.state.selectedY != null) {
+          selectedValues = <div style={{margin: '30px'}}>
+            {'You selected X = ' + this.state.selectedX + ' and Y = ' + this.state.selectedY}
+            </div>
+      }
+      return selectedValues
+  },
 
   getInitialState: function() {
     return {
       areaData: [],
-      ohlcData: []
+      ohlcData: [],
+      selectedX: null,
+      selectedY: null
     }
   },
 
@@ -145,7 +165,9 @@ var Demos = React.createClass({
               yAxisLabel="Altitude"
               xAxisLabel="Elapsed Time (sec)"
               gridHorizontal={true}
+              markerOnClick={this.setSelectedValue}
             />
+          {this.renderSelectedValue()}
           </div>
           <div className="col-md-6">
             <pre ref='block'>
@@ -189,6 +211,7 @@ var Demos = React.createClass({
   yAxisLabel="Altitude"
   xAxisLabel="Elapsed Time (sec)"
   gridHorizontal={true}
+  markerOnClick={this.setSelectedValue}
 />`
               }
               </code>
