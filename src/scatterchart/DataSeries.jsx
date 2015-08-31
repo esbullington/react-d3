@@ -104,6 +104,7 @@ module.exports = React.createClass({
           key={idx}
           vnode={vnode}
           cx={cx} cy={cy}
+          point={point.coord}
           chartType={'scatterchart'}
           hoverAnimation={props.hoverAnimation}
           markerName={marker[vnode.point.seriesIndex].markerName.shift()}
@@ -114,6 +115,7 @@ module.exports = React.createClass({
           markerRadius={marker[vnode.point.seriesIndex].markerRadius}
           markerOuterRadius={marker[vnode.point.seriesIndex].markerOuterRadius}
           markerInnerRadius={marker[vnode.point.seriesIndex].markerInnerRadius}
+          markerOnClick={props.markerOnClick}
           />
       );
     }.bind(this));

@@ -116,6 +116,7 @@ module.exports = React.createClass({
             xAccessor={props.xAccessor}
             yAccessor={props.yAccessor}
             hoverAnimation={props.hoverAnimation}
+            markerOnClick={props.markerOnClick}
             data={props.data}
             value={allValues}
             interpolationType={props.interpolationType}

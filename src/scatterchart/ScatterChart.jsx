@@ -130,6 +130,7 @@ module.exports = React.createClass({
             value={allValues}
             height={innerHeight}
             hoverAnimation={props.hoverAnimation}
+            markerOnClick={props.markerOnClick}
             width={innerWidth}
             xAccessor={props.xAccessor}
             xScale={xScale}
