@@ -17,6 +17,8 @@ module.exports = React.createClass({
       markerHeight: 6,
       markerFill: '#1f77b4',
       hoverAnimation: true,
+      markerAnimationResize: 1.25,
+      markerAnimationShade: 0.2,
       chartType: 'chart'
     };
   },
@@ -74,9 +76,9 @@ module.exports = React.createClass({
 
   _animateMarker() {
     this.setState({
-      markerWidth: this.props.markerWidth * ( 5 / 4 ),
-      markerHeight: this.props.markerHeight * ( 5 / 4 ),
-      markerFill: shade(this.props.markerFill, 0.2)
+      markerWidth: this.props.markerWidth * this.props.markerAnimationResize,
+      markerHeight: this.props.markerHeight * this.props.markerAnimationResize,
+      markerFill: shade(this.props.markerFill, this.props.markerAnimationShade)
     });
   },
 

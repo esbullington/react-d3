@@ -16,7 +16,9 @@ module.exports = React.createClass({
       markerRadius: 3,
       markerFill: '#1f77b4',
       hoverAnimation: true,
-      chartType: 'chart'
+      markerAnimationResize: 1.25,
+      markerAnimationShade: 0.2,
+      chartType: 'chart',
     };
   },
 
@@ -71,8 +73,8 @@ module.exports = React.createClass({
 
   _animateMarker() {
     this.setState({
-      markerRadius: this.props.markerRadius * ( 5 / 4 ),
-      markerFill: shade(this.props.markerFill, 0.2)
+      markerRadius: this.props.markerRadius * this.props.markerAnimationResize,
+      markerFill: shade(this.props.markerFill, this.props.markerAnimationShade)
     });
   },
 

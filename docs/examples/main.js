@@ -125,7 +125,9 @@ var Demos = React.createClass({
         values: [ { x: 0, y: 20 }, { x: 5, y: 7 }, { x: 8, y: 3 }, { x: 13, y: 33 }, { x: 12, y: 10 }, { x: 13, y: 15 }, { x: 24, y: 8 }, { x: 25, y: 15 }, { x: 16, y: 10 }, { x: 16, y: 10 }, { x: 19, y: 30 }, { x: 14, y: 30 }],
         markerName: 'star',
         markerOuterRadius: 8,
-        markerInnerRadius: 3
+        markerInnerRadius: 3,
+        markerAnimationResize: 3,
+        markerAnimationShade: .8
       },
       {
         name: "series2",
@@ -239,8 +241,10 @@ var Demos = React.createClass({
     name: "series1",
     values: [ { x: 0, y: 20 }, ..., { x: 24, y: 10 } ],
     markerName: 'star',
-    markerOuterRadius: 12,
-    markerInnerRadius: 4
+    markerOuterRadius: 8,
+    markerInnerRadius: 3,
+    markerAnimationResize: 3,
+    markerAnimationShade: .8
   },
   ....
   {

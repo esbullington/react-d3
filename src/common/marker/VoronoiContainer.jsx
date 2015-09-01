@@ -29,6 +29,8 @@ module.exports = React.createClass({
               hoverAnimation={this.props.hoverAnimation}
               markerRadius={this.props.markerRadius}
               markerFill={this.props.markerFill}
+              markerAnimationResize={this.props.markerAnimationResize}
+              markerAnimationShade={this.props.markerAnimationShade}
               markerOnClick={this.props.markerOnClick}
               chartType={this.props.chartType}
               />
@@ -47,6 +49,8 @@ module.exports = React.createClass({
               markerWidth={this.props.markerWidth}
               markerHeight={this.props.markerHeight}
               markerFill={this.props.markerFill}
+              markerAnimationResize={this.props.markerAnimationResize}
+              markerAnimationShade={this.props.markerAnimationShade}
               markerOnClick={this.props.markerOnClick}
               chartType={this.props.chartType}
               />
@@ -65,6 +69,8 @@ module.exports = React.createClass({
               markerOuterRadius={this.props.markerOuterRadius}
               markerInnerRadius={this.props.markerInnerRadius}
               markerFill={this.props.markerFill}
+              markerAnimationResize={this.props.markerAnimationResize}
+              markerAnimationShade={this.props.markerAnimationShade}
               markerOnClick={this.props.markerOnClick}
               chartType={this.props.chartType}
               />

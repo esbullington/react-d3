@@ -85,7 +85,9 @@ module.exports = React.createClass({
         markerHeight: series.markerHeight,            // same for one series
         markerRadius: series.markerRadius,            // same for one series
         markerOuterRadius: series.markerOuterRadius,  // same for one series
-        markerInnerRadius: series.markerInnerRadius   // same for one series
+        markerInnerRadius: series.markerInnerRadius,  // same for one series
+        markerAnimationResize: series.markerAnimationResize,  // same for one series
+        markerAnimationShade: series.markerAnimationShade     // same for one series
         // markerFill:
         // - would be good to have that here too (is below now)
         // - same for one series
@@ -139,6 +141,8 @@ module.exports = React.createClass({
           markerRadius={marker[vnode.point.seriesIndex].markerRadius}
           markerOuterRadius={marker[vnode.point.seriesIndex].markerOuterRadius}
           markerInnerRadius={marker[vnode.point.seriesIndex].markerInnerRadius}
+          markerAnimationResize={marker[vnode.point.seriesIndex].markerAnimationResize}
+          markerAnimationShade={marker[vnode.point.seriesIndex].markerAnimationShade}
           markerOnClick={props.markerOnClick}
         />
       );
