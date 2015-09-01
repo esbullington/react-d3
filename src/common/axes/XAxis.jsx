@@ -34,7 +34,7 @@ module.exports = React.createClass({
     return {
       fill:            'none',
       stroke:          'none',
-      strokeWidth:     'none',
+      strokeWidth:     '1',
       tickStroke:      '#000',
       xAxisClassName:  'rd3-x-axis',
       xAxisLabel:      '',
