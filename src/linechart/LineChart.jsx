@@ -73,7 +73,7 @@ module.exports = React.createClass({
         <g transform={trans} className={props.className}>
           <XAxis
             xAxisClassName={props.xAxisClassName}
-            strokeWidth="1"
+            strokeWidth={props.xAxisStrokeWidth}
             xAxisTickValues={props.xAxisTickValues}
             xAxisTickInterval={props.xAxisTickInterval}
             xAxisOffset={props.xAxisOffset}
@@ -95,6 +95,7 @@ module.exports = React.createClass({
           />
           <YAxis
             yAxisClassName={props.yAxisClassName}
+            strokeWidth={props.yAxisStrokeWidth}
             yScale={scales.yScale}
             yAxisTickValues={props.yAxisTickValues}
             yAxisTickCount={props.yAxisTickCount}
