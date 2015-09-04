@@ -16,12 +16,18 @@ module.exports = React.createClass({
     strokeWidth:     React.PropTypes.string,
     tickStroke:      React.PropTypes.string,
     width:           React.PropTypes.number.isRequired,
+    height:          React.PropTypes.number.isRequired,
     yAxisClassName:  React.PropTypes.string,
     yAxisLabel:      React.PropTypes.string,
     yAxisOffset:     React.PropTypes.number,
     yAxisTickValues: React.PropTypes.array,
+    xOrient:         React.PropTypes.oneOf(['top', 'bottom']),
     yOrient:         React.PropTypes.oneOf(['left', 'right']),
-    yScale:          React.PropTypes.func.isRequired
+    yScale:          React.PropTypes.func.isRequired,
+    gridVertical: React.PropTypes.bool,
+    gridVerticalStroke: React.PropTypes.string,
+    gridVerticalStrokeWidth: React.PropTypes.number,
+    gridVerticalStrokeDash: React.PropTypes.string
   },
 
   getDefaultProps() {
@@ -33,6 +39,7 @@ module.exports = React.createClass({
       yAxisClassName: 'rd3-y-axis',
       yAxisLabel:     '',
       yAxisOffset:    0,
+      xOrient:        'bottom',
       yOrient:        'left'
     };
   },
@@ -65,12 +72,19 @@ module.exports = React.createClass({
         <AxisTicks
           innerTickSize={props.tickSize}
           orient={props.yOrient}
+          orient2nd={props.xOrient}
           tickArguments={tickArguments}
           tickFormatting={props.tickFormatting}
           tickStroke={props.tickStroke}
           tickTextStroke={props.tickTextStroke}
           tickValues={props.yAxisTickValues}
           scale={props.yScale}
+          height={props.height}
+          width={props.width}
+          gridHorizontal={props.gridHorizontal}
+          gridHorizontalStroke={props.gridHorizontalStroke}
+          gridHorizontalStrokeWidth={props.gridHorizontalStrokeWidth}
+          gridHorizontalStrokeDash={props.gridHorizontalStrokeDash}
         />
         <AxisLine
           orient={props.yOrient}

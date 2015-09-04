@@ -1,5 +1,5 @@
 ## react-d3
-Modular ReactJS charts made using d3 chart utilities. Work on project documentation has started [here](https://github.com/esbullington/react-d3/wiki). A few examples of the available charts can be seen below, the others can be [viewed here](http://esbullington.github.io/react-d3-website), side-by-side with the React code that generates the charts.
+Modular ReactJS charts made using d3 chart utilities. Work on project documentation has started [here](https://github.com/esbullington/react-d3/wiki). A few examples of the available charts can be seen below, the others can be [viewed here](https://reactiva.github.io/react-d3-website/), side-by-side with the React code that generates the charts.
 
 ![react-d3 chart images](https://raw.githubusercontent.com/esbullington/react-d3-website/gh-pages/img/multiseries.png)
 
@@ -60,14 +60,12 @@ With this approach, React itself is responsible for generating the SVG markup.  
 
 ### Roadmap
 
-* v0.4.0:
+* v0.5.0:
+  * Data frame animations
   * Additional charts types:
     - slopegraph
     - table
   * Tooltips
-
-* v0.5.0:
-  * Data frame animations
 
 ### Available for work
 Consider me for your next contract job.  I do:

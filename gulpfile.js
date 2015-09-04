@@ -8,7 +8,8 @@ var gulp = require('gulp'),
   buffer = require('vinyl-buffer'),
   browserSync = require('browser-sync'),
   merge = require('merge-stream'),
-  chalk = require('chalk');
+  chalk = require('chalk'),
+  karma = require('karma').server;
 
 console.timeEnd('Loading plugins');
 
@@ -24,7 +25,7 @@ gulp.task('clean:build', function() {
 });
 
 function bundler(entry) {
-  var reactify = require('reactify'),
+  var babelify = require('babelify'),
       watchify = require('watchify'),
       browserify = require('browserify');
 
@@ -50,7 +51,7 @@ function bundler(entry) {
 
   bundler
     .external(["react", "d3"]) // this informs browserify that when you see require("react") or require("d3") it will be available, trust me
-    .transform(reactify, { harmony : true } ) // We want to convert JSX to normal javascript
+    .transform(babelify) // We want to convert JSX to normal javascript
     .transform(globalShim) // replace require('react') and require('d3') with (window.React) and (window.d3)
     ;
 
@@ -200,11 +201,16 @@ gulp.task('serve', function() {
 });
 
 gulp.task('test', function (cb) {
-  var karma = require('karma').server;
-
   karma.start({
     configFile: __dirname + '/karma.conf.js',
     singleRun: true
+  }, cb);
+});
+
+gulp.task('tdd', function (cb) {
+  console.log("Running TDD");
+  karma.start({
+    configFile: __dirname + '/karma.conf.js'
   }, cb);
 });
 
@@ -244,6 +250,7 @@ gulp.task("default", function() {
   console.log("gulp release     -> Create a release for npm under build/cjs which can be pulished to npm");
   console.log("gulp clean:build -> Clean the build directory");
   console.log("gulp serve       -> Launch a web browser on localhost:4000 and server from 'build/public'");
-  console.log("gulp test        -> Execute the tests with config file karma.conf.js");
+  console.log("gulp test        -> Execute the tests once with config file karma.conf.js");
+  console.log("gulp tdd         -> Execute the tests continuosly with config file karma.conf.js");
   console.log("gulp lint        -> Lint *.js and *.jsx code under src/");
 });

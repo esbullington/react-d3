@@ -20,7 +20,7 @@ module.exports = React.createClass({
         <path
           onMouseOver={this.props.handleMouseOver}
           onMouseLeave={this.props.handleMouseLeave}
-          fill='white'
+          fill='transparent'
           d={this.props.voronoiPath} 
         />
         <circle
