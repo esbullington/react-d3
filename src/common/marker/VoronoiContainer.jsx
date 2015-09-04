@@ -31,6 +31,7 @@ module.exports = React.createClass({
               markerFill={this.props.markerFill}
               markerAnimationResize={this.props.markerAnimationResize}
               markerAnimationShade={this.props.markerAnimationShade}
+              //markerIsHighlighted={true}
               markerOnClick={this.props.markerOnClick}
               chartType={this.props.chartType}
               />
@@ -78,7 +79,6 @@ module.exports = React.createClass({
         );
         break;
       default:
-        console.log('Marker to display data point is not available.');
         return(<g></g>)
     }
   },
