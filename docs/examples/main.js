@@ -221,6 +221,44 @@ var Demos = React.createClass({
           </div>
         </div>
         <div className="row">
+          <div className="col-md-6">
+            It is possible to make a tiny tiny version of the line chart! Series3 from above:
+            <div style={{display: 'inline-block', marginLeft: '4px', marginRight: '4px'}}>
+              <LineChart
+                data={[{
+                  values: [ { x: 0, y: 0 }, { x: 1, y: 5 }, { x: 2, y: 8 }, { x: 3, y: 2 }, { x: 4, y: 6 }, { x: 5, y: 4 }, { x: 6, y: 2 } ],
+                  markerName: ''
+                }]}
+                width='40'
+                height={10}
+                margins={{top: 0, right: 0, bottom: 0, left: 0}}
+                hideXAxis={true}
+                hideYAxis={true}
+              />
+            </div>
+            Cool huh!?
+          </div>
+          <div className="col-md-6">
+            <pre ref='block'>
+              <code className='html'>
+                {
+`<LineChart
+  data={[{
+    values: [ { x: 0, y: 0 }, ..., { x: 6, y: 2 } ],
+    markerName: ''
+  }]}
+  width='40'
+  height={10}
+  margins={{top: 0, right: 0, bottom: 0, left: 0}}
+  hideXAxis={true}
+  hideYAxis={true}
+/>`
+                }
+              </code>
+            </pre>
+          </div>
+        </div>
+        <div className="row">
           <hr/>
         </div>
         <div className="row">
