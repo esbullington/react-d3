@@ -60,14 +60,12 @@ With this approach, React itself is responsible for generating the SVG markup.  
 
 ### Roadmap
 
-* v0.4.0:
+* v0.5.0:
+  * Data frame animations
   * Additional charts types:
     - slopegraph
     - table
   * Tooltips
-
-* v0.5.0:
-  * Data frame animations
 
 ### Available for work
 Consider me for your next contract job.  I do:
