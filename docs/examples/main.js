@@ -198,7 +198,8 @@ var Demos = React.createClass({
             <pre ref='block'>
               <code className='html'>
               {
-`<LineChart
+`// tiny chart
+  <LineChart
   legend={true}
   data={lineData}
   width='100%'
@@ -222,7 +223,10 @@ var Demos = React.createClass({
         </div>
         <div className="row">
           <div className="col-md-6">
-            It is possible to make a tiny tiny version of the line chart! Series3 from above:
+            It is possible to make a tiny version of the line chart! Series3 from above:
+            <br />
+            <br />
+            Result: 
             <div style={{display: 'inline-block', marginLeft: '4px', marginRight: '4px'}}>
               <LineChart
                 data={[{
@@ -236,7 +240,6 @@ var Demos = React.createClass({
                 hideYAxis={true}
               />
             </div>
-            Cool huh!?
           </div>
           <div className="col-md-6">
             <pre ref='block'>
