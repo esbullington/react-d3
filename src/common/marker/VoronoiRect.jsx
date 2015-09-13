@@ -4,31 +4,21 @@ var React = require('react');
 var d3 = require('d3');
 var shade = require('../../utils/index').shade;
 var VoronoiArea = require('./VoronoiArea');
+var { MarkerMixin } = require('../../mixins');
 
 module.exports = React.createClass({
 
   displayName: 'VoronoiRect',
 
-  handleOnClick: function(a) {},
+  mixins: [ MarkerMixin ],
 
   getDefaultProps() {
     return { 
-      markerWidth: 6,
-      markerHeight: 6,
-      markerFill: '#1f77b4',
-      hoverAnimation: true,
-      markerAnimationResize: 1.25,
-      markerAnimationShade: 0.2,
-      chartType: 'chart'
+      markerAppearance: {
+        width: 6,
+        height: 6,
+      }
     };
-  },
-
-  getInitialState() {
-    return {
-      markerWidth: this.props.markerWidth,
-      markerHeight: this.props.markerHeight,
-      markerFill: this.props.markerFill
-    }
   },
 
   render() {
@@ -45,7 +35,6 @@ module.exports = React.createClass({
     if(this.props.markerOnClick) {
       this.handleOnClick = this.props.markerOnClick;
     }
-
     return (
       <g>
         <VoronoiArea
@@ -63,28 +52,14 @@ module.exports = React.createClass({
           onClick={this._callClickCallback}
           onTouchStart={this._callClickCallback}
           onTouchEnd={this.handleMouseLeave}
-          x={this.props.cx - Math.round(this.props.markerWidth/2)}
-          y={this.props.cy - Math.round(this.props.markerHeight/2)}
-          width={this.state.markerWidth}
-          height={this.state.markerHeight}
+          x={this.props.cx - Math.round(this.props.markerAppearance.width/2)}
+          y={this.props.cy - Math.round(this.props.markerAppearance.height/2)}
+          width={this.state.width}
+          height={this.state.height}
           fill={this.state.markerFill}
           className={"rd3-" + this.props.chartType + "-rect"}
         />
       </g>
-    );
-  },
-
-  _animateMarker() {
-    this.setState({
-      markerWidth: this.props.markerWidth * this.props.markerAnimationResize,
-      markerHeight: this.props.markerHeight * this.props.markerAnimationResize,
-      markerFill: shade(this.props.markerFill, this.props.markerAnimationShade)
-    });
-  },
-
-  _restoreMarker() {
-    this.setState(
-        this.getInitialState()
     );
   },
 

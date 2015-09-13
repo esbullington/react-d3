@@ -1,35 +1,25 @@
-'use strict';
+
 
 var React = require('react');
 var d3 = require('d3');
 var shade = require('../../utils/index').shade;
 var VoronoiArea = require('./VoronoiArea');
+var { MarkerMixin } = require('../../mixins');
 
 module.exports = React.createClass({
 
   displayName: 'VoronoiStar',
 
-  handleOnClick: function(a) {},
+  mixins: [ MarkerMixin ],
 
   getDefaultProps() {
     return { 
-      markerOuterRadius: 6,
-      markerInnerRadius: 3,
+      markerAppearance: {
+        outerRadius: 6,
+        innerRadius: 3,
+      },
       arms: 5,
-      markerFill: '#1f77b4',
-      hoverAnimation: true,
-      markerAnimationResize: 1.25,
-      markerAnimationShade: 0.2,
-      chartType: 'chart'
     };
-  },
-
-  getInitialState() {
-    return {
-      markerOuterRadius: this.props.markerOuterRadius,
-      markerInnerRadius: this.props.markerInnerRadius,
-      markerFill: this.props.markerFill
-    }
   },
 
   render() {
@@ -46,7 +36,6 @@ module.exports = React.createClass({
     if(this.props.markerOnClick) {
       this.handleOnClick = this.props.markerOnClick;
     }
-
     return (
       <g>
         <VoronoiArea
@@ -65,7 +54,7 @@ module.exports = React.createClass({
           onTouchStart={this._callClickCallback}
           onTouchEnd={this.handleMouseLeave}
           fill={this.state.markerFill}
-          d={this._calculateStarPoints(this.props.cx, this.props.cy, this.props.arms, this.state.markerOuterRadius, this.state.markerInnerRadius)}
+          d={this._calculateStarPoints(this.props.cx, this.props.cy, this.props.arms, this.state.outerRadius, this.state.innerRadius)}
           className={"rd3-" + this.props.chartType + "-star"}
         />
       </g>
@@ -96,20 +85,6 @@ module.exports = React.createClass({
     }
     results += " Z";
     return results;
-  },
-
-  _animateMarker() {
-    this.setState({
-      markerOuterRadius: this.props.markerOuterRadius * this.props.markerAnimationResize,
-      markerInnerRadius: this.props.markerInnerRadius * this.props.markerAnimationResize,
-      markerFill: shade(this.props.markerFill, this.props.markerAnimationShade)
-    });
-  },
-
-  _restoreMarker() {
-    this.setState(
-        this.getInitialState()
-    );
   },
 
   _callClickCallback() {

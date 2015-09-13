@@ -4,29 +4,20 @@ var React = require('react');
 var d3 = require('d3');
 var shade = require('../../utils/index').shade;
 var VoronoiArea = require('./VoronoiArea');
+var { MarkerMixin } = require('../../mixins');
 
 module.exports = React.createClass({
 
   displayName: 'VoronoiCircle',
 
-  handleOnClick: function(a) {},
+  mixins: [ MarkerMixin ],
 
   getDefaultProps() {
     return { 
-      markerRadius: 3,
-      markerFill: '#1f77b4',
-      hoverAnimation: true,
-      markerAnimationResize: 1.25,
-      markerAnimationShade: 0.2,
-      chartType: 'chart',
+      markerAppearance: {
+        radius: 3,
+      }
     };
-  },
-
-  getInitialState() {
-    return {
-      markerRadius: this.props.markerRadius,
-      markerFill: this.props.markerFill
-    }
   },
 
   render() {
@@ -63,24 +54,11 @@ module.exports = React.createClass({
           onTouchEnd={this.handleMouseLeave}
           cx={this.props.cx}
           cy={this.props.cy}
-          r={this.state.markerRadius}
+          r={this.state.radius}
           fill={this.state.markerFill}
           className={"rd3-" + this.props.chartType + "-circle"}
         />
       </g>
-    );
-  },
-
-  _animateMarker() {
-    this.setState({
-      markerRadius: this.props.markerRadius * this.props.markerAnimationResize,
-      markerFill: shade(this.props.markerFill, this.props.markerAnimationShade)
-    });
-  },
-
-  _restoreMarker() {
-    this.setState(
-      this.getInitialState()
     );
   },
 
