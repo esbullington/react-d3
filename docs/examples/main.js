@@ -166,12 +166,12 @@ var Demos = React.createClass({
   data={lineData}
   width='100%'
   height={400}
-  viewBoxObject={
+  viewBoxObject={{
     x: 0,
     y: 0,
     width: 500,
     height: 400
-  }
+  }}
   title="Line Chart"
   yAxisLabel="Altitude"
   xAxisLabel="Elapsed Time (sec)"

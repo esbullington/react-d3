@@ -16,6 +16,7 @@ module.exports = React.createClass({
     interpolationType: React.PropTypes.string,
     xAccessor: React.PropTypes.func,
     yAccessor: React.PropTypes.func,
+    hoverAnimation: React.PropTypes.bool
   },
 
   getDefaultProps() {
@@ -23,7 +24,8 @@ module.exports = React.createClass({
       data: [],
       xAccessor: (d) => d.x,
       yAccessor: (d) => d.y,
-      interpolationType: 'linear'
+      interpolationType: 'linear',
+      hoverAnimation: false
     };
   },
   
@@ -90,6 +92,7 @@ module.exports = React.createClass({
               key={idx} 
               circleFill={circleFill}
               vnode={vnode}
+              hoverAnimation={props.hoverAnimation}
               cx={cx} cy={cy} 
               circleRadius={props.circleRadius}
           />
