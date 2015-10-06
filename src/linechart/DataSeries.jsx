@@ -3,6 +3,7 @@
 var React = require('react');
 var d3 = require('d3');
 var VoronoiCircleContainer = require('./VoronoiCircleContainer');
+var utils = require('../utils');
 var Line = require('./Line');
 
 module.exports = React.createClass({
@@ -28,10 +29,9 @@ module.exports = React.createClass({
       hoverAnimation: false
     };
   },
-  
-  _isDate(d, accessor) {
-      return Object.prototype.toString.call(accessor(d)) === '[object Date]';
-  },
+
+  _linkValues: utils.linkValues,
+  _prepareValues: utils.prepareValues,
 
   render() {
     var props = this.props;
@@ -39,25 +39,24 @@ module.exports = React.createClass({
     var yScale = props.yScale;
     var xAccessor = props.xAccessor,
         yAccessor = props.yAccessor;
-    
-    var interpolatePath = d3.svg.line()
-        .y( (d) => props.yScale(yAccessor(d)) )
-        .interpolate(props.interpolationType);
+    var self = this;
 
-        if (this._isDate(props.data[0].values[0], xAccessor)) {
-          interpolatePath.x(function(d) {
-            return props.xScale(props.xAccessor(d).getTime());
-          });
-        } else {
-          interpolatePath.x(function(d) {
-            return props.xScale(props.xAccessor(d));
-          });
-        }
+    var linkValues = self._linkValues;
+    var prepareValues = (values,accessor) => { return self._prepareValues(props,values,accessor); }
+
+    var interpolatePath = d3.svg.line()
+        .x( (d) => xScale(d.x) )
+        .y( (d) => yScale(d.y) )
+        .interpolate(props.interpolationType)
+        // only draw values inside x axis range and those next to it
+        .defined( (d) => (d.x >= xScale.domain()[0] && d.x <= xScale.domain()[1]) ||
+                         (d.prevVal && d.prevVal.x >= xScale.domain()[0] && d.prevVal.x <= xScale.domain()[1]) ||
+                         (d.nextVal && d.nextVal.x >= xScale.domain()[0] && d.nextVal.x <= xScale.domain()[1]));
 
     var lines = props.data.map((series, idx) => {
       return (
         <Line 
-          path={interpolatePath(series.values)}
+          path={interpolatePath(linkValues(prepareValues(series.values)))}
           stroke={props.colors(props.colorAccessor(series, idx))}
           strokeWidth={series.strokeWidth}
           strokeDashArray={series.strokeDashArray}
@@ -68,25 +67,19 @@ module.exports = React.createClass({
     });
 
     var voronoi = d3.geom.voronoi()
-      .x(function(d){ return xScale(d.coord.x); })
-      .y(function(d){ return yScale(d.coord.y); })
+      .x(function(d){ return xScale(d.x); })
+      .y(function(d){ return yScale(d.y); })
       .clipExtent([[0, 0], [ props.width , props.height]]);
 
-    var cx, cy, circleFill;
-    var regions = voronoi(props.value).map(function(vnode, idx) {
-      var point = vnode.point.coord;
-      if (Object.prototype.toString.call(xAccessor(point)) === '[object Date]') {
-        cx = props.xScale(xAccessor(point).getTime());
-      } else {
-        cx = props.xScale(xAccessor(point));
-      }
-      if (Object.prototype.toString.call(yAccessor(point)) === '[object Date]') {
-        cy = props.yScale(yAccessor(point).getTime());
-      } else {
-        cy = props.yScale(yAccessor(point));
-      }
+    var dx, cx, dy, cy, circleFill;
+    var regions = voronoi(prepareValues(props.value, (v) => v.coord )).map(function(vnode, idx) {
+      dx = vnode.point.x
+      if (dx < xScale.domain()[0] || dx > xScale.domain()[1]) return null;
+      cx = props.xScale(dx);
+      dy = vnode.point.y
+      cy = props.yScale(dy)
       circleFill = props.colors(props.colorAccessor(vnode, vnode.point.seriesIndex));
-      
+
       return (
           <VoronoiCircleContainer 
               key={idx} 
@@ -101,8 +94,13 @@ module.exports = React.createClass({
 
     return (
       <g>
+        <defs>
+          <clipPath id="myClip">
+            <rect x="0" y="0" width={props.width} height={props.height}/>
+          </clipPath>
+        </defs>
         <g>{regions}</g>
-        <g>{lines}</g>
+        <g style={ {"clip-path": 'url(#myClip)'} }>{lines}</g>
       </g>
     );
   }

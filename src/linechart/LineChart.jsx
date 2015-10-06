@@ -16,7 +16,7 @@ module.exports = React.createClass({
   propTypes: {
     circleRadius:   React.PropTypes.number,
     hoverAnimation: React.PropTypes.bool,
-    margins:        React.PropTypes.object,
+    margins:        React.PropTypes.object
  },
 
   getDefaultProps() {
@@ -26,7 +26,7 @@ module.exports = React.createClass({
       hoverAnimation: true,
       margins:        {top: 10, right: 20, bottom: 50, left: 45},
       xAxisClassName: 'rd3-linechart-xaxis',
-      yAxisClassName: 'rd3-linechart-yaxis',
+      yAxisClassName: 'rd3-linechart-yaxis'
     };
   },
 
@@ -56,9 +56,8 @@ module.exports = React.createClass({
     var allValues = flattenedData.allValues,
         xValues = flattenedData.xValues,
         yValues = flattenedData.yValues;
-    var scales = this._calculateScales(innerWidth, innerHeight, xValues, yValues);
+    var scales = this._calculateScales(innerWidth, innerHeight, xValues, yValues, props.xAxisRange, props.yAxisRange);
     var trans = "translate(" + (props.yAxisOffset < 0 ? props.margins.left + Math.abs(props.yAxisOffset) : props.margins.left) + "," + props.margins.top + ")";
-
     return (
       <Chart
         viewBox={this.getViewBox()}
@@ -128,6 +127,7 @@ module.exports = React.createClass({
             colorAccessor={props.colorAccessor}
             width={innerWidth}
             height={innerHeight}
+            xAxisRange={props.xAxisRange}
             />
         </g>
       </Chart>

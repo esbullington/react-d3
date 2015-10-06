@@ -1,7 +1,7 @@
 var d3 = require('d3');
 
 
-exports.calculateScales = (chartWidth, chartHeight, xValues, yValues) => {
+exports.calculateScales = (chartWidth, chartHeight, xValues, yValues, xAxisRange, yAxisRange) => {
 
   var xScale, yScale;
 
@@ -12,7 +12,13 @@ exports.calculateScales = (chartWidth, chartHeight, xValues, yValues) => {
     xScale = d3.scale.linear()
       .range([0, chartWidth]);
   }
-  xScale.domain(d3.extent(xValues));
+
+  var xDomain = d3.extent(xValues)
+  if (xAxisRange) {
+    xDomain[0] = d3.min([d3.max([xDomain[0],xAxisRange.maxExtentLeft]),xAxisRange.minExtentLeft])
+    xDomain[1] = d3.min([d3.max([xDomain[1],xAxisRange.minExtentRight]),xAxisRange.maxExtentRight])
+  }
+  xScale.domain(xDomain);
 
   if (yValues.length > 0 && Object.prototype.toString.call(yValues[0]) === '[object Date]') {
     yScale = d3.time.scale()
@@ -22,7 +28,12 @@ exports.calculateScales = (chartWidth, chartHeight, xValues, yValues) => {
       .range([chartHeight, 0]);
   }
 
-  yScale.domain(d3.extent(yValues));
+  var yDomain = d3.extent(yValues);
+  if (yAxisRange) {
+    yDomain[0] = d3.min([d3.max([yDomain[0],yAxisRange.maxExtentBottom]),yAxisRange.minExtentBottom])
+    yDomain[1] = d3.min([d3.max([yDomain[1],yAxisRange.minExtentTop]),yAxisRange.maxExtentTop])
+  }
+  yScale.domain(yDomain);
 
   return {
     xScale: xScale,
@@ -150,3 +161,20 @@ exports.shade = (hex, percent) => {
   return `#${ red }${ green }${ blue }`;
 
 };
+
+exports.isDate = (d, accessor) => {
+  return Object.prototype.toString.call(accessor(d)) === '[object Date]';
+};
+
+exports.prepareValues = (props,values,accessor) => {
+  var xform = props.xAccessor;
+  var yform = props.yAccessor;
+  if (!accessor) accessor = (d) => d;
+  if (exports.isDate(props.data[0].values[0], xform)) xform = function(d) { return props.xAccessor(d).getTime() };
+  if (exports.isDate(props.data[0].values[0], yform)) yform = function(d) { return props.yAccessor(d).getTime() };
+  return values.map( (v) => ({ x: xform(accessor(v)), y: yform(accessor(v)), original: v }) );
+}
+
+exports.linkValues = (values) => {
+  return values.map( (v,idx,array) => ({ x: v.x, y: v.y, prevVal: array[idx-1], nextVal: array[idx+1] }))
+}
