@@ -1,7 +1,7 @@
 var d3 = require('d3');
 
 
-exports.calculateScales = (chartWidth, chartHeight, xValues, yValues, xAxisRange, yAxisRange) => {
+exports.calculateScales = (chartWidth, chartHeight, xValues, yValues) => {
 
   var xScale, yScale;
 
@@ -12,13 +12,7 @@ exports.calculateScales = (chartWidth, chartHeight, xValues, yValues, xAxisRange
     xScale = d3.scale.linear()
       .range([0, chartWidth]);
   }
-
-  var xDomain = d3.extent(xValues);
-  if (xAxisRange) {
-    xDomain[0] = d3.min([d3.max([xDomain[0],xAxisRange.maxExtentLeft]),xAxisRange.minExtentLeft]);
-    xDomain[1] = d3.min([d3.max([xDomain[1],xAxisRange.minExtentRight]),xAxisRange.maxExtentRight]);
-  }
-  xScale.domain(xDomain);
+  xScale.domain(d3.extent(xValues));
 
   if (yValues.length > 0 && Object.prototype.toString.call(yValues[0]) === '[object Date]') {
     yScale = d3.time.scale()
@@ -28,12 +22,7 @@ exports.calculateScales = (chartWidth, chartHeight, xValues, yValues, xAxisRange
       .range([chartHeight, 0]);
   }
 
-  var yDomain = d3.extent(yValues);
-  if (yAxisRange) {
-    yDomain[0] = d3.min([d3.max([yDomain[0],yAxisRange.maxExtentBottom]),yAxisRange.minExtentBottom]);
-    yDomain[1] = d3.min([d3.max([yDomain[1],yAxisRange.minExtentTop]),yAxisRange.maxExtentTop]);
-  }
-  yScale.domain(yDomain);
+  yScale.domain(d3.extent(yValues));
 
   return {
     xScale: xScale,
@@ -124,7 +113,7 @@ exports.flattenData = (data, xAccessor, yAccessor) => {
       var pointItem = {
         coord: {
           x: x,
-          y: yNode
+          y: yNode,
         },
         d: item,
         id: series.name + j,
@@ -160,22 +149,4 @@ exports.shade = (hex, percent) => {
   if (blue.length === 1) blue = '0' + blue;
   return `#${ red }${ green }${ blue }`;
 
-};
-
-exports.isDate = (d, accessor) => {
-  return Object.prototype.toString.call(accessor(d)) === '[object Date]';
-};
-
-exports.prepareValues = (props,values,accessor) => {
-  var xform = props.xAccessor;
-  var yform = props.yAccessor;
-  if (!accessor) accessor = (d) => d;
-  if (exports.isDate(props.data[0].values[0], xform)) xform = function(d) { return props.xAccessor(d).getTime() };
-  if (exports.isDate(props.data[0].values[0], yform)) yform = function(d) { return props.yAccessor(d).getTime() };
-  return values.map( (v) => ({ x: xform(accessor(v)), y: yform(accessor(v)), original: v }) );
-};
-
-exports.linkValues = (values) => {
-  values.forEach( (v,idx,array) => { v.nextVal = array[idx+1]; v.prevVal = array[idx-1] } );
-  return values;
 };

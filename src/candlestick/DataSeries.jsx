@@ -34,8 +34,6 @@ module.exports = React.createClass({
         className = `${ ohlcClass } rd3-candlestick-rect`,
         candleFill = (ohlc.open <= ohlc.close) ? props.fillUp : props.fillDown;
 
-      if (candle_x+candleWidth < 0 || candle_x > width) return null;
-
       //Wicks
       var wick_x1 = props.xScale(props.xAccessor(d)),
         wick_y1 = props.yScale(ohlc.high),
