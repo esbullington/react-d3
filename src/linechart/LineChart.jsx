@@ -16,7 +16,8 @@ module.exports = React.createClass({
   propTypes: {
     circleRadius:   React.PropTypes.number,
     hoverAnimation: React.PropTypes.bool,
-    margins:        React.PropTypes.object
+    margins:        React.PropTypes.object,
+    overrideSets:   React.PropTypes.object
  },
 
   getDefaultProps() {
@@ -26,7 +27,8 @@ module.exports = React.createClass({
       hoverAnimation: true,
       margins:        {top: 10, right: 20, bottom: 50, left: 45},
       xAxisClassName: 'rd3-linechart-xaxis',
-      yAxisClassName: 'rd3-linechart-yaxis'
+      yAxisClassName: 'rd3-linechart-yaxis',
+      overrideSets:   {}
     };
   },
 
@@ -128,6 +130,7 @@ module.exports = React.createClass({
             width={innerWidth}
             height={innerHeight}
             xAxisRange={props.xAxisRange}
+            overrideSets={props.overrideSets}
             />
         </g>
       </Chart>

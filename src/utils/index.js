@@ -13,10 +13,10 @@ exports.calculateScales = (chartWidth, chartHeight, xValues, yValues, xAxisRange
       .range([0, chartWidth]);
   }
 
-  var xDomain = d3.extent(xValues)
+  var xDomain = d3.extent(xValues);
   if (xAxisRange) {
-    xDomain[0] = d3.min([d3.max([xDomain[0],xAxisRange.maxExtentLeft]),xAxisRange.minExtentLeft])
-    xDomain[1] = d3.min([d3.max([xDomain[1],xAxisRange.minExtentRight]),xAxisRange.maxExtentRight])
+    xDomain[0] = d3.min([d3.max([xDomain[0],xAxisRange.maxExtentLeft]),xAxisRange.minExtentLeft]);
+    xDomain[1] = d3.min([d3.max([xDomain[1],xAxisRange.minExtentRight]),xAxisRange.maxExtentRight]);
   }
   xScale.domain(xDomain);
 
@@ -30,8 +30,8 @@ exports.calculateScales = (chartWidth, chartHeight, xValues, yValues, xAxisRange
 
   var yDomain = d3.extent(yValues);
   if (yAxisRange) {
-    yDomain[0] = d3.min([d3.max([yDomain[0],yAxisRange.maxExtentBottom]),yAxisRange.minExtentBottom])
-    yDomain[1] = d3.min([d3.max([yDomain[1],yAxisRange.minExtentTop]),yAxisRange.maxExtentTop])
+    yDomain[0] = d3.min([d3.max([yDomain[0],yAxisRange.maxExtentBottom]),yAxisRange.minExtentBottom]);
+    yDomain[1] = d3.min([d3.max([yDomain[1],yAxisRange.minExtentTop]),yAxisRange.maxExtentTop]);
   }
   yScale.domain(yDomain);
 
@@ -124,7 +124,7 @@ exports.flattenData = (data, xAccessor, yAccessor) => {
       var pointItem = {
         coord: {
           x: x,
-          y: yNode,
+          y: yNode
         },
         d: item,
         id: series.name + j,
@@ -173,8 +173,9 @@ exports.prepareValues = (props,values,accessor) => {
   if (exports.isDate(props.data[0].values[0], xform)) xform = function(d) { return props.xAccessor(d).getTime() };
   if (exports.isDate(props.data[0].values[0], yform)) yform = function(d) { return props.yAccessor(d).getTime() };
   return values.map( (v) => ({ x: xform(accessor(v)), y: yform(accessor(v)), original: v }) );
-}
+};
 
 exports.linkValues = (values) => {
-  return values.map( (v,idx,array) => ({ x: v.x, y: v.y, prevVal: array[idx-1], nextVal: array[idx+1] }))
-}
+  values.forEach( (v,idx,array) => { v.nextVal = array[idx+1]; v.prevVal = array[idx-1] } );
+  return values;
+};
