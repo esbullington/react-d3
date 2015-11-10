@@ -2,6 +2,7 @@
 
 var d3 = require('d3');
 var React = require('react');
+var DOM = React.DOM;
 var Chart = require('../common').Chart;
 var DataSeries = require('./DataSeries');
 
