@@ -3,6 +3,7 @@
 var React = require('react');
 var d3 = require('d3');
 var VoronoiContainer = require('../common/marker/VoronoiContainer');
+var utils = require('../utils');
 
 module.exports = React.createClass({
 
@@ -11,7 +12,7 @@ module.exports = React.createClass({
   propTypes: {
     colors:        React.PropTypes.func.isRequired,
     colorAccessor: React.PropTypes.func.isRequired,
-    value:          React.PropTypes.array.isRequired,
+    values:          React.PropTypes.array.isRequired,
     height:        React.PropTypes.number.isRequired,
     xAccessor:     React.PropTypes.func.isRequired,
     xScale:        React.PropTypes.func.isRequired,
@@ -25,6 +26,8 @@ module.exports = React.createClass({
     };
   },
 
+  _prepareValues: utils.prepareValues,
+
   render: function() {
     var props     = this.props;
     var xScale    = props.xScale;
@@ -32,10 +35,13 @@ module.exports = React.createClass({
     var xAccessor = props.xAccessor;
     var yAccessor = props.yAccessor;
     var marker = new Array();
+    var self = this;
+
+    var prepareValues = (values,accessor) => { return self._prepareValues(props,values,accessor); };
 
     var voronoi = d3.geom.voronoi()
-      .x(function(d){ return xScale(d.coord.x); })
-      .y(function(d){ return yScale(d.coord.y); })
+      .x(function(d){ return xScale(d.x); })
+      .y(function(d){ return yScale(d.y); })
       .clipExtent([[0, 0], [ props.width , props.height]]);
 
     props.data.map((series, idx) => {
@@ -77,48 +83,34 @@ module.exports = React.createClass({
         // - same for one series
       });
     });
-
-    var regions = voronoi(props.value).map(function(vnode, idx) {
-      var point = vnode.point;
-      var coord = point.coord;
-
-      var x = xAccessor(coord);
-      var y = yAccessor(coord);
-
-      // The circle coordinates and color
-      var cx, cy, markerFill;
-
-      if (Object.prototype.toString.call(x) === '[object Date]') {
-        cx = xScale(x.getTime());
-      } else {
-        cx = xScale(x);
-      }
-
-      if (Object.prototype.toString.call(y) === '[object Date]') {
-        cy = yScale(y.getTime());
-      } else {
-        cy = yScale(y);
-      }
-      markerFill = props.colors(props.colorAccessor(vnode, vnode.point.seriesIndex));
+      
+    var regions = voronoi(prepareValues(props.values, (v) => v.coord)).map(function(vnode, idx) {
+      var dx = vnode.point.x;
+      var cx = xScale(dx);
+      if (dx < xScale.domain()[0] || dx > xScale.domain()[1]) return null;
+      var dy = vnode.point.y;
+      var cy = yScale(dy);
+      if (dy < yScale.domain()[0] || dy > yScale.domain()[1]) return null;
+      var markerFill = props.colors(props.colorAccessor(vnode, vnode.point.original.seriesIndex));
 
       return (
         <VoronoiContainer
           key={idx}
           vnode={vnode}
           cx={cx} cy={cy}
-          point={point.coord}
+          point={vnode.point.original.coord}
           chartType={'scatterchart'}
           hoverAnimation={props.hoverAnimation}
-          markerName={marker[vnode.point.seriesIndex].markerName.shift()}
+          markerName={marker[vnode.point.original.seriesIndex].markerName.shift()}
           // assigns wrong if more than one series share a data point
           markerFill={markerFill}
-          markerWidth={marker[vnode.point.seriesIndex].markerWidth}
-          markerHeight={marker[vnode.point.seriesIndex].markerHeight}
-          markerRadius={marker[vnode.point.seriesIndex].markerRadius}
-          markerOuterRadius={marker[vnode.point.seriesIndex].markerOuterRadius}
-          markerInnerRadius={marker[vnode.point.seriesIndex].markerInnerRadius}
-          markerAnimationResize={marker[vnode.point.seriesIndex].markerAnimationResize}
-          markerAnimationShade={marker[vnode.point.seriesIndex].markerAnimationShade}
+          markerWidth={marker[vnode.point.original.seriesIndex].markerWidth}
+          markerHeight={marker[vnode.point.original.seriesIndex].markerHeight}
+          markerRadius={marker[vnode.point.original.seriesIndex].markerRadius}
+          markerOuterRadius={marker[vnode.point.original.seriesIndex].markerOuterRadius}
+          markerInnerRadius={marker[vnode.point.original.seriesIndex].markerInnerRadius}
+          markerAnimationResize={marker[vnode.point.original.seriesIndex].markerAnimationResize}
+          markerAnimationShade={marker[vnode.point.original.seriesIndex].markerAnimationShade}
           markerOnClick={props.markerOnClick}
           />
       );

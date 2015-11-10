@@ -71,7 +71,7 @@ var Demos = React.createClass({
     var lineData = [
       { 
         name: 'series1',
-        values: [ { x: 0, y: 20 }, { x: 1, y: 30 }, { x: 2, y: 10 }, { x: 3, y: 5 }, { x: 4, y: 8 }, { x: 5, y: 15 }, { x: 6, y: 10 } ],
+        values: [ { x: 0, y: 20 }, { x: 1, y: 30, override: ['redline'] }, { x: 2, y: 10 }, { x: 3, y: 5 }, { x: 4, y: 8 }, { x: 5, y: 15 }, { x: 6, y: 10 } ],
         strokeWidth: 3,
         strokeDashArray: "5,5",
         markerName: ['star', 'circle', 'rect']
@@ -82,7 +82,7 @@ var Demos = React.createClass({
       },
       {
         name: 'series3',
-        values: [ { x: 0, y: 0 }, { x: 1, y: 5 }, { x: 2, y: 8 }, { x: 3, y: 2 }, { x: 4, y: 6 }, { x: 5, y: 4 }, { x: 6, y: 2 } ]
+        values: [ { x: 0, y: 0 }, { x: 1, y: 5 }, { x: 2, y: 8 }, { x: 3, y: 2, override: ['greenline'] }, { x: 4, y: 6 }, { x: 5, y: 4 }, { x: 6, y: 2 } ]
       } 
     ];
 
@@ -168,6 +168,12 @@ var Demos = React.createClass({
               xAxisLabel="Elapsed Time (sec)"
               gridHorizontal={true}
               markerOnClick={this.setSelectedValue}
+              overrideSets={{
+                redline: { line: true, strokeWidth: 5, strokeDashArray: "2,1", stroke: 'red' },
+                greenline: { line: true, stroke: 'green' }
+              }}
+              xAxisRange={{ maxExtentLeft: 0.5, maxExtentRight: 5.5 }}
+              yAxisRange={{ maxExtentBottom: -10.0, minExtentBottom: -5.0, minExtentTop: 20.0, maxExtentTop: 50.0 }}
             />
           {this.renderSelectedValue()}
           </div>
@@ -203,12 +209,12 @@ var Demos = React.createClass({
   data={lineData}
   width='100%'
   height={400}
-  viewBoxObject={
+  viewBoxObject={{
     x: 0,
     y: 0,
     width: 500,
     height: 400
-  }
+  }}
   title="Line Chart"
   yAxisLabel="Altitude"
   xAxisLabel="Elapsed Time (sec)"

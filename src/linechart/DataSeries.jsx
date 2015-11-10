@@ -3,6 +3,7 @@
 var React = require('react');
 var d3 = require('d3');
 var VoronoiContainer = require('../common/marker/VoronoiContainer');
+var utils = require('../utils');
 var Line = require('./Line');
 
 module.exports = React.createClass({
@@ -23,37 +24,47 @@ module.exports = React.createClass({
       data: [],
       xAccessor: (d) => d.x,
       yAccessor: (d) => d.y,
-      interpolationType: 'linear'
+      interpolationType: 'linear',
+      hoverAnimation: false
     };
   },
-  
-  _isDate(d, accessor) {
-      return Object.prototype.toString.call(accessor(d)) === '[object Date]';
-  },
+
+  _linkValues: utils.linkValues,
+  _prepareValues: utils.prepareValues,
 
   render() {
     var props = this.props;
     var xScale = props.xScale;
     var yScale = props.yScale;
-    var xAccessor = props.xAccessor,
-        yAccessor = props.yAccessor;
-    var marker = new Array();
+    //var xAccessor = props.xAccessor,
+//        yAccessor = props.yAccessor;
+    var marker = [];
+    var self = this;
+
+    var linkValues = self._linkValues;
+    var prepareValues = (values,accessor) => { return self._prepareValues(props,values,accessor); };
 
     var interpolatePath = d3.svg.line()
-      .y( (d) => props.yScale(yAccessor(d)) )
-      .interpolate(props.interpolationType);
-
-      if (this._isDate(props.data[0].values[0], xAccessor)) {
-        interpolatePath.x(function(d) {
-          return props.xScale(props.xAccessor(d).getTime());
-        });
-      } else {
-        interpolatePath.x(function(d) {
-          return props.xScale(props.xAccessor(d));
-        });
-      }
+      .x( (d) => d.xs = xScale(d.x) )
+      .y( (d) => d.ys = yScale(d.y) )
+      .interpolate(props.interpolationType)
+      // only draw values inside x axis range and those next to it
+      .defined( (d) => {
+        var use = (d.x >= xScale.domain()[0] && d.x <= xScale.domain()[1]) ||
+        (d.prevVal && d.prevVal.x >= xScale.domain()[0] && d.prevVal.x <= xScale.domain()[1]) ||
+        (d.nextVal && d.nextVal.x >= xScale.domain()[0] && d.nextVal.x <= xScale.domain()[1]);
+        d.use = use;
+        return use;
+      });
 
     var lines = props.data.map((series, idx) => {
+      var valueSet = linkValues(prepareValues(series.values));
+      var path = interpolatePath(valueSet);
+
+      var exclude = [];
+      var usedOverrides = [];
+      var lines = [
+      ];
 
       // Make an array markerName containing the name (form) of the marker for each data point
       var markerName = new Array(0);
@@ -93,37 +104,81 @@ module.exports = React.createClass({
         // - same for one series
       });
 
-      return (
-        <Line 
-          path={interpolatePath(series.values)}
-          stroke={props.colors(props.colorAccessor(series, idx))}
+      // Check for overridden line segments
+      valueSet.forEach( (v) => {
+        if (!v.use || !v.nextVal || !v.nextVal.use) return;
+        var overrides = v.original.override;
+        if (!overrides) return;
+        if (!Array.isArray(overrides)) overrides = [overrides];
+        var usedOverride = null;
+        overrides.forEach( (override) => {
+            var overrideSet = props.overrideSets[override];
+            if (overrideSet && overrideSet.line) usedOverride = override
+        });
+        if (!usedOverride) return;
+        exclude.push([v.xs,v.nextVal.xs]);
+        v.override = usedOverride;
+        if (usedOverrides.indexOf(usedOverride) < 0) usedOverrides.push(usedOverride)
+      });
+
+      // Add main line (no overrides); overridden segments (if any) are cut out
+      lines.push(
+        <Line
+          path={path}
+          stroke={series.stroke || props.colors(props.colorAccessor(series, idx))}
           strokeWidth={series.strokeWidth}
           strokeDashArray={series.strokeDashArray}
           seriesName={series.name}
           key={idx}
+          override={'_main'}
+          coverage={{ranges: exclude, invert: true}}
+          height={props.height}
+          width={props.width}
         />
       );
+
+      // For each discovered override, create a new line, filling in the overridden parts
+      usedOverrides.forEach((override) => {
+        var include = [];
+        var overrideSet = props.overrideSets[override];
+        valueSet.forEach( (v) => {
+          if (!v.use || !v.nextVal || !v.nextVal.use || v.override != override) return;
+          include.push([v.xs, v.nextVal.xs])
+        });
+        lines.push(
+          <Line
+            path={path}
+            stroke={overrideSet.stroke || series.stroke || props.colors(props.colorAccessor(series, idx))}
+            strokeWidth={overrideSet.strokeWidth || series.strokeWidth}
+            strokeDashArray={overrideSet.strokeDashArray || series.strokeDashArray}
+            seriesName={series.name}
+            key={idx+"."+override}
+            override={override}
+            coverage={{ranges: include, invert: false}}
+            height={props.height}
+            width={props.width}
+            />
+        )
+      });
+
+      return lines;
     });
 
     var voronoi = d3.geom.voronoi()
-      .x(function(d){ return xScale(d.coord.x); })
-      .y(function(d){ return yScale(d.coord.y); })
+      .x(function(d){ return xScale(d.x); })
+      .y(function(d){ return yScale(d.y); })
       .clipExtent([[0, 0], [ props.width , props.height]]);
 
-    var cx, cy, markerFill;
-    var regions = voronoi(props.value).map(function(vnode, idx) {
+    var dx, cx, dy, cy, markerFill;
+    var regions = voronoi(prepareValues(props.value, (v) => v.coord )).map(function(vnode, idx) {
       var point = vnode.point.coord;
-      if (Object.prototype.toString.call(xAccessor(point)) === '[object Date]') {
-        cx = props.xScale(xAccessor(point).getTime());
-      } else {
-        cx = props.xScale(xAccessor(point));
-      }
-      if (Object.prototype.toString.call(yAccessor(point)) === '[object Date]') {
-        cy = props.yScale(yAccessor(point).getTime());
-      } else {
-        cy = props.yScale(yAccessor(point));
-      }
-      markerFill = props.colors(props.colorAccessor(vnode, vnode.point.seriesIndex));
+      dx = vnode.point.x;
+      if (dx < xScale.domain()[0] || dx > xScale.domain()[1]) return null;
+      cx = props.xScale(dx);
+      dy = vnode.point.y;
+      if (dy < yScale.domain()[0] || dy > yScale.domain()[1]) return null;  
+      cy = props.yScale(dy);
+      markerFill = props.colors(props.colorAccessor(vnode, vnode.point.original.seriesIndex));
 
       return (
         <VoronoiContainer
@@ -133,16 +188,15 @@ module.exports = React.createClass({
           point={point}
           chartType={'linechart'}
           hoverAnimation={props.hoverAnimation}
-          markerName={marker[vnode.point.seriesIndex].markerName.shift()}
-            // assigns wrong if more than one series share a data point
+          markerName={marker[vnode.point.original.seriesIndex].markerName.shift()}
           markerFill={markerFill}
-          markerWidth={marker[vnode.point.seriesIndex].markerWidth}
-          markerHeight={marker[vnode.point.seriesIndex].markerHeight}
-          markerRadius={marker[vnode.point.seriesIndex].markerRadius}
-          markerOuterRadius={marker[vnode.point.seriesIndex].markerOuterRadius}
-          markerInnerRadius={marker[vnode.point.seriesIndex].markerInnerRadius}
-          markerAnimationResize={marker[vnode.point.seriesIndex].markerAnimationResize}
-          markerAnimationShade={marker[vnode.point.seriesIndex].markerAnimationShade}
+          markerWidth={marker[vnode.point.original.seriesIndex].markerWidth}
+          markerHeight={marker[vnode.point.original.seriesIndex].markerHeight}
+          markerRadius={marker[vnode.point.original.seriesIndex].markerRadius}
+          markerOuterRadius={marker[vnode.point.original.seriesIndex].markerOuterRadius}
+          markerInnerRadius={marker[vnode.point.original.seriesIndex].markerInnerRadius}
+          markerAnimationResize={marker[vnode.point.original.seriesIndex].markerAnimationResize}
+          markerAnimationShade={marker[vnode.point.original.seriesIndex].markerAnimationShade}
           markerOnClick={props.markerOnClick}
         />
       );
@@ -150,8 +204,8 @@ module.exports = React.createClass({
 
     return (
       <g>
-        <g>{regions}</g>
         <g>{lines}</g>
+        <g>{regions}</g>
       </g>
     );
   }

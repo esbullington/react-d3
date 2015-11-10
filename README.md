@@ -18,13 +18,21 @@ First, install via `npm`:
 
 Then, import into your ReactJS project:
 
-`var rd3 = require('react-d3');`
+```
+var rd3 = require('react-d3');
+// es6
+import rd3 from 'react-d3';
+```
 
-The charts are then available under the `rd3` namespace, which you can then use as shown on the [demonstration page](http://esbullington.github.io/react-d3-website/):
+The charts are then available under the `rd3` namespace, which you can then use as shown on the [demonstration page](https://reactiva.github.io/react-d3-website/):
 
 If you don't wish to pull in all the charts, you can also require single chart:
 
-`var BarChart = require('react-d3/barchart').BarChart;`
+```
+var BarChart = require('react-d3/barchart').BarChart;
+// es6
+import { BarChart } from 'react-d3';
+```
 
 ### Available Charts
 
@@ -38,7 +46,7 @@ var ScatterChart = rd3.ScatterChart;
 var CandleStickChart = rd3.CandleStickChart;
 ```
 
-For usage, please see [here](http://esbullington.github.io/react-d3-website).  API documentation is also coming online over the coming days.
+For usage, please see [here](https://reactiva.github.io/react-d3-website/).  [API documentation](https://github.com/esbullington/react-d3/wiki/API) is also coming online over the coming days.
 
 ### JSFiddle
 There's a development build available for experimentation on JSFiddle: [http://jsfiddle.net/esbullington/jp9dkh1g/](http://jsfiddle.net/esbullington/jp9dkh1g/).

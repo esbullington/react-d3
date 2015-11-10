@@ -20,7 +20,7 @@ describe('Treemap', function() {
 
     var treemapGroup = TestUtils.findRenderedDOMComponentWithClass(treemap, 'rd3-treemap');
     expect(treemapGroup).to.exist;
-    expect(treemapGroup.tagName).to.equal('G');
+    expect(treemapGroup.tagName).to.equal('g');
     
     // Verify that it has the same number of nodes as the array's length
     var cells = TestUtils.scryRenderedDOMComponentsWithClass(treemap, 'rd3-treemap-cell');

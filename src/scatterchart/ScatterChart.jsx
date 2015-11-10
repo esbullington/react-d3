@@ -56,7 +56,7 @@ module.exports = React.createClass({
         xValues   = flattenedData.xValues,
         yValues   = flattenedData.yValues;
 
-    var scales  = this._calculateScales(innerWidth, innerHeight, xValues, yValues);
+    var scales  = this._calculateScales(innerWidth, innerHeight, xValues, yValues, props.xAxisRange, props.yAxisRange);
     var xScale  = scales.xScale;
     var yScale  = scales.yScale;
 
@@ -127,7 +127,7 @@ module.exports = React.createClass({
             colors={props.colors}
             colorAccessor={props.colorAccessor}
             data={props.data}
-            value={allValues}
+            values={allValues}
             height={innerHeight}
             hoverAnimation={props.hoverAnimation}
             markerOnClick={props.markerOnClick}

@@ -16,6 +16,7 @@ module.exports = React.createClass({
   propTypes: {
     hoverAnimation: React.PropTypes.bool,
     margins:        React.PropTypes.object,
+    overrideSets:   React.PropTypes.object
  },
 
   getDefaultProps() {
@@ -25,7 +26,8 @@ module.exports = React.createClass({
       xAxisClassName: 'rd3-linechart-xaxis',
       yAxisClassName: 'rd3-linechart-yaxis',
       hideXAxis: false,
-      hideYAxis: false
+      hideYAxis: false,
+      overrideSets:   {}
     };
   },
 
@@ -55,9 +57,8 @@ module.exports = React.createClass({
     var allValues = flattenedData.allValues,
         xValues = flattenedData.xValues,
         yValues = flattenedData.yValues;
-    var scales = this._calculateScales(innerWidth, innerHeight, xValues, yValues);
+    var scales = this._calculateScales(innerWidth, innerHeight, xValues, yValues, props.xAxisRange, props.yAxisRange);
     var trans = "translate(" + (props.yAxisOffset < 0 ? props.margins.left + Math.abs(props.yAxisOffset) : props.margins.left) + "," + props.margins.top + ")";
-
     var xAxis = null;
     if (!props.hideXAxis) {
       xAxis = <XAxis
@@ -137,6 +138,8 @@ module.exports = React.createClass({
             colorAccessor={props.colorAccessor}
             width={innerWidth}
             height={innerHeight}
+            xAxisRange={props.xAxisRange}
+            overrideSets={props.overrideSets}
             />
         </g>
       </Chart>

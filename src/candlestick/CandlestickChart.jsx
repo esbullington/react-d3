@@ -54,6 +54,8 @@ module.exports = React.createClass({
     };
   },
 
+  _calculateScales: utils.calculateScales,
+
   render() {
 
     var props = this.props;
@@ -71,7 +73,9 @@ module.exports = React.createClass({
     var allValues = flattenedData.allValues,
         xValues = flattenedData.xValues,
         yValues = flattenedData.yValues;
-    var scales = utils.calculateScales(innerWidth, innerHeight, xValues, yValues);
+
+    var scales  = this._calculateScales(innerWidth, innerHeight, xValues, yValues, props.xAxisRange, props.yAxisRange);
+
 
     var trans = `translate(${ props.yAxisOffset < 0 ? props.margins.left + Math.abs(props.yAxisOffset) : props.margins.left},${ props.margins.top })`;
 

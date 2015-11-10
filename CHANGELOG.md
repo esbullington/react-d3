@@ -1,3 +1,8 @@
+####0.4.0:
+- Stacked bar chart 
+- Support grid (Thanks @nightlyop)
+- Using babel to tranform es6 code
+
 ####0.3.0:
 - Pure React axes (library is 100% React-rendered now)
 - Added candestickchart (Thanks @rrag!)
