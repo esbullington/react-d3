@@ -55,8 +55,7 @@ module.exports = React.createClass({
         }
         // From ES6 on (not supported yet):
         // var markerName = new Array(this.props.values.length).fill(this.props.marker);
-      }
-      else {
+      } else {
         // use different markers for data points
         markerName = series.markerName.slice();
         if (markerName.length != series.values.length) {

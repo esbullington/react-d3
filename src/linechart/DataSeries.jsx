@@ -17,6 +17,7 @@ module.exports = React.createClass({
     interpolationType: React.PropTypes.string,
     xAccessor: React.PropTypes.func,
     yAccessor: React.PropTypes.func,
+    hoverAnimation: React.PropTypes.bool
   },
 
   getDefaultProps() {
@@ -36,8 +37,8 @@ module.exports = React.createClass({
     var props = this.props;
     var xScale = props.xScale;
     var yScale = props.yScale;
-    //var xAccessor = props.xAccessor,
-//        yAccessor = props.yAccessor;
+    var xAccessor = props.xAccessor,
+        yAccessor = props.yAccessor;
     var marker = [];
     var self = this;
 
@@ -126,15 +127,15 @@ module.exports = React.createClass({
         <Line
           path={path}
           stroke={series.stroke || props.colors(props.colorAccessor(series, idx))}
-          strokeWidth={series.strokeWidth}
-          strokeDashArray={series.strokeDashArray}
-          seriesName={series.name}
-          key={idx}
+              strokeWidth={series.strokeWidth}
+              strokeDashArray={series.strokeDashArray}
+              seriesName={series.name}
+              key={idx}
           override={'_main'}
           coverage={{ranges: exclude, invert: true}}
           height={props.height}
           width={props.width}
-        />
+              />
       );
 
       // For each discovered override, create a new line, filling in the overridden parts
@@ -171,7 +172,7 @@ module.exports = React.createClass({
 
     var dx, cx, dy, cy, markerFill;
     var regions = voronoi(prepareValues(props.value, (v) => v.coord )).map(function(vnode, idx) {
-      var point = vnode.point.coord;
+      dx = vnode.point.x;
       dx = vnode.point.x;
       if (dx < xScale.domain()[0] || dx > xScale.domain()[1]) return null;
       cx = props.xScale(dx);
@@ -185,7 +186,7 @@ module.exports = React.createClass({
           key={idx}
           vnode={vnode}
           cx={cx} cy={cy}
-          point={point}
+          point={vnode.point}
           chartType={'linechart'}
           hoverAnimation={props.hoverAnimation}
           markerName={marker[vnode.point.original.seriesIndex].markerName.shift()}

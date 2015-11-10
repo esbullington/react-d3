@@ -73,7 +73,7 @@ module.exports = React.createClass({
     ranges = cleanRanges(ranges,0,props.width);
 
     return (<g>
-      <clipPath id={clipPathId} key={clipPathId}>
+      <clipPath id={clipPathId}>
         { ranges.map( (r) => <rect x={r[0]} y={0} width={r[1]-r[0]} height={props.height}/>) }
       </clipPath>
       <path
