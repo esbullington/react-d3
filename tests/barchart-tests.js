@@ -4,10 +4,10 @@ var expect = require('chai').expect;
 
 describe('BarChart', function() {
   it('renders barchart', function() {
-    var React = require('react/addons');
+    var React = require('react');
+    var TestUtils = require('react-addons-test-utils');
     var BarChart = require('../src/barchart').BarChart;
     var generate = require('./utils/datagen').generateArrayOfPoints;
-    var TestUtils = React.addons.TestUtils;
     var length = 5;
 
     var data = [
@@ -30,7 +30,7 @@ describe('BarChart', function() {
     var barchartGroup = TestUtils.findRenderedDOMComponentWithClass(
       barchart, 'rd3-barchart');
     expect(barchartGroup).to.exist;
-    expect(barchartGroup.tagName).to.equal('G');
+    expect(barchartGroup.tagName).to.equal('g');
 
     // Verify that it has the same number of bars as the array's length
     var bars = TestUtils.scryRenderedDOMComponentsWithTag(
@@ -39,10 +39,10 @@ describe('BarChart', function() {
   });
 
   it('renders barchart with negative values', function() {
-    var React = require('react/addons');
+    var React = require('react');
+    var TestUtils = require('react-addons-test-utils');
     var BarChart = require('../src/barchart').BarChart;
     var generate = require('./utils/datagen').generateArrayOfPoints;
-    var TestUtils = React.addons.TestUtils;
 
     var length = 5;
 
@@ -69,11 +69,11 @@ describe('BarChart', function() {
     var barchartGroup = TestUtils.findRenderedDOMComponentWithClass(
       barchart, 'rd3-barchart');
     expect(barchartGroup).to.exist;
-    expect(barchartGroup.tagName).to.equal('G');
+    expect(barchartGroup.getAttribute('tagName')).to.equal('g');
 
     // Verify that it has the same number of bars as the array's length
     var bars = TestUtils.scryRenderedDOMComponentsWithTag(
       barchart, 'rect');
-    expect(bars.length).to.equal(data.length * length);
+    expect(bars.getAttribute('length')).to.equal(data.length * length);
   });
 });

@@ -44,6 +44,7 @@
     "karma-phantomjs-launcher": "^0.2.0",
     "merge-stream": "^0.1.7",
     "mocha": "^2.2.5",
+    "react-addons-test-utils": "^0.14.2",
     "react-tools": "^0.13.3",
     "reactify": "^1.1.1",
     "uglify-js": "^2.4.23",
