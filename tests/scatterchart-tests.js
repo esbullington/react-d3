@@ -11,7 +11,7 @@ var circleRadius = 5;
 var data, scatterchart;
 
 var CHART_CLASS_NAME  = 'rd3-scatterchart';
-var CIRCLE_CLASS_NAME = 'rd3-scatterchart-voronoi-circle';
+var CIRCLE_CLASS_NAME = 'rd3-scatterchart-circle';
 
 describe('ScatterChart', function() {
 
@@ -20,16 +20,17 @@ describe('ScatterChart', function() {
     data = [
       {
         name: "series1",
-        values: generate(points)
+        values: generate(points),
+        markerRadius: circleRadius
       },
       {
         name: "series2",
-        values: generate(points)
+        values: generate(points),
+        markerRadius: circleRadius
       }
     ];
     scatterchart = TestUtils.renderIntoDocument(
       <ScatterChart
-        circleRadius={circleRadius}
         data={data}
         width={400}
         height={200}

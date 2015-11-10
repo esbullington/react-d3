@@ -69,7 +69,7 @@ describe('BarChart', function() {
     var barchartGroup = TestUtils.findRenderedDOMComponentWithClass(
       barchart, 'rd3-barchart');
     expect(barchartGroup).to.exist;
-    expect(barchartGroup.getAttribute('tagName')).to.equal('g');
+    expect(barchartGroup.tagName).to.equal('g');
 
     // Verify that it has the same number of bars as the array's length
     var bars = TestUtils.scryRenderedDOMComponentsWithTag(
