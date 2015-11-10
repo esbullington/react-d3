@@ -14,7 +14,6 @@ module.exports = React.createClass({
   displayName: 'LineChart',
 
   propTypes: {
-    circleRadius:   React.PropTypes.number,
     hoverAnimation: React.PropTypes.bool,
     margins:        React.PropTypes.object,
     overrideSets:   React.PropTypes.object
@@ -22,12 +21,12 @@ module.exports = React.createClass({
 
   getDefaultProps() {
     return {
-      circleRadius:    3,
       className: 'rd3-linechart',
-      hoverAnimation: true,
       margins:        {top: 10, right: 20, bottom: 50, left: 45},
       xAxisClassName: 'rd3-linechart-xaxis',
       yAxisClassName: 'rd3-linechart-yaxis',
+      hideXAxis: false,
+      hideYAxis: false,
       overrideSets:   {}
     };
   },
@@ -60,6 +59,57 @@ module.exports = React.createClass({
         yValues = flattenedData.yValues;
     var scales = this._calculateScales(innerWidth, innerHeight, xValues, yValues, props.xAxisRange, props.yAxisRange);
     var trans = "translate(" + (props.yAxisOffset < 0 ? props.margins.left + Math.abs(props.yAxisOffset) : props.margins.left) + "," + props.margins.top + ")";
+    var xAxis = null;
+    if (!props.hideXAxis) {
+      xAxis = <XAxis
+        xAxisClassName={props.xAxisClassName}
+        strokeWidth={props.xAxisStrokeWidth}
+        xAxisTickValues={props.xAxisTickValues}
+        xAxisTickInterval={props.xAxisTickInterval}
+        xAxisOffset={props.xAxisOffset}
+        xScale={scales.xScale}
+        xAxisLabel={props.xAxisLabel}
+        xAxisLabelOffset={props.xAxisLabelOffset}
+        tickFormatting={props.xAxisFormatter}
+        xOrient={props.xOrient}
+        yOrient={props.yOrient}
+        data={props.data}
+        margins={props.margins}
+        width={innerWidth}
+        height={innerHeight}
+        stroke={props.axesColor}
+        gridVertical={props.gridVertical}
+        gridVerticalStroke={props.gridVerticalStroke}
+        gridVerticalStrokeWidth={props.gridVerticalStrokeWidth}
+        gridVerticalStrokeDash={props.gridVerticalStrokeDash}
+        />
+    }
+
+    var yAxis = null;
+    if (!props.hideYAxis) {
+      yAxis = <YAxis
+        yAxisClassName={props.yAxisClassName}
+        strokeWidth={props.yAxisStrokeWidth}
+        yScale={scales.yScale}
+        yAxisTickValues={props.yAxisTickValues}
+        yAxisTickCount={props.yAxisTickCount}
+        yAxisOffset={props.yAxisOffset}
+        yAxisLabel={props.yAxisLabel}
+        yAxisLabelOffset={props.yAxisLabelOffset}
+        tickFormatting={props.yAxisFormatter}
+        xOrient={props.xOrient}
+        yOrient={props.yOrient}
+        margins={props.margins}
+        width={innerWidth}
+        height={innerHeight}
+        stroke={props.axesColor}
+        gridHorizontal={props.gridHorizontal}
+        gridHorizontalStroke={props.gridHorizontalStroke}
+        gridHorizontalStrokeWidth={props.gridHorizontalStrokeWidth}
+        gridHorizontalStrokeDash={props.gridHorizontalStrokeDash}
+        />
+    }
+
     return (
       <Chart
         viewBox={this.getViewBox()}
@@ -72,56 +122,15 @@ module.exports = React.createClass({
         height={props.height}
         title={props.title}>
         <g transform={trans} className={props.className}>
-          <XAxis
-            xAxisClassName={props.xAxisClassName}
-            strokeWidth={props.xAxisStrokeWidth}
-            xAxisTickValues={props.xAxisTickValues}
-            xAxisTickInterval={props.xAxisTickInterval}
-            xAxisOffset={props.xAxisOffset}
-            xScale={scales.xScale}
-            xAxisLabel={props.xAxisLabel}
-            xAxisLabelOffset={props.xAxisLabelOffset}
-            tickFormatting={props.xAxisFormatter}
-            xOrient={props.xOrient}
-            yOrient={props.yOrient}
-            data={props.data}
-            margins={props.margins}
-            width={innerWidth}
-            height={innerHeight}
-            stroke={props.axesColor}
-            gridVertical={props.gridVertical}
-            gridVerticalStroke={props.gridVerticalStroke}
-            gridVerticalStrokeWidth={props.gridVerticalStrokeWidth}
-            gridVerticalStrokeDash={props.gridVerticalStrokeDash}
-          />
-          <YAxis
-            yAxisClassName={props.yAxisClassName}
-            strokeWidth={props.yAxisStrokeWidth}
-            yScale={scales.yScale}
-            yAxisTickValues={props.yAxisTickValues}
-            yAxisTickCount={props.yAxisTickCount}
-            yAxisOffset={props.yAxisOffset}
-            yAxisLabel={props.yAxisLabel}
-            yAxisLabelOffset={props.yAxisLabelOffset}
-            tickFormatting={props.yAxisFormatter}
-            xOrient={props.xOrient}
-            yOrient={props.yOrient}
-            margins={props.margins}
-            width={innerWidth}
-            height={innerHeight}
-            stroke={props.axesColor}
-            gridHorizontal={props.gridHorizontal}
-            gridHorizontalStroke={props.gridHorizontalStroke}
-            gridHorizontalStrokeWidth={props.gridHorizontalStrokeWidth}
-            gridHorizontalStrokeDash={props.gridHorizontalStrokeDash}
-          />
+          {xAxis}
+          {yAxis}
           <DataSeries
             xScale={scales.xScale}
             yScale={scales.yScale}
             xAccessor={props.xAccessor}
             yAccessor={props.yAccessor}
             hoverAnimation={props.hoverAnimation}
-            circleRadius={props.circleRadius}
+            markerOnClick={props.markerOnClick}
             data={props.data}
             value={allValues}
             interpolationType={props.interpolationType}

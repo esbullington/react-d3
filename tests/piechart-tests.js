@@ -21,7 +21,7 @@ describe('PieChart', function() {
     var pie = TestUtils.findRenderedDOMComponentWithClass(
       piechart, 'rd3-piechart');
     expect(pie).to.exist;
-    expect(pie.tagName).to.equal('G');
+    expect(pie.tagName).to.equal('g');
 
     var pieGroup = TestUtils.findRenderedDOMComponentWithClass(piechart, 'rd3-piechart-pie');
     expect(pieGroup).to.exist;

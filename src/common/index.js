@@ -5,3 +5,10 @@ exports.Chart = require('./charts').Chart;
 exports.LegendChart = require('./charts').LegendChart;
 exports.Legend = require('./Legend');
 exports.Voronoi = require('./Voronoi');
+
+// markers
+exports.VoronoiArea = require('./marker').VoronoiArea;
+exports.VoronoiContainer = require('./marker').VoronoiContainer;
+exports.VoronoiCircle = require('./marker').VoronoiCircle;
+exports.VoronoiRect = require('./marker').VoronoiRect;
+exports.VoronoiStar = require('./marker').VoronoiStar;
