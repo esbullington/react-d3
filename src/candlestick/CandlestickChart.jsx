@@ -1,7 +1,6 @@
 'use strict';
 
 var React = require('react');
-var DOM = React.DOM;
 var d3 = require('d3');
 var utils = require('../utils');
 var DataSeries = require('./DataSeries');
