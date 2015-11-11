@@ -113,8 +113,8 @@ module.exports = React.createClass({
         if (!Array.isArray(overrides)) overrides = [overrides];
         var usedOverride = null;
         overrides.forEach( (override) => {
-            var overrideSet = props.overrideSets[override];
-            if (overrideSet && overrideSet.line) usedOverride = override
+          var overrideSet = props.overrideSets[override];
+          if (overrideSet && overrideSet.line) usedOverride = override
         });
         if (!usedOverride) return;
         exclude.push([v.xs,v.nextVal.xs]);
@@ -127,15 +127,15 @@ module.exports = React.createClass({
         <Line
           path={path}
           stroke={series.stroke || props.colors(props.colorAccessor(series, idx))}
-              strokeWidth={series.strokeWidth}
-              strokeDashArray={series.strokeDashArray}
-              seriesName={series.name}
-              key={idx}
+          strokeWidth={series.strokeWidth}
+          strokeDashArray={series.strokeDashArray}
+          seriesName={series.name}
+          key={idx}
           override={'_main'}
           coverage={{ranges: exclude, invert: true}}
           height={props.height}
           width={props.width}
-              />
+        />
       );
 
       // For each discovered override, create a new line, filling in the overridden parts
@@ -158,7 +158,7 @@ module.exports = React.createClass({
             coverage={{ranges: include, invert: false}}
             height={props.height}
             width={props.width}
-            />
+          />
         )
       });
 
