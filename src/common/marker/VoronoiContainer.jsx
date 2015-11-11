@@ -5,6 +5,7 @@ var d3 = require('d3');
 var VoronoiCircle = require('./VoronoiCircle');
 var VoronoiRect = require('./VoronoiRect');
 var VoronoiStar = require('./VoronoiStar');
+var VoronoiV = require('./VoronoiV');
 
 module.exports = React.createClass({
 
@@ -70,6 +71,27 @@ module.exports = React.createClass({
               markerOuterRadius={this.props.markerOuterRadius}
               markerInnerRadius={this.props.markerInnerRadius}
               markerFill={this.props.markerFill}
+              markerAnimationResize={this.props.markerAnimationResize}
+              markerAnimationShade={this.props.markerAnimationShade}
+              markerOnClick={this.props.markerOnClick}
+              chartType={this.props.chartType}
+              />
+          </g>
+        );
+        break;
+      case 'v':
+        return (
+          <g>
+            <VoronoiV
+              voronoiPath={this._drawPath(this.props.vnode)}
+              point={this.props.point}
+              cx={this.props.cx }
+              cy={this.props.cy}
+              hoverAnimation={this.props.hoverAnimation}
+              markerWidth={this.props.markerWidth}
+              markerHeight={this.props.markerHeight}
+              markerFill={this.props.markerFill}
+              markerUSD={this.props.markerUSD}
               markerAnimationResize={this.props.markerAnimationResize}
               markerAnimationShade={this.props.markerAnimationShade}
               markerOnClick={this.props.markerOnClick}

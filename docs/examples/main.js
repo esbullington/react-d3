@@ -137,10 +137,19 @@ var Demos = React.createClass({
       },
       {
         name: "series3",
-        values: [ { x: 80, y: 78 }, { x: 71, y: 58 }, { x: 78, y: 68 }, { x: 81, y: 47 },{ x: 72, y: 70 }, { x: 70, y: 88 }, { x: 81, y: 90 }, { x: 92, y: 80 }, { x: 81, y: 72 }, { x: 99, y: 95 }, { x: 67, y: 81 }, { x: 96, y: 78 }],
-        markerName: 'rect',
-        markerWidth: 8,
-        markerHeight: 8
+        values: [ { x: 80, y: 75 }, { x: 71, y: 58 }, { x: 78, y: 68 }, { x: 81, y: 47 },{ x: 72, y: 70 }, { x: 70, y: 88 }, { x: 81, y: 90 }, { x: 92, y: 80 }, { x: 81, y: 72 }, { x: 99, y: 95 }, { x: 67, y: 81 }, { x: 96, y: 78 }],
+        markerName: 'v',
+        markerWidth: 16,
+        markerHeight: 16
+      },
+      {
+        name: "series4",
+        values: [ { x: 80, y: 80 }, { x: 82, y: 78 }, { x: 60, y: 68 }, { x: 81, y: 66 },{ x: 90, y: 70 }, { x: 71, y: 88 }, { x: 82, y: 90 }, { x: 92, y: 81 }, { x: 80, y: 72 }, { x: 99, y: 94 }, { x: 67, y: 80 }, { x: 100, y: 78 }],
+        markerName: 'v',
+        markerRadius: 2,
+        markerWidth: 16,
+        markerHeight: 16,
+        markerUSD: true
       }
     ];
 
@@ -274,6 +283,10 @@ var Demos = React.createClass({
               width={500}
               height={400}
               title="Scatter Chart"
+              gridHorizontal={true}
+              gridVertical={true}
+              xAxisLabel='X'
+              yAxisLabel='Y'
             />
           </div>
           <div className="col-md-6">
@@ -292,11 +305,13 @@ var Demos = React.createClass({
   },
   ....
   {
-    name: "series3",
-    values: [ { x: 70, y: 82 }, ..., { x: 76, y: 82 } ],
-    markerName: 'rect',
-    markerWidth: 8,
-    markerHeight: 8
+    name: "series4",
+    values: [ { x: 80, y: 80 }, ..., { x: 100, y: 78 } ],
+    markerName: 'v',
+    markerRadius: 2,
+    markerWidth: 16,
+    markerHeight: 16,
+    markerUSD: true
   }
 ];`
               }
@@ -310,6 +325,10 @@ var Demos = React.createClass({
   width={500}
   height={400}
   title="Scatter Chart"
+  gridHorizontal={true}
+  gridVertical={true}
+  xAxisLabel='X'
+  yAxisLabel='Y'
 />`
               }
               </code>
