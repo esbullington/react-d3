@@ -61,7 +61,7 @@ module.exports = React.createClass({
 
     var props = this.props;
 
-    var {innerWidth, innerHeight} = this.getDimensions();
+    var {innerWidth, innerHeight, trans} = this.getDimensions();
 
     if (!Array.isArray(props.data)) {
       props.data = [props.data];
@@ -72,8 +72,6 @@ module.exports = React.createClass({
         xValues = flattenedData.xValues,
         yValues = flattenedData.yValues;
     var scales = utils.calculateScales(innerWidth, innerHeight, xValues, yValues);
-
-    var trans = `translate(${ props.yAxisOffset < 0 ? props.margins.left + Math.abs(props.yAxisOffset) : props.margins.left},${ props.margins.top })`;
 
     var dataSeries = props.data.map( (series, idx) => {
       return (

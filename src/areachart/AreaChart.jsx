@@ -38,7 +38,7 @@ module.exports = React.createClass({
 
     var interpolationType = props.interpolationType || (props.interpolate ? 'cardinal' : 'linear');
 
-    var {innerWidth, innerHeight} = this.getDimensions();
+    var {innerWidth, innerHeight, trans} = this.getDimensions();
 
     if (!Array.isArray(data)) {
       data = [data];
@@ -82,8 +82,6 @@ module.exports = React.createClass({
       .values((d)=> { return d.values; });
 
     var layers = stack(data);
-
-    var trans = `translate(${ props.margins.left },${ props.margins.top })`;
 
     var dataSeries = layers.map( (d, idx) => {
       return (

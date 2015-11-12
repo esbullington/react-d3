@@ -21,7 +21,7 @@ module.exports =  {
 
   getDimensions() {
     var props = this.props;
-    var {margins, viewBoxObject} = props;
+    var {margins, viewBoxObject, yAxisOffset} = props;
     var width;
     var height;
     
@@ -37,7 +37,8 @@ module.exports =  {
       width: width,
       height: height,
       innerWidth: width - margins.left - margins.right,
-      innerHeight: height - margins.top - margins.bottom
+      innerHeight: height - margins.top - margins.bottom,
+      trans: `translate(${ yAxisOffset < 0 ? margins.left + -yAxisOffset : margins.left},${ margins.top })`
     };
   }
 
