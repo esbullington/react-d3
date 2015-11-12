@@ -76,12 +76,14 @@ module.exports = React.createClass({
 
     var props = this.props;
 
+    var {height, width} = this.getOuterDimensions();
+
     var _data = this._stack()(props.data);
 
     var margins = props.margins;
 
-    var innerHeight = props.height - ( margins.top + margins.bottom );
-    var innerWidth = props.width - ( margins.left + margins.right );
+    var innerHeight = height - ( margins.top + margins.bottom );
+    var innerWidth = width - ( margins.left + margins.right );
 
     var xScale = d3.scale.ordinal()
       .domain(this._getLabels(_data[0]))
@@ -95,7 +97,7 @@ module.exports = React.createClass({
 
     return (
       <Chart
-        viewBox={props.viewBox}
+        viewBox={this.getViewBox()}
         legend={props.legend}
         data={props.data}
         margins={props.margins}
