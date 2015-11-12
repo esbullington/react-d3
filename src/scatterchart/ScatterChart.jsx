@@ -49,7 +49,7 @@ module.exports = React.createClass({
       return null;
     }
 
-    var {innerWidth, innerHeight} = this.getDimensions();
+    var {innerWidth, innerHeight, trans} = this.getDimensions();
 
     // Returns an object of flattened allValues, xValues, and yValues
     var flattenedData = utils.flattenData(data, props.xAccessor, props.yAccessor);
@@ -61,9 +61,6 @@ module.exports = React.createClass({
     var scales  = this._calculateScales(innerWidth, innerHeight, xValues, yValues);
     var xScale  = scales.xScale;
     var yScale  = scales.yScale;
-
-    var x = props.yAxisOffset < 0 ? (margins.left + Math.abs(props.yAxisOffset)) : margins.left;
-    var transform = `translate(${x}, ${margins.top})`;
 
     return (
       <Chart
@@ -79,7 +76,7 @@ module.exports = React.createClass({
       >
         <g
           className={props.className}
-          transform={transform}
+          transform={trans}
         >
           <XAxis
             data={data}
