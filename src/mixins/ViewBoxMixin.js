@@ -19,18 +19,26 @@ module.exports =  {
     } 
   },
 
-  getOuterDimensions() {
-    if (this.props.viewBoxObject) {
-      return {
-        width: this.props.viewBoxObject.width,
-        height: this.props.viewBoxObject.height
-      };
+  getDimensions() {
+    var props = this.props;
+    var {margins, viewBoxObject} = props;
+    var width;
+    var height;
+    
+    if (viewBoxObject) {
+      width = viewBoxObject.width,
+      height = viewBoxObject.height
     } else {
-      return {
-        width: this.props.width,
-        height: this.props.height
-      };
+      width = props.width,
+      height = props.height
     }
+
+    return {
+      width: width,
+      height: height,
+      innerWidth: width - margins.left - margins.right,
+      innerHeight: height - margins.top - margins.bottom
+    };
   }
 
 };

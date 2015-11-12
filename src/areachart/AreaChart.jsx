@@ -38,10 +38,7 @@ module.exports = React.createClass({
 
     var interpolationType = props.interpolationType || (props.interpolate ? 'cardinal' : 'linear');
 
-    // Calculate inner chart dimensions
-    var innerWidth, innerHeight;
-    innerWidth = this.getOuterDimensions().width - props.margins.left - props.margins.right;
-    innerHeight = this.getOuterDimensions().height - props.margins.top - props.margins.bottom;
+    var {innerWidth, innerHeight} = this.getDimensions();
 
     if (!Array.isArray(data)) {
       data = [data];

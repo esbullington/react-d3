@@ -49,9 +49,7 @@ module.exports = React.createClass({
       return null;
     }
 
-    // Calculate inner chart dimensions
-    var innerWidth  = this.getOuterDimensions().width - margins.left - margins.right;
-    var innerHeight = this.getOuterDimensions().height - margins.top - margins.bottom;
+    var {innerWidth, innerHeight} = this.getDimensions();
 
     // Returns an object of flattened allValues, xValues, and yValues
     var flattenedData = utils.flattenData(data, props.xAccessor, props.yAccessor);

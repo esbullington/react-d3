@@ -76,14 +76,11 @@ module.exports = React.createClass({
 
     var props = this.props;
 
-    var {height, width} = this.getOuterDimensions();
-
     var _data = this._stack()(props.data);
 
     var margins = props.margins;
 
-    var innerHeight = height - ( margins.top + margins.bottom );
-    var innerWidth = width - ( margins.left + margins.right );
+    var {innerHeight, innerWidth} = this.getDimensions();
 
     var xScale = d3.scale.ordinal()
       .domain(this._getLabels(_data[0]))
