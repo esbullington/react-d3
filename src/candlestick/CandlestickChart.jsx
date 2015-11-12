@@ -5,8 +5,11 @@ var d3 = require('d3');
 var utils = require('../utils');
 var DataSeries = require('./DataSeries');
 var { Chart, XAxis, YAxis } = require('../common');
+var { ViewBoxMixin } = require('../mixins');
 
 module.exports = React.createClass({
+
+  mixins: [ ViewBoxMixin ],
 
   displayName: 'CandleStickChart',
 
@@ -58,10 +61,12 @@ module.exports = React.createClass({
 
     var props = this.props;
 
+    var {height, width} = this.getOuterDimensions();
+
     // Calculate inner chart dimensions
     var innerWidth, innerHeight;
-    innerWidth = props.width - props.margins.left - props.margins.right;
-    innerHeight = props.height - props.margins.top - props.margins.bottom;
+    innerWidth = width - props.margins.left - props.margins.right;
+    innerHeight = height - props.margins.top - props.margins.bottom;
 
     if (!Array.isArray(props.data)) {
       props.data = [props.data];
@@ -95,7 +100,7 @@ module.exports = React.createClass({
 
     return (
       <Chart
-        viewBox={props.viewBox}
+        viewBox={this.getViewBox()}
         width={props.width}
         height={props.height}
         margins={props.margins}
