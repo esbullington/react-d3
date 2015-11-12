@@ -173,7 +173,6 @@ module.exports = React.createClass({
     var dx, cx, dy, cy, markerFill;
     var regions = voronoi(prepareValues(props.value, (v) => v.coord )).map(function(vnode, idx) {
       dx = vnode.point.x;
-      dx = vnode.point.x;
       if (dx < xScale.domain()[0] || dx > xScale.domain()[1]) return null;
       cx = props.xScale(dx);
       dy = vnode.point.y;
