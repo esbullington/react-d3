@@ -30,59 +30,36 @@ module.exports = React.createClass({
 
     var props = this.props;
 
-    if (props.label) {
-      switch (props.orient) {
-        case 'top':
-          return (
-            <text
-              strokeWidth={props.strokeWidth.toString()}
-              textAnchor={props.textAnchor}
-              transform={props.verticalTransform}
-              x={props.width / 2}
-              y={props.offset}
-            >
-              {props.label}
-            </text>
-          );
-        case 'bottom':
-          return (
-            <text
-              strokeWidth={props.strokeWidth.toString()}
-              textAnchor={props.textAnchor}
-              transform={props.verticalTransform}
-              x={props.width / 2}
-              y={props.offset}
-            >
-              {props.label}
-            </text>
-          );
-        case 'left':
-          return (
-            <text
-              strokeWidth={props.strokeWidth.toString()}
-              textAnchor={props.textAnchor}
-              transform={props.horizontalTransform}
-              y={-props.offset}
-              x={-props.height / 2}
-            >
-              {props.label}
-            </text>
-          );
-        case 'right':
-          return (
-            <text
-              strokeWidth={props.strokeWidth.toString()}
-              textAnchor={props.textAnchor}
-              transform={props.horizontalTransform}
-              y={props.offset}
-              x={-props.height / 2}
-            >
-              {props.label}
-            </text>
-          );
+    if (!props.label) {
+      return <text/>;
+    }
+
+    var transform, x, y;
+    if (props.orient === 'top' || props.orient === 'bottom') {
+      transform = props.verticalTransform;
+      x = props.width / 2;
+      y = props.offset;
+    } else {  // left, right
+      transform = props.horizontalTransform;
+      x = -props.height / 2; 
+      if (props.orient === 'left') {
+        y = -props.offset;
+      } else {
+        y = props.offset;
       }
     }
-    return <text/>;
+
+    return (
+      <text
+        strokeWidth={props.strokeWidth.toString()}
+        textAnchor={props.textAnchor}
+        transform={transform}
+        y={y}
+        x={x}
+      >
+        {props.label}
+      </text>
+    );
   }
 
 });
