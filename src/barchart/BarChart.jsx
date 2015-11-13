@@ -80,8 +80,7 @@ module.exports = React.createClass({
 
     var margins = props.margins;
 
-    var innerHeight = props.height - ( margins.top + margins.bottom );
-    var innerWidth = props.width - ( margins.left + margins.right );
+    var {innerHeight, innerWidth, trans} = this.getDimensions();
 
     var xScale = d3.scale.ordinal()
       .domain(this._getLabels(_data[0]))
@@ -91,11 +90,9 @@ module.exports = React.createClass({
       .range([innerHeight, 0])
       .domain([0, this._getStackedValuesMaxY(_data)]);
 
-    var trans = `translate(${ margins.left },${ margins.top })`;
-
     return (
       <Chart
-        viewBox={props.viewBox}
+        viewBox={this.getViewBox()}
         legend={props.legend}
         data={props.data}
         margins={props.margins}
