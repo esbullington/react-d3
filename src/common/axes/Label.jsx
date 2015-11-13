@@ -9,6 +9,7 @@ module.exports = React.createClass({
 
   propTypes: {
     height:              React.PropTypes.number,
+    horizontalChart:     React.PropTypes.bool,
     horizontalTransform: React.PropTypes.string,
     label:               React.PropTypes.string.isRequired,
     width:               React.PropTypes.number,
@@ -39,6 +40,10 @@ module.exports = React.createClass({
       transform = props.verticalTransform;
       x = props.width / 2;
       y = props.offset;
+
+      if (props.horizontalChart) {
+        transform = `rotate(180 ${x} ${y}) ${transform}`;
+      }
     } else {  // left, right
       transform = props.horizontalTransform;
       x = -props.height / 2; 
@@ -48,6 +53,7 @@ module.exports = React.createClass({
         y = props.offset;
       }
     }
+
 
     return (
       <text

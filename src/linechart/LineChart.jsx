@@ -5,11 +5,11 @@ var d3 = require('d3');
 var { Chart, XAxis, YAxis } = require('../common');
 var DataSeries = require('./DataSeries');
 var utils = require('../utils');
-var { CartesianChartPropsMixin, ViewBoxMixin } = require('../mixins');
+var { CartesianChartPropsMixin, DefaultAccessorsMixin, ViewBoxMixin } = require('../mixins');
 
 module.exports = React.createClass({
 
-  mixins: [ CartesianChartPropsMixin, ViewBoxMixin ],
+  mixins: [ CartesianChartPropsMixin, DefaultAccessorsMixin, ViewBoxMixin ],
 
   displayName: 'LineChart',
 
@@ -40,7 +40,8 @@ module.exports = React.createClass({
       return null;
     }
 
-    var {innerWidth, innerHeight, trans} = this.getDimensions();
+    var {innerWidth, innerHeight, trans, svgMargins} = this.getDimensions();
+    var yOrient = this.getYOrient();
 
     if (!Array.isArray(props.data)) {
       props.data = [props.data];
@@ -78,11 +79,12 @@ module.exports = React.createClass({
             xAxisLabelOffset={props.xAxisLabelOffset}
             tickFormatting={props.xAxisFormatter}
             xOrient={props.xOrient}
-            yOrient={props.yOrient}
+            yOrient={yOrient}
             data={props.data}
-            margins={props.margins}
+            margins={svgMargins}
             width={innerWidth}
             height={innerHeight}
+            horizontalChart={props.horizontal}
             stroke={props.axesColor}
             gridVertical={props.gridVertical}
             gridVerticalStroke={props.gridVerticalStroke}
@@ -100,10 +102,11 @@ module.exports = React.createClass({
             yAxisLabelOffset={props.yAxisLabelOffset}
             tickFormatting={props.yAxisFormatter}
             xOrient={props.xOrient}
-            yOrient={props.yOrient}
-            margins={props.margins}
+            yOrient={yOrient}
+            margins={svgMargins}
             width={innerWidth}
             height={innerHeight}
+            horizontalChart={props.horizontal}
             stroke={props.axesColor}
             gridHorizontal={props.gridHorizontal}
             gridHorizontalStroke={props.gridHorizontalStroke}

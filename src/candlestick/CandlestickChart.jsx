@@ -5,11 +5,11 @@ var d3 = require('d3');
 var utils = require('../utils');
 var DataSeries = require('./DataSeries');
 var { Chart, XAxis, YAxis } = require('../common');
-var { ViewBoxMixin } = require('../mixins');
+var { ViewBoxMixin, CartesianChartPropsMixin } = require('../mixins');
 
 module.exports = React.createClass({
 
-  mixins: [ ViewBoxMixin ],
+  mixins: [ CartesianChartPropsMixin, ViewBoxMixin ],
 
   displayName: 'CandleStickChart',
 
@@ -22,18 +22,13 @@ module.exports = React.createClass({
     fillUpAccessor:    React.PropTypes.func,
     fillDown:          React.PropTypes.func,
     fillDownAccessor:  React.PropTypes.func,
-    height:            React.PropTypes.number,
     hoverAnimation:    React.PropTypes.bool,
-    title:             React.PropTypes.string,
-    xAccessor:         React.PropTypes.func,
     xAxisFormatter:    React.PropTypes.func,
     xAxisTickInterval: React.PropTypes.object,
     xAxisTickValues:   React.PropTypes.array,
-    yAccessor:         React.PropTypes.func,
     yAxisFormatter:    React.PropTypes.func,
     yAxisTickCount:    React.PropTypes.number,
     yAxisTickValues:   React.PropTypes.array,
-    width:             React.PropTypes.number,
   },
 
   getDefaultProps() {
@@ -46,14 +41,10 @@ module.exports = React.createClass({
       fillUpAccessor:   (d, idx) => idx,
       fillDown:         d3.scale.category20c(),
       fillDownAccessor: (d, idx) => idx,
-      height:           200,
       hoverAnimation:   true,
       margins:          {top: 10, right: 20, bottom: 30, left: 45},
-      legendOffset:     120,
-      title:            '',
       xAccessor:        (d) => d.x,
       yAccessor:        (d) => ({ open: d.open, high: d.high, low: d.low, close: d.close }),
-      width:            400,
     };
   },
 
@@ -61,7 +52,8 @@ module.exports = React.createClass({
 
     var props = this.props;
 
-    var {innerWidth, innerHeight, trans} = this.getDimensions();
+    var {innerWidth, innerHeight, trans, svgMargins} = this.getDimensions();
+    var yOrient = this.getYOrient();
 
     if (!Array.isArray(props.data)) {
       props.data = [props.data];
@@ -110,10 +102,11 @@ module.exports = React.createClass({
             xAxisLabel={props.xAxisLabel}
             xAxisLabelOffset={props.xAxisLabelOffset}
             xOrient={props.xOrient}
-            yOrient={props.yOrient}
-            margins={props.margins}
+            yOrient={yOrient}
+            margins={svgMargins}
             width={innerWidth}
             height={innerHeight}
+            horizontalChart={props.horizontal}
             gridVertical={props.gridVertical}
             gridVerticalStroke={props.gridVerticalStroke}
             gridVerticalStrokeWidth={props.gridVerticalStrokeWidth}
@@ -129,10 +122,11 @@ module.exports = React.createClass({
             yAxisLabel={props.yAxisLabel}
             yAxisLabelOffset={props.yAxisLabelOffset}
             xOrient={props.xOrient}
-            yOrient={props.yOrient}
-            margins={props.margins}
+            yOrient={yOrient}
+            margins={svgMargins}
             width={innerWidth}
             height={props.height}
+            horizontalChart={props.horizontal}
             gridHorizontal={props.gridHorizontal}
             gridHorizontalStroke={props.gridHorizontalStroke}
             gridHorizontalStrokeWidth={props.gridHorizontalStrokeWidth}
