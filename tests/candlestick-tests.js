@@ -55,7 +55,7 @@ describe('CandlestickChart', function() {
     var candlestickGroup = TestUtils.findRenderedDOMComponentWithClass(
       candlestickChart, 'rd3-candlestick');
     expect(candlestickGroup).to.exist;
-    expect(candlestickGroup.tagName).to.equal('G');
+    expect(candlestickGroup.tagName).to.equal('g');
   });
 
   it('renders same amount of wicks and candles with data', function() {
@@ -97,7 +97,7 @@ describe('CandlestickChart', function() {
     var candlestickGroup = TestUtils.findRenderedDOMComponentWithClass(
       candlestickChartWithoutAnimation, CHART_WO_ANIMATION_CLASS_NAME);
     expect(candlestickGroup).to.exist;
-    expect(candlestickGroup.tagName).to.equal('G');
+    expect(candlestickGroup.tagName).to.equal('g');
   });
 
   it('candle does not animate since hoverAnimation is set to false', function() {

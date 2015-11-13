@@ -43,7 +43,7 @@ describe('ScatterChart', function() {
     var scatterchartGroup = TestUtils.findRenderedDOMComponentWithClass(
       scatterchart, CHART_CLASS_NAME);
     expect(scatterchartGroup).to.exist;
-    expect(scatterchartGroup.tagName).to.equal('G');
+    expect(scatterchartGroup.tagName).to.equal('g');
 
   });
 
