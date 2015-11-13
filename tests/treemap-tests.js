@@ -6,7 +6,7 @@ describe('Treemap', function() {
   it('renders treemap', function() {
     var React = require('react/addons');
     var Treemap = require('../src/treemap').Treemap;
-    var generate = require('./utils/datagen').generateArrayOfNumbers;
+    var generate = require('./utils/datagen').generateArrayOfNameObjects;
     var TestUtils = React.addons.TestUtils;
     var points = 5;
 
@@ -24,12 +24,12 @@ describe('Treemap', function() {
     
     // Verify that it has the same number of nodes as the array's length
     var cells = TestUtils.scryRenderedDOMComponentsWithClass(treemap, 'rd3-treemap-cell');
+    // Magic number '1' is the parent node
+    expect(cells.length).to.equal(data.length + 1);
 
     // Note that the first node generated will always be the parent node 
     expect(Number(cells[0].getDOMNode().getAttribute('width'))).to.equal(width);
 
-    // Magic number '1' is the parent node
-    expect(cells.length).to.equal(data.length + 1);
 
     var labels = TestUtils.scryRenderedDOMComponentsWithClass(
       treemap, 'rd3-treemap-cell-text');
