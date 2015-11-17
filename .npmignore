@@ -1,6 +1,5 @@
 test
 examples
-dist
 .gitignore
 .module-cache
 build/cjs/.module-cache
