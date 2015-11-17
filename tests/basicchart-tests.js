@@ -4,10 +4,10 @@ var expect = require('chai').expect;
 
 describe('BasicChart', function() {
   it('renders and tests BasicChart component', function() {
-    var React = require('react/addons');
+    var React = require('react');
+    var TestUtils = require('react-addons-test-utils');
     var BasicChart = require('../src/common/charts/BasicChart');
     var generate = require('./utils/datagen').generateArrayOfPoints;
-    var TestUtils = React.addons.TestUtils;
 
     var chart = TestUtils.renderIntoDocument(
       <BasicChart /> 

@@ -4,10 +4,10 @@ var expect = require('chai').expect;
 
 describe('Voronoi', function() {
   it('renders and tests voronoi component', function() {
-    var React = require('react/addons');
+    var React = require('react');
+    var TestUtils = require('react-addons-test-utils');
     var Voronoi = require('../src/common/Voronoi');
     var generate = require('./utils/datagen').generateArrayOfPoints;
-    var TestUtils = React.addons.TestUtils;
     var utils = require('../src/utils');
 
     var points = 5,

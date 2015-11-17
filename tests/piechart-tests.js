@@ -1,10 +1,10 @@
 'use strict';
 
 var expect = require('chai').expect;  
-var React = require('react/addons');
+var React = require('react');
+var TestUtils = require('react-addons-test-utils');
 var PieChart = require('../src/piechart').PieChart;
 var generatePartsOfWhole = require('./utils/datagen').generatePartsOfWhole;
-var TestUtils = React.addons.TestUtils;
 
 describe('PieChart', function() {
 
@@ -21,7 +21,7 @@ describe('PieChart', function() {
     var pie = TestUtils.findRenderedDOMComponentWithClass(
       piechart, 'rd3-piechart');
     expect(pie).to.exist;
-    expect(pie.tagName).to.equal('G');
+    expect(pie.tagName).to.equal('g');
 
     var pieGroup = TestUtils.findRenderedDOMComponentWithClass(piechart, 'rd3-piechart-pie');
     expect(pieGroup).to.exist;
