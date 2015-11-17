@@ -4,10 +4,10 @@ var expect = require('chai').expect;
 
 describe('LegendChart', function() {
   it('renders and tests LegendChart component', function() {
-    var React = require('react/addons');
+    var React = require('react');
+    var TestUtils = require('react-addons-test-utils');
     var LegendChart = require('../src/common/charts/LegendChart');
     var generate = require('./utils/datagen').generateArrayOfPoints;
-    var TestUtils = React.addons.TestUtils;
 
     var legend = TestUtils.renderIntoDocument(
       <LegendChart /> 

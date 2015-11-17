@@ -4,10 +4,10 @@ var expect = require('chai').expect;
 
 describe('LineChart', function() {
   it('renders multi-series linechart with array of objects data', function() {
-    var React = require('react/addons');
+    var React = require('react');
+    var TestUtils = require('react-addons-test-utils');
     var LineChart = require('../src/linechart').LineChart;
     var generate = require('./utils/datagen').generateArrayOfPoints;
-    var TestUtils = React.addons.TestUtils;
     var length = 5;
 
     // Render a linechart using array data

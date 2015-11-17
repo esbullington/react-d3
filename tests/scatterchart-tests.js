@@ -1,17 +1,17 @@
 'use strict';
 
 var expect = require('chai').expect;
-var React = require('react/addons');
+var React = require('react');
+var TestUtils = require('react-addons-test-utils');
 var { ScatterChart } = require('../src/scatterchart');
 var { generateArrayOfPoints: generate } = require('./utils/datagen');
 
-var TestUtils = React.addons.TestUtils;
 var points = 5;
 var circleRadius = 5;
 var data, scatterchart;
 
 var CHART_CLASS_NAME  = 'rd3-scatterchart';
-var CIRCLE_CLASS_NAME = 'rd3-scatterchart-voronoi-circle';
+var CIRCLE_CLASS_NAME = 'rd3-scatterchart-circle';
 
 describe('ScatterChart', function() {
 
@@ -20,16 +20,17 @@ describe('ScatterChart', function() {
     data = [
       {
         name: "series1",
-        values: generate(points)
+        values: generate(points),
+        markerRadius: circleRadius
       },
       {
         name: "series2",
-        values: generate(points)
+        values: generate(points),
+        markerRadius: circleRadius
       }
     ];
     scatterchart = TestUtils.renderIntoDocument(
       <ScatterChart
-        circleRadius={circleRadius}
         data={data}
         width={400}
         height={200}
@@ -43,7 +44,7 @@ describe('ScatterChart', function() {
     var scatterchartGroup = TestUtils.findRenderedDOMComponentWithClass(
       scatterchart, CHART_CLASS_NAME);
     expect(scatterchartGroup).to.exist;
-    expect(scatterchartGroup.tagName).to.equal('G');
+    expect(scatterchartGroup.tagName).to.equal('g');
 
   });
 
@@ -67,10 +68,10 @@ describe('ScatterChart', function() {
         lastCircle = circles[circles.length - 1];
 
     // we know that first and second circle are in same series
-    expect(firstCircle.props.fill).to.equal(secondCircle.props.fill);
+    expect(firstCircle.getAttribute('fill')).to.equal(secondCircle.getAttribute('fill'));
 
     // we know that first and last circle are not in same series
-    expect(firstCircle.props.fill).to.not.equal(lastCircle.props.fill);
+    expect(firstCircle.getAttribute('fill')).to.not.equal(lastCircle.getAttribute('fill'));
 
   });
 
@@ -80,23 +81,23 @@ describe('ScatterChart', function() {
         scatterchart, CIRCLE_CLASS_NAME)[0];
 
       // circle properties before hovered
-      var circleColor  = circle.props.fill;
+      var circleColor  = circle.getAttribute('fill');
 
       // Before animation
-      expect(circle.props.r).to.equal(circleRadius);
-      expect(circle.props.fill).to.equal(circleColor);
+      expect(circle.getAttribute('r')).to.equal(circleRadius);
+      expect(circle.getAttribute('fill')).to.equal(circleColor);
 
       // Animation starts with hover
       TestUtils.Simulate.mouseOver(circle);
-      expect(circle.props.r).to.be.above(circleRadius);
-      expect(circle.props.fill).to.not.equal(circleColor);
+      expect(circle.getAttribute('r')).to.be.above(circleRadius);
+      expect(circle.getAttribute('fill')).to.not.equal(circleColor);
 
       // TestUtils.Simulate.mouseOut(circle) is not working here
       // https://github.com/facebook/react/issues/1297
       // Animation ends with end of hover
       TestUtils.SimulateNative.mouseOut(circle);
-      expect(circle.props.r).to.equal(circleRadius);
-      expect(circle.props.fill).to.equal(circleColor);
+      expect(circle.getAttribute('r')).to.equal(circleRadius);
+      expect(circle.getAttribute('fill')).to.equal(circleColor);
 
   });
 

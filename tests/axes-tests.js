@@ -25,10 +25,10 @@ function generateData(points) {
 
 describe('Axes', function() {
   it('renders and tests axes component', function() {
-    var React = require('react/addons');
+    var React = require('react');
+    var TestUtils = require('react-addons-test-utils');
     var YAxis = require('../src/common/axes').YAxis;
     var XAxis = require('../src/common/axes').XAxis;
-    var TestUtils = React.addons.TestUtils;
     var utils = require('../src/utils');
 
     var points = 5,
@@ -57,10 +57,10 @@ describe('Axes', function() {
   });
 
   it('renders and tests axes component with tickValues', function() {
-    var React = require('react/addons');
+    var React = require('react');
+    var TestUtils = require('react-addons-test-utils');
     var YAxis = require('../src/common/axes').YAxis;
     var XAxis = require('../src/common/axes').XAxis;
-    var TestUtils = React.addons.TestUtils;
     var utils = require('../src/utils');
 
     var points = 5,
