@@ -10,3 +10,4 @@ exports.VoronoiCircle = require('./VoronoiCircle');
 exports.VoronoiRect = require('./VoronoiRect');
 exports.VoronoiStar = require('./VoronoiStar');
 exports.VoronoiV = require('./VoronoiV');
+exports.VoronoiX = require('./VoronoiX');
