@@ -74,7 +74,7 @@ var Demos = React.createClass({
         values: [ { x: 0, y: 20 }, { x: 1, y: 30, override: ['redline'] }, { x: 2, y: 10 }, { x: 3, y: 5 }, { x: 4, y: 8 }, { x: 5, y: 15 }, { x: 6, y: 10 } ],
         strokeWidth: 3,
         strokeDashArray: "5,5",
-        markerName: ['star', 'circle', 'rect']
+        markerName: ['star', 'circle', 'x']
       },
       {
         name: 'series2',
