@@ -55,8 +55,8 @@ module.exports = React.createClass({
     var flattenedData = utils.flattenData(props.data, props.xAccessor, props.yAccessor);
 
     var allValues = flattenedData.allValues,
-        xValues = flattenedData.xValues,
-        yValues = flattenedData.yValues;
+        xValues = props.xAxisTickValues || flattenedData.xValues,
+        yValues = props.yAxisTickValues || flattenedData.yValues;
     var scales = this._calculateScales(innerWidth, innerHeight, xValues, yValues, props.xAxisRange, props.yAxisRange);
     var trans = "translate(" + (props.yAxisOffset < 0 ? props.margins.left + Math.abs(props.yAxisOffset) : props.margins.left) + "," + props.margins.top + ")";
     var xAxis = null;

@@ -53,8 +53,8 @@ module.exports = React.createClass({
     var flattenedData = utils.flattenData(data, props.xAccessor, props.yAccessor);
 
     var allValues = flattenedData.allValues,
-        xValues   = flattenedData.xValues,
-        yValues   = flattenedData.yValues;
+        xValues = props.xAxisTickValues || flattenedData.xValues,
+        yValues = props.yAxisTickValues || flattenedData.yValues;
 
     var scales  = this._calculateScales(innerWidth, innerHeight, xValues, yValues, props.xAxisRange, props.yAxisRange);
     var xScale  = scales.xScale;
