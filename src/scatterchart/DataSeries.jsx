@@ -77,10 +77,9 @@ module.exports = React.createClass({
         markerInnerRadius: series.markerInnerRadius,  // same for one series
         markerUSD: series.markerUSD,  // same for one series
         markerAnimationResize: series.markerAnimationResize,  // same for one series
-        markerAnimationShade: series.markerAnimationShade     // same for one series
-        // markerFill:
-        // - would be good to have that here too (is below now)
-        // - same for one series
+        markerAnimationShade: series.markerAnimationShade,     // same for one series
+        markerFill: series.markerFill                 // might be the same for one series, if not defined, it'll be set
+                                                      // later
       });
     });
       
@@ -91,7 +90,8 @@ module.exports = React.createClass({
       var dy = vnode.point.y;
       var cy = yScale(dy);
       if (dy < yScale.domain()[0] || dy > yScale.domain()[1]) return null;
-      var markerFill = props.colors(props.colorAccessor(vnode, vnode.point.original.seriesIndex));
+      var markerFill = marker[vnode.point.original.seriesIndex].markerFill ||
+          props.colors(props.colorAccessor(vnode, vnode.point.original.seriesIndex));
 
       return (
         <VoronoiContainer

@@ -99,10 +99,9 @@ module.exports = React.createClass({
         markerOuterRadius: series.markerOuterRadius,  // same for one series
         markerInnerRadius: series.markerInnerRadius,  // same for one series
         markerAnimationResize: series.markerAnimationResize,  // same for one series
-        markerAnimationShade: series.markerAnimationShade     // same for one series
-        // markerFill:
-        // - would be good to have that here too (is below now)
-        // - same for one series
+        markerAnimationShade: series.markerAnimationShade,    // same for one series
+        markerFill: series.markerFill                 // might be the same for one series, if not defined, it'll be set
+                                                      // later
       });
 
       // Check for overridden line segments
@@ -178,7 +177,8 @@ module.exports = React.createClass({
       dy = vnode.point.y;
       if (dy < yScale.domain()[0] || dy > yScale.domain()[1]) return null;  
       cy = props.yScale(dy);
-      markerFill = props.colors(props.colorAccessor(vnode, vnode.point.original.seriesIndex));
+      markerFill = marker[vnode.point.original.seriesIndex].markerFill ||
+          props.colors(props.colorAccessor(vnode, vnode.point.original.seriesIndex));
 
       return (
         <VoronoiContainer
