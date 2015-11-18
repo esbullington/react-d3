@@ -75,7 +75,7 @@ module.exports = React.createClass({
         markerRadius: series.markerRadius,            // same for one series
         markerOuterRadius: series.markerOuterRadius,  // same for one series
         markerInnerRadius: series.markerInnerRadius,  // same for one series
-        markerUSD: series.markerUSD,  // same for one series
+        markerUSD: series.markerUSD,                  // same for one series
         markerAnimationResize: series.markerAnimationResize,  // same for one series
         markerAnimationShade: series.markerAnimationShade,     // same for one series
         markerFill: series.markerFill                 // might be the same for one series, if not defined, it'll be set
