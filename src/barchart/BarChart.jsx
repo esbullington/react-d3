@@ -6,11 +6,11 @@ var DataSeries = require('./DataSeries');
 var utils = require('../utils');
 
 var { Chart, XAxis, YAxis } = require('../common');
-var { CartesianChartPropsMixin, ViewBoxMixin } = require('../mixins');
+var { CartesianChartPropsMixin, DefaultAccessorsMixin, ViewBoxMixin } = require('../mixins');
 
 module.exports = React.createClass({
 
-  mixins: [ CartesianChartPropsMixin, ViewBoxMixin ],
+  mixins: [ CartesianChartPropsMixin, DefaultAccessorsMixin, ViewBoxMixin ],
 
   displayName: 'BarChart',
 
@@ -75,13 +75,11 @@ module.exports = React.createClass({
   render() {
 
     var props = this.props;
+    var yOrient = this.getYOrient();
 
     var _data = this._stack()(props.data);
 
-    var margins = props.margins;
-
-    var innerHeight = props.height - ( margins.top + margins.bottom );
-    var innerWidth = props.width - ( margins.left + margins.right );
+    var {innerHeight, innerWidth, trans, svgMargins} = this.getDimensions();
 
     var xScale = d3.scale.ordinal()
       .domain(this._getLabels(_data[0]))
@@ -91,11 +89,9 @@ module.exports = React.createClass({
       .range([innerHeight, 0])
       .domain([0, this._getStackedValuesMaxY(_data)]);
 
-    var trans = `translate(${ margins.left },${ margins.top })`;
-
     return (
       <Chart
-        viewBox={props.viewBox}
+        viewBox={this.getViewBox()}
         legend={props.legend}
         data={props.data}
         margins={props.margins}
@@ -112,13 +108,14 @@ module.exports = React.createClass({
             yAxisLabel={props.yAxisLabel}
             yAxisLabelOffset={props.yAxisLabelOffset}
             yScale={yScale}
-            margins={margins}
+            margins={svgMargins}
             yAxisTickCount={props.yAxisTickCount}
             tickFormatting={props.yAxisFormatter}
             width={innerWidth}
             height={innerHeight}
+            horizontalChart={props.horizontal}
             xOrient={props.xOrient}
-            yOrient={props.yOrient}
+            yOrient={yOrient}
             gridHorizontal={props.gridHorizontal}
             gridHorizontalStroke={props.gridHorizontalStroke}
             gridHorizontalStrokeWidth={props.gridHorizontalStrokeWidth}
@@ -130,12 +127,13 @@ module.exports = React.createClass({
             xAxisLabel={props.xAxisLabel}
             xAxisLabelOffset={props.xAxisLabelOffset} 
             xScale={xScale}
-            margins={margins}
+            margins={svgMargins}
             tickFormatting={props.xAxisFormatter}
             width={innerWidth}
             height={innerHeight}
+            horizontalChart={props.horizontal}
             xOrient={props.xOrient}
-            yOrient={props.yOrient}
+            yOrient={yOrient}
             gridVertical={props.gridVertical}
             gridVerticalStroke={props.gridVerticalStroke}
             gridVerticalStrokeWidth={props.gridVerticalStrokeWidth}
@@ -144,7 +142,7 @@ module.exports = React.createClass({
           <DataSeries
             yScale={yScale}
             xScale={xScale}
-            margins={margins}
+            margins={svgMargins}
             _data={_data}
             width={innerWidth}
             height={innerHeight}
