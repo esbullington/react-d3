@@ -69,7 +69,22 @@ var Demos = React.createClass({
   render: function() {
 
     var lineData = [
-      { 
+      /*{
+        name: 'series1',
+        values: [
+            { x: new Date('2015-01-01 23:00'), y: 20 },
+            { x: new Date('2015-01-02 00:00'), y: 30, override: ['redline'] },
+            { x: new Date('2015-01-02 01:00'), y: 10 },
+            { x: new Date('2015-01-02 02:00'), y: 5 },
+            { x: new Date('2015-01-02 03:00'), y: 8 },
+            { x: new Date('2015-01-02 04:00'), y: 15 },
+            { x: new Date('2015-01-02 05:00'), y: 10 }
+        ],
+        strokeWidth: 3,
+        strokeDashArray: "5,5",
+        markerName: ['star', 'circle', 'x']
+      },*/
+      {
         name: 'series1',
         values: [ { x: 0, y: 20 }, { x: 1, y: 30, override: ['redline'] }, { x: 2, y: 10 }, { x: 3, y: 5 }, { x: 4, y: 8 }, { x: 5, y: 15 }, { x: 6, y: 10 } ],
         strokeWidth: 3,
@@ -185,6 +200,14 @@ var Demos = React.createClass({
               }}
               xAxisRange={{ maxExtentLeft: 0.5, maxExtentRight: 5.5 }}
               yAxisRange={{ maxExtentBottom: -10.0, minExtentBottom: -5.0, minExtentTop: 20.0, maxExtentTop: 50.0 }}
+              /*xTickTimeFormat={[
+                ["%H:%M", function(d) { return d.getMinutes(); }],
+                ["%H:%M", function(d) { return d.getHours(); }],
+                ["%d.%m.%y", function(d) { return d.getDay() && d.getDate() != 1; }],
+                ["%d.%m.%y", function(d) { return d.getDate() != 1; }],
+                ["%d.%m.%y", function(d) { return d.getMonth(); }],
+                ["%d.%m.%y", function() { return true; }]
+              ]}*/
             />
           {this.renderSelectedValue()}
           </div>
