@@ -85,6 +85,8 @@ module.exports = React.createClass({
       tickFormat = props.tickFormatting;
     } else if (props.tickTimeFormat) {
       tickFormat = d3.locale(props.localizationConfig).timeFormat.multi(props.tickTimeFormat);
+    } else if (props.tickTimeFormat) {
+      tickFormat = d3.locale(props.localizationConfig).timeFormat.multi(props.tickTimeFormat);
     } else if (scale.tickFormat) {
       tickFormat = scale.tickFormat.apply(scale, props.tickArguments);
     } else {
