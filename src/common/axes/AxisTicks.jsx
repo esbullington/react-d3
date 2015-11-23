@@ -19,6 +19,8 @@ module.exports = React.createClass({
     outerTickSize: React.PropTypes.number,
     tickPadding: React.PropTypes.number,
     tickFormat: React.PropTypes.func,
+    tickTimeFormat: React.PropTypes.array,        // https://github.com/mbostock/d3/wiki/Time-Formatting#format_multi
+    localizationConfig: React.PropTypes.object,   // https://github.com/mbostock/d3/wiki/Localization#locale
     tickStroke: React.PropTypes.string,
     gridHorizontal: React.PropTypes.bool,
     gridVertical: React.PropTypes.bool,
@@ -82,7 +84,11 @@ module.exports = React.createClass({
     if (props.tickFormatting) {
         tickFormat = props.tickFormatting;
     } else if (scale.tickFormat) {
+      if (props.tickTimeFormat) {
+        tickFormat = d3.locale(props.localizationConfig).timeFormat.multi(props.tickTimeFormat);
+      } else {
         tickFormat = scale.tickFormat.apply(scale, props.tickArguments);
+      }
     } else {
         tickFormat = (d)=> d;
     }

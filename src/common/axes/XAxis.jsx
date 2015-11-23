@@ -22,6 +22,8 @@ module.exports = React.createClass({
     xAxisTickValues: React.PropTypes.array,
     xAxisOffset:     React.PropTypes.number,
     xScale:          React.PropTypes.func.isRequired,
+    tickTimeFormat:  React.PropTypes.array,
+    localizationConfig: React.PropTypes.object,
     xOrient:         React.PropTypes.oneOf(['top', 'bottom']),
     yOrient:         React.PropTypes.oneOf(['left', 'right']),
     gridVertical:  React.PropTypes.bool,
@@ -67,6 +69,8 @@ module.exports = React.createClass({
         <AxisTicks
           tickValues={props.xAxisTickValues}
           tickFormatting={props.tickFormatting}
+          localizationConfig={props.localizationConfig}
+          tickTimeFormat={props.xTickTimeFormat}
           tickArguments={tickArguments}
           tickStroke={props.tickStroke}
           tickTextStroke={props.tickTextStroke}
