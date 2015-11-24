@@ -116,7 +116,7 @@ module.exports = React.createClass({
         textAnchor = "middle";
         y2 = props.innerTickSize * sign;
         y1 = tickSpacing * sign;
-        dy =  sign < 0 ? "0em" : ".71em";
+        dy =  sign < 0 ? 0 : 0.71;
         x2grid = 0;
         y2grid = -props.height;
         break;
@@ -125,7 +125,7 @@ module.exports = React.createClass({
         textAnchor = "middle";
         y2 = props.innerTickSize * sign;
         y1 = tickSpacing * sign;
-        dy =  sign < 0 ? "0em" : ".71em";
+        dy =  sign < 0 ? 0 : .71;
         x2grid = 0;
         y2grid = -props.height;
         break;
@@ -134,7 +134,7 @@ module.exports = React.createClass({
         textAnchor = "end";
         x2 = props.innerTickSize * -sign;
         x1 = tickSpacing * -sign;
-        dy = ".32em";
+        dy = .32;
         x2grid = props.width;
         y2grid = 0;
         break;
@@ -143,7 +143,7 @@ module.exports = React.createClass({
         textAnchor = "start";
         x2 = props.innerTickSize * -sign;
         x1 = tickSpacing * -sign;
-        dy = ".32em";
+        dy = .32;
         x2grid = -props.width;
         y2grid = 0;
         break;
@@ -175,32 +175,35 @@ module.exports = React.createClass({
             shapeRendering: 'crispEdges',
             stroke: gridStroke,
             strokeDasharray: gridStrokeDashArray
-            }} x2={x2grid} y2={y2grid}></line>
+          }} x2={x2grid} y2={y2grid}></line>
         )
       }
     }
 
     return (
-    <g>
-      {ticks.map( (tick, idx) => {
-        return (
-          <g key={idx} className="tick" transform={tr(tick)} >
-            {gridLine(adjustedScale(tick))}
-            <line style={{shapeRendering:'crispEdges',opacity:'1',stroke:props.tickStroke}} x2={x2} y2={y2} >
-            </line>
-            <text
-              strokeWidth="0.01"
-              dy={dy} x={x1} y={y1}
-              style={{stroke:props.tickTextStroke, fill:props.tickTextStroke}}
-              textAnchor={textAnchor}
-            >
-              {tickFormat(tick)}
-            </text>
-          </g>
-        );
+      <g>
+        {ticks.map( (tick, idx) => {
+          let tickTexts = tickFormat(tick).split('\\n');
+          return (
+            <g key={idx} className="tick" transform={tr(tick)} >
+              {gridLine(adjustedScale(tick))}
+              <line style={{shapeRendering:'crispEdges',opacity:'1',stroke:props.tickStroke}} x2={x2} y2={y2} >
+              </line>
+              {tickTexts.map((line, idx) =>{
+                return <text
+                  strokeWidth="0.01"
+                  dy={(dy + (idx) * 0.9) + 'em'} x={x1} y={y1}
+                  style={{stroke:props.tickTextStroke, fill:props.tickTextStroke}}
+                  textAnchor={textAnchor}
+                >
+                  {line}
+                </text>;
+              })}
+            </g>
+          );
         })
-      }
-    </g>
+        }
+      </g>
     );
   }
 
