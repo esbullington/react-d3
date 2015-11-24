@@ -22,7 +22,7 @@ module.exports = React.createClass({
     xAxisTickValues: React.PropTypes.array,
     xAxisOffset:     React.PropTypes.number,
     xScale:          React.PropTypes.func.isRequired,
-    tickTimeFormat:  React.PropTypes.array,
+    tickTimeFormat:  React.PropTypes.string,
     localizationConfig: React.PropTypes.object,
     xOrient:         React.PropTypes.oneOf(['top', 'bottom']),
     yOrient:         React.PropTypes.oneOf(['left', 'right']),
