@@ -34,7 +34,7 @@ module.exports = React.createClass({
   render() {
     const defScaleX = 1.0113821;  // horizontal; default Scale to get proper v of size 32px by 32 px
     const defScaleY = 0.98874598;  // vertical; default Scale to get proper v of size 32px by 32 px
-    let translateX, translateY, markerName;
+    var translateX, translateY;
     translateX = this.props.cx - Math.round(this.state.markerWidth / 2);
     translateY = this.props.cy - Math.round(this.state.markerHeight / 2);
 
