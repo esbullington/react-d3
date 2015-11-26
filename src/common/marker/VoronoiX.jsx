@@ -32,14 +32,14 @@ module.exports = React.createClass({
   },
 
   render() {
-    const defScaleX = 1.0113821;  // horizontal; default Scale to get proper v of size 32px by 32 px
-    const defScaleY = 0.98874598;  // vertical; default Scale to get proper v of size 32px by 32 px
+    var defScaleX = 1.0113821;  // horizontal; default Scale to get proper v of size 32px by 32 px
+    var defScaleY = 0.98874598;  // vertical; default Scale to get proper v of size 32px by 32 px
     var translateX, translateY;
     translateX = this.props.cx - Math.round(this.state.markerWidth / 2);
     translateY = this.props.cy - Math.round(this.state.markerHeight / 2);
 
-    const translation = 'translate(' + translateX + ' ' + translateY + ') ';
-    const scaling = 'scale(' + defScaleX / 32 * this.state.markerWidth + ' '
+    var translation = 'translate(' + translateX + ' ' + translateY + ') ';
+    var scaling = 'scale(' + defScaleX / 32 * this.state.markerWidth + ' '
         + defScaleY / 32 * this.state.markerHeight + ') ';
 
     // animation controller

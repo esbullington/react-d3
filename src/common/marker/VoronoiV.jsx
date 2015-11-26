@@ -33,8 +33,8 @@ module.exports = React.createClass({
   },
 
   render() {
-    const defScaleX = 1.0123096;  // horizontal; default Scale to get proper v of size 32px by 32 px
-    const defScaleY = 0.9878401;  // vertical; default Scale to get proper v of size 32px by 32 px
+    var defScaleX = 1.0123096;  // horizontal; default Scale to get proper v of size 32px by 32 px
+    var defScaleY = 0.9878401;  // vertical; default Scale to get proper v of size 32px by 32 px
     var angle, translateX, translateY, markerName;
     if (this.props.markerUSD) {
       angle = 180;
@@ -48,10 +48,10 @@ module.exports = React.createClass({
       markerName = 'v';
     }
 
-    const translation = 'translate(' + translateX + ' ' + translateY + ') ';
-    const scaling = 'scale(' + defScaleX / 32 * this.state.markerWidth + ' '
+    var translation = 'translate(' + translateX + ' ' + translateY + ') ';
+    var scaling = 'scale(' + defScaleX / 32 * this.state.markerWidth + ' '
         + defScaleY / 32 * this.state.markerHeight + ') ';
-    const rotation = 'rotate(' + angle + ') ';
+    var rotation = 'rotate(' + angle + ') ';
 
     // animation controller
     var handleMouseOver, handleMouseLeave;
