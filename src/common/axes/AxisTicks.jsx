@@ -191,6 +191,7 @@ module.exports = React.createClass({
               </line>
               {tickTexts.map((line, idx) =>{
                 return <text
+                  key={idx}
                   strokeWidth="0.01"
                   dy={(dy + (idx) * 0.9) + 'em'} x={x1} y={y1}
                   style={{stroke:props.tickTextStroke, fill:props.tickTextStroke}}
