@@ -12,3 +12,5 @@ exports.VoronoiContainer = require('./marker').VoronoiContainer;
 exports.VoronoiCircle = require('./marker').VoronoiCircle;
 exports.VoronoiRect = require('./marker').VoronoiRect;
 exports.VoronoiStar = require('./marker').VoronoiStar;
+exports.VoronoiV = require('./marker').VoronoiV;
+exports.VoronoiX = require('./marker').VoronoiX;

@@ -14,7 +14,8 @@ module.exports = React.createClass({
     width:               React.PropTypes.number,
     strokeWidth:         React.PropTypes.number,
     textAnchor:          React.PropTypes.string,
-    verticalTransform:   React.PropTypes.string
+    verticalTransform:   React.PropTypes.string,
+    fill:                React.PropTypes.string
   },
 
   getDefaultProps() {
@@ -37,6 +38,7 @@ module.exports = React.createClass({
             <text
               strokeWidth={props.strokeWidth.toString()}
               textAnchor={props.textAnchor}
+              fill={props.fill}
               transform={props.verticalTransform}
               x={props.width / 2}
               y={props.offset}
@@ -49,6 +51,7 @@ module.exports = React.createClass({
             <text
               strokeWidth={props.strokeWidth.toString()}
               textAnchor={props.textAnchor}
+              fill={props.fill}
               transform={props.verticalTransform}
               x={props.width / 2}
               y={props.offset}
@@ -61,6 +64,7 @@ module.exports = React.createClass({
             <text
               strokeWidth={props.strokeWidth.toString()}
               textAnchor={props.textAnchor}
+              fill={props.fill}
               transform={props.horizontalTransform}
               y={-props.offset}
               x={-props.height / 2}
@@ -73,6 +77,7 @@ module.exports = React.createClass({
             <text
               strokeWidth={props.strokeWidth.toString()}
               textAnchor={props.textAnchor}
+              fill={props.fill}
               transform={props.horizontalTransform}
               y={props.offset}
               x={-props.height / 2}

@@ -19,6 +19,7 @@ module.exports = React.createClass({
     tickStroke:      React.PropTypes.string,
     xAxisClassName:  React.PropTypes.string,
     xAxisLabel:      React.PropTypes.string,
+    xAxisLabelStroke:React.PropTypes.string,
     xAxisTickValues: React.PropTypes.array,
     xAxisOffset:     React.PropTypes.number,
     xScale:          React.PropTypes.func.isRequired,
@@ -98,6 +99,7 @@ module.exports = React.createClass({
           orient={props.xOrient}
           margins={props.margins}
           width={props.width}
+          fill={props.xAxisLabelStroke}
           />
       </g>
     );

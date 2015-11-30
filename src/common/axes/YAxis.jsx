@@ -19,6 +19,7 @@ module.exports = React.createClass({
     height:          React.PropTypes.number.isRequired,
     yAxisClassName:  React.PropTypes.string,
     yAxisLabel:      React.PropTypes.string,
+    yAxisLabelStroke:React.PropTypes.string,
     yAxisOffset:     React.PropTypes.number,
     yAxisTickValues: React.PropTypes.array,
     xOrient:         React.PropTypes.oneOf(['top', 'bottom']),
@@ -99,6 +100,7 @@ module.exports = React.createClass({
           margins={props.margins}
           offset={props.yAxisLabelOffset}
           orient={props.yOrient}
+          fill={props.yAxisLabelStroke}
         />
       </g>
     );
