@@ -183,7 +183,7 @@ module.exports = React.createClass({
     return (
       <g>
         {ticks.map( (tick, idx) => {
-          var tickTexts = tickFormat(tick).split('\\n');
+          var tickTexts = tickFormat(tick).toString().split('\\n');
           return (
             <g key={idx} className="tick" transform={tr(tick)} >
               {gridLine(adjustedScale(tick))}
