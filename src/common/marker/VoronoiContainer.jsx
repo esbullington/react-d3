@@ -35,6 +35,7 @@ module.exports = React.createClass({
               markerAnimationShade={this.props.markerAnimationShade}
               //markerIsHighlighted={true}
               markerOnClick={this.props.markerOnClick}
+              markerBaseColor={this.props.markerBaseColor}
               chartType={this.props.chartType}
               />
           </g>
@@ -55,6 +56,7 @@ module.exports = React.createClass({
               markerAnimationResize={this.props.markerAnimationResize}
               markerAnimationShade={this.props.markerAnimationShade}
               markerOnClick={this.props.markerOnClick}
+              markerBaseColor={this.props.markerBaseColor}
               chartType={this.props.chartType}
               />
           </g>
@@ -75,6 +77,7 @@ module.exports = React.createClass({
               markerAnimationResize={this.props.markerAnimationResize}
               markerAnimationShade={this.props.markerAnimationShade}
               markerOnClick={this.props.markerOnClick}
+              markerBaseColor={this.props.markerBaseColor}
               chartType={this.props.chartType}
               />
           </g>
@@ -96,6 +99,7 @@ module.exports = React.createClass({
               markerAnimationResize={this.props.markerAnimationResize}
               markerAnimationShade={this.props.markerAnimationShade}
               markerOnClick={this.props.markerOnClick}
+              markerBaseColor={this.props.markerBaseColor}
               chartType={this.props.chartType}
               />
           </g>
@@ -116,6 +120,7 @@ module.exports = React.createClass({
               markerAnimationResize={this.props.markerAnimationResize}
               markerAnimationShade={this.props.markerAnimationShade}
               markerOnClick={this.props.markerOnClick}
+              markerBaseColor={this.props.markerBaseColor}
               chartType={this.props.chartType}
               />
           </g>

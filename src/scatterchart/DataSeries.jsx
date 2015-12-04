@@ -73,11 +73,12 @@ module.exports = React.createClass({
         markerWidth: series.markerWidth,              // same for one series
         markerHeight: series.markerHeight,            // same for one series
         markerRadius: series.markerRadius,            // same for one series
+        markerBaseColor: series.markerBaseColor,      // same for one series
         markerOuterRadius: series.markerOuterRadius,  // same for one series
         markerInnerRadius: series.markerInnerRadius,  // same for one series
         markerUSD: series.markerUSD,                  // same for one series
         markerAnimationResize: series.markerAnimationResize,  // same for one series
-        markerAnimationShade: series.markerAnimationShade,     // same for one series
+        markerAnimationShade: series.markerAnimationShade,    // same for one series
         markerFill: series.markerFill                 // might be the same for one series, if not defined, it'll be set
                                                       // later
       });
@@ -107,13 +108,14 @@ module.exports = React.createClass({
           markerWidth={marker[vnode.point.original.seriesIndex].markerWidth}
           markerHeight={marker[vnode.point.original.seriesIndex].markerHeight}
           markerRadius={marker[vnode.point.original.seriesIndex].markerRadius}
+          markerBaseColor={marker[vnode.point.original.seriesIndex].markerBaseColor}
           markerOuterRadius={marker[vnode.point.original.seriesIndex].markerOuterRadius}
           markerInnerRadius={marker[vnode.point.original.seriesIndex].markerInnerRadius}
           markerUSD={marker[vnode.point.original.seriesIndex].markerUSD}
           markerAnimationResize={marker[vnode.point.original.seriesIndex].markerAnimationResize}
           markerAnimationShade={marker[vnode.point.original.seriesIndex].markerAnimationShade}
           markerOnClick={props.markerOnClick}
-          />
+        />
       );
     }.bind(this));
 

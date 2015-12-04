@@ -4,6 +4,7 @@ var React = require('react');
 var d3 = require('d3');
 var shade = require('../../utils/index').shade;
 var VoronoiArea = require('./VoronoiArea');
+var MarkerBaseCircle = require('./MarkerBaseCircle');
 
 module.exports = React.createClass({
 
@@ -49,8 +50,9 @@ module.exports = React.createClass({
     }
 
     var translation = 'translate(' + translateX + ' ' + translateY + ') ';
-    var scaling = 'scale(' + defScaleX / 32 * this.state.markerWidth + ' '
-        + defScaleY / 32 * this.state.markerHeight + ') ';
+    var scalefactorX = defScaleX / 32 * this.state.markerWidth;
+    var scalefactorY = defScaleY / 32 * this.state.markerHeight;
+    var scaling = 'scale(' + scalefactorX + ' ' + scalefactorY + ') ';
     var rotation = 'rotate(' + angle + ') ';
 
     // animation controller
@@ -67,8 +69,28 @@ module.exports = React.createClass({
       this.handleOnClick = this.props.markerOnClick;
     }
 
+    var markerBase = null;
+    if (this.props.markerBaseColor) {
+      markerBase = <MarkerBaseCircle
+        cx={this.state.markerWidth / scalefactorX / 2}
+        cy={this.state.markerHeight / scalefactorY / 2}
+        r={Math.max(this.state.markerWidth / scalefactorX, this.state.markerHeight / scalefactorY) / 2 * 1.5}
+        fill={this.props.markerBaseColor}
+      />
+    }
+
     return (
       <g>
+        <g transform={translation + scaling + rotation}>
+          {markerBase}
+          <path
+            fill={this.state.markerFill}
+            // v form with size 32px by 32px
+            d={'M 31.610884,-5.5879354e-7 18.502518,32.393906 l -5.481154,0 L -3.7252903e-8,-5.5879354e-7 ' +
+             '5.9161655,-5.5879354e-7 15.950446,25.781721 25.897724,-5.5879354e-7 l 5.71316,0 z'}
+            className={"rd3-" + this.props.chartType + markerName}
+          />
+        </g>
         <VoronoiArea
           handleMouseOver={handleMouseOver}
           handleMouseLeave={handleMouseLeave}
@@ -78,21 +100,6 @@ module.exports = React.createClass({
           voronoiPath={this.props.voronoiPath}
           point={this.props.point}
         />
-        <g transform={translation + scaling + rotation}>
-          <path
-            onMouseOver={handleMouseOver}
-            onMouseLeave={handleMouseLeave}
-            onClick={this._callClickCallback}
-            onTouchStart={this._callClickCallback}
-            onTouchEnd={this.handleMouseLeave}
-            fill={this.state.markerFill}
-
-            // v form with size 32px by 32px
-            d={'M 31.610884,-5.5879354e-7 18.502518,32.393906 l -5.481154,0 L -3.7252903e-8,-5.5879354e-7 ' +
-             '5.9161655,-5.5879354e-7 15.950446,25.781721 25.897724,-5.5879354e-7 l 5.71316,0 z'}
-            className={"rd3-" + this.props.chartType + markerName}
-          />
-        </g>
       </g>
     );
   },

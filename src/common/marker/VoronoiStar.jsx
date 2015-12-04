@@ -4,6 +4,7 @@ var React = require('react');
 var d3 = require('d3');
 var shade = require('../../utils/index').shade;
 var VoronoiArea = require('./VoronoiArea');
+var MarkerBaseCircle = require('./MarkerBaseCircle');
 
 module.exports = React.createClass({
 
@@ -47,8 +48,24 @@ module.exports = React.createClass({
       this.handleOnClick = this.props.markerOnClick;
     }
 
+    var markerBase = null;
+    if (this.props.markerBaseColor) {
+      markerBase = <MarkerBaseCircle
+        cx={this.props.cx}
+        cy={this.props.cy}
+        r={this.state.markerOuterRadius * 1.3}
+        fill={this.props.markerBaseColor}
+      />
+    }
+
     return (
       <g>
+        {markerBase}
+        <path
+          fill={this.state.markerFill}
+          d={this._calculateStarPoints(this.props.cx, this.props.cy, this.props.arms, this.state.markerOuterRadius, this.state.markerInnerRadius)}
+          className={"rd3-" + this.props.chartType + "-star"}
+        />
         <VoronoiArea
           handleMouseOver={handleMouseOver}
           handleMouseLeave={handleMouseLeave}
@@ -57,16 +74,6 @@ module.exports = React.createClass({
           handleOnTouchEnd={this.handleMouseLeave}
           voronoiPath={this.props.voronoiPath}
           point={this.props.point}
-        />
-        <path
-          onMouseOver={handleMouseOver}
-          onMouseLeave={handleMouseLeave}
-          onClick={this._callClickCallback}
-          onTouchStart={this._callClickCallback}
-          onTouchEnd={this.handleMouseLeave}
-          fill={this.state.markerFill}
-          d={this._calculateStarPoints(this.props.cx, this.props.cy, this.props.arms, this.state.markerOuterRadius, this.state.markerInnerRadius)}
-          className={"rd3-" + this.props.chartType + "-star"}
         />
       </g>
     );

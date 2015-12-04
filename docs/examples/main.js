@@ -89,16 +89,20 @@ var Demos = React.createClass({
         values: [ { x: 0, y: 20 }, { x: 1, y: 30, override: ['redline'] }, { x: 2, y: 10 }, { x: 3, y: 5 }, { x: 4, y: 8 }, { x: 5, y: 15 }, { x: 6, y: 10 } ],
         strokeWidth: 3,
         strokeDashArray: "5,5",
-        markerName: ['star', 'circle', 'x']
+        markerName: ['star', 'circle', 'x'],
+        markerBaseColor: 'white'
       },
       {
         name: 'series2',
         values : [ { x: 0, y: 8 }, { x: 1, y: 5 }, { x: 2, y: 20 }, { x: 3, y: 12 }, { x: 4, y: 4 }, { x: 5, y: 6 }, { x: 6, y: 2 } ],
-        markerFill: '#2e7d32'
+        markerFill: '#2e7d32',
+        markerBaseColor: 'white',
+        markerRadius: 6
       },
       {
         name: 'series3',
-        values: [ { x: 0, y: 0 }, { x: 1, y: 5 }, { x: 2, y: 8 }, { x: 3, y: 2, override: ['greenline'] }, { x: 4, y: 6 }, { x: 5, y: 4 }, { x: 6, y: 2 } ]
+        values: [ { x: 0, y: 0 }, { x: 1, y: 5 }, { x: 2, y: 8 }, { x: 3, y: 2, override: ['greenline'] }, { x: 4, y: 6 }, { x: 5, y: 4 }, { x: 6, y: 2 } ],
+        markerBaseColor: 'white'
       } 
     ];
 
@@ -143,30 +147,33 @@ var Demos = React.createClass({
         markerOuterRadius: 8,
         markerInnerRadius: 3,
         markerAnimationResize: 3,
-        markerAnimationShade: .8
+        markerAnimationShade: .8,
+        markerBaseColor: 'white'
       },
       {
         name: "series2",
         values: [ { x: 40, y: 30 }, { x: 35, y: 37 }, { x: 48, y: 37 }, { x: 38, y: 33 }, { x: 52, y: 60 }, { x: 51, y: 55 }, { x: 54, y: 48 }, { x: 45, y: 45 }, { x: 46, y: 50 }, { x: 66, y: 50 }, { x: 39, y: 36 }, { x: 54, y: 30 }],
         markerName: 'circle',
-        markerRadius: 4
+        markerRadius: 8,
+        markerBaseColor: 'white'
       },
       {
         name: "series3",
         values: [ { x: 80, y: 75 }, { x: 71, y: 58 }, { x: 78, y: 68 }, { x: 81, y: 47 },{ x: 72, y: 70 }, { x: 70, y: 88 }, { x: 81, y: 90 }, { x: 92, y: 80 }, { x: 81, y: 72 }, { x: 99, y: 95 }, { x: 67, y: 81 }, { x: 96, y: 78 }],
-        markerName: 'v',
+        markerName: 'x',
         markerWidth: 16,
         markerHeight: 16,
-        markerFill: '#2e7d32'
+        markerFill: '#2e7d32',
+        markerBaseColor: 'red'
       },
       {
         name: "series4",
         values: [ { x: 80, y: 80 }, { x: 82, y: 78 }, { x: 60, y: 68 }, { x: 81, y: 66 },{ x: 90, y: 70 }, { x: 71, y: 88 }, { x: 82, y: 90 }, { x: 92, y: 81 }, { x: 80, y: 72 }, { x: 99, y: 94 }, { x: 67, y: 80 }, { x: 100, y: 78 }],
         markerName: 'v',
-        markerRadius: 2,
         markerWidth: 16,
         markerHeight: 16,
-        markerUSD: true
+        markerUSD: true,
+        markerBaseColor: 'white'
       }
     ];
 
@@ -221,15 +228,19 @@ var Demos = React.createClass({
     values: [ { x: 0, y: 20 }, ..., { x: 24, y: 10 } ],
     strokeWidth: 3,
     strokeDashArray: "5,5",
-    markerName: ['star', 'circle', 'rect']
+    markerName: ['star', 'circle', 'rect'],
+    markerBaseColor: 'white'
   },
   {
     name: "series2",
     values: [ { x: 70, y: 82 }, ..., { x: 76, y: 82 } ]
+    markerFill: '#2e7d32',
+    markerBaseColor: 'white'
   }
   {
     name: 'series3',
     values: [ { x: 0, y: 0 }, ..., { x: 6, y: 2 } ],
+    markerBaseColor: 'white'
   }
 ];`
               }
@@ -326,17 +337,18 @@ var Demos = React.createClass({
     markerOuterRadius: 8,
     markerInnerRadius: 3,
     markerAnimationResize: 3,
-    markerAnimationShade: .8
+    markerAnimationShade: .8,
+    markerBaseColor: 'white'
   },
   ....
   {
     name: "series4",
     values: [ { x: 80, y: 80 }, ..., { x: 100, y: 78 } ],
     markerName: 'v',
-    markerRadius: 2,
     markerWidth: 16,
     markerHeight: 16,
-    markerUSD: true
+    markerUSD: true,
+    markerBaseColor: 'white'
   }
 ];`
               }

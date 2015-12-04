@@ -4,6 +4,7 @@ var React = require('react');
 var d3 = require('d3');
 var shade = require('../../utils/index').shade;
 var VoronoiArea = require('./VoronoiArea');
+var MarkerBaseCircle = require('./MarkerBaseCircle');
 
 module.exports = React.createClass({
 
@@ -46,8 +47,27 @@ module.exports = React.createClass({
       this.handleOnClick = this.props.markerOnClick;
     }
 
+    var markerBase = null;
+    if (this.props.markerBaseColor) {
+      markerBase = <MarkerBaseCircle
+        cx={this.props.cx}
+        cy={this.props.cy}
+        r={Math.max(this.state.markerWidth, this.state.markerHeight) / 2 * 1.7}
+        fill={this.props.markerBaseColor}
+      />
+    }
+
     return (
       <g>
+        {markerBase}
+        <rect
+          x={this.props.cx - Math.round(this.state.markerWidth/2)}
+          y={this.props.cy - Math.round(this.state.markerHeight/2)}
+          width={this.state.markerWidth}
+          height={this.state.markerHeight}
+          fill={this.state.markerFill}
+          className={"rd3-" + this.props.chartType + "-rect"}
+        />
         <VoronoiArea
           handleMouseOver={handleMouseOver}
           handleMouseLeave={handleMouseLeave}
@@ -56,19 +76,6 @@ module.exports = React.createClass({
           handleOnTouchEnd={this.handleMouseLeave}
           voronoiPath={this.props.voronoiPath}
           point={this.props.point}
-        />
-        <rect
-          onMouseOver={handleMouseOver}
-          onMouseLeave={handleMouseLeave}
-          onClick={this._callClickCallback}
-          onTouchStart={this._callClickCallback}
-          onTouchEnd={this.handleMouseLeave}
-          x={this.props.cx - Math.round(this.state.markerWidth/2)}
-          y={this.props.cy - Math.round(this.state.markerHeight/2)}
-          width={this.state.markerWidth}
-          height={this.state.markerHeight}
-          fill={this.state.markerFill}
-          className={"rd3-" + this.props.chartType + "-rect"}
         />
       </g>
     );
