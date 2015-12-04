@@ -8,14 +8,15 @@ var MarkerBaseCircle = require('./MarkerBaseCircle');
 
 module.exports = React.createClass({
 
-  displayName: 'VoronoiRect',
+  displayName: 'VoronoiPolygon',
 
   handleOnClick: function(a) {},
 
   getDefaultProps() {
     return { 
-      markerWidth: 6,
-      markerHeight: 6,
+      markerRadius: 6,
+      markerCorners: 3,
+      markerRotationCCW: 90,
       markerFill: '#1f77b4',
       hoverAnimation: true,
       markerAnimationResize: 1.25,
@@ -26,8 +27,7 @@ module.exports = React.createClass({
 
   getInitialState() {
     return {
-      markerWidth: this.props.markerWidth,
-      markerHeight: this.props.markerHeight,
+      markerRadius: this.props.markerRadius,
       markerFill: this.props.markerFill
     }
   },
@@ -52,7 +52,7 @@ module.exports = React.createClass({
       markerBase = <MarkerBaseCircle
         cx={this.props.cx}
         cy={this.props.cy}
-        r={Math.max(this.state.markerWidth, this.state.markerHeight) / 2 * 1.7}
+        r={this.state.markerRadius * 1.3}
         fill={this.props.markerBaseColor}
         chartType={this.props.chartType}
       />
@@ -61,13 +61,15 @@ module.exports = React.createClass({
     return (
       <g>
         {markerBase}
-        <rect
-          x={this.props.cx - Math.round(this.state.markerWidth/2)}
-          y={this.props.cy - Math.round(this.state.markerHeight/2)}
-          width={this.state.markerWidth}
-          height={this.state.markerHeight}
+        <path
           fill={this.state.markerFill}
-          className={"rd3-" + this.props.chartType + "-rect"}
+          d={this._calculatePolygonPath(
+            this.props.cx,
+            this.props.cy,
+            this.props.markerCorners,
+            this.state.markerRadius,
+            this.props.markerRotationCCW)}
+          className={'rd3-' + this.props.chartType + '-polygon' + '-' + this.props.markerCorners}
         />
         <VoronoiArea
           handleMouseOver={handleMouseOver}
@@ -82,10 +84,33 @@ module.exports = React.createClass({
     );
   },
 
+  // Calculate path of polygon
+  _calculatePolygonPath(centerX, centerY, corners, radius, rotationCCW) {
+    var path = '';
+    corners = corners >= 3 ? corners : 3;
+    var angle = 2 * Math.PI / corners;
+    rotationCCW = - rotationCCW / 180 * Math.PI;
+
+    for (var i = 0; i < corners; i++) {
+      var posX = centerX + Math.cos(i * angle + rotationCCW) * radius;
+      var posY = centerY + Math.sin(i * angle + rotationCCW) * radius;
+
+      // The first time we simply append the coordinates, subsequet times
+      // we append a ', ' to distinguish each coordinate pair.
+      if (i == 0) {
+        path = 'M' + posX + ' ' + posY;
+      }
+      else {
+        path += ' L' + posX + ' ' + posY;
+      }
+    }
+    path += ' Z';
+    return path;
+  },
+
   _animateMarker() {
     this.setState({
-      markerWidth: this.props.markerWidth * this.props.markerAnimationResize,
-      markerHeight: this.props.markerHeight * this.props.markerAnimationResize,
+      markerRadius: this.props.markerRadius * this.props.markerAnimationResize,
       markerFill: shade(this.props.markerFill, this.props.markerAnimationShade)
     });
   },

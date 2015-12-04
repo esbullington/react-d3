@@ -97,7 +97,8 @@ var Demos = React.createClass({
         values : [ { x: 0, y: 8 }, { x: 1, y: 5 }, { x: 2, y: 20 }, { x: 3, y: 12 }, { x: 4, y: 4 }, { x: 5, y: 6 }, { x: 6, y: 2 } ],
         markerFill: '#2e7d32',
         markerBaseColor: 'white',
-        markerRadius: 6
+        markerRadius: 6,
+        markerName: 'polygon'
       },
       {
         name: 'series3',
@@ -169,10 +170,10 @@ var Demos = React.createClass({
       {
         name: "series4",
         values: [ { x: 80, y: 80 }, { x: 82, y: 78 }, { x: 60, y: 68 }, { x: 81, y: 66 },{ x: 90, y: 70 }, { x: 71, y: 88 }, { x: 82, y: 90 }, { x: 92, y: 81 }, { x: 80, y: 72 }, { x: 99, y: 94 }, { x: 67, y: 80 }, { x: 100, y: 78 }],
-        markerName: 'v',
-        markerWidth: 16,
-        markerHeight: 16,
-        markerUSD: true,
+        markerName: 'polygon',
+        markerRadius: 10,
+        markerCorners: 5,
+        markerFill: 'green',
         markerBaseColor: 'white'
       }
     ];
@@ -235,7 +236,9 @@ var Demos = React.createClass({
     name: "series2",
     values: [ { x: 70, y: 82 }, ..., { x: 76, y: 82 } ]
     markerFill: '#2e7d32',
-    markerBaseColor: 'white'
+    markerBaseColor: 'white',
+    markerRadius: 6,
+    markerName: 'polygon'
   }
   {
     name: 'series3',
@@ -344,10 +347,10 @@ var Demos = React.createClass({
   {
     name: "series4",
     values: [ { x: 80, y: 80 }, ..., { x: 100, y: 78 } ],
-    markerName: 'v',
-    markerWidth: 16,
-    markerHeight: 16,
-    markerUSD: true,
+    markerName: 'polygon',
+    markerRadius: 10,
+    markerCorners: 5,
+    markerFill: 'green',
     markerBaseColor: 'white'
   }
 ];`

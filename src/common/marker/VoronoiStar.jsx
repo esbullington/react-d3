@@ -55,6 +55,7 @@ module.exports = React.createClass({
         cy={this.props.cy}
         r={this.state.markerOuterRadius * 1.3}
         fill={this.props.markerBaseColor}
+        chartType={this.props.chartType}
       />
     }
 

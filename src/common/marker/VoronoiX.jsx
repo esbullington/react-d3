@@ -65,6 +65,7 @@ module.exports = React.createClass({
         cy={this.state.markerHeight / scalefactorY / 2}
         r={Math.max(this.state.markerWidth / scalefactorX, this.state.markerHeight / scalefactorY) / 2 * 1.5}
         fill={this.props.markerBaseColor}
+        chartType={this.props.chartType}
       />
     }
 

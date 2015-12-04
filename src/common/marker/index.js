@@ -7,6 +7,7 @@ exports.VoronoiContainer = require('./VoronoiContainer');
 
 // markers
 exports.VoronoiCircle = require('./VoronoiCircle');
+exports.VoronoiPolygon = require('./VoronoiPolygon');
 exports.VoronoiRect = require('./VoronoiRect');
 exports.VoronoiStar = require('./VoronoiStar');
 exports.VoronoiV = require('./VoronoiV');

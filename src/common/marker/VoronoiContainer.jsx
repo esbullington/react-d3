@@ -3,6 +3,7 @@
 var React = require('react');
 var d3 = require('d3');
 var VoronoiCircle = require('./VoronoiCircle');
+var VoronoiPolygon = require('./VoronoiPolygon');
 var VoronoiRect = require('./VoronoiRect');
 var VoronoiStar = require('./VoronoiStar');
 var VoronoiV = require('./VoronoiV');
@@ -37,7 +38,30 @@ module.exports = React.createClass({
               markerOnClick={this.props.markerOnClick}
               markerBaseColor={this.props.markerBaseColor}
               chartType={this.props.chartType}
-              />
+            />
+          </g>
+        );
+        break;
+      case 'polygon':
+        return (
+          <g>
+            <VoronoiPolygon
+              voronoiPath={this._drawPath(this.props.vnode)}
+              point={this.props.point}
+              cx={this.props.cx}
+              cy={this.props.cy}
+              hoverAnimation={this.props.hoverAnimation}
+              markerRadius={this.props.markerRadius}
+              markerCorners={this.props.markerCorners}
+              markerRotationCCW={this.props.markerRotationCCW}
+              markerFill={this.props.markerFill}
+              markerAnimationResize={this.props.markerAnimationResize}
+              markerAnimationShade={this.props.markerAnimationShade}
+              //markerIsHighlighted={true}
+              markerOnClick={this.props.markerOnClick}
+              markerBaseColor={this.props.markerBaseColor}
+              chartType={this.props.chartType}
+            />
           </g>
         );
         break;
@@ -58,7 +82,7 @@ module.exports = React.createClass({
               markerOnClick={this.props.markerOnClick}
               markerBaseColor={this.props.markerBaseColor}
               chartType={this.props.chartType}
-              />
+            />
           </g>
         );
         break;
@@ -79,7 +103,7 @@ module.exports = React.createClass({
               markerOnClick={this.props.markerOnClick}
               markerBaseColor={this.props.markerBaseColor}
               chartType={this.props.chartType}
-              />
+            />
           </g>
         );
         break;
@@ -101,7 +125,7 @@ module.exports = React.createClass({
               markerOnClick={this.props.markerOnClick}
               markerBaseColor={this.props.markerBaseColor}
               chartType={this.props.chartType}
-              />
+            />
           </g>
         );
         break;
@@ -122,7 +146,7 @@ module.exports = React.createClass({
               markerOnClick={this.props.markerOnClick}
               markerBaseColor={this.props.markerBaseColor}
               chartType={this.props.chartType}
-              />
+            />
           </g>
         );
         break;
