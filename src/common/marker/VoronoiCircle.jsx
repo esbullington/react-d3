@@ -50,7 +50,7 @@ module.exports = React.createClass({
       markerBase = <MarkerBaseCircle
         cx={this.props.cx}
         cy={this.props.cy}
-        r={this.state.markerRadius * 1.3}
+        r={this.state.markerRadius * 1.4}
         fill={this.props.markerBaseColor}
         chartType={this.props.chartType}
       />
