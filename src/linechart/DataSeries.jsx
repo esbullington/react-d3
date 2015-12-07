@@ -110,7 +110,7 @@ module.exports = React.createClass({
 
       // Check for overridden line segments
       valueSet.forEach( (v) => {
-        if (!v.use || !v.nextVal || !v.nextVal.use) return;
+        if (!v.use || !v.prevVal || !v.prevVal.use) return;
         var overrides = v.original.override;
         if (!overrides) return;
         if (!Array.isArray(overrides)) overrides = [overrides];
@@ -120,7 +120,7 @@ module.exports = React.createClass({
           if (overrideSet && overrideSet.line) usedOverride = override
         });
         if (!usedOverride) return;
-        exclude.push([v.xs,v.nextVal.xs]);
+        exclude.push([v.prevVal.xs, v.xs]);
         v.override = usedOverride;
         if (usedOverrides.indexOf(usedOverride) < 0) usedOverrides.push(usedOverride)
       });
@@ -146,8 +146,8 @@ module.exports = React.createClass({
         var include = [];
         var overrideSet = props.overrideSets[override];
         valueSet.forEach( (v) => {
-          if (!v.use || !v.nextVal || !v.nextVal.use || v.override != override) return;
-          include.push([v.xs, v.nextVal.xs])
+          if (!v.use || !v.prevVal || !v.prevVal.use || v.override != override) return;
+          include.push([v.prevVal.xs, v.xs])
         });
         lines.push(
           <Line
