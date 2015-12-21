@@ -52,7 +52,7 @@ module.exports = React.createClass({
     );
   },
 
-  _animateCircle(rect) {
+  _animateCircle() {
     var rect = this.getDOMNode().getElementsByTagName("circle")[0].getBoundingClientRect();
     this.props.onMouseOver.call(this, rect.right, rect.top, this.props.dataPoint )
     this.setState({ 

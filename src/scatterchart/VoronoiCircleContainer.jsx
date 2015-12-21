@@ -37,13 +37,6 @@ module.exports = React.createClass({
     };
   },
 
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      circleFill:   nextProps.circleFill,
-      circleRadius: nextProps.circleRadius
-    });
-  },
-
   render() {
 
     var props = this.props;
@@ -68,9 +61,10 @@ module.exports = React.createClass({
 
   _animateCircle() {
     var props = this.props;
-    var rect = this.getDOMNode().getElementsByTagName("circle")[0].getBoundingClientRect();
-    this.props.onMouseOver.call(this, rect.right, rect.top, props.dataPoint )
+
     if(props.hoverAnimation) {
+      var rect = this.getDOMNode().getElementsByTagName("circle")[0].getBoundingClientRect();
+      this.props.onMouseOver.call(this, rect.right, rect.top, props.dataPoint )
       this.setState({
         circleFill:   shade(props.circleFill, props.shadeMultiplier),
         circleRadius: props.circleRadius * props.circleRadiusMultiplier

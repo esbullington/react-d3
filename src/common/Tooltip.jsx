@@ -15,6 +15,8 @@ module.exports = React.createClass({
     var props = this.props;
     var display = this.props.show ? 'inherit' : 'none';
     var containerStyles = {position: 'fixed', top: props.cy, left: props.cx, display: display, opacity: 0.8}
+    
+    //TODO: add 'right: 0px' style when tooltip is off the chart
     var tooltipStyles = {
       position: 'absolute',
       backgroundColor: 'white',

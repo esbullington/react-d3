@@ -12,7 +12,7 @@ module.exports =  {
   getDefaultProps() {
     return {
       showTooltip:   true,
-      tooltipFormat: (d) => d.yValue
+      tooltipFormat: (d) => String(d.yValue)
     };
   },
 

@@ -100,4 +100,17 @@ describe('ScatterChart', function() {
 
   });
 
+  it('render tooltip when circle animates', function() {
+
+      var circle = TestUtils.scryRenderedDOMComponentsWithClass(
+        scatterchart, CIRCLE_CLASS_NAME)[0];
+
+      // Before animation
+      expect(scatterchart.state.tooltip.show).to.equal(false);
+
+      // Animation starts with hover
+      TestUtils.Simulate.mouseOver(circle);
+      expect(scatterchart.state.tooltip.show).to.equal(true);
+  });
+
 });
