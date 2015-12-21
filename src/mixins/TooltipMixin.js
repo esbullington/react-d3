@@ -19,21 +19,21 @@ module.exports =  {
   getInitialState() {
     return {
       tooltip: {
-        cx: 0,
-        cy: 0,
+        x: 0,
+        y: 0,
         text: '',
         show: false
       }
     };
   },
 
-  onMouseOver(cx, cy, dataPoint) {
+  onMouseOver(x, y, dataPoint) {
     if(!this.props.showTooltip)
       return;
     this.setState({
       tooltip: {
-        cx: cx,
-        cy: cy,
+        x: x,
+        y: y,
         text: this.props.tooltipFormat.call(this, dataPoint),
         show: true 
       } 
@@ -45,8 +45,8 @@ module.exports =  {
       return;
     this.setState({
       tooltip: {
-        cx: 0,
-        cy: 0,
+        x: 0,
+        y: 0,
         text: '',
         show: false
       } 

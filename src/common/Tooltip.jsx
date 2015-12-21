@@ -5,8 +5,8 @@ var React = require('react');
 module.exports = React.createClass({
 
   propTypes: {
-    cx:   React.PropTypes.number,
-    cy:   React.PropTypes.number,
+    x:   React.PropTypes.number,
+    y:   React.PropTypes.number,
     text: React.PropTypes.string,
     show: React.PropTypes.bool
   },
@@ -14,7 +14,7 @@ module.exports = React.createClass({
   render: function() {
     var props = this.props;
     var display = this.props.show ? 'inherit' : 'none';
-    var containerStyles = {position: 'fixed', top: props.cy, left: props.cx, display: display, opacity: 0.8}
+    var containerStyles = {position: 'fixed', top: props.y, left: props.x, display: display, opacity: 0.8}
     
     //TODO: add 'right: 0px' style when tooltip is off the chart
     var tooltipStyles = {
