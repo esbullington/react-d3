@@ -41,6 +41,9 @@ module.exports = React.createClass({
         y={yScale( segment.y0 + segment.y )}
         fill={colors(colorAccessor(segment, seriesIdx))}
         hoverAnimation={hoverAnimation}
+        onMouseOver={this.props.onMouseOver}
+        onMouseLeave={this.props.onMouseLeave}
+        dataPoint={{xValue: segment.x, yValue: segment.y}}
       />
     )
   }

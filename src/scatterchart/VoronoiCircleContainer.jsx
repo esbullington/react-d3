@@ -68,7 +68,8 @@ module.exports = React.createClass({
 
   _animateCircle() {
     var props = this.props;
-
+    var rect = this.getDOMNode().getElementsByTagName("circle")[0].getBoundingClientRect();
+    this.props.onMouseOver.call(this, rect.right, rect.top, props.dataPoint )
     if(props.hoverAnimation) {
       this.setState({
         circleFill:   shade(props.circleFill, props.shadeMultiplier),
@@ -79,7 +80,6 @@ module.exports = React.createClass({
 
   _restoreCircle() {
     var props = this.props;
-
     if(props.hoverAnimation) {
       this.setState({
         circleFill:   props.circleFill,
