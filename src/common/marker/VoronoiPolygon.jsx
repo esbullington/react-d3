@@ -84,7 +84,16 @@ module.exports = React.createClass({
     );
   },
 
-  // Calculate path of polygon
+  /**
+   * Calculate the path of a regular polygon. Copied from react-d3
+   * @param centerX Horizontal coordinate of center
+   * @param centerY Vertical coordinate of center
+   * @param corners Number of corners
+   * @param radius Distance of the corners to the center
+   * @param rotationCCW Degrees in which the polygon is rotate (counter clock wise) at the end
+   * @returns {string} string for the `d` attribute of a SVG `<path>` object
+   * @private
+   */
   _calculatePolygonPath(centerX, centerY, corners, radius, rotationCCW) {
     var path = '';
     corners = corners >= 3 ? corners : 3;

@@ -80,8 +80,17 @@ module.exports = React.createClass({
     );
   },
 
-  // Calculate path of star
-  // from https://dillieodigital.wordpress.com/2013/01/16/quick-tip-how-to-draw-a-star-with-svg-and-javascript/
+  /**
+   * Calculate the path of a star. Copied from react-d3
+   * https://dillieodigital.wordpress.com/2013/01/16/quick-tip-how-to-draw-a-star-with-svg-and-javascript/
+   * @param centerX Horizontal coordinate of center
+   * @param centerY Vertical coordinate of center
+   * @param arms Numbers of arms of the star
+   * @param markerOuterRadius Distance of the outer corners of the arms to the center
+   * @param markerInnerRadius Distance of the inner corners of the arms to the center
+   * @returns {string} string for the `d` attribute of a SVG `<path>` object
+   * @private
+   */
   _calculateStarPoints(centerX, centerY, arms, markerOuterRadius, markerInnerRadius) {
     var results = "";
     var angle = Math.PI / arms;
