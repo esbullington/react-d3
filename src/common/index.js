@@ -8,8 +8,10 @@ exports.Voronoi = require('./Voronoi');
 
 // markers
 exports.VoronoiArea = require('./marker').VoronoiArea;
+exports.MarkerBaseCircle = require('./marker').MarkerBaseCircle;
 exports.VoronoiContainer = require('./marker').VoronoiContainer;
 exports.VoronoiCircle = require('./marker').VoronoiCircle;
+exports.VoronoiPolygon = require('./marker').VoronoiPolygon;
 exports.VoronoiRect = require('./marker').VoronoiRect;
 exports.VoronoiStar = require('./marker').VoronoiStar;
 exports.VoronoiV = require('./marker').VoronoiV;
