@@ -67,10 +67,14 @@ exports.flattenData = (data, xAccessor, yAccessor) => {
 
   var allValues = [];
   var xValues = [];
+  var xValues2 = [];
   var yValues = [];
+  var yValues2 = [];
   var coincidentCoordinateCheck = {};
+  var yAxisNo = 1;
 
   data.forEach( (series, i) => {
+    yAxisNo = series.yAxisNo | 1; // without configuration, the data belong to the first (usually left) y axis
     series.values.forEach( (item, j) => {
 
       var x = xAccessor(item);
@@ -81,7 +85,11 @@ exports.flattenData = (data, xAccessor, yAccessor) => {
       if (isNaN(x)) {
         return;
       }
-      xValues.push(x);
+      if (yAxisNo === 1) {
+        xValues.push(x);
+      } else {
+        xValues2.push(x);
+      }
 
       var y = yAccessor(item);
       // when yAccessor returns an object (as in the case of candlestick)
@@ -95,7 +103,12 @@ exports.flattenData = (data, xAccessor, yAccessor) => {
           if (isNaN(y[key])) {
             return;
           }
-          yValues.push(y[key]);
+          if (yAxisNo === 1) {
+            yValues.push(y[key]);
+          } else {
+            yValues2.push(y[key]);
+          }
+
           // if multiple y points are to be plotted for a single x
           // as in the case of candlestick, default to y value of 0
           yNode = 0;
@@ -107,7 +120,11 @@ exports.flattenData = (data, xAccessor, yAccessor) => {
         if (isNaN(y)) {
           return;
         }
-        yValues.push(y);
+        if (yAxisNo === 1) {
+          yValues.push(y);
+        } else {
+          yValues2.push(y);
+        }
         yNode = y;
       }
 
@@ -128,7 +145,7 @@ exports.flattenData = (data, xAccessor, yAccessor) => {
         },
         d: item,
         id: series.name + j,
-        //series: series,
+        series: series,
         seriesIndex: i
       };
       allValues.push(pointItem);
@@ -136,9 +153,11 @@ exports.flattenData = (data, xAccessor, yAccessor) => {
   });
 
   return {
-    allValues: allValues,
-    xValues: xValues,
-    yValues: yValues
+    allValues,
+    xValues,
+    xValues2,
+    yValues,
+    yValues2
   };
 };
 

@@ -2,7 +2,7 @@
 
 var React = require('react');
 var d3 = require('d3');
-var { Chart, XAxis, YAxis } = require('../common');
+var { Chart, Axis } = require('../common');
 var DataSeries = require('./DataSeries');
 var utils = require('../utils');
 var { CartesianChartPropsMixin, ViewBoxMixin } = require('../mixins');
@@ -16,17 +16,25 @@ module.exports = React.createClass({
   propTypes: {
     hoverAnimation: React.PropTypes.bool,
     margins:        React.PropTypes.object,
-    overrideSets:   React.PropTypes.object
+    overrideSets:   React.PropTypes.object,
+    grid:           React.PropTypes.object
  },
 
   getDefaultProps() {
     return {
       className: 'rd3-linechart',
-      margins:        {top: 10, right: 20, bottom: 50, left: 45},
-      xAxisClassName: 'rd3-linechart-xaxis',
-      yAxisClassName: 'rd3-linechart-yaxis',
-      hideXAxis: false,
-      hideYAxis: false,
+      margins: { top: 10, right: 20, bottom: 50, left: 45 },
+      xAxis: {
+        hide: false
+      },
+      yAxis: {
+        className: 'rd3-linechart-yaxis',
+        hide: false
+      },
+      yAxis2: {
+        className: 'rd3-linechart-yaxis',
+        hide: false
+      },
       overrideSets:   {}
     };
   },
@@ -39,6 +47,20 @@ module.exports = React.createClass({
 
     if (this.props.data && this.props.data.length < 1) {
       return null;
+    }
+
+    var xAxisProps = this.props.xAxis || {};
+    var yAxisProps = {};
+    var yAxis2Props = {};
+    if (Array.isArray(this.props.yAxis)) {
+      yAxisProps = this.props.yAxis[0] || {};
+      yAxisProps.orient = yAxisProps.orient || 'left';
+      yAxis2Props = this.props.yAxis[1] || {};
+      if (yAxis2Props) {
+        yAxis2Props.orient = yAxis2Props.orient || (yAxisProps.orient === 'left' ? 'right' : 'left');
+      }
+    } else {
+      yAxisProps = this.props.yAxis;
     }
 
     // Calculate inner chart dimensions
@@ -55,67 +77,51 @@ module.exports = React.createClass({
     var flattenedData = utils.flattenData(props.data, props.xAccessor, props.yAccessor);
 
     var allValues = flattenedData.allValues,
-        xValues = props.xAxisTickValues || flattenedData.xValues,
-        yValues = props.yAxisTickValues || flattenedData.yValues;
-    var scales = this._calculateScales(innerWidth, innerHeight, xValues, yValues, props.xAxisRange, props.yAxisRange);
-    var trans = "translate(" + (props.yAxisOffset < 0 ? props.margins.left + Math.abs(props.yAxisOffset) : props.margins.left) + "," + props.margins.top + ")";
-    var xAxis = null;
-    if (!props.hideXAxis) {
-      xAxis = <XAxis
-        xAxisClassName={props.xAxisClassName}
-        strokeWidth={props.xAxisStrokeWidth}
-        xAxisTickValues={props.xAxisTickValues}
-        xAxisTickInterval={props.xAxisTickInterval}
-        xAxisOffset={props.xAxisOffset}
-        xScale={scales.xScale}
-        xAxisLabel={props.xAxisLabel}
-        xAxisLabelOffset={props.xAxisLabelOffset}
-        xAxisLabelStroke={props.xAxisLabelStroke}
-        localizationConfig={props.localizationConfig}
-        xTickTimeFormat={props.xTickTimeFormat}
-        tickStroke={props.XTickStroke}
-        tickTextStroke={props.XTickTextStroke}
-        tickFormatting={props.xAxisFormatter}
-        xOrient={props.xOrient}
-        yOrient={props.yOrient}
-        data={props.data}
-        margins={props.margins}
-        width={innerWidth}
-        height={innerHeight}
-        stroke={props.axesColor}
-        gridVertical={props.gridVertical}
-        gridVerticalStroke={props.gridVerticalStroke}
-        gridVerticalStrokeWidth={props.gridVerticalStrokeWidth}
-        gridVerticalStrokeDash={props.gridVerticalStrokeDash}
-        />
+        xValues = xAxisProps.tickValues || flattenedData.xValues,
+        yValues = yAxisProps.tickValues || flattenedData.yValues,
+        xValues2 = flattenedData.xValues2,
+        yValues2 = flattenedData.yValues2;
+    var scales = this._calculateScales(innerWidth, innerHeight, xValues, yValues, xAxisProps.range, yAxisProps.range);
+    var trans = "translate("
+      + (yAxisProps.offset < 0 ? props.margins.left + Math.abs(yAxisProps.offset) : props.margins.left) + ","
+      + props.margins.top + ")";
+
+    var scales2, trans2;
+    if (xValues2 && yValues2) {
+      scales2 = this._calculateScales(innerWidth, innerHeight, xValues2, yValues2, xAxisProps.range, yAxisProps.range2);
+      trans2 = "translate("
+        + (yAxis2Props.offset < 0 ? props.margins.left + Math.abs(yAxis2Props.offset) : props.margins.left) + ","
+        + props.margins.top + ")";
     }
 
-    var yAxis = null;
-    if (!props.hideYAxis) {
-      yAxis = <YAxis
-        yAxisClassName={props.yAxisClassName}
-        strokeWidth={props.yAxisStrokeWidth}
-        yScale={scales.yScale}
-        yAxisTickValues={props.yAxisTickValues}
-        yAxisTickCount={props.yAxisTickCount}
-        yAxisOffset={props.yAxisOffset}
-        yAxisLabel={props.yAxisLabel}
-        yAxisLabelOffset={props.yAxisLabelOffset}
-        yAxisLabelStroke={props.yAxisLabelStroke}
-        tickFormatting={props.yAxisFormatter}
-        tickStroke={props.YTickStroke}
-        tickTextStroke={props.YTickTextStroke}
-        xOrient={props.xOrient}
-        yOrient={props.yOrient}
+    var xAxis;
+    if (!xAxisProps.hide) {
+      xAxis = <Axis
+        type={'x'}
+        {... xAxisProps}
+        grid={props.grid}
+        scale={scales.xScale}
+        xOrient={xAxisProps.orient}
+        yOrient={yAxisProps.orient}
         margins={props.margins}
         width={innerWidth}
         height={innerHeight}
-        stroke={props.axesColor}
-        gridHorizontal={props.gridHorizontal}
-        gridHorizontalStroke={props.gridHorizontalStroke}
-        gridHorizontalStrokeWidth={props.gridHorizontalStrokeWidth}
-        gridHorizontalStrokeDash={props.gridHorizontalStrokeDash}
-        />
+      />
+    }
+
+    var yAxis;
+    if (!yAxisProps.hide) {
+      yAxis = <Axis
+        type={'y'}
+        {... yAxisProps}
+        grid={props.grid}
+        scale={scales.yScale}
+        xOrient={xAxisProps.orient}
+        yOrient={yAxisProps.orient}
+        margins={props.margins}
+        width={innerWidth}
+        height={innerHeight}
+      />
     }
 
     return (
@@ -146,7 +152,7 @@ module.exports = React.createClass({
             colorAccessor={props.colorAccessor}
             width={innerWidth}
             height={innerHeight}
-            xAxisRange={props.xAxisRange}
+            xAxisRange={xAxisProps.Range}
             overrideSets={props.overrideSets}
             />
         </g>

@@ -11,6 +11,7 @@ module.exports = React.createClass({
     height:              React.PropTypes.number,
     horizontalTransform: React.PropTypes.string,
     label:               React.PropTypes.string.isRequired,
+    offset:              React.PropTypes.number,
     width:               React.PropTypes.number,
     strokeWidth:         React.PropTypes.number,
     textAnchor:          React.PropTypes.string,
@@ -23,7 +24,8 @@ module.exports = React.createClass({
       horizontalTransform: 'rotate(270)',
       strokeWidth:         0.01,
       textAnchor:          'middle',
-      verticalTransform:   'rotate(0)'
+      verticalTransform:   'rotate(0)',
+      offset:              38
     };
   },
 

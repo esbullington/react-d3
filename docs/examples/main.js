@@ -103,7 +103,8 @@ var Demos = React.createClass({
       {
         name: 'series3',
         values: [ { x: 0, y: 0 }, { x: 1, y: 5 }, { x: 2, y: 8 }, { x: 3, y: 2, override: ['greenline'] }, { x: 4, y: 6 }, { x: 5, y: 4 }, { x: 6, y: 2 } ],
-        markerBaseColor: 'white'
+        markerBaseColor: 'white',
+        //yAxisNo: 2
       } 
     ];
 
@@ -198,24 +199,25 @@ var Demos = React.createClass({
                 height: 400
               }}
               title="Line Chart"
-              yAxisLabel="Altitude"
-              xAxisLabel="Elapsed Time (sec)"
-              gridHorizontal={true}
+              xAxis={{
+                label: "Elapsed Time (sec)",
+                labelOffset: 40,
+                range: { maxExtentLeft: 0.5, maxExtentRight: 5.5 },
+                ticks: { interval: 0.5 }
+              }}
+              yAxis={[{
+                label: "Altitude",
+                labelOffset: 35,
+                range: { maxExtentBottom: -10.0, minExtentBottom: -5.0, minExtentTop: 20.0, maxExtentTop: 50.0 },
+              }]}
+              grid={{
+                horizontal: true
+              }}
               markerOnClick={this.setSelectedValue}
               overrideSets={{
                 redline: { line: true, strokeWidth: 5, strokeDashArray: "2,1", stroke: 'red' },
                 greenline: { line: true, stroke: 'green' }
               }}
-              xAxisRange={{ maxExtentLeft: 0.5, maxExtentRight: 5.5 }}
-              yAxisRange={{ maxExtentBottom: -10.0, minExtentBottom: -5.0, minExtentTop: 20.0, maxExtentTop: 50.0 }}
-              /*xTickTimeFormat={[
-                ["%H:%M", function(d) { return d.getMinutes(); }],
-                ["%H:%M", function(d) { return d.getHours(); }],
-                ["%d.%m.%y", function(d) { return d.getDay() && d.getDate() != 1; }],
-                ["%d.%m.%y", function(d) { return d.getDate() != 1; }],
-                ["%d.%m.%y", function(d) { return d.getMonth(); }],
-                ["%d.%m.%y", function() { return true; }]
-              ]}*/
             />
           {this.renderSelectedValue()}
           </div>
@@ -264,10 +266,25 @@ var Demos = React.createClass({
     height: 400
   }}
   title="Line Chart"
-  yAxisLabel="Altitude"
-  xAxisLabel="Elapsed Time (sec)"
-  gridHorizontal={true}
+  xAxis={{
+    label: "Elapsed Time (sec)",
+    labelOffset: 40,
+    range: { maxExtentLeft: 0.5, maxExtentRight: 5.5 },
+    ticks: { interval: 0.5 }
+  }}
+  yAxis={[{
+    label: "Altitude",
+    labelOffset: 35,
+    range: { maxExtentBottom: -10.0, minExtentBottom: -5.0, minExtentTop: 20.0, maxExtentTop: 50.0 },
+  }]}
+  grid={{
+    horizontal: true
+  }}
   markerOnClick={this.setSelectedValue}
+  overrideSets={{
+    redline: { line: true, strokeWidth: 5, strokeDashArray: "2,1", stroke: 'red' },
+    greenline: { line: true, stroke: 'green' }
+  }}
 />`
               }
               </code>
@@ -286,8 +303,8 @@ var Demos = React.createClass({
                 width='40'
                 height={10}
                 margins={{top: 0, right: 0, bottom: 0, left: 0}}
-                hideXAxis={true}
-                hideYAxis={true}
+                xAxis={{ hide: true }}
+                yAxis={{ hide: true }}
               />
             </div>
             Cool huh!?
@@ -304,8 +321,8 @@ var Demos = React.createClass({
   width='40'
   height={10}
   margins={{top: 0, right: 0, bottom: 0, left: 0}}
-  hideXAxis={true}
-  hideYAxis={true}
+  xAxis={{ hide: true }}
+  yAxis={{ hide: true }}
 />`
                 }
               </code>
@@ -613,7 +630,6 @@ var treemapData = [
             </pre>
           </div>
         </div>
-
       </div>
     );
   }

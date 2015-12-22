@@ -9,10 +9,10 @@ module.exports = React.createClass({
 
   propTypes: {
     scale: React.PropTypes.func.isRequired,
+    orient: React.PropTypes.string.isRequired,
     innerTickSize: React.PropTypes.number,
     outerTickSize: React.PropTypes.number,
     tickPadding: React.PropTypes.number,
-    tickArguments: React.PropTypes.array,
     fill: React.PropTypes.string,
     stroke: React.PropTypes.string
   },
@@ -22,13 +22,9 @@ module.exports = React.createClass({
       innerTickSize: 6,
       outerTickSize: 6,
       tickPadding: 3,
-      fill: 'none',
-      tickArguments: [10],
-      tickValues: null,
-      tickFormat: null 
+      fill: 'none'
     };
   },
-
 
   _d3_scaleExtent(domain) {
     var start = domain[0], stop = domain[domain.length - 1];
@@ -53,7 +49,6 @@ module.exports = React.createClass({
     } else {
       d = "M" + sign * props.outerTickSize + "," + range[0] + "H0V" + range[1] + "H" + sign * props.outerTickSize;
     }
-
 
     return (
       <path
