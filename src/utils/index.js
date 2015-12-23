@@ -71,10 +71,10 @@ exports.flattenData = (data, xAccessor, yAccessor) => {
   var yValues = [];
   var yValues2 = [];
   var coincidentCoordinateCheck = {};
-  var yAxisNo = 1;
+  var yAxisNo;
 
   data.forEach( (series, i) => {
-    yAxisNo = series.yAxisNo | 1; // without configuration, the data belong to the first (usually left) y axis
+    yAxisNo = series.yAxisNo || 1; // without configuration, the data belong to the first (usually left) y axis
     series.values.forEach( (item, j) => {
 
       var x = xAccessor(item);

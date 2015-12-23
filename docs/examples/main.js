@@ -25,12 +25,13 @@ var Demos = React.createClass({
   },
 
   renderSelectedValue: function() {
-      var selectedValues = <div style={{margin: '30px'}}>Select a value!</div>;
+      /*var selectedValues = <div style={{margin: '30px'}}>Select a value!</div>;
       if (this.state.selectedX != null && this.state.selectedY != null) {
           selectedValues = <div style={{margin: '30px'}}>
             {'You selected X = ' + this.state.selectedX + ' and Y = ' + this.state.selectedY}
             </div>
-      }
+      }*/
+      var selectedValues = <div style={{margin: '30px'}}>Selection of values does not work when using two Y Axes.</div>;
       return selectedValues
   },
 
@@ -102,10 +103,10 @@ var Demos = React.createClass({
       },
       {
         name: 'series3',
-        values: [ { x: 0, y: 0 }, { x: 1, y: 5 }, { x: 2, y: 8 }, { x: 3, y: 2, override: ['greenline'] }, { x: 4, y: 6 }, { x: 5, y: 4 }, { x: 6, y: 2 } ],
+        values: [ { x: 0, y: 100 }, { x: 1, y: 105 }, { x: 2, y: 108 }, {x: 2.5, y: 108}, { x: 3, y: 102, override: ['greenline'] }, { x: 4, y: 106 }, { x: 5, y: 104 }, { x: 6, y: 102 } ],
         markerBaseColor: 'white',
-        //yAxisNo: 2
-      } 
+        yAxisNo: 2
+      }
     ];
 
     var barData = [
@@ -209,6 +210,13 @@ var Demos = React.createClass({
                 label: "Altitude",
                 labelOffset: 35,
                 range: { maxExtentBottom: -10.0, minExtentBottom: -5.0, minExtentTop: 20.0, maxExtentTop: 50.0 },
+              },
+              {
+                label: "Altitude of series 3",
+                labelOffset: 50,
+                ticks: {
+                  values : [101, 102, 103, 104, 105, 106, 107, 108]
+                }
               }]}
               grid={{
                 horizontal: true
@@ -245,7 +253,8 @@ var Demos = React.createClass({
   {
     name: 'series3',
     values: [ { x: 0, y: 0 }, ..., { x: 6, y: 2 } ],
-    markerBaseColor: 'white'
+    markerBaseColor: 'white',
+    yAxisNo: 2
   }
 ];`
               }
@@ -276,6 +285,13 @@ var Demos = React.createClass({
     label: "Altitude",
     labelOffset: 35,
     range: { maxExtentBottom: -10.0, minExtentBottom: -5.0, minExtentTop: 20.0, maxExtentTop: 50.0 },
+  },
+  {
+    label: "Altitude of series 3",
+    labelOffset: 50,
+    ticks: {
+      values : [101, 102, 103, 104, 105, 106, 107, 108]
+    }
   }]}
   grid={{
     horizontal: true
@@ -477,9 +493,9 @@ var Demos = React.createClass({
 `var ohlcData = [
   {
     name: "AAPL",
-    values: [ { x: [object Date], open: 451.69, high: 456.23, low: 435, close: 439.88 }, 
-              { x: [object Date], open: 437.82, high: 453.21, low: 435.86 , close: 449.83 }, 
-              ... 
+    values: [ { x: [object Date], open: 451.69, high: 456.23, low: 435, close: 439.88 },
+              { x: [object Date], open: 437.82, high: 453.21, low: 435.86 , close: 449.83 },
+              ...
             ]
   }
 ];`
@@ -502,7 +518,7 @@ var Demos = React.createClass({
             </pre>
           </div>
         </div>
-        
+
         <div className="row">
           <hr/>
         </div>
@@ -515,13 +531,13 @@ var Demos = React.createClass({
             <pre ref='block'>
               <code className='js'>
               {`var barData = [
-  { 
+  {
     "name": "Series A",
     "values": [
       { "x": 1, "y":  91},
       ...
   },
-  { 
+  {
     "name": "Series B",
      "values": [ ... ]
   }
@@ -547,7 +563,7 @@ var Demos = React.createClass({
         <div className="row">
           <h3 className="page-header">react-d3: Single series charts</h3>
         </div>
-       
+
         </div>
 
         <div className="row">

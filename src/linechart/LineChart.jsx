@@ -31,10 +31,6 @@ module.exports = React.createClass({
         className: 'rd3-linechart-yaxis',
         hide: false
       },
-      yAxis2: {
-        className: 'rd3-linechart-yaxis',
-        hide: false
-      },
       overrideSets:   {}
     };
   },
@@ -56,9 +52,6 @@ module.exports = React.createClass({
       yAxisProps = this.props.yAxis[0] || {};
       yAxisProps.orient = yAxisProps.orient || 'left';
       yAxis2Props = this.props.yAxis[1] || {};
-      if (yAxis2Props) {
-        yAxis2Props.orient = yAxis2Props.orient || (yAxisProps.orient === 'left' ? 'right' : 'left');
-      }
     } else {
       yAxisProps = this.props.yAxis;
     }
@@ -77,21 +70,37 @@ module.exports = React.createClass({
     var flattenedData = utils.flattenData(props.data, props.xAccessor, props.yAccessor);
 
     var allValues = flattenedData.allValues,
-        xValues = xAxisProps.tickValues || flattenedData.xValues,
-        yValues = yAxisProps.tickValues || flattenedData.yValues,
-        xValues2 = flattenedData.xValues2,
-        yValues2 = flattenedData.yValues2;
+        xValues = (xAxisProps.ticks && xAxisProps.ticks.values) || flattenedData.xValues,
+        yValues = (yAxisProps.ticks && yAxisProps.ticks.values) || flattenedData.yValues,
+        xValues2 = xValues,
+        yValues2 = (yAxis2Props.ticks && yAxis2Props.ticks.values) || flattenedData.yValues2;
     var scales = this._calculateScales(innerWidth, innerHeight, xValues, yValues, xAxisProps.range, yAxisProps.range);
     var trans = "translate("
       + (yAxisProps.offset < 0 ? props.margins.left + Math.abs(yAxisProps.offset) : props.margins.left) + ","
       + props.margins.top + ")";
 
-    var scales2, trans2;
-    if (xValues2 && yValues2) {
-      scales2 = this._calculateScales(innerWidth, innerHeight, xValues2, yValues2, xAxisProps.range, yAxisProps.range2);
-      trans2 = "translate("
-        + (yAxis2Props.offset < 0 ? props.margins.left + Math.abs(yAxis2Props.offset) : props.margins.left) + ","
-        + props.margins.top + ")";
+    var scales2 = {};
+    var yAxis2;
+    if (xValues2.length > 0 && yValues2.length > 0) {
+      scales2 = this._calculateScales(innerWidth, innerHeight, xValues.concat(xValues2), yValues2, xAxisProps.range,
+          yAxis2Props.range);
+      scales.xScale = scales2.xScale;
+      if (!yAxis2Props.orient) {
+        yAxis2Props.orient = yAxis2Props.orient || (yAxisProps.orient === 'left' ? 'right' : 'left');
+      }
+      if (!yAxis2Props.hide) {
+        yAxis2 = <Axis
+          type={'y'}
+          {... yAxis2Props}
+          grid={props.grid}
+          scale={scales2.yScale}
+          xOrient={xAxisProps.orient}
+          yOrient={yAxis2Props.orient}
+          margins={props.margins}
+          width={innerWidth}
+          height={innerHeight}
+        />
+      }
     }
 
     var xAxis;
@@ -138,9 +147,12 @@ module.exports = React.createClass({
         <g transform={trans} className={props.className}>
           {xAxis}
           {yAxis}
+          {yAxis2}
           <DataSeries
             xScale={scales.xScale}
             yScale={scales.yScale}
+            xScale2={scales2.xScale}
+            yScale2={scales2.yScale}
             xAccessor={props.xAccessor}
             yAccessor={props.yAccessor}
             hoverAnimation={props.hoverAnimation}
@@ -154,7 +166,7 @@ module.exports = React.createClass({
             height={innerHeight}
             xAxisRange={xAxisProps.Range}
             overrideSets={props.overrideSets}
-            />
+          />
         </g>
       </Chart>
     );

@@ -37,6 +37,8 @@ module.exports = React.createClass({
     var props = this.props;
     var xScale = props.xScale;
     var yScale = props.yScale;
+    var xScale2 = props.xScale2;
+    var yScale2 = props.yScale2;
     var xAccessor = props.xAccessor,
         yAccessor = props.yAccessor;
     var marker = [];
@@ -58,9 +60,30 @@ module.exports = React.createClass({
         return use;
       });
 
+    var interpolatePath2;
+    if (xScale2 && yScale2) {
+      interpolatePath2 = d3.svg.line()
+        .x( (d) => d.xs = xScale2(d.x) )
+        .y( (d) => d.ys = yScale2(d.y) )
+        .interpolate(props.interpolationType)
+        // only draw values inside x axis range and those next to it
+        .defined( (d) => {
+          var use = (d.x >= xScale2.domain()[0] && d.x <= xScale2.domain()[1]) ||
+              (d.prevVal && d.prevVal.x >= xScale2.domain()[0] && d.prevVal.x <= xScale2.domain()[1]) ||
+              (d.nextVal && d.nextVal.x >= xScale2.domain()[0] && d.nextVal.x <= xScale2.domain()[1]);
+          d.use = use;
+          return use;
+        });
+    }
+
     var lines = props.data.map((series, idx) => {
+      var path;
       var valueSet = linkValues(prepareValues(series.values));
-      var path = interpolatePath(valueSet);
+      if (series.yAxisNo !== 2) {
+        path = interpolatePath(valueSet);
+      } else {
+        path = interpolatePath2(valueSet);
+      }
 
       var exclude = [];
       var usedOverrides = [];
@@ -168,6 +191,12 @@ module.exports = React.createClass({
       return lines;
     });
 
+    // don't know why but voronoi() does not work properly when using two y axes
+    if (xScale2 && yScale2) {
+      props.hoverAnimation = false;
+      props.markerOnClick = undefined;
+    }
+
     var voronoi = d3.geom.voronoi()
       .x(function(d){ return xScale(d.x); })
       .y(function(d){ return yScale(d.y); })
@@ -176,13 +205,21 @@ module.exports = React.createClass({
     var dx, cx, dy, cy, markerFill;
     var regions = voronoi(prepareValues(props.value, (v) => v.coord )).map(function(vnode, idx) {
       dx = vnode.point.x;
-      if (dx < xScale.domain()[0] || dx > xScale.domain()[1]) return null;
-      cx = props.xScale(dx);
       dy = vnode.point.y;
-      if (dy < yScale.domain()[0] || dy > yScale.domain()[1]) return null;  
-      cy = props.yScale(dy);
       markerFill = marker[vnode.point.original.seriesIndex].markerFill ||
           props.colors(props.colorAccessor(vnode, vnode.point.original.seriesIndex));
+
+      if (vnode.point.original.series.yAxisNo === 2 && xScale2 && yScale2) {
+        if (dx < xScale2.domain()[0] || dx > xScale2.domain()[1]) return null;
+        cx = xScale2(dx);
+        if (dy < yScale2.domain()[0] || dy > yScale2.domain()[1]) return null;
+        cy = yScale2(dy);
+      } else {
+        if (dx < xScale.domain()[0] || dx > xScale.domain()[1]) return null;
+        cx = xScale(dx);
+        if (dy < yScale.domain()[0] || dy > yScale.domain()[1]) return null;
+        cy = yScale(dy);
+      }
 
       return (
         <VoronoiContainer

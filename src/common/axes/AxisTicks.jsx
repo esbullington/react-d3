@@ -10,7 +10,8 @@ module.exports = React.createClass({
   propTypes: {
     scale: React.PropTypes.func.isRequired,
     orient: React.PropTypes.oneOf(['top','bottom','left','right']).isRequired,
-    orient2nd: React.PropTypes.array,
+    orient2nd: React.PropTypes.oneOfType([React.PropTypes.array, React.PropTypes.string]),
+      // string is currently necessary until charts other than linechart will be updated
     height: React.PropTypes.number.isRequired,
     width: React.PropTypes.number.isRequired,
     arg: React.PropTypes.arrayOf(React.PropTypes.number),

@@ -156,7 +156,7 @@ module.exports = React.createClass({
   },
 
   _drawPath: function(d) {
-    if(d === undefined) {
+    if(d.length === 0 || d === undefined) {
       return; 
     }  
     return 'M' + d.join(',') + 'Z';
