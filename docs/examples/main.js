@@ -71,7 +71,7 @@ var Demos = React.createClass({
         "values": [
           { "x": 1, "y":  91},
           { "x": 2, "y": 290},
-          { "x": 3, "y": 146},
+          { "x": 3, "y": -25},
         ]
       },
       {  
@@ -79,7 +79,7 @@ var Demos = React.createClass({
         "values": [
           { "x": 1, "y":  9},
           { "x": 2, "y": 49},
-          { "x": 3, "y": 144},
+          { "x": 3, "y": -20},
         ]
       },
       {  
@@ -87,7 +87,7 @@ var Demos = React.createClass({
         "values": [
           { "x": 1, "y":  14},
           { "x": 2, "y": 77},
-          { "x": 3, "y": 16},
+          { "x": 3, "y": -70},
         ]
       }
     ];
