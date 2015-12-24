@@ -13,6 +13,7 @@ module.exports = React.createClass({
   propTypes: {
     type:         React.PropTypes.oneOf(['x', 'y']).isRequired,
     className:    React.PropTypes.string,        // at top level equal to this.props.xAxis.className
+    label:        React.PropTypes.string,        // at top level equal to this.props.xAxis.*
     fill:         React.PropTypes.string,        // at top level equal to this.props.xAxis.*
     grid:         React.PropTypes.object,        // at top level equal to this.props.xAxis.*
     offset:       React.PropTypes.number,        // at top level equal to this.props.xAxis.*
@@ -42,7 +43,7 @@ module.exports = React.createClass({
 
   render() {
 
-    var props = this.props;
+    var props = Object.assign({}, this.props);
     var ticks = this.props.ticks;
     var orient, orient2nd, t;
 
@@ -71,6 +72,21 @@ module.exports = React.createClass({
       }
     }
 
+    var label;
+    if (props.label) {
+      label = <Label
+        label={props.label}
+        offset={props.labelOffset}
+        orient={orient}
+        margins={props.margins}
+        width={props.width}
+        height={props.height}
+        fill={props.labelStroke}
+        strokeWidth={props.strokeWidth}
+        textAnchor={props.textAnchor}
+      />;
+    }
+
     return (
       <g
         className={props.className}
@@ -94,17 +110,7 @@ module.exports = React.createClass({
           stroke={props.stroke}
           tickPadding={ticks.padding}
         />
-        <Label
-          label={props.label}
-          offset={props.labelOffset}
-          orient={orient}
-          margins={props.margins}
-          width={props.width}
-          height={props.height}
-          fill={props.labelStroke}
-          strokeWidth={props.strokeWidth}
-          textAnchor={props.textAnchor}
-        />
+        {label}
       </g>
     );
   }

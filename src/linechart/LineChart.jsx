@@ -38,8 +38,7 @@ module.exports = React.createClass({
   _calculateScales: utils.calculateScales,
 
   render() {
-
-    var props = this.props;
+    var props = Object.assign({}, this.props);
 
     if (this.props.data && this.props.data.length < 1) {
       return null;

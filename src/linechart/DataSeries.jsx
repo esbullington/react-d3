@@ -34,7 +34,7 @@ module.exports = React.createClass({
   _prepareValues: utils.prepareValues,
 
   render() {
-    var props = this.props;
+    var props = Object.assign({}, this.props);
     var xScale = props.xScale;
     var yScale = props.yScale;
     var xScale2 = props.xScale2;
