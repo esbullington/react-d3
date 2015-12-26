@@ -17,6 +17,7 @@ module.exports = React.createClass({
     tickStroke:      React.PropTypes.string,
     width:           React.PropTypes.number.isRequired,
     height:          React.PropTypes.number.isRequired,
+    horizontalChart: React.PropTypes.bool,
     yAxisClassName:  React.PropTypes.string,
     yAxisLabel:      React.PropTypes.string,
     yAxisOffset:     React.PropTypes.number,
@@ -81,6 +82,7 @@ module.exports = React.createClass({
           scale={props.yScale}
           height={props.height}
           width={props.width}
+          horizontalChart={props.horizontalChart}
           gridHorizontal={props.gridHorizontal}
           gridHorizontalStroke={props.gridHorizontalStroke}
           gridHorizontalStrokeWidth={props.gridHorizontalStrokeWidth}
@@ -95,6 +97,7 @@ module.exports = React.createClass({
         />
         <Label
           height={props.height}
+          horizontalChart={props.horizontalChart}
           label={props.yAxisLabel}
           margins={props.margins}
           offset={props.yAxisLabelOffset}

@@ -13,6 +13,7 @@ module.exports = React.createClass({
     orient2nd: React.PropTypes.oneOf(['top','bottom','left','right']),
     height: React.PropTypes.number.isRequired,
     width: React.PropTypes.number.isRequired,
+    horizontal: React.PropTypes.bool,
     tickArguments : React.PropTypes.array,
     tickValues: React.PropTypes.array,
     innerTickSize: React.PropTypes.number,
@@ -55,7 +56,9 @@ module.exports = React.createClass({
         ticks,
         scale,
         adjustedScale,
+        orient,
         textAnchor,
+        textTransform,
         tickFormat,
         y0, y1, y2, dy, x0, x1, x2, dx;
 
@@ -88,6 +91,7 @@ module.exports = React.createClass({
     }
 
     adjustedScale = scale.rangeBand ? (d) => { return scale(d) + scale.rangeBand() / 2; } : scale;
+
 
     // Still working on this
     // Ticks and lines are not fully aligned
@@ -131,6 +135,30 @@ module.exports = React.createClass({
         break;
     }
 
+    if (props.horizontalChart) {
+      textTransform = "rotate(-90)";
+      [y1, x1] = [x1, -y1 || 0];
+
+      switch (props.orient) {
+        case 'top':
+          textAnchor = "start";
+          dy = ".32em";
+          break;
+        case 'bottom':
+          textAnchor = "end";
+          dy = ".32em";
+          break;
+        case 'left':
+          textAnchor = 'middle';
+          dy = sign < 0 ? ".71em" : "0em";
+          break;
+        case 'right':
+          textAnchor = 'middle';
+          dy = sign < 0 ? ".71em" : "0em";
+          break;
+      }
+    }
+
     if (props.gridHorizontal) {
       gridOn = true;
       gridStrokeWidth = props.gridHorizontalStrokeWidth;
@@ -162,6 +190,10 @@ module.exports = React.createClass({
       }
     }
 
+    var optionalTextProps = textTransform ? {
+      transform: textTransform
+    } : {};
+
     return (
     <g>
       {ticks.map( (tick, idx) => {
@@ -175,6 +207,7 @@ module.exports = React.createClass({
               dy={dy} x={x1} y={y1}
               style={{stroke:props.tickTextStroke, fill:props.tickTextStroke}}
               textAnchor={textAnchor}
+              {...optionalTextProps}
             >
               {tickFormat(tick)}
             </text>

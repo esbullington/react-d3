@@ -46,7 +46,7 @@ var ScatterChart = rd3.ScatterChart;
 var CandleStickChart = rd3.CandleStickChart;
 ```
 
-For usage, please see [here](http://esbullington.github.io/react-d3-website).  [API documentation](https://github.com/esbullington/react-d3/wiki/API) is also coming online over the coming days.
+For usage, please see [here](https://reactiva.github.io/react-d3-website/).  [API documentation](https://github.com/esbullington/react-d3/wiki/API) is also coming online over the coming days.
 
 ### JSFiddle
 There's a development build available for experimentation on JSFiddle: [http://jsfiddle.net/esbullington/jp9dkh1g/](http://jsfiddle.net/esbullington/jp9dkh1g/).

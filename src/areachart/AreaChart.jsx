@@ -4,11 +4,11 @@ var React = require('react');
 var d3 = require('d3');
 var DataSeries = require('./DataSeries');
 var { Chart, XAxis, YAxis } = require('../common');
-var { CartesianChartPropsMixin, ViewBoxMixin } = require('../mixins');
+var { CartesianChartPropsMixin, DefaultAccessorsMixin, ViewBoxMixin } = require('../mixins');
 
 module.exports = React.createClass({
 
-  mixins: [ CartesianChartPropsMixin, ViewBoxMixin ],
+  mixins: [ CartesianChartPropsMixin, DefaultAccessorsMixin, ViewBoxMixin ],
 
   displayName: 'AreaChart',
 
@@ -38,10 +38,8 @@ module.exports = React.createClass({
 
     var interpolationType = props.interpolationType || (props.interpolate ? 'cardinal' : 'linear');
 
-    // Calculate inner chart dimensions
-    var innerWidth, innerHeight;
-    innerWidth = this.getOuterDimensions().width - props.margins.left - props.margins.right;
-    innerHeight = this.getOuterDimensions().height - props.margins.top - props.margins.bottom;
+    var {innerWidth, innerHeight, trans, svgMargins} = this.getDimensions();
+    var yOrient = this.getYOrient();
 
     if (!Array.isArray(data)) {
       data = [data];
@@ -86,8 +84,6 @@ module.exports = React.createClass({
 
     var layers = stack(data);
 
-    var trans = `translate(${ props.margins.left },${ props.margins.top })`;
-
     var dataSeries = layers.map( (d, idx) => {
       return (
           <DataSeries
@@ -129,10 +125,11 @@ module.exports = React.createClass({
             xAxisLabelOffset={props.xAxisLabelOffset}
             tickFormatting={props.xAxisFormatter}
             xOrient={props.xOrient}
-            yOrient={props.yOrient}
-            margins={props.margins}
+            yOrient={yOrient}
+            margins={svgMargins}
             width={innerWidth}
             height={innerHeight}
+            horizontalChart={props.horizontal}
             gridVertical={props.gridVertical}
             gridVerticalStroke={props.gridVerticalStroke}
             gridVerticalStrokeWidth={props.gridVerticalStrokeWidth}
@@ -148,10 +145,11 @@ module.exports = React.createClass({
             yAxisLabelOffset={props.yAxisLabelOffset}
             tickFormatting={props.yAxisFormatter}
             xOrient={props.xOrient}
-            yOrient={props.yOrient}
-            margins={props.margins}
+            yOrient={yOrient}
+            margins={svgMargins}
             width={innerWidth}
             height={props.height}
+            horizontalChart={props.horizontal}
             gridHorizontal={props.gridHorizontal}
             gridHorizontalStroke={props.gridHorizontalStroke}
             gridHorizontalStrokeWidth={props.gridHorizontalStrokeWidth}

@@ -28,7 +28,7 @@ exports.generateArrayOfNameObjects = function(n) {
     var j = Math.floor(Math.random() * 100);
     numbers.push(j);
   } 
-  var data = new Array(n);
+  var data = [];
   numbers.forEach( function(value, idx) {
     var i = idx % 10;
     var name = names[i];
