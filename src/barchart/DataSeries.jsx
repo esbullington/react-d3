@@ -33,12 +33,14 @@ module.exports = React.createClass({
 
   _renderBarContainer(segment, seriesIdx) {
     var { colors, colorAccessor, height, hoverAnimation, xScale, yScale } = this.props;
+    var barHeight = Math.abs(yScale(0) - yScale(segment.y));
+    var y = yScale( segment.y0 + segment.y );
     return (
       <BarContainer
-        height={height - yScale(segment.y)}
+        height={barHeight}
         width={xScale.rangeBand()}
         x={xScale(segment.x)}
-        y={yScale( segment.y0 + segment.y )}
+        y={(segment.y >= 0) ? y : y - barHeight}
         fill={colors(colorAccessor(segment, seriesIdx))}
         hoverAnimation={hoverAnimation}
       />
