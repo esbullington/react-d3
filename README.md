@@ -75,14 +75,6 @@ With this approach, React itself is responsible for generating the SVG markup.  
     - table
   * Tooltips
 
-### Available for work
-Consider me for your next contract job.  I do:
-* custom d3 and/or React visualizations.
-* React, AngularJS, or Backbone frontend work.
-* backend work in Python(Flask, Django), Lua(w/Nginx), or Node.js, particularly REST APIs.
-
-More at: [ericbullington.com](https://ericbullington.com)
-
 ### License
 MIT
 
