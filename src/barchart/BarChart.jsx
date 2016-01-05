@@ -89,6 +89,8 @@ module.exports = React.createClass({
       .range([innerHeight, 0])
       .domain([0, this._getStackedValuesMaxY(_data)]);
 
+    var series = props.data.map( (item) => item.name );
+
     return (
       <span>
         <Chart
@@ -145,6 +147,7 @@ module.exports = React.createClass({
               xScale={xScale}
               margins={svgMargins}
               _data={_data}
+              series={series}
               width={innerWidth}
               height={innerHeight}
               colors={props.colors}

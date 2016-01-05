@@ -70,7 +70,7 @@ module.exports = React.createClass({
           cy={cy}
           vnode={vnode}
           onMouseOver={props.onMouseOver}
-          dataPoint={{xValue: x, yValue: y}}
+          dataPoint={{xValue: x, yValue: y, seriesName: point.series.name}}
         />
       );
     });

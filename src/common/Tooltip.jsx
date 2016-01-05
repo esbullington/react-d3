@@ -7,7 +7,11 @@ module.exports = React.createClass({
   propTypes: {
     x:   React.PropTypes.number,
     y:   React.PropTypes.number,
-    text: React.PropTypes.string,
+    child: React.PropTypes.oneOfType([
+      React.PropTypes.string,
+      React.PropTypes.number,
+      React.PropTypes.element
+    ]),
     show: React.PropTypes.bool
   },
 
@@ -31,7 +35,7 @@ module.exports = React.createClass({
     return (
       <div style={containerStyles}>
         <div style={tooltipStyles}>
-          {props.text}
+          {props.child}
         </div>
       </div>
     );
