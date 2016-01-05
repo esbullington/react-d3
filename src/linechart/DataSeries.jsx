@@ -101,8 +101,8 @@ module.exports = React.createClass({
 
     return (
       <g>
-        <g>{regions}</g>
         <g>{lines}</g>
+        <g>{regions}</g>
       </g>
     );
   }
