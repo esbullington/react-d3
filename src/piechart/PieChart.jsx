@@ -3,9 +3,12 @@
 var d3 = require('d3');
 var React = require('react');
 var DataSeries = require('./DataSeries');
-var Chart = require('../common').Chart;
+var { Chart, XAxis, YAxis, Tooltip} = require('../common');
+var TooltipMixin = require('../mixins').TooltipMixin;
 
 module.exports = React.createClass({
+
+  mixins: [ TooltipMixin ],
 
   displayName: 'PieChart',
 
@@ -46,33 +49,38 @@ module.exports = React.createClass({
     var labels = props.data.map( (item) => item.label );
 
     return (
-      <Chart
-        width={props.width}
-        height={props.height}
-        title={props.title}
-      >
-        <g className='rd3-piechart'>
-          <DataSeries
-            labelTextFill={props.labelTextFill}
-            valueTextFill={props.valueTextFill}
-            valueTextFormatter={props.valueTextFormatter}
-            data={props.data}
-            values={values}
-            labels={labels}
-            colors={props.colors}
-            colorAccessor={props.colorAccessor}
-            transform={transform}
-            width={props.width}
-            height={props.height}
-            radius={props.radius}
-            innerRadius={props.innerRadius}
-            showInnerLabels={props.showInnerLabels}
-            showOuterLabels={props.showOuterLabels}
-            sectorBorderColor={props.sectorBorderColor}
-            hoverAnimation={props.hoverAnimation}
-          />
-        </g>
-      </Chart>
+      <span>
+        <Chart
+          width={props.width}
+          height={props.height}
+          title={props.title}
+        >
+          <g className='rd3-piechart'>
+            <DataSeries
+              labelTextFill={props.labelTextFill}
+              valueTextFill={props.valueTextFill}
+              valueTextFormatter={props.valueTextFormatter}
+              data={props.data}
+              values={values}
+              labels={labels}
+              colors={props.colors}
+              colorAccessor={props.colorAccessor}
+              transform={transform}
+              width={props.width}
+              height={props.height}
+              radius={props.radius}
+              innerRadius={props.innerRadius}
+              showInnerLabels={props.showInnerLabels}
+              showOuterLabels={props.showOuterLabels}
+              sectorBorderColor={props.sectorBorderColor}
+              hoverAnimation={props.hoverAnimation}
+              onMouseOver={this.onMouseOver}
+              onMouseLeave={this.onMouseLeave}
+            />
+          </g>
+        </Chart>
+        {(props.showTooltip ? <Tooltip {...this.state.tooltip}/> : null)}
+      </span>
     );
   }
 

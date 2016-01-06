@@ -39,12 +39,15 @@ module.exports = React.createClass({
   },
 
   _animateBar() {
+    var rect = this.getDOMNode().getBoundingClientRect();
+    this.props.onMouseOver.call(this, rect.right, rect.top, this.props.dataPoint )
     this.setState({ 
       fill: shade(this.props.fill, 0.2)
     });
   },
 
   _restoreBar() {
+    this.props.onMouseLeave.call(this);
     this.setState({ 
       fill: this.props.fill
     });

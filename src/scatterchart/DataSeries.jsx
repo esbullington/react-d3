@@ -69,6 +69,8 @@ module.exports = React.createClass({
           cx={cx}
           cy={cy}
           vnode={vnode}
+          onMouseOver={props.onMouseOver}
+          dataPoint={{xValue: x, yValue: y, seriesName: point.series.name}}
         />
       );
     });
