@@ -22,7 +22,6 @@ module.exports = React.createClass({
     ticks:        React.PropTypes.object,        // at top level equal to this.props.xAxis.*
     height:       React.PropTypes.number.isRequired,
     width:        React.PropTypes.number.isRequired,
-    localizationConfig: React.PropTypes.object,
     xOrient:      React.PropTypes.oneOf(['top', 'bottom']),
     scale:       React.PropTypes.func.isRequired,
     //yOrient:      React.PropTypes.array

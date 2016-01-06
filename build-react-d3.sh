@@ -3,6 +3,6 @@
 gulp release 
 cd ..
 npm pack react-d3/build/cjs/
-scp react-d3-0.4.1.tgz $USER@mobiledev-ubuntu.cistec.com:/var/www/html/tar/
-rm -f react-d3-0.4.1.tgz
+scp react-d3-0.4.2.tgz $USER@mobiledev-ubuntu.cistec.com:/var/www/html/tar/
+rm -f react-d3-0.4.2.tgz
 cd -
