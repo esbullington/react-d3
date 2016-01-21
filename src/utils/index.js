@@ -18,7 +18,7 @@ exports.calculateScales = function(chartWidth, chartHeight, xValues, yValues)  {
       .range([0, chartWidth]);
   } else if (xValues.length > 0 && Object.prototype.toString.call(xValues[0]) === '[object String]'){
     tickDist = (chartWidth) / xValues.unique().length;
-    for (tickRangeNum = 0; tickRangeNum < chartWidth; tickRangeNum += tickDist) {
+    for (tickRangeNum = chartWidth; tickRangeNum > 0; tickRangeNum -= tickDist) {
       tickRange.push(tickRangeNum);
     }
     xScale = d3.scale.ordinal().domain(xValues).range(tickRange);
@@ -34,7 +34,7 @@ exports.calculateScales = function(chartWidth, chartHeight, xValues, yValues)  {
       .range([chartHeight, 0]);
   } else if (yValues.length > 0 && Object.prototype.toString.call(yValues[0]) === '[object String]'){
     tickDist = (chartHeight) / yValues.unique().length;
-    for (tickRangeNum = 0 ; tickRangeNum < chartHeight; tickRangeNum += tickDist) {
+    for (tickRangeNum = chartHeight ; tickRangeNum > 0; tickRangeNum -= tickDist) {
       tickRange.push(tickRangeNum);
     }
     console.log(JSON.stringify(tickRange));
