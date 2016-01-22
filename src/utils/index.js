@@ -1,9 +1,8 @@
 var d3 = require('d3');
 
-
-Array.prototype.unique = function() {
-  var o = {}, i, l = this.length, r = [];
-  for(i=0; i<l;i+=1) o[this[i]] = this[i];
+var findUniqueValues = function(list) {
+  var o = {}, i, l = list.length, r = [];
+  for(i=0; i<l;i+=1) o[list[i]] = list[i];
   for(i in o) r.push(o[i]);
   return r;
 };
@@ -17,7 +16,7 @@ exports.calculateScales = function(chartWidth, chartHeight, xValues, yValues)  {
     xScale = d3.time.scale()
       .range([0, chartWidth]);
   } else if (xValues.length > 0 && Object.prototype.toString.call(xValues[0]) === '[object String]'){
-    tickDist = (chartWidth) / xValues.unique().length;
+    tickDist = (chartWidth) / findUniqueValues(xValues).length;
     for (tickRangeNum = chartWidth; tickRangeNum > 0; tickRangeNum -= tickDist) {
       tickRange.push(tickRangeNum);
     }
@@ -33,7 +32,7 @@ exports.calculateScales = function(chartWidth, chartHeight, xValues, yValues)  {
     yScale = d3.time.scale()
       .range([chartHeight, 0]);
   } else if (yValues.length > 0 && Object.prototype.toString.call(yValues[0]) === '[object String]'){
-    tickDist = (chartHeight) / yValues.unique().length;
+    tickDist = (chartHeight) / findUniqueValues(yValues).length;
     for (tickRangeNum = chartHeight ; tickRangeNum > 0; tickRangeNum -= tickDist) {
       tickRange.push(tickRangeNum);
     }
