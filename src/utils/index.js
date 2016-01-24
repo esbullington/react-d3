@@ -36,7 +36,6 @@ exports.calculateScales = function(chartWidth, chartHeight, xValues, yValues)  {
     for (tickRangeNum = chartHeight ; tickRangeNum > 0; tickRangeNum -= tickDist) {
       tickRange.push(tickRangeNum);
     }
-    console.log(JSON.stringify(tickRange));
     yScale = d3.scale.ordinal().domain(yValues).range(tickRange);
   }else {
     yScale = d3.scale.linear()
