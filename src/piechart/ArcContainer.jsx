@@ -9,7 +9,8 @@ module.exports = React.createClass({
   displayName: 'ArcContainer',
 
   propTypes: {
-    fill: React.PropTypes.string
+    fill:     React.PropTypes.string,
+    onClick:  React.PropTypes.func
   },
 
   getInitialState() {
@@ -23,13 +24,14 @@ module.exports = React.createClass({
   render() {
 
     var props = this.props;
-    
+
     return (
-      <Arc 
+      <Arc
         {...this.props}
         fill={this.state.fill}
         handleMouseOver={props.hoverAnimation ? this._animateArc : null}
         handleMouseLeave={props.hoverAnimation ? this._restoreArc : null}
+        onClick={props.onClick}
       />
     );
   },

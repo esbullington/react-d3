@@ -19,7 +19,8 @@ module.exports = React.createClass({
     valueTextFill: React.PropTypes.string,
     sectorBorderColor: React.PropTypes.string,
     showInnerLabels: React.PropTypes.bool,
-    showOuterLabels: React.PropTypes.bool
+    showOuterLabels: React.PropTypes.bool,
+    onClick: React.PropTypes.func
   },
 
   getDefaultProps() {
@@ -41,7 +42,7 @@ module.exports = React.createClass({
       .endAngle(props.endAngle);
 
     return (
-      <g className='rd3-piechart-arc' >
+      <g className='rd3-piechart-arc' onClick={props.onClick.bind(this, props.dataPoint)}>
         <path
           d={arc()}
           fill={props.fill}
