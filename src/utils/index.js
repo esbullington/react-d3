@@ -72,15 +72,15 @@ exports.debounce = function(func, wait, immediate) {
   };
 };
 
-exports.flattenData = function(data, xAccessor, yAccessor)  {
+exports.flattenData = (data, xAccessor, yAccessor) =>  {
 
   var allValues = [];
   var xValues = [];
   var yValues = [];
   var coincidentCoordinateCheck = {};
 
-  data.forEach( function(series, i)  {
-    series.values.forEach( function(item, j)  {
+  data.forEach( (series, i) =>  {
+    series.values.forEach( (item, j) => {
 
       var x = xAccessor(item);
       xValues.push(x);
@@ -101,7 +101,7 @@ exports.flattenData = function(data, xAccessor, yAccessor)  {
         yNode = y;
       }
 
-      var xyCoords = (x + "-" + yNode);
+      var xyCoords = `${x}-${yNode}`;
       if (coincidentCoordinateCheck.hasOwnProperty(xyCoords)) {
         // Proceed to next iteration if the x y pair already exists
         // d3's Voronoi cannot handle NaN values or coincident coords
