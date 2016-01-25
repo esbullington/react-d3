@@ -133,7 +133,7 @@ exports.flattenData = (data, xAccessor, yAccessor) =>  {
 };
 
 
-exports.shade = function(hex, percent)  {
+exports.shade = (hex, percent) => {
 
   var R, G, B, red, green, blue, number;
   var min = Math.min, round = Math.round;
@@ -148,6 +148,6 @@ exports.shade = function(hex, percent)  {
   if (green.length === 1) green = '0' + green;
   blue = min( 255, round( ( 1 + percent ) * B )).toString(16);
   if (blue.length === 1) blue = '0' + blue;
-  return ("#" +  red +  green +  blue);
+  return `#${ red }${ green }${ blue }`;
 
 };
