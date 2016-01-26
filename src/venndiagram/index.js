@@ -1,0 +1,2 @@
+
+exports.VennDiagram = require('./VennDiagram');
