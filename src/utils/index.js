@@ -1,14 +1,28 @@
 var d3 = require('d3');
 
+var findUniqueValues = (list) => {
+  var o = {}, i, l = list.length, r = [];
+  for(i=0; i<l;i+=1) o[list[i]] = list[i];
+  for(i in o) r.push(o[i]);
+  return r;
+};
 
-exports.calculateScales = (chartWidth, chartHeight, xValues, yValues) => {
+exports.calculateScales = (chartWidth, chartHeight, xValues, yValues) =>  {
 
-  var xScale, yScale;
+  var xScale, yScale, tickDist, tickRangeNum;
+  var tickRange = [];
 
   if (xValues.length > 0 && Object.prototype.toString.call(xValues[0]) === '[object Date]') {
     xScale = d3.time.scale()
       .range([0, chartWidth]);
+  } else if (xValues.length > 0 && Object.prototype.toString.call(xValues[0]) === '[object String]'){
+    tickDist = (chartWidth) / findUniqueValues(xValues).length;
+    for (tickRangeNum = chartWidth; tickRangeNum > 0; tickRangeNum -= tickDist) {
+      tickRange.push(tickRangeNum);
+    }
+    xScale = d3.scale.ordinal().domain(xValues).range(tickRange);
   } else {
+
     xScale = d3.scale.linear()
       .range([0, chartWidth]);
   }
@@ -17,7 +31,13 @@ exports.calculateScales = (chartWidth, chartHeight, xValues, yValues) => {
   if (yValues.length > 0 && Object.prototype.toString.call(yValues[0]) === '[object Date]') {
     yScale = d3.time.scale()
       .range([chartHeight, 0]);
-  } else {
+  } else if (yValues.length > 0 && Object.prototype.toString.call(yValues[0]) === '[object String]'){
+    tickDist = (chartHeight) / findUniqueValues(yValues).length;
+    for (tickRangeNum = chartHeight ; tickRangeNum > 0; tickRangeNum -= tickDist) {
+      tickRange.push(tickRangeNum);
+    }
+    yScale = d3.scale.ordinal().domain(yValues).range(tickRange);
+  }else {
     yScale = d3.scale.linear()
       .range([chartHeight, 0]);
   }
@@ -52,24 +72,17 @@ exports.debounce = function(func, wait, immediate) {
   };
 };
 
-exports.flattenData = (data, xAccessor, yAccessor) => {
+exports.flattenData = (data, xAccessor, yAccessor) =>  {
 
   var allValues = [];
   var xValues = [];
   var yValues = [];
   var coincidentCoordinateCheck = {};
 
-  data.forEach( (series, i) => {
+  data.forEach( (series, i) =>  {
     series.values.forEach( (item, j) => {
 
       var x = xAccessor(item);
-
-      // Check for NaN since d3's Voronoi cannot handle NaN values
-      // Go ahead and Proceed to next iteration since we don't want NaN
-      // in allValues or in xValues or yValues
-      if (isNaN(x)) {
-        return;
-      }
       xValues.push(x);
 
       var y = yAccessor(item);
@@ -78,24 +91,12 @@ exports.flattenData = (data, xAccessor, yAccessor) => {
       var yNode;
       if (typeof y === 'object' && Object.keys(y).length > 0) {
         Object.keys(y).forEach(function (key) {
-          // Check for NaN since d3's Voronoi cannot handle NaN values
-          // Go ahead and Proceed to next iteration since we don't want NaN
-          // in allValues or in xValues or yValues
-          if (isNaN(y[key])) {
-            return;
-          }
           yValues.push(y[key]);
           // if multiple y points are to be plotted for a single x
           // as in the case of candlestick, default to y value of 0
           yNode = 0;
         });
       } else {
-        // Check for NaN since d3's Voronoi cannot handle NaN values
-        // Go ahead and Proceed to next iteration since we don't want NaN
-        // in allValues or in xValues or yValues
-        if (isNaN(y)) {
-          return;
-        }
         yValues.push(y);
         yNode = y;
       }
