@@ -1,13 +1,13 @@
 var d3 = require('d3');
 
-var findUniqueValues = function(list) {
+var findUniqueValues = (list) => {
   var o = {}, i, l = list.length, r = [];
   for(i=0; i<l;i+=1) o[list[i]] = list[i];
   for(i in o) r.push(o[i]);
   return r;
 };
 
-exports.calculateScales = function(chartWidth, chartHeight, xValues, yValues)  {
+exports.calculateScales = (chartWidth, chartHeight, xValues, yValues) =>  {
 
   var xScale, yScale, tickDist, tickRangeNum;
   var tickRange = [];
