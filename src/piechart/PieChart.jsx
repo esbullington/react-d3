@@ -54,6 +54,7 @@ module.exports = React.createClass({
           width={props.width}
           height={props.height}
           title={props.title}
+          shouldUpdate={!this.state.changeState}
         >
           <g className='rd3-piechart'>
             <DataSeries

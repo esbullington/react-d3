@@ -74,6 +74,7 @@ module.exports = React.createClass({
           title={props.title}
           viewBox={this.getViewBox()}
           width={props.width}
+          shouldUpdate={!this.state.changeState}
         >
           <g
             className={props.className}

@@ -11,17 +11,21 @@ module.exports = React.createClass({
   propTypes: {
     legend:         React.PropTypes.bool,
     svgClassName:   React.PropTypes.string,
-    titleClassName: React.PropTypes.string
+    titleClassName: React.PropTypes.string,
+    shouldUpdate:   React.PropTypes.bool
   },
 
   getDefaultProps: function() {
     return {
       legend:         false,
       svgClassName:   'rd3-chart',
-      titleClassName: 'rd3-chart-title'
+      titleClassName: 'rd3-chart-title',
+      shouldUpdate:   true
     };
   },
-
+  shouldComponentUpdate: function(nextProps, nextState) {
+    return nextProps.shouldUpdate;
+  },
   render: function() {
     var props = this.props;
 
