@@ -23,8 +23,15 @@ module.exports =  {
         y: 0,
         child: '',
         show: false
-      }
+      },
+      changeState: false
     };
+  },
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      changeState: false
+    })
   },
 
   onMouseOver(x, y, dataPoint) {
@@ -36,7 +43,8 @@ module.exports =  {
         y: y,
         child: this.props.tooltipFormat.call(this, dataPoint),
         show: true 
-      } 
+      },
+      changeState: true
     });
   },
 
@@ -49,7 +57,8 @@ module.exports =  {
         y: 0,
         child: '',
         show: false
-      } 
+      },
+      changeState: true 
     });
   }
 }
