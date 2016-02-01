@@ -135,6 +135,7 @@ var Demos = React.createClass({
               title="Line Chart"
               yAxisLabel="Altitude"
               xAxisLabel="Elapsed Time (sec)"
+              domain={{x: [,10], y: [-10,]}}
               gridHorizontal={true}
             />
           </div>
@@ -175,6 +176,7 @@ var Demos = React.createClass({
   title="Line Chart"
   yAxisLabel="Altitude"
   xAxisLabel="Elapsed Time (sec)"
+  domain={{x: [,10], y: [-10,]}}
   gridHorizontal={true}
 />`
               }
@@ -188,7 +190,7 @@ var Demos = React.createClass({
         <div className="row">
           <div className="col-md-6">
             <ScatterChart
-              data={scatterData} width={500} height={400} title="Scatter Chart" />
+              data={scatterData} width={500} height={400} title="Scatter Chart" domain={{x:[-15,], y:[-15,]}}/>
           </div>
           <div className="col-md-6">
             <pre ref='block'>
@@ -215,6 +217,7 @@ var Demos = React.createClass({
   data={scatterData}
   width={500}
   height={400}
+  domain={{y: [-15,], y: [-15,]}}
   title="Scatter Chart"
 />`
               }
@@ -246,6 +249,7 @@ var Demos = React.createClass({
                 }
               }
               yAccessor={(d)=>d[1]}
+              domain={{y: [,60]}}
             />
           </div>
           <div className="col-md-6">
@@ -279,6 +283,7 @@ var Demos = React.createClass({
     height: 400,
     width: 500
   }}
+  domain={{y: [,60]}}
   xAxisTickInterval={{unit: 'year', interval: 2}}
   title="Area Chart"
 />`
@@ -298,6 +303,7 @@ var Demos = React.createClass({
               height={400}
               yAxisOffset={-10}
               title="Candlestick Chart"
+              domain={{y:[400, 500]}}
             />
           </div>
           <div className="col-md-6">
@@ -326,6 +332,7 @@ var Demos = React.createClass({
   xAxisTickInterval={{unit: 'month', interval: 1}}
   yAxisOffset={-10}
   title="Candlestick Chart"
+  domain={{y:[400, 500]}}
 />`
                 }
               </code>
