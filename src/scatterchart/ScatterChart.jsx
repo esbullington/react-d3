@@ -50,6 +50,7 @@ module.exports = React.createClass({
 
     var {innerWidth, innerHeight, trans, svgMargins} = this.getDimensions();
     var yOrient = this.getYOrient();
+    var domain = props.domain || {};
 
     // Returns an object of flattened allValues, xValues, and yValues
     var flattenedData = utils.flattenData(data, props.xAccessor, props.yAccessor);
@@ -58,7 +59,7 @@ module.exports = React.createClass({
         xValues   = flattenedData.xValues,
         yValues   = flattenedData.yValues;
 
-    var scales  = this._calculateScales(innerWidth, innerHeight, xValues, yValues);
+    var scales  = this._calculateScales(innerWidth, innerHeight, xValues, yValues, domain.x, domain.y);
     var xScale  = scales.xScale;
     var yScale  = scales.yScale;
 

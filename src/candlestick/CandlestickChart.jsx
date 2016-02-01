@@ -54,6 +54,7 @@ module.exports = React.createClass({
 
     var {innerWidth, innerHeight, trans, svgMargins} = this.getDimensions();
     var yOrient = this.getYOrient();
+    var domain = props.domain || {};
 
     if (!Array.isArray(props.data)) {
       props.data = [props.data];
@@ -63,7 +64,7 @@ module.exports = React.createClass({
     var allValues = flattenedData.allValues,
         xValues = flattenedData.xValues,
         yValues = flattenedData.yValues;
-    var scales = utils.calculateScales(innerWidth, innerHeight, xValues, yValues);
+    var scales = utils.calculateScales(innerWidth, innerHeight, xValues, yValues, domain.x, domain.y);
 
     var dataSeries = props.data.map( (series, idx) => {
       return (
