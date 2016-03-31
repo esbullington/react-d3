@@ -61,6 +61,7 @@ module.exports = React.createClass({
         <Chart
           viewBox={this.getViewBox()}
           legend={props.legend}
+          sideOffset={props.sideOffset}
           data={props.data}
           margins={props.margins}
           colors={props.colors}
