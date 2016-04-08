@@ -2,9 +2,9 @@
 
 **Important update:**  
 
-The actively maintained fork of this project is now at the Github of react-d3 co-creator yang-wei, who has recently taken the lead in maintaining the project and moving toward 1.0.
+The actively maintained fork of this project is now at the Github of react-d3 co-creator `yang-wei`, who has recently taken the lead in maintaining the project and moving toward 1.0.
 
-Yang Wei's fork is located [here](https://github.com/yang-wei/rd3) instead.
+Yang Wei's fork is located [here](https://github.com/yang-wei/rd3).
 
 ### react-d3
 Modular ReactJS charts made using d3 chart utilities. Work on project documentation has started [here](https://github.com/esbullington/react-d3/wiki). A few examples of the available charts can be seen below, the others can be [viewed here](https://reactiva.github.io/react-d3-website/), side-by-side with the React code that generates the charts.
