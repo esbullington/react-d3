@@ -1,12 +1,15 @@
-# This project is unmaintained
-You should use this [fork](https://github.com/yang-wei/rd3) instead.
+##  Update
 
-## react-d3
+**Important update:**  
+
+The actively maintained fork of this project is now at the Github of react-d3 co-creator yang-wei, who has recently taken the lead in maintaining the project and moving toward 1.0.
+
+Yang Wei's fork is located [here](https://github.com/yang-wei/rd3) instead.
+
+### react-d3
 Modular ReactJS charts made using d3 chart utilities. Work on project documentation has started [here](https://github.com/esbullington/react-d3/wiki). A few examples of the available charts can be seen below, the others can be [viewed here](https://reactiva.github.io/react-d3-website/), side-by-side with the React code that generates the charts.
 
 ![react-d3 chart images](https://raw.githubusercontent.com/esbullington/react-d3-website/gh-pages/img/multiseries.png)
-
-**Caution:**  alpha state software. Chart APIs will change. Breaking changes will occur at each minor (0.x) release, until we reach version 1.0.  At that point, we'll closely follow the [semver](http://semver.org/) specification.
 
 [![Build Status](https://travis-ci.org/esbullington/react-d3.svg?branch=master)](https://travis-ci.org/esbullington/react-d3)
 
@@ -58,12 +61,6 @@ Please note that this build should probably not be used in production, since it 
 
 All the react-d3 charts are available in this JSFiddle fork under the global `rd3` namespace.
 
-### Support
-
-* Chat: [![Join the chat at https://gitter.im/esbullington/react-d3](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/esbullington/react-d3?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-* Issues: [react-d3 issues](https://github.com/esbullington/react-d3/issues) on Github
-* Support: [react-d3 Google Groups email list](https://groups.google.com/forum/#!forum/react-d3)
-
 ### Background
 Although there have been [several](http://nicolashery.com/integrating-d3js-visualizations-in-a-react-app/) [different](http://bl.ocks.org/milroc/d22bbf92231876505e5d) approaches proposed for combining the power of d3 with the flexibility and modularity of ReactJS, the approach I'm using here was inspired by [this blog post](http://10consulting.com/2014/02/19/d3-plus-reactjs-for-charting/) by Ben Smith of [Binary Consulting](http://10consulting.com/).
 
@@ -71,12 +68,7 @@ With this approach, React itself is responsible for generating the SVG markup.  
 
 ### Roadmap
 
-* v0.5.0:
-  * Data frame animations
-  * Additional charts types:
-    - slopegraph
-    - table
-  * Tooltips
+For current roadmap, please see Yang Wei's fork at: https://github.com/yang-wei/rd3
 
 ### License
 MIT
