@@ -3,6 +3,8 @@
 var React = require('react');
 var d3 = require('d3');
 
+var getIndex = (d, idx) => idx;
+
 module.exports = React.createClass({
 
   displayName: 'Legend',
@@ -22,7 +24,7 @@ module.exports = React.createClass({
     return {
       className:    'rd3-legend',
       colors:        d3.scale.category20c(),
-      colorAccessor: (d, idx) => idx,
+      colorAccessor: getIndex,
       itemClassName: 'rd3-legend-item',
       text:          '#000'
     };
@@ -38,16 +40,14 @@ module.exports = React.createClass({
       'verticalAlign': 'top'
     };
 
-    var legendItems = [];
-
-    props.data.forEach( (series, idx) => {
+    var legendItem = (series, idx) => {
       var itemStyle = {
         'color': props.colors(props.colorAccessor(series, idx)),
         'lineHeight': '60%',
         'fontSize': '200%'
       };
 
-      legendItems.push(
+      return (
         <li
           key={idx}
           className={props.itemClassName}
@@ -60,8 +60,9 @@ module.exports = React.createClass({
           </span>
         </li>
       );
+    };
 
-    });
+    var legendItems = props.data.map(legendItem);
 
     var topMargin = props.margins.top;
 
