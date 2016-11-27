@@ -10,17 +10,18 @@ module.exports = React.createClass({
   displayName: 'DataSeries',
 
   propTypes: {
-    data:              React.PropTypes.array,
-    values:            React.PropTypes.array,
-    labels:            React.PropTypes.array,
-    transform:         React.PropTypes.string,
-    innerRadius:       React.PropTypes.number,
-    radius:            React.PropTypes.number,
-    colors:            React.PropTypes.func,
-    colorAccessor:     React.PropTypes.func,
-    showInnerLabels:   React.PropTypes.bool,
-    showOuterLabels:   React.PropTypes.bool,
-    sectorBorderColor: React.PropTypes.string
+    data:                   React.PropTypes.array,
+    values:                 React.PropTypes.array,
+    labels:                 React.PropTypes.array,
+    transform:              React.PropTypes.string,
+    innerRadius:            React.PropTypes.number,
+    radius:                 React.PropTypes.number,
+    colors:                 React.PropTypes.func,
+    colorAccessor:          React.PropTypes.func,
+    showInnerLabels:        React.PropTypes.bool,
+    showOuterLabels:        React.PropTypes.bool,
+    sectorBorderColor:      React.PropTypes.string,
+    handleClickOnSegment:   React.PropTypes.func
   },
 
   getDefaultProps() {
@@ -64,6 +65,7 @@ module.exports = React.createClass({
           onMouseOver={props.onMouseOver}
           onMouseLeave={props.onMouseLeave}
           dataPoint={{yValue: props.values[idx], seriesName: props.labels[idx]}}
+          onClick={props.handleClickOnSegment}
         />
       );
     });

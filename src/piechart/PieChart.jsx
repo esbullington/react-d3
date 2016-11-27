@@ -26,7 +26,8 @@ module.exports = React.createClass({
     showInnerLabels:    React.PropTypes.bool,
     showOuterLabels:    React.PropTypes.bool,
     sectorBorderColor:  React.PropTypes.string,
-    hoverAnimation:     React.PropTypes.bool
+    hoverAnimation:     React.PropTypes.bool,
+    handleClickOnSegment: React.PropTypes.func
   },
 
   getDefaultProps: function() {
@@ -36,7 +37,8 @@ module.exports = React.createClass({
       colors:             d3.scale.category20c(),
       colorAccessor:      (d, idx) => idx,
       valueTextFormatter: (val) => `${ val }%`,
-      hoverAnimation:     true
+      hoverAnimation:     true,
+      handleClickOnSegment: () => { }
     };
   },
 
@@ -77,6 +79,7 @@ module.exports = React.createClass({
               hoverAnimation={props.hoverAnimation}
               onMouseOver={this.onMouseOver}
               onMouseLeave={this.onMouseLeave}
+              handleClickOnSegment={props.handleClickOnSegment}
             />
           </g>
         </Chart>
