@@ -5,6 +5,7 @@ var d3 = require('d3');
 var hljs = require("highlight.js");
 var rd3 = require('../../src');
 var BarChart = rd3.BarChart;
+var VennDiagram = rd3.VennDiagram;
 var LineChart = rd3.LineChart;
 var CandlestickChart = rd3.CandlestickChart;
 var PieChart = rd3.PieChart;
@@ -63,6 +64,23 @@ var Demos = React.createClass({
         name: 'series3',
         values: [ { x: 0, y: 0 }, { x: 1, y: 5 }, { x: 2, y: 8 }, { x: 3, y: 2 }, { x: 4, y: 6 }, { x: 5, y: 4 }, { x: 6, y: 2 } ]
       } 
+    ];
+
+    var vennData = [
+      {sets: ['A'], size: 12}, 
+      {sets: ['B'], size: 12},
+      {sets: ['C'], size: 8},
+      {sets: ['D'], size: 6},
+      {sets: ['A','B'], size: 2},
+      {sets: ['A','C'], size: 3},
+      {sets: ['A','D'], size: 4},
+      {sets: ['B','A'], size: 2},
+      {sets: ['B','C'], size: 3},
+      {sets: ['B','D'], size: 4},
+      {sets: ['C','A'], size: 2},
+      {sets: ['C','B'], size: 3},
+      {sets: ['C','D'], size: 4},
+      {sets: ['A','B','C','D'], size: 2}
     ];
 
     var barData = [
@@ -377,6 +395,40 @@ var Demos = React.createClass({
   yAxisLabel='Label'
   xAxisLabel='Value'
 />`}
+              </code>
+            </pre>
+          </div>
+        </div>
+
+        <div className="row">
+          <div className="col-md-6">
+            <VennDiagram
+              onCircleClick={(e, circle) => console.log('onCircleClick: ', e, circle)}
+              onIntersectionClick={(e, intersection) => console.log('onIntersectionClick: ', e, intersection)}
+              tooltipFormat={(circle) => <span>{circle.name} ({circle.size})</span>}
+              data={vennData}
+              intersection={{name: 'Intersection', size: 2, other: 'values' }}
+              width={500}
+              height={300}
+              title="Venn Diagram" />
+          </div>
+          <div className="col-md-6">
+            <pre ref='block'>
+              <code className='js'>
+              {`var vennData = ${JSON.stringify(vennData, null, 4)}`}
+              </code>
+            </pre>
+            <pre ref='block'>
+              <code className='html'>
+                {`<VennDiagram
+              onCircleClick={(e, circle) => console.log('onCircleClick: ', e, circle)}
+              onIntersectionClick={(e, intersection) => console.log('onIntersectionClick: ', e, intersection)}
+              tooltipFormat={(circle) => <span>{circle.name} ({circle.size})</span>}
+              data={vennData}
+              intersection={{name: 'Intersection', size: 2, other: 'values' }}
+              width={500}
+              height={300}
+              title="Venn Diagram" />`}
               </code>
             </pre>
           </div>
